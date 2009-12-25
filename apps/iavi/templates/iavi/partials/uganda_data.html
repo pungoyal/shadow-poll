@@ -1,0 +1,33 @@
+{% if uganda_reports %}
+<h2>Uganda Survey Data</h2>
+<table width="100%"> 
+    <thead>
+        <tr>
+            <th>Site #</th>
+            <th>Participant Id</th>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Sex With Partner</th>
+            <th>Condoms With Partner</th>
+            <th>Sex With Other</th>
+            <th>Condoms With Other</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for report in uganda_reports %}
+            <tr>
+                <td>{{report.reporter.location.code}}</td>
+                <td><a href="/iavi/participants/{{report.reporter.pk}}/">{{report.reporter.study_id}}</a></td>
+                <td>{{report.started|date:"d-M-Y"}}</td>
+                <td>{{report.started|date:"Hi"}}</td>
+                <td>{{report.sex_with_partner}}</td>
+                <td>{{report.condom_with_partner}}</td>
+                <td>{{report.sex_with_other}}</td>
+                <td>{{report.condom_with_other}}</td>
+                <td>{{report.get_status_display}}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endif %}

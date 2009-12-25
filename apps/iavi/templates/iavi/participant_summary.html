@@ -1,0 +1,39 @@
+{% extends "iavi/layout.html" %}
+{% block title %}Participant Summary{% endblock %}
+{% block pagecontent %}
+<h2>Participant Summary Information</h2>
+{% if perms.iavi.can_write_users %}
+<br><a href="/iavi/participants/{{reporter.id}}/edit/">edit this information</a><br><br>
+{% endif %}
+<table>
+    <tr>
+        <td align="right">Participant #</td>
+        <td><b>{{reporter.study_id}}</b></td>
+    </tr>
+    <tr>
+        <td align="right">Location</td>
+        <td><b>{{reporter.location}}</b></td>
+    </tr>
+    <tr>
+        <td align="right">Registered</td>
+        <td><b>{{reporter.registered|date:"d-M-Y"}}</b></td>
+    </tr>
+    <tr>
+        <td align="right">Phone #</td>
+        <td><b>{{reporter.connection.identity}}</b></td>
+    </tr>
+    <tr>
+        <td align="right">PIN</td>
+        <td><b>{{reporter.pin}}</b></td>
+    </tr>
+</table>
+{% if perms.iavi.can_see_data %}
+<br>
+<br>
+{% include "iavi/partials/kenya_data.html" %} 
+<br><br>
+{% include "iavi/partials/uganda_data.html" %} 
+<br>
+{% endif %}
+<a href="/iavi/participants">back to participant list</a>
+{% endblock %}

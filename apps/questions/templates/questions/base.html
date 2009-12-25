@@ -1,0 +1,10 @@
+{% extends base_template %}
+
+{% block page_stylesheets %}<link type="text/css" rel="stylesheet" href="/static/questions/stylesheets/questions.css" />{% endblock %}
+{% block title %}Questions{% endblock %}
+
+{% block page_tabs %}
+<ul id="page-tabs">{% for section in sections %}
+	<li{% ifequal section.pk active_section_tab %} class="active"{% endifequal %}><a href="{% url view-section section.pk %}">{{ section.title }}</a></li>{% endfor %}
+</ul>
+{% endblock %}

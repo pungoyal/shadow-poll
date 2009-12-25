@@ -1,0 +1,51 @@
+{% extends "questions/base.html" %}
+{% load reporters-tags %}
+
+{% block title %}Questions{% endblock %}
+
+{% block content %}{% if questions %}
+<div class="module questions">
+	<h2>All Questions in: <strong>{{ section.title }}</strong></h2>
+	<div class="help">
+		<p>
+			This module lists all of the questions within the {{ section.title }} section, along with
+			the number of answers that have been received, and the response rate. This data indicates
+			which of the questions are the most popular, and which should be considered for removal
+			from the questionnaire.
+		</p>
+	</div>
+	<table>
+		<thead>
+			<tr>
+				<th scope="col" title="Question Number"></th>
+				<th scope="col" class="question">Question</th>
+				<th scope="col">Type</th>
+				<th scope="col" title="Total number of Answers submited">#</th>
+				<th scope="col">Latest Answer</th>
+			</tr>
+		</thead>
+		<tbody>{% for question in questions %}
+			<tr>
+				<td class="number">{{ question.number }}</td>
+				<td class="question"><a href="{% url view-question section_pk=section.pk question_pk=question.pk %}">{{ question.text }}</a></td>
+				<td>{{ question.get_type_display }}</td>
+				<td>{{ question.num_answers }}</td>{% if question.last_answer %}
+				<td>
+					{{ question.last_answer.submission.submitted|last_seen }}
+					<span class="na">by</span>{% if question.last_answer.submission.reporter %}
+					<a href="{% url submissions-by-reporter question.last_answer.submission.reporter.pk %}" class="reporter{% if question.last_answer.submission.reporter.full_name %}">{{ question.last_answer.submission.reporter.full_name }}{% else %} unknown">Unknown{% endif %}</a></td>{% else %}
+					<a href="{% url submissions-by-connection question.last_answer.submission.connection.pk %}" class="connection">{{ question.last_answer.submission.connection }}</a>{% endif %}
+				</td>{% else %}
+				<td class="na" title="No responses to this question have ever been received">Never</td>{% endif %}
+			</tr>{% endfor %}
+		</tbody>
+		<tfoot>
+				<td colspan="6">
+					<a href="/questions/">Export to Word</a>
+					<a href="">Export to Excel</a>
+					<span>{{ questions|length }} Questions</span>
+				</td>
+		</tfoot>
+	</table>
+</div>{% endif %}
+{% endblock %}

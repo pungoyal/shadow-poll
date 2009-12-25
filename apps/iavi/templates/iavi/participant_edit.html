@@ -1,0 +1,14 @@
+{% extends "iavi/layout.html" %}
+{% block title %}Edit Participant{% endblock %}
+{% block pagecontent %}
+<h2>Edit Participant</h2>
+<form method="POST">
+    <table>
+        {{ form.as_table}}
+    </table>
+    <input type="hidden" name="reporter_id" value="{{reporter.id}}">
+    <input type="submit" value="Submit" />
+</form>
+<br>
+<a href="/iavi/participants">back to participant list</a>
+{% endblock %}

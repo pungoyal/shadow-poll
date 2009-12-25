@@ -1,0 +1,17 @@
+{% extends base_template %}
+{% block content %}
+{% if perms.iavi.can_read_participants%}
+<a href="/iavi/participants">Participants</a> |
+{% endif %}
+{% if perms.iavi.can_see_data %}
+<a href="/iavi/data">Survey Data</a> |
+{% endif %} 
+<a href="/iavi/compliance">Compliance</a>
+{% if perms.iavi.is_admin %}
+ | <a href="/iavi/users">Site Users</a>
+{% endif %}
+<br>
+<br>
+{% block pagecontent %}
+{% endblock %}
+{% endblock %}

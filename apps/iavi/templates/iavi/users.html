@@ -1,0 +1,28 @@
+{% extends "iavi/layout.html" %}
+{% block title %}IAVI Web Users{% endblock %}
+{% block pagecontent %}
+<p align="right"><a href="/iavi/users/new/">Create a new user</a></p>
+<h2>All Users</h2>
+<table width="100%"> 
+    <thead>
+        <tr>
+            <th>Login</th>
+            <th>Name</th>
+            <th>Permissions</th>
+            <th>Locations</th>
+            <th />
+        </tr>
+    </thead>
+    <tbody>
+        {% for user in all_users %}
+            <tr>
+                <td>{{user.username}}</td>
+                <td>{{user.get_full_name}}</td>
+                <td>{{user.permission_string}}</td>
+                <td>{{user.locations}}</td>
+                <td><a href="/iavi/users/{{user.id}}/edit/">edit</a></td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table> 
+{% endblock %}

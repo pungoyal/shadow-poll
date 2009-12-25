@@ -1,0 +1,65 @@
+{% load query_log-tags %}
+{% query_log_vars %}
+
+<div id="query-log" class="module{% if warn %} warn{% endif %}">
+	<div style="padding: 1em;">
+		<h2>Query Log</h2>
+		<table>
+			<thead>
+				<tr>
+					<th>Time</th>
+					<th>SQL</th>
+				</tr>
+			</thead>
+			
+			<!-- TODO: wtf is this inline style doing here -->
+			<tbody style="font: 80% monospace; line-height: 1.4;">{% for q in queries %}
+				<tr>
+					<td>{{ q.time }}</td>
+					<td>{{ q.sql }}</td>
+				</tr>{% endfor %}
+			</tbody>
+			<tfoot>
+				<tr>
+					<td colspan="2">
+						<span>{{ queries|length }} Queries in {{ total_time }} seconds</span>
+					</td>
+				</tr>
+			</tfoot>
+		</table>
+	</div>
+</div>
+
+<script type="text/javascript">
+	$(function() {
+		var container = $("#query-log");
+		var log = container.children("div");
+		
+		/* hide the log as default, since
+		 * it's huge and rather ugly */
+		log.hide();
+	  
+		/* create a trigger div, to show the log this is done
+		 * here, rather than in the HTML, since the event won't
+		 * fire unless Javascript is enabled (and the query log
+		 * won't be hidden, anyway) */
+		var trigger =
+		  	$('<div class="trigger"></div>').
+		  	text($("tfoot", container).text()).
+		  	attr("title", "Click to show the Query Log").
+		  	click(function(ev) {
+		  		trigger.hide();
+		  		log.show();
+		  	})
+		
+		/* if the query-log is marked as WARNING (too many SQL
+		 * queries, or too much time spent in the DB), copy it
+		 * to the trigger, to make it bright and bold */
+		if(container.hasClass("warn")) {
+			trigger.addClass("warn");
+		}
+		
+		/* inject the trigger into the DOM */
+		container.append(trigger);
+	});
+</script>

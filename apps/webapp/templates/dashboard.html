@@ -1,0 +1,16 @@
+{% extends base_template %}
+{% block title %}Dashboard{% endblock %}
+{% block javascripts %}
+<script type="text/javascript" src="/static/webapp/javascripts/jquery.flot.js"></script>
+<script type="text/javascript" src="/static/webapp/javascripts/jquery.flot.pie.pack.js"></script>
+<!--[if IE]><script type="text/javascript" src="/static/webapp/javascripts/excanvas.pack.js"></script>
+<![endif]-->
+{% endblock %}
+{% block content %}
+Welcome to RapidSMS! 
+{% if user.is_authenticated %}
+Click on a tab to explore.
+{% else %}                                        
+Please <a href="/accounts/login/">log in</a> to continue.
+{% endif %}  
+{% endblock %}

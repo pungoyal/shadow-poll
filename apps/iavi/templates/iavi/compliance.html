@@ -1,0 +1,25 @@
+{% extends "iavi/layout.html" %}
+{% block title %}IAVI Summary{% endblock %}
+{% block page_stylesheets %}
+<style>
+td.severe-compliance { background-color: #F2503A; }
+</style>
+{% endblock %}
+{% block pagecontent %}
+<h2>Participants and their compliance.  All sites.</h2>
+<table width="100%"> 
+    <thead>
+        <tr>
+            <th>Participant Number</th>
+            <th>Compliance Past 7 Days</th>
+            <th>Compliance Past 30 Days</th>
+            <th>All Compliance To-Date</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for reporter in reporters %}
+            {% include "iavi/partials/user_compliance.html" %}
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

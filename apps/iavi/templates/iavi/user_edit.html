@@ -1,0 +1,19 @@
+{% extends "iavi/layout.html" %}
+{% block title %}Edit User{% endblock %}
+{% block pagecontent %}
+<h2>Edit User</h2>
+<form method="POST">
+    <table>
+        {% if current_user %}
+            <br>
+            <tr><td /><td align="right"><a href="/iavi/users/{{current_user.id}}/change_password/">Change Password</a></td></tr>
+        {% endif %}
+        {{ user_form.as_table}}
+        {{ profile_form.as_table}}
+        
+    </table>
+    <input type="submit" value="Submit" />
+</form>
+<br>
+<a href="/iavi/users">back to user list</a>
+{% endblock %}

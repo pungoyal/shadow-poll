@@ -1,0 +1,526 @@
+[
+  {
+    "pk": 1, 
+    "model": "patterns.pattern", 
+    "fields": {
+      "regex": "(en|eng)", 
+      "name": "en"
+    }
+  }, 
+  {
+    "pk": 2, 
+    "model": "patterns.pattern", 
+    "fields": {
+      "regex": "(lg|lug)", 
+      "name": "lg"
+    }
+  }, 
+  {
+    "pk": 3, 
+    "model": "patterns.pattern", 
+    "fields": {
+      "regex": "(sw|swa|swc|swh)", 
+      "name": "sw"
+    }
+  }, 
+  {
+    "pk": 4, 
+    "model": "patterns.pattern", 
+    "fields": {
+      "regex": "(n|no|ne|ned|nedd|neda|nedda|2)", 
+      "name": "uganda no"
+    }
+  }, 
+  {
+    "pk": 5, 
+    "model": "patterns.pattern", 
+    "fields": {
+      "regex": "(y|yes|ye|yee|yea|1)", 
+      "name": "uganda yes"
+    }
+  }, 
+
+  {
+    "pk": 1, 
+    "model": "i18n.language", 
+    "fields": {
+      "pattern": 1, 
+      "name": "English"
+    }
+  }, 
+  {
+    "pk": 2, 
+    "model": "i18n.language", 
+    "fields": {
+      "pattern": 2, 
+      "name": "Luganda"
+    }
+  }, 
+  {
+    "pk": 3, 
+    "model": "i18n.language", 
+    "fields": {
+      "pattern": 3, 
+      "name": "Swahili"
+    }
+  }, 
+  {
+    "pk": 1, 
+    "model": "i18n.translation", 
+    "fields": {
+      "translation": "Wetabyeeko mu kikolwa eky'omukwano n'omwagalwawo gw'olinaye mukunoonyereza kuno mu lunaku lumu oluyise?", 
+      "original": "Did you have sex with your main partner in the last 24 hours?", 
+      "language": 2
+    }
+  }, 
+  {
+    "pk": 2, 
+    "model": "i18n.translation", 
+    "fields": {
+      "translation": "Mwakozesezza kondomu?", 
+      "original": "Did you use a condom?", 
+      "language": 2
+    }
+  }, 
+  {
+    "pk": 3, 
+    "model": "i18n.translation", 
+    "fields": {
+      "translation": "Wetabyeeko mu kikolwa ky'omukwano n'omwagalwawo omulala yenna mu lunaku lumu oluyise?", 
+      "original": "Did you have sex with any other partner in the last 24 hours?", 
+      "language": 2
+    }
+  }, 
+  {
+    "pk": 4, 
+    "model": "i18n.translation", 
+    "fields": {
+      "translation": "Ssebo/Nnyabo Yingiza ennamba yo eye'kyaama mu ssimu yo. Era ennamba eyo giwereze ku kompyuta yaffe.", 
+      "original": "Hello, Please Reply With Your PIN", 
+      "language": 2
+    }
+  }, 
+  {
+    "pk": 5, 
+    "model": "i18n.translation", 
+    "fields": {
+      "translation": "Ebibuuzo bino bikomemye wano. Webale nnyo kuwaayo budde bwo.", 
+      "original": "Questionnaire is complete. Thank you.", 
+      "language": 2
+    }
+  }, 
+  {
+    "pk": 6, 
+    "model": "i18n.translation", 
+    "fields": {
+      "translation": "Tafadhali peana jibu ukitumia nambari yako binafsi ya kujitambulisha", 
+      "original": "Hello, Please Reply With Your PIN", 
+      "language": 3
+    }
+  }, 
+  {
+    "pk": 7, 
+    "model": "i18n.translation", 
+    "fields": {
+      "translation": "Umefanya mapenzi mara ngapi kwa masaa ishirini na nne iliopita?", 
+      "original": "How many times did you have sex in the last 24 hours?", 
+      "language": 3
+    }
+  }, 
+  {
+    "pk": 8, 
+    "model": "i18n.translation", 
+    "fields": {
+      "translation": "Kwa masaa hiyo ishirini na nne iliopita, ulitumia mipira ya Kondom mara ngapi ulipofanya mapenzi?", 
+      "original": "Of the number of times that you had sex in the last 24 hours, how many times were condoms used?", 
+      "language": 3
+    }
+  }, 
+  {
+    "pk": 9, 
+    "model": "i18n.translation", 
+    "fields": {
+      "translation": "Maswali yamekwisha. Kumbuka kutumia mpira mpya wa kondom kila unavyo fanya mapenzi na kumeza dawa kama ulivyoshauriwa. Asante sana", 
+      "original": "Interview is complete. Remember to use a new condom each time you have sex and take your pills as agreed. Thank you", 
+      "language": 3
+    }
+  }, 
+  {
+    "pk": 10, 
+    "model": "i18n.translation", 
+    "fields": {
+      "translation": "\"%(answer)s\" silo jibu sahihi.", 
+      "original": "\"%(answer)s\" is not a valid answer. ", 
+      "language": 3
+    }
+  }, 
+  {
+    "pk": 11, 
+    "model": "i18n.translation", 
+    "fields": {
+      "translation": "Samahani, jibu lisilo sahihi mara %(retries)s. Muda wako umekwisha. Tafadhali jaribu tena baadaye", 
+      "original": "Sorry, invalid answer %(retries)s times. Your session will now end. Please try again later.", 
+      "language": 3
+    }
+  }, 
+  {
+    "pk": 12, 
+    "model": "i18n.translation", 
+    "fields": {
+      "translation": "Samahani, nambari uliyopeana sio sahihi. Tafadhali jaribu kubonyeza nambari yako ya kujitambulisha tena", 
+      "original": "Sorry, that wasn't the right PIN. Please try sending your 4-digit PIN again", 
+      "language": 3
+    }
+  }, 
+  {
+    "pk": 13, 
+    "model": "i18n.translation", 
+    "fields": {
+      "translation": "\"%(answer)s\" silo jibu sahihi. Lazima ubonyeze ndio au la", 
+      "original": "\"%(answer)s\" is not a valid answer. You must enter yes or no", 
+      "language": 3
+    }
+  }, 
+  {
+    "pk": 14, 
+    "model": "i18n.translation", 
+    "fields": {
+      "translation": "\"%(answer)s\" sio jibu sahihi. Lazima ubonyeze nambari kati ya sufuri hadi kumi na tisa", 
+      "original": "\"%(answer)s\" is not a valid answer. You must enter a number between 0 and 19", 
+      "language": 3
+    }
+  }, 
+  {
+    "pk": 15, 
+    "model": "i18n.translation", 
+    "fields": {
+      "translation": "\"%(answer)s\" silo jibu sahihi. Lazima ubonyeze %(hint)s", 
+      "original": "\"%(answer)s\" is not a valid answer. You must enter %(hint)s", 
+      "language": 3
+    }
+  },
+  {
+    "pk": 16, 
+    "model": "i18n.translation", 
+    "fields": {
+      "translation": "nambari inayolingana au iliyo chini ya jibu uliopeana hapo awali", 
+      "original": "a number less than or equal to the previous answer",  
+      "language": 3
+    }
+  },
+  {
+    "pk": 1, 
+    "model": "tree.question", 
+    "fields": {
+      "text": "Hello, Please Reply With Your PIN", 
+      "error_response": "Sorry, that wasn't the right PIN. Please try sending your 4-digit PIN again"
+    }
+  }, 
+  {
+    "pk": 2, 
+    "model": "tree.question", 
+    "fields": {
+      "text": "Did you have sex with your main partner in the last 24 hours?", 
+      "error_response": null
+    }
+  }, 
+  {
+    "pk": 3, 
+    "model": "tree.question", 
+    "fields": {
+      "text": "Did you use a condom?", 
+      "error_response": null
+    }
+  }, 
+  {
+    "pk": 4, 
+    "model": "tree.question", 
+    "fields": {
+      "text": "Did you have sex with any other partner in the last 24 hours?", 
+      "error_response": null
+    }
+  }, 
+  {
+    "pk": 5, 
+    "model": "tree.question", 
+    "fields": {
+      "text": "How many times did you have sex in the last 24 hours?", 
+      "error_response": "\"%(answer)s\" is not a valid answer. You must enter a number between 0 and 19"
+    }
+  }, 
+  {
+    "pk": 6, 
+    "model": "tree.question", 
+    "fields": {
+      "text": "Of the number of times that you had sex in the last 24 hours, how many times were condoms used?", 
+      "error_response": null
+    }
+  }, 
+  {
+    "pk": 1, 
+    "model": "tree.tree", 
+    "fields": {
+      "root_state": 1, 
+      "trigger": "iavi uganda", 
+      "completion_text": "Questionnaire is complete. Thank you."
+    }
+  }, 
+  {
+    "pk": 2, 
+    "model": "tree.tree", 
+    "fields": {
+      "root_state": 6, 
+      "trigger": "iavi kenya", 
+      "completion_text": "Interview is complete. Remember to use a new condom each time you have sex and take your pills as agreed. Thank you"
+    }
+  }, 
+  {
+    "pk": 1, 
+    "model": "tree.answer", 
+    "fields": {
+      "answer": "validate_pin", 
+      "type": "C", 
+      "name": "pin validation", 
+      "description": "your 4-digit PIN"
+    }
+  }, 
+  {
+    "pk": 2, 
+    "model": "tree.answer", 
+    "fields": {
+      "answer": "(y|yes|ye|yee|yea|1)", 
+      "type": "R", 
+      "name": "uganda yes", 
+      "description": "1 for yes"
+    }
+  }, 
+  {
+    "pk": 3, 
+    "model": "tree.answer", 
+    "fields": {
+      "answer": "(n|no|ne|ned|nedd|neda|nedda|2)", 
+      "type": "R", 
+      "name": "uganda no", 
+      "description": "2 for no"
+    }
+  }, 
+  {
+    "pk": 4, 
+    "model": "tree.answer", 
+    "fields": {
+      "answer": "validate_1_to_19", 
+      "type": "C", 
+      "name": "1 to 19", 
+      "description": "a number between 1 and 19"
+    }
+  }, 
+  {
+    "pk": 5, 
+    "model": "tree.answer", 
+    "fields": {
+      "answer": "(0|zero|none)", 
+      "type": "R", 
+      "name": "zero", 
+      "description": "0"
+    }
+  }, 
+  {
+    "pk": 6, 
+    "model": "tree.answer", 
+    "fields": {
+      "answer": "validate_num_times_condoms_used", 
+      "type": "C", 
+      "name": "times condoms used", 
+      "description": "a number less than or equal to the previous answer"
+    }
+  }, 
+  {
+    "pk": 1, 
+    "model": "tree.treestate", 
+    "fields": {
+      "num_retries": 5, 
+      "question": 1, 
+      "name": "uganda_root"
+    }
+  }, 
+  {
+    "pk": 2, 
+    "model": "tree.treestate", 
+    "fields": {
+      "num_retries": null, 
+      "question": 2, 
+      "name": "uganda_main_1"
+    }
+  }, 
+  {
+    "pk": 3, 
+    "model": "tree.treestate", 
+    "fields": {
+      "num_retries": null, 
+      "question": 3, 
+      "name": "uganda_main_2"
+    }
+  }, 
+  {
+    "pk": 4, 
+    "model": "tree.treestate", 
+    "fields": {
+      "num_retries": null, 
+      "question": 4, 
+      "name": "uganda_main_3"
+    }
+  }, 
+  {
+    "pk": 5, 
+    "model": "tree.treestate", 
+    "fields": {
+      "num_retries": null, 
+      "question": 3, 
+      "name": "uganda_main_4"
+    }
+  }, 
+  {
+    "pk": 6, 
+    "model": "tree.treestate", 
+    "fields": {
+      "num_retries": 5, 
+      "question": 1, 
+      "name": "kenya_root"
+    }
+  }, 
+  {
+    "pk": 7, 
+    "model": "tree.treestate", 
+    "fields": {
+      "num_retries": 3, 
+      "question": 5, 
+      "name": "kenya_main_1"
+    }
+  }, 
+  {
+    "pk": 8, 
+    "model": "tree.treestate", 
+    "fields": {
+      "num_retries": 3, 
+      "question": 6, 
+      "name": "kenya_main_2"
+    }
+  }, 
+  {
+    "pk": 1, 
+    "model": "tree.transition", 
+    "fields": {
+      "answer": 1, 
+      "current_state": 1, 
+      "next_state": 2
+    }
+  }, 
+  {
+    "pk": 2, 
+    "model": "tree.transition", 
+    "fields": {
+      "answer": 2, 
+      "current_state": 2, 
+      "next_state": 3
+    }
+  }, 
+  {
+    "pk": 3, 
+    "model": "tree.transition", 
+    "fields": {
+      "answer": 3, 
+      "current_state": 2, 
+      "next_state": 4
+    }
+  }, 
+  {
+    "pk": 4, 
+    "model": "tree.transition", 
+    "fields": {
+      "answer": 2, 
+      "current_state": 3, 
+      "next_state": 4
+    }
+  }, 
+  {
+    "pk": 5, 
+    "model": "tree.transition", 
+    "fields": {
+      "answer": 3, 
+      "current_state": 3, 
+      "next_state": 4
+    }
+  }, 
+  {
+    "pk": 6, 
+    "model": "tree.transition", 
+    "fields": {
+      "answer": 2, 
+      "current_state": 4, 
+      "next_state": 5
+    }
+  }, 
+  {
+    "pk": 7, 
+    "model": "tree.transition", 
+    "fields": {
+      "answer": 3, 
+      "current_state": 4, 
+      "next_state": null
+    }
+  }, 
+  {
+    "pk": 8, 
+    "model": "tree.transition", 
+    "fields": {
+      "answer": 2, 
+      "current_state": 5, 
+      "next_state": null
+    }
+  }, 
+  {
+    "pk": 9, 
+    "model": "tree.transition", 
+    "fields": {
+      "answer": 3, 
+      "current_state": 5, 
+      "next_state": null
+    }
+  }, 
+  {
+    "pk": 10, 
+    "model": "tree.transition", 
+    "fields": {
+      "answer": 1, 
+      "current_state": 6, 
+      "next_state": 7
+    }
+  }, 
+  {
+    "pk": 11, 
+    "model": "tree.transition", 
+    "fields": {
+      "answer": 4, 
+      "current_state": 7, 
+      "next_state": 8
+    }
+  }, 
+  {
+    "pk": 12, 
+    "model": "tree.transition", 
+    "fields": {
+      "answer": 5, 
+      "current_state": 7, 
+      "next_state": null
+    }
+  }, 
+  {
+    "pk": 13, 
+    "model": "tree.transition", 
+    "fields": {
+      "answer": 6, 
+      "current_state": 8, 
+      "next_state": null
+    }
+  }
+]

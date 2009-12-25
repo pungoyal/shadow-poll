@@ -1,0 +1,100 @@
+/* UNICEF RapidSMS UI
+ * vim:set noet:
+ * --
+ * messaging.css
+ * --
+ * What is this? */
+
+
+/* i'm using a table here, because i've
+ * spent quite enough time trying to make
+ * this damn form align properly with css */
+.search table {
+	width: 100%; }
+	
+	/* make most columns as thin as we
+	 * can, to contain their contents,
+	 * and space them out a little */
+	.search td {
+		padding: 0 0.5em 0 0;
+		border: 0;
+		width: 1%;
+	}
+		
+		/* allow the search field to fill up
+		 * as much of the width as is available */
+		.search td.search {
+			width: auto; }
+		
+			.search td.search input {
+				box-sizing: border-box;
+				-moz-box-sizing: border-box;
+				-webkit-box-sizing: border-box;
+				width: 100%;
+			}
+		
+		/* manually set the width of the last
+		 * column, to prevent the buttons from
+		 * breaking onto multiple lines */
+		.search td.buttons {
+			padding-right: 0;
+			width: 48px;
+		}
+			
+			/* but bunch them all together, because it's
+			 * prettier, and i like punishing people for
+			 * trying to use my software */
+			.search td.buttons input {
+				float: left; }
+
+
+.recipients { }
+	
+	/* the "check" column contains an icon,
+	 * indicating what's going on in the row */
+	.recipients .check {
+		padding: 0 0 0 0.5em;
+		width: 16px;
+	}
+	
+	/* everything looks clickable */
+	.recipients tbody tr {
+		cursor: pointer;
+	}
+		
+		/* highlight checked rows, to indicate
+		 * who we'll be blasting the message to */
+		.recipients tbody tr.checked td {
+			background-color: #fffff8;
+		}
+			
+			/* dull rows have a background image too, to avoid
+			 * a weird looking gap before anything is checked */
+			.recipients tbody tr         .check { background: url("../../webui/icons/silk/bullet_white.png") no-repeat 0.5em 50%; }
+			.recipients tbody tr.checked .check { background-image: url("../../webui/icons/silk/accept.png"); }
+			
+			/* various statuses for messages during/after send */
+			.recipients tbody tr.busy    .check { background-image: url("../../webui/icons/silk/email_go.png"); }
+			.recipients tbody tr.sent    .check { background-image: url("../../webui/icons/silk/email.png"); }
+			.recipients tbody tr.error   .check { background-image: url("../../webui/icons/silk/email_error.png"); }
+	
+	/* when a filter is in effect, dim all of the text
+	 * in the table *except* for the matching rows */
+	.recipients tbody.filtered {
+		background: #fcfcfc;
+		color: #eee;
+	}
+		
+		/* matching search results are BRIGHT */
+		.recipients tbody.filtered tr.hit {
+			background-color: #fff;
+			color: #000;
+		}
+
+
+.contents textarea {
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	width: 100%;
+}	
