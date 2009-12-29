@@ -1,7 +1,4 @@
-import rapidsms
 from django.db import models
-
-# Create your Django models here, if you need them.
 
 GENDER_CHOICES = ( ('M', 'Male'), ('F', 'Female') )
 
@@ -23,23 +20,15 @@ class Respondent(models.Model):
     answer = models.ForeignKey('Choice')
     age = models.IntegerField()
     gender = models.CharField(max_length=1, choices=GENDER_CHOICES)
+    mobile_number = models.IntegerField()
+    our_response = models.CharField(max_length=160)
 
 class Responder(models.Model):
     def __init__(self, message):
         self.message = message
 
     def response(self):
-        poll_response = self.message.text.split(";")
+        poll_response = self.message.split(";")
         selected_choice = Choice.objects.get(short_code=poll_response[0])
-        
-        Respondent(answer=selected_choice, age=poll_response[1], gender=poll_response[2]).save()
         our_response = "Thanks for your participation. You selected %s." % (selected_choice)
-        return our_response
-
-#        response = message.text.split(";")
-#        answer = response[0]
-#        self.debug("answer %s", answer)
-#        selected_choice = Choice.objects.get(short_code=answer)
-#        Respondent(answer=selected_choice, age=response[1], gender=response[2]).save()
-#        message.respond("Thanks for your participation. You selected %s." % (selected_choice))
-#        return True
+        return Respondent(answer=selected_choice, age=poll_response[1], gender=poll_response[2], our_response=our_response)
