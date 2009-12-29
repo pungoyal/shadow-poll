@@ -5,7 +5,10 @@ from rapidsms.tests.scripted import TestScript
 from app import App
 
 class ResponderTest(unittest.TestCase):
+    fixtures = ['poll.json']
+
     def testParseForChoiceAgeAndGender(self):
+        print Choice.objects.all()
         response = Responder("ED;16;M").response()
         self.assertEquals(response, "")
 

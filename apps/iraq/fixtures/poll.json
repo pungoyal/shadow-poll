@@ -1,0 +1,8 @@
+[
+{"pk": 1, "model": "iraq.question", "fields": {"question": "What is the most important issue?" }}, 
+{"pk": 1, "model": "iraq.choice", "fields": {"short_code": "EV", "question": 1, "choice": "Environment" }}, 
+{"pk": 2, "model": "iraq.choice", "fields": {"short_code": "DV", "question": 1, "choice": "Domestic Violence" }}, 
+{"pk": 3, "model": "iraq.choice", "fields": {"short_code": "ED", "question": 1, "choice": "Education" }}, 
+{"pk": 4, "model": "iraq.choice", "fields": {"short_code": "HL", "question": 1, "choice": "Health" }}, 
+{"pk": 1, "model": "iraq.respondent", "fields": {"answer": 1, "gender": "M", "age": 12, "our_response": "Thanks for your participation. You selected Environment.", "mobile_number": 245525 }}
+]
