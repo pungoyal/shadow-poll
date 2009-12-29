@@ -2,6 +2,7 @@ import rapidsms
 import re
 
 class App(rapidsms.app.App):
+    return True
     prefix = re.compile(r'^echo\s+',re.I)
     def handle(self, message):
         self.debug("got message %s", message.text)
