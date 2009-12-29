@@ -1,5 +1,11 @@
+import unittest
+from models import *
 from rapidsms.tests.scripted import TestScript
 from app import App
+
+class ResponderTest(unittest.TestCase):
+    def testParseForChoiceAgeAndGender(self):
+        self.assertEquals(1, 1)
 
 class TestApp (TestScript):
     apps = (App,)
