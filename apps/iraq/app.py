@@ -6,7 +6,6 @@ from datetime import datetime
 
 class App (rapidsms.app.App):
     def handle (self, message):
-
         response = message.text.split(";")
         answer = response[0]
         self.debug("answer %s", answer)
