@@ -8,9 +8,8 @@ class ResponderTest(unittest.TestCase):
     fixtures = ['poll.json']
 
     def testParseForChoiceAgeAndGender(self):
-        print Choice.objects.all()
-        response = Responder("ED;16;M").response()
-        self.assertEquals(response, "")
+        respondent = Responder("ED;16;M").response()
+        self.assertEquals(respondent.our_response, "Thanks for your participation. You selected Education.")
 
 class TestApp (TestScript):
     apps = (App,)
