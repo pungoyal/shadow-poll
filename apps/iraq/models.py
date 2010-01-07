@@ -21,12 +21,12 @@ class PollResponse(models.Model):
     age = models.IntegerField()
     gender = models.CharField(max_length=1, choices=GENDER)
     mobile_number = models.IntegerField()
-    our_response = models.CharField(max_length=160)
 
-    def parse(self, text, identity):
+    def generateResponse(self, text, identity):
         foo = text.split(";")
         self.issue = Choice.objects.get(short_code=foo[0])
         self.age = foo[1]
         self.gender = foo[2]
         self.mobile_number = identity
-        self.our_response = "Thanks for participating. You selected %s." % (self.issue)
+        self.save()
+        return "Thanks for participating. You selected %s." % (self.issue)
