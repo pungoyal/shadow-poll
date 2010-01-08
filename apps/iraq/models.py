@@ -33,7 +33,8 @@ class PollResponse(models.Model):
             self.age = foo[1]
             self.gender = foo[2]
             self.mobile_number = identity
-            self.save()
-            return "Thanks for participating. You selected %s." % (self.issue)
+            our_response = "Thanks for participating. You selected %s." % (self.issue)
         else:
             pass
+        self.save()
+        return our_response
