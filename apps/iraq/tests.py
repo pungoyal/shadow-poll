@@ -7,7 +7,7 @@ from app import App
 class ResponderTest(unittest.TestCase):
     def testParseForChoiceAgeAndGender(self):
         poll_response = PollResponse()
-        response = poll_response.generateResponse("ED;16;F","1000")
+        response = poll_response.generateResponse("ED;16;F",1000)
         self.assertEquals(poll_response.age, '16')
         self.assertEquals(poll_response.gender,'F')
         self.assertEquals(response, "Thanks for participating. You selected Education.")

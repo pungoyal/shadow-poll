@@ -19,14 +19,21 @@ class Choice(models.Model):
 class PollResponse(models.Model):
     issue = models.ForeignKey('Choice')
     age = models.IntegerField()
+    location = models.CharField(max_length=100)
+    name = models.CharField(max_length=100)
     gender = models.CharField(max_length=1, choices=GENDER)
     mobile_number = models.IntegerField()
 
     def generateResponse(self, text, identity):
-        foo = text.split(";")
-        self.issue = Choice.objects.get(short_code=foo[0])
-        self.age = foo[1]
-        self.gender = foo[2]
-        self.mobile_number = identity
-        self.save()
-        return "Thanks for participating. You selected %s." % (self.issue)
+        old_response = PollResponse.objects.filter(mobile_number=identity)
+        
+        if (old_response != None):
+            foo = text.split(";")
+            self.issue = Choice.objects.get(short_code=foo[0])
+            self.age = foo[1]
+            self.gender = foo[2]
+            self.mobile_number = identity
+            self.save()
+            return "Thanks for participating. You selected %s." % (self.issue)
+        else:
+            pass
