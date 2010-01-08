@@ -23,6 +23,8 @@ class PollResponse(models.Model):
     name = models.CharField(max_length=100)
     gender = models.CharField(max_length=1, choices=GENDER)
     mobile_number = models.IntegerField()
+    latitude = models.DecimalField(max_digits=8, decimal_places=6)
+    longitude = models.DecimalField(max_digits=8, decimal_places=6)
 
     def generateResponse(self, text):
         foo = text.split(";")

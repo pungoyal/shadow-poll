@@ -24,7 +24,9 @@
                "age": 10, 
                "location": "Baghdad", 
                "mobile_number": 1000, 
-               "issue": 1
+               "issue": 1,
+	       "latitude" : "33.33", 
+	       "longitude" : "44.50" 
           }
      }
 ]
