@@ -12,9 +12,3 @@ class ResponderTest(unittest.TestCase):
         self.assertEquals(poll_response.age, '16')
         self.assertEquals(poll_response.gender,'F')
         self.assertEquals(response, "Thanks for participating. You selected Education.")
-    def testConstructorDefaultArguments(self):
-        p = PollResponse()
-        self.assertEquals(p.mobile_number, None)
-
-        p = PollResponse(mobile_number = 20)
-        self.assertEquals(p.mobile_number, 20)
