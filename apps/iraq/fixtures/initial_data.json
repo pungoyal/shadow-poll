@@ -4,5 +4,9 @@
 {"pk": 2, "model": "iraq.choice", "fields": {"short_code": "DV", "question": 1, "choice": "Domestic Violence" }}, 
 {"pk": 3, "model": "iraq.choice", "fields": {"short_code": "ED", "question": 1, "choice": "Education" }}, 
 {"pk": 4, "model": "iraq.choice", "fields": {"short_code": "HL", "question": 1, "choice": "Health" }},
+<<<<<<< HEAD:apps/iraq/fixtures/initial_data.json
 {"pk": 1, "model": "iraq.pollresponse", "fields": {"issue": 2, "gender": "M", "age": 12, "mobile_number": 9880438062, "latitude" : "33.33", "longitude" : "44.50" }}
+=======
+{"pk": 1, "model": "iraq.pollresponse", "fields": {"issue": 2, "gender": "M", "age": 12, "location": "baghdad", "mobile_number": 9880438062, "name": "Abdul" }}
+>>>>>>> 4968f5367fd00f089caec2c0bd1b83b7b55ed872:apps/iraq/fixtures/initial_data.json
 ]

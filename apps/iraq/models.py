@@ -19,16 +19,24 @@ class Choice(models.Model):
 class PollResponse(models.Model):
     issue = models.ForeignKey('Choice')
     age = models.IntegerField()
+    location = models.CharField(max_length=100)
+    name = models.CharField(max_length=100)
     gender = models.CharField(max_length=1, choices=GENDER)
     mobile_number = models.IntegerField()
     latitude = models.DecimalField(max_digits=8, decimal_places=6)
     longitude = models.DecimalField(max_digits=8, decimal_places=6)
 
     def generateResponse(self, text, identity):
-        foo = text.split(";")
-        self.issue = Choice.objects.get(short_code=foo[0])
-        self.age = foo[1]
-        self.gender = foo[2]
-        self.mobile_number = identity
+        old_response = PollResponse.objects.filter(mobile_number=identity)
+        
+        if (old_response != None):
+            foo = text.split(";")
+            self.issue = Choice.objects.get(short_code=foo[0])
+            self.age = foo[1]
+            self.gender = foo[2]
+            self.mobile_number = identity
+            our_response = "Thanks for participating. You selected %s." % (self.issue)
+        else:
+            pass
         self.save()
-        return "Thanks for participating. You selected %s." % (self.issue)
+        return our_response
