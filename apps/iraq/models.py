@@ -27,7 +27,7 @@ class PollResponse(models.Model):
     longitude = models.DecimalField(max_digits=8, decimal_places=6, null = True)
 
     def generateResponse(self, text):
-        foo = text.split(";")
+        foo = text.split(" ")
         self.issue = Choice.objects.get(short_code=foo[0])
         self.age = foo[1]
         self.gender = foo[2]
