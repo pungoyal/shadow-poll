@@ -22,6 +22,7 @@ class ResponderTest(unittest.TestCase):
         self.assertEquals(self.poll_response.gender,'M')
         self.assertEquals(self.poll_response.location,None)
         self.assertEquals(response, "Thanks for participating. You selected Education.")
+
     def _testErrorScenarios(self):
         response = self.poll_response.generateResponse("EV")
         response = self.poll_response.generateResponse("ED 12")
