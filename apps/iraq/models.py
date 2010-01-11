@@ -19,7 +19,7 @@ class Choice(models.Model):
 class PollResponse(models.Model):
     issue = models.ForeignKey('Choice')
     age = models.IntegerField()
-    location = models.CharField(max_length=100)
+    location = models.CharField(max_length=100, null = True)
     name = models.CharField(max_length=100)
     gender = models.CharField(max_length=1, choices=GENDER)
     mobile_number = models.IntegerField()
@@ -31,4 +31,8 @@ class PollResponse(models.Model):
         self.issue = Choice.objects.get(short_code=foo[0])
         self.age = foo[1]
         self.gender = foo[2]
+        try :
+            self.location = foo[3]
+        except :
+            pass
         return "Thanks for participating. You selected %s." % (self.issue)
