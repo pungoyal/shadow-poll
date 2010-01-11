@@ -1,4 +1,12 @@
-from django.db import models
+from iraq.models import Question
 
-class django
+class Questions():
+    def __init__(self):
+        """
+        """
+        
+        
+
+
+
 
