@@ -1,8 +1,8 @@
 *.pyc
 *~
-#*#
 *.sqlite3
 .ropeproject/
 *.dump
 .project
 .pydevproject
+*#
