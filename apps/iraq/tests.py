@@ -8,7 +8,7 @@ class ResponderTest(unittest.TestCase):
     def setUp(self):
         self.poll_response = PollResponse(mobile_number = 1000)
     
-    def testParseForChoiceAgeAndGender(self):
+    def testParseResponse(self):
         response = self.poll_response.generateResponse("ED 16 F Baghdad")
 
         self.assertEquals(self.poll_response.age, '16')
@@ -21,4 +21,12 @@ class ResponderTest(unittest.TestCase):
         self.assertEquals(self.poll_response.age, '12')
         self.assertEquals(self.poll_response.gender,'M')
         self.assertEquals(self.poll_response.location,None)
-        self.assertEquals(response, "Thanks for participating. You selected Education.")        
+        self.assertEquals(response, "Thanks for participating. You selected Education.")
+
+    def _testErrorScenarios(self):
+        response = self.poll_response.generateResponse("EV")
+        response = self.poll_response.generateResponse("ED 12")
+        response = self.poll_response.generateResponse("ED")
+        response = self.poll_response.generateResponse("EV")
+        response = self.poll_response.generateResponse("ED 12 F Baghdad Foo")
+        response = self.poll_response.generateResponse("ED M 12 Baghdad")
