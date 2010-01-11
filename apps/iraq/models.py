@@ -33,6 +33,6 @@ class PollResponse(models.Model):
         self.gender = foo[2]
         try :
             self.location = foo[3]
-        except :
+        except IndexError:
             pass
         return "Thanks for participating. You selected %s." % (self.issue)
