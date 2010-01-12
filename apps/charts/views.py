@@ -3,6 +3,7 @@ from django.http import HttpRequest, HttpResponse, HttpResponseNotFound,\
 from django.shortcuts import render_to_response
 from django.template import loader, Context
 from charts.models import Responses
+from charts.chart_data import ChartData
 
 import datetime
 
@@ -13,7 +14,7 @@ def current_status(self):
     now = datetime.datetime.now()
     return render_to_response('charts.html')
 
-def proxy(self):
+def data(self):
     return HttpResponse('junk')
     
 def view_404(request):
