@@ -14,14 +14,14 @@ class ResponderTest(unittest.TestCase):
         self.assertEquals(self.poll_response.age, '16')
         self.assertEquals(self.poll_response.gender,'F')
         self.assertEquals(self.poll_response.location,"110001")
-        self.assertEquals(response, "Thanks for participating. You selected Education.")
+        self.assertEquals(response, "Thank you for voting. You selected Education as your number one issue.")
     def _testLocationIsOptional(self):
         response = self.poll_response.generateResponse("ED 12 M")
 
         self.assertEquals(self.poll_response.age, '12')
         self.assertEquals(self.poll_response.gender,'M')
         self.assertEquals(self.poll_response.location,None)
-        self.assertEquals(response, "Thanks for participating. You selected Education.")
+        self.assertEquals(response, "Thank you for voting. You selected Education as your number one issue.")
 
     def _testErrorScenarios(self):
         response = self.poll_response.generateResponse("EV")

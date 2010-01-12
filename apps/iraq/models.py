@@ -35,4 +35,4 @@ class PollResponse(models.Model):
             self.location = foo[3]
         except IndexError:
             pass
-        return "Thanks for participating. You selected %s." % (self.issue)
+        return "Thank you for voting. You selected %s as your number one issue." % (self.issue)
