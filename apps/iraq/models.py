@@ -27,12 +27,16 @@ class PollResponse(models.Model):
     longitude = models.DecimalField(max_digits=8, decimal_places=6, null = True)
 
     def generateResponse(self, text):
-        foo = text.split(" ")
-        self.issue = Choice.objects.get(short_code=foo[0])
-        self.age = foo[1]
-        self.gender = foo[2]
         try :
-            self.location = foo[3]
-        except IndexError:
-            pass
+            foo = text.split(" ")
+            self.issue = Choice.objects.get(short_code=foo[0])
+            self.age = foo[1]
+            self.gender = foo[2]
+            try :
+                self.location = foo[3]
+            except IndexError:
+                pass
+            self.save()
+        except :
+            return "Sorry, did not understand your response - %s. Please re-send as - issue age gender area" % (text)
         return "Thank you for voting. You selected %s as your number one issue." % (self.issue)

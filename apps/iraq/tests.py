@@ -15,7 +15,8 @@ class ResponderTest(unittest.TestCase):
         self.assertEquals(self.poll_response.gender,'F')
         self.assertEquals(self.poll_response.location,"110001")
         self.assertEquals(response, "Thank you for voting. You selected Education as your number one issue.")
-    def _testLocationIsOptional(self):
+        
+    def testLocationIsOptional(self):
         response = self.poll_response.generateResponse("ED 12 M")
 
         self.assertEquals(self.poll_response.age, '12')
@@ -23,6 +24,11 @@ class ResponderTest(unittest.TestCase):
         self.assertEquals(self.poll_response.location,None)
         self.assertEquals(response, "Thank you for voting. You selected Education as your number one issue.")
 
+    def testIncorrectResponseMessageOnBadParsing(self):
+        text_message = "ED M 12 110001"
+        response = self.poll_response.generateResponse(text_message)
+        self.assertEquals(response, "Sorry, did not understand your response - %s. Please re-send as - issue age gender area" % (text_message))
+        
     def _testErrorScenarios(self):
         response = self.poll_response.generateResponse("EV")
         response = self.poll_response.generateResponse("ED 12")
