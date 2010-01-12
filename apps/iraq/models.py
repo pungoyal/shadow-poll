@@ -26,7 +26,7 @@ class PollResponse(models.Model):
     latitude = models.DecimalField(max_digits=8, decimal_places=6, null = True)
     longitude = models.DecimalField(max_digits=8, decimal_places=6, null = True)
 
-    def generateResponse(self, text):
+    def generate_response(self, text):
         try :
             foo = text.split(" ")
             self.issue = Choice.objects.get(short_code=foo[0])
@@ -38,5 +38,5 @@ class PollResponse(models.Model):
                 pass
             self.save()
         except :
-            return "Sorry, did not understand your response. Please re-send as - issue age gender area"
+            return "Sorry, we did not understand your response. Please re-send as - issue age gender area"
         return "Thank you for voting. You selected %s as your number one issue." % (self.issue)

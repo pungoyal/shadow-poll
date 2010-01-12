@@ -14,6 +14,6 @@ class App (rapidsms.app.App):
         else:
             poll_response = querySet[0]
         
-        response_text = poll_response.generateResponse(message.text)
+        response_text = poll_response.generate_response(message.text)
         message.respond(response_text)
         return True
