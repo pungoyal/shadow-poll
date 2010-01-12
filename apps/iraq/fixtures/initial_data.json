@@ -49,7 +49,7 @@
                "name": "Rehman", 
                "gender": "M", 
                "age": 10, 
-               "location": "Baghdad", 
+               "location": "10001", 
                "mobile_number": 1000, 
                "issue": 1,
 	           "latitude" : "33.33", 

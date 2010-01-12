@@ -19,7 +19,7 @@ class Choice(models.Model):
 class PollResponse(models.Model):
     issue = models.ForeignKey('Choice')
     age = models.IntegerField()
-    location = models.CharField(max_length=100, null = True)
+    location = models.IntegerField(null = True)
     name = models.CharField(max_length=100)
     gender = models.CharField(max_length=1, choices=GENDER)
     mobile_number = models.IntegerField()
