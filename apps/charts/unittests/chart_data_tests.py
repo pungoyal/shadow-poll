@@ -10,6 +10,6 @@ class ChartDataTests (unittest.TestCase):
 
     def test_response_counts(self):
         responses = ChartData().response_counts(1)
-        self.assertEquals(responses.count(),4)
+        self.assertEquals(responses.count(),5)
 
         
