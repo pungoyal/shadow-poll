@@ -6,8 +6,8 @@ from models import Responses
 
 class TestApp (unittest.TestCase):
     def testLoadAllAnswersToTheFirstQuestion(self):
-        noOfAnswers = Responses().numberOfAnswers()
-        self.assertEquals(noOfAnswers,1)
+        noOfAnswers = Responses().number_of_answers()
+        self.assertEquals(noOfAnswers,4)
 
         
         

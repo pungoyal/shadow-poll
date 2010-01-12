@@ -1,10 +1,10 @@
 from django.db import models
-from iraq.models import Responses
+from iraq.models import Question,PollResponse
 
 class Responses():
-    def numberOfAnswers(self):
+    def number_of_answers(self):
         firstQuestion = Question.objects.all()[0]
-        return firstQuestion.answer_set.count()
+        return firstQuestion.choice_set.count()
     
         
 

@@ -5,7 +5,7 @@ import datetime
 def show_stats_on_map(request):
     return HttpResponse("Hello World")
 
-def currentStatus(self):
+def current_status(self):
     now = datetime.datetime.now()
     html = "<html><body>Current time is %s.</body></html> " % now
     return HttpResponse(html)
