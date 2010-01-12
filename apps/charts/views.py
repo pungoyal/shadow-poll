@@ -1,6 +1,8 @@
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render_to_response
 from django.template import loader, Context
+from charts.models import Responses
+
 import datetime
 
 def show_stats_on_map(request):
@@ -8,6 +10,4 @@ def show_stats_on_map(request):
 
 def current_status(self):
     now = datetime.datetime.now()
-    html = "<html><body>Current time is %s.</body></html> " % now
-    return HttpResponse(html)
-    
+    return render_to_response('base.html')
