@@ -1,9 +1,13 @@
-from iraq.models import Question
+from django.db import models
+from iraq.models import Responses
 
-class Questions():
-    def __init__(self):
-        """
-        """
+class Responses():
+    def numberOfAnswers(self):
+        firstQuestion = Question.objects.all()[0]
+        return firstQuestion.answer_set.count()
+    
+        
+
         
         
 

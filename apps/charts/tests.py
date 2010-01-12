@@ -1,20 +1,13 @@
+import unittest
+import rapidsms
 from rapidsms.tests.scripted import TestScript
 from app import App
+from models import Responses
 
-class TestApp (TestScript):
-    apps = (App,)
+class TestApp (unittest.TestCase):
+    def testLoadAllAnswersToTheFirstQuestion(self):
+        noOfAnswers = Responses().numberOfAnswers()
+        self.assertEquals(noOfAnswers.count(),1)
 
-    # define your test scripts here.
-    # e.g.:
-    #
-    # testRegister = """
-    #   8005551212 > register as someuser
-    #   8005551212 < Registered new user 'someuser' for 8005551212!
-    #   8005551212 > tell anotheruser what's up??
-    #   8005550000 < someuser said "what's up??"
-    # """
-    #
-    # You can also do normal unittest.TestCase methods:
-    #
-    # def testMyModel (self):
-    #   self.assertEquals(...)
+        
+        
