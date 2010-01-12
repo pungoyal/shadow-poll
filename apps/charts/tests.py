@@ -1,5 +1,1 @@
-from charts.unittests.ResponseTests import *
-
-
-        
-        
+from charts.unittests.response_tests import *
