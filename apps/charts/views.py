@@ -10,4 +10,9 @@ def show_stats_on_map(request):
 
 def current_status(self):
     now = datetime.datetime.now()
-    return render_to_response('base.html')
+    template = loader.get_template('base.html')
+    context = Context({
+            'some_val':12,
+            })
+    html = "<html><body>Current time is %s.</body></html> " % now
+    return HttpResponse(template.render(context))
