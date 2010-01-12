@@ -7,6 +7,9 @@ urlpatterns = patterns('charts',
                        (r'^data/(?P<action>.*)$','views.proxy'),
                        )
 
+handler404 = 'charts.views.view_404'
+handler500 = 'charts.views.view_500'
+
 urlpatterns += patterns('',
                         (r'^static/(?P<path>.*)$', 
                          'django.views.static.serve',
