@@ -38,5 +38,5 @@ class PollResponse(models.Model):
                 pass
             self.save()
         except :
-            return "Sorry, did not understand your response - %s. Please re-send as - issue age gender area" % (text)
+            return "Sorry, did not understand your response. Please re-send as - issue age gender area"
         return "Thank you for voting. You selected %s as your number one issue." % (self.issue)

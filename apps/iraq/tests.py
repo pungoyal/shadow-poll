@@ -21,18 +21,25 @@ class ResponderTest(unittest.TestCase):
 
         self.assertEquals(self.poll_response.age, '12')
         self.assertEquals(self.poll_response.gender,'M')
-        self.assertEquals(self.poll_response.location,None)
+        self.assertEquals(self.poll_response.location, None)
         self.assertEquals(response, "Thank you for voting. You selected Education as your number one issue.")
 
+    def testExtraInfoInTheMessageIsIgnored(self):
+        response = self.poll_response.generateResponse("ED 16 F 110001 Foo Bar")
+
+        self.assertEquals(self.poll_response.age, '16')
+        self.assertEquals(self.poll_response.gender,'F')
+        self.assertEquals(self.poll_response.location,"110001")
+        self.assertEquals(response, "Thank you for voting. You selected Education as your number one issue.")        
+
     def testIncorrectResponseMessageOnBadParsing(self):
-        text_message = "ED M 12 110001"
-        response = self.poll_response.generateResponse(text_message)
-        self.assertEquals(response, "Sorry, did not understand your response - %s. Please re-send as - issue age gender area" % (text_message))
-        
-    def _testErrorScenarios(self):
-        response = self.poll_response.generateResponse("EV")
-        response = self.poll_response.generateResponse("ED 12")
-        response = self.poll_response.generateResponse("ED")
-        response = self.poll_response.generateResponse("EV")
-        response = self.poll_response.generateResponse("ED 12 F 110001 Foo")
+        error_message = "Sorry, did not understand your response. Please re-send as - issue age gender area"
+
         response = self.poll_response.generateResponse("ED M 12 110001")
+        self.assertEquals(response, error_message)
+        response = self.poll_response.generateResponse("EV")
+        self.assertEquals(response, error_message)
+        response = self.poll_response.generateResponse("ED 12")
+        self.assertEquals(response, error_message)
+        response = self.poll_response.generateResponse("ED")
+        self.assertEquals(response, error_message)
