@@ -6,6 +6,9 @@ urlpatterns = patterns('charts',
                        (r'^map/$', 'views.show_stats_on_map'),
                        )
 
+handler404 = 'charts.views.view_404'
+handler500 = 'charts.views.view_500'
+
 urlpatterns += patterns('',
                         (r'^static/(?P<path>.*)$', 
                          'django.views.static.serve',

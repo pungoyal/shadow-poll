@@ -1,4 +1,5 @@
-from django.http import HttpRequest, HttpResponse
+from django.http import HttpRequest, HttpResponse, HttpResponseNotFound,\
+    HttpResponseServerError
 from django.shortcuts import render_to_response
 from django.template import loader, Context
 from charts.models import Responses
@@ -16,3 +17,13 @@ def current_status(self):
             })
     html = "<html><body>Current time is %s.</body></html> " % now
     return HttpResponse(template.render(context))
+
+def view_404(request):
+    response = HttpResponseNotFound()
+    response.write("The path is not found")
+    return response
+
+def view_500(request):
+    response = HttpResponseServerError()
+    response.write("Something went wrong")
+    return response
