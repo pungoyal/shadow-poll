@@ -10,11 +10,38 @@
           "pk": 1, 
           "model": "iraq.choice", 
           "fields": {
+               "short_code": "FD", 
+               "question": 1, 
+               "choice": "Food"
+          }
+     },
+     {
+          "pk": 2, 
+          "model": "iraq.choice", 
+          "fields": {
                "short_code": "ED", 
                "question": 1, 
                "choice": "Education"
           }
-     }, 
+     },
+     {
+          "pk": 3, 
+          "model": "iraq.choice", 
+          "fields": {
+               "short_code": "HE", 
+               "question": 1, 
+               "choice": "Health"
+          }
+     },
+     {
+          "pk": 4, 
+          "model": "iraq.choice", 
+          "fields": {
+               "short_code": "PC", 
+               "question": 1, 
+               "choice": "Peace"
+          }
+     },
      {
           "pk": 1, 
           "model": "iraq.pollresponse", 
@@ -25,8 +52,8 @@
                "location": "Baghdad", 
                "mobile_number": 1000, 
                "issue": 1,
-	       "latitude" : "33.33", 
-	       "longitude" : "44.50" 
+	           "latitude" : "33.33", 
+	           "longitude" : "44.50" 
           }
      }
 ]
