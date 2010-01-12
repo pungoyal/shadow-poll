@@ -11,13 +11,11 @@ def show_stats_on_map(request):
 
 def current_status(self):
     now = datetime.datetime.now()
-    template = loader.get_template('base.html')
-    context = Context({
-            'some_val':12,
-            })
-    html = "<html><body>Current time is %s.</body></html> " % now
-    return HttpResponse(template.render(context))
+    return render_to_response('charts.html')
 
+def proxy(self):
+    return HttpResponse('junk')
+    
 def view_404(request):
     response = HttpResponseNotFound()
     response.write("The path is not found")
@@ -27,3 +25,4 @@ def view_500(request):
     response = HttpResponseServerError()
     response.write("Something went wrong")
     return response
+
