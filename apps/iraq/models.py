@@ -8,6 +8,9 @@ class Question(models.Model):
     def __unicode__(self):
         return self.question
 
+    def flatten(self):
+        return [self.question]
+
 class Choice(models.Model):
     choice = models.CharField(null=False, max_length=100)
     short_code = models.CharField(null=False, max_length=2)

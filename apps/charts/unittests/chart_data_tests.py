@@ -11,11 +11,6 @@ class ChartDataTests (unittest.TestCase):
         chartData = ChartData()
         self.assertEquals(chartData.no_of_choices(1),5)
 
-    def _question(self):
-        question = Question()
-        question.choice_set.add(Choice())
-        return question
-
     def test_response_counts(self):
         responses = ChartData().responses_by_choice(1)
         self.assertEquals(len(responses),5)
