@@ -43,3 +43,9 @@ class PollResponseTest(unittest.TestCase):
         self.assertEquals(response, error_message)
         response = self.poll_response.generate_response("ED")
         self.assertEquals(response, error_message)
+
+    def testToString(self):
+        choice = Choice.objects.get(id=2)
+        p = PollResponse(issue=choice, age=10, location=110001, gender="M")
+
+        self.assertEquals(str(p), "%s 10 M 110001" %choice)

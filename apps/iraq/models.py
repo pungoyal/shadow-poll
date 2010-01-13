@@ -40,3 +40,6 @@ class PollResponse(models.Model):
         except :
             return "Sorry, we did not understand your response. Please re-send as - issue age gender area"
         return "Thank you for voting. You selected %s as your number one issue." % (self.issue)
+
+    def __unicode__(self):
+        return str(self.issue)+" "+str(self.age)+" "+str(self.gender)+" "+str(self.location)
