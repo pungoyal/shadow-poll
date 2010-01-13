@@ -1,15 +1,22 @@
 from iraq.models import Question, Choice, PollResponse
+from model_adapter import ModelAdapter
 
 class ChartData():
-    def no_of_responses(self, questionId):
-        question = self.__load_question(questionId)
+
+    data_adapter = ModelAdapter()
+
+    def __init__(self,data_adapter=None):
+        self.data_adapter = data_adapter or self.data_adapter
+    
+    def no_of_choices(self, questionId):
+        question = self.data_adapter.load_question_by_id(questionId)
         return question.choice_set.count()
 
-    def response_counts(self, questionId):
-        choices = Choice.objects.filter(question=questionId)
-        return choices
-        
-    def __load_question(self, questionId):
-        return Question.objects.filter(id=questionId)[0]
+    def responses_by_choice(self, questionId):
+        responses_by_choice = {}
+        choices = self.data_adapter.load_choices_by_question(questionId)
+        for choice in choices:
+            responses_by_choice[choice.choice] = choice.pollresponse_set.all().count()
+        return responses_by_choice
 
 

@@ -2,7 +2,6 @@ from django.http import HttpRequest, HttpResponse, HttpResponseNotFound,\
     HttpResponseServerError
 from django.shortcuts import render_to_response
 from django.template import loader, Context
-from charts.models import Responses
 from charts.chart_data import ChartData
 
 import datetime
