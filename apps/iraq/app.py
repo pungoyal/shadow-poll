@@ -1,5 +1,4 @@
 import rapidsms
-import re
 
 from models import *
 from datetime import datetime
