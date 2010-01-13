@@ -1,10 +1,11 @@
-import unittest
+from django.test import TestCase
 import rapidsms
 from iraq.models import *
 from rapidsms.tests.scripted import TestScript
 from iraq.app import App
 
-class PollResponseTest(unittest.TestCase):
+class PollResponseTest(TestCase):
+    fixtures = ['poll_responses']
     def setUp(self):
         self.poll_response = PollResponse(mobile_number = 1000)
 

@@ -3,6 +3,7 @@ from iraq.app import App
 from iraq.models import *
 
 class TestApp(TestScript):
+    fixtures = ['poll_responses.json']
     apps = (App,)
 
     testIncorrectResponse = """
