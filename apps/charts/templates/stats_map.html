@@ -1,7 +1,35 @@
 {% extends "base.html" %}
 {% block extrahead %}
-<script src="/static/charts/javascripts/ext-all.js" type="application/javascript"></script>
+<script src="/static/charts/javascripts/ext-2.3/adapter/ext/ext-base.js" type="text/javascript"></script>
+<script src="/static/charts/javascripts/ext-2.3/ext-all.js" type="text/javascript"></script>
+<script src="/static/charts/javascripts/OpenLayers-2.8/OpenLayers.js" type="application/javascript"></script>
+<script src="/static/charts/javascripts/GeoExt/script/GeoExt.js" type="application/javascript"></script>
+<script src="/static/charts/javascripts/jquery-1.3.2.min.js" type="application/javascript"></script>
+
+<link rel="stylesheet" type="text/css" href="/static/charts/javascripts/GeoExt/resources/css/geoext-all.css"></link>
+<link rel="stylesheet" type="text/css" href="/static/charts/stylesheets/base.css" />
+
+<script type="application/javascript">
+$(document).ready(function(){
+	var map = new OpenLayers.Map();
+        var layer = new OpenLayers.Layer.WMS(
+            "Global Imagery",
+            "http://maps.opengeo.org/geowebcache/service/wms",
+            {layers: "bluemarble"}
+        );
+        map.addLayer(layer);
+
+        new GeoExt.MapPanel({
+            renderTo: 'map',
+            height: 400,
+            width: 600,
+            map: map,
+            title: 'Iraq Youth'
+        });
+});
+</script>
 {% endblock %}
 {% block content %}
-Charts
+<div id="map">
+</div>
 {% endblock %}
