@@ -18,6 +18,15 @@ $(document).ready(function(){
             {layers: "bluemarble"}
         );
         map.addLayer(layer);
+        
+        var iraq = new OpenLayers.Layer.WMS(
+            "Iraq",
+            "http://localhost/geoserver/wms",
+            {layers: 'GADM:IRQ_adm2', transparent: true, format: 'image/png'},
+            {isBaseLayer: false, visibility: true}
+        );
+        iraq.setOpacity(0.5);
+        map.addLayer(iraq);
 
         new GeoExt.MapPanel({
             renderTo: 'map',
