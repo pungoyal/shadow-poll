@@ -9,7 +9,10 @@ class Question(models.Model):
         return self.question
 
     def flatten(self):
-        return [self.question]
+        flat_list = [self.question]
+        choices = [str(choice) for choice in self.choice_set.all()]
+        
+        return [self.question, choices, []]
 
 class Choice(models.Model):
     choice = models.CharField(null=False, max_length=100)
