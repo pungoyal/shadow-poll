@@ -5,40 +5,62 @@
 <script src="/static/charts/javascripts/OpenLayers-2.8/OpenLayers.js" type="application/javascript"></script>
 <script src="/static/charts/javascripts/GeoExt/script/GeoExt.js" type="application/javascript"></script>
 <script src="/static/charts/javascripts/jquery-1.3.2.min.js" type="application/javascript"></script>
+<script src="/static/charts/javascripts/raphael-min.js" type="application/javascript"></script>
 
 <link rel="stylesheet" type="text/css" href="/static/charts/javascripts/GeoExt/resources/css/geoext-all.css"></link>
 <link rel="stylesheet" type="text/css" href="/static/charts/stylesheets/base.css" />
 
 <script type="application/javascript">
-$(document).ready(function(){
-	var map = new OpenLayers.Map();
-        var layer = new OpenLayers.Layer.WMS(
-            "Global Imagery",
-            "http://maps.opengeo.org/geowebcache/service/wms",
-            {layers: "bluemarble"}
-        );
-        map.addLayer(layer);
-        
-        var iraq = new OpenLayers.Layer.WMS(
-            "Iraq",
-            "http://localhost/geoserver/wms",
-            {layers: 'GADM:IRQ_adm2', transparent: true, format: 'image/png'},
-            {isBaseLayer: false, visibility: true}
-        );
-        iraq.setOpacity(0.5);
-        map.addLayer(iraq);
+$(document).ready(function(){var map = new OpenLayers.Map();
+	map.maxExtent = new OpenLayers.Bounds(30.322265625,23.48876953125,56.689453125,40.23193359375)
+    var layer = new OpenLayers.Layer.WMS(
+        "Global Imagery",
+        "http://maps.opengeo.org/geowebcache/service/wms",
+        {layers: "bluemarble"}
+    );
+    map.addLayer(layer);
+    
+    var iraq = new OpenLayers.Layer.WMS(
+        "Iraq",
+        "http://localhost/geoserver/wms",
+        {layers: 'GADM:IRQ_adm2', transparent: true, format: 'image/png'},
+        {isBaseLayer: false, visibility: true}
+    );
+    iraq.setOpacity(0.5);
+    map.addLayer(iraq);
 
-        new GeoExt.MapPanel({
-            renderTo: 'map',
-            height: 400,
-            width: 600,
-            map: map,
-            title: 'Iraq Youth'
+    new GeoExt.MapPanel({
+        renderTo: 'map',
+        height: 400,
+        width: 600,
+        map: map,
+        title: 'Iraq Youth'
+    });
+	
+	map.events.register('click', map, mapEvent);
+	function mapEvent(e){
+		bounds = map.getExtent().toArray();
+		console.log("%d %d %d %d %d %d", bounds[0],bounds[1], bounds[2], bounds[3], e.xy.x, e.xy.y);
+        $.get('/get_stat/', {
+            left: bounds[0],
+            bottom: bounds[1],
+            right: bounds[2],
+            top: bounds[3],
+			x: e.xy.x,
+			y: e.xy.y
+        }, function(response){
+			
         });
+	}
+	
+	var paper = new Raphael(document.getElementById("map"), 320, 200);
+	var circle = paper.circle(80, 80, 80);  
 });
 </script>
 {% endblock %}
 {% block content %}
 <div id="map">
+</div>
+<div id="notepad" style="width=320; height=200;">
 </div>
 {% endblock %}
