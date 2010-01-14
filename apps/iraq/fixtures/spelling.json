@@ -1,0 +1,42 @@
+[
+     {
+          "pk": 1, 
+          "model": "iraq.spelling", 
+          "fields": {
+               "spelling": "wat", 
+               "choice": 5
+          }
+     }, 
+     {
+          "pk": 2, 
+          "model": "iraq.spelling", 
+          "fields": {
+               "spelling": "water", 
+               "choice": 5
+          }
+     }, 
+     {
+          "pk": 3, 
+          "model": "iraq.spelling", 
+          "fields": {
+               "spelling": "wtr", 
+               "choice": 5
+          }
+     }, 
+     {
+          "pk": 4, 
+          "model": "iraq.spelling", 
+          "fields": {
+               "spelling": "watr", 
+               "choice": 5
+          }
+     }, 
+     {
+          "pk": 5, 
+          "model": "iraq.spelling", 
+          "fields": {
+               "spelling": "wter", 
+               "choice": 5
+          }
+     }
+]

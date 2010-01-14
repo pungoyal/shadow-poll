@@ -8,7 +8,3 @@ class QuestionTest(TestCase):
         question = Question.objects.all()[1]
         data = question.flatten()
         self.assertEquals(len(data),1)
-        
-        
-        
-
