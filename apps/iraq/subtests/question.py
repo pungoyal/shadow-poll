@@ -26,7 +26,7 @@ class QuestionTest(TestCase):
         self.assertEquals(len(data),3)
         self.assertTrue(self.is_not_empty(data[0]))
         self.assertTrue(self.is_not_empty(data[1]))
-       # self.assertTrue(self.is_not_empty(data[2]))
+        self.assertTrue(self.is_not_empty(data[2]))
 
     def is_empty(self, li):
         return len(li) < 1
