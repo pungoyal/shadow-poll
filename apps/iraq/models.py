@@ -1,4 +1,5 @@
 from django.db import models
+from iraq.postcode_name_map import get_name
 
 GENDER = ( ('M', 'Male'), ('F', 'Female') )
 
@@ -56,6 +57,9 @@ class PollResponse(models.Model):
         except :
             return "Sorry, we did not understand your response. Please re-send as - issue age gender area"
         return "Thank you for voting. You selected %s as your number one issue." % (self.issue)
+    
+    def convert_postcode_to_place_name(self, postcode):
+        return get_name(postcode)
 
     def __unicode__(self):
         return str(self.issue)+" "+str(self.age)+" "+str(self.gender)+" "+str(self.location)
