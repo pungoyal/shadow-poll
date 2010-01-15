@@ -42,7 +42,12 @@ class PollResponseTest(TestCase):
         self.assertEquals(response, error_message)
         response = self.poll_response.generate_response("ED")
         self.assertEquals(response, error_message)
-
+        
+    def test_convert_location_to_place_name(self):
+        poll_response = PollResponse.objects.get(id=80)
+        place_name = poll_response.convert_postcode_to_place_name(str(poll_response.location))
+        self.assertEquals(place_name, "Al Falojah")
+        
     def testToString(self):
         choice = Choice.objects.get(id=2)
         p = PollResponse(issue=choice, age=10, location=110001, gender="M")
