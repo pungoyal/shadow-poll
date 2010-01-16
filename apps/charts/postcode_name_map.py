@@ -1,14 +1,14 @@
-__postcode_name_map = {'31001' : 'Al Rumadi', '31002': 'Al Falojah',
-                       '31003' : 'Al Qa\'im', '31004' : 'Haditha',
-                       '31005' : 'Enna', '31006' : 'Rawah',
-                       '31007' : 'Heet', '31008' :'Al Habanyah',
-                       '31009' : 'Al Haqaniyah', '31010' : 'Al Khaldiya',
-                       '31011' : 'Al Rutbah', '31012' : 'Al Quqa', 
-                       '31013' : 'Al Karmah', '31014' : 'Al Baghdadi',
-                       '31015' : 'Al Waleed','Al-Nukhaib' : '31016',
-                       '31017' : 'Al Ubaidi','31018' : 'Kabisa',
-                       '31019': 'Tarbil', '31020' : 'Abu Ghraib',
-                       '31021' : 'Sadah', '31022':'Akashat' 
+__postcode_name_map = {'Al Rumadi' :'31001', 'Al Falojah' : '31002',
+                       'Al Qa\'im':'31003' , 'Haditha' : '31004',
+                       'Enna': '31005',  'Rawah' :'31006' ,
+                       'Heet':'31007',  'Al Habanyah':'31008',
+                       'Al Haqaniyah' :'31009', 'Al Khaldiya' : '31010',
+                       'Al Rutbah':'31011' , 'Al Quqa' : '31012', 
+                       'Al Karmah': '31013', 'Al Baghdadi' : '31014',
+                       'Al Waleed': '31015' ,'31016' :'Al-Nukhaib' ,
+                       'Al Ubaidi':'31017','Kabisa' : '31018',
+                       'Tarbil':'31019',  'Abu Ghraib':'31020' ,
+                       'Sadah':'31021', 'Akashat':'31022' 
                        }
     
 def get_name(post_code):
