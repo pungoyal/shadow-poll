@@ -8,6 +8,7 @@ from django.template.context import RequestContext
 from charts.feature_info_request_parser import convert_text_to_dicts
 from httplib import HTTPResponse
 from apps.iraq.models import PollResponse, Choice
+from charts.postcode_name_map import get_name
 import urllib2
 
 import datetime
@@ -39,10 +40,10 @@ format=jpeg&info_format=text/plain&request=GetFeatureInfo&layers=GADM:IRQ_adm2&\
 query_layers=GADM:IRQ_adm2&width=550&height=250&x=%s&y=%s" % (left, bottom, right, top, x, y))
         request = urllib2.urlopen(url)
         response_dict = request.read()
-        print response_dict
         feature_dict = convert_text_to_dicts(response_dict)
         try:
             place_name = feature_dict['NAME_2']
+            post_code = get_name(place_name)
         except KeyError:
             place_name = "Not Found"
         return HttpResponse("OK")
