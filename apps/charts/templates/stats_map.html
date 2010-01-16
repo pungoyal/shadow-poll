@@ -5,7 +5,6 @@
 <script src="/static/charts/javascripts/OpenLayers-2.8/OpenLayers.js" type="application/javascript"></script>
 <script src="/static/charts/javascripts/GeoExt/script/GeoExt.js" type="application/javascript"></script>
 <script src="/static/charts/javascripts/jquery-1.3.2.min.js" type="application/javascript"></script>
-<script src="/static/charts/javascripts/raphael-min.js" type="application/javascript"></script>
 
 <link rel="stylesheet" type="text/css" href="/static/charts/javascripts/GeoExt/resources/css/geoext-all.css"></link>
 <link rel="stylesheet" type="text/css" href="/static/charts/stylesheets/base.css" />
@@ -40,7 +39,6 @@ $(document).ready(function(){var map = new OpenLayers.Map();
 	map.events.register('click', map, mapEvent);
 	function mapEvent(e){
 		bounds = map.getExtent().toArray();
-		console.log("%d %d %d %d %d %d", bounds[0],bounds[1], bounds[2], bounds[3], e.xy.x, e.xy.y);
         $.get('/get_stat/', {
             left: bounds[0],
             bottom: bounds[1],
@@ -53,14 +51,13 @@ $(document).ready(function(){var map = new OpenLayers.Map();
         });
 	}
 	
-	var paper = new Raphael(document.getElementById("map"), 320, 200);
-	var circle = paper.circle(80, 80, 80);  
 });
 </script>
 {% endblock %}
 {% block content %}
-<div id="map">
-</div>
 <div id="notepad" style="width=320; height=200;">
+<img src="http://chart.apis.google.com/chart?cht=p3&chd=t:{{ percentage }}&chs=250x100&chl={{ labels }}"></img>
+</div>
+<div id="map">
 </div>
 {% endblock %}
