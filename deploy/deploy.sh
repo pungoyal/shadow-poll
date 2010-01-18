@@ -1,3 +1,5 @@
+#!/bin/sh
+
 kill -9 $(cat /tmp/shadowpoll.pid)
 python /var/lib/buildbot/slave/shadow-poll/build/manage.py syncdb --noinput
 rm -rf /var/www/shadowpoll/*
