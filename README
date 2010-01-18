@@ -1,2 +1,3 @@
-Packages to be installed - 
-python-mox
+Packages to be installed
+Dev- python-mox
+Prod - python-flup
