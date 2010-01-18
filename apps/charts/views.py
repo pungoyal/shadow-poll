@@ -34,10 +34,12 @@ def get_stats(request):
         top = request.GET.get('top')
         x = request.GET.get('x')
         y = request.GET.get('y')
+        width = request.GET.get('width')
+        height = request.GET.get('height')
         url = ("http://localhost:8080/geoserver/wms?REQUEST=GetFeatureInfo&\
 EXCEPTIONS=application/vnd.ogc.se_xml&BBOX=%s,%s,%s,%s&X=%s&Y=%s&INFO_FORMAT=text/plain&\
 QUERY_LAYERS=GADM:IRQ_adm2&FEATURE_COUNT=50&Layers=GADM:IRQ_adm2&Styles=&Srs=EPSG:4326&\
-WIDTH=512&HEIGHT=439&format=image/png" % (left, bottom, right, top, x, y))
+WIDTH=%s&HEIGHT=%s&format=image/png" % (left, bottom, right, top, x, y, width, height))
         request = urllib2.urlopen(url)        
         response_dict = request.read()
         feature_dict = convert_text_to_dicts(response_dict)

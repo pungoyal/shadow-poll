@@ -48,7 +48,9 @@ $(document).ready(function(){
             right: bounds[2],
             top: bounds[3],
 			x: e.xy.x,
-			y: e.xy.y
+			y: e.xy.y,
+			width: map.size.w,
+			height: map.size.h
         }, function(response){
 			data = JSON.parse(response);
 			if(data.has_stats == "true"){
