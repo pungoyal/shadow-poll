@@ -10,6 +10,7 @@ from httplib import HTTPResponse
 from apps.iraq.models import PollResponse, Choice
 from charts.postcode_name_map import get_name
 import urllib2
+import json
 
 import datetime
 
@@ -44,7 +45,6 @@ query_layers=GADM:IRQ_adm2&width=550&height=250&x=%s&y=%s" % (left, bottom, righ
             post_code = get_name(place_name)
             if post_code != "Not Found":
                num_resp_for_postcode = PollResponse.objects.filter(location = post_code)
-               print num_resp_for_postcode.count()
                choices = Choice.objects.all()
                percentage_string, label_string = '', ''
                for ch in choices:
@@ -52,18 +52,22 @@ query_layers=GADM:IRQ_adm2&width=550&height=250&x=%s&y=%s" % (left, bottom, righ
                    percentage = ((num_resp.count())/num_resp_for_postcode.count()) * 100
                    percentage_string += ('%.2F'%percentage) + ','
                    label_string += ch.choice + '|'
-                   data_dict = {'label' : label_string[:-1], 'percentage' : percentage_string[:-1]}
-                   json_data = _convert_stats_to_json(data_dict)
-                   response = HttpResponse()
-                   response.write(json_data)
-                   return response
+               data_dict = {'has_stats' : 'true', 'label' : label_string[:-1], 'percentage' : percentage_string[:-1]}
+               return __dump_json_and_get_http_response(data_dict)
+            else:
+                data_dict = {'has_stats' : 'false'}
+                return __dump_json_and_get_http_response(data_dict)
         except KeyError:
             place_name = "Not Found"
+            data_dict = {'has_stats' : 'false'}
+            return __dump_json_and_get_http_response(data_dict)
         return HttpResponse("OK")
         
-def _convert_stats_to_json(data):
-    json_data = '''{"labels": "%s", "percentages" : "%s"}''' % (data['label'], data['percentage'])
-    return '[' + json_data + ']'
+def __dump_json_and_get_http_response(json_data_dict):
+    json_data = json.dumps(json_data_dict)
+    response = HttpResponse()
+    response.write(json_data)
+    return response
     
 def current_status(self):
     now = datetime.datetime.now()
