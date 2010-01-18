@@ -17,12 +17,10 @@ def show_stats_on_map(request):
     poll_response = PollResponse.objects.all()
     choices = Choice.objects.all()
     num_response = poll_response.count()
-    percentage_vote_country = {}
     percentage_string, label_string = '', ''
     for ch in choices:
         num_resp_for_choice = PollResponse.objects.filter(issue = ch)
         percentage = (num_resp_for_choice.count()/num_response) * 100
-        percentage_vote_country[ch.choice] = percentage
         percentage_string += ('%.2F'%percentage) + ',' 
         label_string += ch.choice + '|'
     return render_to_response('stats_map.html', {'percentage' : percentage_string[:-1], 'labels' : label_string[:-1]})
@@ -35,7 +33,7 @@ def get_stats(request):
         top = request.GET.get('top')
         x = request.GET.get('x')
         y = request.GET.get('y')
-        url = ("http://localhost/geoserver/wms/reflector?bbox=%s,%s,%s,%s&\
+        url = ("http://localhost:8080/geoserver/wms/reflector?bbox=%s,%s,%s,%s&\
 format=jpeg&info_format=text/plain&request=GetFeatureInfo&layers=GADM:IRQ_adm2&\
 query_layers=GADM:IRQ_adm2&width=550&height=250&x=%s&y=%s" % (left, bottom, right, top, x, y))
         request = urllib2.urlopen(url)
@@ -44,11 +42,29 @@ query_layers=GADM:IRQ_adm2&width=550&height=250&x=%s&y=%s" % (left, bottom, righ
         try:
             place_name = feature_dict['NAME_2']
             post_code = get_name(place_name)
+            if post_code != "Not Found":
+               num_resp_for_postcode = PollResponse.objects.filter(location = post_code)
+               print num_resp_for_postcode.count()
+               choices = Choice.objects.all()
+               percentage_string, label_string = '', ''
+               for ch in choices:
+                   num_resp = PollResponse.objects.filter(issue = ch, location = post_code)
+                   percentage = ((num_resp.count())/num_resp_for_postcode.count()) * 100
+                   percentage_string += ('%.2F'%percentage) + ','
+                   label_string += ch.choice + '|'
+                   data_dict = {'label' : label_string[:-1], 'percentage' : percentage_string[:-1]}
+                   json_data = _convert_stats_to_json(data_dict)
+                   response = HttpResponse()
+                   response.write(json_data)
+                   return response
         except KeyError:
             place_name = "Not Found"
         return HttpResponse("OK")
         
-
+def _convert_stats_to_json(data):
+    json_data = '''{"labels": "%s", "percentages" : "%s"}''' % (data['label'], data['percentage'])
+    return '[' + json_data + ']'
+    
 def current_status(self):
     now = datetime.datetime.now()
     return render_to_response('charts.html')
