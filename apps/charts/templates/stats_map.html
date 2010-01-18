@@ -14,14 +14,14 @@ $(document).ready(function(){var map = new OpenLayers.Map();
 	map.maxExtent = new OpenLayers.Bounds(30.322265625,23.48876953125,56.689453125,40.23193359375)
     var layer = new OpenLayers.Layer.WMS(
         "Global Imagery",
-        "http://maps.opengeo.org/geowebcache/service/wms",
-        {layers: "bluemarble"}
+        "http://labs.metacarta.com/wms/vmap0",
+        {layers: "basic"}
     );
     map.addLayer(layer);
     
     var iraq = new OpenLayers.Layer.WMS(
         "Iraq",
-        "http://localhost/geoserver/wms",
+        "http://localhost:8080/geoserver/wms",
         {layers: 'GADM:IRQ_adm2', transparent: true, format: 'image/png'},
         {isBaseLayer: false, visibility: true}
     );
