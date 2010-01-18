@@ -58,11 +58,10 @@ WIDTH=%s&HEIGHT=%s&format=image/png" % (left, bottom, right, top, x, y, width, h
                data_dict = {'has_stats' : 'true', 'label' : label_string[:-1], 'percentage' : percentage_string[:-1], 'place_name' : place_name}
                return __dump_json_and_get_http_response(data_dict)
             else:
-                data_dict = {'has_stats' : 'false'}
+                data_dict = {'has_stats' : 'false', 'place_name' : 'Iraq'}
                 return __dump_json_and_get_http_response(data_dict)
         except KeyError:
-            place_name = "Not Found"
-            data_dict = {'has_stats' : 'false'}
+            data_dict = {'has_stats' : 'false', 'place_name' : 'Iraq'}
             return __dump_json_and_get_http_response(data_dict)
         return HttpResponse("OK")
         
