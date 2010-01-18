@@ -12,7 +12,7 @@
 
 <script type="application/javascript">
 $(document).ready(function(){
-	var chart_of_country = "http://chart.apis.google.com/chart?cht=p3&chd=t:{{ percentage }}&chs=250x100&chl={{ labels }}"
+	var chart_of_country = "http://chart.apis.google.com/chart?cht=p3&chd=t:{{ percentage }}&chs=280x100&chl={{ labels }}"
 	var map = new OpenLayers.Map();
 	map.maxExtent = new OpenLayers.Bounds(30.322265625,23.48876953125,56.689453125,40.23193359375)
     var layer = new OpenLayers.Layer.WMS(
@@ -36,7 +36,7 @@ $(document).ready(function(){
         height: 400,
         width: 600,
         map: map,
-        title: 'Iraq Youth'
+        title: 'Click on the map to see the Response chart to see the response chart of the governorate in the area'
     });
 	
 	map.events.register('click', map, mapEvent);
@@ -54,7 +54,7 @@ $(document).ready(function(){
         }, function(response){
 			data = JSON.parse(response);
 			if(data.has_stats == "true"){
-				url = "http://chart.apis.google.com/chart?cht=p3&chd=t:" + data.percentage + "&chs=250x100&chl=" + data.label;
+				url = "http://chart.apis.google.com/chart?cht=p3&chd=t:" + data.percentage + "&chs=280x100&chl=" + data.label;
 				$("#chart").attr("src", url);
 			}else{
 				$("#chart").attr("src", chart_of_country);
@@ -66,9 +66,9 @@ $(document).ready(function(){
 </script>
 {% endblock %}
 {% block content %}
-<div id="notepad" style="width=320; height=200;">
-<img id="chart" src="http://chart.apis.google.com/chart?cht=p3&chd=t:{{ percentage }}&chs=250x100&chl={{ labels }}"></img>
+<div id="stats" style="float:left;">
+<img id="chart" src="http://chart.apis.google.com/chart?cht=p3&chd=t:{{ percentage }}&chs=300x100&chl={{ labels }}"></img>
 </div>
-<div id="map">
+<div id="map" style="float:left">
 </div>
 {% endblock %}
