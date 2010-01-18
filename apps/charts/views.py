@@ -55,7 +55,7 @@ WIDTH=%s&HEIGHT=%s&format=image/png" % (left, bottom, right, top, x, y, width, h
                    percentage = ((num_resp.count())/num_resp_for_postcode.count()) * 100
                    percentage_string += ('%.2F'%percentage) + ','
                    label_string += ch.choice + '|'
-               data_dict = {'has_stats' : 'true', 'label' : label_string[:-1], 'percentage' : percentage_string[:-1]}
+               data_dict = {'has_stats' : 'true', 'label' : label_string[:-1], 'percentage' : percentage_string[:-1], 'place_name' : place_name}
                return __dump_json_and_get_http_response(data_dict)
             else:
                 data_dict = {'has_stats' : 'false'}

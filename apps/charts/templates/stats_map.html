@@ -56,6 +56,7 @@ $(document).ready(function(){
 			if(data.has_stats == "true"){
 				url = "http://chart.apis.google.com/chart?cht=p3&chd=t:" + data.percentage + "&chs=280x100&chl=" + data.label;
 				$("#chart").attr("src", url);
+				$("#placename").html(data.place_name);
 			}else{
 				$("#chart").attr("src", chart_of_country);
 			}
@@ -67,7 +68,8 @@ $(document).ready(function(){
 {% endblock %}
 {% block content %}
 <div id="stats" style="float:left;">
-<img id="chart" src="http://chart.apis.google.com/chart?cht=p3&chd=t:{{ percentage }}&chs=300x100&chl={{ labels }}"></img>
+<span style="float:left;" id="placename">Iraq</span>
+<img id="chart" style="clear:none;" src="http://chart.apis.google.com/chart?cht=p3&chd=t:{{ percentage }}&chs=300x100&chl={{ labels }}"></img>
 </div>
 <div id="map" style="float:left">
 </div>

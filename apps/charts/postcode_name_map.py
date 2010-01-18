@@ -12,7 +12,6 @@ __postcode_name_map = {'Ar Ramadi' :'31001', 'Al Fallujah' : '31002',
                        }
     
 def get_name(post_code):
-    print post_code
     try:
         place_name = __postcode_name_map[post_code]
     except KeyError, ex:
