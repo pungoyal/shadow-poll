@@ -28,21 +28,7 @@ def show_stats_on_map(request):
 
 def get_stats(request):
     if request.method == 'GET':
-        left = request.GET.get('left')
-        bottom = request.GET.get('bottom')
-        right = request.GET.get('right')
-        top = request.GET.get('top')
-        x = request.GET.get('x')
-        y = request.GET.get('y')
-        width = request.GET.get('width')
-        height = request.GET.get('height')
-        url = ("http://localhost:8080/geoserver/wms?REQUEST=GetFeatureInfo&\
-EXCEPTIONS=application/vnd.ogc.se_xml&BBOX=%s,%s,%s,%s&X=%s&Y=%s&INFO_FORMAT=text/plain&\
-QUERY_LAYERS=GADM:IRQ_adm2&FEATURE_COUNT=50&Layers=GADM:IRQ_adm2&Styles=&Srs=EPSG:4326&\
-WIDTH=%s&HEIGHT=%s&format=image/png" % (left, bottom, right, top, x, y, width, height))
-        request = urllib2.urlopen(url)        
-        response_dict = request.read()
-        feature_dict = convert_text_to_dicts(response_dict)
+        feature_dict = _get_feature_dict(request.GET)
         try:
             place_name = feature_dict['NAME_2']
             post_code = get_name(place_name)
@@ -56,20 +42,38 @@ WIDTH=%s&HEIGHT=%s&format=image/png" % (left, bottom, right, top, x, y, width, h
                    percentage_string += ('%.2F'%percentage) + ','
                    label_string += ch.choice + '|'
                data_dict = {'has_stats' : 'true', 'label' : label_string[:-1], 'percentage' : percentage_string[:-1], 'place_name' : place_name}
-               return __dump_json_and_get_http_response(data_dict)
+               return _dump_json_and_get_http_response(data_dict)
             else:
                 data_dict = {'has_stats' : 'false', 'place_name' : 'Iraq'}
-                return __dump_json_and_get_http_response(data_dict)
+                return _dump_json_and_get_http_response(data_dict)
         except KeyError:
             data_dict = {'has_stats' : 'false', 'place_name' : 'Iraq'}
-            return __dump_json_and_get_http_response(data_dict)
+            return _dump_json_and_get_http_response(data_dict)
         return HttpResponse("OK")
         
-def __dump_json_and_get_http_response(json_data_dict):
+def _dump_json_and_get_http_response(json_data_dict):
     json_data = json.dumps(json_data_dict)
     response = HttpResponse()
     response.write(json_data)
     return response
+    
+def _get_feature_dict(req_get):
+    left = req_get.get('left')
+    bottom = req_get.get('bottom')
+    right = req_get.get('right')
+    top = req_get.get('top')
+    x = req_get.get('x')
+    y = req_get.get('y')
+    width = req_get.get('width')
+    height = req_get.get('height')
+    url = ("http://localhost:8080/geoserver/wms?REQUEST=GetFeatureInfo&\
+EXCEPTIONS=application/vnd.ogc.se_xml&BBOX=%s,%s,%s,%s&X=%s&Y=%s&INFO_FORMAT=text/plain&\
+QUERY_LAYERS=GADM:IRQ_adm2&FEATURE_COUNT=50&Layers=GADM:IRQ_adm2&Styles=&Srs=EPSG:4326&\
+WIDTH=%s&HEIGHT=%s&format=image/png" % (left, bottom, right, top, x, y, width, height))
+    request = urllib2.urlopen(url)        
+    response_dict = request.read()
+    return convert_text_to_dicts(response_dict)
+    
     
 def current_status(self):
     now = datetime.datetime.now()
