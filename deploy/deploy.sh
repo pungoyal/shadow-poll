@@ -1,0 +1,2 @@
+
+rm /var/www/shadowpoll
