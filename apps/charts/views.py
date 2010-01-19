@@ -66,7 +66,7 @@ def _get_feature_dict(req_get):
     y = req_get.get('y')
     width = req_get.get('width')
     height = req_get.get('height')
-    url = ("http://localhost:8080/geoserver/wms?REQUEST=GetFeatureInfo&\
+    url = ("http://127.0.0.1/geoserver/wms?REQUEST=GetFeatureInfo&\
 EXCEPTIONS=application/vnd.ogc.se_xml&BBOX=%s,%s,%s,%s&X=%s&Y=%s&INFO_FORMAT=text/plain&\
 QUERY_LAYERS=GADM:IRQ_adm2&FEATURE_COUNT=50&Layers=GADM:IRQ_adm2&Styles=&Srs=EPSG:4326&\
 WIDTH=%s&HEIGHT=%s&format=image/png" % (left, bottom, right, top, x, y, width, height))
