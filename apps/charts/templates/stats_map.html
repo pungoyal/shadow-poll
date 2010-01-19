@@ -24,7 +24,7 @@ $(document).ready(function(){
     
     var iraq = new OpenLayers.Layer.WMS(
         "Iraq",
-        "http://localhost:8080/geoserver/wms",
+        "http://"+ window.location.host + "/geoserver/wms",
         {layers: 'GADM:IRQ_adm2', transparent: true, format: 'image/png'},
         {isBaseLayer: false, visibility: true}
     );
