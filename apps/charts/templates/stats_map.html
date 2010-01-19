@@ -24,7 +24,7 @@ $(document).ready(function(){
     
     var iraq = new OpenLayers.Layer.WMS(
         "Iraq",
-        "http://"+ window.location.host + "/geoserver/wms",
+        "http://"+window.location.host+"/geoserver/wms",
         {layers: 'GADM:IRQ_adm2', transparent: true, format: 'image/png'},
         {isBaseLayer: false, visibility: true}
     );
@@ -67,10 +67,11 @@ $(document).ready(function(){
 </script>
 {% endblock %}
 {% block content %}
-<div id="stats" style="float:left;">
+<div id="stats">
 <span style="float:left;" id="placename">Iraq</span>
-<img id="chart" style="clear:none;" src="http://chart.apis.google.com/chart?cht=p3&chd=t:{{ percentage }}&chs=300x100&chl={{ labels }}"></img>
+<img id="chart" src="http://chart.apis.google.com/chart?cht=p3&chd=t:{{ percentage }}&chs=300x100&chl={{ labels }}"></img>
 </div>
-<div id="map" style="float:left">
+<div id="map">
 </div>
 {% endblock %}
+
