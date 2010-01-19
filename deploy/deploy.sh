@@ -2,6 +2,7 @@
 
 kill -9 $(cat /tmp/shadowpoll.pid)
 python /var/lib/buildbot/slave/shadow-poll/build/manage.py syncdb --noinput
+python /var/lib/buildbot/slave/shadow-poll/build/manage.py loaddata poll_responses.json
 rm -rf /var/www/shadowpoll/*
 cp -r /var/lib/buildbot/slave/shadow-poll/build/* /var/www/shadowpoll
 ln -s /var/www/shadowpoll/rapidsms.ini.ci /var/www/shadowpoll/rapidsms.ini

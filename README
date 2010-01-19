@@ -1,3 +1,4 @@
 Packages to be installed
-Dev- python-mox
-Prod - python-flup
+python-pysqlite2
+Dev-> python-mox
+Prod-> python-flup
