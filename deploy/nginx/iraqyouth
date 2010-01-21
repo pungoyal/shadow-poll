@@ -1,0 +1,75 @@
+server {
+        listen   80;
+        server_name iraqyouth.mepemepe.com;
+
+        access_log  /var/log/shadowpoll/access.log;
+        error_log   /var/log/shadowpoll/error.log;
+
+        # Reverse Proxy geoserver
+        location /geoserver {
+            proxy_pass         http://127.0.0.1:8096/geoserver;
+            proxy_redirect     off;
+
+            proxy_set_header   Host             $host;
+            proxy_set_header   X-Real-IP        $remote_addr;
+            proxy_set_header   X-Forwarded-For  $proxy_add_x_forwarded_for;
+
+            client_max_body_size       10m;
+            client_body_buffer_size    128k;
+
+            proxy_connect_timeout      90;
+            proxy_send_timeout         90;
+            proxy_read_timeout         90;
+
+            proxy_buffer_size          4k;
+            proxy_buffers              4 32k;
+            proxy_busy_buffers_size    64k;
+            proxy_temp_file_write_size 64k;
+
+        }
+
+        # Reverse Proxy geoserver
+        location /buildbot {
+            proxy_pass         http://127.0.0.1:9000/;
+            proxy_redirect     off;
+
+            proxy_set_header   Host             $host;
+            proxy_set_header   X-Real-IP        $remote_addr;
+            proxy_set_header   X-Forwarded-For  $proxy_add_x_forwarded_for;
+
+            client_max_body_size       10m;
+            client_body_buffer_size    128k;
+
+            proxy_connect_timeout      90;
+            proxy_send_timeout         90;
+            proxy_read_timeout         90;
+
+            proxy_buffer_size          4k;
+            proxy_buffers              4 32k;
+            proxy_busy_buffers_size    64k;
+            proxy_temp_file_write_size 64k;
+
+        }
+
+
+        location /media {
+            root  /usr/share/pyshared/django/contrib/admin;
+            expires 30d;
+        }
+        location / {
+            # host and port to fastcgi server
+            fastcgi_pass 127.0.0.1:8801;
+            fastcgi_param PATH_INFO $fastcgi_script_name;
+            fastcgi_param REQUEST_METHOD $request_method;
+            fastcgi_param QUERY_STRING $query_string;
+            fastcgi_param CONTENT_TYPE $content_type;
+            fastcgi_param CONTENT_LENGTH $content_length;
+            fastcgi_param SERVER_NAME $server_name;
+            fastcgi_param SERVER_PORT $server_port;
+            fastcgi_param SERVER_PROTOCOL $server_protocol;
+            fastcgi_pass_header Authorization;
+            fastcgi_intercept_errors off;
+        }
+}
+
+
