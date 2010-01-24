@@ -1,20 +1,22 @@
+from django.test import TestCase
+from register.app import App
 from rapidsms.tests.scripted import TestScript
-from app import App
+from register.models import *
+from rapidsms import *
 
-class TestApp (TestScript):
+class RegisterTest(TestCase):
+    def test_register_needs_a_keyword_at_the_start_of_the_message(self):
+        app = App(None)
+        result = app.handle(Message(text="regirrt 100 1001 poll", connection=1000))
+        self.assertEquals(result, None)
+        result = app.handle(Message(text="register 100 1001 poll", connection=1000))
+        self.assertEquals(result, True)
+        
+
+class TestRegister (TestScript):
     apps = (App,)
 
-    # define your test scripts here.
-    # e.g.:
-    #
-    # testRegister = """
-    #   8005551212 > register as someuser
-    #   8005551212 < Registered new user 'someuser' for 8005551212!
-    #   8005551212 > tell anotheruser what's up??
-    #   8005550000 < someuser said "what's up??"
-    # """
-    #
-    # You can also do normal unittest.TestCase methods:
-    #
-    # def testMyModel (self):
-    #   self.assertEquals(...)
+    test_register_needs_a_keyword_at_the_start_of_the_message = """
+      03948 > register 100 1001 poll
+      03948 < Thanks for registering for the survey.
+      """

@@ -10,8 +10,9 @@ class App (rapidsms.app.App):
         pass
 
     def handle (self, message):
-        """Add your main application logic in the handle phase."""
-        pass
+        if message.text.lower().startswith("register"):
+            message.respond("Thanks for registering for the survey.")
+            return True
 
     def cleanup (self, message):
         """Perform any clean up after all handlers have run in the
