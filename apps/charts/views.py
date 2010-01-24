@@ -7,7 +7,7 @@ from charts.chart_data import ChartData
 from django.template.context import RequestContext
 from charts.feature_info_request_parser import convert_text_to_dicts
 from httplib import HTTPResponse
-from apps.iraq.models import PollResponse, Choice
+from apps.poll.models import PollResponse, Choice
 from charts.postcode_name_map import get_name
 import urllib2
 import json
