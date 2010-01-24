@@ -37,7 +37,6 @@ def get_stats(request):
         width = request.GET.get('width')
         height = request.GET.get('height')
         map_params = (left, bottom, right, top, x, y, width, height)
-        print map_params
         feature_dict = _get_feature_dict(map_params)
         try:
             place_name = feature_dict['NAME_2']
@@ -67,11 +66,11 @@ def _dump_json_and_get_http_response(json_data_dict):
     response.write(json_data)
     return response
     
-def _get_feature_dict(args):
+def _get_feature_dict(map_args):
     url = ("http://127.0.0.1/geoserver/wms?REQUEST=GetFeatureInfo&\
 EXCEPTIONS=application/vnd.ogc.se_xml&BBOX=%s,%s,%s,%s&X=%s&Y=%s&INFO_FORMAT=text/plain&\
 QUERY_LAYERS=GADM:IRQ_adm2&FEATURE_COUNT=50&Layers=GADM:IRQ_adm2&Styles=&Srs=EPSG:4326&\
-WIDTH=%s&HEIGHT=%s&format=image/png" % args)
+WIDTH=%s&HEIGHT=%s&format=image/png" % map_args)
     request = urllib2.urlopen(url)        
     response_dict = request.read()
     return convert_text_to_dicts(response_dict)
