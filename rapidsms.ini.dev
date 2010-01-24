@@ -11,7 +11,7 @@
 # backends=[backend1,backend2,...]  * comma-separated list of backends to load
 
 [rapidsms]
-apps=webapp,ajax,admin,reporters,locations,messaging,httptester,logger,echo,poll,charts
+apps=webapp,ajax,admin,reporters,locations,messaging,httptester,logger,echo,poll,register,charts
 backends=http
 
 # -- DATABASE
