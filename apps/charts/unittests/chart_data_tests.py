@@ -2,7 +2,7 @@ from django.test import TestCase
 import rapidsms
 import mox
 from rapidsms.tests.scripted import TestScript
-from iraq.models import Question,Choice
+from poll.models import Question,Choice
 from charts.chart_data import ChartData
 from charts.model_adapter import ModelAdapter
 

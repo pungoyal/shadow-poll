@@ -1,14 +1,14 @@
 [
      {
           "pk": 1, 
-          "model": "iraq.question", 
+          "model": "poll.question", 
           "fields": {
                "question": "What is your biggest problem?"
           }
      }, 
      {
           "pk": 1, 
-          "model": "iraq.choice", 
+          "model": "poll.choice", 
           "fields": {
                "short_code": "FD", 
                "question": 1, 
@@ -17,7 +17,7 @@
      },
      {
           "pk": 2, 
-          "model": "iraq.choice", 
+          "model": "poll.choice", 
           "fields": {
                "short_code": "ED", 
                "question": 1, 
@@ -26,7 +26,7 @@
      },
      {
           "pk": 3, 
-          "model": "iraq.choice", 
+          "model": "poll.choice", 
           "fields": {
                "short_code": "HE", 
                "question": 1, 
@@ -35,7 +35,7 @@
      },
      {
           "pk": 4, 
-          "model": "iraq.choice", 
+          "model": "poll.choice", 
           "fields": {
                "short_code": "PC", 
                "question": 1, 
@@ -44,7 +44,7 @@
      },
      {
           "pk": 5, 
-          "model": "iraq.choice", 
+          "model": "poll.choice", 
           "fields": {
                "short_code": "WA", 
                "question": 1, 
@@ -53,7 +53,7 @@
      }, 
      {
           "pk": 1, 
-          "model": "iraq.pollresponse", 
+          "model": "poll.pollresponse", 
           "fields": {
                "name": "Rehman", 
                "gender": "M", 
@@ -66,7 +66,7 @@
           }
      },
      {"pk": 2 ,
-	"model": "iraq.pollresponse",
+	"model": "poll.pollresponse",
 	"fields": {
 		"name": "Amin",
 		"gender": "M",
@@ -79,7 +79,7 @@
 		}
 	},
 	{"pk": 3 ,
-	"model": "iraq.pollresponse",
+	"model": "poll.pollresponse",
 	"fields": {
 		"name": "Akram",
 		"gender": "M",
@@ -92,7 +92,7 @@
 		}
 	},
 	{"pk": 4 ,
-	"model": "iraq.pollresponse",
+	"model": "poll.pollresponse",
 	"fields": {
 		"name": "Akram",
 		"gender": "M",
@@ -105,7 +105,7 @@
 		}
 	},
 	{"pk": 5 ,
-	"model": "iraq.pollresponse",
+	"model": "poll.pollresponse",
 	"fields": {
 		"name": "Bob",
 		"gender": "M",
@@ -118,7 +118,7 @@
 		}
 	},
 	{"pk": 6 ,
-	"model": "iraq.pollresponse",
+	"model": "poll.pollresponse",
 	"fields": {
 		"name": "Mac",
 		"gender": "M",
@@ -131,7 +131,7 @@
 		}
 	},
 	{"pk": 7 ,
-	"model": "iraq.pollresponse",
+	"model": "poll.pollresponse",
 	"fields": {
 		"name": "Amin",
 		"gender": "M",
@@ -144,7 +144,7 @@
 		}
 	},
 	{"pk": 8 ,
-	"model": "iraq.pollresponse",
+	"model": "poll.pollresponse",
 	"fields": {
 		"name": "Mac",
 		"gender": "M",
@@ -157,7 +157,7 @@
 		}
 	},
 	{"pk": 9 ,
-	"model": "iraq.pollresponse",
+	"model": "poll.pollresponse",
 	"fields": {
 		"name": "Rehman",
 		"gender": "M",
@@ -170,7 +170,7 @@
 		}
 	},
 	{"pk": 10 ,
-	"model": "iraq.pollresponse",
+	"model": "poll.pollresponse",
 	"fields": {
 		"name": "Mac",
 		"gender": "M",
@@ -183,7 +183,7 @@
 		}
 	},
 	{"pk": 11 ,
-	"model": "iraq.pollresponse",
+	"model": "poll.pollresponse",
 	"fields": {
 		"name": "Rehman",
 		"gender": "M",
@@ -196,7 +196,7 @@
 		}
 	},
 	{"pk": 12 ,
-	"model": "iraq.pollresponse",
+	"model": "poll.pollresponse",
 	"fields": {
 		"name": "John",
 		"gender": "M",
@@ -209,7 +209,7 @@
 		}
 	},
 	{"pk": 13 ,
-	"model": "iraq.pollresponse",
+	"model": "poll.pollresponse",
 	"fields": {
 		"name": "Rehman",
 		"gender": "M",
@@ -222,7 +222,7 @@
 		}
 	},
 	{"pk": 14 ,
-	"model": "iraq.pollresponse",
+	"model": "poll.pollresponse",
 	"fields": {
 		"name": "Amin",
 		"gender": "M",
@@ -235,7 +235,7 @@
 		}
 	},
 	{"pk": 15 ,
-	"model": "iraq.pollresponse",
+	"model": "poll.pollresponse",
 	"fields": {
 		"name": "Mac",
 		"gender": "M",
@@ -248,7 +248,7 @@
 		}
 	},
 	{"pk": 16 ,
-	"model": "iraq.pollresponse",
+	"model": "poll.pollresponse",
 	"fields": {
 		"name": "Rehman",
 		"gender": "M",
@@ -261,7 +261,7 @@
 		}
 	},
 	{"pk": 17 ,
-	"model": "iraq.pollresponse",
+	"model": "poll.pollresponse",
 	"fields": {
 		"name": "Bob",
 		"gender": "M",
@@ -274,7 +274,7 @@
 		}
 	},
 	{"pk": 18 ,
-	"model": "iraq.pollresponse",
+	"model": "poll.pollresponse",
 	"fields": {
 		"name": "Akram",
 		"gender": "M",
@@ -287,7 +287,7 @@
 		}
 	},
 	{"pk": 19 ,
-	"model": "iraq.pollresponse",
+	"model": "poll.pollresponse",
 	"fields": {
 		"name": "Mac",
 		"gender": "M",
@@ -300,7 +300,7 @@
 		}
 	},
 	{"pk": 20 ,
-	"model": "iraq.pollresponse",
+	"model": "poll.pollresponse",
 	"fields": {
 		"name": "John",
 		"gender": "M",
@@ -313,7 +313,7 @@
 		}
 	},
 	{"pk": 21 ,
-	"model": "iraq.pollresponse",
+	"model": "poll.pollresponse",
 	"fields": {
 		"name": "Rehman",
 		"gender": "M",
@@ -326,7 +326,7 @@
 		}
 	},
 	{"pk": 22 ,
-	"model": "iraq.pollresponse",
+	"model": "poll.pollresponse",
 	"fields": {
 		"name": "Mac",
 		"gender": "M",
@@ -339,7 +339,7 @@
 		}
 	},
 	{"pk": 23 ,
-	"model": "iraq.pollresponse",
+	"model": "poll.pollresponse",
 	"fields": {
 		"name": "Akram",
 		"gender": "M",
@@ -352,7 +352,7 @@
 		}
 	},
 	{"pk": 24 ,
-	"model": "iraq.pollresponse",
+	"model": "poll.pollresponse",
 	"fields": {
 		"name": "John",
 		"gender": "M",
@@ -365,7 +365,7 @@
 		}
 	},
 	{"pk": 25 ,
-	"model": "iraq.pollresponse",
+	"model": "poll.pollresponse",
 	"fields": {
 		"name": "Akram",
 		"gender": "M",
@@ -378,7 +378,7 @@
 		}
 	},
 	{"pk": 26 ,
-	"model": "iraq.pollresponse",
+	"model": "poll.pollresponse",
 	"fields": {
 		"name": "Rehman",
 		"gender": "M",
@@ -391,7 +391,7 @@
 		}
 	},
 	{"pk": 27 ,
-	"model": "iraq.pollresponse",
+	"model": "poll.pollresponse",
 	"fields": {
 		"name": "Rehman",
 		"gender": "M",
@@ -404,7 +404,7 @@
 		}
 	},
 	{"pk": 28 ,
-	"model": "iraq.pollresponse",
+	"model": "poll.pollresponse",
 	"fields": {
 		"name": "Rehman",
 		"gender": "M",
@@ -417,7 +417,7 @@
 		}
 	},
 	{"pk": 29 ,
-	"model": "iraq.pollresponse",
+	"model": "poll.pollresponse",
 	"fields": {
 		"name": "Bob",
 		"gender": "M",
@@ -430,7 +430,7 @@
 		}
 	},
 	{"pk": 30 ,
-	"model": "iraq.pollresponse",
+	"model": "poll.pollresponse",
 	"fields": {
 		"name": "Bob",
 		"gender": "M",
@@ -443,7 +443,7 @@
 		}
 	},
 	{"pk": 31 ,
-	"model": "iraq.pollresponse",
+	"model": "poll.pollresponse",
 	"fields": {
 		"name": "Rehman",
 		"gender": "M",
@@ -456,7 +456,7 @@
 		}
 	},
 	{"pk": 32 ,
-	"model": "iraq.pollresponse",
+	"model": "poll.pollresponse",
 	"fields": {
 		"name": "Akram",
 		"gender": "M",
@@ -469,7 +469,7 @@
 		}
 	},
 	{"pk": 33 ,
-	"model": "iraq.pollresponse",
+	"model": "poll.pollresponse",
 	"fields": {
 		"name": "Rehman",
 		"gender": "M",
@@ -482,7 +482,7 @@
 		}
 	},
 	{"pk": 34 ,
-	"model": "iraq.pollresponse",
+	"model": "poll.pollresponse",
 	"fields": {
 		"name": "Amin",
 		"gender": "M",
@@ -495,7 +495,7 @@
 		}
 	},
 	{"pk": 35 ,
-	"model": "iraq.pollresponse",
+	"model": "poll.pollresponse",
 	"fields": {
 		"name": "Rehman",
 		"gender": "M",
@@ -508,7 +508,7 @@
 		}
 	},
 	{"pk": 36 ,
-	"model": "iraq.pollresponse",
+	"model": "poll.pollresponse",
 	"fields": {
 		"name": "Rehman",
 		"gender": "M",
@@ -521,7 +521,7 @@
 		}
 	},
 	{"pk": 37 ,
-	"model": "iraq.pollresponse",
+	"model": "poll.pollresponse",
 	"fields": {
 		"name": "John",
 		"gender": "M",
@@ -534,7 +534,7 @@
 		}
 	},
 	{"pk": 38 ,
-	"model": "iraq.pollresponse",
+	"model": "poll.pollresponse",
 	"fields": {
 		"name": "Akram",
 		"gender": "M",
@@ -547,7 +547,7 @@
 		}
 	},
 	{"pk": 39 ,
-	"model": "iraq.pollresponse",
+	"model": "poll.pollresponse",
 	"fields": {
 		"name": "Mac",
 		"gender": "M",
@@ -560,7 +560,7 @@
 		}
 	},
 	{"pk": 40 ,
-	"model": "iraq.pollresponse",
+	"model": "poll.pollresponse",
 	"fields": {
 		"name": "Rehman",
 		"gender": "M",
@@ -573,7 +573,7 @@
 		}
 	},
 	{"pk": 41 ,
-	"model": "iraq.pollresponse",
+	"model": "poll.pollresponse",
 	"fields": {
 		"name": "Akram",
 		"gender": "M",
@@ -586,7 +586,7 @@
 		}
 	},
 	{"pk": 42 ,
-	"model": "iraq.pollresponse",
+	"model": "poll.pollresponse",
 	"fields": {
 		"name": "Mac",
 		"gender": "M",
@@ -599,7 +599,7 @@
 		}
 	},
 	{"pk": 43 ,
-	"model": "iraq.pollresponse",
+	"model": "poll.pollresponse",
 	"fields": {
 		"name": "Rehman",
 		"gender": "M",
@@ -612,7 +612,7 @@
 		}
 	},
 	{"pk": 44 ,
-	"model": "iraq.pollresponse",
+	"model": "poll.pollresponse",
 	"fields": {
 		"name": "John",
 		"gender": "M",
@@ -625,7 +625,7 @@
 		}
 	},
 	{"pk": 45 ,
-	"model": "iraq.pollresponse",
+	"model": "poll.pollresponse",
 	"fields": {
 		"name": "Rehman",
 		"gender": "M",
@@ -638,7 +638,7 @@
 		}
 	},
 	{"pk": 46 ,
-	"model": "iraq.pollresponse",
+	"model": "poll.pollresponse",
 	"fields": {
 		"name": "John",
 		"gender": "M",
@@ -651,7 +651,7 @@
 		}
 	},
 	{"pk": 47 ,
-	"model": "iraq.pollresponse",
+	"model": "poll.pollresponse",
 	"fields": {
 		"name": "Mac",
 		"gender": "M",
@@ -664,7 +664,7 @@
 		}
 	},
 	{"pk": 48 ,
-	"model": "iraq.pollresponse",
+	"model": "poll.pollresponse",
 	"fields": {
 		"name": "Rehman",
 		"gender": "M",
@@ -677,7 +677,7 @@
 		}
 	},
 	{"pk": 49 ,
-	"model": "iraq.pollresponse",
+	"model": "poll.pollresponse",
 	"fields": {
 		"name": "Rehman",
 		"gender": "M",
@@ -690,7 +690,7 @@
 		}
 	},
 	{"pk": 50 ,
-	"model": "iraq.pollresponse",
+	"model": "poll.pollresponse",
 	"fields": {
 		"name": "Bob",
 		"gender": "M",
@@ -703,7 +703,7 @@
 		}
 	},
 	{"pk": 51 ,
-	"model": "iraq.pollresponse",
+	"model": "poll.pollresponse",
 	"fields": {
 		"name": "Mac",
 		"gender": "M",
@@ -716,7 +716,7 @@
 		}
 	},
 	{"pk": 52 ,
-	"model": "iraq.pollresponse",
+	"model": "poll.pollresponse",
 	"fields": {
 		"name": "Akram",
 		"gender": "M",
@@ -729,7 +729,7 @@
 		}
 	},
 	{"pk": 53 ,
-	"model": "iraq.pollresponse",
+	"model": "poll.pollresponse",
 	"fields": {
 		"name": "John",
 		"gender": "M",
@@ -742,7 +742,7 @@
 		}
 	},
 	{"pk": 54 ,
-	"model": "iraq.pollresponse",
+	"model": "poll.pollresponse",
 	"fields": {
 		"name": "Mac",
 		"gender": "M",
@@ -755,7 +755,7 @@
 		}
 	},
 	{"pk": 55 ,
-	"model": "iraq.pollresponse",
+	"model": "poll.pollresponse",
 	"fields": {
 		"name": "Akram",
 		"gender": "M",
@@ -768,7 +768,7 @@
 		}
 	},
 	{"pk": 56 ,
-	"model": "iraq.pollresponse",
+	"model": "poll.pollresponse",
 	"fields": {
 		"name": "John",
 		"gender": "M",
@@ -781,7 +781,7 @@
 		}
 	},
 	{"pk": 57 ,
-	"model": "iraq.pollresponse",
+	"model": "poll.pollresponse",
 	"fields": {
 		"name": "Rehman",
 		"gender": "M",
@@ -794,7 +794,7 @@
 		}
 	},
 	{"pk": 58 ,
-	"model": "iraq.pollresponse",
+	"model": "poll.pollresponse",
 	"fields": {
 		"name": "Akram",
 		"gender": "M",
@@ -807,7 +807,7 @@
 		}
 	},
 	{"pk": 59 ,
-	"model": "iraq.pollresponse",
+	"model": "poll.pollresponse",
 	"fields": {
 		"name": "Bob",
 		"gender": "M",
@@ -820,7 +820,7 @@
 		}
 	},
 	{"pk": 60 ,
-	"model": "iraq.pollresponse",
+	"model": "poll.pollresponse",
 	"fields": {
 		"name": "Amin",
 		"gender": "M",
@@ -833,7 +833,7 @@
 		}
 	},
 	{"pk": 61 ,
-	"model": "iraq.pollresponse",
+	"model": "poll.pollresponse",
 	"fields": {
 		"name": "Rehman",
 		"gender": "M",
@@ -846,7 +846,7 @@
 		}
 	},
 	{"pk": 62 ,
-	"model": "iraq.pollresponse",
+	"model": "poll.pollresponse",
 	"fields": {
 		"name": "Mac",
 		"gender": "M",
@@ -859,7 +859,7 @@
 		}
 	},
 	{"pk": 63 ,
-	"model": "iraq.pollresponse",
+	"model": "poll.pollresponse",
 	"fields": {
 		"name": "John",
 		"gender": "M",
@@ -872,7 +872,7 @@
 		}
 	},
 	{"pk": 64 ,
-	"model": "iraq.pollresponse",
+	"model": "poll.pollresponse",
 	"fields": {
 		"name": "Rehman",
 		"gender": "M",
@@ -885,7 +885,7 @@
 		}
 	},
 	{"pk": 65 ,
-	"model": "iraq.pollresponse",
+	"model": "poll.pollresponse",
 	"fields": {
 		"name": "Amin",
 		"gender": "M",
@@ -898,7 +898,7 @@
 		}
 	},
 	{"pk": 66 ,
-	"model": "iraq.pollresponse",
+	"model": "poll.pollresponse",
 	"fields": {
 		"name": "Mac",
 		"gender": "M",
@@ -911,7 +911,7 @@
 		}
 	},
 	{"pk": 67 ,
-	"model": "iraq.pollresponse",
+	"model": "poll.pollresponse",
 	"fields": {
 		"name": "Amin",
 		"gender": "M",
@@ -924,7 +924,7 @@
 		}
 	},
 	{"pk": 68 ,
-	"model": "iraq.pollresponse",
+	"model": "poll.pollresponse",
 	"fields": {
 		"name": "Rehman",
 		"gender": "M",
@@ -937,7 +937,7 @@
 		}
 	},
 	{"pk": 69 ,
-	"model": "iraq.pollresponse",
+	"model": "poll.pollresponse",
 	"fields": {
 		"name": "Amin",
 		"gender": "M",
@@ -950,7 +950,7 @@
 		}
 	},
 	{"pk": 70 ,
-	"model": "iraq.pollresponse",
+	"model": "poll.pollresponse",
 	"fields": {
 		"name": "Bob",
 		"gender": "M",
@@ -963,7 +963,7 @@
 		}
 	},
 	{"pk": 71 ,
-	"model": "iraq.pollresponse",
+	"model": "poll.pollresponse",
 	"fields": {
 		"name": "Mac",
 		"gender": "M",
@@ -976,7 +976,7 @@
 		}
 	},
 	{"pk": 72 ,
-	"model": "iraq.pollresponse",
+	"model": "poll.pollresponse",
 	"fields": {
 		"name": "Amin",
 		"gender": "M",
@@ -989,7 +989,7 @@
 		}
 	},
 	{"pk": 73 ,
-	"model": "iraq.pollresponse",
+	"model": "poll.pollresponse",
 	"fields": {
 		"name": "Akram",
 		"gender": "M",
@@ -1002,7 +1002,7 @@
 		}
 	},
 	{"pk": 74 ,
-	"model": "iraq.pollresponse",
+	"model": "poll.pollresponse",
 	"fields": {
 		"name": "Rehman",
 		"gender": "M",
@@ -1015,7 +1015,7 @@
 		}
 	},
 	{"pk": 75 ,
-	"model": "iraq.pollresponse",
+	"model": "poll.pollresponse",
 	"fields": {
 		"name": "Amin",
 		"gender": "M",
@@ -1028,7 +1028,7 @@
 		}
 	},
 	{"pk": 76 ,
-	"model": "iraq.pollresponse",
+	"model": "poll.pollresponse",
 	"fields": {
 		"name": "Rehman",
 		"gender": "M",
@@ -1041,7 +1041,7 @@
 		}
 	},
 	{"pk": 77 ,
-	"model": "iraq.pollresponse",
+	"model": "poll.pollresponse",
 	"fields": {
 		"name": "Mac",
 		"gender": "M",
@@ -1054,7 +1054,7 @@
 		}
 	},
 	{"pk": 78 ,
-	"model": "iraq.pollresponse",
+	"model": "poll.pollresponse",
 	"fields": {
 		"name": "Akram",
 		"gender": "M",
@@ -1067,7 +1067,7 @@
 		}
 	},
 	{"pk": 79 ,
-	"model": "iraq.pollresponse",
+	"model": "poll.pollresponse",
 	"fields": {
 		"name": "John",
 		"gender": "M",
@@ -1080,7 +1080,7 @@
 		}
 	},
 	{"pk": 80 ,
-	"model": "iraq.pollresponse",
+	"model": "poll.pollresponse",
 	"fields": {
 		"name": "Rehman",
 		"gender": "M",
@@ -1093,7 +1093,7 @@
 		}
 	},
 	{"pk": 81 ,
-	"model": "iraq.pollresponse",
+	"model": "poll.pollresponse",
 	"fields": {
 		"name": "Amin",
 		"gender": "M",
@@ -1106,7 +1106,7 @@
 		}
 	},
 	{"pk": 82 ,
-	"model": "iraq.pollresponse",
+	"model": "poll.pollresponse",
 	"fields": {
 		"name": "Amin",
 		"gender": "M",
@@ -1119,7 +1119,7 @@
 		}
 	},
 	{"pk": 83 ,
-	"model": "iraq.pollresponse",
+	"model": "poll.pollresponse",
 	"fields": {
 		"name": "Amin",
 		"gender": "M",
@@ -1132,7 +1132,7 @@
 		}
 	},
 	{"pk": 84 ,
-	"model": "iraq.pollresponse",
+	"model": "poll.pollresponse",
 	"fields": {
 		"name": "Mac",
 		"gender": "M",
@@ -1145,7 +1145,7 @@
 		}
 	},
 	{"pk": 85 ,
-	"model": "iraq.pollresponse",
+	"model": "poll.pollresponse",
 	"fields": {
 		"name": "Bob",
 		"gender": "M",
@@ -1158,7 +1158,7 @@
 		}
 	},
 	{"pk": 86 ,
-	"model": "iraq.pollresponse",
+	"model": "poll.pollresponse",
 	"fields": {
 		"name": "Mac",
 		"gender": "M",
@@ -1171,7 +1171,7 @@
 		}
 	},
 	{"pk": 87 ,
-	"model": "iraq.pollresponse",
+	"model": "poll.pollresponse",
 	"fields": {
 		"name": "Akram",
 		"gender": "M",
@@ -1184,7 +1184,7 @@
 		}
 	},
 	{"pk": 88 ,
-	"model": "iraq.pollresponse",
+	"model": "poll.pollresponse",
 	"fields": {
 		"name": "Bob",
 		"gender": "M",
@@ -1197,7 +1197,7 @@
 		}
 	},
 	{"pk": 89 ,
-	"model": "iraq.pollresponse",
+	"model": "poll.pollresponse",
 	"fields": {
 		"name": "Rehman",
 		"gender": "M",
@@ -1210,7 +1210,7 @@
 		}
 	},
 	{"pk": 90 ,
-	"model": "iraq.pollresponse",
+	"model": "poll.pollresponse",
 	"fields": {
 		"name": "Rehman",
 		"gender": "M",
@@ -1223,7 +1223,7 @@
 		}
 	},
 	{"pk": 91 ,
-	"model": "iraq.pollresponse",
+	"model": "poll.pollresponse",
 	"fields": {
 		"name": "Bob",
 		"gender": "M",
@@ -1236,7 +1236,7 @@
 		}
 	},
 	{"pk": 92 ,
-	"model": "iraq.pollresponse",
+	"model": "poll.pollresponse",
 	"fields": {
 		"name": "Amin",
 		"gender": "M",
@@ -1249,7 +1249,7 @@
 		}
 	},
 	{"pk": 93 ,
-	"model": "iraq.pollresponse",
+	"model": "poll.pollresponse",
 	"fields": {
 		"name": "Mac",
 		"gender": "M",
@@ -1262,7 +1262,7 @@
 		}
 	},
 	{"pk": 94 ,
-	"model": "iraq.pollresponse",
+	"model": "poll.pollresponse",
 	"fields": {
 		"name": "Mac",
 		"gender": "M",
@@ -1275,7 +1275,7 @@
 		}
 	},
 	{"pk": 95 ,
-	"model": "iraq.pollresponse",
+	"model": "poll.pollresponse",
 	"fields": {
 		"name": "Akram",
 		"gender": "M",
@@ -1288,7 +1288,7 @@
 		}
 	},
 	{"pk": 96 ,
-	"model": "iraq.pollresponse",
+	"model": "poll.pollresponse",
 	"fields": {
 		"name": "John",
 		"gender": "M",
@@ -1301,7 +1301,7 @@
 		}
 	},
 	{"pk": 97 ,
-	"model": "iraq.pollresponse",
+	"model": "poll.pollresponse",
 	"fields": {
 		"name": "Rehman",
 		"gender": "M",
@@ -1314,7 +1314,7 @@
 		}
 	},
 	{"pk": 98 ,
-	"model": "iraq.pollresponse",
+	"model": "poll.pollresponse",
 	"fields": {
 		"name": "Mac",
 		"gender": "M",
@@ -1327,7 +1327,7 @@
 		}
 	},
 	{"pk": 99 ,
-	"model": "iraq.pollresponse",
+	"model": "poll.pollresponse",
 	"fields": {
 		"name": "Bob",
 		"gender": "M",

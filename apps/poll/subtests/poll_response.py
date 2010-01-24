@@ -1,6 +1,6 @@
 from django.test import TestCase
 import rapidsms
-from iraq.models import *
+from poll.models import *
 
 class PollResponseTest(TestCase):
     fixtures = ['poll_responses']

@@ -1,4 +1,4 @@
-from iraq.models import Question, Choice, PollResponse
+from poll.models import Question, Choice, PollResponse
 from model_adapter import ModelAdapter
 
 class ChartData():

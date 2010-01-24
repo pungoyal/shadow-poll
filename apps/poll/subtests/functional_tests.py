@@ -1,6 +1,6 @@
 from rapidsms.tests.scripted import TestScript
-from iraq.app import App
-from iraq.models import *
+from poll.app import App
+from poll.models import *
 
 class TestApp(TestScript):
     fixtures = ['poll_responses.json']

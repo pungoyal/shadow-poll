@@ -1,4 +1,4 @@
-from iraq.models import Question, Choice
+from poll.models import Question, Choice
 
 class ModelAdapter():
     def load_choices_by_question(self, questionId):
