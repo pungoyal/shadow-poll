@@ -1,4 +1,5 @@
 import rapidsms
+from models import *
 
 class App (rapidsms.app.App):
     def start (self):
@@ -10,9 +11,13 @@ class App (rapidsms.app.App):
         pass
 
     def handle (self, message):
-        if message.text.lower().startswith("register"):
-            message.respond("Thanks for registering for the survey.")
-            return True
+        try:
+            if message.text.lower().startswith("register"):
+                Registration(number = message.connection.identity).parse(message.text)
+                message.respond("Thanks for registering for the survey.")
+                return True
+        except :
+                message.respond("We could not understand the register message. Please send as - register survey governorate district")
 
     def cleanup (self, message):
         """Perform any clean up after all handlers have run in the
