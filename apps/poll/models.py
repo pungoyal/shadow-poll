@@ -25,13 +25,6 @@ class Choice(models.Model):
     def __unicode__(self):
         return self.choice
 
-class Spelling(models.Model):
-    spelling = models.CharField(null=False, max_length=50)
-    choice = models.ForeignKey('Choice')
-
-    def __unicode__(self):
-        return self.spelling
-
 class PollResponse(models.Model):
     issue = models.ForeignKey('Choice')
     age = models.IntegerField()
