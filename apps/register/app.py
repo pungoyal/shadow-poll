@@ -13,7 +13,7 @@ class App (rapidsms.app.App):
     def handle (self, message):
         try:
             if message.text.lower().startswith("register"):
-                Registration(number = message.connection.identity).parse(message.text)
+                Registration(mobile_number = message.connection.identity).parse(message.text)
                 message.respond("Thanks for registering for the survey.")
                 return True
         except :
