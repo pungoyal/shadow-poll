@@ -11,12 +11,12 @@ class App (rapidsms.app.App):
         pass
 
     def handle (self, message):
-        try:
-            if message.text.lower().startswith("register"):
+        if message.text.lower().startswith("register"):
+            try:
                 Registration(mobile_number = message.connection.identity).parse(message.text)
                 message.respond("Thanks for registering for the survey.")
                 return True
-        except :
+            except:
                 message.respond("We could not understand the register message. Please send as - register survey governorate district")
 
     def cleanup (self, message):
