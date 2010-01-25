@@ -14,7 +14,7 @@ class RegisterTest(TestCase):
         self.assertEquals(result, True)
         
 
-class TestRegister (TestScript):
+class TestRegisterScript (TestScript):
     apps = (App,)
 
     test_register_needs_a_keyword_at_the_start_of_the_message = """
@@ -32,10 +32,20 @@ class TestRegister (TestScript):
     
 class RegistrationTest(TestCase):
     def test_parse(self):
-        reg = Registration(number = 1000)
+        reg = Registration(mobile_number = 1000)
         reg.parse('register poll 100 1001')
         self.assertEquals(reg.public_identifier, 'poll')
         self.assertEquals(reg.governorate, '100')
         self.assertEquals(reg.district, '1001')
-        self.assertEquals(reg.number, 1000)
-    
+        self.assertEquals(reg.mobile_number, 1000)
+
+    def test_load_by_mobile_number(self):
+        r = Registration.objects.filter(mobile_number = 1000)
+
+    def test_to_string(self):
+        r = Registration(mobile_number = 1000)
+        r.public_identifier = "Poll"
+        r.governorate = "Baghdad"
+        r.district = "Baghdad"
+
+        self.assertEquals(str(r), "1000 Poll Baghdad Baghdad")

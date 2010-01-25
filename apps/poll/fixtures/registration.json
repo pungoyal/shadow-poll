@@ -1,0 +1,12 @@
+[
+     {
+          "pk": 1, 
+          "model": "register.registration", 
+          "fields": {
+               "governorate": "baghdad", 
+               "public_identifier": "poll", 
+               "district": "baghdad", 
+               "mobile_number": 1000
+          }
+     }
+]
