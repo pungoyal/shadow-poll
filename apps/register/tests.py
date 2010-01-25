@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from django.test import TestCase
 from register.app import App
 from rapidsms.tests.scripted import TestScript
@@ -28,7 +29,9 @@ class TestRegister (TestScript):
       1000 < %s
       1000 > register
       1000 < %s
-      """ % (error_message, error_message)
+      90800 > register ومساحتها
+      90800 < %s
+      """ % (error_message, error_message, error_message)
     
 class RegistrationTest(TestCase):
     def test_parse(self):
