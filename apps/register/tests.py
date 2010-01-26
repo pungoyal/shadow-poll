@@ -11,6 +11,11 @@ class RegisterTest(TestCase):
         app = App(None)
         result = app.handle(Message(text="regirrt poll 100 1001", connection=1000))
         self.assertEquals(result, None)
+        result = app.handle(Message(text="register", connection=1000))
+        self.assertEquals(result, True)
+        result = app.handle(Message(text="register poll", connection=1000))
+        self.assertEquals(result, True)
+
         result = app.handle(Message(text="register poll 100 1001", connection=Connection(backend = None, identity=1000)))
         self.assertEquals(result, True)
         
