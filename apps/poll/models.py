@@ -25,13 +25,6 @@ class Choice(models.Model):
     def __unicode__(self):
         return self.choice
 
-class Spelling(models.Model):
-    spelling = models.CharField(null=False, max_length=50)
-    choice = models.ForeignKey('Choice')
-
-    def __unicode__(self):
-        return self.spelling
-
 class PollResponse(models.Model):
     issue = models.ForeignKey('Choice')
     age = models.IntegerField()
@@ -44,12 +37,12 @@ class PollResponse(models.Model):
 
     def generate_response(self, text):
         try :
-            foo = text.split(" ")
-            self.issue = Choice.objects.get(short_code=foo[0])
-            self.age = foo[1]
-            self.gender = foo[2]
+            parts = text.split(" ")
+            self.issue = Choice.objects.get(short_code=parts[0])
+            self.age = parts[1]
+            self.gender = parts[2]
             try :
-                self.location = foo[3]
+                self.location = parts[3]
             except IndexError:
                 pass
             self.save()
