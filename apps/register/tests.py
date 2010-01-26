@@ -1,10 +1,11 @@
 # -*- coding: utf-8 -*-
 from django.test import TestCase
-from register.app import App
-from rapidsms.tests.scripted import TestScript
-from register.models import *
 from rapidsms import *
 from rapidsms.connection import *
+from rapidsms.tests.scripted import TestScript
+from register.app import App
+from register.models import *
+
 
 class RegisterTest(TestCase):
     def test_register_needs_a_keyword_at_the_start_of_the_message(self):
@@ -39,6 +40,7 @@ class TestRegisterScript (TestScript):
       """ % (error_message, error_message, error_message)
     
 class RegistrationTest(TestCase):
+    fixtures = ['registration']
     def test_parse(self):
         reg = Registration(mobile_number = 1000)
         reg.parse('register poll 100 1001')
@@ -48,7 +50,13 @@ class RegistrationTest(TestCase):
         self.assertEquals(reg.mobile_number, 1000)
 
     def test_load_by_mobile_number(self):
-        r = Registration.objects.filter(mobile_number = 1000)
+        query_result = Registration.objects.filter(mobile_number = 100)
+        self.assertEquals(query_result.count(), 0)
+
+        query_result = Registration.objects.filter(mobile_number = 1000)
+        self.assertEquals(query_result.count(), 1)
+        r = query_result.iterator().next()
+        self.assertNotEquals(r, None)
 
     def test_to_string(self):
         r = Registration(mobile_number = 1000)
