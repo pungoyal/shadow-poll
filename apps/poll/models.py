@@ -54,7 +54,7 @@ class PollResponse(models.Model):
         return "Thank you for voting. You selected %s as your number one issue." % (self.issue)
 
     def set_location(self, registration):
-        self.governerate = registration.governorate
+        self.governorate = registration.governorate
         self.district = registration.district
 
     def __unicode__(self):

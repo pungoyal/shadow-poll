@@ -48,8 +48,8 @@ class PollResponseTest(TestCase):
         r = Registration(governorate = 1, district = 2)
         p = PollResponse()
         p.set_location(r)
-#        self.assertEquals(p.governorate, 1)
-#        self.assertEquals(p.district, 2)
+        self.assertEquals(p.governorate, 1)
+        self.assertEquals(p.district, 2)
         
     def testToString(self):
         choice = Choice.objects.get(id=2)
