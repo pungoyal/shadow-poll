@@ -1,4 +1,5 @@
 from django.db import models
+from register.models import *
 
 GENDER = ( ('M', 'Male'), ('F', 'Female') )
 
@@ -34,6 +35,8 @@ class PollResponse(models.Model):
     mobile_number = models.IntegerField()
     latitude = models.DecimalField(max_digits=8, decimal_places=6, null = True)
     longitude = models.DecimalField(max_digits=8, decimal_places=6, null = True)
+    governorate = models.IntegerField(null = True)
+    district = models.IntegerField(null = True)
 
     def generate_response(self, text):
         try :
@@ -49,6 +52,10 @@ class PollResponse(models.Model):
         except :
             return "Sorry, we did not understand your response. Please re-send as - issue age gender area"
         return "Thank you for voting. You selected %s as your number one issue." % (self.issue)
+
+    def set_location(self, registration):
+        self.governerate = registration.governorate
+        self.district = registration.district
 
     def __unicode__(self):
         return str(self.issue)+" "+str(self.age)+" "+str(self.gender)+" "+str(self.location)

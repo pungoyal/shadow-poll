@@ -3,9 +3,9 @@
           "pk": 1, 
           "model": "register.registration", 
           "fields": {
-               "governorate": "baghdad", 
+               "governorate": "10",
                "public_identifier": "poll", 
-               "district": "baghdad", 
+               "district": "8", 
                "mobile_number": 1000
           }
      }

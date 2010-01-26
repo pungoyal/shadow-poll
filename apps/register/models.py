@@ -3,15 +3,15 @@ from django.db import models
 
 class Registration(models.Model):
     public_identifier = models.CharField(max_length=10)
-    governorate = models.CharField(max_length=50)
-    district = models.CharField(max_length=50)
+    governorate = models.IntegerField()
+    district = models.IntegerField()
     mobile_number = models.IntegerField()
     
     def parse(self, message):
-        foo = message.split(' ')
-        self.public_identifier = foo[1]
-        self.governorate = foo[2]
-        self.district = foo[3]
+        parts = message.split(' ')
+        self.public_identifier = parts[1]
+        self.governorate = parts[2]
+        self.district = parts[3]
         self.save()
 
     def __unicode__(self):

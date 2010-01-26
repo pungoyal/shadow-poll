@@ -1,6 +1,7 @@
 from django.test import TestCase
 import rapidsms
 from poll.models import *
+from register.models import *
 
 class PollResponseTest(TestCase):
     fixtures = ['poll_responses']
@@ -42,6 +43,13 @@ class PollResponseTest(TestCase):
         self.assertEquals(response, error_message)
         response = self.poll_response.generate_response("ED")
         self.assertEquals(response, error_message)
+
+    def test_add_location_from_registration(self):
+        r = Registration(governorate = 1, district = 2)
+        p = PollResponse()
+        p.set_location(r)
+#        self.assertEquals(p.governorate, 1)
+#        self.assertEquals(p.district, 2)
         
     def testToString(self):
         choice = Choice.objects.get(id=2)

@@ -6,7 +6,6 @@ from rapidsms.tests.scripted import TestScript
 from register.app import App
 from register.models import *
 
-
 class RegisterTest(TestCase):
     def test_register_needs_a_keyword_at_the_start_of_the_message(self):
         app = App(None)
@@ -61,7 +60,7 @@ class RegistrationTest(TestCase):
     def test_to_string(self):
         r = Registration(mobile_number = 1000)
         r.public_identifier = "Poll"
-        r.governorate = "Baghdad"
-        r.district = "Baghdad"
+        r.governorate = "12"
+        r.district = "8"
 
-        self.assertEquals(str(r), "1000 Poll Baghdad Baghdad")
+        self.assertEquals(str(r), "1000 Poll 12 8")
