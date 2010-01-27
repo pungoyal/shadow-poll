@@ -10,11 +10,11 @@ class Governorates(models.Model):
     name = models.CharField(max_length=200)
     objects = models.GeoManager()
     
-    def num_responses(self):
+    def num_responses(self, name_map = get_name, pollresponse_manager = PollResponse.objects):
         self.post_code = get_name(self.name)
         if self.post_code == "Not Found":
             return None
-        return PollResponse.objects.filter(location = self.post_code).count()
+        return pollresponse_manager.filter(location = self.post_code).count()
     
     def total_responses(self):
         self.poll_responses = PollResponse.objects.all()
