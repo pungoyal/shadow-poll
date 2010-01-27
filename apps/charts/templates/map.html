@@ -165,10 +165,10 @@ function onFeatureSelect(event) {
   var feature = event.feature;
   // Since KML is user-generated, do naive protection against
   // Javascript.
-  var content = "<div class='ol-popup-name'>" + 
-    feature.attributes.name + 
-    "</div><div class='openlayers-tooltip-description'>" + 
-    feature.attributes.description + "</div>";
+  var content = "<div>" + 
+    feature.attributes['name'] + 
+    "</div><div>" + 
+    feature.attributes['description'] + "</div>";
   popup = new OpenLayers.Popup.FramedCloud("stick", 
   feature.geometry.getBounds().getCenterLonLat(),
   new OpenLayers.Size(100,100),

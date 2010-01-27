@@ -10,7 +10,7 @@ from charts.models import Governorates
 
 def get_governorates(request):
     reports = Governorates.objects.kml()
-    scales = [sqrt(i * 0.1) for i in range(1, 200)]
+    scales = [sqrt(i * 0.1) for i in range(1, 20)]
     style = 'kml/population_points.kml'
     r = _render_to_kml('kml/placemarks.kml', {'places' : reports, 'scales' : scales, 'style' : style})
     r['Content-Disposition'] = 'attachment;filename=reports.kml'
