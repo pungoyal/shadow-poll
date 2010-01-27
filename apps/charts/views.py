@@ -5,6 +5,7 @@ from django.http import HttpResponse, HttpResponseNotFound, HttpResponseServerEr
 from django.shortcuts import render_to_response
 from django.template import loader
 
+
 def get_governorates(request):
     reports = Governorates.objects.kml()
     scales = [sqrt(i * 0.1) for i in range(1, 20)]
@@ -14,11 +15,12 @@ def get_governorates(request):
     return r
 
 def show_governorate(request, governorate_id):
-    response = HttpResponse()
-    g = Governorates.objects.filter(id=governorate_id).iterator().next()
-    
-    response.write(g)
-    return response
+    try:
+        governorate = Governorates.objects.filter(id=governorate_id).iterator().next()
+    except:
+        return HttpResponseServerError("Sorry, governorate not found")
+
+    return render_to_response('map.html', {"governorate": governorate, "bbox": 10})
 
 def show_results(request):
     return render_to_response('map.html')

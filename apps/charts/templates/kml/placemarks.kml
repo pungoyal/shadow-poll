@@ -16,6 +16,7 @@ ExtendedData attributes.
 {% block placemarks %}
 {% for place in places %}
   <Placemark>
+    <id>{% if place.id %}{{ place.id }}{% else %}{{ place }}{% endif %}</id>
     <name>{% if place.name %}{{ place.name }}{% else %}{{ place }}{% endif %}</name>
     <description>{% if place.description %}{{ place.description }}{% else %}{{ place }}{% endif %}</description>
     {{ place.kml|safe }}

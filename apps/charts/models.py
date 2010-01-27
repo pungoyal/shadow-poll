@@ -1,9 +1,12 @@
 from __future__ import division
+
 from math import ceil
 
-from django.contrib.gis.db import models
 from apps.poll.models import PollResponse
+from django.contrib.gis.db import models
+
 from postcode_name_map import get_name
+
 
 class Governorates(models.Model):    
     the_geom = models.PointField(srid=4326)
@@ -27,5 +30,5 @@ class Governorates(models.Model):
             return None
         
     def exposed(self):
-        return {'name': self.name}
+        return {'name': self.id}
     

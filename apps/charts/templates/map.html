@@ -165,17 +165,7 @@ function onFeatureSelect(event) {
   var feature = event.feature;
   // Since KML is user-generated, do naive protection against
   // Javascript.
-  var content = "<div>" + 
-    feature.attributes['name'] + 
-    "</div><div>" + 
-    feature.attributes['description'] + "</div>";
-  popup = new OpenLayers.Popup.FramedCloud("stick", 
-  feature.geometry.getBounds().getCenterLonLat(),
-  new OpenLayers.Size(100,100),
-  content,
-  null, true, onPopupClose);
-  feature.popup = popup;
-  map.addPopup(popup);
+  window.location = "/charts/" + feature.attributes['id']
 }
 
 function onFeatureUnselect(event) {
@@ -209,8 +199,6 @@ select.activate();
 // Custom BlockSwitcher attached to DOM element
 
 map.zoomTo(1);
-map.removeControl(map.controls);
-
 
 </script>
 {% endblock %}
