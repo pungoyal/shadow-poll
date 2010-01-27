@@ -1,18 +1,15 @@
 from __future__ import division
-from django.http import HttpRequest, HttpResponse, HttpResponseNotFound,\
-    HttpResponseServerError
-from django.shortcuts import render_to_response
-from django.template import loader, Context
-from charts.chart_data import ChartData
-from django.template.context import RequestContext
-from charts.feature_info_request_parser import convert_text_to_dicts
-from httplib import HTTPResponse
-from apps.poll.models import PollResponse, Choice
-from charts.postcode_name_map import get_name
-import urllib2
-import json
 
 import datetime
+import json
+import urllib2
+
+from apps.poll.models import PollResponse, Choice
+from charts.feature_info_request_parser import convert_text_to_dicts
+from charts.postcode_name_map import get_name
+from django.http import HttpResponse, HttpResponseNotFound, HttpResponseServerError
+from django.shortcuts import render_to_response
+
 
 def show_stats_on_map(request):
     poll_response = PollResponse.objects.all()
