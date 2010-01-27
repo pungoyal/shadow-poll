@@ -1,18 +1,20 @@
 from __future__ import division
+from math import sqrt
+import urllib2
+import json
+
 from django.http import HttpRequest, HttpResponse, HttpResponseNotFound,\
     HttpResponseServerError
 from django.shortcuts import render_to_response
 from django.template import loader, Context
-from charts.chart_data import ChartData
 from django.template.context import RequestContext
-from charts.feature_info_request_parser import convert_text_to_dicts
-from httplib import HTTPResponse
-from apps.poll.models import PollResponse, Choice
-from charts.postcode_name_map import get_name
-import urllib2
-import json
 
-import datetime
+from charts.chart_data import ChartData
+from charts.feature_info_request_parser import convert_text_to_dicts
+from charts.postcode_name_map import get_name
+from charts.models import Governorates
+
+from apps.poll.models import PollResponse, Choice
 
 def show_stats_on_map(request):
     poll_response = PollResponse.objects.all()
@@ -25,6 +27,17 @@ def show_stats_on_map(request):
         percentage_string += ('%.2F'%percentage) + ',' 
         label_string += ch.choice + '|'
     return render_to_response('stats_map.html', {'percentage' : percentage_string[:-1], 'labels' : label_string[:-1]})
+
+def get_governorates(request):
+    reports = Governorates.objects.kml()
+    scales = [sqrt(i * 0.1) for i in range(1, 200)]
+    style = 'kml/population_points.kml'
+    r = _render_to_kml('kml/placemarks.kml', {'places' : reports, 'scales' : scales, 'style' : style})
+    r['Content-Disposition'] = 'attachment;filename=reports.kml'
+    return r
+
+def show_results(request):
+    return render_to_response('map.html')
 
 def get_stats(request):
     if request.method == 'GET':
@@ -75,14 +88,6 @@ WIDTH=%s&HEIGHT=%s&format=image/png" % map_args)
     response_dict = request.read()
     return convert_text_to_dicts(response_dict)
     
-    
-def current_status(self):
-    now = datetime.datetime.now()
-    return render_to_response('charts.html')
-
-def data(self):
-    return HttpResponse('junk')
-    
 def view_404(request):
     response = HttpResponseNotFound()
     response.write("The path is not found")
@@ -93,5 +98,8 @@ def view_500(request):
     response.write("Something went wrong")
     return response
 
-def _get_stats_for_place(place_name):
-    pass
+def _render_to_kml(*args, **kwargs):
+    "Renders the response as KML (using the correct MIME type)."
+    return HttpResponse(loader.render_to_string(*args, **kwargs),
+                        mimetype='application/vnd.google-earth.kml+xml')
+    
