@@ -1,6 +1,15 @@
 # -*- coding: utf-8 -*-
 from django.db import models
 
+class Governorate(models.Model):
+    name = models.CharField(max_length = 100)
+    latitude = models.DecimalField(max_digits=8, decimal_places=6, null = True)
+    longitude = models.DecimalField(max_digits=8, decimal_places=6, null = True)
+
+class District(models.Model):
+    name = models.CharField(max_length = 100)
+    governorate = models.ForeignKey('Governorate')
+
 class Registration(models.Model):
     public_identifier = models.CharField(max_length=10)
     governorate = models.IntegerField()
