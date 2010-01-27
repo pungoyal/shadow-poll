@@ -1,14 +1,14 @@
-__postcode_name_map = {'Ar Ramadi' :'31001', 'Al Fallujah' : '31002',
-                       'Al Qa\'im':'31003' , 'Al Haditha' : '31004',
-                       'Samarra': '31005',  'Rawah' :'31006' ,
-                       'Hit':'31007',  'Al Habanyah':'31008',
-                       'Al Haqaniyah' :'31009', 'Balad Ruz' : '31010',
-                       'Ar Rutbah':'31011' , 'Anah' : '31012', 
-                       'Al Karmah': '31013', 'Al Baghdadi' : '31014',
-                       'Al Waleed': '31015' , 'Balad':'31016',
-                       'Hatra':'31017','Al Ba\'aj' : '31018',
-                       'Bayji':'31019',  'Abu Ghraib':'31020' ,
-                       'Najaf':'31021', 'As Salaman':'31022' 
+__postcode_name_map = {'Al-Anbar' :'31001', 'Al-Basrah' : '31002',
+                       'Al-Muthannia':'31003' , 'Al-Qadisiyah' : '31004',
+                       'An-Najaf': '31005',  'Arbil' :'31006' ,
+                       'As-Sulaymaniyah':'31007',  'At-Ta\'mim':'31008',
+                       'Babil' :'31009', 'Baghdad' : '31010',
+                       'Dhi-Qar':'31011' , 'Dihok' : '31012', 
+                       'Diyala': '31013', 'Karbala\'' : '31014',
+                       'Maysan': '31015' , 'Ninawa':'31016',
+                       'Sala ad-Din':'31017','Wasit' : '31018',
+                       'As-Sulaymaniyah':'31019',  'Arbil':'31020' ,
+                       'Al-Basrah':'31021', 'An-Najaf':'31022' 
                        }
     
 def get_name(post_code):
