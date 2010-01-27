@@ -26,10 +26,10 @@ backends=http
 # port=<database-port>                                          * not used for sqlite3
 
 [database]
-engine=sqlite3
-name=/var/www/shadowpoll/youth.sqlite3
-#user=
-#password=
+engine=postgresql_psycopg2
+name=iraqchildren
+user=unicef
+password=
 #host=
 #port=
 
