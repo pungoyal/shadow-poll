@@ -1,0 +1,204 @@
+{% extends 'base.html' %}
+
+{% comment %}
+
+  Map template.
+
+  Although the blockswitcher is populated by javascript, it requires
+  the bare HTML below in order to work and position all items.
+
+  map_load.js can be called in the header as well, but make sure that
+  if you run the map initialization on a hook, DO NOT RUN IT ON
+  $(window).ready(). The very technical reason for this is that IE is 
+  poorly implemented and its vector drawing capabilities (VML) are not 
+  operation before $(window).load(), and thus will break the entire map,
+  not just the vectors.
+
+{% endcomment %}
+
+{% block title %}Map{% endblock %}
+
+{% block headhtml %}
+<script src="http://www.openlayers.org/dev/OpenLayers.js"></script>
+<script src="http://js.mapbox.com/ol/2.8/mapbox.js"></script>
+<script src="/static/charts/javascripts/jquery-1.3.2.min.js"></script>
+<script src="/static/charts/javascripts/openlayers_plus_blockswitcher.js"></script>
+{% endblock %}
+
+{% block header %}
+<h2 style='margin-top: 5px; margin-left: 5px;'>UNICEF Map Demo</h2>
+{% endblock %}
+
+{% block left %}
+<div class='side'>
+All Reports: <a class='badge' href="/get_kml/">KML</a>
+</div>
+{% endblock %}
+
+{% block content %}
+<div id='map'>
+</div>
+<script type='text/javascript'>
+	var map;
+//OpenLayers.ImgPath = '/img/openlayers/';
+
+/**
+ * MAP CONSTRUCTION
+ */
+
+options = {
+  units: "m",
+  maxResolution: 156543.0339,
+  numZoomLevels: 20,
+  maxExtent: new OpenLayers.Bounds(-20037508,-20037508,20037508,20037508),
+  projection: new OpenLayers.Projection("EPSG:4326"),
+  displayProjection: new OpenLayers.Projection("EPSG:4326"),
+  // restrictedExtent: new OpenLayers.Bounds(-20037508,-20037508,20037508,20037508),
+  restrictedExtent: new OpenLayers.Bounds(3830412.3607388, 3160212.4968564, 6178557.8692412, 4657155.2585266),
+  controls: []
+}
+
+map = new OpenLayers.Map('map', options);
+
+/**
+ * LAYERS
+ */
+
+map.addLayer(
+  new OpenLayers.Layer.MapBox('World Light', 
+  {
+    layername: 'world-light',
+    serverResolutions: [156543.0339,
+      78271.51695,
+      39135.758475,
+      19567.8792375,
+      9783.93961875,
+      4891.96980938,
+      2445.98490469,
+      1222.99245234,
+      611.496226172,
+      305.748113086,
+      152.874056543,
+      76.4370282715,
+      38.2185141357,
+      19.1092570679,
+      9.55462853394,
+      4.77731426697,
+      2.38865713348,
+      1.19432856674,
+      0.597164283371],
+
+    resolutions: [
+      4891.96980938,
+      2445.98490469,
+      1222.99245234,
+      611.496226172]
+    }
+  ));
+ 
+
+var cities = new OpenLayers.Layer.Vector("Cities KML", {
+    projection: map.displayProjection,
+    strategies: [new OpenLayers.Strategy.Fixed()],
+    styleMap: new OpenLayers.StyleMap(
+      OpenLayers.Util.applyDefaults(
+          {
+            fillColor: "#93ce54", 
+            fillOpacity: 1, 
+            strokeColor: "#4c8014",
+            pointRadius: 4
+          },
+          OpenLayers.Feature.Vector.style["default"]
+        )
+    ),
+    protocol: new OpenLayers.Protocol.HTTP({
+        url: "/get_kml/",
+        format: new OpenLayers.Format.KML({
+            extractStyles: true,
+            extractAttributes: true
+        })
+    }),
+	isBaseLayer:false, visibility:true,
+});
+cities.setOpacity(0.5);
+map.addLayer(cities);
+/*
+
+var reports = new OpenLayers.Layer.Vector("KML", {
+    projection: map.displayProjection,
+    strategies: [new OpenLayers.Strategy.Fixed()],
+    protocol: new OpenLayers.Protocol.HTTP({
+        url: "/kml/reports",
+        format: new OpenLayers.Format.KML({
+            extractStyles: true,
+            extractAttributes: true
+        })
+    })
+});
+
+map.addLayer(reports);
+
+var areas = new OpenLayers.Layer.Vector("Areas KML", {
+    projection: map.displayProjection,
+    strategies: [new OpenLayers.Strategy.Fixed()],
+    protocol: new OpenLayers.Protocol.HTTP({
+        url: "/kml/areas",
+        format: new OpenLayers.Format.KML({
+            extractStyles: true,
+            extractAttributes: true
+        })
+    })
+});
+
+map.addLayer(areas);
+*/
+
+/**
+ * CONTROLS
+ */
+
+function onPopupClose(evt) {
+  select.unselectAll();
+}
+
+function onFeatureSelect(event) {
+  var feature = event.feature;
+  // Since KML is user-generated, do naive protection against
+  // Javascript.
+  window.location = "/charts/" + feature.attributes['id']
+}
+
+function onFeatureUnselect(event) {
+  var feature = event.feature;
+  if(feature.popup) {
+    map.removePopup(feature.popup);
+    feature.popup.destroy();
+    delete feature.popup;
+  }
+}
+
+cities.events.on({
+    "featureselected": onFeatureSelect,
+    "featureunselected": onFeatureUnselect
+});
+
+/*
+reports.events.on({
+    "featureselected": onFeatureSelect,
+    "featureunselected": onFeatureUnselect
+});
+*/
+
+select = new OpenLayers.Control.SelectFeature([cities]);
+map.addControl(select);
+select.activate();
+
+// Default LayerSwitcher on Map
+// map.addControl(new OpenLayers.Control.LayerSwitcher());
+
+// Custom BlockSwitcher attached to DOM element
+
+map.zoomTo(1);
+
+</script>
+{% endblock %}

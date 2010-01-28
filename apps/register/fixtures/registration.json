@@ -1,0 +1,29 @@
+[
+  {
+        "pk": 1, 
+        "model": "register.registration", 
+        "fields": {
+            "governorate": 10, 
+            "public_identifier": "poll", 
+            "district": 8, 
+            "phone": 1
+        }
+    }, 
+    {
+        "pk": 1, 
+        "model": "reporters.persistantbackend", 
+        "fields": {
+            "slug": "Mock", 
+            "title": "Mock"
+        }
+    }, 
+    {
+        "pk": 1, 
+        "model": "reporters.persistantconnection", 
+        "fields": {
+            "last_seen": null, 
+            "identity": "1000", 
+            "backend": 1
+        }
+    }
+]

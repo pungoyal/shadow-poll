@@ -1,4 +1,6 @@
+# -*- coding: utf-8 -*-
 import rapidsms
+from rapidsms.i18n import ugettext_from_locale as _t
 from models import *
 
 class App (rapidsms.app.App):
@@ -11,13 +13,15 @@ class App (rapidsms.app.App):
         pass
 
     def handle (self, message):
-        try:
-            if message.text.lower().startswith("register"):
-                Registration(mobile_number = message.connection.identity).parse(message.text)
-                message.respond("Thanks for registering for the survey.")
-                return True
-        except :
+        if message.text.lower().startswith("register") or message.text.lower().startswith(u'تسجيل'):
+            try:
+                r = Registration()
+                r.parse(message)
+                message.respond(_t("Thanks for registering.", message.persistant_connection.language ))
+            except Exception, e:
                 message.respond("We could not understand the register message. Please send as - register survey governorate district")
+            finally:
+                return True
 
     def cleanup (self, message):
         """Perform any clean up after all handlers have run in the

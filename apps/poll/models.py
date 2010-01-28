@@ -1,4 +1,6 @@
 from django.db import models
+from register.models import *
+from reporters.models import PersistantConnection
 
 GENDER = ( ('M', 'Male'), ('F', 'Female') )
 
@@ -34,21 +36,43 @@ class PollResponse(models.Model):
     mobile_number = models.IntegerField()
     latitude = models.DecimalField(max_digits=8, decimal_places=6, null = True)
     longitude = models.DecimalField(max_digits=8, decimal_places=6, null = True)
+    governorate = models.IntegerField(null = True)
+    district = models.IntegerField(null = True)
 
     def generate_response(self, text):
         try :
-            foo = text.split(" ")
-            self.issue = Choice.objects.get(short_code=foo[0])
-            self.age = foo[1]
-            self.gender = foo[2]
+            parts = text.split(" ")
+            self.issue = Choice.objects.get(short_code=parts[0])
+            self.age = parts[1]
+            self.gender = parts[2]
             try :
-                self.location = foo[3]
+                self.location = parts[3]
             except IndexError:
                 pass
             self.save()
         except :
-            return "Sorry, we did not understand your response. Please re-send as - issue age gender area"
+            raise ValueError("Sorry, we did not understand your response. Please re-send as - issue age gender area")
         return "Thank you for voting. You selected %s as your number one issue." % (self.issue)
+
+    def set_location(self, registration):
+        self.governorate = registration.governorate
+        self.district = registration.district
 
     def __unicode__(self):
         return str(self.issue)+" "+str(self.age)+" "+str(self.gender)+" "+str(self.location)
+
+class Phone(PersistantConnection):
+    """ A phone registered with this poll. 
+    Multiple individuals can share a phone, which is why it doesn't make
+    sense to use the reporter app (which is targetted at individuals with
+    multiple phones). At the same time, most people sharing a phone will
+    speak the same language, so we can optionally associate phone with locale.
+    
+    """
+    language = models.CharField(max_length=10, blank=True)
+    
+    def __str__(self):
+        return unicode(self).encode('utf-8')
+
+    def __unicode__(self):
+        return unicode( super(PersistantConnection, self) )

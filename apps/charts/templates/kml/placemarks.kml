@@ -1,0 +1,35 @@
+{% extends "kml/base.kml" %}
+
+{% comment %}
+
+Placemark style, adapted from the one included in geodjango.
+
+The main difference is that this supports variable styles and 
+ExtendedData attributes.
+
+{% endcomment %}
+
+{% block style %}
+{% include style %}
+{% endblock %}
+
+{% block placemarks %}
+{% for place in places %}
+  <Placemark>
+    <id>{% if place.id %}{{ place.id }}{% else %}{{ place }}{% endif %}</id>
+    <name>{% if place.name %}{{ place.name }}{% else %}{{ place }}{% endif %}</name>
+    <description>{% if place.description %}{{ place.description }}{% else %}{{ place }}{% endif %}</description>
+    {{ place.kml|safe }}
+    {% if place.style %}
+    <styleUrl>#{{ place.style }}</styleUrl>
+    {% endif %}
+    {% if place.exposed %}
+    <ExtendedData>
+      {% for name, value in place.exposed.items %}
+        <Data name="{{ name }}">
+          <value>{{ value }}</value>
+        </Data>
+      {% endfor %}
+    </ExtendedData>
+    {% endif %}
+  </Placemark>{% endfor %}{% endblock %}
