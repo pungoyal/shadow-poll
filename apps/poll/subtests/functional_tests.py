@@ -9,7 +9,7 @@ class TestApp(TestScript):
 
     testCorrectResponse = """
       98804 > ED 10 M 110010
-      98804 < Thank you for voting. You selected Education as your number one issue.
+      98804 < Thank you for voting. You selected Education.
       10000 > ED 10 J 110010
-      10000 < Thank you for voting. You selected Education as your number one issue.
+      10000 < Thank you for voting. You selected Education.
     """
