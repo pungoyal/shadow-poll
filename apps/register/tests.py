@@ -40,11 +40,11 @@ class TestRegisterArabicScript (TestScript):
 
     fails_test_registration_message_in_arabic = u"""
         1000 > تسجيل التصويت 100 1001
-        1000 < شكراً لتسجيلك في  هذه الدراسة')
+        1000 < شكراً لتسجيلك في  هذه الدراسة
     """
     
-    arabic_error_message = u"لم نستطيع فهم الرسالة المسجلة' الرجاء إرسال 'التسجيل  الدراسة  المحافظة  الحي'"
-    fails_test_incomplete_information_passed_in_the_register_message_arabic = u"""
+    fails_arabic_error_message = u"لم نستطيع فهم الرسالة المسجلة, الرجاء إرسال - التسجيل  الدراسة  المحافظة  الحي"
+    test_incomplete_information_passed_in_the_register_message_arabic = u"""
         1000 > regحتister
         1000 < %(error_msg)s
         90800 > register ومساحتها
