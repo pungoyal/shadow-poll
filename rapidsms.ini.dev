@@ -11,7 +11,7 @@
 # backends=[backend1,backend2,...]  * comma-separated list of backends to load
 
 [rapidsms]
-apps=webapp,ajax,admin,httptester,logger,echo,register,poll,charts
+apps=webapp,ajax,admin,httptester,logger,register,poll,charts,reporters
 backends=http
 
 # -- DATABASE
@@ -99,3 +99,20 @@ port=8080
 # cache_backend=dummy:///
 
 login_redirect_url=/
+
+[i18n]
+# Settings for RapidSMS Internationalization
+#
+# At minimum, you should define 'default_language' and 'languages'. 
+# 'languages' specifies the supported languages. It is a comma-
+# separated list of tuples where the first list in the tuple
+# is the language code and the remainder are associated names/aliases.
+# You can optionally specify web_languages and sms_languages
+# if you want to support different languages in the web vs sms UI.
+# web_languages and sms_languages override languages.
+#
+# Retardedly, django fails when running unit tests with default language
+# set to Arabic. So: for TESTING, we set default to english.
+# For PRODUCTION, SET DEFAULT_LANGUAGE_TO_ARABIC
+default_language=en
+languages=(ar,Arabic),(en,English)
