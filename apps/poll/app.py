@@ -18,9 +18,10 @@ class App (rapidsms.app.App):
         # allow them to query the question
         if message.text.lower().startswith("poll"):
             # return any question
-            q = Question.objects.all()[0]
-            message.respond(q.question)
-            return True
+            qs = Question.objects.all()
+            if qs:
+                message.respond(qs[0].question)
+                return True
         
         # allow them to submit a response
         result = Registration.objects.filter(phone__identity = phone_number)

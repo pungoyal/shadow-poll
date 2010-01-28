@@ -18,6 +18,6 @@ class TestApp(TestScript):
 
     testCorrectResponse = """
       98804 > poll
-      98804 < What is your favourite fruit?
+      98804 < What is your biggest problem?
     """
 
