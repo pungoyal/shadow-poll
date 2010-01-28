@@ -1,15 +1,11 @@
 from rapidsms.tests.scripted import TestScript
 from poll.app import App
 from poll.models import *
+from reporters.app import App as reporter_app
 
 class TestApp(TestScript):
     fixtures = ['poll_responses.json']
-    apps = (App,)
-
-    testIncorrectResponse = """
-      98804 > test
-      98804 < Sorry, we did not understand your response. Please re-send as - issue age gender area
-    """
+    apps = (App, reporter_app)
 
     testCorrectResponse = """
       98804 > ED 10 M 110010
