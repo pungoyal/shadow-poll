@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 from django.db import models
 from apps.poll.models import Phone
-from internationalization.utils import is_english
 from rapidsms.webui import settings
 
 class Governorate(models.Model):
@@ -25,10 +24,6 @@ class Registration(models.Model):
         self.governorate = parts[2]
         self.district = parts[3]
         self.phone = message.persistant_connection
-        if is_english(message.text):
-            self.phone.language = 'en'
-        else:
-            self.phone.language = settings.LANGUAGE_CODE
         self.save()
 
     def __str__(self):

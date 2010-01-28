@@ -1,6 +1,7 @@
 from django.db import models
 from register.models import *
-from reporters.models import PersistantConnection
+from reporters.models import PersistantConnection, PersistantBackend
+from internationalization.utils import is_english
 
 GENDER = ( ('M', 'Male'), ('F', 'Female') )
 
@@ -76,3 +77,23 @@ class Phone(PersistantConnection):
 
     def __unicode__(self):
         return unicode( super(PersistantConnection, self) )
+    
+    @classmethod
+    def from_message(klass, msg):
+        obj, created = klass.objects.get_or_create(
+            backend  = PersistantBackend.from_message(msg),
+            identity = msg.connection.identity)
+        
+        if created:
+            obj.save()
+        
+        if is_english(msg.text):
+            obj.language = 'en'
+        else:
+            obj.language = 'ar'
+            #conn.language = 'ar'#settings.LANGUAGE_CODE
+
+        # just return the object. it doesn't matter
+        # if it was created or fetched. TODO: maybe
+        # a parameter to return the tuple
+        return obj

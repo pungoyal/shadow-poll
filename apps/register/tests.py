@@ -28,8 +28,6 @@ class TestRegisterScript (TestScript):
       1000 < %(error_msg)s
       1000 > register
       1000 < %(error_msg)s
-      90800 > register ومساحتها
-      90800 < %(error_msg)s
       """ % {"error_msg":error_message}
     
 class TestRegisterArabicScript (TestScript):
@@ -38,17 +36,17 @@ class TestRegisterArabicScript (TestScript):
     def setUp(self):
         TestScript.setUp(self)
 
-    fails_test_registration_message_in_arabic = u"""
+    test_registration_message_in_arabic = u"""
         1000 > تسجيل التصويت 100 1001
         1000 < شكراً لتسجيلك في  هذه الدراسة
     """
     
-    fails_arabic_error_message = u"لم نستطيع فهم الرسالة المسجلة, الرجاء إرسال - التسجيل  الدراسة  المحافظة  الحي"
+    arabic_error_message = u"لم نستطيع فهم الرسالة المسجلة, الرجاء إرسال - التسجيل  الدراسة  المحافظة  الحي"
+    # the first case doesn't return anything since it falls through the register app
     test_incomplete_information_passed_in_the_register_message_arabic = u"""
         1000 > regحتister
+        1000 > register ومساحتها
         1000 < %(error_msg)s
-        90800 > register ومساحتها
-        90800 < %(error_msg)s
     """ % {"error_msg":arabic_error_message}
 
 class RegisterTest(TestCase):

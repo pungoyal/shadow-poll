@@ -19,7 +19,7 @@ class App (rapidsms.app.App):
                 r.parse(message)
                 message.respond(_t("Thanks for registering.", message.persistant_connection.language ))
             except Exception, e:
-                message.respond(_t("Register not understood."), message.persistant_connection.language )
+                message.respond(_t("Register not understood.", message.persistant_connection.language ))
             finally:
                 return True
 
