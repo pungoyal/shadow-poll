@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from django.db import models
 from apps.poll.models import Phone
-from i18n.utils import is_english
+from internationalization.utils import is_english
 from rapidsms.webui import settings
 
 class Governorate(models.Model):
