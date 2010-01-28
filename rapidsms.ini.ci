@@ -12,7 +12,7 @@
 
 [rapidsms]
 apps=webapp,ajax,admin,httptester,logger,register,poll,charts,reporters
-backends=http
+backends=http,kannel
 
 # -- DATABASE
 #
