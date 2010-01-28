@@ -1,6 +1,11 @@
 #!/usr/bin/env python
 # vim: ai ts=4 sts=4 et sw=4
 
+"""
+For Iraq, we disable the default reporter behaviour 
+and implement most of the sms interaction in the Register app
+"""
+
 import re
 import rapidsms
 from rapidsms.parsers import Matcher
@@ -98,9 +103,10 @@ class App(rapidsms.app.App):
                 self.info("Creating PersistantBackend object for %s (%s)" % (be.slug, be.title))
                 PersistantBackend(slug=be.slug, title=be.title).save()
     
-    
+    """
+    For Iraq, we disable the default reporter behaviour 
+    and implement most of the sms interaction in the Register app
     def parse(self, msg):
-        
         # fetch the persistantconnection object
         # for this message's sender (or create
         # one if this is the first time we've
@@ -133,7 +139,6 @@ class App(rapidsms.app.App):
         # populates the same property 
         conn.seen()
             
-    
     def handle(self, msg):
         matcher = Matcher(msg)
         
@@ -159,7 +164,6 @@ class App(rapidsms.app.App):
         # no matches, so this message is not
         # for us; allow processing to continue
         return False
-    
     
     def register(self, msg, name):
         try:
@@ -302,3 +306,4 @@ class App(rapidsms.app.App):
         msg.respond(
             self.__str(
                 resp, msg.reporter))
+    """
