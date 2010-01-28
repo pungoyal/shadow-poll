@@ -22,7 +22,11 @@ def proxy(req, number, message):
         conf["host"], 
         conf["port"],
         urllib2.quote(number), 
-        urllib2.quote(message))
-    
+        # urllib2.quote throws KeyError when given a python unicode string.
+        # This is a known bug (http://bugs.python.org/issue1712522), fixed 
+        # in Python 3000. We get 'quote' to work by encoding the string and
+        # allowing it to be interpreted as ascii bytes (this still works 
+        # for non-unicode strings)
+        urllib2.quote(message.encode('utf-8')))
     f = urllib2.urlopen(url)
     return HttpResponse(f.read())
