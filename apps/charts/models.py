@@ -1,9 +1,12 @@
 from __future__ import division
+
 from math import ceil
 
-from django.contrib.gis.db import models
 from apps.poll.models import PollResponse
+from django.contrib.gis.db import models
+
 from postcode_name_map import get_name
+
 
 class Governorates(models.Model):    
     the_geom = models.PointField(srid=4326)
@@ -22,7 +25,10 @@ class Governorates(models.Model):
     
     def style(self):
         if self.num_responses():
-            print (self.num_responses() / self.total_responses())
             return "s%d" % (int(ceil((self.num_responses() / self.total_responses()) * 100)))
         else:
             return None
+        
+    def exposed(self):
+        return {'name': self.id}
+    
