@@ -20,7 +20,7 @@ def show_governorate(request, governorate_id):
     except:
         return HttpResponseServerError("Sorry, governorate not found")
 
-    return render_to_response('map.html', {"governorate": governorate, "bbox": 10})
+    return render_to_response('map.html', {"bbox": governorate.bounding_box})
 
 def show_results(request):
     return render_to_response('map.html')
