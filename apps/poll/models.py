@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+# vim: ai ts=4 sts=4 et sw=4 encoding=utf-8
 from django.db import models
 from register.models import *
 from reporters.models import PersistantConnection, PersistantBackend
@@ -53,7 +55,7 @@ class PollResponse(models.Model):
             self.save()
         except :
             raise ValueError("Sorry, we did not understand your response. Please re-send as - issue age gender area")
-        return "Thank you for voting. You selected %s as your number one issue." % (self.issue)
+        return "Thank you for voting. You selected %s." % (self.issue)
 
     def set_location(self, registration):
         self.governorate = registration.governorate

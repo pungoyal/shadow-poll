@@ -53,7 +53,6 @@ options = {
   maxExtent: new OpenLayers.Bounds(-20037508,-20037508,20037508,20037508),
   projection: new OpenLayers.Projection("EPSG:4326"),
   displayProjection: new OpenLayers.Projection("EPSG:4326"),
-  // restrictedExtent: new OpenLayers.Bounds(-20037508,-20037508,20037508,20037508),
   restrictedExtent: new OpenLayers.Bounds(3830412.3607388, 3160212.4968564, 6178557.8692412, 4657155.2585266),
   controls: []
 }
@@ -122,36 +121,6 @@ var cities = new OpenLayers.Layer.Vector("Cities KML", {
 });
 cities.setOpacity(0.5);
 map.addLayer(cities);
-/*
-
-var reports = new OpenLayers.Layer.Vector("KML", {
-    projection: map.displayProjection,
-    strategies: [new OpenLayers.Strategy.Fixed()],
-    protocol: new OpenLayers.Protocol.HTTP({
-        url: "/kml/reports",
-        format: new OpenLayers.Format.KML({
-            extractStyles: true,
-            extractAttributes: true
-        })
-    })
-});
-
-map.addLayer(reports);
-
-var areas = new OpenLayers.Layer.Vector("Areas KML", {
-    projection: map.displayProjection,
-    strategies: [new OpenLayers.Strategy.Fixed()],
-    protocol: new OpenLayers.Protocol.HTTP({
-        url: "/kml/areas",
-        format: new OpenLayers.Format.KML({
-            extractStyles: true,
-            extractAttributes: true
-        })
-    })
-});
-
-map.addLayer(areas);
-*/
 
 /**
  * CONTROLS
@@ -162,10 +131,8 @@ function onPopupClose(evt) {
 }
 
 function onFeatureSelect(event) {
-  var feature = event.feature;
-  // Since KML is user-generated, do naive protection against
-  // Javascript.
-  window.location = "/charts/" + feature.attributes['id']
+  feature = event.feature;
+  window.location = "/charts/" + feature.attributes['id'];
 }
 
 function onFeatureUnselect(event) {
@@ -182,23 +149,19 @@ cities.events.on({
     "featureunselected": onFeatureUnselect
 });
 
-/*
-reports.events.on({
-    "featureselected": onFeatureSelect,
-    "featureunselected": onFeatureUnselect
-});
-*/
-
 select = new OpenLayers.Control.SelectFeature([cities]);
 map.addControl(select);
 select.activate();
 
-// Default LayerSwitcher on Map
-// map.addControl(new OpenLayers.Control.LayerSwitcher());
+bbox = '{{ bbox }}'
+if (bbox == '')
+  map.zoomTo(1);
+else {
+  wkt = new OpenLayers.Format.WKT();
+  vector = wkt.read(bbox);
+  bounds = vector.geometry.getBounds().transform(new OpenLayers.Projection('EPSG:4326'), new OpenLayers.Projection('EPSG:900913'));
+  map.zoomToExtent(bounds);
+}
 
-// Custom BlockSwitcher attached to DOM element
-
-map.zoomTo(1);
-
-</script>
+</script>c
 {% endblock %}

@@ -52,6 +52,15 @@
           }
      }, 
      {
+          "pk": 6, 
+          "model": "poll.choice", 
+          "fields": {
+               "short_code": "EV", 
+               "question": 1, 
+               "choice": "Environment"
+          }
+     }, 
+     {
           "pk": 1, 
           "model": "poll.pollresponse", 
           "fields": {

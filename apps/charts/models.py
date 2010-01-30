@@ -12,6 +12,7 @@ class Governorates(models.Model):
     the_geom = models.PointField(srid=4326)
     name = models.CharField(max_length=200)
     objects = models.GeoManager()
+    bounding_box = models.CharField(max_length=1000)
     
     def num_responses(self, name_map = get_name, pollresponse_manager_filter = PollResponse.objects.filter):
         self.post_code = name_map(self.name)
@@ -31,4 +32,3 @@ class Governorates(models.Model):
         
     def exposed(self):
         return {'name': self.id}
-    

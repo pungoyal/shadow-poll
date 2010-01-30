@@ -3,7 +3,7 @@ import rapidsms
 from models import *
 from register.models import *
 from datetime import datetime
-from poll.models import Phone
+from poll.models import Phone, Question
 
 class App (rapidsms.app.App):
     def parse(self, message):
@@ -14,7 +14,16 @@ class App (rapidsms.app.App):
         
     def handle (self, message):
         phone_number = message.connection.identity
-
+        
+        # allow them to query the question
+        if message.text.lower().startswith("poll"):
+            # return any question
+            qs = Question.objects.all()
+            if qs:
+                message.respond(qs[0].question)
+                return True
+        
+        # allow them to submit a response
         result = Registration.objects.filter(phone__identity = phone_number)
         poll_response = PollResponse(mobile_number = phone_number)
         if(result != None and result.count() > 0):
