@@ -99,6 +99,7 @@ port=8080
 # cache_backend=dummy:///
 
 login_redirect_url=/
+time_zone=Asia/Amman
 
 [i18n]
 # Settings for RapidSMS Internationalization
