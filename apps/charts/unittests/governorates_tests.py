@@ -5,5 +5,4 @@ from mox import Mox
 
 class GovernoratesTest(TestCase):
     def test_num_response(self):
-        x
         pass
