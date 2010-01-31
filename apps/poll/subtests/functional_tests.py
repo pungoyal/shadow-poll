@@ -10,14 +10,14 @@ class TestApp(TestScript):
     apps = (App, reporter_app)
 
     testCorrectResponse = """
-      98804 > ED 10 M 110010
-      98804 < Thank you for voting. You selected Education.
-      10000 > ED 10 J 110010
-      10000 < Thank you for voting. You selected Education.
+      98804 > NE 10 M 110010
+      98804 < Thank you for voting. You selected Never.
+      10000 > AL 10 J 110010
+      10000 < Thank you for voting. You selected Always.
     """
 
     testCorrectResponse = """
       98804 > poll
-      98804 < What is your biggest problem?
+      98804 < I feel happy:
     """
 
