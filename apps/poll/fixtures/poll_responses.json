@@ -3,63 +3,45 @@
           "pk": 1, 
           "model": "poll.question", 
           "fields": {
-               "question": "What is your biggest problem?"
+               "question": "I feel happy:"
           }
      }, 
      {
           "pk": 1, 
           "model": "poll.choice", 
           "fields": {
-               "short_code": "FD", 
+               "short_code": "AL", 
                "question": 1, 
-               "choice": "Food"
+               "choice": "Always"
           }
      },
      {
           "pk": 2, 
           "model": "poll.choice", 
           "fields": {
-               "short_code": "ED", 
+               "short_code": "MT", 
                "question": 1, 
-               "choice": "Education"
+               "choice": "Most of the time"
           }
      },
      {
           "pk": 3, 
           "model": "poll.choice", 
           "fields": {
-               "short_code": "HE", 
+               "short_code": "RA", 
                "question": 1, 
-               "choice": "Health"
+               "choice": "Rarely"
           }
      },
      {
           "pk": 4, 
           "model": "poll.choice", 
           "fields": {
-               "short_code": "PC", 
+               "short_code": "NE", 
                "question": 1, 
-               "choice": "Peace"
+               "choice": "Never"
           }
      },
-     {
-          "pk": 5, 
-          "model": "poll.choice", 
-          "fields": {
-               "short_code": "WA", 
-               "question": 1, 
-               "choice": "Water"
-          }
-     }, 
-     {
-          "pk": 6, 
-          "model": "poll.choice", 
-          "fields": {
-               "short_code": "EV", 
-               "question": 1, 
-               "choice": "Environment"
-          }
-     }, 
      {
           "pk": 1, 
           "model": "poll.pollresponse", 
@@ -121,7 +103,7 @@
 		"age": 5,
 		"location": "31005",
 		"mobile_number": 1000,
-		"issue": 5,
+		"issue": 2,
 		"latitude" : "42.15",
 		"longitude" : "33.15"
 		}
@@ -238,7 +220,7 @@
 		"age": 17,
 		"location": "31009",
 		"mobile_number": 1000,
-		"issue": 5,
+		"issue": 2,
 		"latitude" : "44.80",
 		"longitude" : "34.27"
 		}
@@ -368,7 +350,7 @@
 		"age": 6,
 		"location": "31022",
 		"mobile_number": 1000,
-		"issue": 5,
+		"issue": 2,
 		"latitude" : "44.90",
 		"longitude" : "34.03"
 		}
@@ -381,7 +363,7 @@
 		"age": 6,
 		"location": "31021",
 		"mobile_number": 1000,
-		"issue": 5,
+		"issue": 2,
 		"latitude" : "41.01",
 		"longitude" : "33.37"
 		}
@@ -433,7 +415,7 @@
 		"age": 5,
 		"location": "31022",
 		"mobile_number": 1000,
-		"issue": 5,
+		"issue": 2,
 		"latitude" : "44.61",
 		"longitude" : "31.25"
 		}
@@ -459,7 +441,7 @@
 		"age": 8,
 		"location": "31003",
 		"mobile_number": 1000,
-		"issue": 5,
+		"issue": 2,
 		"latitude" : "43.68",
 		"longitude" : "33.44"
 		}
@@ -485,7 +467,7 @@
 		"age": 16,
 		"location": "31014",
 		"mobile_number": 1000,
-		"issue": 5,
+		"issue": 2,
 		"latitude" : "41.30",
 		"longitude" : "33.32"
 		}
@@ -641,7 +623,7 @@
 		"age": 12,
 		"location": "31005",
 		"mobile_number": 1000,
-		"issue": 5,
+		"issue": 2,
 		"latitude" : "41.29",
 		"longitude" : "32.75"
 		}
@@ -758,7 +740,7 @@
 		"age": 8,
 		"location": "31018",
 		"mobile_number": 1000,
-		"issue": 5,
+		"issue": 2,
 		"latitude" : "43.21",
 		"longitude" : "34.35"
 		}
@@ -823,7 +805,7 @@
 		"age": 11,
 		"location": "31010",
 		"mobile_number": 1000,
-		"issue": 5,
+		"issue": 2,
 		"latitude" : "42.62",
 		"longitude" : "34.30"
 		}
@@ -836,7 +818,7 @@
 		"age": 6,
 		"location": "31022",
 		"mobile_number": 1000,
-		"issue": 5,
+		"issue": 2,
 		"latitude" : "45.54",
 		"longitude" : "31.92"
 		}
@@ -849,7 +831,7 @@
 		"age": 9,
 		"location": "31005",
 		"mobile_number": 1000,
-		"issue": 5,
+		"issue": 2,
 		"latitude" : "44.04",
 		"longitude" : "32.40"
 		}
@@ -862,7 +844,7 @@
 		"age": 15,
 		"location": "31016",
 		"mobile_number": 1000,
-		"issue": 5,
+		"issue": 2,
 		"latitude" : "41.77",
 		"longitude" : "31.07"
 		}
@@ -875,7 +857,7 @@
 		"age": 14,
 		"location": "31010",
 		"mobile_number": 1000,
-		"issue": 5,
+		"issue": 2,
 		"latitude" : "43.53",
 		"longitude" : "34.02"
 		}
@@ -940,7 +922,7 @@
 		"age": 13,
 		"location": "31020",
 		"mobile_number": 1000,
-		"issue": 5,
+		"issue": 2,
 		"latitude" : "41.10",
 		"longitude" : "31.14"
 		}
@@ -953,7 +935,7 @@
 		"age": 5,
 		"location": "31019",
 		"mobile_number": 1000,
-		"issue": 5,
+		"issue": 2,
 		"latitude" : "42.89",
 		"longitude" : "33.69"
 		}
@@ -1083,7 +1065,7 @@
 		"age": 16,
 		"location": "31009",
 		"mobile_number": 1000,
-		"issue": 5,
+		"issue": 2,
 		"latitude" : "44.04",
 		"longitude" : "31.31"
 		}
@@ -1122,7 +1104,7 @@
 		"age": 13,
 		"location": "31005",
 		"mobile_number": 1000,
-		"issue": 5,
+		"issue": 2,
 		"latitude" : "42.34",
 		"longitude" : "31.30"
 		}
@@ -1161,7 +1143,7 @@
 		"age": 13,
 		"location": "31010",
 		"mobile_number": 1000,
-		"issue": 5,
+		"issue": 2,
 		"latitude" : "42.47",
 		"longitude" : "34.53"
 		}
