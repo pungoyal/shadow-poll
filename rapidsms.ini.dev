@@ -99,6 +99,10 @@ port=8080
 # cache_backend=dummy:///
 
 login_redirect_url=/
+time_zone=Asia/Amman
+postgis_sql_path=/usr/share/postgresql/8.4/contrib/
+test_runner=django.contrib.gis.tests.run_tests
+postgis_template=template_postgis
 
 [i18n]
 # Settings for RapidSMS Internationalization
