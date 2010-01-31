@@ -3,43 +3,43 @@
           "pk": 1, 
           "model": "poll.question", 
           "fields": {
-               "question": "I feel happy:"
+               "question": "What is your favourite fruit?"
           }
      }, 
      {
           "pk": 1, 
           "model": "poll.choice", 
           "fields": {
-               "short_code": "AL", 
+               "short_code": "A", 
                "question": 1, 
-               "choice": "Always"
+               "choice": "Apple"
           }
      },
      {
           "pk": 2, 
           "model": "poll.choice", 
           "fields": {
-               "short_code": "MT", 
+               "short_code": "B", 
                "question": 1, 
-               "choice": "Most of the time"
+               "choice": "Banana"
           }
      },
      {
           "pk": 3, 
           "model": "poll.choice", 
           "fields": {
-               "short_code": "RA", 
+               "short_code": "S", 
                "question": 1, 
-               "choice": "Rarely"
+               "choice": "Strawberry"
           }
      },
      {
           "pk": 4, 
           "model": "poll.choice", 
           "fields": {
-               "short_code": "NE", 
+               "short_code": "M", 
                "question": 1, 
-               "choice": "Never"
+               "choice": "Mango"
           }
      },
      {
