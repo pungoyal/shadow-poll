@@ -16,48 +16,5 @@
                "email": "p@p.com", 
                "date_joined": "2010-01-12 10:25:30"
           }
-     },
-    {
-        "pk": 1, 
-        "model": "poll.question", 
-        "fields": {
-            "question": "What is your favourite fruit?"
-        }
-    }, 
-    {
-        "pk": 1, 
-        "model": "poll.choice", 
-        "fields": {
-            "short_code": "A", 
-            "question": 1, 
-            "choice": "Mango"
-        }
-    }, 
-    {
-        "pk": 2, 
-        "model": "poll.choice", 
-        "fields": {
-            "short_code": "B", 
-            "question": 1, 
-            "choice": "Banana"
-        }
-    }, 
-    {
-        "pk": 3, 
-        "model": "poll.choice", 
-        "fields": {
-            "short_code": "C", 
-            "question": 1, 
-            "choice": "Persimmon"
-        }
-    }, 
-    {
-        "pk": 4, 
-        "model": "poll.choice", 
-        "fields": {
-            "short_code": "D", 
-            "question": 1, 
-            "choice": "Custard Apple"
-        }
-    }
+     }
 ]
