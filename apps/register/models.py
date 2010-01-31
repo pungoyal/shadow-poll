@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from datetime import datetime
 from django.db import models
 from apps.poll.models import Phone
 from rapidsms.webui import settings
@@ -17,6 +18,7 @@ class Registration(models.Model):
     governorate = models.IntegerField()
     district = models.IntegerField()
     phone = models.ForeignKey(Phone)
+    date = models.DateTimeField(default=datetime.now)
     
     def parse(self, message):
         parts = message.text.split(' ')
