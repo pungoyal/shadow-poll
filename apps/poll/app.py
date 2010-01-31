@@ -21,7 +21,9 @@ class App (rapidsms.app.App):
             qs = Question.objects.all()
             if qs:
                 message.respond(qs[0].question)
-                return True
+            else: 
+                message.respond("No survey questions defined")
+            return True
         
         # allow them to submit a response
         result = Registration.objects.filter(phone__identity = phone_number)
