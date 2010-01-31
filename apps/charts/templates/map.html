@@ -48,7 +48,7 @@ All Reports: <a class='badge' href="/get_kml/">KML</a>
  * MAP CONSTRUCTION
  */
 
-options = {
+var options = {
   units: "m",
   maxResolution: 156543.0339,
   numZoomLevels: 20,
@@ -150,17 +150,17 @@ cities.events.on({
     "featureunselected": onFeatureUnselect
 });
 
-select = new OpenLayers.Control.SelectFeature([cities]);
+var select = new OpenLayers.Control.SelectFeature([cities]);
 map.addControl(select);
 select.activate();
 
-bbox = '{{ bbox }}'
+var bbox = '{{ bbox }}'
 if (bbox == '')
   map.zoomTo(1);
 else {
-  wkt = new OpenLayers.Format.WKT();
-  vector = wkt.read(bbox);
-  bounds = vector.geometry.getBounds().transform(new OpenLayers.Projection('EPSG:4326'), new OpenLayers.Projection('EPSG:900913'));
+  var wkt = new OpenLayers.Format.WKT();
+  var vector = wkt.read(bbox);
+  var bounds = vector.geometry.getBounds().transform(new OpenLayers.Projection('EPSG:4326'), new OpenLayers.Projection('EPSG:900913'));
   map.zoomToExtent(bounds);
 }
 
