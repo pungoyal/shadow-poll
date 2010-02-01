@@ -10,9 +10,9 @@ class TestApp(TestScript):
     apps = (App, reporter_app)
 
     testCorrectResponse = """
-      98804 > A 10 M 110010
+      98804 > A 10 M
       98804 < Thank you for voting. You selected Apple.
-      10000 > M 10 J 110010
+      10000 > M 10 J
       10000 < Thank you for voting. You selected Mango.
     """
 

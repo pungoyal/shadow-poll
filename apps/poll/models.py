@@ -33,10 +33,10 @@ class Choice(models.Model):
 class PollResponse(models.Model):
     issue = models.ForeignKey('Choice')
     age = models.IntegerField()
-    location = models.IntegerField(null = True)
     name = models.CharField(max_length=100)
     gender = models.CharField(max_length=1, choices=GENDER)
     mobile_number = models.IntegerField()
+    location = models.CharField(max_length = 10)
     latitude = models.DecimalField(max_digits=8, decimal_places=6, null = True)
     longitude = models.DecimalField(max_digits=8, decimal_places=6, null = True)
     governorate = models.IntegerField(null = True)
@@ -48,10 +48,6 @@ class PollResponse(models.Model):
             self.issue = Choice.objects.get(short_code=parts[0])
             self.age = parts[1]
             self.gender = parts[2]
-            try :
-                self.location = parts[3]
-            except IndexError:
-                pass
             self.save()
         except :
             raise ValueError("Sorry, we did not understand your response. Please re-send as - issue age gender area")
@@ -62,7 +58,7 @@ class PollResponse(models.Model):
         self.district = registration.district
 
     def __unicode__(self):
-        return str(self.issue)+" "+str(self.age)+" "+str(self.gender)+" "+str(self.location)
+        return str(self.issue)+" "+str(self.age)+" "+str(self.gender)
 
 class Phone(PersistantConnection):
     """ A phone registered with this poll. 
