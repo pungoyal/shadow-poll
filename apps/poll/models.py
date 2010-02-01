@@ -36,7 +36,7 @@ class PollResponse(models.Model):
     def generate_response(self, text):
         try :
             parts = text.split(" ")
-            self.issue = Choice.objects.get(short_code=parts[0])
+            self.issue = Choice.objects.get(short_code=parts[0].upper())
         except :
             raise ValueError("")
         try :

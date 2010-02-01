@@ -15,6 +15,13 @@ class PollResponseTest(TestCase):
         self.assertEquals(self.poll_response.gender,'F')
 #        self.assertEquals(self.poll_response.location,"110001")
         self.assertEquals(response, "Thank you for voting. You selected Banana.")
+
+        response = self.poll_response.generate_response("b 16 F")
+
+        self.assertEquals(self.poll_response.age, '16')
+        self.assertEquals(self.poll_response.gender,'F')
+#        self.assertEquals(self.poll_response.location,"110001")
+        self.assertEquals(response, "Thank you for voting. You selected Banana.")
         
     def test_location_is_optional(self):
         response = self.poll_response.generate_response("S 12 M")
