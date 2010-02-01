@@ -1,16 +1,11 @@
-{% comment %}
-
-Standard page outline. The shadow-bottom and shadow-top elements are rather
-necessary, because trying to line up the same thing without extra elements 
-will be an alignment and z-index nightmare.
-
-{% endcomment %}
 <!DOCTYPE HTML PUBLIC '-//W3C//DTD HTML 4.01 Transitional//EN' 'http://www.w3.org/TR/html4/loose.dtd'> 
-<html lang='en'> 
+<html lang='en'>
+	<head>
   <title>{% block title %}{% endblock %}</title>
-  <link type='text/css' rel='stylesheet' media='screen' href='/static/charts/stylesheets/screen.css' /> 
-  <link type='text/css' rel='stylesheet' media='screen' href='/static/charts/stylesheets/mapdark.css' /> 
+  <link type='text/css' rel='stylesheet' media='screen' href='/static/charts/stylesheets/screen.css' />
+  <link type='text/css' rel='stylesheet' media='screen' href='/static/charts/stylesheets/mapdark.css' />
   {% block headhtml %}{% endblock %}
+	</head>
 <body>
   <div id='header'>
     {% block header %}{% endblock %}
@@ -18,8 +13,6 @@ will be an alignment and z-index nightmare.
   <div id='left'>
     {% block left %}{% endblock %}
   </div>
-  <div id='shadow-bottom'></div>
-  <div id='shadow-top'></div>
   <div class='canvas'>
     {% block content %}{% endblock %}
   </div>

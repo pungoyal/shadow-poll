@@ -1,21 +1,5 @@
 {% extends 'base.html' %}
 
-{% comment %}
-
-  Map template.
-
-  Although the blockswitcher is populated by javascript, it requires
-  the bare HTML below in order to work and position all items.
-
-  map_load.js can be called in the header as well, but make sure that
-  if you run the map initialization on a hook, DO NOT RUN IT ON
-  $(window).ready(). The very technical reason for this is that IE is 
-  poorly implemented and its vector drawing capabilities (VML) are not 
-  operation before $(window).load(), and thus will break the entire map,
-  not just the vectors.
-
-{% endcomment %}
-
 {% block title %}Map{% endblock %}
 
 {% block headhtml %}
@@ -38,7 +22,7 @@ All Reports: <a class='badge' href="/get_kml/">KML</a>
 {% endblock %}
 
 {% block content %}
-<div id='map'>
+<div id='map' style="width:950px; height:575px;">
 </div>
 <script type='text/javascript'>
 	var map;
