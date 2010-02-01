@@ -16,7 +16,12 @@ class TestApp(TestScript):
       10000 < Thank you for voting. You selected Mango.
     """
 
-    testPollQuestionIsSentOut = """
+    testIncorrectResponse = """
+      1234 > B 10
+      1234 < Sorry, we did not understand your response. Please re-send as - answer age gender
+    """
+
+    testSendOutPollQuestion = """
       98804 > poll
       98804 < What is your favourite fruit?
     """

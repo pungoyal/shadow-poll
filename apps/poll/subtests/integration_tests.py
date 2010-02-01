@@ -14,16 +14,16 @@ class TestIntegration(TestScript):
     testCorrectResponse = """
       100 > poll
       100 < What is your favourite fruit?
-      100 > register poll 100 1001
+      100 > register poll 10 8
       100 < Thanks for registering for the survey.
-      100 > M 10 J 110010
+      100 > M 10 J
       100 < Thank you for voting. You selected Mango.
-      100 > A 10 M 110010
+      100 > A 10 M
       100 < Thank you for voting. You selected Apple.
       100 > poll
       100 < What is your favourite fruit?
       100 > register asdfas
       100 < We could not understand the register message. Please send as - register survey governorate district
-      100 > Mango
-      100 < Sorry, we didn't understand your response. Please re-send as - issue age gender area
+      100 > M
+      100 < Sorry, we did not understand your response. Please re-send as - answer age gender
     """

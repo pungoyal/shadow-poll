@@ -13,15 +13,6 @@ class Question(models.Model):
     def __unicode__(self):
         return self.question
 
-    def flatten(self):
-        choices = self.choice_set.all()
-        responses = []
-
-        for choice in choices:
-            responses += [str(choice) for response in choice.pollresponse_set.all()]
-
-        return [self.question, map(str,choices), responses]
-
 class Choice(models.Model):
     choice = models.CharField(null=False, max_length=100)
     short_code = models.CharField(null=False, max_length=2)
@@ -46,11 +37,14 @@ class PollResponse(models.Model):
         try :
             parts = text.split(" ")
             self.issue = Choice.objects.get(short_code=parts[0])
+        except :
+            raise ValueError("")
+        try :
             self.age = parts[1]
             self.gender = parts[2]
             self.save()
         except :
-            raise ValueError("Sorry, we did not understand your response. Please re-send as - issue age gender area")
+            return "Sorry, we did not understand your response. Please re-send as - answer age gender"
         return "Thank you for voting. You selected %s." % (self.issue)
 
     def set_location(self, registration):

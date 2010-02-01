@@ -33,8 +33,10 @@ class PollResponseTest(TestCase):
         self.assertEquals(response, "Thank you for voting. You selected Apple.")
 
     def test_incorrect_response_message_on_bad_parsing(self):
+        response_text = self.poll_response.generate_response("A M")
+        self.assertEquals(response_text, "Sorry, we did not understand your response. Please re-send as - answer age gender")
+        
         self.assertRaises(ValueError, self.poll_response.generate_response, "C M 12")
-        self.assertRaises(ValueError, self.poll_response.generate_response, "B")
         self.assertRaises(ValueError, self.poll_response.generate_response, "C 12")
         self.assertRaises(ValueError, self.poll_response.generate_response, "D")
 
