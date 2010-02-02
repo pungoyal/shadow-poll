@@ -8,7 +8,7 @@ from models import OutgoingMessage, IncomingMessage
 
 class App(rapidsms.app.App):
     
-    def handle(self, message):
+    def parse(self, message):
         # make and save messages on their way in and 
         # cast connection as string so pysqlite doesnt complain
         msg = IncomingMessage(identity=message.connection.identity, text=message.text,
