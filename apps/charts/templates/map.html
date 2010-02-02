@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load i18n %}
 
 {% block title %}Map{% endblock %}
 
@@ -17,7 +18,7 @@
 
 {% block left %}
 <div class='side'>
-All Reports: <a class='badge' href="/get_kml/">KML</a>
+{% trans "All Reports:" %} <a class='badge' href="/get_kml/">KML</a>
 </div>
 {% endblock %}
 
