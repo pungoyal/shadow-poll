@@ -1,31 +1,28 @@
-# vim: ai ts=4 sts=4 et sw=4 encoding=utf-8
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-# ARABIC translations for RapidSMS package.
-# Copyright (C) 2009 RapidSMS
-#
+#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: 0.0\n"
-"Report-Msgid-Bugs-To: rapidsms.org\n"
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2010-02-02 15:20+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: pygettext.py 1.5\n"
 
-######################
-# RapidSMS Route     #
-######################
+#: apps/charts/templates/map.html:21
+msgid "All Reports:"
+msgstr "كافة التقارير"
 
 msgid "Thanks for registering."
 msgstr "شكراً لتسجيلك في  هذه الدراسة"
 
 msgid "Register not understood."
 msgstr "لم نستطيع فهم الرسالة المسجلة, الرجاء إرسال - التسجيل  الدراسة  المحافظة  الحي"
-
-###################
-# RapidSMS Web UI #
-###################
-
-msgid "Log in"
-msgstr "Log in"
 
