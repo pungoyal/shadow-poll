@@ -1,7 +1,37 @@
 # -*- coding: utf-8 -*-
 from rapidsms.tests.scripted import TestScript
 from utils import is_english
-from i18n.app import App
+from app import App
+from django.test import TestCase 
+from models import *
+
+class TestTranslator(TestCase):
+    fixtures = ['dictionary']
+    def test_translate_from_english_to_english(self):
+        t = Translator()
+        translated_text = t.translate("register poll".split(' '))
+        self.assertEquals(translated_text, "register poll")
+
+    def test_translate_from_arabic_to_english(self):
+        t = Translator()
+        translated_text = t.translate("تسجيل".split(' '))
+        self.assertEquals(translated_text, "register")
+
+class TestDictionaryEntry(TestCase):
+    fixtures = ['dictionary']
+    def test_get_meaning(self):
+        dictionary = DictionaryEntry.load_dictionary()
+        self.assertEquals(dictionary["register"], "register")
+        
+    def test_to_string(self):
+        d = DictionaryEntry()
+        d.text = "text"
+        d.meaning = "meaning"
+        self.assertEquals(str(d), "text -> meaning")
+        
+    def test_load_dictionary(self):
+        d = DictionaryEntry.load_dictionary()
+        self.assertEquals(d["register"], "register")
 
 class TestInferArabic(TestScript):
     apps = (App,)

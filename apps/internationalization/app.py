@@ -6,8 +6,17 @@ class App (rapidsms.app.App):
         pass
 
     def parse (self, message):
-        """Parse and annotate messages in the parse phase."""
-        pass
+        self.arabic = false
+        parts = message.split(" ")
+        for part in parts:
+            if not is_english(part):
+                self.arabic = true
+                break
+        if self.arabic:
+            t = Translator()
+            translated_text = t.translate(parts)
+        
+        message.text = translated_text
 
     def handle (self, message):
         """Add your main application logic in the handle phase."""
