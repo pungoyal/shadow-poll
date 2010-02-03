@@ -20,7 +20,6 @@ class DictionaryEntry(models.Model):
             dictionary[entry.text] = entry.meaning
         return dictionary
         
-   
 class Translator(models.Model):
     def __init__(self):
         self.dictionary = DictionaryEntry.load_dictionary()
