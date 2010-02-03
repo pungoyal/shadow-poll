@@ -38,5 +38,13 @@
             "text": "fem", 
             "meaning": "f"
         }
+    },
+    {
+        "pk": 6, 
+        "model": "internationalization.dictionaryentry", 
+        "fields": {
+            "text": "تسجيل", 
+            "meaning": "register"
+        }
     }
 ]
