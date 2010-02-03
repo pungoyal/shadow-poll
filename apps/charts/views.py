@@ -1,10 +1,9 @@
 from math import sqrt
+from django.http import HttpResponse, HttpResponseNotFound, HttpResponseServerError
+from django.template import loader
+from rapidsms.webui.utils import render_to_response
 
 from charts.models import Governorates
-from django.http import HttpResponse, HttpResponseNotFound, HttpResponseServerError
-from django.shortcuts import render_to_response
-from django.template import loader
-
 
 def get_governorates(request):
     reports = Governorates.objects.kml()
@@ -20,10 +19,10 @@ def show_governorate(request, governorate_id):
     except:
         return HttpResponseServerError("Sorry, governorate not found")
 
-    return render_to_response('map.html', {"bbox": governorate.bounding_box})
+    return render_to_response(request, 'map.html', {"bbox": governorate.bounding_box})
 
-def show_results(request):
-    return render_to_response('map.html')
+def show_results(request, template="map.html"):
+    return render_to_response(request, template)
 
 def view_404(request):
     response = HttpResponseNotFound()

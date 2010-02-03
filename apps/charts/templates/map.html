@@ -1,9 +1,14 @@
-{% extends 'base.html' %}
+{% extends 'layout-split-2.html' %}
 {% load i18n %}
 
 {% block title %}Map{% endblock %}
 
-{% block headhtml %}
+{% block stylesheets %}
+<link type="text/css" rel="stylesheet" href="/static/charts/stylesheets/screen.css" />
+<link type="text/css" rel="stylesheet" href="/static/charts/stylesheets/mapdark.css" />
+{% endblock %}
+
+{% block javascripts %}
 <script src="http://www.openlayers.org/dev/OpenLayers.js"></script>
 <script src="http://js.mapbox.com/ol/2.8/mapbox.js"></script>
 <script src="/static/charts/javascripts/openlayers_plus_blockswitcher.js"></script>
@@ -11,7 +16,7 @@
 
 {% block header %}
 <a href="/charts">
-  <h2 style='margin-top: 5px; margin-left: 5px; color:white'>UNICEF Map Demo</h2>
+  <h2 style='margin-top: 5px; margin-left: 5px; padding: 10px; color:white; background:black'>UNICEF Map Demo</h2>
 </a>
 {% endblock %}
 
@@ -21,7 +26,7 @@
 </div>
 {% endblock %}
 
-{% block content %}
+{% block right %}
 <div id='map' style="width:950px; height:575px;">
 </div>
 <script type='text/javascript'>
@@ -150,3 +155,5 @@ else {
 
 </script>
 {% endblock %}
+
+

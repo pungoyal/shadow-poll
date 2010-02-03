@@ -26,3 +26,5 @@ msgstr "شكراً لتسجيلك في  هذه الدراسة"
 msgid "Register not understood."
 msgstr "لم نستطيع فهم الرسالة المسجلة, الرجاء إرسال - التسجيل  الدراسة  المحافظة  الحي"
 
+msgid "Submit"
+msgstr "اختيار"
