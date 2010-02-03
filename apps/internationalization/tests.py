@@ -1,16 +1,17 @@
 # -*- coding: utf-8 -*-
-from rapidsms.tests.scripted import TestScript
-from utils import is_english
-from app import App
 from django.test import TestCase 
+from rapidsms.tests.scripted import TestScript
+
+from app import App
+from utils import is_english
 from models import *
+
 
 class TestTranslator(TestCase):
     fixtures = ['dictionary']
     def test_translate_from_english_to_english(self):
         t = Translator()
-        translated_text = t.translate("poll")
-        self.assertEquals(translated_text, "poll")
+        self.assertEquals(t.translate("poll"), "poll")
 
     def test_understand_and_translate(self):
         t = Translator()
@@ -21,19 +22,41 @@ class TestTranslator(TestCase):
 
     def test_translate_from_arabic_to_english(self):
         t = Translator()
-        translated_text = t.translate(u"تسجيل")
-        self.assertEquals(translated_text, u"register")
+        self.assertEquals(t.translate(u"تسجيل"), u"register")
+        self.assertEquals(t.translate(u"poll تسجيل"), u"register poll")
+        self.assertEquals(t.translate(u"التصويت تسجيل"), u"register poll")
 
-        translated_text = t.translate(u"poll تسجيل")
-        self.assertEquals(translated_text, u"register poll")
-
-        translated_text = t.translate(u"التصويت تسجيل")
-        self.assertEquals(translated_text, u"register poll")
+    def test_translate_numbers(self):
+        t = Translator()
+        self.assertEquals(t.translate_number(u"٠١٢٣٤٥٦٧٨٩"), u"0123456789")
+        self.assertEquals(t.translate_number(u"0123456789"), u"0123456789")
+        self.assertEquals(t.translate_number(u"0١2٣4٥6٧8٩"), u"0123456789")
         
     def test_reverse_input_string_on_translation(self):
-        t= Translator()
-        translated_text = t.translate(u"register poll")
-        self.assertEquals(translated_text, "poll register")
+        t = Translator()
+        self.assertEquals(t.translate(u"register poll"), "poll register")
+
+    def test_if_a_string_is_numbers(self):
+        t = Translator()
+        self.assertFalse(u"a".isdigit())
+        self.assertFalse(u"a12".isdigit())
+        self.assertFalse(u"12a".isdigit())
+        self.assertFalse(u"0a".isdigit())
+        self.assertFalse(u"a0".isdigit())
+        self.assertFalse(u"001a010".isdigit())
+
+        self.assertTrue(u"1".isdigit())
+        self.assertTrue(u"100".isdigit())
+        self.assertTrue(u"0011".isdigit())
+        self.assertTrue(u"1234567890".isdigit())
+
+        self.assertTrue(u"٠١٢٣٤٥٦٧٨٩".isdigit())
+        self.assertTrue(u"٩٠٠".isdigit())
+        self.assertTrue(u"1".isdigit())
+
+        self.assertTrue(u"١1٩".isdigit())
+        self.assertFalse(u"١a٩".isdigit())
+        
         
 class TestDictionaryEntry(TestCase):
     fixtures = ['dictionary']
@@ -69,7 +92,7 @@ class TestInferArabic(TestScript):
     def test_only_numbers_should_raise_exception(self):
         numbers_string = u"3242498277"
         self.assertRaises(ValueError, is_english, numbers_string)
-        
+
 #    TODO - put arabic numbers here
 #    def test_arabic_numbers_is_not_english(self):
 #        numbers_string = u"3242498277"

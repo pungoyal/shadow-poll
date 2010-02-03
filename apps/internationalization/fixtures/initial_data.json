@@ -47,12 +47,172 @@
             "meaning": "register"
         }
     },
-   {
+    {
         "pk": 7, 
         "model": "internationalization.dictionaryentry", 
         "fields": {
             "text": "التصويت", 
             "meaning": "poll"
+        }
+    },
+    {
+        "pk": 8, 
+        "model": "internationalization.dictionaryentry", 
+        "fields": {
+            "text": "٠", 
+            "meaning": "0"
+        }
+    },
+    {
+        "pk": 9, 
+        "model": "internationalization.dictionaryentry", 
+        "fields": {
+            "text": "١", 
+            "meaning": "1"
+        }
+    },
+    {
+        "pk": 10, 
+        "model": "internationalization.dictionaryentry", 
+        "fields": {
+            "text": "٢", 
+            "meaning": "2"
+        }
+    },
+    {
+        "pk": 11, 
+        "model": "internationalization.dictionaryentry", 
+        "fields": {
+            "text": "٣", 
+            "meaning": "3"
+        }
+    },
+    {
+        "pk": 12, 
+        "model": "internationalization.dictionaryentry", 
+        "fields": {
+            "text": "٤", 
+            "meaning": "4"
+        }
+    },
+    {
+        "pk": 13, 
+        "model": "internationalization.dictionaryentry", 
+        "fields": {
+            "text": "٥", 
+            "meaning": "5"
+        }
+    },
+    {
+        "pk": 14, 
+        "model": "internationalization.dictionaryentry", 
+        "fields": {
+            "text": "٦", 
+            "meaning": "6"
+        }
+    },
+    {
+        "pk": 15, 
+        "model": "internationalization.dictionaryentry", 
+        "fields": {
+            "text": "٧", 
+            "meaning": "7"
+        }
+    },
+    {
+        "pk": 16, 
+        "model": "internationalization.dictionaryentry", 
+        "fields": {
+            "text": "٨", 
+            "meaning": "8"
+        }
+    },
+    {
+        "pk": 17, 
+        "model": "internationalization.dictionaryentry", 
+        "fields": {
+            "text": "٩", 
+            "meaning": "9"
+        }
+    },
+    {
+        "pk": 18, 
+        "model": "internationalization.dictionaryentry", 
+        "fields": {
+            "text": "0", 
+            "meaning": "0"
+        }
+    },
+    {
+        "pk": 19, 
+        "model": "internationalization.dictionaryentry", 
+        "fields": {
+            "text": "1", 
+            "meaning": "1"
+        }
+    },
+    {
+        "pk": 20, 
+        "model": "internationalization.dictionaryentry", 
+        "fields": {
+            "text": "2", 
+            "meaning": "2"
+        }
+    },
+    {
+        "pk": 21, 
+        "model": "internationalization.dictionaryentry", 
+        "fields": {
+            "text": "3", 
+            "meaning": "3"
+        }
+    },
+    {
+        "pk": 22, 
+        "model": "internationalization.dictionaryentry", 
+        "fields": {
+            "text": "4", 
+            "meaning": "4"
+        }
+    },
+    {
+        "pk": 23, 
+        "model": "internationalization.dictionaryentry", 
+        "fields": {
+            "text": "5", 
+            "meaning": "5"
+        }
+    },
+    {
+        "pk": 24, 
+        "model": "internationalization.dictionaryentry", 
+        "fields": {
+            "text": "6", 
+            "meaning": "6"
+        }
+    },
+    {
+        "pk": 25, 
+        "model": "internationalization.dictionaryentry", 
+        "fields": {
+            "text": "7", 
+            "meaning": "7"
+        }
+    },
+    {
+        "pk": 26, 
+        "model": "internationalization.dictionaryentry", 
+        "fields": {
+            "text": "8", 
+            "meaning": "8"
+        }
+    },
+    {
+        "pk": 27, 
+        "model": "internationalization.dictionaryentry", 
+        "fields": {
+            "text": "9", 
+            "meaning": "9"
         }
     }
 ]
