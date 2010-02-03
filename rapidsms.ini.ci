@@ -115,4 +115,4 @@ login_redirect_url=/
 # set to Arabic. So: for TESTING, we set default to english.
 # For PRODUCTION, SET DEFAULT_LANGUAGE_TO_ARABIC
 default_language=ar
-languages=(ar,Arabic),(en,English)
+languages=(ar,عربي),(en,English)
