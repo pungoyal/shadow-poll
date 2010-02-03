@@ -1,22 +1,18 @@
 import rapidsms
 
 class App (rapidsms.app.App):
+#    PRIORITY = "first"
+
+    def priority(self):
+        return 1
+
     def start (self):
         """Configure your app in the start phase."""
         pass
 
     def parse (self, message):
-        self.arabic = false
-        parts = message.split(" ")
-        for part in parts:
-            if not is_english(part):
-                self.arabic = true
-                break
-        if self.arabic:
-            t = Translator()
-            translated_text = t.translate(parts)
-        
-        message.text = translated_text
+        t = Translator()
+        message.text = t.understand_and_translate_if_required(message.text)
 
     def handle (self, message):
         """Add your main application logic in the handle phase."""

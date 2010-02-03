@@ -46,5 +46,13 @@
             "text": "تسجيل", 
             "meaning": "register"
         }
+    },
+   {
+        "pk": 7, 
+        "model": "internationalization.dictionaryentry", 
+        "fields": {
+            "text": "التصويت", 
+            "meaning": "poll"
+        }
     }
 ]
