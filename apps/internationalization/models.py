@@ -33,7 +33,7 @@ class Translator(models.Model):
                 translated = t.translate(text)
                 return translated
 
-        return text
+        return False
     
     def translate(self, text):
         parts = text.split(' ')

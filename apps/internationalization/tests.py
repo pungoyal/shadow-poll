@@ -13,12 +13,18 @@ class TestTranslator(TestCase):
         t = Translator()
         self.assertEquals(t.translate("poll"), "poll")
 
-    def test_understand_and_translate(self):
+    def test_english_text_is_left_untouched(self):
         t = Translator()
         translated_text = t.understand_and_translate_if_required("register poll")
-        self.assertEquals(translated_text, "register poll")
+        self.assertEquals(translated_text, False)
+
+
+    def test_understand_and_translate(self):
+        t = Translator()
         translated_text = t.understand_and_translate_if_required(u"التصويت تسجيل")
         self.assertEquals(translated_text, "register poll")
+        translated_text = t.understand_and_translate_if_required(u"٥ ١٠ التصويت تسجيل")
+        self.assertEquals(translated_text, "register poll 10 5")
 
     def test_translate_from_arabic_to_english(self):
         t = Translator()
@@ -89,10 +95,6 @@ class TestInferArabic(TestScript):
         mixed_string = u"""sfdsadfsafالتصويتan3242498277asdkjfndsaf"""
         self.assertFalse(is_english(mixed_string))
     
-    def test_only_numbers_should_raise_exception(self):
-        numbers_string = u"3242498277"
-        self.assertRaises(ValueError, is_english, numbers_string)
-
 #    TODO - put arabic numbers here
 #    def test_arabic_numbers_is_not_english(self):
 #        numbers_string = u"3242498277"
