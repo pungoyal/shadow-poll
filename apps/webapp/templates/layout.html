@@ -55,6 +55,7 @@
 			</div>
 
 			{% block footer %}
+			<div id="footer">
 			{% if USE_I18N %}
 				<form action="/i18n/setlang/" method="post">
 				    <select name="language">
@@ -68,8 +69,6 @@
 				<input type="submit" class="small" value="{% trans 'Submit' %}"/>
 				</form>
 			{% endif %}
-
-			<div id="footer">
 				<p class="rights">
 					Copyright &copy; 2009 <a href="http://unicefinnovation.org">UNICEF</a> et al.<br />
 					<a href="http://github.com/unicefinnovation/rapidsms">RapidSMS</a> is free software,
