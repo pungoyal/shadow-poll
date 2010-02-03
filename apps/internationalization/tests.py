@@ -13,10 +13,14 @@ class TestTranslator(TestCase):
         t = Translator()
         self.assertEquals(t.translate("poll"), "poll")
 
-    def test_understand_and_translate(self):
+    def test_english_text_is_left_untouched(self):
         t = Translator()
         translated_text = t.understand_and_translate_if_required("register poll")
-        self.assertEquals(translated_text, "register poll")
+        self.assertEquals(translated_text, False)
+
+
+    def test_understand_and_translate(self):
+        t = Translator()
         translated_text = t.understand_and_translate_if_required(u"التصويت تسجيل")
         self.assertEquals(translated_text, "register poll")
         translated_text = t.understand_and_translate_if_required(u"٥ ١٠ التصويت تسجيل")
