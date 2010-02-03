@@ -1,4 +1,5 @@
 import rapidsms
+from models import *
 
 class App (rapidsms.app.App):
 #    PRIORITY = "first"

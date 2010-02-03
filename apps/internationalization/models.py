@@ -30,7 +30,8 @@ class Translator(models.Model):
         for part in parts:
             if not is_english(part):
                 t = Translator()
-                return t.translate(text)
+                translated = t.translate(text)
+                return translated
 
         return text
     
@@ -39,5 +40,16 @@ class Translator(models.Model):
         parts.reverse()
         result = ""
         for part in parts:
-            result += self.dictionary[part] + " "
+            if part.isdigit():
+                translated = self.translate_number(part)
+            else:
+                translated = self.dictionary[part]
+            result += translated + " "
         return result.strip()
+
+    def translate_number(self, number):
+        result = ""
+        for c in number:
+            result += self.dictionary[c]
+        return result
+

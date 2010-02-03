@@ -24,4 +24,3 @@ class RegisterTest(TestCase):
 
         result = app.handle(Message(text="register poll 100 1001", connection=Connection(backend = None, identity=1000)))
         self.assertEquals(result, True)
-
