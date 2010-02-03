@@ -12,7 +12,7 @@ function sendMsg() {
 		$.getJSON(
 			req, // if Ajax call succeeds, execute the following script
 			function (response) { if (response) {
-				snippet = '<tr class="in"><td class="phone">' + response.phone + '</td><td class="dir">&laquo;</td><td class="msg">' + unescape(response.message) + '</td><td class="info">' + unescape(response.message).length + ' characters</td></tr>';
+				snippet = '<tr class="in"><td class="phone">' + response.phone + '</td><td class="dir">&laquo;</td><td class="msg">' + response.message + '</td><td class="info">' + response.message.length + ' characters</td></tr>';
 				$('#log').append(snippet);
 				fixClasses();
 				$('div.tester').scrollTo('#log tr:last', 800);
@@ -35,7 +35,7 @@ function checkMsgs() {
 		$.getJSON(
 			req,
 			function (response) { if (response) {
-				snippet = '<tr class="out"><td class="phone">' + response.phone + '</td><td class="dir">&raquo;</td><td class="msg">' + unescape(response.message) + '</td><td class="info">' + unescape(response.message).length + ' characters</td></tr>';
+				snippet = '<tr class="out"><td class="phone">' + response.phone + '</td><td class="dir">&raquo;</td><td class="msg">' + response.message + '</td><td class="info">' + response.message.length + ' characters</td></tr>';
 				$('#log').append(snippet);
 				fixClasses();
 				$('div.tester').scrollTo('#log tr:last', 800);

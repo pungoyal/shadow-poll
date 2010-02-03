@@ -1,0 +1,252 @@
+[
+    {
+        "pk": 1, 
+        "model": "tree.question", 
+        "fields": {
+            "text": "What is your favourite fruit?", 
+            "error_response": "Please specify one of Apple, Mango, Pear. "
+        }
+    }, 
+    {
+        "pk": 2, 
+        "model": "tree.question", 
+        "fields": {
+            "text": "Of these vegetables, which is your favourite? Carrot, Tomato, Lettuce, Spinach", 
+            "error_response": "Please specify one of: Carrot, Tomato, Lettuce, Spinach"
+        }
+    }, 
+    {
+        "pk": 3, 
+        "model": "tree.question", 
+        "fields": {
+            "text": "What is your favourite drink? Please specify one of: lime, kiwi, ginger.", 
+            "error_response": "That is not a drink. Please specify one of: lime, kiwi, ginger."
+        }
+    }, 
+    {
+        "pk": 1, 
+        "model": "tree.tree", 
+        "fields": {
+            "root_state": 1, 
+            "trigger": "food", 
+            "completion_text": "Thank you for sharing your dietary preferences."
+        }
+    }, 
+    {
+        "pk": 1, 
+        "model": "tree.answer", 
+        "fields": {
+            "answer": "Apple", 
+            "type": "A", 
+            "name": "apple", 
+            "description": "round and red"
+        }
+    }, 
+    {
+        "pk": 2, 
+        "model": "tree.answer", 
+        "fields": {
+            "answer": "Mango", 
+            "type": "A", 
+            "name": "mango", 
+            "description": "oval and orange"
+        }
+    }, 
+    {
+        "pk": 3, 
+        "model": "tree.answer", 
+        "fields": {
+            "answer": "Carrot", 
+            "type": "A", 
+            "name": "carrot", 
+            "description": "sharp and orange"
+        }
+    }, 
+    {
+        "pk": 4, 
+        "model": "tree.answer", 
+        "fields": {
+            "answer": "Tomato", 
+            "type": "A", 
+            "name": "tomato", 
+            "description": "round and red and green"
+        }
+    }, 
+    {
+        "pk": 5, 
+        "model": "tree.answer", 
+        "fields": {
+            "answer": "Lime", 
+            "type": "A", 
+            "name": "lime", 
+            "description": "round and green"
+        }
+    }, 
+    {
+        "pk": 6, 
+        "model": "tree.answer", 
+        "fields": {
+            "answer": "Kiwi", 
+            "type": "A", 
+            "name": "kiwi", 
+            "description": "oval and green"
+        }
+    }, 
+    {
+        "pk": 7, 
+        "model": "tree.answer", 
+        "fields": {
+            "answer": "Pear", 
+            "type": "A", 
+            "name": "pear", 
+            "description": "oddly shaped"
+        }
+    }, 
+    {
+        "pk": 8, 
+        "model": "tree.answer", 
+        "fields": {
+            "answer": "Lettuce", 
+            "type": "A", 
+            "name": "lettuce", 
+            "description": "leafy"
+        }
+    }, 
+    {
+        "pk": 9, 
+        "model": "tree.answer", 
+        "fields": {
+            "answer": "Spinach", 
+            "type": "A", 
+            "name": "spinach", 
+            "description": "leafy and dark green"
+        }
+    }, 
+    {
+        "pk": 10, 
+        "model": "tree.answer", 
+        "fields": {
+            "answer": "Ginger", 
+            "type": "A", 
+            "name": "ginger", 
+            "description": "like potato"
+        }
+    }, 
+    {
+        "pk": 1, 
+        "model": "tree.treestate", 
+        "fields": {
+            "num_retries": 3, 
+            "question": 1, 
+            "name": "default"
+        }
+    }, 
+    {
+        "pk": 2, 
+        "model": "tree.treestate", 
+        "fields": {
+            "num_retries": 3, 
+            "question": 2, 
+            "name": "Vegetable"
+        }
+    }, 
+    {
+        "pk": 3, 
+        "model": "tree.treestate", 
+        "fields": {
+            "num_retries": 3, 
+            "question": 3, 
+            "name": "Juice"
+        }
+    }, 
+    {
+        "pk": 1, 
+        "model": "tree.transition", 
+        "fields": {
+            "answer": 2, 
+            "current_state": 1, 
+            "next_state": 2
+        }
+    }, 
+    {
+        "pk": 2, 
+        "model": "tree.transition", 
+        "fields": {
+            "answer": 1, 
+            "current_state": 1, 
+            "next_state": 2
+        }
+    }, 
+    {
+        "pk": 3, 
+        "model": "tree.transition", 
+        "fields": {
+            "answer": 3, 
+            "current_state": 2, 
+            "next_state": 3
+        }
+    }, 
+    {
+        "pk": 4, 
+        "model": "tree.transition", 
+        "fields": {
+            "answer": 4, 
+            "current_state": 2, 
+            "next_state": 3
+        }
+    }, 
+    {
+        "pk": 5, 
+        "model": "tree.transition", 
+        "fields": {
+            "answer": 5, 
+            "current_state": 3, 
+            "next_state": null
+        }
+    }, 
+    {
+        "pk": 6, 
+        "model": "tree.transition", 
+        "fields": {
+            "answer": 6, 
+            "current_state": 3, 
+            "next_state": null
+        }
+    }, 
+    {
+        "pk": 7, 
+        "model": "tree.transition", 
+        "fields": {
+            "answer": 7, 
+            "current_state": 1, 
+            "next_state": 2
+        }
+    }, 
+    {
+        "pk": 8, 
+        "model": "tree.transition", 
+        "fields": {
+            "answer": 8, 
+            "current_state": 2, 
+            "next_state": 3
+        }
+    }, 
+    {
+        "pk": 9, 
+        "model": "tree.transition", 
+        "fields": {
+            "answer": 9, 
+            "current_state": 3, 
+            "next_state": null
+        }
+    }, 
+    {
+        "pk": 10, 
+        "model": "tree.transition", 
+        "fields": {
+            "answer": 10, 
+            "current_state": 3, 
+            "next_state": null
+        }
+    } 
+]

@@ -28,3 +28,16 @@ msgstr "لم نستطيع فهم الرسالة المسجلة, الرجاء إ�
 
 msgid "Submit"
 msgstr "اختيار"
+
+#: apps/charts/templates/map.html:27
+msgid "Welcome to the Iraq Children Happiness Website."
+msgstr "مرحبا بكم في العراق السعادة للأطفال على شبكة الإنترنت"
+
+#: apps/charts/templates/map.html:27
+msgid "The map shows the poll responses recieved from"
+msgstr "الخريطة ويبين استطلاع الردود التي وردت م"
+
+#: apps/charts/templates/map.html:28
+msgid "the various governorates in Iraq."
+msgstr "في مختلف المحافظات في العراق"
+
