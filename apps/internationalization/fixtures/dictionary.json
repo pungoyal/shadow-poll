@@ -1,0 +1,42 @@
+[
+    {
+        "pk": 1, 
+        "model": "internationalization.dictionaryentry", 
+        "fields": {
+            "text": "register", 
+            "meaning": "register"
+        }
+    }, 
+    {
+        "pk": 2, 
+        "model": "internationalization.dictionaryentry", 
+        "fields": {
+            "text": "poll", 
+            "meaning": "poll"
+        }
+    }, 
+    {
+        "pk": 3, 
+        "model": "internationalization.dictionaryentry", 
+        "fields": {
+            "text": "reg", 
+            "meaning": "register"
+        }
+    }, 
+    {
+        "pk": 4, 
+        "model": "internationalization.dictionaryentry", 
+        "fields": {
+            "text": "female", 
+            "meaning": "f"
+        }
+    }, 
+    {
+        "pk": 5, 
+        "model": "internationalization.dictionaryentry", 
+        "fields": {
+            "text": "fem", 
+            "meaning": "f"
+        }
+    }
+]
