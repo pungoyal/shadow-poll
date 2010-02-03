@@ -25,7 +25,9 @@ class Translator(models.Model):
     def __init__(self):
         self.dictionary = DictionaryEntry.load_dictionary()
     
-    def translate(self, parts):
+    def translate(self, text):
+        parts = text.split(' ')
+        parts.reverse()
         result = ""
         for part in parts:
             result += self.dictionary[part] + " "

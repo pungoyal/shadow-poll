@@ -14,8 +14,7 @@ class App (rapidsms.app.App):
                 break
         if self.arabic:
             t = Translator()
-            translated_text = t.translate(parts)
-        
+            translated_text = t.translate(message.text)
         message.text = translated_text
 
     def handle (self, message):
