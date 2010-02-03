@@ -9,13 +9,19 @@ class TestTranslator(TestCase):
     fixtures = ['dictionary']
     def test_translate_from_english_to_english(self):
         t = Translator()
-        translated_text = t.translate("poll تسجيل")
-        self.assertEquals(translated_text, "register poll")
+        translated_text = t.translate("poll")
+        self.assertEquals(translated_text, "poll")
 
     def test_translate_from_arabic_to_english(self):
         t = Translator()
         translated_text = t.translate("تسجيل")
         self.assertEquals(translated_text, "register")
+
+        translated_text = t.translate("poll تسجيل")
+        self.assertEquals(translated_text, "register poll")
+
+        translated_text = t.translate("تسجيل التصويت")
+        self.assertEquals(translated_text, "register poll")
         
     def test_reverse_input_string_on_translation(self):
         t= Translator()
