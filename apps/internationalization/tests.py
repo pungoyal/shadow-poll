@@ -12,22 +12,29 @@ class TestTranslator(TestCase):
         translated_text = t.translate("poll")
         self.assertEquals(translated_text, "poll")
 
+    def test_understand_and_translate(self):
+        t = Translator()
+        translated_text = t.understand_and_translate_if_required("register poll")
+        self.assertEquals(translated_text, "register poll")
+        translated_text = t.understand_and_translate_if_required(u"التصويت تسجيل")
+        self.assertEquals(translated_text, "register poll")
+
     def test_translate_from_arabic_to_english(self):
         t = Translator()
-        translated_text = t.translate("تسجيل")
-        self.assertEquals(translated_text, "register")
+        translated_text = t.translate(u"تسجيل")
+        self.assertEquals(translated_text, u"register")
 
-        translated_text = t.translate("poll تسجيل")
-        self.assertEquals(translated_text, "register poll")
+        translated_text = t.translate(u"poll تسجيل")
+        self.assertEquals(translated_text, u"register poll")
 
-        translated_text = t.translate("تسجيل التصويت")
-        self.assertEquals(translated_text, "register poll")
+        translated_text = t.translate(u"التصويت تسجيل")
+        self.assertEquals(translated_text, u"register poll")
         
     def test_reverse_input_string_on_translation(self):
         t= Translator()
-        translated_text = t.translate("register poll")
+        translated_text = t.translate(u"register poll")
         self.assertEquals(translated_text, "poll register")
-
+        
 class TestDictionaryEntry(TestCase):
     fixtures = ['dictionary']
     def test_get_meaning(self):
