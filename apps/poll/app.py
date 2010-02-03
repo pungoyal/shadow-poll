@@ -7,7 +7,10 @@ from poll.models import Phone, Question
 
 class App (rapidsms.app.App):
     def parse(self, message):
-        # same as in the reporter app
+        """ same as in the reporter app
+        
+        TODO - move this into apps/sharedphone
+        """
         phone = Phone.from_message(message)
         message.persistant_connection = phone
         phone.seen()

@@ -61,6 +61,7 @@ class Phone(PersistantConnection):
     multiple phones). At the same time, most people sharing a phone will
     speak the same language, so we can optionally associate phone with locale.
     
+    TODO - move this into apps/sharedphone
     """
     language = models.CharField(max_length=10, blank=True)
     
