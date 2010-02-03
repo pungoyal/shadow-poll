@@ -9,8 +9,6 @@ def is_english(string):
     string = string.strip()
     if not string:
         raise ValueError("Cannot infer language from empty string")
-    if string.isdigit():
-        raise ValueError("Cannot infer language from numbers")
     try:
         string.encode('ascii')
         return True
