@@ -1,5 +1,5 @@
 from django.db import models
-
+from utils import *
 
 class DictionaryEntry(models.Model):
     text = models.CharField(null=False, max_length=100)
@@ -23,6 +23,16 @@ class DictionaryEntry(models.Model):
 class Translator(models.Model):
     def __init__(self):
         self.dictionary = DictionaryEntry.load_dictionary()
+
+    def understand_and_translate_if_required(self, text):
+        self.arabic = False
+        parts = text.split(" ")
+        for part in parts:
+            if not is_english(part):
+                t = Translator()
+                return t.translate(text)
+
+        return text
     
     def translate(self, text):
         parts = text.split(' ')
