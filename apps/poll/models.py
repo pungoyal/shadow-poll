@@ -38,7 +38,7 @@ class PollResponse(models.Model):
             parts = text.split(" ")
             self.issue = Choice.objects.get(short_code=parts[0].upper())
         except :
-            raise ValueError("")
+            raise ValueError("Not a poll response")
         try :
             self.age = parts[1]
             self.gender = parts[2]

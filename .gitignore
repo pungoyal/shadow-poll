@@ -8,3 +8,4 @@
 *#
 rapidsms.ini
 *.log
+.settings/
