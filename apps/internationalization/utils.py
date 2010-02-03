@@ -18,6 +18,9 @@ def is_english(string):
         return False
 
 def get_language_code(connection):
+    """ TODO - fix this function depending on whether we look at 
+    connection.reporter.language, connection.language, or something else...
+    """
     if connection.reporter:
         if connection.reporter.language:
             return connection.reporter.language
