@@ -24,203 +24,11 @@
         }
     }, 
     {
-        "pk": 30, 
+        "pk": 4, 
         "model": "internationalization.dictionaryentry", 
         "fields": {
-            "text": "\u0669", 
-            "meaning": "9"
-        }
-    }, 
-    {
-        "pk": 29, 
-        "model": "internationalization.dictionaryentry", 
-        "fields": {
-            "text": "\u0668", 
-            "meaning": "8"
-        }
-    }, 
-    {
-        "pk": 28, 
-        "model": "internationalization.dictionaryentry", 
-        "fields": {
-            "text": "\u0667", 
-            "meaning": "7"
-        }
-    }, 
-    {
-        "pk": 27, 
-        "model": "internationalization.dictionaryentry", 
-        "fields": {
-            "text": "\u0666", 
-            "meaning": "6"
-        }
-    }, 
-    {
-        "pk": 26, 
-        "model": "internationalization.dictionaryentry", 
-        "fields": {
-            "text": "\u0665", 
-            "meaning": "5"
-        }
-    }, 
-    {
-        "pk": 25, 
-        "model": "internationalization.dictionaryentry", 
-        "fields": {
-            "text": "\u0664", 
-            "meaning": "4"
-        }
-    }, 
-    {
-        "pk": 24, 
-        "model": "internationalization.dictionaryentry", 
-        "fields": {
-            "text": "\u0663", 
-            "meaning": "3"
-        }
-    }, 
-    {
-        "pk": 23, 
-        "model": "internationalization.dictionaryentry", 
-        "fields": {
-            "text": "\u0662", 
-            "meaning": "2"
-        }
-    }, 
-    {
-        "pk": 22, 
-        "model": "internationalization.dictionaryentry", 
-        "fields": {
-            "text": "\u0661", 
-            "meaning": "1"
-        }
-    }, 
-    {
-        "pk": 21, 
-        "model": "internationalization.dictionaryentry", 
-        "fields": {
-            "text": "\u0660", 
-            "meaning": "0"
-        }
-    }, 
-    {
-        "pk": 15, 
-        "model": "internationalization.dictionaryentry", 
-        "fields": {
-            "text": "\ufec1", 
-            "meaning": "i"
-        }
-    }, 
-    {
-        "pk": 14, 
-        "model": "internationalization.dictionaryentry", 
-        "fields": {
-            "text": "\ufea1", 
-            "meaning": "h"
-        }
-    }, 
-    {
-        "pk": 13, 
-        "model": "internationalization.dictionaryentry", 
-        "fields": {
-            "text": "\ufeaf", 
-            "meaning": "g"
-        }
-    }, 
-    {
-        "pk": 12, 
-        "model": "internationalization.dictionaryentry", 
-        "fields": {
-            "text": "\ufeed", 
+            "text": "female", 
             "meaning": "f"
-        }
-    }, 
-    {
-        "pk": 11, 
-        "model": "internationalization.dictionaryentry", 
-        "fields": {
-            "text": "\ufee9", 
-            "meaning": "e"
-        }
-    }, 
-    {
-        "pk": 10, 
-        "model": "internationalization.dictionaryentry", 
-        "fields": {
-            "text": "\ufea9", 
-            "meaning": "d"
-        }
-    }, 
-    {
-        "pk": 9, 
-        "model": "internationalization.dictionaryentry", 
-        "fields": {
-            "text": "\ufe9d", 
-            "meaning": "c"
-        }
-    }, 
-    {
-        "pk": 8, 
-        "model": "internationalization.dictionaryentry", 
-        "fields": {
-            "text": "\ufe8f", 
-            "meaning": "b"
-        }
-    }, 
-    {
-        "pk": 7, 
-        "model": "internationalization.dictionaryentry", 
-        "fields": {
-            "text": "\u0623", 
-            "meaning": "a"
-        }
-    }, 
-    {
-        "pk": 6, 
-        "model": "internationalization.dictionaryentry", 
-        "fields": {
-            "text": "\u0627", 
-            "meaning": "a"
-        }
-    }, 
-    {
-        "pk": 17, 
-        "model": "internationalization.dictionaryentry", 
-        "fields": {
-            "text": "\u062a\u0633\u062c\u064a\u0644", 
-            "meaning": "register"
-        }
-    }, 
-    {
-        "pk": 20, 
-        "model": "internationalization.dictionaryentry", 
-        "fields": {
-            "text": "\u0623\u0646\u062b\u0649", 
-            "meaning": "female"
-        }
-    }, 
-    {
-        "pk": 19, 
-        "model": "internationalization.dictionaryentry", 
-        "fields": {
-            "text": "\u0627\u0646\u062b\u0649", 
-            "meaning": "female"
-        }
-    }, 
-    {
-        "pk": 18, 
-        "model": "internationalization.dictionaryentry", 
-        "fields": {
-            "text": "\u0630\u0643\u0631", 
-            "meaning": "male"
-        }
-    }, 
-    {
-        "pk": 16, 
-        "model": "internationalization.dictionaryentry", 
-        "fields": {
-            "text": "\u062a\u0635\u0648\u064a\u062a", 
-            "meaning": "poll"
         }
     }, 
     {
@@ -228,31 +36,23 @@
         "model": "internationalization.dictionaryentry", 
         "fields": {
             "text": "fem", 
-            "meaning": "female"
+            "meaning": "f"
         }
-    }, 
+    },
     {
-        "pk": 4, 
+        "pk": 6, 
         "model": "internationalization.dictionaryentry", 
         "fields": {
-            "text": "female", 
-            "meaning": "female"
+            "text": "تسجيل", 
+            "meaning": "register"
         }
-    }, 
-    {
-        "pk": 31, 
+    },
+   {
+        "pk": 7, 
         "model": "internationalization.dictionaryentry", 
         "fields": {
-            "text": "m", 
-            "meaning": "male"
-        }
-    }, 
-    {
-        "pk": 32, 
-        "model": "internationalization.dictionaryentry", 
-        "fields": {
-            "text": "male", 
-            "meaning": "male"
+            "text": "التصويت", 
+            "meaning": "poll"
         }
     }
 ]

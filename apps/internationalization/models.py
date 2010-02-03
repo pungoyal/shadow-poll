@@ -29,7 +29,6 @@ class Translator(models.Model):
         parts = text.split(" ")
         for part in parts:
             if not is_english(part):
-#                self.log("Translating %s", text)
                 t = Translator()
                 return t.translate(text)
 
