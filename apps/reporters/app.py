@@ -103,9 +103,6 @@ class App(rapidsms.app.App):
                 self.info("Creating PersistantBackend object for %s (%s)" % (be.slug, be.title))
                 PersistantBackend(slug=be.slug, title=be.title).save()
     
-    """
-    For Iraq, we disable the default reporter behaviour 
-    and implement most of the sms interaction in the Register app
     def parse(self, msg):
         # fetch the persistantconnection object
         # for this message's sender (or create
@@ -139,6 +136,9 @@ class App(rapidsms.app.App):
         # populates the same property 
         conn.seen()
             
+    """
+    For Iraq, we disable the default reporter behaviour 
+    and implement most of the sms interaction in the Register app
     def handle(self, msg):
         matcher = Matcher(msg)
         

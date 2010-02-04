@@ -3,9 +3,8 @@ from rapidsms import *
 from rapidsms.connection import *
 from rapidsms.tests.scripted import TestScript
 from register.models import *
-from reporters.models import PersistantBackend, Reporter
+from reporters.models import PersistantBackend, PersistantConnection, Reporter
 from register.app import App
-from poll.models import Phone
 import poll.app as poll_app
 import register.app as register_app
 import reporters.app as reporter_app
@@ -19,22 +18,22 @@ class RegistrationTest(TestCase):
         self.reporter = Reporter(alias="ReporterName")
         self.reporter.save()
         self.connection = Connection(backend=self.backend, identity="1000")
-        self.pconnection = Phone(backend=self.backend, 
-                                 reporter=self.reporter, 
-                                 identity="1000")
+        self.pconnection = PersistantConnection(backend=self.backend, 
+                                                reporter=self.reporter, 
+                                                identity="1000")
         self.pconnection.save()
         self.reporter.connections.add(self.pconnection)
         
-        self.reg = Registration()
         message = Message(text='register poll 100 1001', connection=self.connection)
         message.persistant_connection = self.pconnection
-        self.reg.parse(message)
 
     
     def test_parse(self):
+        # there should only be one registration object in this fixture
+        self.reg = Registration.objects.get()
         self.assertEquals(self.reg.public_identifier, 'poll')
-        self.assertEquals(self.reg.governorate, '100')
-        self.assertEquals(self.reg.district, '1001')
+        self.assertEquals(self.reg.governorate, 10)
+        self.assertEquals(self.reg.district, 8)
         self.assertEquals(self.reg.phone.identity, "1000")
 
     def test_load_by_mobile_number(self):

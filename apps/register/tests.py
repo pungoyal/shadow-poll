@@ -7,22 +7,23 @@ from rapidsms.tests.scripted import TestScript
 from register.models import *
 from reporters.models import PersistantBackend, Reporter
 from register.app import App
-from poll.models import Phone
 import poll.app as poll_app
 import register.app as register_app
 import reporters.app as reporter_app
+import internationalization.app as i18n_app
 #model and app tests
 from subtests.models import *
 from subtests.app import *
 
 
 class TestRegisterScript (TestScript):
-    apps = (poll_app.App, register_app.App, reporter_app.App)
+    apps = (poll_app.App, register_app.App, reporter_app.App, i18n_app.App)
 
     def setUp(self):
         TestScript.setUp(self)
 
     test_register_needs_keyword_at_the_start_of_the_message_rapidsms = """
+      03948 > not_keyword poll 100 1001
       03948 > register poll 100 1001
       03948 < Thanks for registering for the survey.
       """
@@ -31,12 +32,15 @@ class TestRegisterScript (TestScript):
     test_incomplete_information_passed_in_the_register_message = """
       1000 > register poll 10001000
       1000 < %(error_msg)s
-      1000 > register
-      1000 < %(error_msg)s
       """ % {"error_msg":error_message}
     
+    test_incomplete_information_passed_in_the_register_message_2 = """
+      1000 > register poll 10001000
+      1000 < %(error_msg)s
+      """ % {"error_msg":error_message}
+
 class TestRegisterArabicScript (TestScript):
-    apps = (poll_app.App, register_app.App, reporter_app.App)
+    apps = (poll_app.App, register_app.App, reporter_app.App, i18n_app.App)
 
     def setUp(self):
         TestScript.setUp(self)
@@ -47,10 +51,8 @@ class TestRegisterArabicScript (TestScript):
     """
     
     arabic_error_message = u"لم نستطيع فهم الرسالة المسجلة, الرجاء إرسال - التسجيل  الدراسة  المحافظة  الحي"
-    # the first case doesn't return anything since it falls through the register app
     test_incomplete_information_passed_in_the_register_message_arabic = u"""
-        1000 > regحتister
-        1000 > register ومساحتها
+        1000 > تسجيل التصويت 1شش شس 00 001
         1000 < %(error_msg)s
     """ % {"error_msg":arabic_error_message}
 
