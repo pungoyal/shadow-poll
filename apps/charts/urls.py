@@ -5,7 +5,8 @@ urlpatterns = patterns('charts',
                        (r'^charts/$', 'views.show_results'),
                        (r'^get_kml/$', 'views.get_governorates'),
                        (r'^charts/(\d{1,2})$', 'views.show_governorate'),
-                       (r'^charts/(\d{1,2})/(\d{1,2})$', 'views.show_district')
+                       (r'^charts/(\d{1,2})/(\d{1,2})$', 'views.show_district'),
+                       (r'^graphs', 'views.show_graphs'),
                        )
 
 handler404 = 'charts.views.view_404'
