@@ -22,15 +22,15 @@ class TestTranslator(TestCase):
     def test_understand_and_translate(self):
         t = Translator()
         translated_text = t.understand_and_translate_if_required(u"التصويت تسجيل")
-        self.assertEquals(translated_text, "register poll")
+        self.assertEquals(translated_text, "poll register")
         translated_text = t.understand_and_translate_if_required(u"٥ ١٠ التصويت تسجيل")
-        self.assertEquals(translated_text, "register poll 10 5")
+        self.assertEquals(translated_text, "5 10 poll register")
 
     def test_translate_from_arabic_to_english(self):
         t = Translator()
         self.assertEquals(t.translate(u"تسجيل"), u"register")
-        self.assertEquals(t.translate(u"poll تسجيل"), u"register poll")
-        self.assertEquals(t.translate(u"التصويت تسجيل"), u"register poll")
+        self.assertEquals(t.translate(u"poll تسجيل"), u"poll register")
+        self.assertEquals(t.translate(u"التصويت تسجيل"), u"poll register")
 
     def test_translate_numbers(self):
         t = Translator()
@@ -40,7 +40,7 @@ class TestTranslator(TestCase):
         
     def test_reverse_input_string_on_translation(self):
         t = Translator()
-        self.assertEquals(t.translate(u"register poll"), "poll register")
+        self.assertEquals(t.translate(u"register poll"), "register poll")
 
     def test_if_a_string_is_numbers(self):
         t = Translator()
