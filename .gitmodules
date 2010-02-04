@@ -1,3 +1,0 @@
-[submodule "contrib/screw-unit"]
-	path = contrib/screw-unit
-	url = git://github.com/nkallen/screw-unit.git
