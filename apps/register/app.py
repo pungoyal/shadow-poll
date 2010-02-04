@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import rapidsms
+from rapidsms.webui import settings
 from rapidsms.i18n import ugettext_from_locale as _t
 from models import *
 
@@ -13,16 +14,19 @@ class App (rapidsms.app.App):
         pass
 
     def handle (self, message):
-        if message.text.lower().startswith("register") or message.text.lower().startswith(u'تسجيل'):
+        if message.text.lower().startswith("register"):
+            r = Registration()
+            if not hasattr(message, 'language'):
+                # fail gracefully
+                message.language = settings.LANGUAGE_CODE
             try:
-                r = Registration()
                 r.parse(message)
-                message.respond(_t("Thanks for registering.", message.persistant_connection.language ))
+                response = "Thanks for registering."
             except Exception, e:
-                message.respond(_t("Register not understood.", message.persistant_connection.language ))
-            finally:
-                return True
-
+                response = "Register not understood."
+            message.respond(_t(response, message.language ))
+            return True
+    
     def cleanup (self, message):
         """Perform any clean up after all handlers have run in the
            cleanup phase."""

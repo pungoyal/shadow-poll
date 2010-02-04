@@ -3,17 +3,11 @@ import rapidsms
 from models import *
 from register.models import *
 from datetime import datetime
-from poll.models import Phone, Question
+from poll.models import Question
 
 class App (rapidsms.app.App):
     def parse(self, message):
-        """ same as in the reporter app
-        
-        TODO - move this into apps/sharedphone
-        """
-        phone = Phone.from_message(message)
-        message.persistant_connection = phone
-        phone.seen()
+        pass
         
     def handle (self, message):
         phone_number = message.connection.identity

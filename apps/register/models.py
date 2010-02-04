@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from datetime import datetime
 from django.db import models
-from apps.poll.models import Phone
+from apps.reporters.models import PersistantConnection
 from rapidsms.webui import settings
 
 class Governorate(models.Model):
@@ -17,7 +17,7 @@ class Registration(models.Model):
     public_identifier = models.CharField(max_length=10)
     governorate = models.IntegerField()
     district = models.IntegerField()
-    phone = models.ForeignKey(Phone)
+    phone = models.ForeignKey(PersistantConnection)
     date = models.DateTimeField(default=datetime.now)
     
     def parse(self, message):

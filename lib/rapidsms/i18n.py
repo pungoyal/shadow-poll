@@ -43,6 +43,8 @@ def ugettext_from_locale(text, locale=_sms_default):
     # to new hotness 3-letter codes 'eng'
     global _sms_translations, _sms_default
     translator = _sms_translations[_sms_default].translator
+    if locale is None:
+        locale = _sms_default
     if locale in _sms_translations:
         translator = _sms_translations[locale].translator
     return translator.ugettext(text)
