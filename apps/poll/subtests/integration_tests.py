@@ -5,11 +5,12 @@ from poll.app import App
 from reporters.app import App as reporter_app
 from default.app import App as default_app
 from register.app import App as register_app
+from internationalization.app import App as i18n_app
 
 class TestIntegration(TestScript):
     """ Test our various SMS apps all together now """
     fixtures = ['poll_responses.json']
-    apps = (App, reporter_app, register_app, default_app)
+    apps = (App, reporter_app, register_app, default_app, i18n_app)
 
     testCorrectResponse = """
       100 > poll
