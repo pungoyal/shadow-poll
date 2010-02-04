@@ -200,7 +200,7 @@ class Session(models.Model):
     num_tries = models.PositiveIntegerField()
     # this flag stores the difference between completed
     # on its own, or manually canceled.
-    canceled = models.BooleanField(blank=True, null=True) 
+    canceled = models.NullBooleanField(blank=True, null=True) 
      
     def __unicode__(self):
         if self.state:
