@@ -14,10 +14,10 @@ def index(req):
     return render_to_response(req, template_name, {
     })
 
-def proxy(req, message):
-    pos = message.find("/")
-    number = message[:pos]
-    text_msg = message[pos+1:]
+def proxy(req, number, message):
+    print "******proxy**********"
+    print message
+    print number
     # build the url to the http server running
     # in ajax.app.App via conf hackery
     conf = settings.RAPIDSMS_APPS["httptester"]
