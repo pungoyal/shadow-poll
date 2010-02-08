@@ -14,7 +14,10 @@ def index(req):
     return render_to_response(req, template_name, {
     })
 
-def proxy(req, number, message):
+def proxy(req, message):
+    pos = message.find("/")
+    number = message[:pos]
+    text_msg = message[pos+1:]
     # build the url to the http server running
     # in ajax.app.App via conf hackery
     conf = settings.RAPIDSMS_APPS["httptester"]
@@ -27,6 +30,6 @@ def proxy(req, number, message):
         # in Python 3000. We get 'quote' to work by encoding the string and
         # allowing it to be interpreted as ascii bytes (this still works 
         # for non-unicode strings)
-        urllib2.quote(message))
+        urllib2.quote(text_msg))
     f = urllib2.urlopen(url)
     return HttpResponse(f.read())

@@ -9,3 +9,5 @@
 rapidsms.ini
 *.log
 .settings/
+.idea
+.idea/*

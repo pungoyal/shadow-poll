@@ -1,5 +1,6 @@
 # RapidSMS configuration file.
 
+
 # -- RAPIDSMS
 #
 # The main configuration of the RapidSMS server. It contains a list of
@@ -99,7 +100,10 @@ port=8081
 # cache_backend=dummy:///
 
 login_redirect_url=/
-
+time_zone=Asia/Kolkata
+postgis_sql_path=/usr/share/postgresql/8.4/contrib/
+test_runner=django.contrib.gis.tests.run_tests
+postgis_template=template_postgis
 [i18n]
 # Settings for RapidSMS Internationalization
 #

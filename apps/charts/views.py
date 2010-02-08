@@ -24,6 +24,10 @@ def show_governorate(request, governorate_id):
 def show_results(request, template="map.html"):
     return render_to_response(request, template)
 
+
+def show_graphs(request, template="graphs.html"):
+	return render_to_response(request, template)
+
 def view_404(request):
     response = HttpResponseNotFound()
     response.write("The path is not found")
