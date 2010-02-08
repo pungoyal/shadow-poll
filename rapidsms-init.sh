@@ -39,6 +39,8 @@ ROUTER_PID_FILE=/var/run/${NAME}_router.pid
 #WEBSERVER_PID_FILE=/var/run/${NAME}_webs.pid
 WEBSERVER_PORT=8801
 WEBSERVER_IP=127.0.0.1
+OUT_LOG=/var/log/shadowpoll/shadow_poll_out
+ERR_LOG=/var/log/shadowpoll/shadow_poll_err
 ############### END EDIT ME ##################
 test -x $DAEMON || exit 0
  
@@ -48,7 +50,7 @@ do_start() {
     echo "Router Started"
     sleep 2
     echo -n "Starting webserver for $NAME... "
-    start-stop-daemon -d $APP_PATH -c $RUN_AS --start --background --exec $DAEMON -- runfcgi -v 2 host=$WEBSERVER_IP port=$WEBSERVER_PORT
+    start-stop-daemon -d $APP_PATH -c $RUN_AS --start --background --exec $DAEMON -- runfcgi -v 2 host=$WEBSERVER_IP port=$WEBSERVER_PORT outlog=$OUT_LOG errlog=$ERR_LOG
     echo "Webserver Started"
 }
  

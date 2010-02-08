@@ -15,6 +15,9 @@ def index(req):
     })
 
 def proxy(req, number, message):
+    print "******proxy**********"
+    print message
+    print number
     # build the url to the http server running
     # in ajax.app.App via conf hackery
     conf = settings.RAPIDSMS_APPS["httptester"]
