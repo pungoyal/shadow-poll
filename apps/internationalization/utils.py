@@ -15,16 +15,15 @@ def is_english(string):
     except Exception, e:
         return False
 
-def get_language_code(connection):
-    """ TODO - fix this function depending on whether we look at 
-    connection.reporter.language, connection.language, or something else...
+def get_language_from_connection(connection):
+    """ customize this function depending on the 
+    default i18n behaviour your app expects
     """
     if connection.reporter:
         if connection.reporter.language:
             return connection.reporter.language
     return DEFAULT_LANGUAGE 
 
-"""
 def get_language_from_code(language_code):
     languages = Language.objects.all()
     for language in languages:
@@ -37,11 +36,9 @@ def get_language_from_code(language_code):
 
 def get_translation(string, language_code):
     try:
-        language = get_language_from_code(language_code)
-        if language:
-            return Translation.objects.get(language=language, original=string).translation
+        return Translation.objects.get(language=language_code, original=string).translation
     except Translation.DoesNotExist:
         # hopefully the default passed in string will work
         pass
     return string
-"""
+

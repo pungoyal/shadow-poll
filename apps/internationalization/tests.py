@@ -67,17 +67,20 @@ class TestTranslator(TestCase):
 class TestDictionaryEntry(TestCase):
     fixtures = ['dictionary']
     def test_get_meaning(self):
-        dictionary = DictionaryEntry.load_dictionary()
+        dictionary = Translation.load_dictionary()
         self.assertEquals(dictionary["register"], "register")
         
     def test_to_string(self):
-        d = DictionaryEntry()
-        d.text = "text"
-        d.meaning = "meaning"
-        self.assertEquals(str(d), "text -> meaning")
+        c = Language()
+        c.code = 'en'
+        d = Translation()
+        d.code = "text"
+        d.translation = "meaning"
+        d.language = c
+        self.assertEquals(str(d), "text -> meaning (en)")
         
     def test_load_dictionary(self):
-        d = DictionaryEntry.load_dictionary()
+        d = Translation.load_dictionary()
         self.assertEquals(d["register"], "register")
 
 class TestInferArabic(TestScript):

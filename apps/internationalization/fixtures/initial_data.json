@@ -1,218 +1,261 @@
 [
     {
         "pk": 1, 
-        "model": "internationalization.dictionaryentry", 
+        "model": "internationalization.language", 
         "fields": {
-            "text": "register", 
-            "meaning": "register"
+            "code": "en", 
+            "name": "English"
         }
     }, 
     {
         "pk": 2, 
-        "model": "internationalization.dictionaryentry", 
+        "model": "internationalization.language", 
         "fields": {
-            "text": "poll", 
-            "meaning": "poll"
+            "code": "ar", 
+            "name": "Arabic"
+        }
+    }, 
+    {
+        "pk": 1, 
+        "model": "internationalization.translation", 
+        "fields": {
+            "language": 2, 
+            "translation": "register", 
+            "code": "register"
+        }
+    }, 
+    {
+        "pk": 2, 
+        "model": "internationalization.translation", 
+        "fields": {
+            "language": 2, 
+            "translation": "poll", 
+            "code": "poll"
         }
     }, 
     {
         "pk": 3, 
-        "model": "internationalization.dictionaryentry", 
+        "model": "internationalization.translation", 
         "fields": {
-            "text": "reg", 
-            "meaning": "register"
+            "language": 2, 
+            "translation": "reg", 
+            "code": "register"
         }
     }, 
     {
         "pk": 4, 
-        "model": "internationalization.dictionaryentry", 
+        "model": "internationalization.translation", 
         "fields": {
-            "text": "female", 
-            "meaning": "f"
+            "language": 2, 
+            "translation": "female", 
+            "code": "f"
         }
     }, 
     {
         "pk": 5, 
-        "model": "internationalization.dictionaryentry", 
+        "model": "internationalization.translation", 
         "fields": {
-            "text": "fem", 
-            "meaning": "f"
+            "language": 2, 
+            "translation": "fem", 
+            "code": "f"
         }
     },
     {
         "pk": 6, 
-        "model": "internationalization.dictionaryentry", 
+        "model": "internationalization.translation", 
         "fields": {
-            "text": "تسجيل", 
-            "meaning": "register"
+            "language": 2, 
+            "translation": "تسجيل", 
+            "code": "register"
         }
     },
     {
         "pk": 7, 
-        "model": "internationalization.dictionaryentry", 
+        "model": "internationalization.translation", 
         "fields": {
-            "text": "التصويت", 
-            "meaning": "poll"
+            "language": 2, 
+            "translation": "التصويت", 
+            "code": "poll"
         }
     },
     {
         "pk": 8, 
-        "model": "internationalization.dictionaryentry", 
+        "model": "internationalization.translation", 
         "fields": {
-            "text": "٠", 
-            "meaning": "0"
+            "language": 2, 
+            "translation": "٠", 
+            "code": "0"
         }
     },
     {
         "pk": 9, 
-        "model": "internationalization.dictionaryentry", 
+        "model": "internationalization.translation", 
         "fields": {
-            "text": "١", 
-            "meaning": "1"
+            "language": 2, 
+            "translation": "١", 
+            "code": "1"
         }
     },
     {
         "pk": 10, 
-        "model": "internationalization.dictionaryentry", 
+        "model": "internationalization.translation", 
         "fields": {
-            "text": "٢", 
-            "meaning": "2"
+            "language": 2, 
+            "translation": "٢", 
+            "code": "2"
         }
     },
     {
         "pk": 11, 
-        "model": "internationalization.dictionaryentry", 
+        "model": "internationalization.translation", 
         "fields": {
-            "text": "٣", 
-            "meaning": "3"
+            "language": 2, 
+            "translation": "٣", 
+            "code": "3"
         }
     },
     {
         "pk": 12, 
-        "model": "internationalization.dictionaryentry", 
+        "model": "internationalization.translation", 
         "fields": {
-            "text": "٤", 
-            "meaning": "4"
+            "language": 2, 
+            "translation": "٤", 
+            "code": "4"
         }
     },
     {
         "pk": 13, 
-        "model": "internationalization.dictionaryentry", 
+        "model": "internationalization.translation", 
         "fields": {
-            "text": "٥", 
-            "meaning": "5"
+            "language": 2, 
+            "translation": "٥", 
+            "code": "5"
         }
     },
     {
         "pk": 14, 
-        "model": "internationalization.dictionaryentry", 
+        "model": "internationalization.translation", 
         "fields": {
-            "text": "٦", 
-            "meaning": "6"
+            "language": 2, 
+            "translation": "٦", 
+            "code": "6"
         }
     },
     {
         "pk": 15, 
-        "model": "internationalization.dictionaryentry", 
+        "model": "internationalization.translation", 
         "fields": {
-            "text": "٧", 
-            "meaning": "7"
+            "language": 2, 
+            "translation": "٧", 
+            "code": "7"
         }
     },
     {
         "pk": 16, 
-        "model": "internationalization.dictionaryentry", 
+        "model": "internationalization.translation", 
         "fields": {
-            "text": "٨", 
-            "meaning": "8"
+            "language": 2, 
+            "translation": "٨", 
+            "code": "8"
         }
     },
     {
         "pk": 17, 
-        "model": "internationalization.dictionaryentry", 
+        "model": "internationalization.translation", 
         "fields": {
-            "text": "٩", 
-            "meaning": "9"
+            "language": 2, 
+            "translation": "٩", 
+            "code": "9"
         }
     },
     {
         "pk": 18, 
-        "model": "internationalization.dictionaryentry", 
+        "model": "internationalization.translation", 
         "fields": {
-            "text": "0", 
-            "meaning": "0"
+            "language": 2, 
+            "translation": "0", 
+            "code": "0"
         }
     },
     {
         "pk": 19, 
-        "model": "internationalization.dictionaryentry", 
+        "model": "internationalization.translation", 
         "fields": {
-            "text": "1", 
-            "meaning": "1"
+            "language": 2, 
+            "translation": "1", 
+            "code": "1"
         }
     },
     {
         "pk": 20, 
-        "model": "internationalization.dictionaryentry", 
+        "model": "internationalization.translation", 
         "fields": {
-            "text": "2", 
-            "meaning": "2"
+            "language": 2, 
+            "translation": "2", 
+            "code": "2"
         }
     },
     {
         "pk": 21, 
-        "model": "internationalization.dictionaryentry", 
+        "model": "internationalization.translation", 
         "fields": {
-            "text": "3", 
-            "meaning": "3"
+            "language": 2, 
+            "translation": "3", 
+            "code": "3"
         }
     },
     {
         "pk": 22, 
-        "model": "internationalization.dictionaryentry", 
+        "model": "internationalization.translation", 
         "fields": {
-            "text": "4", 
-            "meaning": "4"
+            "language": 2, 
+            "translation": "4", 
+            "code": "4"
         }
     },
     {
         "pk": 23, 
-        "model": "internationalization.dictionaryentry", 
+        "model": "internationalization.translation", 
         "fields": {
-            "text": "5", 
-            "meaning": "5"
+            "language": 2, 
+            "translation": "5", 
+            "code": "5"
         }
     },
     {
         "pk": 24, 
-        "model": "internationalization.dictionaryentry", 
+        "model": "internationalization.translation", 
         "fields": {
-            "text": "6", 
-            "meaning": "6"
+            "language": 2, 
+            "translation": "6", 
+            "code": "6"
         }
     },
     {
         "pk": 25, 
-        "model": "internationalization.dictionaryentry", 
+        "model": "internationalization.translation", 
         "fields": {
-            "text": "7", 
-            "meaning": "7"
+            "language": 2, 
+            "translation": "7", 
+            "code": "7"
         }
     },
     {
         "pk": 26, 
-        "model": "internationalization.dictionaryentry", 
+        "model": "internationalization.translation", 
         "fields": {
-            "text": "8", 
-            "meaning": "8"
+            "language": 2, 
+            "translation": "8", 
+            "code": "8"
         }
     },
     {
         "pk": 27, 
-        "model": "internationalization.dictionaryentry", 
+        "model": "internationalization.translation", 
         "fields": {
-            "text": "9", 
-            "meaning": "9"
+            "language": 2, 
+            "translation": "9", 
+            "code": "9"
         }
     }
 ]
