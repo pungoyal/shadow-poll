@@ -76,7 +76,7 @@ class TestDictionaryEntry(TestCase):
         d.code = "text"
         d.translation = "meaning"
         d.language = c
-        self.assertEquals(str(d), "text -> meaning (en)")
+        self.assertEquals(str(d), "meaning -> text (en)")
         
     def test_load_dictionary(self):
         d = Translation.load_dictionary()
