@@ -6,6 +6,14 @@ from internationalization.models import Language, Translation
 
 DEFAULT_LANGUAGE = "en"
 
+def get_language_from_message(message):
+    """ customize this function depending on the 
+    default i18n behaviour your app expects
+    """
+    if hasattr(message,'language'):
+        return message.language
+    return get_language_from_connection(message.persistant_connection)
+
 def get_language_from_connection(connection):
     """ customize this function depending on the 
     default i18n behaviour your app expects
