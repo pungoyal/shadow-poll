@@ -6,16 +6,6 @@ from internationalization.models import Language, Translation
 
 DEFAULT_LANGUAGE = "en"
 
-def is_english(string):
-    string = string.strip()
-    if not string:
-        raise ValueError("Cannot infer language from empty string")
-    try:
-        string.encode('ascii')
-        return True
-    except Exception, e:
-        return False
-
 def get_language_from_connection(connection):
     """ customize this function depending on the 
     default i18n behaviour your app expects

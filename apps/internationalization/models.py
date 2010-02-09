@@ -39,7 +39,7 @@ class Translator(models.Model):
         self.arabic = False
         parts = text.split(" ")
         for part in parts:
-            if not is_english(part):
+            if not self.is_english(part):
                 t = Translator()
                 translated = t.translate(text)
                 return translated
@@ -72,3 +72,14 @@ class Translator(models.Model):
         except KeyError:
             # fall back to English -s TODO: fix unit tests and remove 'return False' above
             return text
+
+    def is_english(self, string):
+        string = string.strip()
+        if not string:
+            raise ValueError("Cannot infer language from empty string")
+        try:
+            string.encode('ascii')
+            return True
+        except Exception, e:
+            return False
+    

@@ -3,7 +3,6 @@ from django.test import TestCase
 from rapidsms.tests.scripted import TestScript
 
 from app import App
-from utils import is_english
 from models import *
 
 
@@ -85,18 +84,21 @@ class TestDictionaryEntry(TestCase):
 
 class TestInferArabic(TestScript):
     apps = (App,)
+    
+    def setUp(self):
+        self.translator = Translator()
 
     def test_arabic_is_not_english(self):
         arabic_string = u"""تسجيل التصويت 100 1001"""
-        self.assertFalse(is_english(arabic_string))
+        self.assertFalse(self.translator.is_english(arabic_string))
         
     def test_english_is_english(self):
         english_string = u"""sfdsadfsafan3242498277asdkjfndsaf"""
-        self.assertTrue(is_english(english_string))
+        self.assertTrue(self.translator.is_english(english_string))
         
     def test_mixed_is_not_english(self):
         mixed_string = u"""sfdsadfsafالتصويتan3242498277asdkjfndsaf"""
-        self.assertFalse(is_english(mixed_string))
+        self.assertFalse(self.translator.is_english(mixed_string))
     
 #    TODO - put arabic numbers here
 #    def test_arabic_numbers_is_not_english(self):
@@ -105,4 +107,7 @@ class TestInferArabic(TestScript):
         
     def test_empty_string_should_raise_exception(self):
         empty_string = u""
-        self.assertRaises(ValueError, is_english, empty_string)
+        self.assertRaises(ValueError, self.translator.is_english, empty_string)
+        
+    def tearDown(self):
+        pass
