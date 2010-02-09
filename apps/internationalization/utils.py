@@ -2,6 +2,7 @@
 # vim: ai ts=4 sts=4 et sw=4
 
 import re
+from internationalization.models import Language, Translation
 
 DEFAULT_LANGUAGE = "en"
 
@@ -36,9 +37,14 @@ def get_language_from_code(language_code):
 
 def get_translation(string, language_code):
     try:
-        return Translation.objects.get(language=language_code, original=string).translation
-    except Translation.DoesNotExist:
-        # hopefully the default passed in string will work
+        language = Language.objects.get(code=language_code)
+    except Language.DoesNotExist:
         pass
+    else:
+        try:
+            return Translation.objects.get(language=language, code=string).translation
+        except Translation.DoesNotExist:
+            # hopefully the default passed in string will work
+            pass
     return string
 

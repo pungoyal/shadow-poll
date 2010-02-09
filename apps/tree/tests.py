@@ -1,12 +1,13 @@
 from rapidsms.tests.scripted import TestScript
-import apps.tree.app as tree_app
+from app import App
 import reporters.app as reporters_app
+import internationalization.app as i18n_app
 
-from apps.tree.models import *
+from models import *
 from reporters.models import Reporter, PersistantConnection, PersistantBackend
     
 class TestApp (TestScript):
-    apps = (tree_app.App, reporters_app.App )
+    apps = (App, reporters_app.App)
     # the test_backend script does the loading of the dummy backend that allows reporters
     # to work properly in tests
     fixtures = ['test_backend', 'test_tree']
@@ -40,13 +41,8 @@ class TestApp (TestScript):
            8005551213 < Thanks for entering.
          """
          
-    def fails_testLocalization(self):
-        '''Tests very basic localization of trees
-        
-        TODO - fix this once we get i18n for tree app working again
-        using the new rapidsms i18n
-        
-        '''
+    def testLocalization(self):
+        '''Tests very basic localization of trees'''
         reporter = self._register('0004', 'en', "loc_en")
         script = """
               loc_en > test

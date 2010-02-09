@@ -1,5 +1,4 @@
 from django.db import models
-from utils import *
 
 # some really bare bones models for localization
 class Language(models.Model):
