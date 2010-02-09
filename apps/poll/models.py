@@ -25,7 +25,7 @@ class PollResponse(models.Model):
     age = models.IntegerField()
     name = models.CharField(max_length=100)
     gender = models.CharField(max_length=1, choices=GENDER)
-    mobile_number = models.IntegerField()
+    mobile_number = models.CharField(max_length=20)
     location = models.CharField(max_length = 10)
     latitude = models.DecimalField(max_digits=8, decimal_places=6, null = True)
     longitude = models.DecimalField(max_digits=8, decimal_places=6, null = True)
