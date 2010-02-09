@@ -12,8 +12,6 @@ import register.app as register_app
 import reporters.app as reporter_app
 import internationalization.app as i18n_app
 
-
-
 class TestRegisterScript (TestScript):
     apps = (poll_app.App, register_app.App, reporter_app.App, i18n_app.App)
 
