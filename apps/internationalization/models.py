@@ -9,7 +9,8 @@ class Language(models.Model):
         return "%s (%s)" % (self.code, self.name)
 
 class Translation(models.Model):
-    language = models.ForeignKey(Language)
+    # not all translations are associated with a language. for example, numbers...
+    language = models.ForeignKey(Language, null=True, blank=True)
     # The actual original (probably english) string will be 
     # used as the key into the other languages.  This is 
     # similar to the python/django _() i18n support.  
@@ -20,7 +21,7 @@ class Translation(models.Model):
         db_table = 'Dictionary'
     
     def __unicode__(self):
-        return "%s -> %s (%s)" % (self.code, self.translation, self.language.code)
+        return "%s -> %s (%s)" % (self.translation, self.code, self.language.code)
     
     @staticmethod
     def load_dictionary():
