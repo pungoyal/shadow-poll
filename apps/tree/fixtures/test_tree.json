@@ -45,14 +45,16 @@
     "pk": 1, 
     "model": "tree.question", 
     "fields": {
-      "text": "hello"
+      "text": "hello",
+	  "error_response": "err1"
     }
   }, 
   {
     "pk": 2, 
     "model": "tree.question", 
     "fields": {
-      "text": "Please enter your 4-digit PIN"
+      "text": "Please enter your 4-digit PIN",
+	  "error_response": "err2"
     }
   }, 
   {
@@ -84,7 +86,6 @@
     "fields": {
       "answer": "^(\\d{4})$", 
       "type": "R", 
-      "name": "pin formatting", 
       "description": "a 4-digit decimal number"
     }
   }, 
