@@ -248,5 +248,158 @@
             "current_state": 3, 
             "next_state": null
         }
-    } 
+    },
+    {
+        "pk": 100, 
+        "model": "internationalization.translation", 
+        "fields": {
+            "translation": "\u062afood", 
+            "code": "food", 
+            "language": 2
+        }
+    },
+    {
+        "pk": 101, 
+        "model": "internationalization.translation", 
+        "fields": {
+            "translation": "\u062aWhat is your favourite fruit?", 
+            "code": "What is your favourite fruit?", 
+            "language": 2
+        }
+    }, 
+    {
+        "pk": 102, 
+        "model": "internationalization.translation", 
+        "fields": {
+            "translation": "\u062aThank you for sharing your dietary preferences.", 
+            "code": "Thank you for sharing your dietary preferences.", 
+            "language": 2
+        }
+    }, 
+    {
+        "pk": 103, 
+        "model": "internationalization.translation", 
+        "fields": {
+            "translation": "\u062aOf these vegetables, which is your favourite? Carrot, Tomato, Lettuce, Spinach", 
+            "code": "Of these vegetables, which is your favourite? Carrot, Tomato, Lettuce, Spinach", 
+            "language": 2
+        }
+    }, 
+    {
+        "pk": 104, 
+        "model": "internationalization.translation", 
+        "fields": {
+            "translation": "\u062aPlease specify one of: Carrot, Tomato, Lettuce, Spinach", 
+            "code": "Please specify one of: Carrot, Tomato, Lettuce, Spinach", 
+            "language": 2
+        }
+    }, 
+    {
+        "pk": 105, 
+        "model": "internationalization.translation", 
+        "fields": {
+            "translation": "\u062aWhat is your favourite drink? Please specify one of: lime, kiwi, ginger.", 
+            "code": "What is your favourite drink? Please specify one of: lime, kiwi, ginger.", 
+            "language": 2
+        }
+    }, 
+    {
+        "pk": 106, 
+        "model": "internationalization.translation", 
+        "fields": {
+            "translation": "\u062aThat is not a drink. Please specify one of: lime, kiwi, ginger.", 
+            "code": "That is not a drink. Please specify one of: lime, kiwi, ginger.", 
+            "language": 2
+        }
+    },
+    {
+        "pk": 107, 
+        "model": "internationalization.translation", 
+        "fields": {
+            "translation": "\u062aginger", 
+            "code": "ginger", 
+            "language": 2
+        }
+    }, 
+    {
+        "pk": 108, 
+        "model": "internationalization.translation", 
+        "fields": {
+            "translation": "\u062aspinach", 
+            "code": "spinach", 
+            "language": 2
+        }
+    }, 
+    {
+        "pk": 109, 
+        "model": "internationalization.translation", 
+        "fields": {
+            "translation": "\u062alettuce", 
+            "code": "lettuce", 
+            "language": 2
+        }
+    }, 
+    {
+        "pk": 110, 
+        "model": "internationalization.translation", 
+        "fields": {
+            "translation": "\u062apear", 
+            "code": "pear", 
+            "language": 2
+        }
+    }, 
+    {
+        "pk": 111, 
+        "model": "internationalization.translation", 
+        "fields": {
+            "translation": "\u062akiwi", 
+            "code": "kiwi", 
+            "language": 2
+        }
+    }, 
+    {
+        "pk": 112, 
+        "model": "internationalization.translation", 
+        "fields": {
+            "translation": "\u062alime", 
+            "code": "lime", 
+            "language": 2
+        }
+    }, 
+    {
+        "pk": 113, 
+        "model": "internationalization.translation", 
+        "fields": {
+            "translation": "\u062atomato", 
+            "code": "tomato", 
+            "language": 2
+        }
+    }, 
+    {
+        "pk": 114, 
+        "model": "internationalization.translation", 
+        "fields": {
+            "translation": "\u062acarrot", 
+            "code": "carrot", 
+            "language": 2
+        }
+    }, 
+    {
+        "pk": 115, 
+        "model": "internationalization.translation", 
+        "fields": {
+            "translation": "\u062amango", 
+            "code": "mango", 
+            "language": 2
+        }
+    }, 
+    {
+        "pk": 116, 
+        "model": "internationalization.translation", 
+        "fields": {
+            "translation": "\u062aapple", 
+            "code": "apple", 
+            "language": 2
+        }
+    }
 ]

@@ -1,34 +1,46 @@
 from django.db import models
-from utils import *
 
-class DictionaryEntry(models.Model):
-    text = models.CharField(null=False, max_length=100)
-    meaning = models.CharField(null=False,max_length=100)
+# some really bare bones models for localization
+class Language(models.Model):
+    code = models.CharField(max_length = 16) # e.g. "en" or "en-us" or "eng"
+    name = models.CharField(max_length = 64) # e.g. "English"
+
+    def __unicode__(self):
+        return "%s (%s)" % (self.code, self.name)
+
+class Translation(models.Model):
+    # not all translations are associated with a language. for example, numbers...
+    language = models.ForeignKey(Language, null=True, blank=True)
+    # The actual original (probably english) string will be 
+    # used as the key into the other languages.  This is 
+    # similar to the python/django _() i18n support.  
+    translation = models.CharField(max_length=100)
+    code = models.CharField(max_length=100)
         
     class Meta:
         db_table = 'Dictionary'
     
     def __unicode__(self):
-        return "%s -> %s" % (self.text, self.meaning)
+        return "%s -> %s (%s)" % (self.translation, self.code, self.language.code)
     
     @staticmethod
     def load_dictionary():
-        dictionary_entries = DictionaryEntry.objects.all()
+        dictionary_entries = Translation.objects.all()
         dictionary = {}
         
         for entry in dictionary_entries:
-            dictionary[entry.text] = entry.meaning
+            dictionary[entry.translation] = entry.code
         return dictionary
         
 class Translator(models.Model):
     def __init__(self):
-        self.dictionary = DictionaryEntry.load_dictionary()
+        self.dictionary = Translation.load_dictionary()
 
     def understand_and_translate_if_required(self, text):
         self.arabic = False
         parts = text.split(" ")
         for part in parts:
-            if not is_english(part):
+            if not self.is_english(part):
                 t = Translator()
                 translated = t.translate(text)
                 return translated
@@ -61,3 +73,14 @@ class Translator(models.Model):
         except KeyError:
             # fall back to English -s TODO: fix unit tests and remove 'return False' above
             return text
+
+    def is_english(self, string):
+        string = string.strip()
+        if not string:
+            raise ValueError("Cannot infer language from empty string")
+        try:
+            string.encode('ascii')
+            return True
+        except Exception, e:
+            return False
+    

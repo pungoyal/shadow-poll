@@ -92,13 +92,13 @@ class Answer(models.Model):
         ('R', 'Regular Expression'),
         ('C', 'Custom logic'),
     )
-    name = models.CharField(max_length=30)
+    code = models.CharField(max_length=5)
     type = models.CharField(max_length=1, choices=ANSWER_TYPES)
     answer = models.CharField(max_length=160)
     description = models.CharField(max_length=100, null=True)
     
     def __unicode__(self):
-        return self.name
+        return self.answer
         #return "%s %s (%s)" % (self.helper_text(), self.type)
     
     def helper_text(self):

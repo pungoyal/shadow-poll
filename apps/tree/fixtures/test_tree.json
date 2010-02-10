@@ -1,40 +1,60 @@
 [
- {
+  {
     "pk": 1, 
-    "model": "patterns.pattern", 
+    "model": "internationalization.language", 
     "fields": {
-      "regex": "(en[a-z]*)", 
-      "name": "english"
+      "code": "en",
+      "name": "English"
     }
   }, 
   {
     "pk": 2, 
-    "model": "patterns.pattern", 
+    "model": "internationalization.language", 
     "fields": {
-      "regex": "(sp[a-z]*)", 
-      "name": "spanish"
+      "code": "sp", 
+      "name": "Spanish"
     }
   }, 
   {
     "pk": 3, 
-    "model": "patterns.pattern", 
+    "model": "internationalization.language", 
     "fields": {
-      "regex": "(fr[a-z]*)", 
-      "name": "french"
+      "code": "fr", 
+      "name": "French"
+    }
+  }, 
+  {
+    "pk": 1, 
+    "model": "internationalization.translation", 
+    "fields": {
+      "translation": "ola", 
+      "code": "hello", 
+      "language": 2
+    }
+  }, 
+  {
+    "pk": 2, 
+    "model": "internationalization.translation", 
+    "fields": {
+      "translation": "bon jour", 
+      "code": "hello", 
+      "language": 3
     }
   }, 
   {
     "pk": 1, 
     "model": "tree.question", 
     "fields": {
-      "text": "hello"
+      "text": "hello",
+	  "error_response": "err1"
     }
   }, 
   {
     "pk": 2, 
     "model": "tree.question", 
     "fields": {
-      "text": "Please enter your 4-digit PIN"
+      "text": "Please enter your 4-digit PIN",
+	  "error_response": "err2"
     }
   }, 
   {
@@ -66,7 +86,6 @@
     "fields": {
       "answer": "^(\\d{4})$", 
       "type": "R", 
-      "name": "pin formatting", 
       "description": "a 4-digit decimal number"
     }
   }, 

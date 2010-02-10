@@ -14,5 +14,5 @@ class App(rapidsms.app.App):
         if not msg.responses:
             
             # TODO: i18n from the reporters app
-            msg.respond("We didn't understand your response. Please re-send as - choice age gender", StatusCodes.GENERIC_ERROR)
+            msg.respond("We didn't understand your response.", StatusCodes.GENERIC_ERROR)
             return True

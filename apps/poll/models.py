@@ -3,7 +3,6 @@
 from django.db import models
 from register.models import *
 from reporters.models import PersistantConnection, PersistantBackend
-from internationalization.utils import is_english
 
 GENDER = ( ('M', 'Male'), ('F', 'Female') )
 

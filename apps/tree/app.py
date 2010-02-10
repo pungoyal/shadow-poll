@@ -4,8 +4,9 @@
 import rapidsms
 from models import *
 from reporters.models import Reporter
-from rapidsms.i18n import ugettext_from_locale as _t
-from internationalization.utils import get_language_code
+from internationalization.utils import get_translation as _
+#from internationalization.utils import get_language_from_connection as lang
+from internationalization.utils import get_language_from_message as lang
 
 class App(rapidsms.app.App):
     
@@ -80,14 +81,14 @@ class App(rapidsms.app.App):
                 else:
                     # send them some hints about how to respond
                     if state.question.error_response:
-                        response = (_t(state.question.error_response, get_language_code(session.connection)))
+                        response = (_(state.question.error_response, lang(msg)))
                         if "%(answer)s" in response:
                             response = response % ({"answer" : msg.text})
                     else:
                         flat_answers = " or ".join([trans.answer.helper_text() for trans in transitions])
-                        translated_answers = _t(flat_answers, get_language_code(session.connection))
-                        response = _t('"%(answer)s" is not a valid answer. You must enter %(hint)s', 
-                                     get_language_code(session.connection))% ({"answer" : msg.text, "hint": translated_answers})
+                        translated_answers = _(flat_answers, lang(msg))
+                        response = _('"%(answer)s" is not a valid answer. You must enter %(hint)s', 
+                                     lang(msg))% ({"answer" : msg.text, "hint": translated_answers})
                          
                     msg.respond(response)
                     
@@ -98,8 +99,8 @@ class App(rapidsms.app.App):
                     session.num_tries = session.num_tries + 1
                     if state.num_retries and session.num_tries >= state.num_retries:
                         session.state = None
-                        msg.respond(_t("Sorry, invalid answer %(retries)s times. Your session will now end. Please try again later.",
-                                      get_language_code(session.connection)) % {"retries": session.num_tries })
+                        msg.respond(_("Sorry, invalid answer %(retries)s times. Your session will now end. Please try again later.",
+                                      lang(msg)) % {"retries": session.num_tries })
                         
                     session.save()
                     return True
@@ -131,7 +132,7 @@ class App(rapidsms.app.App):
             if not session.state:
                 self._end_session(session)
                 if session.tree.completion_text:
-                    msg.respond(_t(session.tree.completion_text, get_language_code(session.connection)))
+                    msg.respond(_(session.tree.completion_text, lang(msg)))
                 
         # if there is a next question ready to ask
         # (and this includes THE FIRST), send it along
@@ -139,8 +140,8 @@ class App(rapidsms.app.App):
         if sessions:
             state = sessions[0].state
             if state.question:
-                msg.respond(_t(state.question.text, get_language_code(sessions[0].connection)))
-                self.info(_t(state.question.text, get_language_code(sessions[0].connection)))
+                msg.respond(_(state.question.text, lang(msg)))
+                self.info(_(state.question.text, lang(msg)))
         
         # if we haven't returned long before now, we're
         # long committed to dealing with this message
@@ -194,12 +195,12 @@ class App(rapidsms.app.App):
         if not answer_value:
             return False
         if answer.type == "A":
-            return answer_value.lower() == answer.answer.lower()
+            return answer_value.lower() == answer.code.lower()
         elif answer.type == "R":
-            return re.match(answer.answer, answer_value, re.IGNORECASE)
+            return re.match(answer.code, answer_value, re.IGNORECASE)
         elif answer.type == "C":
             if self.registered_functions.has_key(answer.answer):
-                return self.registered_functions[answer.answer](message)
+                return self.registered_functions[answer.code](message)
             else:
                 raise Exception("Can't find a function to match custom key: %s", answer)
         raise Exception("Don't know how to process answer type: %s", answer.type)

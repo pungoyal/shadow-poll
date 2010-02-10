@@ -3,7 +3,6 @@ from django.test import TestCase
 from rapidsms.tests.scripted import TestScript
 
 from app import App
-from utils import is_english
 from models import *
 
 
@@ -67,33 +66,39 @@ class TestTranslator(TestCase):
 class TestDictionaryEntry(TestCase):
     fixtures = ['dictionary']
     def test_get_meaning(self):
-        dictionary = DictionaryEntry.load_dictionary()
+        dictionary = Translation.load_dictionary()
         self.assertEquals(dictionary["register"], "register")
         
     def test_to_string(self):
-        d = DictionaryEntry()
-        d.text = "text"
-        d.meaning = "meaning"
-        self.assertEquals(str(d), "text -> meaning")
+        c = Language()
+        c.code = 'en'
+        d = Translation()
+        d.code = "text"
+        d.translation = "meaning"
+        d.language = c
+        self.assertEquals(str(d), "meaning -> text (en)")
         
     def test_load_dictionary(self):
-        d = DictionaryEntry.load_dictionary()
+        d = Translation.load_dictionary()
         self.assertEquals(d["register"], "register")
 
 class TestInferArabic(TestScript):
     apps = (App,)
+    
+    def setUp(self):
+        self.translator = Translator()
 
     def test_arabic_is_not_english(self):
         arabic_string = u"""تسجيل التصويت 100 1001"""
-        self.assertFalse(is_english(arabic_string))
+        self.assertFalse(self.translator.is_english(arabic_string))
         
     def test_english_is_english(self):
         english_string = u"""sfdsadfsafan3242498277asdkjfndsaf"""
-        self.assertTrue(is_english(english_string))
+        self.assertTrue(self.translator.is_english(english_string))
         
     def test_mixed_is_not_english(self):
         mixed_string = u"""sfdsadfsafالتصويتan3242498277asdkjfndsaf"""
-        self.assertFalse(is_english(mixed_string))
+        self.assertFalse(self.translator.is_english(mixed_string))
     
 #    TODO - put arabic numbers here
 #    def test_arabic_numbers_is_not_english(self):
@@ -102,4 +107,7 @@ class TestInferArabic(TestScript):
         
     def test_empty_string_should_raise_exception(self):
         empty_string = u""
-        self.assertRaises(ValueError, is_english, empty_string)
+        self.assertRaises(ValueError, self.translator.is_english, empty_string)
+        
+    def tearDown(self):
+        pass
