@@ -1,1 +1,9 @@
-*{ background-color: #000; }
+body { 
+      background-color: white;
+ }
+
+#left { 
+        width : 100px;
+        
+        
+ }
