@@ -1,24 +1,23 @@
 #!/usr/bin/env python
 # vim: ai ts=4 sts=4 et sw=4 encoding=utf-8
 from rapidsms.tests.scripted import TestScript
-from poll.app import App
-from poll.models import *
-from reporters.app import App as reporter_app
 from tree.app import App as tree_app
+from reporters.app import App as reporter_app
+from default.app import App as default_app
 
 class TestApp(TestScript):
-    fixtures = ['poll_responses.json']
-    apps = (App, reporter_app, tree_app)
+    fixtures = ['poll_interactive.json']
+    apps = (reporter_app, tree_app, default_app)
 
     testBasicPoll = """
-      10000 > food
-      10000 < What is your favourite fruit?
-      10000 > apple
-      10000 < Of these vegetables, which is your favourite? Carrot, Tomato, Lettuce, Spinach
-      10000 > tomato
-      10000 < What is your favourite drink? Please specify one of: lime, kiwi, ginger.
-      10000 > kiwi
-      10000 < Thank you for sharing your dietary preferences.
+        00919980131127 > poll
+        00919980131127 < What do you feel happy?
+        00919980131127 > a
+        00919980131127 < What are the three things do you need the most?
+        00919980131127 > c
+        00919980131127 < Compare to my parents?
+        00919980131127 > e
+        00919980131127 < Thank you for participating in the poll.
     """
 
     fails_testBasicPollArabic = """
