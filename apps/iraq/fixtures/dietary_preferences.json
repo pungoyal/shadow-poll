@@ -38,7 +38,7 @@
         "fields": {
             "answer": "Apple", 
             "type": "A", 
-            "name": "apple", 
+            "code": "apple", 
             "description": "round and red"
         }
     }, 
@@ -48,7 +48,7 @@
         "fields": {
             "answer": "Mango", 
             "type": "A", 
-            "name": "mango", 
+            "code": "mango", 
             "description": "oval and orange"
         }
     }, 
@@ -58,7 +58,7 @@
         "fields": {
             "answer": "Carrot", 
             "type": "A", 
-            "name": "carrot", 
+            "code": "carrot", 
             "description": "sharp and orange"
         }
     }, 
@@ -68,7 +68,7 @@
         "fields": {
             "answer": "Tomato", 
             "type": "A", 
-            "name": "tomato", 
+            "code": "tomato", 
             "description": "round and red and green"
         }
     }, 
@@ -78,7 +78,7 @@
         "fields": {
             "answer": "Lime", 
             "type": "A", 
-            "name": "lime", 
+            "code": "lime", 
             "description": "round and green"
         }
     }, 
@@ -88,7 +88,7 @@
         "fields": {
             "answer": "Kiwi", 
             "type": "A", 
-            "name": "kiwi", 
+            "code": "kiwi", 
             "description": "oval and green"
         }
     }, 
@@ -98,7 +98,7 @@
         "fields": {
             "answer": "Pear", 
             "type": "A", 
-            "name": "pear", 
+            "code": "pear", 
             "description": "oddly shaped"
         }
     }, 
@@ -108,7 +108,7 @@
         "fields": {
             "answer": "Lettuce", 
             "type": "A", 
-            "name": "lettuce", 
+            "code": "lettuce", 
             "description": "leafy"
         }
     }, 
@@ -118,7 +118,7 @@
         "fields": {
             "answer": "Spinach", 
             "type": "A", 
-            "name": "spinach", 
+            "code": "spinach", 
             "description": "leafy and dark green"
         }
     }, 
@@ -128,7 +128,7 @@
         "fields": {
             "answer": "Ginger", 
             "type": "A", 
-            "name": "ginger", 
+            "code": "ginger", 
             "description": "like potato"
         }
     }, 
