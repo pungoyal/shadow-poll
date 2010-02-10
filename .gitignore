@@ -11,3 +11,4 @@ rapidsms.ini
 .settings/
 .idea
 .idea/*
+/apps/internationalization/.#tests.py
