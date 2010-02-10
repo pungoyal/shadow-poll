@@ -5,25 +5,33 @@
 	<head>
   <title>{% block title %}{% endblock %}</title>
   <link type='text/css' rel='stylesheet' media='screen' href='/static/charts/stylesheets/screen.css' />
- <link type='text/css' rel='stylesheet' media='screen' href='/static/charts/stylesheets/base.css' />
+ <link type='text/css' rel='stylesheet' media='screen'
+ href='/static/charts/stylesheets/base.css' />
   <link type='text/css' rel='stylesheet' media='screen' href='/static/charts/stylesheets/mapdark.css' />
   <script src="/static/charts/javascripts/jquery-1.3.2.min.js"></script>
   {% block headhtml %}{% endblock %}
 	</head>
 <body>
   <div id='header'>
-    {% block header %}{% endblock %}
+    {% block header %}
+    {% endblock %}
   </div>
   <div id='left'>
-    {% block left %}{% endblock %}
-  </div>
+    {% block left %}
+    {% endblock %}
+    </div>
   <div class='canvas'>
-    {% block content %}{% endblock %}
+    {% block content %}
+    {% endblock %}
   </div>
+  <div class='right'>
+    {% block right %} 
+    {% endblock %}
+  </div> 
   <div id='footer'>
-  			{% get_languages %}
+    {% get_languages %}
     {% block footer %}
-	{% endblock %}
+    {% endblock %}
   </div>
 </body>
 <script type="application/javascript">
