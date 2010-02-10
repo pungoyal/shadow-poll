@@ -7,3 +7,8 @@ body {
         
         
  }
+
+#map { 
+          width:950px; 
+          height:575px;
+}
