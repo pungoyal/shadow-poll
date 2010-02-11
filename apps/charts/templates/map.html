@@ -4,20 +4,10 @@
 {% block title %}Map{% endblock %}
 
 {% block stylesheets %}
-<link type="text/css" rel="stylesheet" href="/static/charts/stylesheets/mapdark.css" />
-{% endblock %}
-
-
-{% block header %}
-<a href="/charts">
-  <h2 style='margin-top: 5px; margin-left: 5px; padding: 10px; color:white; background:black'>UNICEF Map Demo</h2>
-</a>
-{% endblock %}
-{% block left %}
+<link type="text/css" rel="stylesheet" href="/static/charts/stylesheets/map.css" />
 {% endblock %}
 
 {% block right %}
-
 <script type='text/javascript'>
 	var map;
 //OpenLayers.ImgPath = '/img/openlayers/';
@@ -33,7 +23,7 @@ options = {
   maxExtent: new OpenLayers.Bounds(-20037508,-20037508,20037508,20037508),
   projection: new OpenLayers.Projection("EPSG:4326"),
   displayProjection: new OpenLayers.Projection("EPSG:4326"),
-  restrictedExtent: new OpenLayers.Bounds(3830412.3607388, 3160212.4968564, 6178557.8692412, 4657155.2585266),
+  restrictedExtent: new OpenLayers.Bounds(4302487.4473443,3370567.1986602,5525479.8996893,4495720.2548176),
   controls: []
 }
 
@@ -74,7 +64,13 @@ map.addLayer(
       611.496226172]
     }
   ));
- 
+
+/*function to display current bounds
+map.events.register("moveend",map,function(){
+   var boundingBox = map.getExtent();
+   $("#devbox").text(boundingBox.toString());
+});
+*/
 
 var cities = new OpenLayers.Layer.Vector("Cities KML", {
     projection: map.displayProjection,

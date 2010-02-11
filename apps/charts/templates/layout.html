@@ -8,7 +8,6 @@
 	  <title>{% block title %}{% endblock %}</title>
 	  <link type='text/css' rel='stylesheet' media='screen'
 		href='/static/charts/stylesheets/base.css' />
-	  <link type='text/css' rel='stylesheet' media='screen' href='/static/charts/stylesheets/mapdark.css' />
 	  <script src="/static/charts/javascripts/jquery-1.3.2.min.js"></script>
 	  {% block javascripts %}
 	  <script src="http://www.openlayers.org/dev/OpenLayers.js"></script>
@@ -21,6 +20,9 @@
 <body>
   <div id='header'>
     {% block header %}
+    <a href="/charts">
+      <h2 style='margin-top: 5px; margin-left: 5px; padding: 10px; color: white; background:black'>UNICEF Map Demo</h2>
+    </a>
     {% endblock %}
   </div>
   <div id='left'>
@@ -34,9 +36,14 @@
       <br>{% trans "the various governorates in Iraq." %}
     </div>
 
+    <div class="testing">
+      <span id="devbox" visible="true"></span>
+    </div>
+
     {% endblock %}
   </div>
   <div id='map'>
+     
     {% block content %}
     {% endblock %}
   </div>
@@ -48,6 +55,7 @@
     {% get_languages %}
     {% block footer %}
     {% endblock %}
+   
   </div>
 </body>
 <script type="application/javascript">
