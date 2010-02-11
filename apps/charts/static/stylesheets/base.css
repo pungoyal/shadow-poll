@@ -3,6 +3,7 @@ body {
        color:#444;
        font: 13px/20px "Helvetica Neue",Arial,Helvetica,sans-serif;
        margin: 0;
+       overflow :auto;
        }
 
 a {
@@ -37,17 +38,17 @@ a {
         background:#F8F8F8 none repeat scroll 0 0;
         float:left;
         width:1%;
-        bottom:0;
         left:0;
         overflow:auto;
-        position:fixed;
+        position:relative;
         top:50px;
         }
 
 #map { 
-       width:500px; 
+       clear:both;
+       width:600px; 
        height:460px;
-       position:fixed;
+       position:relative;
        top: 50px;
        float:left;
        overflow:auto;
@@ -55,6 +56,18 @@ a {
        padding:2px;
        margin:2px;
        }
+
+#charts { 
+          clear:both;
+          width:600px; 
+          height:460px;
+          position:relative;
+          top: 0px;
+          float:left;
+          overflow:auto;
+          left:0;
+          }
+
 
 #footer {
           background:#212320;
@@ -68,7 +81,6 @@ a {
           padding:0px 20px;
 
           position:fixed;
-          bottom:0px;
           left:0px;
           right:0px;
 
