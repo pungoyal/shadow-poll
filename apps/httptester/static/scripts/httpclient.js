@@ -8,11 +8,14 @@ $(document).ready(function(){
 
 function sendMsg() {
 	if ($('#phone').val().length > 0 && $('#message').val().length > 0) {
-		req = url + $('#phone').val() + "/" + escape($('#message').val());
-		$.getJSON(
-			req, // if Ajax call succeeds, execute the following script
-			function (response) { if (response) {
-				snippet = '<tr class="in"><td class="phone">' + response.phone + '</td><td class="dir">&laquo;</td><td class="msg">' + response.message + '</td><td class="info">' + response.message.length + ' characters</td></tr>';
+		$.post(
+			url, 
+			{ "number": $('#phone').val(), "message": escape($('#message').val()) }, 
+			function (response) { if (response) { // if Ajax call succeeds, execute this function
+				// I don't speak javascript. Someone please clean this up
+				to_eval = "resp_dict = " + response
+				eval(to_eval)
+				snippet = '<tr class="in"><td class="phone">' + resp_dict.phone + '</td><td class="dir">&laquo;</td><td class="msg">' + unescape(resp_dict.message) + '</td><td class="info">' + resp_dict.message.length + ' characters</td></tr>';
 				$('#log').append(snippet);
 				fixClasses();
 				$('div.tester').scrollTo('#log tr:last', 800);
@@ -31,11 +34,14 @@ function fixClasses(){
 
 function checkMsgs() {
 	if ($('#phone').val().length > 0) {
-		req = url + $('#phone').val() + "/json_resp";
-		$.getJSON(
-			req,
+		$.post(
+			url,
+			{ number: $('#phone').val(), message: "json_resp" }, 
 			function (response) { if (response) {
-				snippet = '<tr class="out"><td class="phone">' + response.phone + '</td><td class="dir">&raquo;</td><td class="msg">' + response.message + '</td><td class="info">' + response.message.length + ' characters</td></tr>';
+				// I don't speak javascript. Someone please clean this up
+				to_eval = "resp_dict = " + response
+				eval(to_eval)
+				snippet = '<tr class="out"><td class="phone">' + resp_dict.phone + '</td><td class="dir">&raquo;</td><td class="msg">' + resp_dict.message + '</td><td class="info">' + resp_dict.message.length + ' characters</td></tr>';
 				$('#log').append(snippet);
 				fixClasses();
 				$('div.tester').scrollTo('#log tr:last', 800);

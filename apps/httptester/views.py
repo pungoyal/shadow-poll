@@ -6,6 +6,7 @@ from rapidsms.webui.utils import render_to_response
 from django.core.urlresolvers import reverse
 from rapidsms.webui import settings
 import datetime
+import urllib
 import urllib2
 import random
 
@@ -14,19 +15,19 @@ def index(req):
     return render_to_response(req, template_name, {
     })
 
-def proxy(req, number, message):
+def proxy(req):
     # build the url to the http server running
     # in ajax.app.App via conf hackery
     conf = settings.RAPIDSMS_APPS["httptester"]
-    url = "http://%s:%s/%s/%s" % (
+    url = "http://%s:%s/" % (
         conf["host"], 
-        conf["port"],
-        urllib2.quote(number), 
-        # urllib2.quote throws KeyError when given a python unicode string.
-        # This is a known bug (http://bugs.python.org/issue1712522), fixed 
-        # in Python 3000. We get 'quote' to work by encoding the string and
-        # allowing it to be interpreted as ascii bytes (this still works 
-        # for non-unicode strings)
-        urllib2.quote(message))
-    f = urllib2.urlopen(url)
-    return HttpResponse(f.read())
+        conf["port"]
+    )
+    data = _dict_to_POST(req.POST)
+    req = urllib2.Request(url, data)
+    response = urllib2.urlopen(req)
+    return HttpResponse(response.read())
+
+def _dict_to_POST(post_dict):
+    """ Convert dictionary structure to key-value pair string """
+    return "&".join(['%s=%s' % (key, post_dict[key]) for key in post_dict])

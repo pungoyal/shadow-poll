@@ -7,7 +7,7 @@ import httptester.views as views
 
 urlpatterns = patterns('',
     url(r'^http$', views.index),
-    url(r'^http/proxy/\+?(?P<number>\d+)/(?P<message>.*)$', views.proxy),
+    url(r'^http/proxy.*', views.proxy),
     
     
     # serve the static files for this HTTP app
