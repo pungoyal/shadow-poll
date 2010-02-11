@@ -145,6 +145,14 @@ class TreeState(models.Model):
                 
         return self.transition_found
     
+    def get_transition(self, choices):
+        self.trans = None
+        for self.transition in Transition.objects.all():
+            if self.transition.answer.code in choices:
+                self.trans = self.transition
+                
+        return self.trans
+    
     @classmethod
     def path_has_loops(klass, path):
         # we're going to get all unique paths through the this

@@ -74,7 +74,7 @@ class TestApp (TestScript):
         self.assertEquals(len(self.choices), 1)
         self.assertEquals(['a'], self.choices)
         
-    def testGetTransitionsForSingleOption(self):
+    def testCheckTransitionsForSingleOption(self):
         self.choices = ['a']
         self.current_state = TreeState.objects.get(id=2)
         self.found_transition = self.current_state.has_transition(self.choices)
@@ -83,8 +83,17 @@ class TestApp (TestScript):
         self.choices = ['b']
         self.found_transition = self.current_state.has_transition(self.choices)
         self.assertEqual(self.found_transition, False)
-        
     
+    def testGetTransitionsForSingleOption(self):
+        self.choices = ['a']
+        self.current_state = TreeState.objects.get(id=2)
+        self.transition = self.current_state.get_transition(self.choices)
+        self.assertEqual(self.transition.id, 1)
+        
+        self.choices = ['b']
+        self.transition = self.current_state.get_transition(self.choices)
+        self.assertEqual(self.transition, None)    
+  
     def testLocalization(self):
         '''Tests very basic localization of trees'''
         reporter = self._register('0004', 'en', "loc_en")
