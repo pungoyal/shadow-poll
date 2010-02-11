@@ -17,7 +17,7 @@ class TestIntegration(TestScript):
         00919980131127 < What do you feel happy?
         00919980131127 > a
         00919980131127 < What are the three things do you need the most?
-        00919980131127 > c
+        00919980131127 > c,d,x
         00919980131127 < Compare to my parents?
         00919980131127 > e
         00919980131127 < Thank you for participating in the poll.

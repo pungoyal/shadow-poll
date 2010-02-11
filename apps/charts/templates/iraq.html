@@ -1,0 +1,67 @@
+{% extends 'layout.html' %}
+{% load i18n %}
+{% load i18ntags %}
+{% load region-tags %}
+{% load webapp-tags %}
+
+
+  {% block header %}
+  <div id='header'>
+    <a href="/charts">
+      <h2>UNICEF Map Demo</h2>
+    </a>
+  </div>
+  {% endblock %}
+
+
+  {% block content %}
+
+    <div id='main'>
+      {% block main %}
+      {% endblock %}
+    </div>
+
+    <div id='right'>
+      {% block right %} 
+      {% endblock %}
+    </div> 
+
+    <div id='footer'>
+      {% get_languages %}
+      {% block footer %}
+      {% endblock %}
+      
+    </div>
+  {% endblock %}
+
+{% block i18nscript %}
+  <script type="application/javascript">
+    function test(lang){
+    $.post("/i18n/setlang/", {language : lang});
+    location.reload();
+    }
+  </script>
+{% endblock %}
+
+<!--
+    <div id='left'>
+      {% block left %}
+
+      <div>
+	{% trans "All Reports:" %} <a class='badge' href="/get_kml/">KML</a>
+      </div>
+      
+      <div>
+	{% trans "Welcome to the Iraq Children Happiness Website." %}<br>{% trans "The map shows the poll responses recieved from" %}
+	<br>{% trans "the various governorates in Iraq." %}
+      </div>
+
+      <div class="testing">
+	<span id="devbox" visible="true"></span>
+      </div>
+
+      {% endblock %}
+      </div>
+-->
+   
+

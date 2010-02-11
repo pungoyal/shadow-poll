@@ -3,7 +3,8 @@
         "pk": 1, 
         "model": "tree.question", 
         "fields": {
-            "text": "What is your favourite fruit?", 
+            "text": "What is your favourite fruit?",
+			"max_choices":"1",
             "error_response": "Please specify one of Apple, Mango, Pear. "
         }
     }, 
@@ -11,7 +12,8 @@
         "pk": 2, 
         "model": "tree.question", 
         "fields": {
-            "text": "Of these vegetables, which is your favourite? Carrot, Tomato, Lettuce, Spinach", 
+            "text": "Of these vegetables, which is your favourite? Carrot, Tomato, Lettuce, Spinach",
+			"max_choices":"1", 
             "error_response": "Please specify one of: Carrot, Tomato, Lettuce, Spinach"
         }
     }, 
@@ -19,7 +21,8 @@
         "pk": 3, 
         "model": "tree.question", 
         "fields": {
-            "text": "What is your favourite drink? Please specify one of: lime, kiwi, ginger.", 
+            "text": "What is your favourite drink? Please specify one of: lime, kiwi, ginger.",
+			"max_choices":"1", 
             "error_response": "That is not a drink. Please specify one of: lime, kiwi, ginger."
         }
     }, 

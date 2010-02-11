@@ -20,10 +20,80 @@ class TestApp (TestScript):
     testPin = """
            8005551211 > pin
            8005551211 < Please enter your 4-digit PIN
-           8005551211 > 1234
+           8005551211 > a
            8005551211 < Thanks for entering.
          """
-         
+    
+    def testGetChoicesForSingleOption(self):
+        self.msg_txt = "a"
+        self.delim = ";"
+        self.ques = Question(id=1, text="What?", max_choices=1)
+        self.choices = self.ques.get_choices(self.msg_txt, self.delim)
+        self.assertEquals(len(self.choices), 1)
+    
+    def testGetChoicesForSingleOptionWithDelim(self):
+        self.msg_txt = "a;"
+        self.delim = ";"
+        self.ques = Question(id=1, text="What?", max_choices=1)
+        self.choices = self.ques.get_choices(self.msg_txt, self.delim)
+        self.assertEquals(len(self.choices), 1)
+        self.assertEquals(['a'], self.choices)
+    
+    def testGetChoicesForSingleOptionWithTwoLetters(self):
+        self.delim = ";"
+        self.ques = Question(id=1, text="What?", max_choices=1)
+
+        self.msg_txt = "a;b"
+        self.choices = self.ques.get_choices(self.msg_txt, self.delim)
+        self.assertEquals(len(self.choices), 1)
+        self.assertEquals(['a'], self.choices)
+        
+        # this case should be handled by translator app
+#        self.msg_txt = "a b"
+#        self.choices = self.ques.get_choices(self.msg_txt, self.delim)
+#        self.assertEquals('a', self.choices[0])
+        
+    def testGetChoicesForMultipleOptions(self):
+        self.msg_txt = "a;b"
+        self.delim = ";"
+        self.ques = Question(id=1, text="What?", max_choices=2)
+        self.choices = self.ques.get_choices(self.msg_txt, self.delim)
+        self.assertEquals(len(self.choices), 2)
+        
+    def testGetChoicesForMultipleOptions(self):
+        self.msg_txt = "a,b,c,d"
+        self.delim = ","
+        self.ques = Question(id=1, text="What?", max_choices=3)
+        self.choices = self.ques.get_choices(self.msg_txt, self.delim)
+        self.assertEquals(len(self.choices), 3)
+        self.assertEquals(['a', 'b', 'c'], self.choices)
+        
+        self.msg_txt = "a"
+        self.delim = ";"
+        self.choices = self.ques.get_choices(self.msg_txt, self.delim)
+        self.assertEquals(len(self.choices), 1)
+        self.assertEquals(['a'], self.choices)
+        
+    def testCheckTransitionsForSingleOption(self):
+        self.choices = ['a']
+        self.current_state = TreeState.objects.get(id=2)
+        self.found_transition = self.current_state.has_transition(self.choices)
+        self.assertTrue(self.found_transition)
+        
+        self.choices = ['b']
+        self.found_transition = self.current_state.has_transition(self.choices)
+        self.assertEqual(self.found_transition, False)
+    
+    def testGetTransitionsForSingleOption(self):
+        self.choices = ['a']
+        self.current_state = TreeState.objects.get(id=2)
+        self.transition = self.current_state.get_transition(self.choices)
+        self.assertEqual(self.transition.id, 1)
+        
+        self.choices = ['b']
+        self.transition = self.current_state.get_transition(self.choices)
+        self.assertEqual(self.transition, None)    
+  
     def testLocalization(self):
         '''Tests very basic localization of trees'''
         reporter = self._register('0004', 'en', "loc_en")
@@ -67,6 +137,3 @@ class TestApp (TestScript):
         connection.reporter = reporter
         connection.save()
         return reporter
-    
-        
-         

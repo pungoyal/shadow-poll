@@ -12,6 +12,7 @@ class Question(models.Model):
        and an optional error message if the question is not answered
        properly'''
     text = models.TextField()
+    max_choices = models.IntegerField()
     # allow the question to specify a default error
     # message
     error_response = models.TextField(null=True, blank=True)
@@ -20,6 +21,9 @@ class Question(models.Model):
         return "Q%s: %s" % (
             self.pk,
             self.text)
+    
+    def get_choices(self, msg_txt, delim):   
+        return msg_txt.rsplit(delim)[:self.max_choices]    
 
 class Tree(models.Model):
     '''A decision tree.  
@@ -92,7 +96,7 @@ class Answer(models.Model):
         ('R', 'Regular Expression'),
         ('C', 'Custom logic'),
     )
-    code = models.CharField(max_length=20)
+    code = models.CharField(max_length=20, null=False)
     type = models.CharField(max_length=1, choices=ANSWER_TYPES)
     answer = models.CharField(max_length=160)
     description = models.CharField(max_length=100, null=True)
@@ -131,6 +135,23 @@ class TreeState(models.Model):
 
     def has_loops_below(self):
         return TreeState.path_has_loops([self])
+    
+    def has_transition(self, choices):
+        self.codes = [trans.answer.code for trans in Transition.objects.filter(current_state=self)]
+        self.transition_found=True
+        for self.ch in choices:
+            if not self.ch in self.codes:
+                self.transition_found = False
+                
+        return self.transition_found
+    
+    def get_transition(self, choices):
+        self.trans = None
+        for self.transition in Transition.objects.filter(current_state=self):
+            if self.transition.answer.code in choices:
+                self.trans = self.transition
+        
+        return self.trans
     
     @classmethod
     def path_has_loops(klass, path):
@@ -182,7 +203,7 @@ class Transition(models.Model):
     def __unicode__(self):
         return ("%s : %s --> %s" % 
             (self.current_state,
-             self.answer,
+             self.answer.code,
              self.next_state))
  
 class Session(models.Model):
