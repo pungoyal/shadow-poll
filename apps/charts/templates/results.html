@@ -1,4 +1,4 @@
-{% extends 'layout.html' %}
+{% extends 'iraq.html' %}
 {% load i18n %}
 
 {% block title %}Map{% endblock %}
@@ -7,18 +7,27 @@
 <link type="text/css" rel="stylesheet" href="/static/charts/stylesheets/map.css" />
 {% endblock %}
 
-{% block mainHeader %}
-{% include "mainHeader.html" %}
+{% block main %}
+<div id='mainHeader'>
+  {% block mainHeader %}
+  {% include "mainHeader.html" %}
+  {% endblock %}
+</div>
+<div id='map'>
+  {% block map %}
+  {% include "map.html" %}
+  {% endblock %}
+</div>
+<div id='charts'>
+  {% block charts %}
+  {% include "charts.html" %}
+  {% endblock %}
+</div>
 {% endblock %}
 
-{% block map %}
-{% include "map.html" %}
-{% endblock %}
-
-{% block charts %}
-{% include "charts.html" %}
-{% endblock %}
-
-{% block filters %}
-{% include "filters.html" %}
+{% block right %}
+<div id='filters'>
+  {% block filters %}
+  {% endblock %}
+</div>
 {% endblock %}
