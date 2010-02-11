@@ -1,17 +1,97 @@
 body { 
-      background-color: white;
+       background:#eee;
+       color:#444;
+       font: 13px/20px "Helvetica Neue",Arial,Helvetica,sans-serif;
+       margin: 0;
  }
 
+a {
+  text-decoration:none;
+  color:#68a;
+}
+
+#header {
+  bottom:auto;
+  position:fixed;
+  width: 100%;
+  top:auto;
+  background-color:#182824;
+  border-color:#152420;
+  z-index: 20000;
+  -moz-background-clip:border;
+  -moz-background-inline-policy:continuous;
+  -moz-background-origin:padding;
+  background:#222222 none repeat scroll 0 0;
+  border-bottom:3px solid #111111;
+  height:47px;
+  line-height:50px;
+  overflow:hidden;
+  display:inline-block;
+}
+
+
 #left { 
-        width : 40px;
-        margin-left: 5px;
+  -moz-background-clip:border;
+  -moz-background-inline-policy:continuous;
+  -moz-background-origin:padding;
+  background:#F8F8F8 none repeat scroll 0 0;
+  float:left;
+  width:10%;
+  bottom:0;
+  left:0;
+  overflow:auto;
+  position:fixed;
+  top:50px;
  }
 
 #map { 
-          width:500px; 
-          height:460px;
+       width:500px; 
+       height:460px;
+       position:fixed;
+       top: 50px;
+       float:left;
+       overflow:auto;
+       left:10%;
 }
 
+  #footer {
+    background:#212320;
+    color:#ccc;
+
+    overflow:hidden;
+    height:40px;
+    line-height:40px;
+    font-size:11px;
+
+    padding:0px 20px;
+
+    position:fixed;
+    bottom:0px;
+    left:0px;
+    right:0px;
+
+    z-index:1000;
+  }
+
+  #footer a {
+    color: #eee;
+  }
+
+  #footer a.ds {
+    background: url(/site_media/img/ds.gif) no-repeat;
+    z-index: 50000;
+    border: 0px;
+    bottom: 5px;
+    height: 30px;
+    overflow: hidden;
+    position: absolute;
+    right: 40px;
+    text-indent: -999px;
+    width: 150px;
+  }
+
+
+/*classes*/
 .testing{ 
           display: block; 
           color:black;
@@ -19,6 +99,7 @@ body {
           height:20px;
           font-size:14;
  }
+
 a.badge {
   display: inline;
   padding: 4px;
