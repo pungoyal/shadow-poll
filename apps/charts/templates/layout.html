@@ -46,9 +46,20 @@
       </div>
 -->
    
-    <div id='map'>
-      
-      {% block content %}
+    <div id='main'>
+      {% block main %}
+      <div id='map'>
+	{% block map %}
+	{% endblock %}
+      </div>
+      <div id='charts'>
+	{% block charts %}
+	{% endblock %}
+      </div>
+      <div id='filters'>
+	{% block filters %}
+	{% endblock %}
+      </div>
       {% endblock %}
     </div>
     <div id='right'>
