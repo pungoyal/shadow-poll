@@ -60,14 +60,16 @@
 	{% block charts %}
 	{% endblock %}
       </div>
+      {% endblock %}
+    </div>
+
+    <div id='right'>
+      {% block right %} 
       <div id='filters'>
 	{% block filters %}
 	{% endblock %}
       </div>
-      {% endblock %}
-    </div>
-    <div id='right'>
-      {% block right %} 
+
       {% endblock %}
     </div> 
     <div id='footer'>

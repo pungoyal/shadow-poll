@@ -62,12 +62,21 @@ a {
           width:600px; 
           height:460px;
           position:relative;
-          top: 0px;
+          top: 50px;
           float:left;
           overflow:auto;
           left:0;
           }
 
+#right { 
+         background:#F8F8F8 none repeat scroll 0 0;
+           width:210px; 
+           height:470px;
+           position:absolute;
+           top: 50px;
+           overflow:auto;
+           left:600px;
+           }
 
 #footer {
           background:#212320;
