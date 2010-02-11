@@ -6,7 +6,6 @@
 <html lang='en'>
 	<head>
 	  <title>{% block title %}{% endblock %}</title>
-	  <link type='text/css' rel='stylesheet' media='screen' href='/static/charts/stylesheets/screen.css' />
 	  <link type='text/css' rel='stylesheet' media='screen'
 		href='/static/charts/stylesheets/base.css' />
 	  <link type='text/css' rel='stylesheet' media='screen' href='/static/charts/stylesheets/mapdark.css' />
@@ -26,8 +25,17 @@
   </div>
   <div id='left'>
     {% block left %}
-    {% endblock %}
+    <div>
+      {% trans "All Reports:" %} <a class='badge' href="/get_kml/">KML</a>
     </div>
+    
+    <div>
+      {% trans "Welcome to the Iraq Children Happiness Website." %}<br>{% trans "The map shows the poll responses recieved from" %}
+      <br>{% trans "the various governorates in Iraq." %}
+    </div>
+
+    {% endblock %}
+  </div>
   <div id='map'>
     {% block content %}
     {% endblock %}

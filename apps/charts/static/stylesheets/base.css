@@ -3,12 +3,20 @@ body {
  }
 
 #left { 
-        width : 100px;
-        
-        
+        width : 40px;
+        margin-left: 5px;
  }
 
 #map { 
-          width:950px; 
-          height:575px;
+          width:650px; 
+          height:375px;
+}
+
+a.badge {
+  display: inline;
+  padding: 4px;
+  font-size: 10px;
+  line-height: 12px; /* total height 20px */
+  background: url('/site_media/img/badge.png') repeat-x #eee;
+  border: 1px solid #d0d0d0;
 }
