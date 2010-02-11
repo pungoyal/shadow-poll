@@ -3,7 +3,8 @@
         "pk": 1, 
         "model": "tree.question", 
         "fields": {
-            "text": "What do you feel happy?", 
+            "text": "What do you feel happy?",
+			"max_choices":"1",
             "error_response": "err1"
         }
     }, 
@@ -11,7 +12,8 @@
         "pk": 2, 
         "model": "tree.question", 
         "fields": {
-            "text": "What are the three things do you need the most?", 
+            "text": "What are the three things do you need the most?",
+			"max_choices": "3", 
             "error_response": "err2"
         }
     }, 
@@ -19,7 +21,8 @@
         "pk": 3, 
         "model": "tree.question", 
         "fields": {
-            "text": "Compare to my parents?", 
+            "text": "Compare to my parents?",
+			"max_choices": "1",
             "error_response": "err3"
         }
     }, 

@@ -12,6 +12,7 @@ class Question(models.Model):
        and an optional error message if the question is not answered
        properly'''
     text = models.TextField()
+    max_choices = models.IntegerField()
     # allow the question to specify a default error
     # message
     error_response = models.TextField(null=True, blank=True)

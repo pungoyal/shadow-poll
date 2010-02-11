@@ -46,6 +46,7 @@
     "model": "tree.question", 
     "fields": {
       "text": "hello",
+	  "max_choices": "1",
 	  "error_response": "err1"
     }
   }, 
@@ -54,6 +55,7 @@
     "model": "tree.question", 
     "fields": {
       "text": "Please enter your 4-digit PIN",
+	  "max_choices": "1",
 	  "error_response": "err2"
     }
   }, 
@@ -61,6 +63,7 @@
     "pk": 3, 
     "model": "tree.question", 
     "fields": {
+	  "max_choices": "1",
       "text": "Thanks for entering."
     }
   }, 
