@@ -8,10 +8,17 @@ body {
  }
 
 #map { 
-          width:650px; 
-          height:375px;
+          width:500px; 
+          height:460px;
 }
 
+.testing{ 
+          display: block; 
+          color:black;
+          width:40px;
+          height:20px;
+          font-size:14;
+ }
 a.badge {
   display: inline;
   padding: 4px;
