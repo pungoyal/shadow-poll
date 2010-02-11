@@ -21,6 +21,9 @@ class Question(models.Model):
         return "Q%s: %s" % (
             self.pk,
             self.text)
+    
+    def get_choices(self, msg_txt, delim):   
+        return msg_txt.rsplit(delim)[:self.max_choices]    
 
 class Tree(models.Model):
     '''A decision tree.  
