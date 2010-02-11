@@ -6,7 +6,7 @@
 # The main configuration of the RapidSMS server. It contains a list of
 # apps and backends to run, which can be names of app classes, or (in the
 # case of multiple apps or backends of the same type) names for apps of
-# the same type (see APPS and BACKENDS sections below).
+# the same type (see APPS and BACKENDS sections below). 
 #
 # apps=[app1,app2,app3,...]         * comma-separated list of apps to load
 # backends=[backend1,backend2,...]  * comma-separated list of backends to load
