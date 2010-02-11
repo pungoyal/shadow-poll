@@ -137,7 +137,7 @@ class TreeState(models.Model):
         return TreeState.path_has_loops([self])
     
     def has_transition(self, choices):
-        self.codes = [trans.answer.code for trans in Transition.objects.all()]
+        self.codes = [trans.answer.code for trans in Transition.objects.filter(current_state=self)]
         self.transition_found=True
         for self.ch in choices:
             if not self.ch in self.codes:
@@ -147,10 +147,10 @@ class TreeState(models.Model):
     
     def get_transition(self, choices):
         self.trans = None
-        for self.transition in Transition.objects.all():
+        for self.transition in Transition.objects.filter(current_state=self):
             if self.transition.answer.code in choices:
                 self.trans = self.transition
-                
+        
         return self.trans
     
     @classmethod
@@ -203,7 +203,7 @@ class Transition(models.Model):
     def __unicode__(self):
         return ("%s : %s --> %s" % 
             (self.current_state,
-             self.answer,
+             self.answer.code,
              self.next_state))
  
 class Session(models.Model):

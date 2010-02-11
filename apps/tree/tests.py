@@ -61,12 +61,12 @@ class TestApp (TestScript):
         self.assertEquals(len(self.choices), 2)
         
     def testGetChoicesForMultipleOptions(self):
-        self.msg_txt = "a;b;c;d"
-        self.delim = ";"
-        self.ques = Question(id=1, text="What?", max_choices=2)
+        self.msg_txt = "a,b,c,d"
+        self.delim = ","
+        self.ques = Question(id=1, text="What?", max_choices=3)
         self.choices = self.ques.get_choices(self.msg_txt, self.delim)
-        self.assertEquals(len(self.choices), 2)
-        self.assertEquals(['a', 'b'], self.choices)
+        self.assertEquals(len(self.choices), 3)
+        self.assertEquals(['a', 'b', 'c'], self.choices)
         
         self.msg_txt = "a"
         self.delim = ";"

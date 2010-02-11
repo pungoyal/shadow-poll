@@ -52,17 +52,12 @@ class App(rapidsms.app.App):
             state = session.state
             
             self.debug(state)
+            options =  state.question.get_choices(msg.text, ",")
             # loop through all transitions starting with  
             # this state and try each one depending on the type
             # this will be a greedy algorithm and NOT safe if 
             # multiple transitions can match the same answer
-            transitions = Transition.objects.filter(current_state=state)
-            found_transition = None
-            for transition in transitions:
-                if self.matches(transition.answer, msg):
-                    found_transition = transition
-                    break
-            
+            found_transition = state.get_transition(options)
             # the number of tries they have to get out of this state
             # if empty there is no limit.  When the num_retries is hit
             # a user's session will be terminated.
@@ -113,7 +108,7 @@ class App(rapidsms.app.App):
                 sequence = ids[len(ids) -1] + 1
             else:
                 sequence = 1
-            entry = Entry(session=session,sequence_id=sequence,transition=found_transition,text=msg.text)
+            entry = Entry(session=session,sequence_id=sequence,transition=found_transition,text=str(options))
             entry.save()
             self.debug("entry %s saved" % entry)
                 
