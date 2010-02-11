@@ -109,7 +109,7 @@
         "pk": 8, 
         "model": "tree.answer", 
         "fields": {
-			"code": "d",
+			"code": "x",
             "answer": "Lettuce", 
             "type": "A", 
             "description": "leafy"
