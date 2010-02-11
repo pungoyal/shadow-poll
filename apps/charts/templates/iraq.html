@@ -1,0 +1,78 @@
+{% extends 'layout.html' %}
+{% load i18n %}
+{% load i18ntags %}
+{% load region-tags %}
+{% load webapp-tags %}
+{% block stylesheets %}
+<link type='text/css' rel='stylesheet' media='screen'
+      href='/static/charts/stylesheets/base.css' />
+<script src="/static/charts/javascripts/jquery-1.3.2.min.js"></script>
+{% endblock %}
+
+{% block javascripts %}
+<script src="http://www.openlayers.org/dev/OpenLayers.js"></script>
+<script src="http://js.mapbox.com/ol/2.8/mapbox.js"></script>
+<script src="/static/charts/javascripts/openlayers_plus_blockswitcher.js"></script>
+{% endblock %}
+
+{% block headhtml %}{% endblock %}
+
+    <div id='header'>
+      {% block header %}
+      <a href="/charts">
+	<h2 style='margin-top: 5px; margin-left: 5px; padding: 10px; color: white; background:black'>UNICEF Map Demo</h2>
+      </a>
+      {% endblock %}
+    </div>
+
+  {% block content %}
+
+    <div id='main'>
+      {% block main %}
+      {% endblock %}
+    </div>
+
+    <div id='right'>
+      {% block right %} 
+      {% endblock %}
+    </div> 
+
+    <div id='footer'>
+      {% get_languages %}
+      {% block footer %}
+      {% endblock %}
+      
+    </div>
+  {% endblock %}
+
+{% block i18nscript %}
+  <script type="application/javascript">
+    function test(lang){
+    $.post("/i18n/setlang/", {language : lang});
+    location.reload();
+    }
+  </script>
+{% endblock %}
+
+<!--
+    <div id='left'>
+      {% block left %}
+
+      <div>
+	{% trans "All Reports:" %} <a class='badge' href="/get_kml/">KML</a>
+      </div>
+      
+      <div>
+	{% trans "Welcome to the Iraq Children Happiness Website." %}<br>{% trans "The map shows the poll responses recieved from" %}
+	<br>{% trans "the various governorates in Iraq." %}
+      </div>
+
+      <div class="testing">
+	<span id="devbox" visible="true"></span>
+      </div>
+
+      {% endblock %}
+      </div>
+-->
+   
+
