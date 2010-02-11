@@ -30,7 +30,6 @@ a {
           display:inline-block;
           }
 
-
 #left { 
         moz-background-clip:border;
         moz-background-inline-policy:continuous;
@@ -81,7 +80,7 @@ a {
 #footer {
           background:#212320;
           color:#ccc;
-
+          bottom : 0px;
           overflow:hidden;
           height:40px;
           line-height:40px;

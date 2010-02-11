@@ -3,27 +3,16 @@
 {% load i18ntags %}
 {% load region-tags %}
 {% load webapp-tags %}
-{% block stylesheets %}
-<link type='text/css' rel='stylesheet' media='screen'
-      href='/static/charts/stylesheets/base.css' />
-<script src="/static/charts/javascripts/jquery-1.3.2.min.js"></script>
-{% endblock %}
 
-{% block javascripts %}
-<script src="http://www.openlayers.org/dev/OpenLayers.js"></script>
-<script src="http://js.mapbox.com/ol/2.8/mapbox.js"></script>
-<script src="/static/charts/javascripts/openlayers_plus_blockswitcher.js"></script>
-{% endblock %}
 
-{% block headhtml %}{% endblock %}
+  {% block header %}
+  <div id='header'>
+    <a href="/charts">
+      <h2>UNICEF Map Demo</h2>
+    </a>
+  </div>
+  {% endblock %}
 
-    <div id='header'>
-      {% block header %}
-      <a href="/charts">
-	<h2 style='margin-top: 5px; margin-left: 5px; padding: 10px; color: white; background:black'>UNICEF Map Demo</h2>
-      </a>
-      {% endblock %}
-    </div>
 
   {% block content %}
 

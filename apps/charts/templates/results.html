@@ -4,6 +4,7 @@
 {% block title %}Map{% endblock %}
 
 {% block stylesheets %}
+<link type="text/css" rel="stylesheet" href="/static/charts/stylesheets/results.css" />
 <link type="text/css" rel="stylesheet" href="/static/charts/stylesheets/map.css" />
 {% endblock %}
 
@@ -28,6 +29,7 @@
 {% block right %}
 <div id='filters'>
   {% block filters %}
+  {% include "filters.html" %}
   {% endblock %}
 </div>
 {% endblock %}
