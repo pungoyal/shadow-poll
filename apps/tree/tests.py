@@ -20,7 +20,7 @@ class TestApp (TestScript):
     testPin = """
            8005551211 > pin
            8005551211 < Please enter your 4-digit PIN
-           8005551211 > 1234
+           8005551211 > a
            8005551211 < Thanks for entering.
          """
     
@@ -73,6 +73,17 @@ class TestApp (TestScript):
         self.choices = self.ques.get_choices(self.msg_txt, self.delim)
         self.assertEquals(len(self.choices), 1)
         self.assertEquals(['a'], self.choices)
+        
+    def testGetTransitionsForSingleOption(self):
+        self.choices = ['a']
+        self.current_state = TreeState.objects.get(id=2)
+        self.found_transition = self.current_state.has_transition(self.choices)
+        self.assertTrue(self.found_transition)
+        
+        self.choices = ['b']
+        self.found_transition = self.current_state.has_transition(self.choices)
+        self.assertEqual(self.found_transition, False)
+        
     
     def testLocalization(self):
         '''Tests very basic localization of trees'''

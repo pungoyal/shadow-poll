@@ -96,7 +96,7 @@ class Answer(models.Model):
         ('R', 'Regular Expression'),
         ('C', 'Custom logic'),
     )
-    code = models.CharField(max_length=20)
+    code = models.CharField(max_length=20, null=False)
     type = models.CharField(max_length=1, choices=ANSWER_TYPES)
     answer = models.CharField(max_length=160)
     description = models.CharField(max_length=100, null=True)
@@ -135,6 +135,15 @@ class TreeState(models.Model):
 
     def has_loops_below(self):
         return TreeState.path_has_loops([self])
+    
+    def has_transition(self, choices):
+        self.codes = [trans.answer.code for trans in Transition.objects.all()]
+        self.transition_found=True
+        for self.ch in choices:
+            if not self.ch in self.codes:
+                self.transition_found = False
+                
+        return self.transition_found
     
     @classmethod
     def path_has_loops(klass, path):

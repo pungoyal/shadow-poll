@@ -87,6 +87,7 @@
     "pk": 1, 
     "model": "tree.answer", 
     "fields": {
+	  "code":"a",
       "answer": "^(\\d{4})$", 
       "type": "R", 
       "description": "a 4-digit decimal number"
@@ -99,7 +100,7 @@
       "question": 1, 
       "name": "test_root"
     }
-  }, 
+  },
   {
     "pk": 2, 
     "model": "tree.treestate", 
