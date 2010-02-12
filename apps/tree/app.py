@@ -188,21 +188,3 @@ class App(rapidsms.app.App):
 #                self.session_listeners[tree_key].append(function)
 #        else: 
         self.session_listeners[tree_key] = [function]
-        
-    def matches(self, answer, message):
-        answer_value = message.text
-        '''returns True if the answer is a match for this.'''
-        if not answer_value:
-            return False
-        if answer.type == "A":
-            return answer_value.lower() == answer.code.lower()
-        elif answer.type == "R":
-            return re.match(answer.code, answer_value, re.IGNORECASE)
-        elif answer.type == "C":
-            if self.registered_functions.has_key(answer.answer):
-                return self.registered_functions[answer.code](message)
-            else:
-                raise Exception("Can't find a function to match custom key: %s", answer)
-        raise Exception("Don't know how to process answer type: %s", answer.type)
-        
-        
