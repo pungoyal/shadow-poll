@@ -34,4 +34,10 @@ class TestIntegration(TestScript):
         00919980131127 < The three things I need most are: (Prioritize your first, second, and third.)
         00919980131127 > c,d,y
         00919980131127 < Placeholder error for question number 2. Please re-send.
+        00919980131127 > c,d,a
+        00919980131127 < Compared to my parents, my life in the future will be: a) Better; b) About the same; c) Worse; d) I don't know. Choose a,b,c or d.
+        00919980131127 > p
+        00919980131127 < Placeholder error for question number 3. Please re-send.
+        00919980131127 > a
+        00919980131127 < Thank you for participating in the poll. 
     """

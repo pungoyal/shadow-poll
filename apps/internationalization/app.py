@@ -15,10 +15,12 @@ class App (rapidsms.app.App):
         message.language = "en"
         t = Translator()
         processed = t.understand_and_translate_if_required(message.text)
-
         if processed:
             message.language = "ar"
             message.text = processed
+            self.debug("Processed '%s' to '%s'" % (message.text, processed))
+        else:
+            self.debug("No translation was required.")            
 
     def handle (self, message):
         """Add your main application logic in the handle phase."""
