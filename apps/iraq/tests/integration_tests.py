@@ -19,8 +19,19 @@ class TestIntegration(TestScript):
         00919980131127 < I feel happy: a) Always; b) Most of the time; c) Rarely; d) Never. Choose a,b,c or d.
         00919980131127 > a
         00919980131127 < The three things I need most are: (Prioritize your first, second, and third.)
-        00919980131127 > c,d,x
+        00919980131127 > c,d,e
         00919980131127 < Compared to my parents, my life in the future will be: a) Better; b) About the same; c) Worse; d) I don't know. Choose a,b,c or d.
         00919980131127 > c
         00919980131127 < Thank you for participating in the poll.
+    """
+    
+    testTreeAppFail = """
+        00919980131127 > register poll 100 1001
+        00919980131127 < Thanks for registering for the survey.
+        00919980131127 > poll
+        00919980131127 < I feel happy: a) Always; b) Most of the time; c) Rarely; d) Never. Choose a,b,c or d.
+        00919980131127 > a
+        00919980131127 < The three things I need most are: (Prioritize your first, second, and third.)
+        00919980131127 > c,d,y
+        00919980131127 < Placeholder error for question number 2. Please re-send.
     """

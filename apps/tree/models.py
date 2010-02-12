@@ -148,6 +148,9 @@ class TreeState(models.Model):
         for self.transition in Transition.objects.filter(current_state=self):
             if self.transition.answer.code in choices:
                 self.trans = self.transition
+                choices.remove(self.transition.answer.code)
+        if len(choices) > 0:
+            self.trans = None
         
         return self.trans
     
