@@ -23,11 +23,13 @@ def proxy(req):
         conf["host"], 
         conf["port"]
     )
-    data = _dict_to_POST(req.POST)
+    data = _dict_to_string(req.POST)
     req = urllib2.Request(url, data)
     response = urllib2.urlopen(req)
     return HttpResponse(response.read())
 
-def _dict_to_POST(post_dict):
-    """ Convert dictionary structure to key-value pair string """
-    return "&".join(['%s=%s' % (key, post_dict[key]) for key in post_dict])
+def _dict_to_string(dict_):
+    """ Convert dictionary structure to key-value pair string 
+    e.g. {'a':'b', 'c':'d'} -> a=b&c=d
+    """
+    return "&".join(['%s=%s' % (key, dict_[key]) for key in dict_])

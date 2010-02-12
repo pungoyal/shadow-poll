@@ -2,6 +2,7 @@
 # vim: ai ts=4 sts=4 et sw=4
 
 import django
+from datetime import datetime
 from django.db import models
 
 
@@ -19,7 +20,7 @@ class MessageBase(models.Model):
     
     
 class IncomingMessage(MessageBase):
-    received = models.DateTimeField(auto_now_add=True)
+    received = models.DateTimeField(default=datetime.now)
     
     # Helper methods to allow this object to be treated similar
     # to the outgoing message, e.g. if they are in the same list
@@ -36,7 +37,7 @@ class IncomingMessage(MessageBase):
         return "%s %s" % (MessageBase.__unicode__(self), self.received)  
 
 class OutgoingMessage(MessageBase):
-    sent = models.DateTimeField(auto_now_add=True)
+    sent = models.DateTimeField(default=datetime.now)
     
     @property
     def date(self):
