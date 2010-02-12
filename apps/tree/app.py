@@ -7,6 +7,7 @@ from reporters.models import Reporter
 from internationalization.utils import get_translation as _
 #from internationalization.utils import get_language_from_connection as lang
 from internationalization.utils import get_language_from_message as lang
+from register.models import Registration
 
 class App(rapidsms.app.App):
     
@@ -102,13 +103,17 @@ class App(rapidsms.app.App):
             
             # create an entry for this response
             # first have to know what sequence number to insert
+            last_registered_list = Registration.objects.filter(phone = msg.persistant_connection).order_by('date')
+            last_registered = None
+            if(len(last_registered_list) > 0):
+                last_registered = last_registered_list[0].phone
             ids = Entry.objects.all().filter(session=session).order_by('sequence_id').values_list('sequence_id', flat=True)
             if ids:
                 # not sure why pop() isn't allowed...
                 sequence = ids[len(ids) -1] + 1
             else:
                 sequence = 1
-            entry = Entry(session=session,sequence_id=sequence,transition=found_transition,text=str(options))
+            entry = Entry(session=session,sequence_id=sequence,transition=found_transition,text=str(options), uid = last_registered)
             entry.save()
             self.debug("entry %s saved" % entry)
                 

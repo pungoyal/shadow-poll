@@ -5,7 +5,7 @@
 from django.db import models
 from reporters.models import Reporter, PersistantConnection
 import re
-
+from register.models import Registration
 
 class Question(models.Model):
     '''A question, which is just some text to be sent to the user,
@@ -239,6 +239,7 @@ class Entry(models.Model):
     transition = models.ForeignKey(Transition)
     time = models.DateTimeField(auto_now_add=True)
     text = models.CharField(max_length=160)
+    uid = models.ForeignKey(PersistantConnection, null=True)
     
     def __unicode__(self):
         return "%s-%s: %s - %s" % (self.session.id, self.sequence_id, self.transition.current_state.question, self.text)
