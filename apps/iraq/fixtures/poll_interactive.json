@@ -32,7 +32,7 @@
         "fields": {
             "root_state": 1,
             "trigger": "poll",
-            "completion_text": "Thank you for participating in the poll."
+            "completion_text": "Your responses have been recorded. Thank you for participating in the poll."
         }
     },
     {
