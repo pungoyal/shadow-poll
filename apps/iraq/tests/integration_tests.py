@@ -32,7 +32,7 @@ class TestIntegration(TestScript):
         00919980131127 > c,d,e
         00919980131127 < Compared to my parents, my life in the future will be: a) Better; b) About the same; c) Worse; d) I don't know. Choose a,b,c or d.
         00919980131127 > c
-        00919980131127 < Thank you for participating in the poll.
+        00919980131127 < Your responses have been recorded. Thank you for participating in the poll.
     """
     
     testTreeAppFail = """
