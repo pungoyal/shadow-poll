@@ -65,7 +65,9 @@ class TestIntegration(TestScript):
         00919980131127 < Placeholder error for question number 1. Please re-send.
         00919980131127 > x
         00919980131127 < Placeholder error for question number 1. Please re-send.
-        00919980131127 < Sorry, invalid answer 3 times. Your session will now end. Please try again later. 
+        00919980131127 < Sorry, invalid answer 3 times. Your session will now end. Please try again later.
+        00919980131127 > a
+        00919980131127 < We didn't understand your response.
     """
     
     testTreeAppJunkMessage = """
