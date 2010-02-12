@@ -88,9 +88,7 @@
     "model": "tree.answer", 
     "fields": {
 	  "code":"a",
-      "answer": "^(\\d{4})$", 
-      "type": "R", 
-      "description": "a 4-digit decimal number"
+      "answer": "2010" 
     }
   }, 
   {

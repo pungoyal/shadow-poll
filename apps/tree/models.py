@@ -3,7 +3,7 @@
 
 
 from django.db import models
-from reporters.models import Reporter, PersistantConnection
+from apps.reporters.models import Reporter, PersistantConnection
 import re
 from register.models import Registration
 
@@ -97,10 +97,8 @@ class Answer(models.Model):
         ('C', 'Custom logic'),
     )
     code = models.CharField(max_length=20, null=False)
-    type = models.CharField(max_length=1, choices=ANSWER_TYPES)
     answer = models.CharField(max_length=160)
-    description = models.CharField(max_length=100, null=True)
-    
+
     def __unicode__(self):
         return self.answer
         #return "%s %s (%s)" % (self.helper_text(), self.type)

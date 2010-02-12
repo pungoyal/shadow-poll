@@ -40,9 +40,7 @@
         "model": "tree.answer", 
         "fields": {
             "answer": "Apple", 
-            "type": "A", 
-            "code": "apple", 
-            "description": "round and red"
+            "code": "apple" 
         }
     }, 
     {
@@ -50,9 +48,7 @@
         "model": "tree.answer", 
         "fields": {
             "answer": "Mango", 
-            "type": "A", 
-            "code": "mango", 
-            "description": "oval and orange"
+            "code": "mango"
         }
     }, 
     {
@@ -60,19 +56,15 @@
         "model": "tree.answer", 
         "fields": {
             "answer": "Carrot", 
-            "type": "A", 
-            "code": "carrot", 
-            "description": "sharp and orange"
+            "code": "carrot"
         }
     }, 
     {
         "pk": 4, 
         "model": "tree.answer", 
         "fields": {
-            "answer": "Tomato", 
-            "type": "A", 
-            "code": "tomato", 
-            "description": "round and red and green"
+            "answer": "Tomato",
+            "code": "tomato"
         }
     }, 
     {
@@ -80,9 +72,7 @@
         "model": "tree.answer", 
         "fields": {
             "answer": "Lime", 
-            "type": "A", 
-            "code": "lime", 
-            "description": "round and green"
+            "code": "lime" 
         }
     }, 
     {
@@ -90,9 +80,7 @@
         "model": "tree.answer", 
         "fields": {
             "answer": "Kiwi", 
-            "type": "A", 
-            "code": "kiwi", 
-            "description": "oval and green"
+            "code": "kiwi"
         }
     }, 
     {
@@ -100,9 +88,7 @@
         "model": "tree.answer", 
         "fields": {
             "answer": "Pear", 
-            "type": "A", 
-            "code": "pear", 
-            "description": "oddly shaped"
+            "code": "pear" 
         }
     }, 
     {
@@ -110,9 +96,7 @@
         "model": "tree.answer", 
         "fields": {
             "answer": "Lettuce", 
-            "type": "A", 
-            "code": "lettuce", 
-            "description": "leafy"
+            "code": "lettuce" 
         }
     }, 
     {
@@ -120,9 +104,7 @@
         "model": "tree.answer", 
         "fields": {
             "answer": "Spinach", 
-            "type": "A", 
-            "code": "spinach", 
-            "description": "leafy and dark green"
+            "code": "spinach" 
         }
     }, 
     {
@@ -130,9 +112,7 @@
         "model": "tree.answer", 
         "fields": {
             "answer": "Ginger", 
-            "type": "A", 
-            "code": "ginger", 
-            "description": "like potato"
+            "code": "ginger" 
         }
     }, 
     {
