@@ -43,6 +43,14 @@ a {
         top:50px;
         }
 
+#mainHeader { 
+              width: 600px;
+              height: 20px;
+              top: 50px;
+              float: left;
+              position: relative;
+              }
+
 #map { 
        clear:both;
        width:600px; 
