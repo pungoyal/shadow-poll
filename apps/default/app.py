@@ -41,8 +41,8 @@ def _test_and_set_bot(connection):
     it stays 'bot' until an administrator remarks it
     """
     history = IncomingMessage.objects.filter(
-        identity=connection.identity, 
-        backend=connection.backend
+        identity=str(connection.identity), 
+        backend=str(connection.backend)
         ).order_by('-pk')[:MAX_NUM_DUPLICATES]
     if history and history.count() == MAX_NUM_DUPLICATES:
         # if the last X messages had the same text

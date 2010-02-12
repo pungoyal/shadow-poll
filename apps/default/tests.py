@@ -80,16 +80,16 @@ class TestBot(DjTestScript):
     
     def test_ignore_before_timeout(self):
         for i in range(0,5):
-            IncomingMessage(text="123",identity=self.conn.identity, 
-                            backend=self.conn.backend, 
+            IncomingMessage(text="123",identity=str(self.conn.identity), 
+                            backend=str(self.conn.backend), 
                             received=datetime.now()).save()
         # this is a bot
         self.assertTrue( _test_and_set_bot(self.conn) )
 
     def test_allow_after_timeout(self):
         for i in range(0,5):
-            IncomingMessage(text="123", identity=self.conn.identity, 
-                            backend=self.conn.backend, 
+            IncomingMessage(text="123",identity=str(self.conn.identity), 
+                            backend=str(self.conn.backend), 
                             received=datetime.now() - timedelta(minutes=5)
                             ).save()
         # this is not a bot
