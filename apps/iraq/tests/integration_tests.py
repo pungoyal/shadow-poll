@@ -13,6 +13,8 @@ class TestIntegration(TestScript):
     apps = (App, reporter_app, register_app, default_app, i18n_app)
 
     testTreeApp = """
+        00919980131127 > register poll 100 1001
+        00919980131127 < Thanks for registering for the survey.
         00919980131127 > poll
         00919980131127 < What do you feel happy?
         00919980131127 > a
