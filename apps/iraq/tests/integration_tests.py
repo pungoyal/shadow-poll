@@ -68,6 +68,8 @@ class TestIntegration(TestScript):
         00919980131127 < Sorry, invalid answer 3 times. Your session will now end. Please try again later.
         00919980131127 > a
         00919980131127 < We didn't understand your response.
+        00919980131127 > poll
+        00919980131127 < I feel happy: a) Always; b) Most of the time; c) Rarely; d) Never. Choose a,b,c or d.
     """
     
     testTreeAppJunkMessage = """
