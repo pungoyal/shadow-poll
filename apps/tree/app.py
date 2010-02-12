@@ -113,6 +113,7 @@ class App(rapidsms.app.App):
                 sequence = ids[len(ids) -1] + 1
             else:
                 sequence = 1
+            options =  state.question.get_choices(msg.text, ",")
             entry = Entry(session=session,sequence_id=sequence,transition=found_transition,text=str(options), uid = last_registered)
             entry.save()
             self.debug("entry %s saved" % entry)
