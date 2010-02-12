@@ -1,254 +1,404 @@
 [
     {
-        "pk": 1, 
-        "model": "tree.question", 
+        "pk": 1,
+        "model": "tree.question",
         "fields": {
-            "text": "What do you feel happy?",
-			"max_choices":"1",
-            "error_response": "err1"
+            "max_choices": 1,
+            "text": "I feel happy: a) Always; b) Most of the time; c) Rarely; d) Never. Choose a,b,c or d.",
+            "error_response": "Placeholder error for question number 1. Please re-send."
         }
-    }, 
+    },
     {
-        "pk": 2, 
-        "model": "tree.question", 
+        "pk": 2,
+        "model": "tree.question",
         "fields": {
-            "text": "What are the three things do you need the most?",
-			"max_choices": "3", 
-            "error_response": "err2"
+            "max_choices": 3,
+            "text": "The three things I need most are: (Prioritize your first, second, and third.)",
+            "error_response": "Placeholder error for question number 2. Please re-send."
         }
-    }, 
+    },
     {
-        "pk": 3, 
-        "model": "tree.question", 
+        "pk": 3,
+        "model": "tree.question",
         "fields": {
-            "text": "Compare to my parents?",
-			"max_choices": "1",
-            "error_response": "err3"
+            "max_choices": 1,
+            "text": "Compared to my parents, my life in the future will be: a) Better; b) About the same; c) Worse; d) I don't know. Choose a,b,c or d.",
+            "error_response": "Placeholder error for question number 3. Please re-send."
         }
-    }, 
+    },
     {
-        "pk": 1, 
-        "model": "tree.tree", 
+        "pk": 1,
+        "model": "tree.tree",
         "fields": {
-            "root_state": 1, 
-            "trigger": "poll", 
-            "completion_text": "Thank you for participating in the poll."
+            "root_state": 1,
+            "trigger": "poll",
+            "completion_text": "Your responses have been recorded. Thank you for participating in the poll."
         }
-    }, 
+    },
     {
-        "pk": 1, 
-        "model": "tree.answer", 
+        "pk": 1,
+        "model": "tree.answer",
         "fields": {
-			"code": "a",
-            "answer": "Always", 
-            "type": "A", 
-            "description": "round and red"
+            "answer": "Always",
+            "code": "a"
         }
-    }, 
+    },
     {
-        "pk": 2, 
-        "model": "tree.answer", 
+        "pk": 2,
+        "model": "tree.answer",
         "fields": {
-			"code": "b",
-            "answer": "Mostly", 
-            "type": "A", 
-            "description": "oval and orange"
+            "answer": "Most of the time",
+            "code": "b"
         }
-    }, 
+    },
     {
-        "pk": 3, 
-        "model": "tree.answer", 
+        "pk": 3,
+        "model": "tree.answer",
         "fields": {
-			"code": "c",
-            "answer": "Never", 
-            "type": "A", 
-            "description": "sharp and orange"
+            "answer": "Rarely",
+            "code": "c"
         }
-    }, 
+    },
     {
-        "pk": 4, 
-        "model": "tree.answer", 
+        "pk": 4,
+        "model": "tree.answer",
         "fields": {
-			"code": "d",
-            "answer": "Rarely", 
-            "type": "A", 
-            "description": "round and red and green"
+            "answer": "Never",
+            "code": "d"
         }
-    }, 
+    },
     {
-        "pk": 5, 
-        "model": "tree.answer", 
+        "pk": 5,
+        "model": "tree.answer",
         "fields": {
-			"code": "a",
-            "answer": "Lime", 
-            "type": "A", 
-            "description": "round and green"
+            "answer": "Peace and Security",
+            "code": "a"
         }
-    }, 
+    },
     {
-        "pk": 6, 
-        "model": "tree.answer", 
+        "pk": 6,
+        "model": "tree.answer",
         "fields": {
-			"code": "b",
-            "answer": "Kiwi", 
-            "type": "A", 
-            "description": "oval and green"
+            "answer": "Go to school regularly",
+            "code": "b"
         }
-    }, 
+    },
     {
-        "pk": 7, 
-        "model": "tree.answer", 
+        "pk": 7,
+        "model": "tree.answer",
         "fields": {
-			"code": "c",
-            "answer": "Pear", 
-            "type": "A", 
-            "description": "oddly shaped"
+            "answer": "Health care when sick",
+            "code": "c"
         }
-    }, 
+    },
     {
-        "pk": 8, 
-        "model": "tree.answer", 
+        "pk": 8,
+        "model": "tree.answer",
         "fields": {
-			"code": "x",
-            "answer": "Lettuce", 
-            "type": "A", 
-            "description": "leafy"
+            "answer": "Clean neighbourhood",
+            "code": "d"
         }
-    }, 
+    },
     {
-        "pk": 9, 
-        "model": "tree.answer", 
+        "pk": 9,
+        "model": "tree.answer",
         "fields": {
-			"code": "e",
-            "answer": "Spinach", 
-            "type": "A", 
-            "description": "leafy and dark green"
+            "answer": "Clean drinking water",
+            "code": "e"
         }
-    }, 
+    },
     {
-        "pk": 10, 
-        "model": "tree.answer", 
+        "pk": 10,
+        "model": "tree.answer",
         "fields": {
-			"code": "f",
-            "answer": "Ginger", 
-            "type": "A", 
-            "description": "like potato"
+            "answer": "Enough food",
+            "code": "f"
         }
-    }, 
+    },
     {
-        "pk": 1, 
-        "model": "tree.treestate", 
+        "pk": 11,
+        "model": "tree.answer",
         "fields": {
-            "num_retries": 3, 
-            "question": 1, 
+            "answer": "Be loved",
+            "code": "g"
+        }
+    },
+    {
+        "pk": 12,
+        "model": "tree.answer",
+        "fields": {
+            "answer": "Not have to work",
+            "code": "h"
+        }
+    },
+    {
+        "pk": 13,
+        "model": "tree.answer",
+        "fields": {
+            "answer": "Be listened to",
+            "code": "i"
+        }
+    },
+    {
+        "pk": 14,
+        "model": "tree.answer",
+        "fields": {
+            "answer": "A place to play",
+            "code": "j"
+        }
+    },
+    {
+        "pk": 15,
+        "model": "tree.answer",
+        "fields": {
+            "answer": "Family and friends to be safe",
+            "code": "k"
+        }
+    },
+    {
+        "pk": 16,
+        "model": "tree.answer",
+        "fields": {
+            "answer": "Other (open text response)",
+            "code": "l"
+        }
+    },
+    {
+        "pk": 17,
+        "model": "tree.answer",
+        "fields": {
+            "answer": "Better",
+            "code": "a"
+        }
+    },
+    {
+        "pk": 18,
+        "model": "tree.answer",
+        "fields": {
+            "answer": "About the same",
+            "code": "b"
+        }
+    },
+    {
+        "pk": 19,
+        "model": "tree.answer",
+        "fields": {
+            "answer": "Worse",
+            "code": "c"
+        }
+    },
+    {
+        "pk": 20,
+        "model": "tree.answer",
+        "fields": {
+            "answer": "I Don\u2019t know",
+            "code": "d"
+        }
+    },
+    {
+        "pk": 1,
+        "model": "tree.treestate",
+        "fields": {
+            "num_retries": 3,
+            "question": 1,
             "name": "default"
         }
-    }, 
+    },
     {
-        "pk": 2, 
-        "model": "tree.treestate", 
+        "pk": 2,
+        "model": "tree.treestate",
         "fields": {
-            "num_retries": 3, 
-            "question": 2, 
-            "name": "Vegetable"
+            "num_retries": 3,
+            "question": 2,
+            "name": "three things"
         }
-    }, 
+    },
     {
-        "pk": 3, 
-        "model": "tree.treestate", 
+        "pk": 3,
+        "model": "tree.treestate",
         "fields": {
-            "num_retries": 3, 
-            "question": 3, 
-            "name": "Juice"
+            "num_retries": 3,
+            "question": 3,
+            "name": "life"
         }
-    }, 
+    },
     {
-        "pk": 1, 
-        "model": "tree.transition", 
+        "pk": 1,
+        "model": "tree.transition",
         "fields": {
-            "answer": 2, 
-            "current_state": 1, 
+            "answer": 1,
+            "current_state": 1,
             "next_state": 2
         }
-    }, 
+    },
     {
-        "pk": 2, 
-        "model": "tree.transition", 
+        "pk": 2,
+        "model": "tree.transition",
         "fields": {
-            "answer": 1, 
-            "current_state": 1, 
+            "answer": 2,
+            "current_state": 1,
             "next_state": 2
         }
-    }, 
+    },
     {
-        "pk": 3, 
-        "model": "tree.transition", 
+        "pk": 3,
+        "model": "tree.transition",
         "fields": {
-            "answer": 3, 
-            "current_state": 2, 
-            "next_state": 3
-        }
-    }, 
-    {
-        "pk": 4, 
-        "model": "tree.transition", 
-        "fields": {
-            "answer": 4, 
-            "current_state": 2, 
-            "next_state": 3
-        }
-    }, 
-    {
-        "pk": 5, 
-        "model": "tree.transition", 
-        "fields": {
-            "answer": 5, 
-            "current_state": 3, 
-            "next_state": null
-        }
-    }, 
-    {
-        "pk": 6, 
-        "model": "tree.transition", 
-        "fields": {
-            "answer": 6, 
-            "current_state": 3, 
-            "next_state": null
-        }
-    }, 
-    {
-        "pk": 7, 
-        "model": "tree.transition", 
-        "fields": {
-            "answer": 7, 
-            "current_state": 1, 
+            "answer": 3,
+            "current_state": 1,
             "next_state": 2
         }
-    }, 
+    },
     {
-        "pk": 8, 
-        "model": "tree.transition", 
+        "pk": 4,
+        "model": "tree.transition",
         "fields": {
-            "answer": 8, 
-            "current_state": 2, 
+            "answer": 4,
+            "current_state": 1,
+            "next_state": 2
+        }
+    },
+    {
+        "pk": 5,
+        "model": "tree.transition",
+        "fields": {
+            "answer": 5,
+            "current_state": 2,
             "next_state": 3
         }
-    }, 
+    },
     {
-        "pk": 9, 
-        "model": "tree.transition", 
+        "pk": 6,
+        "model": "tree.transition",
         "fields": {
-            "answer": 9, 
-            "current_state": 3, 
+            "answer": 6,
+            "current_state": 2,
+            "next_state": 3
+        }
+    },
+    {
+        "pk": 7,
+        "model": "tree.transition",
+        "fields": {
+            "answer": 7,
+            "current_state": 2,
+            "next_state": 3
+        }
+    },
+    {
+        "pk": 8,
+        "model": "tree.transition",
+        "fields": {
+            "answer": 8,
+            "current_state": 2,
+            "next_state": 3
+        }
+    },
+    {
+        "pk": 9,
+        "model": "tree.transition",
+        "fields": {
+            "answer": 9,
+            "current_state": 2,
+            "next_state": 3
+        }
+    },
+    {
+        "pk": 10,
+        "model": "tree.transition",
+        "fields": {
+            "answer": 10,
+            "current_state": 2,
+            "next_state": 3
+        }
+    },
+    {
+        "pk": 11,
+        "model": "tree.transition",
+        "fields": {
+            "answer": 11,
+            "current_state": 2,
+            "next_state": 3
+        }
+    },
+    {
+        "pk": 12,
+        "model": "tree.transition",
+        "fields": {
+            "answer": 12,
+            "current_state": 2,
+            "next_state": 3
+        }
+    },
+    {
+        "pk": 13,
+        "model": "tree.transition",
+        "fields": {
+            "answer": 13,
+            "current_state": 2,
+            "next_state": 3
+        }
+    },
+    {
+        "pk": 14,
+        "model": "tree.transition",
+        "fields": {
+            "answer": 14,
+            "current_state": 2,
+            "next_state": 3
+        }
+    },
+    {
+        "pk": 15,
+        "model": "tree.transition",
+        "fields": {
+            "answer": 15,
+            "current_state": 2,
+            "next_state": 3
+        }
+    },
+    {
+        "pk": 16,
+        "model": "tree.transition",
+        "fields": {
+            "answer": 16,
+            "current_state": 2,
+            "next_state": 3
+        }
+    },
+    {
+        "pk": 17,
+        "model": "tree.transition",
+        "fields": {
+            "answer": 17,
+            "current_state": 3,
             "next_state": null
         }
-    }, 
+    },
     {
-        "pk": 10, 
-        "model": "tree.transition", 
+        "pk": 18,
+        "model": "tree.transition",
         "fields": {
-            "answer": 10, 
-            "current_state": 3, 
+            "answer": 18,
+            "current_state": 3,
+            "next_state": null
+        }
+    },
+    {
+        "pk": 19,
+        "model": "tree.transition",
+        "fields": {
+            "answer": 19,
+            "current_state": 3,
+            "next_state": null
+        }
+    },
+    {
+        "pk": 20,
+        "model": "tree.transition",
+        "fields": {
+            "answer": 20,
+            "current_state": 3,
             "next_state": null
         }
     },
@@ -256,8 +406,8 @@
         "pk": 100, 
         "model": "internationalization.translation", 
         "fields": {
-            "translation": "\u062afood", 
-            "code": "food", 
+            "translation": "\u062apoll",
+            "code": "poll", 
             "language": 2
         }
     },
@@ -265,8 +415,8 @@
         "pk": 101, 
         "model": "internationalization.translation", 
         "fields": {
-            "translation": "\u062aWhat is your favourite fruit?", 
-            "code": "What is your favourite fruit?", 
+            "translation": "\u062aI feel happy: a) Always; b) Most of the time; c) Rarely; d) Never. Choose a,b,c or d.", 
+            "code": "I feel happy: a) Always; b) Most of the time; c) Rarely; d) Never. Choose a,b,c or d.", 
             "language": 2
         }
     }, 

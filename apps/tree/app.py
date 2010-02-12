@@ -7,6 +7,7 @@ from reporters.models import Reporter
 from internationalization.utils import get_translation as _
 #from internationalization.utils import get_language_from_connection as lang
 from internationalization.utils import get_language_from_message as lang
+from register.models import Registration
 
 class App(rapidsms.app.App):
     
@@ -102,13 +103,18 @@ class App(rapidsms.app.App):
             
             # create an entry for this response
             # first have to know what sequence number to insert
+            last_registered_list = Registration.objects.filter(phone = msg.persistant_connection).order_by('date')
+            last_registered = None
+            if(len(last_registered_list) > 0):
+                last_registered = last_registered_list[0].phone
             ids = Entry.objects.all().filter(session=session).order_by('sequence_id').values_list('sequence_id', flat=True)
             if ids:
                 # not sure why pop() isn't allowed...
                 sequence = ids[len(ids) -1] + 1
             else:
                 sequence = 1
-            entry = Entry(session=session,sequence_id=sequence,transition=found_transition,text=str(options))
+            options =  state.question.get_choices(msg.text, ",")
+            entry = Entry(session=session,sequence_id=sequence,transition=found_transition,text=str(options), uid = last_registered)
             entry.save()
             self.debug("entry %s saved" % entry)
                 
@@ -183,21 +189,3 @@ class App(rapidsms.app.App):
 #                self.session_listeners[tree_key].append(function)
 #        else: 
         self.session_listeners[tree_key] = [function]
-        
-    def matches(self, answer, message):
-        answer_value = message.text
-        '''returns True if the answer is a match for this.'''
-        if not answer_value:
-            return False
-        if answer.type == "A":
-            return answer_value.lower() == answer.code.lower()
-        elif answer.type == "R":
-            return re.match(answer.code, answer_value, re.IGNORECASE)
-        elif answer.type == "C":
-            if self.registered_functions.has_key(answer.answer):
-                return self.registered_functions[answer.code](message)
-            else:
-                raise Exception("Can't find a function to match custom key: %s", answer)
-        raise Exception("Don't know how to process answer type: %s", answer.type)
-        
-        

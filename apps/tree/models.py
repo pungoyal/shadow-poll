@@ -3,9 +3,9 @@
 
 
 from django.db import models
-from reporters.models import Reporter, PersistantConnection
+from apps.reporters.models import Reporter, PersistantConnection
 import re
-
+from register.models import Registration
 
 class Question(models.Model):
     '''A question, which is just some text to be sent to the user,
@@ -97,10 +97,8 @@ class Answer(models.Model):
         ('C', 'Custom logic'),
     )
     code = models.CharField(max_length=20, null=False)
-    type = models.CharField(max_length=1, choices=ANSWER_TYPES)
     answer = models.CharField(max_length=160)
-    description = models.CharField(max_length=100, null=True)
-    
+
     def __unicode__(self):
         return self.answer
         #return "%s %s (%s)" % (self.helper_text(), self.type)
@@ -150,6 +148,9 @@ class TreeState(models.Model):
         for self.transition in Transition.objects.filter(current_state=self):
             if self.transition.answer.code in choices:
                 self.trans = self.transition
+                choices.remove(self.transition.answer.code)
+        if len(choices) > 0:
+            self.trans = None
         
         return self.trans
     
@@ -239,6 +240,7 @@ class Entry(models.Model):
     transition = models.ForeignKey(Transition)
     time = models.DateTimeField(auto_now_add=True)
     text = models.CharField(max_length=160)
+    uid = models.ForeignKey(PersistantConnection, null=True)
     
     def __unicode__(self):
         return "%s-%s: %s - %s" % (self.session.id, self.sequence_id, self.transition.current_state.question, self.text)
