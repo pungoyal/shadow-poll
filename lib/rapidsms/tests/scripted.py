@@ -102,7 +102,11 @@ class TestScript (TestCase):
                     except UnicodeDecodeError:
                         # This error occurs when the input is not standardized (i.e. unicode)
                         self.fail("Could not encode unit test string to stdout character encoding. Make sure your RapidSMS unit tests are unicode strings!")
-
+                        
+                if len(txt) == 0 and msg is None:
+                    last_msg = txt
+                    continue
+                    
                 # The following 3 try...catch blocks handle the case where the unit test strings
                 # are not properly decoded in tests.py. Basically, there is no way to reliably
                 # determine the encoding of a character > 127 bits a posteriori. The best we can
