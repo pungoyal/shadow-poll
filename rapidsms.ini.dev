@@ -30,7 +30,7 @@ backends=http
 engine=postgresql_psycopg2
 name=iraqchildren
 user=unicef
-password=
+password=unicef
 #host=
 #port=
 
