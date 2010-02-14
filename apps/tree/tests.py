@@ -47,7 +47,18 @@ class TestApp (TestScript):
         self.tree = Tree.objects.get(id=1)
         self.tree_model = Tree()
         self.tree_and_demographics = self.tree_model.parse_information_and_get_tree(self.msg_txt," ")
-        self.assertEquals(self.tree_and_demographics , {'tree': self.tree, 'sex': "m", 'age': '12'})
+        self.assertEquals(self.tree_and_demographics , {'tree': self.tree, 'sex': 'm', 'age': '12'})
+        
+        self.msg_txt = "test f 12"
+        self.tree_and_demographics = self.tree_model.parse_information_and_get_tree(self.msg_txt," ")
+        self.assertEquals(self.tree_and_demographics , {'tree': self.tree, 'sex': 'f', 'age': '12'})
+        
+    def testTriggerWithOnlySexInfo(self):
+        self.msg_txt = "test m"
+        self.tree_model = Tree()
+        self.tree_and_demographics = self.tree_model.parse_information_and_get_tree(self.msg_txt," ")
+        self.assertEquals(self.tree_and_demographics['tree'].id , 1)
+        self.assertEquals(self.tree_and_demographics['sex'] , 'm')
         
     def testGetChoicesForSingleOption(self):
         self.msg_txt = "a"
