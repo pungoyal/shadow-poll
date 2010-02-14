@@ -65,7 +65,7 @@ class Tree(models.Model):
     def parse_information_and_get_tree(self, message, delimeter):
         self.msg = message.rsplit(delimeter)
         self.tree_objs = Tree.objects.filter(trigger = self.msg[0])
-        return self.tree_objs[0] if len(self.tree_objs) > 0 else False
+        return self.tree_objs[0] if len(self.tree_objs) > 0 else None
         
 
 class Answer(models.Model):

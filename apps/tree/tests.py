@@ -30,6 +30,10 @@ class TestApp (TestScript):
         self.tree = self.tree_model.parse_information_and_get_tree(self.msg_txt," ")
         self.assertEquals(self.tree.id , 1)
         
+        self.msg_txt = "junk m 12"
+        self.tree = self.tree_model.parse_information_and_get_tree(self.msg_txt," ")
+        self.assertEquals(self.tree , None)
+        
     def testGetChoicesForSingleOption(self):
         self.msg_txt = "a"
         self.delim = ";"
