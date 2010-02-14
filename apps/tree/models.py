@@ -64,12 +64,18 @@ class Tree(models.Model):
         
     def parse_information_and_get_tree(self, message, delimeter):
         information={}
-        self.msg = message.rsplit(delimeter)
+        self.msg = message.rsplit(delimeter)    
         self.tree_objs = Tree.objects.filter(trigger = self.msg[0])
         if len(self.tree_objs) > 0:
             information['tree'] = self.tree_objs[0]
         else:
             information['tree'] = None
+        if len(self.msg) > 1:
+            if (self.msg[1] == 'm') | (self.msg[1] == 'f'):
+                information['sex'] = self.msg[1]
+        
+        if len(self.msg) > 2:
+            information['age'] = self.msg[2]
         return information
         
 
