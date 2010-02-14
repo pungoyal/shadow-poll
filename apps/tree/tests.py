@@ -24,6 +24,12 @@ class TestApp (TestScript):
            8005551211 < Thanks for entering.
          """
     
+    def testGetTrigger(self):
+        self.msg_txt = "test m 12"
+        self.tree_model = Tree()
+        self.tree = self.tree_model.parse_information_and_get_tree(self.msg_txt," ")
+        self.assertEquals(self.tree.id , 1)
+        
     def testGetChoicesForSingleOption(self):
         self.msg_txt = "a"
         self.delim = ";"

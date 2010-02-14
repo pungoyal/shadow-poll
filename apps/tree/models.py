@@ -61,8 +61,12 @@ class Tree(models.Model):
         all_states.append(self.root_state)
         self.root_state.add_all_unique_children(all_states)
         return all_states
-
-
+        
+    def parse_information_and_get_tree(self, message, delimeter):
+        self.msg = message.rsplit(delimeter)
+        self.tree_objs = Tree.objects.filter(trigger = self.msg[0])
+        return self.tree_objs[0] if len(self.tree_objs) > 0 else False
+        
 
 class Answer(models.Model):
     '''An answer to a question.
