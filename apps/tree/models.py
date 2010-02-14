@@ -255,7 +255,7 @@ class Entry(models.Model):
     transition = models.ForeignKey(Transition)
     time = models.DateTimeField(auto_now_add=True)
     text = models.CharField(max_length=160)
-    uid = models.ForeignKey(PersistantConnection, null=True)
+    location = models.IntegerField(null=True)
     
     def __unicode__(self):
         return "%s-%s: %s - %s" % (self.session.id, self.sequence_id, self.transition.current_state.question, self.text)
