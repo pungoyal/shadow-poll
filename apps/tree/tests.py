@@ -28,19 +28,25 @@ class TestApp (TestScript):
         self.msg_txt = "test m 12"
         self.tree_model = Tree()
         self.tree = self.tree_model.parse_information_and_get_tree(self.msg_txt," ")
-        self.assertEquals(self.tree.id , 1)
+        self.assertEquals(self.tree['tree'].id , 1)
         
         self.msg_txt = "junk m 12"
         self.tree = self.tree_model.parse_information_and_get_tree(self.msg_txt," ")
-        self.assertEquals(self.tree , None)
+        self.assertEquals(self.tree['tree'] , None)
         
         self.msg_txt = "test"
         self.tree = self.tree_model.parse_information_and_get_tree(self.msg_txt," ")
-        self.assertEquals(self.tree.id , 1)
+        self.assertEquals(self.tree['tree'].id , 1)
         
         self.msg_txt = "test m"
         self.tree = self.tree_model.parse_information_and_get_tree(self.msg_txt," ")
-        self.assertEquals(self.tree.id , 1)
+        self.assertEquals(self.tree['tree'].id , 1)
+        
+    # def testTriggerWithDemoGraphicInformatin(self):
+    #     self.msg_txt = "test m 12"
+    #     self.tree_model = Tree()
+    #     self.tree_and_demographics = self.tree_model.parse_information_and_get_tree(self.msg_txt," ")
+    #     self.assertEquals(self.tree , {'tree': self.tree, 'sex': "m", 'age': 12})
         
     def testGetChoicesForSingleOption(self):
         self.msg_txt = "a"
