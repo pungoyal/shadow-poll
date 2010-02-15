@@ -14,8 +14,8 @@ class Translation(models.Model):
     # The actual original (probably english) string will be 
     # used as the key into the other languages.  This is 
     # similar to the python/django _() i18n support.  
-    translation = models.CharField(max_length=100)
-    code = models.CharField(max_length=100)
+    translation = models.CharField(max_length=700)
+    code = models.CharField(max_length=700)
         
     class Meta:
         db_table = 'Dictionary'

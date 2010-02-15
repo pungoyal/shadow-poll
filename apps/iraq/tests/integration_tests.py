@@ -25,9 +25,10 @@ class TestIntegration(TestScript):
         00919980131127 < Your responses have been recorded. Thank you for participating in the poll.
     """
     test_registration_message_in_arabic = u"""
-        00919980131127 > تسجيل التصويت 100 1001
-        00919980131127 <  شكراً لتسجيلك في  هذه الدراسة
     00919980131127 > التصويت
+    00919980131127 <  أنا أشعر بالسعادة:
+    00919980131127 > أ
+    00919980131127 < أكثر ثلاثة أمور لا تجعلني أشعر بالسعادة هي (الرجاء ترتيبها حسب الأولوية):
     """
     testTreeAppWithoutRegister = """
         00919980131127 > poll
