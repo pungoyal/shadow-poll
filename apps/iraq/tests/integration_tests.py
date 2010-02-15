@@ -24,6 +24,11 @@ class TestIntegration(TestScript):
         00919980131127 > c
         00919980131127 < Your responses have been recorded. Thank you for participating in the poll.
     """
+    test_registration_message_in_arabic = u"""
+        00919980131127 > تسجيل التصويت 100 1001
+        00919980131127 <  شكراً لتسجيلك في  هذه الدراسة
+    00919980131127 > التصويت
+    """
     testTreeAppWithoutRegister = """
         00919980131127 > poll
         00919980131127 < I feel happy: a) Always; b) Most of the time; c) Rarely; d) Never. Choose a,b,c or d.
