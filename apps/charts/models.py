@@ -21,8 +21,7 @@ class Governorates(models.Model):
         return len(Entry.objects.all())
     
     def style(self):
-        number_of_responses = self.num_responses()
-        return "s%d" % int(ceil((number_of_responses / self.total_responses()) * 100))
+        return "s%d" % int(ceil((self.num_responses() / self.total_responses()) * 100))
 
     def exposed(self):
         return {'name': self.id}
