@@ -7,7 +7,7 @@ from django.db import models
 
 
 class MessageBase(models.Model):
-    text = models.CharField(max_length=140)
+    text = models.CharField(max_length=700)
     # TODO save connection title rather than wacky object string?
     identity = models.CharField(max_length=150)
     backend = models.CharField(max_length=150)
