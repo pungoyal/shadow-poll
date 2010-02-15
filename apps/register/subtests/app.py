@@ -5,11 +5,6 @@ from rapidsms.tests.scripted import TestScript
 from register.models import *
 from reporters.models import PersistantBackend, Reporter
 from register.app import App
-import poll.app as poll_app
-import register.app as register_app
-import reporters.app as reporter_app
-
-
 
 class RegisterTest(TestCase):
     def test_register_needs_keyword_at_the_start_of_the_message_base(self):

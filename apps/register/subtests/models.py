@@ -5,9 +5,6 @@ from rapidsms.tests.scripted import TestScript
 from register.models import *
 from reporters.models import PersistantBackend, PersistantConnection, Reporter
 from register.app import App
-import poll.app as poll_app
-import register.app as register_app
-import reporters.app as reporter_app
 
 class RegistrationTest(TestCase):
     fixtures = ['registration']
