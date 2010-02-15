@@ -133,10 +133,10 @@ class Answer(models.Model):
                 return self.description
             # this might be ugly
             return self.answer
-    
+
 
 class TreeState(models.Model):
-    """ A TreeState is a location in a tree.  It is 
+    """ A TreeState is a location in a tree.  It is
         associated with a question and a set of answers
         (transitions) that allow traversal to other states.""" 
     name = models.CharField(max_length=100)
@@ -255,8 +255,9 @@ class Entry(models.Model):
     transition = models.ForeignKey(Transition)
     time = models.DateTimeField(auto_now_add=True)
     text = models.CharField(max_length=160)
-    location = models.IntegerField(null=True)
-    
+    governorate = models.IntegerField(null=True)
+    district = models.IntegerField(null=True)
+
     def __unicode__(self):
         return "%s-%s: %s - %s" % (self.session.id, self.sequence_id, self.transition.current_state.question, self.text)
     

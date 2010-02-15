@@ -104,10 +104,12 @@ class App(rapidsms.app.App):
             
             # create an entry for this response
             # first have to know what sequence number to insert
-            last_registered_list = Registration.objects.filter(phone = msg.persistant_connection).order_by('date')
-            last_registered_location = None
-            if(len(last_registered_list) > 0):
-                last_registered_location = last_registered_list[0].governorate
+            registered_locations = Registration.objects.filter(phone = msg.persistant_connection).order_by('-date')
+            last_registered_governorate = None
+            last_registered_district = None
+            if(len(registered_locations) > 0):
+                last_registered_governorate = registered_locations[0].governorate
+                last_registered_district = registered_locations[0].district
             ids = Entry.objects.all().filter(session=session).order_by('sequence_id').values_list('sequence_id', flat=True)
             if ids:
                 # not sure why pop() isn't allowed...
@@ -115,7 +117,7 @@ class App(rapidsms.app.App):
             else:
                 sequence = 1
             options =  state.question.get_choices(msg.text, " ")
-            entry = Entry(session=session,sequence_id=sequence,transition=found_transition,text=str(options), location = last_registered_location)
+            entry = Entry(session=session,sequence_id=sequence,transition=found_transition,text=str(options), governorate = last_registered_governorate, district = last_registered_district)
             entry.save()
             self.debug("entry %s saved" % entry)
                 
