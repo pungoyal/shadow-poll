@@ -33,22 +33,13 @@ class Translation(models.Model):
         return dictionary
         
 class Translator(models.Model):
+    DELIMITER = " "
+
     def __init__(self):
         self.dictionary = Translation.load_dictionary()
-
-    def understand_and_translate_if_required(self, text):
-        self.arabic = False
-        parts = text.split(" ")
-        for part in parts:
-            if not self.is_english(part):
-                t = Translator()
-                translated = t.translate(text)
-                return translated
-        
-        return False
     
     def translate(self, text):
-        parts = text.split(' ')
+        parts = text.split(self.DELIMITER)
         result = ""
         for part in parts:
             if part.isdigit():
@@ -83,4 +74,3 @@ class Translator(models.Model):
             return True
         except Exception, e:
             return False
-    
