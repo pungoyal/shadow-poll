@@ -22,10 +22,7 @@ class Governorates(models.Model):
     
     def style(self):
         number_of_responses = self.num_responses()
-        if number_of_responses:
-            return "s%d" % int(ceil((number_of_responses / self.total_responses()) * 100))
-        else:
-            return None
+        return "s%d" % int(ceil((number_of_responses / self.total_responses()) * 100))
 
     def exposed(self):
         return {'name': self.id}
