@@ -21,7 +21,7 @@ class App (rapidsms.app.App):
             message.language = "en"
 
         message.text = translated
-        self.debug("Translated %s to %s" % (incoming, translated))
+        self.debug("Translated '%s' to '%s'" % (incoming, translated))
 
     def handle (self, message):
         """Add your main application logic in the handle phase."""
