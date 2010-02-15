@@ -13,6 +13,7 @@ class App(rapidsms.app.App):
     
     registered_functions = {}
     session_listeners = {}
+    delimeter = ' '
     
     def start(self):
         pass
@@ -53,7 +54,7 @@ class App(rapidsms.app.App):
             state = session.state
             
             self.debug(state)
-            options =  state.question.get_choices(msg.text, ",")
+            options =  state.question.get_choices(msg.text, " ")
             # loop through all transitions starting with  
             # this state and try each one depending on the type
             # this will be a greedy algorithm and NOT safe if 
@@ -113,7 +114,7 @@ class App(rapidsms.app.App):
                 sequence = ids[len(ids) -1] + 1
             else:
                 sequence = 1
-            options =  state.question.get_choices(msg.text, ",")
+            options =  state.question.get_choices(msg.text, " ")
             entry = Entry(session=session,sequence_id=sequence,transition=found_transition,text=str(options), location = last_registered_location)
             entry.save()
             self.debug("entry %s saved" % entry)
