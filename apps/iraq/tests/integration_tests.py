@@ -18,7 +18,7 @@ class TestIntegration(TestScript):
         00919980131127 > poll
         00919980131127 < I feel happy: a) Always; b) Most of the time; c) Rarely; d) Never. Choose a,b,c or d.
         00919980131127 > a
-        00919980131127 < The three things I need most are: (Prioritize your first, second, and third.)
+        00919980131127 < The three things I need most are: (Prioritize your first, second, and third.) a. Peace and Security b. Go to school regularly c. Health care when sick d. Clean neighborhood e. Clean drinking water f. Enough food g. Be loved h. Not have to work i. Be listened to j. A place to play k. Family and friends to be safe
         00919980131127 > c,d,e
         00919980131127 < Compared to my parents, my life in the future will be: a) Better; b) About the same; c) Worse; d) I don't know. Choose a,b,c or d.
         00919980131127 > c
@@ -33,7 +33,7 @@ class TestIntegration(TestScript):
         00919980131127 > poll
         00919980131127 < I feel happy: a) Always; b) Most of the time; c) Rarely; d) Never. Choose a,b,c or d.
         00919980131127 > a
-        00919980131127 < The three things I need most are: (Prioritize your first, second, and third.)
+        00919980131127 < The three things I need most are: (Prioritize your first, second, and third.) a. Peace and Security b. Go to school regularly c. Health care when sick d. Clean neighborhood e. Clean drinking water f. Enough food g. Be loved h. Not have to work i. Be listened to j. A place to play k. Family and friends to be safe
         00919980131127 > c,d,e
         00919980131127 < Compared to my parents, my life in the future will be: a) Better; b) About the same; c) Worse; d) I don't know. Choose a,b,c or d.
         00919980131127 > c
@@ -46,7 +46,7 @@ class TestIntegration(TestScript):
         00919980131127 > poll
         00919980131127 < I feel happy: a) Always; b) Most of the time; c) Rarely; d) Never. Choose a,b,c or d.
         00919980131127 > a
-        00919980131127 < The three things I need most are: (Prioritize your first, second, and third.)
+        00919980131127 < The three things I need most are: (Prioritize your first, second, and third.) a. Peace and Security b. Go to school regularly c. Health care when sick d. Clean neighborhood e. Clean drinking water f. Enough food g. Be loved h. Not have to work i. Be listened to j. A place to play k. Family and friends to be safe
         00919980131127 > c,d,y
         00919980131127 < Placeholder error for question number 2. Please re-send.
         00919980131127 > z,d,a
