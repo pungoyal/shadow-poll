@@ -20,5 +20,5 @@ class GovernoratesTest(TestCase):
 
         self.assertEquals(states[0].style(), "s14")
         self.assertEquals(states[2].style(), "s14")
-        self.assertEquals(states[9].style(), None)
+        self.assertEquals(states[9].style(), "s0")
         self.assertEquals(states[1].style(), "s7")
