@@ -15,15 +15,15 @@ class Governorates(models.Model):
     bounding_box = models.CharField(max_length=1000)
     
     def num_responses(self):
-        return Entry.objects.filter(governorate = self.id).count()
+        return len(Entry.objects.filter(governorate = self.id))
     
     def total_responses(self):
-        return Entry.objects.all().count()
+        return len(Entry.objects.all())
     
     def style(self):
         number_of_responses = self.num_responses()
         if number_of_responses:
-            return "s%d" % (int(ceil((number_of_responses / self.total_responses()) * 100)))
+            return "s%d" % int(ceil((number_of_responses / self.total_responses()) * 100))
         else:
             return None
 

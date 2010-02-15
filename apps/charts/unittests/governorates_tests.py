@@ -9,7 +9,7 @@ class GovernoratesTest(TestCase):
     def test_num_response(self):
         states = Governorates.objects.all()
 
-        self.assertEquals(states[0].num_responses(), 1)
+        self.assertEquals(states[0].num_responses(), 2)
         self.assertEquals(states[1].num_responses(), 1)
         self.assertEquals(states[2].num_responses(), 2)
         self.assertEquals(states[3].num_responses(), 0)
@@ -18,7 +18,7 @@ class GovernoratesTest(TestCase):
     def test_style(self):
         states = Governorates.objects.all()
 
-        self.assertEquals(states[0].style(), "s25")
-        self.assertEquals(states[2].style(), "s50")
+        self.assertEquals(states[0].style(), "s14")
+        self.assertEquals(states[2].style(), "s14")
         self.assertEquals(states[9].style(), None)
-        self.assertEquals(states[1].style(), "s25")
+        self.assertEquals(states[1].style(), "s7")
