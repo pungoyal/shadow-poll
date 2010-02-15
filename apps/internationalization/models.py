@@ -14,8 +14,8 @@ class Translation(models.Model):
     # The actual original (probably english) string will be 
     # used as the key into the other languages.  This is 
     # similar to the python/django _() i18n support.  
-    translation = models.CharField(max_length=100)
-    code = models.CharField(max_length=100)
+    translation = models.CharField(max_length=700)
+    code = models.CharField(max_length=700)
         
     class Meta:
         db_table = 'Dictionary'
@@ -33,22 +33,13 @@ class Translation(models.Model):
         return dictionary
         
 class Translator(models.Model):
+    DELIMITER = " "
+
     def __init__(self):
         self.dictionary = Translation.load_dictionary()
-
-    def understand_and_translate_if_required(self, text):
-        self.arabic = False
-        parts = text.split(" ")
-        for part in parts:
-            if not self.is_english(part):
-                t = Translator()
-                translated = t.translate(text)
-                return translated
-        
-        return False
     
     def translate(self, text):
-        parts = text.split(' ')
+        parts = text.split(self.DELIMITER)
         result = ""
         for part in parts:
             if part.isdigit():
@@ -83,4 +74,3 @@ class Translator(models.Model):
             return True
         except Exception, e:
             return False
-    

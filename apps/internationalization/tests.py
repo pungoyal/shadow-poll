@@ -12,14 +12,14 @@ class TestTranslator(TestCase):
 
     def test_english_text_is_left_untouched(self):
         t = Translator()
-        translated_text = t.understand_and_translate_if_required("register poll")
-        self.assertEquals(translated_text, False)
+        translated_text = t.translate("register poll")
+        self.assertEquals(translated_text, "register poll")
 
-    def test_understand_and_translate(self):
+    def test_translate(self):
         t = Translator()
-        translated_text = t.understand_and_translate_if_required(u"التصويت تسجيل")
+        translated_text = t.translate(u"التصويت تسجيل")
         self.assertEquals(translated_text, "poll register")
-        translated_text = t.understand_and_translate_if_required(u"٥ ١٠ التصويت تسجيل")
+        translated_text = t.translate(u"٥ ١٠ التصويت تسجيل")
         self.assertEquals(translated_text, "5 10 poll register")
 
     def test_translate_from_arabic_to_english(self):
@@ -59,7 +59,7 @@ class TestTranslator(TestCase):
         self.assertTrue(u"١1٩".isdigit())
         self.assertFalse(u"١a٩".isdigit())
 
-class TestDictionaryEntry(TestCase):
+class TestTranslation(TestCase):
     def test_get_meaning(self):
         dictionary = Translation.load_dictionary()
         self.assertEquals(dictionary["reg"], "register")
@@ -91,14 +91,17 @@ class TestInferArabic(TestScript):
         english_string = u"""sfdsadfsafan3242498277asdkjfndsaf"""
         self.assertTrue(self.translator.is_english(english_string))
 
+    def test_arabic_numbers_are_not_english(self):
+        numbers = u"٠١٢٣٤٥٦٧٨٩"
+        self.assertFalse(self.translator.is_english(numbers))
+
+    def test_mixed_numbers_are_not_english(self):
+        numbers = u"23١٢٦٧٨٩"
+        self.assertFalse(self.translator.is_english(numbers))
+
     def test_mixed_is_not_english(self):
         mixed_string = u"""sfdsadfsafالتصويتan3242498277asdkjfndsaf"""
         self.assertFalse(self.translator.is_english(mixed_string))
-
-    #    TODO - put arabic numbers here
-    #    def test_arabic_numbers_is_not_english(self):
-    #        numbers_string = u"3242498277"
-    #        self.assertFalse(is_english(numbers_string))
 
     def test_empty_string_should_raise_exception(self):
         empty_string = u""
