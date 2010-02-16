@@ -61,8 +61,23 @@ class Tree(models.Model):
         all_states.append(self.root_state)
         self.root_state.add_all_unique_children(all_states)
         return all_states
-
-
+        
+    def parse_information_and_get_tree(self, message, delimeter):
+        information={}
+        self.msg = message.rsplit(delimeter)    
+        self.tree_objs = Tree.objects.filter(trigger = self.msg[0])
+        if len(self.tree_objs) > 0:
+            information['tree'] = self.tree_objs[0]
+        else:
+            information['tree'] = None
+        if len(self.msg) > 1:
+            if (self.msg[1] == 'm') | (self.msg[1] == 'f'):
+                information['sex'] = self.msg[1]
+        
+        if len(self.msg) > 2:
+            information['age'] = self.msg[2]
+        return information
+        
 
 class Answer(models.Model):
     '''An answer to a question.
@@ -118,10 +133,10 @@ class Answer(models.Model):
                 return self.description
             # this might be ugly
             return self.answer
-    
+
 
 class TreeState(models.Model):
-    """ A TreeState is a location in a tree.  It is 
+    """ A TreeState is a location in a tree.  It is
         associated with a question and a set of answers
         (transitions) that allow traversal to other states.""" 
     name = models.CharField(max_length=100)
@@ -240,8 +255,9 @@ class Entry(models.Model):
     transition = models.ForeignKey(Transition)
     time = models.DateTimeField(auto_now_add=True)
     text = models.CharField(max_length=160)
-    uid = models.ForeignKey(PersistantConnection, null=True)
-    
+    governorate = models.IntegerField(null=True)
+    district = models.IntegerField(null=True)
+
     def __unicode__(self):
         return "%s-%s: %s - %s" % (self.session.id, self.sequence_id, self.transition.current_state.question, self.text)
     

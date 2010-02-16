@@ -7,13 +7,13 @@ from rapidsms.tests.scripted import TestScript
 from register.models import *
 from reporters.models import PersistantBackend, Reporter
 from register.app import App
-import poll.app as poll_app
+import tree.app as tree_app
 import register.app as register_app
 import reporters.app as reporter_app
 import internationalization.app as i18n_app
 
 class TestRegisterScript (TestScript):
-    apps = (poll_app.App, register_app.App, reporter_app.App, i18n_app.App)
+    apps = (tree_app.App, register_app.App, reporter_app.App, i18n_app.App)
 
     def setUp(self):
         TestScript.setUp(self)
@@ -36,7 +36,7 @@ class TestRegisterScript (TestScript):
       """ % {"error_msg":error_message}
 
 class TestRegisterArabicScript (TestScript):
-    apps = (poll_app.App, register_app.App, reporter_app.App, i18n_app.App)
+    apps = (tree_app.App, register_app.App, reporter_app.App, i18n_app.App)
 
     def setUp(self):
         TestScript.setUp(self)
