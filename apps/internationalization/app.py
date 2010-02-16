@@ -12,16 +12,16 @@ class App (rapidsms.app.App):
         pass
 
     def parse (self, message):
-        message.language = "ar"
         t = Translator()
-        incoming = message.text
-        translated = t.translate(incoming)
-
-        if t.is_english(incoming):
+        msg_text = message.text
+        message.language = "ar"
+        if t.is_english(msg_text):
             message.language = "en"
-
+        
+        translated = t.translate(t.to_lower(msg_text, message.language))
+        
         message.text = translated
-        self.debug("Translated '%s' to '%s'" % (incoming, translated))
+        self.debug("Translated '%s' to '%s'" % (msg_text, translated))
 
     def handle (self, message):
         """Add your main application logic in the handle phase."""

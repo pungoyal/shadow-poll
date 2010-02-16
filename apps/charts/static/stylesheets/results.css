@@ -138,3 +138,34 @@ a.badge {
           background: url('/site_media/img/badge.png') repeat-x #eee;
           border: 1px solid #d0d0d0;
           }
+
+.voteBreakdown { 
+                 width : 100%;
+                 float: left;
+                 }
+
+.voteDescription { 
+                   float:left;
+                   width : 50%;
+                   font-size : 12px;
+                   }
+                                  
+.voteBar { 
+           float:left;
+           width : 50%;
+           }
+
+.tabularResults{ 
+                 clear :both;
+                 float : left;
+                 width : 100%;
+
+                 }
+.results{ 
+          width:100%;
+
+          }
+
+.results_total { 
+                 width : 50%;
+                 }

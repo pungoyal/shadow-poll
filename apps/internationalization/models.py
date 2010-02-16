@@ -40,14 +40,14 @@ class Translator(models.Model):
     
     def translate(self, text):
         parts = text.split(self.DELIMITER)
-        result = ""
+        result = []
         for part in parts:
             if part.isdigit():
                 translated = self.translate_number(part)
             else:
                 translated = self.translate_word(part)
-            result += translated + " "
-        return result.strip()
+            result.append(translated)
+        return self.translate_word(self.DELIMITER.join(result))
 
     def translate_number(self, number):
         result = ""
@@ -74,3 +74,10 @@ class Translator(models.Model):
             return True
         except Exception, e:
             return False
+    
+    def to_lower(self, string, language):
+        if language == "en":
+            return string.lower()
+        else:
+            return string
+        

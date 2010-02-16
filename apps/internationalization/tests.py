@@ -37,6 +37,20 @@ class TestTranslator(TestCase):
     def test_reverse_input_string_on_translation(self):
         t = Translator()
         self.assertEquals(t.translate(u"register poll"), "register poll")
+    
+    def test_translate_word_to_keyword(self):
+        t = Translator()
+        self.assertEquals(t.translate(u"always"), "a1")
+        self.assertEquals(t.translate(t.to_lower(u"Always", "en")), "a1")
+        
+    def test_translate_sentence_to_keyword(self):
+        t = Translator()
+        self.assertEquals(t.translate(u"most of the time"), "b1")
+        self.assertEquals(t.translate(t.to_lower(u"Most of The time", "en")), "b1")
+        
+    def test_translate_arabic_sentence_to_keyword(self):
+        t = Translator()
+        self.assertEquals(t.translate(u"أفضل"), "a3")
 
     def test_if_a_string_is_numbers(self):
         t = Translator()

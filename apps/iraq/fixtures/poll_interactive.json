@@ -195,6 +195,70 @@
             "code": "d"
         }
     },
+	{
+        "pk": 21,
+        "model": "tree.answer",
+        "fields": {
+            "answer": "Always",
+            "code": "a1"
+        }
+    },
+	{
+        "pk": 22,
+        "model": "tree.answer",
+        "fields": {
+            "answer": "Most of the time",
+            "code": "b1"
+        }
+    },
+	{
+        "pk": 23,
+        "model": "tree.answer",
+        "fields": {
+            "answer": "Rarely",
+            "code": "c1"
+        }
+    },
+	{
+        "pk": 24,
+        "model": "tree.answer",
+        "fields": {
+            "answer": "Never",
+            "code": "d1"
+        }
+    },
+	{
+        "pk": 25,
+        "model": "tree.answer",
+        "fields": {
+            "answer": "Better",
+            "code": "a3"
+        }
+    },
+	{
+        "pk": 26,
+        "model": "tree.answer",
+        "fields": {
+            "answer": "About the same",
+            "code": "b3"
+        }
+    },
+	{
+        "pk": 27,
+        "model": "tree.answer",
+        "fields": {
+            "answer": "Worse",
+            "code": "c3"
+        }
+    },
+	{
+        "pk": 28,
+        "model": "tree.answer",
+        "fields": {
+            "answer": "I Don\u2019t know",
+            "code": "d3"
+        }
+    },
     {
         "pk": 1,
         "model": "tree.treestate",
@@ -398,6 +462,87 @@
         "model": "tree.transition",
         "fields": {
             "answer": 20,
+            "current_state": 3,
+            "next_state": null
+        }
+    },
+	{
+        "pk": 20,
+        "model": "tree.transition",
+        "fields": {
+            "answer": 20,
+            "current_state": 3,
+            "next_state": null
+        }
+    },
+	{
+        "pk": 21,
+        "model": "tree.transition",
+        "fields": {
+            "answer": 21,
+            "current_state": 1,
+            "next_state": 2
+        }
+    },
+	{
+        "pk": 22,
+        "model": "tree.transition",
+        "fields": {
+            "answer": 22,
+            "current_state": 1,
+            "next_state": 2
+        }
+    },
+	{
+        "pk": 23,
+        "model": "tree.transition",
+        "fields": {
+            "answer": 23,
+            "current_state": 1,
+            "next_state": 2
+        }
+    },
+	{
+        "pk": 24,
+        "model": "tree.transition",
+        "fields": {
+            "answer": 24,
+            "current_state": 1,
+            "next_state": 2
+        }
+    },
+	{
+        "pk": 25,
+        "model": "tree.transition",
+        "fields": {
+            "answer": 25,
+            "current_state": 3,
+            "next_state": null
+        }
+    },
+	{
+        "pk": 26,
+        "model": "tree.transition",
+        "fields": {
+            "answer": 26,
+            "current_state": 3,
+            "next_state": null
+        }
+    },
+	{
+        "pk": 27,
+        "model": "tree.transition",
+        "fields": {
+            "answer": 27,
+            "current_state": 3,
+            "next_state": null
+        }
+    },
+	{
+        "pk": 28,
+        "model": "tree.transition",
+        "fields": {
+            "answer": 28,
             "current_state": 3,
             "next_state": null
         }
