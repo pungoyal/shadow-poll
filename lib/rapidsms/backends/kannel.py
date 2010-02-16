@@ -45,7 +45,7 @@ class Backend(rapidsms.backends.Backend):
     kannel_username = 'kannel'
     kannel_password = 'kannel'
 
-    def configure(self, host="localhost", port=8080, kannel_host='localhost', kannel_port=13013, kannel_username='kannel', kannel_password="kannel"):
+    def configure(self, host="localhost", port=8801, kannel_host='localhost', kannel_port=13013, kannel_username='kannel', kannel_password="kannel"):
               
         self.kannel_host        = kannel_host
         self.kannel_port        = int(kannel_port)
