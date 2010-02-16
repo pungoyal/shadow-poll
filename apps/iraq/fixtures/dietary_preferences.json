@@ -1,7 +1,7 @@
 [
     {
         "pk": 1, 
-        "model": "tree.question", 
+        "model": "tree.questiontext", 
         "fields": {
             "text": "What is your favourite fruit?",
 			"max_choices":"1",
@@ -10,7 +10,7 @@
     }, 
     {
         "pk": 2, 
-        "model": "tree.question", 
+        "model": "tree.questiontext", 
         "fields": {
             "text": "Of these vegetables, which is your favourite? Carrot, Tomato, Lettuce, Spinach",
 			"max_choices":"1", 
@@ -19,7 +19,7 @@
     }, 
     {
         "pk": 3, 
-        "model": "tree.question", 
+        "model": "tree.questiontext", 
         "fields": {
             "text": "What is your favourite drink? Please specify one of: lime, kiwi, ginger.",
 			"max_choices":"1", 
