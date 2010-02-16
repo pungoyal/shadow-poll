@@ -1,0 +1,66 @@
+# Kannel Config Uganda
+
+# Core Kannel Config
+group = core
+# port for admin commands (NOT http gateway)
+admin-port = 13000
+# required for SMS gateway
+smsbox-port = 13001
+# password for http administration commands
+admin-password = thotwrk9
+# disable http admin interface
+admin-deny-ip = "*.*.*.*"
+admin-allow-ip = ""
+wapbox-port = 13002
+wdp-interface-name = "*"
+log-file = "/var/log/kannel/bearerbox.log"
+box-deny-ip = "*.*.*.*"
+box-allow-ip = "127.0.0.1;212.35.67.178;212.35.67.179;212.35.67.180;212.35.67.181"
+sms-resend-retry = 3
+
+group = wapbox
+bearerbox-host = 127.0.0.1
+log-file = "/var/log/kannel/wapbox.log"
+
+group   = smsc
+smsc    = smpp
+# location of external SMSC (SMS Centre)
+host    = 212.35.67.179
+port    = 980
+# only SMPP 3.4 and above
+transceiver-mode = true
+smsc-username    = thoughtworks
+smsc-password    = thotwrk9
+# vma is default (voice mail activation)
+system-type      = vma
+# the machine where the kannel backend is located
+connect-allow-ip = 127.0.0.1
+log-level = 0
+source-addr-ton = 0
+source-addr-npi = 5
+dest-addr-ton = 0
+dest-addr-npi = 1
+
+group = smsbox
+bearerbox-host = 127.0.0.1
+# port in which any sendsms (push) HTTP requests are done
+sendsms-port = 13013
+# specify sendsms originator
+global-sender = HMIS
+log-file = "/var/log/kannel/smsbox.log"
+log-level = 0
+
+# accounts that we use internally for sms push/pull
+group = sendsms-user
+username = kannel
+password = kannel
+concatenation = true
+max-messages = 3
+
+group = sms-service
+keyword-regex = .*
+catch-all = yes
+max-messages = 5
+omit-empty = true
+concatenation = true
+get-url = "http://109.74.196.77:8000/sms/%p/%a/"
