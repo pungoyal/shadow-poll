@@ -5,9 +5,10 @@
 from django.db import models
 from apps.reporters.models import Reporter, PersistantConnection
 import re
-from register.models import Registration
+from register.models import Registration 
 
-class Question(models.Model):
+
+class QuestionText(models.Model):
     '''A question, which is just some text to be sent to the user,
        and an optional error message if the question is not answered
        properly'''
@@ -41,9 +42,9 @@ class Tree(models.Model):
        tree with no possible transitions.
        '''
     trigger = models.CharField(max_length=30, help_text="The incoming message which triggers this Tree")
-    #root_question = models.ForeignKey("Question", related_name="tree_set", help_text="The first Question sent when this Tree is triggered, which may lead to many more")
+    #root_question = models.ForeignKey("QuestionText", related_name="tree_set", help_text="The first QuestionText sent when this Tree is triggered, which may lead to many more")
     # making this compatible with the UI
-    root_state = models.ForeignKey("TreeState", null=True, blank=True, related_name="tree_set", help_text="The first Question sent when this Tree is triggered, which may lead to many more")
+    root_state = models.ForeignKey("TreeState", null=True, blank=True, related_name="tree_set", help_text="The first QuestionText sent when this Tree is triggered, which may lead to many more")
     completion_text = models.CharField(max_length=160, null=True, blank=True, help_text="The message that will be sent when the tree is completed")
      
     def __unicode__(self):
@@ -140,7 +141,7 @@ class TreeState(models.Model):
         associated with a question and a set of answers
         (transitions) that allow traversal to other states.""" 
     name = models.CharField(max_length=100)
-    question = models.ForeignKey(Question, blank=True, null=True)
+    question = models.ForeignKey(QuestionText, blank=True, null=True)
     # the number of tries they have to get out of this state
     # if empty there is no limit.  When the num_retries is hit
     # a user's session will be terminated.
@@ -204,7 +205,7 @@ class TreeState(models.Model):
                 
 
     def __unicode__(self):
-        return ("State %s, Question: %s" % (
+        return ("State %s, QuestionText: %s" % (
             self.name,
             self.question))
     
