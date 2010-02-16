@@ -41,10 +41,12 @@ class TestTranslator(TestCase):
     def test_translate_word_to_keyword(self):
         t = Translator()
         self.assertEquals(t.translate(u"always"), "a")
+        self.assertEquals(t.translate(t.to_lower(u"Always", "en")), "a")
         
     def test_translate_sentence_to_keyword(self):
         t = Translator()
         self.assertEquals(t.translate(u"most of the time"), "b")
+        self.assertEquals(t.translate(t.to_lower(u"Most of The time", "en")), "b")
         
     def test_translate_arabic_sentence_to_keyword(self):
         t = Translator()

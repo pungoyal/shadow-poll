@@ -47,8 +47,7 @@ class Translator(models.Model):
             else:
                 translated = self.translate_word(part)
             result.append(translated)
-        translated_msg = self.DELIMITER.join(result)
-        return self.translate_word(translated_msg)
+        return self.translate_word(self.DELIMITER.join(result))
 
     def translate_number(self, number):
         result = ""
@@ -75,3 +74,10 @@ class Translator(models.Model):
             return True
         except Exception, e:
             return False
+    
+    def to_lower(self, string, language):
+        if language == "en":
+            return string.lower()
+        else:
+            return string
+        
