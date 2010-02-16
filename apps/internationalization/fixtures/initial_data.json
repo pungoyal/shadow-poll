@@ -482,5 +482,86 @@
             "code": "Your responses have been recorded. Thank you for participating in the poll.",
             "language": 2
         }
+    },
+	{
+        "pk": 56,
+        "model": "internationalization.translation",
+        "fields": {
+            "translation": "always",
+            "code": "a",
+            "language": 1
+        }
+    },
+	{
+        "pk": 57,
+        "model": "internationalization.translation",
+        "fields": {
+            "translation": "most of the time",
+            "code": "b",
+            "language": 1
+        }
+    },
+	{
+        "pk": 58,
+        "model": "internationalization.translation",
+        "fields": {
+            "translation": "rarely",
+            "code": "c",
+            "language": 1
+        }
+    },
+	{
+        "pk": 59,
+        "model": "internationalization.translation",
+        "fields": {
+            "translation": "never",
+            "code": "d",
+            "language": 1
+        }
+    },
+	{
+        "pk": 60,
+        "model": "internationalization.translation",
+        "fields": {
+            "translation": "better",
+            "code": "a",
+            "language": 1
+        }
+    },
+	{
+        "pk": 61,
+        "model": "internationalization.translation",
+        "fields": {
+            "translation": "about the same",
+            "code": "b",
+            "language": 1
+        }
+    },
+	{
+        "pk": 62,
+        "model": "internationalization.translation",
+        "fields": {
+            "translation": "worse",
+            "code": "c",
+            "language": 1
+        }
+    },
+	{
+        "pk": 63,
+        "model": "internationalization.translation",
+        "fields": {
+            "translation": "i don't know",
+            "code": "d",
+            "language": 1
+        }
+    },
+	{
+        "pk": 63,
+        "model": "internationalization.translation",
+        "fields": {
+            "translation": "i do not know",
+            "code": "d",
+            "language": 1
+        }
     }
 ]

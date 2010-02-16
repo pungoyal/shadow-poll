@@ -40,14 +40,15 @@ class Translator(models.Model):
     
     def translate(self, text):
         parts = text.split(self.DELIMITER)
-        result = ""
+        result = []
         for part in parts:
             if part.isdigit():
                 translated = self.translate_number(part)
             else:
                 translated = self.translate_word(part)
-            result += translated + " "
-        return result.strip()
+            result.append(translated)
+        translated_msg = self.DELIMITER.join(result)
+        return self.translate_word(translated_msg)
 
     def translate_number(self, number):
         result = ""
