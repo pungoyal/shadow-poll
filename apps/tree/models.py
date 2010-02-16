@@ -7,24 +7,28 @@ from apps.reporters.models import Reporter, PersistantConnection
 import re
 from register.models import Registration 
 
-
-class QuestionText(models.Model):
-    '''A question, which is just some text to be sent to the user,
-       and an optional error message if the question is not answered
-       properly'''
+class Question(models.Model):
     text = models.TextField()
     max_choices = models.IntegerField()
-    # allow the question to specify a default error
-    # message
     error_response = models.TextField(null=True, blank=True)
-    
+
     def __unicode__(self):
         return "Q%s: %s" % (
             self.pk,
             self.text)
-    
+
     def get_choices(self, msg_txt, delim):   
         return msg_txt.rsplit(delim)[:self.max_choices]    
+   
+    
+    def has_transition(self,choice):
+        pass
+    
+
+class Choice(models.Model):
+    question = models.ForeignKey(Question)
+    text = models.TextField()
+    
 
 class Tree(models.Model):
     '''A decision tree.  
@@ -141,7 +145,7 @@ class TreeState(models.Model):
         associated with a question and a set of answers
         (transitions) that allow traversal to other states.""" 
     name = models.CharField(max_length=100)
-    question = models.ForeignKey(QuestionText, blank=True, null=True)
+    question = models.ForeignKey(Question, blank=True, null=True)
     # the number of tries they have to get out of this state
     # if empty there is no limit.  When the num_retries is hit
     # a user's session will be terminated.
@@ -205,7 +209,7 @@ class TreeState(models.Model):
                 
 
     def __unicode__(self):
-        return ("State %s, QuestionText: %s" % (
+        return ("State %s, Question: %s" % (
             self.name,
             self.question))
     
