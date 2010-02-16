@@ -5,9 +5,6 @@ from math import ceil
 from apps.tree.models import Entry
 from django.contrib.gis.db import models
 
-from postcode_name_map import get_name
-
-
 class Governorates(models.Model):    
     the_geom = models.PointField(srid=4326)
     name = models.CharField(max_length=200)

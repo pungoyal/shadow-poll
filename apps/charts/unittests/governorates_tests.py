@@ -1,5 +1,4 @@
 from django.test import TestCase
-from charts.postcode_name_map import get_name
 from charts.models import Governorates
 from apps.charts.models import Governorates
 
