@@ -17,8 +17,12 @@ class Question(models.Model):
             self.pk,
             self.text)
 
-    def get_choices(self, msg_txt, delim):   
-        return msg_txt.rsplit(delim)[:self.max_choices]    
+    def get_choices(self, msg_txt, delim):
+        self.options= msg_txt.strip(delim).rsplit(delim)
+        if len(self.options) > self.max_choices:
+            return None
+        else:
+            return self.options  
    
     
     def has_transition(self,choice):

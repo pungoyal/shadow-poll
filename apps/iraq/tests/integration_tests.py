@@ -112,6 +112,19 @@ class TestIntegration(TestScript):
         00919980131127 < I feel happy: a) Always; b) Most of the time; c) Rarely; d) Never. Choose a,b,c or d.
     """
     
+    testTreeAppFailMultipleResponse = """
+        00919980131127 > register poll 100 1001
+        00919980131127 < Thanks for registering for the survey.
+        00919980131127 > poll
+        00919980131127 < I feel happy: a) Always; b) Most of the time; c) Rarely; d) Never. Choose a,b,c or d.
+        00919980131127 > always never
+        00919980131127 < Sorry you have chosen more options than that is allowed.
+        00919980131127 > a b
+        00919980131127 < Sorry you have chosen more options than that is allowed.
+        00919980131127 > always
+        00919980131127 < The three things I need most are: (Prioritize your first, second, and third.) a. Peace and Security b. Go to school regularly c. Health care when sick d. Clean neighborhood e. Clean drinking water f. Enough food g. Be loved h. Not have to work i. Be listened to j. A place to play k. Family and friends to be safe
+    """
+    
     testTreeAppJunkMessage = """
         00919980131127 > dfsdsdsdsd
         00919980131127 < We didn't understand your response.

@@ -81,8 +81,7 @@ class TestApp (TestScript):
 
         self.msg_txt = "a;b"
         self.choices = self.ques.get_choices(self.msg_txt, self.delim)
-        self.assertEquals(len(self.choices), 1)
-        self.assertEquals(['a'], self.choices)
+        self.assertEquals(self.choices, None)
         
         # this case should be handled by translator app
 #        self.msg_txt = "a b"
@@ -101,8 +100,7 @@ class TestApp (TestScript):
         self.delim = " "
         self.ques = Question(id=1, text="What?", max_choices=3)
         self.choices = self.ques.get_choices(self.msg_txt, self.delim)
-        self.assertEquals(len(self.choices), 3)
-        self.assertEquals(['a', 'b', 'c'], self.choices)
+        self.assertEquals(self.choices, None)
         
         self.msg_txt = "a"
         self.delim = " "

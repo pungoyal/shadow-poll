@@ -54,7 +54,11 @@ class App(rapidsms.app.App):
             
             self.debug(state)
             options =  state.question.get_choices(msg.text, " ")
-            # loop through all transitions starting with  
+            if not options:
+                response = "Sorry you have chosen more options than that is allowed."
+                msg.respond(response)
+                return True
+            # loop through all transitions starting with
             # this state and try each one depending on the type
             # this will be a greedy algorithm and NOT safe if 
             # multiple transitions can match the same answer
