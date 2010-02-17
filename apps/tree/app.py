@@ -5,7 +5,6 @@ import rapidsms
 from models import *
 from reporters.models import Reporter
 from internationalization.utils import get_translation as _
-#from internationalization.utils import get_language_from_connection as lang
 from internationalization.utils import get_language_from_message as lang
 from register.models import Registration
 

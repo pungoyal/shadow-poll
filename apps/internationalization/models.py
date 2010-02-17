@@ -39,7 +39,7 @@ class Translator(models.Model):
         self.dictionary = Translation.load_dictionary()
     
     def translate(self, text):
-        parts = text.split(self.DELIMITER)
+        parts = text.lstrip().split(self.DELIMITER)
         result = []
         for part in parts:
             if part.isdigit():
