@@ -13,6 +13,7 @@ class TestTranslator(TestCase):
     def test_translate_from_english_to_english_with_spaces(self):
         t = Translator()
         self.assertEquals(t.translate("             poll"), "poll")
+        self.assertEquals(t.translate("poll          "), "poll")
 
     def test_english_text_is_left_untouched(self):
         t = Translator()
