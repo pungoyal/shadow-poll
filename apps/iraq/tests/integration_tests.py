@@ -14,7 +14,7 @@ class TestIntegration(TestScript):
 
     testTreeApp = """
         00919980131127 > register poll 100 1001
-        00919980131127 < Thanks for registering for the survey.
+        00919980131127 < Thank you, to initiate the poll sms the keyword Poll with your age and gender
         00919980131127 > poll
         00919980131127 < I feel happy: a) Always; b) Most of the time; c) Rarely; d) Never. Choose a,b,c or d.
         00919980131127 > most of the time
@@ -59,7 +59,7 @@ class TestIntegration(TestScript):
     
     testTreeAppFail = """
         00919980131127 > register poll 100 1001
-        00919980131127 < Thanks for registering for the survey.
+        00919980131127 < Thank you, to initiate the poll sms the keyword Poll with your age and gender
         00919980131127 > poll
         00919980131127 < I feel happy: a) Always; b) Most of the time; c) Rarely; d) Never. Choose a,b,c or d.
         00919980131127 > a
@@ -77,7 +77,7 @@ class TestIntegration(TestScript):
     """
     testTreeAppFailWord = """
         00919980131127 > register poll 100 1001
-        00919980131127 < Thanks for registering for the survey.
+        00919980131127 < Thank you, to initiate the poll sms the keyword Poll with your age and gender
         00919980131127 > poll
         00919980131127 < I feel happy: a) Always; b) Most of the time; c) Rarely; d) Never. Choose a,b,c or d.
         00919980131127 > a
@@ -96,7 +96,7 @@ class TestIntegration(TestScript):
     
     testTreeAppFailSessionEnd = """
         00919980131127 > register poll 100 1001
-        00919980131127 < Thanks for registering for the survey.
+        00919980131127 < Thank you, to initiate the poll sms the keyword Poll with your age and gender
         00919980131127 > poll
         00919980131127 < I feel happy: a) Always; b) Most of the time; c) Rarely; d) Never. Choose a,b,c or d.
         00919980131127 > x
@@ -105,7 +105,7 @@ class TestIntegration(TestScript):
         00919980131127 < Placeholder error for question number 1. Please re-send.
         00919980131127 > x
         00919980131127 < Placeholder error for question number 1. Please re-send.
-        00919980131127 < Sorry, invalid answer 3 times. Your session will now end. Please try again later.
+        00919980131127 < Due to errors the poll has been stopped. To restart, type the keyword Poll with your age and gender
         00919980131127 > a
         00919980131127 < We didn't understand your response.
         00919980131127 > poll
@@ -114,7 +114,7 @@ class TestIntegration(TestScript):
     
     testTreeAppFailMultipleResponse = """
         00919980131127 > register poll 100 1001
-        00919980131127 < Thanks for registering for the survey.
+        00919980131127 < Thank you, to initiate the poll sms the keyword Poll with your age and gender
         00919980131127 > poll
         00919980131127 < I feel happy: a) Always; b) Most of the time; c) Rarely; d) Never. Choose a,b,c or d.
         00919980131127 > always never

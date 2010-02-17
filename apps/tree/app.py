@@ -99,6 +99,7 @@ class App(rapidsms.app.App):
                     session.num_tries = session.num_tries + 1
                     if state.num_retries and session.num_tries >= state.num_retries:
                         session.state = None
+                        msg.__setattr__("error_id", "err3")
                         msg.respond(_("Sorry, invalid answer %(retries)s times. Your session will now end. Please try again later.",
                                       lang(msg)) % {"retries": session.num_tries })
                         

@@ -635,5 +635,41 @@
 			   "code": "d3", 
 			   "language": 2
 		   }
-	   }
+	   }, 
+	   {
+	   	  "pk": 73, 
+		  "model": "internationalization.translation", 
+		  "fields": {
+		  	 	"translation": "We don't understand. Correct format is register poll governorate-code district-code", 
+				"code": "err1", 
+				"language": 1
+		   }
+		}, 
+		{
+		 	"pk": 74, 
+			"model": "internationalization.translation", 
+			"fields": {
+			   	 "translation": "Thank you, to initiate the poll sms the keyword Poll with your age and gender", 
+				 "code": "err2", 
+				 "language": 1
+			 }
+		}, 
+		{
+			 "pk": 75, 
+			 "model": "internationalization.translation", 
+			 "fields": {
+			 	  "translation": "Due to errors the poll has been stopped. To restart, type the keyword Poll with your age and gender", 
+			 	  "code": "err3", 
+				  "language": 1
+			  }
+		}, 
+		{
+			  "pk": 76, 
+			  "model": "internationalization.translation", 
+			  "fields": {
+			  		"translation": "You have repeated your choices, please select any three unique choices", 
+					"code": "err4", 
+					"language": 1
+			   }
+		}
 ]

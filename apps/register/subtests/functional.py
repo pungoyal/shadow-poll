@@ -21,19 +21,19 @@ class TestRegisterScript (TestScript):
     test_register_needs_keyword_at_the_start_of_the_message_rapidsms = """
       00919880438062 > not_keyword poll 100 1001
       00919880438062 > register poll 100 1001
-      00919880438062 < Thanks for registering for the survey.
+      00919880438062 < Thank you, to initiate the poll sms the keyword Poll with your age and gender
       """
 
-    error_message = "We could not understand the register message. Please send as - register survey governorate district"
+    error_message = "We don\u2019t understand. Correct format is register poll governorate-code district-code"
     test_incomplete_information_passed_in_the_register_message = """
       00919980131127 > register poll 0091998013112700919980131127
-      00919980131127 < %(error_msg)s
-      """ % {"error_msg":error_message}
+      00919980131127 < We don't understand. Correct format is register poll governorate-code district-code
+      """
     
     test_incomplete_information_passed_in_the_register_message_2 = """
       00919980131127 > register poll 0091998013112700919980131127
-      00919980131127 < %(error_msg)s
-      """ % {"error_msg":error_message}
+      00919980131127 < We don't understand. Correct format is register poll governorate-code district-code
+      """
 
 class TestRegisterArabicScript (TestScript):
     apps = (tree_app.App, register_app.App, reporter_app.App, i18n_app.App)

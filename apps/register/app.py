@@ -22,8 +22,10 @@ class App (rapidsms.app.App):
             try:
                 r.parse(message)
                 response = "Thanks for registering."
+                message.__setattr__("error_id", "err2")
             except Exception, e:
                 response = "Register not understood."
+                message.__setattr__("error_id", "err1")
             message.respond(_t(response, message.language ))
             return True
     
