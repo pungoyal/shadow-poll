@@ -14,7 +14,7 @@ class TestIntegration(TestScript):
 
     testTreeApp = """
         00919980131127 > register poll 100 1001
-        00919980131127 < Thanks for registering for the survey.
+        00919980131127 < Thank you, to initiate the poll sms the keyword Poll with your age and gender
         00919980131127 > poll
         00919980131127 < I feel happy: a) Always; b) Most of the time; c) Rarely; d) Never. Choose a,b,c or d.
         00919980131127 > most of the time
@@ -59,57 +59,88 @@ class TestIntegration(TestScript):
     
     testTreeAppFail = """
         00919980131127 > register poll 100 1001
-        00919980131127 < Thanks for registering for the survey.
+        00919980131127 < Thank you, to initiate the poll sms the keyword Poll with your age and gender
         00919980131127 > poll
         00919980131127 < I feel happy: a) Always; b) Most of the time; c) Rarely; d) Never. Choose a,b,c or d.
         00919980131127 > a
         00919980131127 < The three things I need most are: (Prioritize your first, second, and third.) a. Peace and Security b. Go to school regularly c. Health care when sick d. Clean neighborhood e. Clean drinking water f. Enough food g. Be loved h. Not have to work i. Be listened to j. A place to play k. Family and friends to be safe
         00919980131127 > c d y
-        00919980131127 < Placeholder error for question number 2. Please re-send.
+        00919980131127 < You have selected an invalid choice, please choose one among the above listed choice
         00919980131127 > z d a
-        00919980131127 < Placeholder error for question number 2. Please re-send.
+        00919980131127 < You have selected an invalid choice, please choose one among the above listed choice
         00919980131127 > c d a
         00919980131127 < Compared to my parents, my life in the future will be: a) Better; b) About the same; c) Worse; d) I don't know. Choose a,b,c or d.
         00919980131127 > p
-        00919980131127 < Placeholder error for question number 3. Please re-send.
+        00919980131127 < You have selected an invalid choice, please choose one among the above listed choice
         00919980131127 > a
         00919980131127 < Your responses have been recorded. Thank you for participating in the poll.
     """
     testTreeAppFailWord = """
         00919980131127 > register poll 100 1001
-        00919980131127 < Thanks for registering for the survey.
+        00919980131127 < Thank you, to initiate the poll sms the keyword Poll with your age and gender
         00919980131127 > poll
         00919980131127 < I feel happy: a) Always; b) Most of the time; c) Rarely; d) Never. Choose a,b,c or d.
         00919980131127 > a
         00919980131127 < The three things I need most are: (Prioritize your first, second, and third.) a. Peace and Security b. Go to school regularly c. Health care when sick d. Clean neighborhood e. Clean drinking water f. Enough food g. Be loved h. Not have to work i. Be listened to j. A place to play k. Family and friends to be safe
         00919980131127 > Always
-        00919980131127 < Placeholder error for question number 2. Please re-send.
+        00919980131127 < You have selected an invalid choice, please choose one among the above listed choice
         00919980131127 > z d a
-        00919980131127 < Placeholder error for question number 2. Please re-send.
+        00919980131127 < You have selected an invalid choice, please choose one among the above listed choice
         00919980131127 > c d a
         00919980131127 < Compared to my parents, my life in the future will be: a) Better; b) About the same; c) Worse; d) I don't know. Choose a,b,c or d.
         00919980131127 > p
-        00919980131127 < Placeholder error for question number 3. Please re-send.
+        00919980131127 < You have selected an invalid choice, please choose one among the above listed choice
         00919980131127 > a
         00919980131127 < Your responses have been recorded. Thank you for participating in the poll.
     """
     
     testTreeAppFailSessionEnd = """
         00919980131127 > register poll 100 1001
-        00919980131127 < Thanks for registering for the survey.
+        00919980131127 < Thank you, to initiate the poll sms the keyword Poll with your age and gender
         00919980131127 > poll
         00919980131127 < I feel happy: a) Always; b) Most of the time; c) Rarely; d) Never. Choose a,b,c or d.
         00919980131127 > x
-        00919980131127 < Placeholder error for question number 1. Please re-send.
+        00919980131127 < You have selected an invalid choice, please choose one among the above listed choice
         00919980131127 > x
-        00919980131127 < Placeholder error for question number 1. Please re-send.
+        00919980131127 < You have selected an invalid choice, please choose one among the above listed choice
         00919980131127 > x
-        00919980131127 < Placeholder error for question number 1. Please re-send.
-        00919980131127 < Sorry, invalid answer 3 times. Your session will now end. Please try again later.
+        00919980131127 < You have selected an invalid choice, please choose one among the above listed choice
+        00919980131127 < Due to errors the poll has been stopped. To restart, type the keyword Poll with your age and gender
         00919980131127 > a
         00919980131127 < We didn't understand your response.
         00919980131127 > poll
         00919980131127 < I feel happy: a) Always; b) Most of the time; c) Rarely; d) Never. Choose a,b,c or d.
+    """
+    
+    testTreeAppFailSessionEnd_2 = """
+        00919980131127 > register poll 100 1001
+        00919980131127 < Thank you, to initiate the poll sms the keyword Poll with your age and gender
+        00919980131127 > poll
+        00919980131127 < I feel happy: a) Always; b) Most of the time; c) Rarely; d) Never. Choose a,b,c or d.
+        00919980131127 > Always Nevr
+        00919980131127 < Please choose one option
+        00919980131127 > Al Neb
+        00919980131127 < Please choose one option
+        00919980131127 > Alllllll
+        00919980131127 < You have selected an invalid choice, please choose one among the above listed choice
+        00919980131127 < Due to errors the poll has been stopped. To restart, type the keyword Poll with your age and gender
+        00919980131127 > a
+        00919980131127 < We didn't understand your response.
+        00919980131127 > poll
+        00919980131127 < I feel happy: a) Always; b) Most of the time; c) Rarely; d) Never. Choose a,b,c or d.
+    """
+    
+    testTreeAppFailMultipleResponse = """
+        00919980131127 > register poll 100 1001
+        00919980131127 < Thank you, to initiate the poll sms the keyword Poll with your age and gender
+        00919980131127 > poll
+        00919980131127 < I feel happy: a) Always; b) Most of the time; c) Rarely; d) Never. Choose a,b,c or d.
+        00919980131127 > always never
+        00919980131127 < Please choose one option
+        00919980131127 > a b
+        00919980131127 < Please choose one option
+        00919980131127 > always
+        00919980131127 < The three things I need most are: (Prioritize your first, second, and third.) a. Peace and Security b. Go to school regularly c. Health care when sick d. Clean neighborhood e. Clean drinking water f. Enough food g. Be loved h. Not have to work i. Be listened to j. A place to play k. Family and friends to be safe
     """
     
     testTreeAppJunkMessage = """

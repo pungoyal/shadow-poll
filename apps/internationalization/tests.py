@@ -9,6 +9,11 @@ class TestTranslator(TestCase):
     def test_translate_from_english_to_english(self):
         t = Translator()
         self.assertEquals(t.translate("poll"), "poll")
+        
+    def test_translate_from_english_to_english_with_spaces(self):
+        t = Translator()
+        self.assertEquals(t.translate("             poll"), "poll")
+        self.assertEquals(t.translate("poll          "), "poll")
 
     def test_english_text_is_left_untouched(self):
         t = Translator()
@@ -72,6 +77,16 @@ class TestTranslator(TestCase):
 
         self.assertTrue(u"١1٩".isdigit())
         self.assertFalse(u"١a٩".isdigit())
+        
+    def test_get_error_msg_from_code(self):
+        t = Translator()
+        self.error_id = "err1"
+        self.language = "en"
+        self.assertEqual(t.get_error_text(self.error_id, self.language), u"We don't understand. Correct format is register poll governorate-code district-code")
+        
+        self.error_id = "err1"
+        self.language = "ar"
+        self.assertEqual(t.get_error_text(self.error_id, self.language), u"نحن لا نفهم. بالشكل الصحيح هو تسجيل استطلاع للمحافظة حي رمز رمز")
 
 class TestTranslation(TestCase):
     def test_get_meaning(self):

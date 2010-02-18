@@ -87,8 +87,7 @@
     "pk": 1, 
     "model": "tree.answer", 
     "fields": {
-	  "code":"a",
-      "answer": "2010" 
+	  "code":"a"
     }
   }, 
   {

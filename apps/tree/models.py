@@ -17,8 +17,12 @@ class Question(models.Model):
             self.pk,
             self.text)
 
-    def get_choices(self, msg_txt, delim):   
-        return msg_txt.rsplit(delim)[:self.max_choices]    
+    def get_choices(self, msg_txt, delim):
+        self.options= msg_txt.strip(delim).rsplit(delim)
+        if len(self.options) > self.max_choices:
+            return None
+        else:
+            return self.options  
    
     
     def has_transition(self,choice):
@@ -117,27 +121,23 @@ class Answer(models.Model):
         ('C', 'Custom logic'),
     )
     code = models.CharField(max_length=20, null=False)
-    answer = models.CharField(max_length=160)
 
     def __unicode__(self):
-        return self.answer
+        return self.code
         #return "%s %s (%s)" % (self.helper_text(), self.type)
     
     def helper_text(self):
         if self.type == "A":
             if self.description:
-                return "%s (%s)" % (self.answer, self.description)
-            return self.answer
+                return "%s" % (self.description)
         if self.type == "R":
             if self.description:
                 return self.description
             # this will be ugly
-            return self.answer
         if self.type == "C":
             if self.description:
                 return self.description
             # this might be ugly
-            return self.answer
 
 
 class TreeState(models.Model):
@@ -237,7 +237,7 @@ class Session(models.Model):
     tree = models.ForeignKey(Tree)
     start_date = models.DateTimeField(auto_now_add=True)
     state = models.ForeignKey(TreeState, blank=True, null=True) # none if the session is complete
-    # the number of times the user has tried to answer 
+    # the number of times the user has tried to  
     # this question
     num_tries = models.PositiveIntegerField()
     # this flag stores the difference between completed

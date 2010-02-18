@@ -39,7 +39,7 @@ class Translator(models.Model):
         self.dictionary = Translation.load_dictionary()
     
     def translate(self, text):
-        parts = text.split(self.DELIMITER)
+        parts = text.strip().split(self.DELIMITER)
         result = []
         for part in parts:
             if part.isdigit():
@@ -48,6 +48,11 @@ class Translator(models.Model):
                 translated = self.translate_word(part)
             result.append(translated)
         return self.translate_word(self.DELIMITER.join(result))
+    
+    def get_error_text(self, error_code, lang):
+        self.error = Translation.objects.filter(language =  Language.objects.get(code=lang).id, code = error_code)
+        if len(self.error) > 0:
+            return self.error[0].translation
 
     def translate_number(self, number):
         result = ""

@@ -33,8 +33,11 @@ class App (rapidsms.app.App):
         pass
 
     def outgoing (self, message):
-        """Handle outgoing message notifications."""
-        pass
+        if hasattr(message, 'error_id'):
+            t = Translator()
+            self.error_msg = t.get_error_text(message.error_id, message.language)
+            if self.error_msg:
+                message.text = self.error_msg
 
     def stop (self):
         """Perform global app cleanup when the application is stopped."""

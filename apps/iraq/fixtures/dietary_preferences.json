@@ -39,7 +39,6 @@
         "pk": 1, 
         "model": "tree.answer", 
         "fields": {
-            "answer": "Apple", 
             "code": "apple" 
         }
     }, 
@@ -47,7 +46,6 @@
         "pk": 2, 
         "model": "tree.answer", 
         "fields": {
-            "answer": "Mango", 
             "code": "mango"
         }
     }, 
@@ -55,7 +53,6 @@
         "pk": 3, 
         "model": "tree.answer", 
         "fields": {
-            "answer": "Carrot", 
             "code": "carrot"
         }
     }, 
@@ -63,7 +60,6 @@
         "pk": 4, 
         "model": "tree.answer", 
         "fields": {
-            "answer": "Tomato",
             "code": "tomato"
         }
     }, 
@@ -71,7 +67,6 @@
         "pk": 5, 
         "model": "tree.answer", 
         "fields": {
-            "answer": "Lime", 
             "code": "lime" 
         }
     }, 
@@ -79,7 +74,6 @@
         "pk": 6, 
         "model": "tree.answer", 
         "fields": {
-            "answer": "Kiwi", 
             "code": "kiwi"
         }
     }, 
@@ -87,7 +81,6 @@
         "pk": 7, 
         "model": "tree.answer", 
         "fields": {
-            "answer": "Pear", 
             "code": "pear" 
         }
     }, 
@@ -95,7 +88,6 @@
         "pk": 8, 
         "model": "tree.answer", 
         "fields": {
-            "answer": "Lettuce", 
             "code": "lettuce" 
         }
     }, 
@@ -103,7 +95,6 @@
         "pk": 9, 
         "model": "tree.answer", 
         "fields": {
-            "answer": "Spinach", 
             "code": "spinach" 
         }
     }, 
@@ -111,7 +102,6 @@
         "pk": 10, 
         "model": "tree.answer", 
         "fields": {
-            "answer": "Ginger", 
             "code": "ginger" 
         }
     }, 
