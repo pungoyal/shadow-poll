@@ -671,5 +671,23 @@
 					"code": "err4", 
 					"language": 1
 			   }
+		},
+		{
+			  "pk": 77, 
+			  "model": "internationalization.translation", 
+			  "fields": {
+			  		"translation": "You have selected an invalid choice, please choose one among the above listed choice", 
+					"code": "err5", 
+					"language": 1
+			   }
+		},
+		{
+			  "pk": 78, 
+			  "model": "internationalization.translation", 
+			  "fields": {
+			  		"translation": "Please choose one option", 
+					"code": "err6", 
+					"language": 1
+			   }
 		}
 ]

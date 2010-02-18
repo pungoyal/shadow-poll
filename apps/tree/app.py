@@ -55,8 +55,10 @@ class App(rapidsms.app.App):
             self.debug(state)
             options =  state.question.get_choices(msg.text, " ")
             if not options:
+                msg.__setattr__("error_id", "err6")
                 response = "Sorry you have chosen more options than that is allowed."
                 msg.respond(response)
+                self._increment_num_tries_save_session(session, msg)
                 return True
             # loop through all transitions starting with
             # this state and try each one depending on the type
@@ -89,21 +91,11 @@ class App(rapidsms.app.App):
                         translated_answers = _(flat_answers, lang(msg))
                         response = _('"%(answer)s" is not a valid answer. You must enter %(hint)s', 
                                      lang(msg))% ({"answer" : msg.text, "hint": translated_answers})
-                         
+                        
+                    msg.__setattr__("error_id", "err5") 
                     msg.respond(response)
                     
-                    # update the number of times the user has tried
-                    # to answer this.  If they have reached the 
-                    # maximum allowed then end their session and
-                    # send them an error message.
-                    session.num_tries = session.num_tries + 1
-                    if state.num_retries and session.num_tries >= state.num_retries:
-                        session.state = None
-                        msg.__setattr__("error_id", "err3")
-                        msg.respond(_("Sorry, invalid answer %(retries)s times. Your session will now end. Please try again later.",
-                                      lang(msg)) % {"retries": session.num_tries })
-                        
-                    session.save()
+                    self._increment_num_tries_save_session(session, msg)
                     return True
             
             # create an entry for this response
@@ -164,6 +156,16 @@ class App(rapidsms.app.App):
         if self.session_listeners.has_key(session.tree.trigger):
             for func in self.session_listeners[session.tree.trigger]:
                 func(session, True)
+    
+    def _increment_num_tries_save_session(self, session, msg):
+        session.num_tries = session.num_tries + 1
+        self.state = session.state
+        if self.state.num_retries and session.num_tries >= self.state.num_retries:
+            session.state = None
+            msg.__setattr__("error_id", "err3")
+            msg.respond(_("Sorry, invalid answer %(retries)s times. Your session will now end. Please try again later.",
+                          lang(msg)) % {"retries": session.num_tries })
+        session.save()
                     
     def end_sessions(self, connection):
         ''' Ends all open sessions with this connection.  

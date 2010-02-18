@@ -26,7 +26,7 @@ class TestApp(TestScript):
       10000 > apple
       10000 < Of these vegetables, which is your favourite? Carrot, Tomato, Lettuce, Spinach
       10000 > tree
-      10000 < Please specify one of: Carrot, Tomato, Lettuce, Spinach
+      10000 < You have selected an invalid choice, please choose one among the above listed choice
     """
 
     testBasicPollArabic = u"""
