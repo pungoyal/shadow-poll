@@ -39,7 +39,6 @@
         "pk": 1,
         "model": "tree.answer",
         "fields": {
-            "answer": "Always",
             "code": "a"
         }
     },
@@ -47,7 +46,6 @@
         "pk": 2,
         "model": "tree.answer",
         "fields": {
-            "answer": "Most of the time",
             "code": "b"
         }
     },
@@ -55,7 +53,6 @@
         "pk": 3,
         "model": "tree.answer",
         "fields": {
-            "answer": "Rarely",
             "code": "c"
         }
     },
@@ -63,7 +60,6 @@
         "pk": 4,
         "model": "tree.answer",
         "fields": {
-            "answer": "Never",
             "code": "d"
         }
     },
@@ -71,7 +67,6 @@
         "pk": 5,
         "model": "tree.answer",
         "fields": {
-            "answer": "Peace and Security",
             "code": "a"
         }
     },
@@ -79,7 +74,6 @@
         "pk": 6,
         "model": "tree.answer",
         "fields": {
-            "answer": "Go to school regularly",
             "code": "b"
         }
     },
@@ -87,7 +81,6 @@
         "pk": 7,
         "model": "tree.answer",
         "fields": {
-            "answer": "Health care when sick",
             "code": "c"
         }
     },
@@ -95,7 +88,6 @@
         "pk": 8,
         "model": "tree.answer",
         "fields": {
-            "answer": "Clean neighbourhood",
             "code": "d"
         }
     },
@@ -103,7 +95,6 @@
         "pk": 9,
         "model": "tree.answer",
         "fields": {
-            "answer": "Clean drinking water",
             "code": "e"
         }
     },
@@ -111,7 +102,6 @@
         "pk": 10,
         "model": "tree.answer",
         "fields": {
-            "answer": "Enough food",
             "code": "f"
         }
     },
@@ -119,7 +109,6 @@
         "pk": 11,
         "model": "tree.answer",
         "fields": {
-            "answer": "Be loved",
             "code": "g"
         }
     },
@@ -127,7 +116,6 @@
         "pk": 12,
         "model": "tree.answer",
         "fields": {
-            "answer": "Not have to work",
             "code": "h"
         }
     },
@@ -135,7 +123,6 @@
         "pk": 13,
         "model": "tree.answer",
         "fields": {
-            "answer": "Be listened to",
             "code": "i"
         }
     },
@@ -143,7 +130,6 @@
         "pk": 14,
         "model": "tree.answer",
         "fields": {
-            "answer": "A place to play",
             "code": "j"
         }
     },
@@ -151,7 +137,6 @@
         "pk": 15,
         "model": "tree.answer",
         "fields": {
-            "answer": "Family and friends to be safe",
             "code": "k"
         }
     },
@@ -159,7 +144,6 @@
         "pk": 16,
         "model": "tree.answer",
         "fields": {
-            "answer": "Other (open text response)",
             "code": "l"
         }
     },
@@ -167,7 +151,6 @@
         "pk": 17,
         "model": "tree.answer",
         "fields": {
-            "answer": "Better",
             "code": "a"
         }
     },
@@ -175,7 +158,6 @@
         "pk": 18,
         "model": "tree.answer",
         "fields": {
-            "answer": "About the same",
             "code": "b"
         }
     },
@@ -183,7 +165,6 @@
         "pk": 19,
         "model": "tree.answer",
         "fields": {
-            "answer": "Worse",
             "code": "c"
         }
     },
@@ -191,7 +172,6 @@
         "pk": 20,
         "model": "tree.answer",
         "fields": {
-            "answer": "I Don\u2019t know",
             "code": "d"
         }
     },
@@ -199,7 +179,6 @@
         "pk": 21,
         "model": "tree.answer",
         "fields": {
-            "answer": "Always",
             "code": "a1"
         }
     },
@@ -207,7 +186,6 @@
         "pk": 22,
         "model": "tree.answer",
         "fields": {
-            "answer": "Most of the time",
             "code": "b1"
         }
     },
@@ -215,7 +193,6 @@
         "pk": 23,
         "model": "tree.answer",
         "fields": {
-            "answer": "Rarely",
             "code": "c1"
         }
     },
@@ -223,7 +200,6 @@
         "pk": 24,
         "model": "tree.answer",
         "fields": {
-            "answer": "Never",
             "code": "d1"
         }
     },
@@ -231,7 +207,6 @@
         "pk": 25,
         "model": "tree.answer",
         "fields": {
-            "answer": "Better",
             "code": "a3"
         }
     },
@@ -239,7 +214,6 @@
         "pk": 26,
         "model": "tree.answer",
         "fields": {
-            "answer": "About the same",
             "code": "b3"
         }
     },
@@ -247,7 +221,6 @@
         "pk": 27,
         "model": "tree.answer",
         "fields": {
-            "answer": "Worse",
             "code": "c3"
         }
     },
@@ -255,7 +228,6 @@
         "pk": 28,
         "model": "tree.answer",
         "fields": {
-            "answer": "I Don\u2019t know",
             "code": "d3"
         }
     },
