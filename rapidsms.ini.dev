@@ -67,6 +67,10 @@ port=8081
 host=localhost
 port=8081
 
+[kannel]
+host=localhost
+port=8080
+
 #[smpp]
 #host=
 #port=
