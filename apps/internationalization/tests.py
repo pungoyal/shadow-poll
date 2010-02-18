@@ -86,7 +86,7 @@ class TestTranslator(TestCase):
         
         self.error_id = "err1"
         self.language = "ar"
-        self.assertEqual(t.get_error_text(self.error_id, self.language), None)
+        self.assertEqual(t.get_error_text(self.error_id, self.language), u"نحن لا نفهم. بالشكل الصحيح هو تسجيل استطلاع للمحافظة حي رمز رمز")
 
 class TestTranslation(TestCase):
     def test_get_meaning(self):

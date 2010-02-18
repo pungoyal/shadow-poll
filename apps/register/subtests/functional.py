@@ -43,10 +43,10 @@ class TestRegisterArabicScript (TestScript):
 
     test_registration_message_in_arabic = u"""
         00919980131127 > تسجيل التصويت 100 1001
-        00919980131127 < شكراً لتسجيلك في  هذه الدراسة
+        00919980131127 < شكرا لك ، للشروع في استطلاع الرسائل القصيرة والتصويت مع الكلمة الرئيسية الخاصة بكالعمر والجنس 
     """
     
-    arabic_error_message = u"لم نستطيع فهم الرسالة المسجلة, الرجاء إرسال - التسجيل  الدراسة  المحافظة  الحي"
+    arabic_error_message = u"نحن لا نفهم. بالشكل الصحيح هو تسجيل استطلاع للمحافظة حي رمز رمز"
     test_incomplete_information_passed_in_the_register_message_arabic = u"""
         00919980131127 > تسجيل التصويت 1شش شس 00 001
         00919980131127 < %(error_msg)s
