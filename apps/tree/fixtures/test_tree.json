@@ -1,6 +1,13 @@
 [
   {
     "pk": 1, 
+    "model": "tree.category", 
+    "fields": {
+      "name": "a category"
+    }
+  },
+  {
+    "pk": 1, 
     "model": "internationalization.language", 
     "fields": {
       "code": "en",
@@ -87,7 +94,8 @@
     "pk": 1, 
     "model": "tree.answer", 
     "fields": {
-	  "code":"a"
+	  "code":"a",
+	  "category": 1
     }
   }, 
   {
