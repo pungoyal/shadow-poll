@@ -1,5 +1,6 @@
 window.onload=function() {
-	var paper = Raphael(10, 50, 500, 200);
+    var canvasWidth = 420;
+    var paper = Raphael(document.getElementById("voteBar"), canvasWidth, 200);
 	var colors=["#ccff8a","#ea4cf4","#f8b088","#8bc0fa"]
 	var fontColors=["#4CC552","magenta","orange","cornflowerblue"]
 	var x = 20;
@@ -9,7 +10,7 @@ window.onload=function() {
     var fillerWidth = 2;
 
 	for (var i=0; i < data.length; i++) {
-        var width = data[i]*4;
+        var width = data[i]*(canvasWidth/107);
         var lightRectangle = paper.rect(x,y,width,lightHeight);
 		lightRectangle.attr({
 			fill: colors[i],

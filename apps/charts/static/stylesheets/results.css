@@ -146,14 +146,17 @@ a.badge {
 
 .voteDescription { 
                    float:left;
-                   width : 50%;
+                   width : 175px;
                    font-size : 12px;
                    }
                                   
 .voteBar { 
            float:left;
-           width : 50%;
+           width : 420px;
            }
+.voteBar svg {
+    margin-top: -65px;
+}
 
 .tabularResults{ 
                  clear :both;
