@@ -31,7 +31,7 @@ class Question(models.Model):
     text = models.TextField()
     max_choices = models.IntegerField()
     error_response = models.TextField(null=True, blank=True)
-
+    question_tree = models.ForeignKey(QuestionTree) 
     
     def __unicode__(self):
         return "Q%s: %s" % (
