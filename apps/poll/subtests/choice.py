@@ -14,10 +14,9 @@ class ChoiceTest(TestScript):
         question.save()
         c1 = Choice(code='a',question = question)
         c1.save()
-
+  
         self.assertFalse(c1.parse("wefhjk"))
         self.assertTrue(c1.parse("a"))
         self.assertFalse(c1.parse(None))
-
         
 

@@ -3,6 +3,11 @@ from apps.reporters.models import Reporter, PersistantConnection
 import re
 from register.models import Registration
 
+#only one questionnaire object in the db to hold the trigger for the poll
+class Questionnaire(models.Model):
+    trigger = models.CharField(max_length=10)
+
+
 class Question(models.Model):
     text = models.TextField()
     max_choices = models.IntegerField(default=3)
@@ -13,18 +18,18 @@ class Question(models.Model):
     def __unicode__(self):
         return " %s" % (self.text)
 
-    def respond(self,answer):
+    def matching_choices(self,answer):
+        matching_choices = []
         all_choices = Choice.objects.filter(question = self)
         for choice in all_choices:
             if choice.parse(answer):
-                return True
-        return False
+                matching_choices.append(choice)
+        return matching_choices
         
+
     @classmethod
     def first(klass):
         return Question.objects.filter(is_first=True)[0]
-
-        
 
 class Choice(models.Model):
     code = models.CharField(max_length=1)
@@ -34,12 +39,13 @@ class Choice(models.Model):
     def parse(self, response):
         return self.code == response
         
-#only one questionnaire object in the db to hold the trigger for the poll
-class Questionnaire(models.Model):
-    trigger = models.CharField(max_length=10)
+
+class User(models.Model):
+    connection = models.ForeignKey(PersistantConnection)
 
 
 class UserSession(models.Model):
+    user = models.ForeignKey(User, null=True)
     connection = models.ForeignKey(PersistantConnection)
     question = models.ForeignKey(Question, null=True)
     
@@ -50,16 +56,28 @@ class UserSession(models.Model):
         if self._first_access():
             self.question = Question.first()
             self.save()
+            self._save_user()
             return self.question.text
-            
-        if self.question.respond(message):
+           
+        matching_choices = self.question.matching_choices(message)
+        if len(matching_choices) > 0:
+            self._save_response(self.question, matching_choices)
             self.question = self.question.next_question
-            return self._question_or_thanks(self.question)   
+            return self._next_question(self.question)   
         
         self.save()
         return "error_parsing_response"
     
-    def _question_or_thanks(self,question):
+    def _save_response(self,question,choices):
+        for choice in choices:
+            user_response = UserResponse(user = self.user, question =question, choice = choice)
+            user_response.save()
+
+    def _save_user(self):
+        self.user = User(connection = self.connection)
+        self.user.save()
+    
+    def _next_question(self,question):
         if question == None:
             return "thanks"
         return question.text
@@ -81,5 +99,11 @@ class UserSession(models.Model):
             session.question = None
             return session
         return sessions[0]
-
     
+    
+class UserResponse(models.Model):
+    user = models.ForeignKey(User)
+    question = models.ForeignKey(Question)
+    choice = models.ForeignKey(Choice)
+    
+

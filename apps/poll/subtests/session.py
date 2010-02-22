@@ -41,6 +41,8 @@ class UserSessionTest(TestCase):
         self.setup_choices(self.question3)
 
         Questionnaire(trigger = "trigger").save()
+        self.user = User(connection = self.pconnection)
+        self.user.save()
 
     def setup_choices(self,question):
         choice1 = Choice(code= 'a',question=question)
@@ -79,6 +81,7 @@ class UserSessionTest(TestCase):
 
     def test_retrieve_ongoing_session_at_question2(self):
         session = UserSession.open(self.pconnection)
+        session.user = self.user
         session.question = self.question2
         session.save()
         session = UserSession.open(self.pconnection)
@@ -87,6 +90,7 @@ class UserSessionTest(TestCase):
         
     def test_close_ongoing_session_at_trigger(self):
         session = UserSession.open(self.pconnection)
+        session.user = self.user
         session.question = self.question2
         session.save()
         session = UserSession.open(self.pconnection)
@@ -100,6 +104,19 @@ class UserSessionTest(TestCase):
     def test_close_session_on_last_answer(self):
         session = UserSession.open(self.pconnection)
         session.question = self.question3
+        session.user  = self.user
         self.assertEquals(session.respond("c"), "thanks")
         self.assertEquals(session.question, None)
 
+
+    def test_user_interaction_is_saved_when_successful(self):
+        initial_number_of_responses = len(UserResponse.objects.all())
+        initial_number_of_users = len(User.objects.all())
+
+        session = UserSession.open(self.pconnection)
+        session.respond('trigger')
+        self.assertEquals(len(User.objects.all()), initial_number_of_users + 1)
+        session.respond('a')
+        self.assertEquals(len(UserResponse.objects.all()), initial_number_of_responses + 1)
+
+        

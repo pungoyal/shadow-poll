@@ -41,5 +41,19 @@ class QuestionTest(TestScript):
         self.assertEquals(first_question, question2)    
     
 
-        
-    
+    def setup_choices(self,question):
+        choice1 = Choice(code= 'a',question=question)
+        choice2 = Choice(code= 'b',question=question)
+        choice3 = Choice(code= 'c',question=question)
+        choice1.save()
+        choice2.save()
+        choice3.save()
+
+    def test_matching_choices(self):
+        question1 = Question(text = 'question 1')
+        question1.save()
+        self.setup_choices(question1)
+        self.assertEquals(len(question1.matching_choices('jdenjn')), 0)
+        self.assertEquals(len(question1.matching_choices('a')), 1)
+        self.assertEquals(len(question1.matching_choices('a b')), 0)
+        self.assertEquals(len(question1.matching_choices(None)), 0)
