@@ -18,7 +18,7 @@ def graphs(request, question_number):
     question = Question.objects.get(id=question_number)
     response_break_up = question.response_break_up()
     
-    return render_to_response(request, "graphs.html", {"break_up": response_break_up})
+    return render_to_response(request, "results.html", {"break_up": response_break_up})
 
 def show_governorate(request, governorate_id):
     try:
@@ -28,12 +28,11 @@ def show_governorate(request, governorate_id):
 
     return render_to_response(request, 'results.html', {"bbox": governorate.bounding_box})
 
-def show_results(request, template="results.html"):
-    return render_to_response(request, template)
-
-
-def show_graphs(request, template="graphs.html"):
-	return render_to_response(request, template)
+def home_page(request):
+    response = HttpResponse()
+    response.write("<h1>Homepage coming soon. </h1>")
+    response.write("Head to <a href='question1'>Question 1</a> page")
+    return response
 
 def view_404(request):
     response = HttpResponseNotFound()

@@ -7,5 +7,4 @@ class ViewTests(TestCase):
 
     def test_urls_are_set_up_properly(self):
         self.assertEquals(self.client.get('/charts/').status_code, 200)
-        self.assertEquals(self.client.get('/charts').status_code, 200)
         self.assertEquals(self.client.get('/charts/10').status_code, 200)
