@@ -90,6 +90,7 @@ class UserSession(models.Model):
     def _is_trigger(self, message):
         return message.startswith(Questionnaire.objects.all()[0].trigger)
 
+    # assuming only one session for a connection throughout the poll
     @classmethod
     def open(klass,connection):
         sessions = UserSession.objects.filter(connection = connection)
