@@ -50,10 +50,13 @@ class QuestionTest(TestScript):
         choice3.save()
 
     def test_matching_choices(self):
-        question1 = Question(text = 'question 1')
+        question1 = Question(text = 'question 1',max_choices = 1)
         question1.save()
         self.setup_choices(question1)
         self.assertEquals(len(question1.matching_choices('jdenjn')), 0)
         self.assertEquals(len(question1.matching_choices('a')), 1)
-        self.assertEquals(len(question1.matching_choices('a b')), 0)
         self.assertEquals(len(question1.matching_choices(None)), 0)
+       
+    # def test_matching_choices_matches_number_of_allowed_choices(self):
+    #     question2 = Question(text = "question 2", max_choices = 3)
+    #     self.assertEquals(len(question1.matching_choices('a b')), 0)
