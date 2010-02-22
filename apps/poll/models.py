@@ -19,6 +19,11 @@ class Question(models.Model):
         return Question.objects.filter(is_first=True)[0]
 
 
+class Choice(models.Model):
+    text = models.TextField()
+    question = models.ForeignKey(Question)
+    
+
 class UserSession(models.Model):
     connection = models.ForeignKey(PersistantConnection)
     question = models.ForeignKey(Question, null=True)
@@ -33,9 +38,7 @@ class UserSession(models.Model):
             return session
         return None
         
+    def respond(self, message):
+        return Question.first().text
 
-class Choice(models.Model):
-    text = models.TextField()
-    question = models.ForeignKey(Question)
-    
 
