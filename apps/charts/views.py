@@ -3,7 +3,8 @@ from django.http import HttpResponse, HttpResponseNotFound, HttpResponseServerEr
 from django.template import loader
 from rapidsms.webui.utils import render_to_response
 
-from charts.models import Governorates
+from apps.charts.models import Governorates
+from apps.tree.models import Question
 
 def get_governorates(request):
     reports = Governorates.objects.kml()
@@ -13,20 +14,21 @@ def get_governorates(request):
     r['Content-Disposition'] = 'attachment;filename=reports.kml'
     return r
 
+def graphs(request, question_number):
+    question = Question.objects.get(id=question_number)
+    response_break_up = question.response_break_up()
+    
+    return render_to_response(request, "results.html", {"chart_data": response_break_up, "national_data": response_break_up, "region": "Iraq", "top_response": "Security", "percentage": "64"})
+
 def show_governorate(request, governorate_id):
-    try:
-        governorate = Governorates.objects.filter(id=governorate_id).iterator().next()
-    except:
-        return HttpResponseServerError("Sorry, governorate not found")
+    governorate = Governorates.objects.get(id=governorate_id)
+    return render_to_response(request, 'results.html', {"bbox": governorate.bounding_box, "chart_data": []})
 
-    return render_to_response(request, 'results.html', {"bbox": governorate.bounding_box})
-
-def show_results(request, template="results.html"):
-    return render_to_response(request, template)
-
-
-def show_graphs(request, template="graphs.html"):
-	return render_to_response(request, template)
+def home_page(request):
+    response = HttpResponse()
+    response.write("<h1>Homepage coming soon. </h1>")
+    response.write("Head to <a href='question1'>Question 1</a> page")
+    return response
 
 def view_404(request):
     response = HttpResponseNotFound()
@@ -41,8 +43,3 @@ def view_500(request):
 def _render_to_kml(*args, **kwargs):
     "Renders the response as KML (using the correct MIME type)."
     return HttpResponse(loader.render_to_string(*args, **kwargs), mimetype='application/vnd.google-earth.kml+xml')
-
-def show_district(request, governorate_id, district_id):
-    response = HttpResponse()
-    response.write("Under Construction. Come back soon, please :)")
-    return response

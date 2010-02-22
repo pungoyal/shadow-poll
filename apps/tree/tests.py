@@ -5,12 +5,31 @@ import internationalization.app as i18n_app
 
 from models import *
 from reporters.models import Reporter, PersistantConnection, PersistantBackend
-    
+import unittest
+from math import fsum
+
+class QuestionTest(unittest.TestCase):
+    def test_response_break_up(self):
+        question = Question(id=1)
+        break_up = question.response_break_up()
+
+        self.assertEquals(break_up[0], 22.6)
+        self.assertEquals(break_up[1], 18.8)
+        self.assertEquals(break_up[2], 52.2)
+        self.assertEquals(break_up[3], 6.4)
+
+    def test_sum_of_break_up_values_should_be_100(self):
+        question = Question(id=1)
+        break_up = question.response_break_up()
+
+        self.assertEquals(fsum(break_up), 100)
+
+
 class TestApp (TestScript):
     apps = (App, reporters_app.App)
     # the test_backend script does the loading of the dummy backend that allows reporters
     # to work properly in tests
-    fixtures = ['test_backend', 'test_tree']
+    fixtures = ['test_backend', 'test_tree','test_charts']
     
     testTrigger = """
            8005551212 > test
@@ -82,6 +101,12 @@ class TestApp (TestScript):
         self.msg_txt = "a;b"
         self.choices = self.ques.get_choices(self.msg_txt, self.delim)
         self.assertEquals(self.choices, None)
+        
+    def test_get_num_entry_for_question(self):
+        self.n_question = "1"
+        self.e = Entry()
+        self.num_entries = self.e.get_num_entries_for_question(self.n_question)
+        self.assertEquals(self.num_entries, 5)
         
         # this case should be handled by translator app
 #        self.msg_txt = "a b"

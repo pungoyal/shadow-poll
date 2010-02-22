@@ -7,6 +7,9 @@ from apps.reporters.models import Reporter, PersistantConnection
 import re
 from register.models import Registration 
 
+class Category(models.Model):
+    name = models.CharField(max_length=40)
+    
 class Question(models.Model):
     text = models.TextField()
     max_choices = models.IntegerField()
@@ -17,6 +20,11 @@ class Question(models.Model):
             self.pk,
             self.text)
 
+    # dummy method right now. should be done when the model refactoring is complete.
+    def response_break_up(self):
+        break_up = [22.6, 18.8, 52.2, 6.4]
+        return break_up 
+
     def get_choices(self, msg_txt, delim):
         self.options= msg_txt.strip(delim).rsplit(delim)
         if len(self.options) > self.max_choices:
@@ -24,7 +32,6 @@ class Question(models.Model):
         else:
             return self.options  
    
-    
     def has_transition(self,choice):
         pass
     
@@ -121,10 +128,10 @@ class Answer(models.Model):
         ('C', 'Custom logic'),
     )
     code = models.CharField(max_length=20, null=False)
+    category = models.ForeignKey(Category, null=True)
 
     def __unicode__(self):
         return self.code
-        #return "%s %s (%s)" % (self.helper_text(), self.type)
     
     def helper_text(self):
         if self.type == "A":
@@ -277,6 +284,8 @@ class Entry(models.Model):
         # since this is what it is for free text entries
         return self.text
     
+    def get_num_entries_for_question(self, question_num):
+        return len(Entry.objects.filter(sequence_id = question_num))
     
     class Meta:
         verbose_name_plural="Entries"

@@ -1,10 +1,27 @@
+<script src="/static/webapp/javascripts/jquery-1.3.2.min.js"></script>
+<script src="/static/charts/javascripts/raphael-min.js"></script>
+<script src="/static/charts/javascripts/graphs.js"></script>
+
+<script type="text/javascript">
+    var data = {{ chart_data }}
+    var country_data = {{ national_data }}
+</script>
+
+
 <div id="voteBreakdown" class="voteBreakdown">
   <div id="voteDescription" class="voteDescription">
-    <label>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</label>
+    <label>Dummy text that is not Lorem Ipsum.</label>
   </div>
-  <div id="voteBar" class="voteBar">
-    <img id="chartImg" src="/static/charts/img/chart.jpg"/>    
+  <div class="voteBar">
+  <div id="vote">
+      <label>Top responses for {{ region }}</label>
+      <br/>
+      <label class="topResponse">{{ top_response }} {{ percentage }}%</label>
   </div>
+  <div id="voteBar">
+      <p class="chartKey">National Results</p>
+  </div>
+      </div>
 </div>
 
 <div id="tabularResults" class="tabularResults">

@@ -1,6 +1,66 @@
 [
     {
         "pk": 1,
+        "model": "tree.category",
+        "fields": {
+			"name":"Always"
+        }
+    },
+	{
+        "pk": 2,
+        "model": "tree.category",
+        "fields": {
+			"name":"Most of the times"
+        }
+    },
+	{
+        "pk": 3,
+        "model": "tree.category",
+        "fields": {
+			"name":"Never"
+        }
+    },
+	{
+        "pk": 4,
+        "model": "tree.category",
+        "fields": {
+			"name":"Rarely"
+        }
+    },
+	{
+        "pk": 1,
+        "model": "charts.colormap",
+        "fields": {
+			"category" :1,
+			"color":"Red"
+        }
+    },
+	{
+        "pk": 2,
+        "model": "charts.colormap",
+        "fields": {
+			"category" :2,
+			"color":"Orange"
+        }
+    },
+	{
+        "pk": 3,
+        "model": "charts.colormap",
+        "fields": {
+			"category" :3,
+			"color":"Green"
+        }
+    },
+	{
+        "pk": 4,
+        "model": "charts.colormap",
+        "fields": {
+			"category" :4,
+			"color":"Blue"
+        }
+    },
+	{
+        "pk": 1,
         "model": "tree.entry",
         "fields": {
             "district": 10,
