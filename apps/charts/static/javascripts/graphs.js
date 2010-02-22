@@ -8,8 +8,8 @@ window.onload=function() {
     var lightHeight = 40;
     var fillerWidth = 2;
 
-	for (var i=0; i < break_up.length; i++) {
-        var width = break_up[i]*4;
+	for (var i=0; i < data.length; i++) {
+        var width = data[i]*4;
         var lightRectangle = paper.rect(x,y,width,lightHeight);
 		lightRectangle.attr({
 			fill: colors[i],
@@ -17,7 +17,7 @@ window.onload=function() {
 			opacity: 0.30
 		});
 
-        var percentageText = paper.text(x+width/2.0,y+lightHeight/2.0,break_up[i]+"%")
+        var percentageText = paper.text(x+width/2.0,y+lightHeight/2.0,data[i]+"%")
         percentageText.attr({
             fill: fontColors[i],
             stroke: fontColors[i],
