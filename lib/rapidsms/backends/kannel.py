@@ -3,6 +3,7 @@
 
 import re
 import urllib
+import urlparse
 from datetime import datetime
 from select import select
 from SocketServer import ThreadingMixIn
@@ -124,17 +125,27 @@ class KannelHTTPHandler(BaseHTTPRequestHandler):
         match           = request_regex.match(self.path)
 
         if match:
+            
+            url = urlparse.urlparse(self.path)
+            params = query_string_to_dict(url.query)
+                    
             # build the message
             sender_id   = _plus(match.group(1))
-            text        = _str(match.group(2))
-            text        = _plus(text.replace('+', ' '))
+            input = match.group(2)
+            if 'charset' in params and params['charset'].lower() == 'utf-8':
+                # if mo-recode is True, then kannel has already transformed
+                # ucs2 to more standard utf-8
+                text = urllib.unquote_plus(input).decode('utf-8')
+            else:
+                # otherwise, we just assume we're dealing with regular ascii
+                text = _str(urllib.unquote_plus(input))
             
             # get time
             received = datetime.utcnow()
             
             msg = self.server.backend.message(
                 sender_id, 
-                urllib.unquote(text),
+                text,
                 date=received
                 )
 
@@ -165,12 +176,12 @@ class KannelHTTPHandler(BaseHTTPRequestHandler):
         target = re.compile('\D').sub("", msg.connection.identity)
 
         # urlencode for HTTP get
-        message = _str(msg.text)
-        msg_enc = urllib.quote(message)
+        message = msg.text.encode('utf-8')
+        msg_enc = urllib.quote_plus(message)
 
         # send HTTP GET request to Kannel
         try:
-            url = "http://%s:%d/cgi-bin/sendsms?username=%s&password=%s&to=%s&from=&text=%s"\
+            url = "http://%s:%d/cgi-bin/sendsms?username=%s&password=%s&to=%s&from=&text=%s&charset=utf-8&coding=2"\
 	            % (cls.kannel_host, cls.kannel_port, cls.kannel_username, cls.kannel_password, target, msg_enc)
             res = urllib.urlopen(url)
             ans = res.read()
@@ -193,3 +204,11 @@ class KannelHTTPHandler(BaseHTTPRequestHandler):
         else:
             cls.error("message failed to send: %s" % ans)
 
+def query_string_to_dict(query):
+    params = {}
+    for keyval in query.split("&"):
+        keyval = keyval.split('=')
+        if len(keyval) == 2:
+            key, val = keyval
+            params[key] = val
+    return params
