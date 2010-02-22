@@ -6,6 +6,9 @@ from register.models import Registration
 #only one questionnaire object in the db to hold the trigger for the poll
 class Questionnaire(models.Model):
     trigger = models.CharField(max_length=10)
+    
+    def __unicode__(self):
+        return "%s" % (self.trigger)
 
 
 class Question(models.Model):
@@ -32,7 +35,7 @@ class Question(models.Model):
         return Question.objects.filter(is_first=True)[0]
 
 class Choice(models.Model):
-    code = models.CharField(max_length=1)
+    code = models.CharField(max_length=2)
     text = models.TextField(null=True)
     question = models.ForeignKey(Question)
     
@@ -88,7 +91,10 @@ class UserSession(models.Model):
         return self.question == None
 
     def _is_trigger(self, message):
-        return message.startswith(Questionnaire.objects.all()[0].trigger)
+        for questionnaire in Questionnaire.objects.all():
+            if message.startswith(questionnaire.trigger):
+                return True
+        return False
 
     # assuming only one session for a connection throughout the poll
     @classmethod
