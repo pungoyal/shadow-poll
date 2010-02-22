@@ -6,7 +6,6 @@ register = template.Library()
 @register.simple_tag
 def get_languages():
     html = ""
-    print settings.LANGUAGE_CODE
     for key,value in settings.LANGUAGES:
         lang_html= "<a href=\"javascript:test('"
         lang_html += key
