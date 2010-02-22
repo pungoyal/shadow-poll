@@ -4,6 +4,7 @@ from django.template import loader
 from rapidsms.webui.utils import render_to_response
 
 from apps.charts.models import Governorates
+from apps.tree.models import Question
 
 def get_governorates(request):
     reports = Governorates.objects.kml()
@@ -14,13 +15,10 @@ def get_governorates(request):
     return r
 
 def graphs(request, question_number):
-
+    question = Question.objects.get(id=question_number)
+    response_break_up = question.response_break_up()
     
-
-
-
-
-    return render_to_response(request, "graphs.html", {"question": question_number})
+    return render_to_response(request, "graphs.html", {"break_up": response_break_up})
 
 def show_governorate(request, governorate_id):
     try:
