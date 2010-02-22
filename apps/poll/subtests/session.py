@@ -21,18 +21,18 @@ class UserSessionTest(TestCase):
         self.pconnection.save()
         self.reporter.connections.add(self.pconnection)
         
-        self.tree = QuestionTree()
+        self.questionnaire = Questionnaire()
         self.question1 = Question("question1")
         self.question2 = Question("question2")
         self.question3 = Question("question3")
-        self.tree.addQuestion(self.question1)
-        self.tree.addQuestion(self.question2)
-        self.tree.addQuestion(self.question3)
-        self.tree.save()
+        self.questionnaire.addQuestion(self.question1)
+        self.questionnaire.addQuestion(self.question2)
+        self.questionnaire.addQuestion(self.question3)
+        self.questionnaire.save()
 
     def testOpenNewSession(self):
         self.session = UserSession.open(self.pconnection)
-        self.assertEquals(self.session.tree, self.tree)
+        self.assertEquals(self.session.questionnaire, self.questionnaire)
         self.assertEquals(self.session.question, None)
         
 

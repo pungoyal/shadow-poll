@@ -13,7 +13,7 @@ class QuestionTreeTest(TestScript):
         question1 = Question(text = 'question 1')
         question2 = Question(text = 'question 2')
         
-        tree = QuestionTree()
+        tree = Questionnaire()
         tree.addQuestion(question1)
         tree.addQuestion(question2)
         
@@ -23,7 +23,7 @@ class QuestionTreeTest(TestScript):
     def testLastQuestion(self):
         question1 = Question(text = 'question 1')
         
-        self.tree = QuestionTree()
+        self.tree = Questionnaire()
         self.tree.addQuestion(question1)
         
         nextquestion = self.tree.next(question1)
@@ -32,7 +32,7 @@ class QuestionTreeTest(TestScript):
     def testFirst(self):
         question1 = Question(text = 'question 1')
         
-        self.tree = QuestionTree()
+        self.tree = Questionnaire()
         self.tree.addQuestion(question1)
         
         nextquestion = self.tree.first()
@@ -41,8 +41,8 @@ class QuestionTreeTest(TestScript):
     def testCurrentTree(self):
         question1 = Question(text = 'question 1')
         
-        self.tree = QuestionTree()
+        self.tree = Questionnaire()
         self.tree.addQuestion(question1)
         self.tree.save()
-        current  = QuestionTree.load_current()
+        current  = Questionnaire.load_current()
         self.assertEquals(self.tree, current)

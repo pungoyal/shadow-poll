@@ -3,11 +3,11 @@ from apps.reporters.models import Reporter, PersistantConnection
 import re
 from register.models import Registration
 
-class QuestionTree(models.Model):
+class Questionnaire(models.Model):
     name = models.TextField(null=True)
 
     def __init__(self, *args, **kargs):
-        super(QuestionTree, self).__init__(*args,**kargs)
+        super(Questionnaire, self).__init__(*args,**kargs)
         self.questions = []
         self.flow = {}
 
@@ -30,14 +30,14 @@ class QuestionTree(models.Model):
 
     @classmethod
     def load_current(klass):
-        return QuestionTree.objects.all()[0]
+        return Questionnaire.objects.all()[0]
 
 
 class Question(models.Model):
     text = models.TextField()
     max_choices = models.IntegerField()
     error_response = models.TextField(null=True, blank=True)
-    question_tree = models.ForeignKey(QuestionTree) 
+    question_tree = models.ForeignKey(Questionnaire) 
     
     def __unicode__(self):
         return "Q%s: %s" % (
@@ -46,7 +46,7 @@ class Question(models.Model):
 
 class UserSession(models.Model):
     connection = models.ForeignKey(PersistantConnection)
-    tree = models.ForeignKey(QuestionTree)
+    tree = models.ForeignKey(Questionnaire)
     question = models.ForeignKey(Question, null=True)
 
     @classmethod
@@ -55,7 +55,7 @@ class UserSession(models.Model):
         if len(sessions) == 0:
             session = UserSession()
             session.connection = connection
-            session.tree = QuestionTree.load_current()
+            session.tree = Questionnaire.load_current()
             session.question = None
             return session
         return None
