@@ -3,7 +3,7 @@ from django.http import HttpResponse, HttpResponseNotFound, HttpResponseServerEr
 from django.template import loader
 from rapidsms.webui.utils import render_to_response
 
-from charts.models import Governorates
+from apps.charts.models import Governorates
 
 def get_governorates(request):
     reports = Governorates.objects.kml()
@@ -13,9 +13,18 @@ def get_governorates(request):
     r['Content-Disposition'] = 'attachment;filename=reports.kml'
     return r
 
+def graphs(request, question_number):
+
+    
+
+
+
+
+    return render_to_response(request, "graphs.html", {"question": question_number})
+
 def show_governorate(request, governorate_id):
     try:
-        governorate = Governorates.objects.filter(id=governorate_id).iterator().next()
+        governorate = Governorates.objects.get(id=governorate_id)
     except:
         return HttpResponseServerError("Sorry, governorate not found")
 
