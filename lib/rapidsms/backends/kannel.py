@@ -41,10 +41,6 @@ class Backend(rapidsms.backends.Backend):
     Although only tested with SMPP to SMS Aggregator.
     Check if Kannel is UP on configuration by testing sendsms HTTP server'''
 
-    kannel_host     = 'localhost'
-    kannel_port     = 13013
-    kannel_username = 'kannel'
-    kannel_password = 'kannel'
 
     def configure(self, host="localhost", port=8080, kannel_host='localhost', kannel_port=13013, kannel_username='kannel', kannel_password="kannel"):
               
@@ -86,11 +82,6 @@ class Backend(rapidsms.backends.Backend):
 
 class KannelHTTPHandler(BaseHTTPRequestHandler):
 
-    kannel_host        = 'localhost'
-    kannel_port        = 13013
-    kannel_username    = 'kannel'
-    kannel_password    = 'kannel'
-
     def respond(self, code, msg):
         self.send_response(code)
         self.send_header("Content-type", "text/plain")
@@ -121,7 +112,7 @@ class KannelHTTPHandler(BaseHTTPRequestHandler):
             return
         
         # accepts /+digits/message
-        request_regex   = re.compile(r"^/([\%B0-9]+)/(.*)")
+        request_regex   = re.compile(r"^/([\%B0-9]+)/([^?]*)")
         match           = request_regex.match(self.path)
 
         if match:
@@ -174,15 +165,22 @@ class KannelHTTPHandler(BaseHTTPRequestHandler):
 
         # remove non digit from number
         target = re.compile('\D').sub("", msg.connection.identity)
-
+        
         # urlencode for HTTP get
-        message = msg.text.encode('utf-8')
+        coding = 0
+        try:
+            message = msg.text.encode('latin1')
+        except Exception, e:
+            coding = 2
+            message = msg.text.encode('utf-8')
         msg_enc = urllib.quote_plus(message)
-
+        
         # send HTTP GET request to Kannel
         try:
-            url = "http://%s:%d/cgi-bin/sendsms?username=%s&password=%s&to=%s&from=&text=%s&charset=utf-8&coding=2"\
+            url = "http://%s:%d/cgi-bin/sendsms?username=%s&password=%s&to=%s&from=&text=%s"\
 	            % (cls.kannel_host, cls.kannel_port, cls.kannel_username, cls.kannel_password, target, msg_enc)
+            if coding == 2:
+                url = url + "&charset=utf-8&coding=2"
             res = urllib.urlopen(url)
             ans = res.read()
         except Exception, err:

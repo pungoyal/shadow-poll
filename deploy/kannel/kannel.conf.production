@@ -33,13 +33,26 @@ log-file = "/var/log/kannel/wapbox.log"
 
 group   = smsc
 smsc    = smpp
+# Fake SMSC
+#smsc    = fake
+transceiver-mode = true
 # location of external SMSC (SMS Centre)
+# RedRabbit
 host    = 212.35.67.179
 port    = 980
-# only SMPP 3.4 and above
-transceiver-mode = true
-smsc-username    = thoughtworks
-smsc-password    = thotwrk9
+# ZAIN
+#host    = 172.29.35.70	
+#port    = 31110
+# Fake SMSC
+#host    = 127.0.0.1
+#port    = 10000
+# comment this out for fakesmsc
+# RedRabbit
+smsc-username    = XXX
+smsc-password    = XXX
+# ZAIN
+#smsc-username    = XXX
+#smsc-password    = XXX
 # vma is default (voice mail activation)
 system-type      = vma
 # the machine where the kannel backend is located
@@ -54,10 +67,12 @@ group = smsbox
 bearerbox-host = 127.0.0.1
 # port in which any sendsms (push) HTTP requests are done
 sendsms-port = 13013
-# specify sendsms originator
-global-sender = HMIS
+# specify sendsms originator. This should ALWAYS be the phone number
+# so that kids can respond easily
+global-sender = 9647801964524
 log-file = "/var/log/kannel/smsbox.log"
 log-level = 0
+mo-recode = true
 
 # accounts that we use internally for sms push/pull
 group = sendsms-user
@@ -69,6 +84,7 @@ max-messages = 3
 group = sms-service
 keyword-regex = .*
 catch-all = yes
-max-messages = 0
-get-url = "http://127.0.0.1:8080/%p/%a"
-
+max-messages = 5
+omit-empty = true
+concatenation = true
+get-url = "http://127.0.0.1:8080/%p/%a?charset=%C"
