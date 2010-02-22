@@ -35,14 +35,43 @@ class UserSessionTest(TestCase):
         self.question1.save()
         self.question2.save()
         self.question3.save()
-        
+
+        self.setup_choices(self.question1)
+
+    def setup_choices(self,question):
+        choice1 = Choice(code= 'a',question=question)
+        choice2 = Choice(code= 'b',question=question)
+        choice3 = Choice(code= 'c',question=question)
+        choice1.save()
+        choice2.save()
+        choice3.save()
 
     def test_open_new_session(self):
-        self.session = UserSession.open(self.pconnection)
-        self.assertEquals(self.session.question, self.question1)
+        session = UserSession.open(self.pconnection)
+        self.assertEquals(session.question, None)
 
         
-    def test_respond_with_first_question_on_new_session(self):
-        self.session = UserSession.open(self.pconnection)
-        self.assertEquals(self.session.respond("text"), "question1")
+    def test_respond_with_first_question_on_new_session_for_any_message(self):
+        session = UserSession.open(self.pconnection)
+        self.assertEquals(session.respond("text"), "question1")
+
+    def test_correct_response_to_question_sends_next_question(self):
+        session = UserSession.open(self.pconnection)
+        self.assertEquals(session.question, None)
+        response1 = session.respond("text")
+        self.assertEquals(session.question, self.question1)
+        response2 = session.respond("a")
+        self.assertEquals(response2, "question2")
+        self.assertEquals(session.question, self.question2)
+
+    def test_wrong_response_to_question_sends_error(self):
+        session = UserSession.open(self.pconnection)
+        self.assertEquals(session.question, None)
+        response1 = session.respond("text")
+        self.assertEquals(session.question, self.question1)
+        response2 = session.respond("django")
+        self.assertEquals(response2, "error_parsing_response")
+        self.assertEquals(session.question, self.question1)
+
+
 

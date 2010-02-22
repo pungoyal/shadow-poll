@@ -11,22 +11,48 @@ class Question(models.Model):
     is_first = models.BooleanField(default=False)
 
     def __unicode__(self):
-        return "Q%s: %s" % (
-            self.pk,
-            self.text)
+        return " %s" % (self.text)
+
+    def respond(self,answer):
+        all_choices = Choice.objects.filter(question = self)
+        for choice in all_choices:
+            if choice.parse(answer):
+                return True
+        return False
+        
     @classmethod
     def first(klass):
         return Question.objects.filter(is_first=True)[0]
 
+        
 
 class Choice(models.Model):
-    text = models.TextField()
+    code = models.CharField(max_length=1)
+    text = models.TextField(null=True)
     question = models.ForeignKey(Question)
     
+    def parse(self, response):
+        return self.code == response
+        
 
 class UserSession(models.Model):
     connection = models.ForeignKey(PersistantConnection)
     question = models.ForeignKey(Question, null=True)
+        
+    def respond(self, message):
+        if self._first_access():
+            self.question = Question.first()
+            return self.question.text
+            
+        if self.question.respond(message):
+            self.question = self.question.next_question
+            return self.question.text   
+        
+        return "error_parsing_response"
+    
+    def _first_access(self):
+        return self.question == None
+
 
     @classmethod
     def open(klass,connection):
@@ -34,11 +60,6 @@ class UserSession(models.Model):
         if len(sessions) == 0:
             session = UserSession()
             session.connection = connection
-            session.question = Question.first()
+            session.question = None
             return session
         return None
-        
-    def respond(self, message):
-        return Question.first().text
-
-
