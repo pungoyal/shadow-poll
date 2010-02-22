@@ -24,9 +24,18 @@ class QuestionTreeTest(TestScript):
     def testLastQuestion(self):
         question1 = Question(text = 'question 1')
         
-        tree = QuestionTree()
-        tree.addQuestion(question1)
+        self.tree = QuestionTree()
+        self.tree.addQuestion(question1)
         
-        nextquestion = tree.next(question1)
-        self.assertEquals(None, nextquestion)    
+        nextquestion = self.tree.next(question1)
+        self.assertEquals(nextquestion, None)    
+    
+    def testFirst(self):
+        question1 = Question(text = 'question 1')
+        
+        self.tree = QuestionTree()
+        self.tree.addQuestion(question1)
+        
+        nextquestion = self.tree.first()
+        self.assertEquals(nextquestion, question1)    
     

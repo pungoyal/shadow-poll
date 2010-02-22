@@ -4,8 +4,10 @@ import re
 from register.models import Registration
 
 class QuestionTree(models.Model):
-    questions = []
-    flow = {}
+
+    def __init__(self):
+        self.questions = []
+        self.flow = {}
 
     def addQuestion(self, question):
         self.addToTheFlow(question)
@@ -15,11 +17,14 @@ class QuestionTree(models.Model):
         if len(self.questions) == 0 :  
             self.flow[question] = None
             return
-            
+ 
         self.flow[self.questions[-1]] =question
 
     def next(self, question):
-        return self.flow[question]
+         return self.flow[question]
+    
+    def first(self):
+        return self.flow.keys()[0]
 
 
 class Question(models.Model):
