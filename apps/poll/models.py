@@ -7,7 +7,7 @@ class Question(models.Model):
     text = models.TextField()
     max_choices = models.IntegerField(default=3)
     error_response = models.TextField(null=True, blank=True)
-    next_question = models.ForeignKey('self', null=True)
+    next_question = models.ForeignKey('self', null = True,default = None)
     is_first = models.BooleanField(default=False)
 
     def __unicode__(self):
@@ -34,25 +34,43 @@ class Choice(models.Model):
     def parse(self, response):
         return self.code == response
         
+#only one questionnaire object in the db to hold the trigger for the poll
+class Questionnaire(models.Model):
+    trigger = models.CharField(max_length=10)
+
 
 class UserSession(models.Model):
     connection = models.ForeignKey(PersistantConnection)
     question = models.ForeignKey(Question, null=True)
-        
+    
     def respond(self, message):
+        if self._is_trigger(message):
+            self.question = None
+
         if self._first_access():
             self.question = Question.first()
+            self.save()
             return self.question.text
             
         if self.question.respond(message):
             self.question = self.question.next_question
-            return self.question.text   
+            return self._question_or_thanks(self.question)   
         
+        self.save()
         return "error_parsing_response"
     
+    def _question_or_thanks(self,question):
+        if question == None:
+            return "thanks"
+        return question.text
+        
+    
+
     def _first_access(self):
         return self.question == None
 
+    def _is_trigger(self, message):
+        return message.startswith(Questionnaire.objects.all()[0].trigger)
 
     @classmethod
     def open(klass,connection):
@@ -62,4 +80,6 @@ class UserSession(models.Model):
             session.connection = connection
             session.question = None
             return session
-        return None
+        return sessions[0]
+
+    
