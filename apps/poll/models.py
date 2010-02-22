@@ -12,9 +12,12 @@ class QuestionTree(models.Model):
         self.questions.append(question)
 
     def addToTheFlow(self, question):
-        if len(self.questions) > 0 :  
-            self.flow[self.questions[-1]] =question
-        
+        if len(self.questions) == 0 :  
+            self.flow[question] = None
+            return
+            
+        self.flow[self.questions[-1]] =question
+
     def next(self, question):
         return self.flow[question]
 
