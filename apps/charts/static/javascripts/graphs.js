@@ -1,16 +1,18 @@
 window.onload=function() {
     var canvasWidth = 420;
+    var factor = (canvasWidth/107);
+
     var paper = Raphael(document.getElementById("voteBar"), canvasWidth, 200);
-	var colors=["#ccff8a","#ea4cf4","#f8b088","#8bc0fa"]
-	var fontColors=["#4CC552","magenta","orange","cornflowerblue"]
-	var x = 20;
-    var y = 80;
+	var colors=["#ccff8a","#ea4cf4","#f8b088","#8bc0fa"];
+	var fontColors=["#4CC552","magenta","orange","cornflowerblue"];
+	var x = 0;
+    var y = 70;
     var darkHeight = 10;
     var lightHeight = 40;
     var fillerWidth = 2;
 
 	for (var i=0; i < data.length; i++) {
-        var width = data[i]*(canvasWidth/107);
+        var width = data[i]*factor;
         var lightRectangle = paper.rect(x,y,width,lightHeight);
 		lightRectangle.attr({
 			fill: colors[i],
@@ -42,4 +44,24 @@ window.onload=function() {
 
         x = x + fillerWidth;
 	};
+    y = y+lightHeight;
+    x=0;
+    
+    for (var i=0; i < country_data.length; i++) {
+        var width = country_data[i]*factor;        
+        var r = paper.rect(x, y+30, width, 5)
+        r.attr({
+            fill: colors[i],
+            stroke: colors[i],
+            opacity: 0.70
+        });
+        x = x + width;
+        var filler = paper.rect(x,y,fillerWidth,darkHeight + lightHeight)
+        filler.attr({
+            fill: "white",
+            stroke: "white"
+        });
+
+        x = x + fillerWidth;
+    }
 };
