@@ -85,7 +85,7 @@ class UserSessionTest(TestCase):
         session.question = self.question2
         session.save()
         session = UserSession.open(self.pconnection)
-        self.assertEquals(session.respond("c"), self.question3.text)
+        self.assertEquals(session.respond("b"), self.question3.text)
         self.assertEquals(session.question, self.question3)
         
     def test_close_ongoing_session_at_trigger(self):

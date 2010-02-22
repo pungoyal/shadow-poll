@@ -13,7 +13,7 @@ class Questionnaire(models.Model):
 
 class Question(models.Model):
     text = models.TextField()
-    max_choices = models.IntegerField(default=3)
+    max_choices = models.IntegerField(default=1)
     error_response = models.TextField(null=True, blank=True)
     next_question = models.ForeignKey('self', null = True,default = None)
     is_first = models.BooleanField(default=False)
@@ -23,11 +23,19 @@ class Question(models.Model):
 
     def matching_choices(self,answer):
         matching_choices = []
+        if answer == None:
+            return matching_choices
+
         all_choices = Choice.objects.filter(question = self)
-        for choice in all_choices:
-            if choice.parse(answer):
-                matching_choices.append(choice)
-        return matching_choices
+        answered_choices = answer.strip(' ').rsplit(' ')
+
+        for answered_choice in answered_choices:
+            for choice in all_choices:
+                if choice.parse(answered_choice):
+                    matching_choices.append(choice)
+                    break
+                
+        return matching_choices if len(matching_choices) == len(answered_choices) else []
         
 
     @classmethod
@@ -63,6 +71,7 @@ class UserSession(models.Model):
             return self.question.text
            
         matching_choices = self.question.matching_choices(message)
+
         if len(matching_choices) > 0:
             self._save_response(self.question, matching_choices)
             self.question = self.question.next_question
