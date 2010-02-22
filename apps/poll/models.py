@@ -3,50 +3,24 @@ from apps.reporters.models import Reporter, PersistantConnection
 import re
 from register.models import Registration
 
-class Questionnaire(models.Model):
-    name = models.TextField(null=True)
-
-    def __init__(self, *args, **kargs):
-        super(Questionnaire, self).__init__(*args,**kargs)
-        self.questions = []
-        self.flow = {}
-
-    def addQuestion(self, question):
-        self.addToTheFlow(question)
-        self.questions.append(question)
-
-    def addToTheFlow(self, question):
-        if len(self.questions) == 0 :  
-            self.flow[question] = None
-            return
- 
-        self.flow[self.questions[-1]] =question
-
-    def next(self, question):
-         return self.flow[question]
-    
-    def first(self):
-        return self.flow.keys()[0]
-
-    @classmethod
-    def load_current(klass):
-        return Questionnaire.objects.all()[0]
-
-
 class Question(models.Model):
     text = models.TextField()
-    max_choices = models.IntegerField()
+    max_choices = models.IntegerField(default=3)
     error_response = models.TextField(null=True, blank=True)
-    question_tree = models.ForeignKey(Questionnaire) 
-    
+    next_question = models.ForeignKey('self', null=True)
+    is_first = models.BooleanField(default=False)
+
     def __unicode__(self):
         return "Q%s: %s" % (
             self.pk,
             self.text)
+    @classmethod
+    def first(klass):
+        return Question.objects.filter(is_first=True)[0]
+
 
 class UserSession(models.Model):
     connection = models.ForeignKey(PersistantConnection)
-    questionnaire = models.ForeignKey(Questionnaire)
     question = models.ForeignKey(Question, null=True)
 
     @classmethod
@@ -55,8 +29,7 @@ class UserSession(models.Model):
         if len(sessions) == 0:
             session = UserSession()
             session.connection = connection
-            session.questionnaire = Questionnaire.load_current()
-            session.question = None
+            session.question = Question.first()
             return session
         return None
         

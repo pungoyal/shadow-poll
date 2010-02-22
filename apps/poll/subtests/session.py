@@ -21,18 +21,25 @@ class UserSessionTest(TestCase):
         self.pconnection.save()
         self.reporter.connections.add(self.pconnection)
         
-        self.questionnaire = Questionnaire()
-        self.question1 = Question("question1")
-        self.question2 = Question("question2")
-        self.question3 = Question("question3")
-        self.questionnaire.addQuestion(self.question1)
-        self.questionnaire.addQuestion(self.question2)
-        self.questionnaire.addQuestion(self.question3)
-        self.questionnaire.save()
+        self.question1 = Question(text = "question1")
+        self.question1.save()
+        self.question2 = Question(text = "question2")
+        self.question2.save()
+        self.question3 = Question(text = "question3")
+        self.question3.save()
+        
+        self.question1.next_question = self.question2
+        self.question2.next_question = self.question3
 
-    def testOpenNewSession(self):
-        self.session = UserSession.open(self.pconnection)
-        self.assertEquals(self.session.questionnaire, self.questionnaire)
-        self.assertEquals(self.session.question, None)
+        self.question1.save()
+        self.question2.save()
+        self.question3.save()
         
 
+    def test_open_new_session(self):
+        self.question1 = Question(text = "question1")
+        self.question1.is_first = True
+        self.question1.save()
+        
+        self.session = UserSession.open(self.pconnection)
+        self.assertEquals(self.session.question, self.question1)
