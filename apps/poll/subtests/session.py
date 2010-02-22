@@ -37,6 +37,10 @@ class UserSessionTest(TestCase):
         self.question3.save()
 
         self.setup_choices(self.question1)
+        self.setup_choices(self.question2)
+        self.setup_choices(self.question3)
+
+        Questionnaire(trigger = "trigger").save()
 
     def setup_choices(self,question):
         choice1 = Choice(code= 'a',question=question)
@@ -73,5 +77,29 @@ class UserSessionTest(TestCase):
         self.assertEquals(response2, "error_parsing_response")
         self.assertEquals(session.question, self.question1)
 
+    def test_retrieve_ongoing_session_at_question2(self):
+        session = UserSession.open(self.pconnection)
+        session.question = self.question2
+        session.save()
+        session = UserSession.open(self.pconnection)
+        self.assertEquals(session.respond("c"), self.question3.text)
+        self.assertEquals(session.question, self.question3)
+        
+    def test_close_ongoing_session_at_trigger(self):
+        session = UserSession.open(self.pconnection)
+        session.question = self.question2
+        session.save()
+        session = UserSession.open(self.pconnection)
+        self.assertEquals(session.respond("c"), self.question3.text)
+        self.assertEquals(session.question, self.question3)
+        
+        self.assertEquals(session.respond("trigger"), self.question1.text)
+        self.assertEquals(session.question, self.question1)
 
+
+    def test_close_session_on_last_answer(self):
+        session = UserSession.open(self.pconnection)
+        session.question = self.question3
+        self.assertEquals(session.respond("c"), "thanks")
+        self.assertEquals(session.question, None)
 
