@@ -4,8 +4,10 @@ import re
 from register.models import Registration
 
 class QuestionTree(models.Model):
+    name = models.TextField(null=True)
 
-    def __init__(self):
+    def __init__(self, *args, **kargs):
+        super(QuestionTree, self).__init__(*args,**kargs)
         self.questions = []
         self.flow = {}
 
@@ -26,6 +28,10 @@ class QuestionTree(models.Model):
     def first(self):
         return self.flow.keys()[0]
 
+    @classmethod
+    def load_current(klass):
+        return QuestionTree.objects.all()[0]
+
 
 class Question(models.Model):
     text = models.TextField()
@@ -37,7 +43,24 @@ class Question(models.Model):
         return "Q%s: %s" % (
             self.pk,
             self.text)
-    
+
+class UserSession(models.Model):
+    connection = models.ForeignKey(PersistantConnection)
+    tree = models.ForeignKey(QuestionTree)
+    question = models.ForeignKey(Question, null=True)
+
+    @classmethod
+    def open(klass,connection):
+        sessions = UserSession.objects.filter(connection = connection)
+        if len(sessions) == 0:
+            session = UserSession()
+            session.connection = connection
+            session.tree = QuestionTree.load_current()
+            session.question = None
+            return session
+        return None
+        
+
 class Choice(models.Model):
     text = models.TextField()
     question = models.ForeignKey(Question)
