@@ -46,7 +46,7 @@ class Question(models.Model):
 
 class UserSession(models.Model):
     connection = models.ForeignKey(PersistantConnection)
-    tree = models.ForeignKey(Questionnaire)
+    questionnaire = models.ForeignKey(Questionnaire)
     question = models.ForeignKey(Question, null=True)
 
     @classmethod
@@ -55,7 +55,7 @@ class UserSession(models.Model):
         if len(sessions) == 0:
             session = UserSession()
             session.connection = connection
-            session.tree = Questionnaire.load_current()
+            session.questionnaire = Questionnaire.load_current()
             session.question = None
             return session
         return None
