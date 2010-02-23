@@ -20,11 +20,6 @@ class Question(models.Model):
             self.pk,
             self.text)
 
-    # dummy method right now. should be done when the model refactoring is complete.
-    def response_break_up(self):
-        break_up = [22.6, 18.8, 52.2, 6.4]
-        return break_up 
-
     def get_choices(self, msg_txt, delim):
         self.options= msg_txt.strip(delim).rsplit(delim)
         if len(self.options) > self.max_choices:
@@ -34,7 +29,6 @@ class Question(models.Model):
    
     def has_transition(self,choice):
         pass
-    
 
 class Choice(models.Model):
     question = models.ForeignKey(Question)

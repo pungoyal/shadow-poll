@@ -1,7 +1,10 @@
+from __future__ import division
 import re
 from django.db import models
 from apps.reporters.models import Reporter, PersistantConnection
-from register.models import Registration
+from apps.register.models import Registration
+from django.db.models import Avg,Count
+import math
 
 """
 'Separator' is what differentiates arguments in the messages we accept.
@@ -12,11 +15,11 @@ SEPARATOR = ' '
 
 #only one questionnaire object in the db to hold the trigger for the poll
 class Questionnaire(models.Model):
-    # users can launch a poll by texting 'trigger param param'
-    # where 'param' is any one of the demographic data which 
-    # links to questionnaire
+# users can launch a poll by texting 'trigger param param'
+# where 'param' is any one of the demographic data which
+# links to questionnaire
     trigger = models.CharField(max_length=10)
-    
+
     def __unicode__(self):
         return "%s" % (self.trigger)
 
@@ -29,7 +32,7 @@ class DemographicData(models.Model):
     regex = models.CharField(max_length=32)
     order = models.IntegerField()
     type = models.CharField(max_length=16, choices=DATA_TYPE)
-    
+
 class Question(models.Model):
     text = models.TextField()
     max_choices = models.IntegerField(default=1)
@@ -41,13 +44,26 @@ class Question(models.Model):
     def __unicode__(self):
         options = self.humanize_options()
         return "%s %s %s" % (self.text,self.helper_text, options)
-    
+
+    def response_break_up(self):
+        break_up = []
+        relevant_responses = UserResponse.objects.filter(question=self)
+
+        grouped_responses = relevant_responses.values('choice').annotate(Count('choice'))
+        total_responses = relevant_responses.aggregate(Count('choice'))
+
+        for gr in grouped_responses:
+            break_up.append(round(gr['choice__count']*100/total_responses['choice__count'], 1))
+
+        return break_up
+
+
     def humanize_options(self):
         choices = Choice.objects.filter(question=self)
         text = []
         for ch in choices:
             text.append(ch.code + ". "+ch.text)
-            
+
         return " ".join(text)
 
     def matching_choices(self,answer):
@@ -63,25 +79,28 @@ class Question(models.Model):
                 if choice.parse(answered_choice):
                     matching_choices.append(choice)
                     break
-                
+
         return matching_choices if len(matching_choices) == len(answered_choices) else []
-        
 
     @classmethod
     def first(klass):
         firsts= Question.objects.filter(is_first=True)
         return firsts[0] if len(firsts)>0 else None
-        
+
 
 class Choice(models.Model):
     code = models.CharField(max_length=2)
     text = models.TextField(null=True)
     question = models.ForeignKey(Question)
-    
+
     def parse(self, response):
         return self.code == response
-        
+
+    def __unicode__(self):
+        return "%s:%s" % (self.text, self.code)
+
 GENDER = ( ('M', 'Male'), ('F', 'Female') )
+
 class User(models.Model):
     connection = models.ForeignKey(PersistantConnection, null=True)
     age = models.IntegerField(default=None, null=True, blank=True)
@@ -89,7 +108,7 @@ class User(models.Model):
                               null=True, blank=True)
     def __unicode__(self):
         return " User : connection %s" % str(self.connection)
-    
+
 
 class UserSession(models.Model):
     user = models.ForeignKey(User)
@@ -98,6 +117,7 @@ class UserSession(models.Model):
     
     def __unicode__(self):
         return "session for : %s" % (self.user)
+
     def respond(self, message):
         if self._is_trigger(message):
             self.question = None
@@ -111,7 +131,8 @@ class UserSession(models.Model):
 
             self.save()
             return str(self.question)
-           
+
+
         matching_choices = self.question.matching_choices(message)
 
         if len(matching_choices) > 0:
@@ -119,10 +140,10 @@ class UserSession(models.Model):
             self.question = self.question.next_question
             self.save()
             return self._next_question(self.question)   
-        
+
         self.save()
         return "error_parsing_response"
-    
+
     def _save_response(self,question,choices):
         for choice in choices:
             user_response = UserResponse(user = self.user, question =question, choice = choice)
@@ -155,11 +176,8 @@ class UserSession(models.Model):
             return session
 
         return sessions[0]
-    
-    
+
 class UserResponse(models.Model):
     user = models.ForeignKey(User)
     question = models.ForeignKey(Question)
-    choice = models.ForeignKey(Choice)
-    
-
+    choice = models.ForeignKey(Choice)    

@@ -1,45 +1,39 @@
-from rapidsms.tests.scripted import TestScript
-from poll.app import App as poll_App
-import reporters.app as reporters_app
-import internationalization.app as i18n_app
-from poll.models import *
-from reporters.models import Reporter, PersistantConnection, PersistantBackend
-import unittest
+from apps.poll.models import *
+from apps.reporters.models import Reporter, PersistantConnection, PersistantBackend
 
-class QuestionTest(TestScript):
-    apps = (poll_App,)
+from unittest import TestCase
+from math import fsum
 
+class QuestionTest(TestCase):
     def test_save(self):
         initial_no_of_questions = len(Question.objects.all())
         question1 = Question(text = 'question 1', max_choices = 3)
         question2 = Question(text = 'question 2', max_choices = 3)
-        
+
         question1.next_question = question2
         question1.save()
         question2.save()
-        
 
     def test_last_question(self):
         question1 = Question(text = 'question 1')
         question1.save()
         next_question = question1.next_question
-        self.assertEquals(next_question, None)    
-    
+        self.assertEquals(next_question, None)
+
     def test_first(self):
         question1 = Question(text = 'question 1')
         question2 = Question(text = 'question 2')
         question3 = Question(text = 'question 3')
-        
+
         question2.is_first = True
-      
+
         question1.save()
         question2.save()
         question3.save()
 
         first_question = Question.first()
-        
-        self.assertEquals(first_question, question2)    
-    
+
+        self.assertEquals(first_question, question2)
 
     def setup_choices(self,question):
         choice1 = Choice(code= 'a',question=question)
@@ -56,7 +50,7 @@ class QuestionTest(TestScript):
         self.assertEquals(len(question1.matching_choices('jdenjn')), 0)
         self.assertEquals(len(question1.matching_choices('a')), 1)
         self.assertEquals(len(question1.matching_choices(None)), 0)
-    
+
     def test_humanize_options(self):
         question = Question(text = 'question 1',max_choices = 1)
         question.save()
@@ -67,7 +61,7 @@ class QuestionTest(TestScript):
         choice2.save()
         choice3.save()
         self.assertEquals(question.humanize_options(), "a. apple b. bannana c. carrot")
-        
+
     def test_humanize_questions(self):
         question = Question(text = 'question 1',max_choices = 1)
         question.save()
@@ -78,7 +72,7 @@ class QuestionTest(TestScript):
         choice2.save()
         choice3.save()
         self.assertEquals(str(question), "question 1  a. apple b. bannana c. carrot")
-        
+
     def test_questions_with_helper_text(self):
         question = Question(text = 'question 1',max_choices = 1, helper_text="(Prioritize)")
         question.save()
@@ -89,4 +83,21 @@ class QuestionTest(TestScript):
         choice2.save()
         choice3.save()
         self.assertEquals(str(question), "question 1 (Prioritize) a. apple b. bannana c. carrot")
+
+    def test_response_break_up(self):
+        self.assertNotEquals(len(UserResponse.objects.all()), 0)
+
+        question = Question.objects.get(id=1)
+        break_up = question.response_break_up()
+
+        self.assertEquals(break_up[0], 33.3)
+        self.assertEquals(break_up[1], 29.2)
+        self.assertEquals(break_up[2], 16.7)
+        self.assertEquals(break_up[3], 20.8)
+
+    def test_sum_of_break_up_values_should_be_100(self):
+        question = Question(id=1)
+        break_up = question.response_break_up()
+
+        self.assertEquals(fsum(break_up), 100)
 
