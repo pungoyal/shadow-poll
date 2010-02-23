@@ -15,10 +15,9 @@ def get_governorates(request):
     return r
 
 def graphs(request, question_number):
-#    question = Question.objects.get(id=question_number)
-#    response_break_up = question.response_break_up()
-    response_break_up = [20, 30, 10, 40]
-#    response_break_up = [22.6, 18.8, 52.2, 6.4]
+    question = Question.objects.get(id=question_number)
+    response_break_up = question.response_break_up()
+#    response_break_up = [20, 30, 10, 40]
 
     return render_to_response(request, "results.html", {"chart_data": response_break_up, "national_data": response_break_up, "region": "Iraq", "top_response": "Security", "percentage": "64"})
 

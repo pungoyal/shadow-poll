@@ -1,7 +1,5 @@
 from django.test import TestCase
-from charts.models import Governorates
-from apps.charts.models import Governorates
-from charts.models import ColorMap
+from apps.charts.models import *
 
 class GovernoratesTest(TestCase):
     fixtures = ['test_charts']
