@@ -39,6 +39,14 @@ class Question(models.Model):
 
     def __unicode__(self):
         return " %s" % (self.text)
+    
+    def humanize_options(self):
+        choices = Choice.objects.filter(question=self)
+        text = []
+        for ch in choices:
+            text.append(ch.code + ". "+ch.text)
+            
+        return " ".join(text)
 
     def matching_choices(self,answer):
         matching_choices = []

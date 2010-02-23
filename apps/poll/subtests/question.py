@@ -56,7 +56,17 @@ class QuestionTest(TestScript):
         self.assertEquals(len(question1.matching_choices('jdenjn')), 0)
         self.assertEquals(len(question1.matching_choices('a')), 1)
         self.assertEquals(len(question1.matching_choices(None)), 0)
-       
+    
+    def test_humanize_options(self):
+        question = Question(text = 'question 1',max_choices = 1)
+        question.save()
+        choice1 = Choice(code= 'a',question=question, text="apple")
+        choice2 = Choice(code= 'b',question=question, text="bannana")
+        choice3 = Choice(code= 'c',question=question, text="carrot")
+        choice1.save()
+        choice2.save()
+        choice3.save()
+        self.assertEquals(question.humanize_options(), "a. apple b. bannana c. carrot")
     # def test_matching_choices_matches_number_of_allowed_choices(self):
     #     question2 = Question(text = "question 2", max_choices = 3)
     #     self.assertEquals(len(question1.matching_choices('a b')), 0)
