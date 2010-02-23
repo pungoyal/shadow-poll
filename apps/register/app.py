@@ -21,10 +21,11 @@ class App (rapidsms.app.App):
                 message.language = settings.LANGUAGE_CODE
             try:
                 r.parse(message)
-                # ro: why on earth is a successful outcome marked with an 'error_id'?
-                message.error_id = "err2"
+                response = "Thanks for registering."
+                message.__setattr__("error_id", "err2")
             except Exception, e:
-                message.error_id = "err1"
+                response = "Register not understood."
+                message.__setattr__("error_id", "err1")
             message.respond(_t(response, message.language ))
             return True
     
