@@ -1,15 +1,10 @@
-from rapidsms.tests.scripted import TestScript
-from poll.app import App as poll_App
-import reporters.app as reporters_app
-import internationalization.app as i18n_app
-from poll.models import *
-from reporters.models import Reporter, PersistantConnection, PersistantBackend
-import unittest
+from apps.poll.models import *
+from apps.reporters.models import Reporter, PersistantConnection, PersistantBackend
+
+from unittest import TestCase
 from math import fsum
 
-class QuestionTest(TestScript):
-    apps = (poll_App,)
-
+class QuestionTest(TestCase):
     def test_save(self):
         initial_no_of_questions = len(Question.objects.all())
         question1 = Question(text = 'question 1', max_choices = 3)

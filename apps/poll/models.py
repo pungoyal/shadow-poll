@@ -44,6 +44,8 @@ class Question(models.Model):
 
     # dummy method right now. should be done when the model refactoring is complete.
     def response_break_up(self):
+        responses = UserResponse.objects.filter(question=self)
+        responses
         break_up = [22.6, 18.8, 52.2, 6.4]
         return break_up
 
