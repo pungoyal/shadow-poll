@@ -12,7 +12,7 @@
 # backends=[backend1,backend2,...]  * comma-separated list of backends to load
 
 [rapidsms]
-apps=webapp,ajax,admin,httptester,logger,internationalization,register,charts,reporters,patterns,default,tree,iraq,poll
+apps=webapp,ajax,admin,httptester,logger,internationalization,register,charts,reporters,patterns,default,tree,messaging,iraq,poll
 backends=http
 
 # -- DATABASE
@@ -109,7 +109,7 @@ kannel_password=kannel
 # cache_backend=dummy:///
 
 login_redirect_url=/
-time_zone=Asia/Amman
+time_zone=Asia/Kolkata
 postgis_sql_path=/usr/share/postgresql/8.4/contrib/
 test_runner=django.contrib.gis.tests.run_tests
 postgis_template=template_postgis
