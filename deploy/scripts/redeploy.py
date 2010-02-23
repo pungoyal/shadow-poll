@@ -40,10 +40,6 @@ if __name__ == '__main__':
 	os.chdir(DEPLOY_DIR)
 	issue_cmd(['git', 'clone', GIT_URL], 'Could not pull git updates')
 
-	print "Symlink rapidsms.ini"
-        os.chdir(APP_DIR)
-        os.symlink('rapidsms.ini.ci', 'rapidsms.ini')
-
         print "Fixing ownership"
 	os.chdir(DEPLOY_DIR)
 	issue_cmd(['chown', '-R', 'www-data:www-data', DEPLOY_DIR], 'Could not set permissions')
