@@ -38,7 +38,8 @@ class Question(models.Model):
     is_first = models.BooleanField(default=False)
 
     def __unicode__(self):
-        return " %s" % (self.text)
+        options = self.humanize_options()
+        return "%s %s" % (self.text, options)
     
     def humanize_options(self):
         choices = Choice.objects.filter(question=self)
