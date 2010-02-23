@@ -6,7 +6,6 @@
 .project
 .pydevproject
 *#
-rapidsms.ini
 *.log
 .settings/
 .idea
