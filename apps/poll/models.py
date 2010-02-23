@@ -2,6 +2,7 @@ import re
 from django.db import models
 from apps.reporters.models import Reporter, PersistantConnection
 from register.models import Registration
+from django.db.models import Avg
 
 """
 'Separator' is what differentiates arguments in the messages we accept.
@@ -44,8 +45,7 @@ class Question(models.Model):
 
     # dummy method right now. should be done when the model refactoring is complete.
     def response_break_up(self):
-        responses = UserResponse.objects.filter(question=self)
-        responses
+#        responses = UserResponse.objects.filter(question=self)
         break_up = [22.6, 18.8, 52.2, 6.4]
         return break_up
 
@@ -87,11 +87,11 @@ class Choice(models.Model):
         return self.code == response
 
 GENDER = ( ('M', 'Male'), ('F', 'Female') )
+
 class User(models.Model):
     connection = models.ForeignKey(PersistantConnection)
     age = models.IntegerField(default=None, null=True, blank=True)
-    gender = models.CharField(max_length=1, choices=GENDER, default=None,
-                              null=True, blank=True)
+    gender = models.CharField(max_length=1, choices=GENDER, default=None, null=True, blank=True)
 
 class UserSession(models.Model):
     user = models.ForeignKey(User, null=True)
@@ -187,6 +187,4 @@ class UserSession(models.Model):
 class UserResponse(models.Model):
     user = models.ForeignKey(User)
     question = models.ForeignKey(Question)
-    choice = models.ForeignKey(Choice)
-    
-
+    choice = models.ForeignKey(Choice)    
