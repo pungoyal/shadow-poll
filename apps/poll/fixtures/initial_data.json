@@ -1,0 +1,343 @@
+[
+    {
+        "pk": 1,
+        "model": "reporters.persistantbackend",
+        "fields": {
+            "slug": "foo",
+            "title": "foo"
+        }
+    },
+    {
+        "pk": 1,
+        "model": "reporters.persistantconnection",
+        "fields": {
+            "last_seen": null,
+            "reporter": null,
+            "is_bot": false,
+            "identity": "foo",
+            "backend": 1
+        }
+    },
+    {
+        "pk": 1,
+        "model": "poll.questionnaire",
+        "fields": {
+            "trigger": "poll"
+        }
+    },
+    {
+        "pk": 1,
+        "model": "poll.question",
+        "fields": {
+            "is_first": false,
+            "max_choices": 1,
+            "text": "I feel happy",
+            "next_question": 2,
+            "error_response": "Placeholder error for question number 1. Please re-send.",
+            "helper_text": ""
+        }
+    },
+    {
+        "pk": 2,
+        "model": "poll.question",
+        "fields": {
+            "is_first": false,
+            "max_choices": 3,
+            "text": "The three things I need most are",
+            "next_question": 3,
+            "error_response": "Placeholder error for question number 2. Please re-send.",
+            "helper_text": ""
+        }
+    },
+    {
+        "pk": 3,
+        "model": "poll.question",
+        "fields": {
+            "is_first": false,
+            "max_choices": 1,
+            "text": "Compared to my parents, my life in the future will be",
+            "next_question": null,
+            "error_response": "Placeholder error for question number 3. Please re-send.",
+            "helper_text": ""
+        }
+    },
+    {
+        "pk": 1,
+        "model": "poll.choice",
+        "fields": {
+            "text": "Always",
+            "code": "a",
+            "question": 1
+        }
+    },
+    {
+        "pk": 2,
+        "model": "poll.choice",
+        "fields": {
+            "text": "Never",
+            "code": "b",
+            "question": 1
+        }
+    },
+    {
+        "pk": 5,
+        "model": "poll.choice",
+        "fields": {
+            "text": "Always",
+            "code": "a1",
+            "question": 1
+        }
+    },
+    {
+        "pk": 6,
+        "model": "poll.choice",
+        "fields": {
+            "text": "Never",
+            "code": "b1",
+            "question": 1
+        }
+    },
+    {
+        "pk": 3,
+        "model": "poll.choice",
+        "fields": {
+            "text": "Rarely",
+            "code": "c1",
+            "question": 1
+        }
+    },
+    {
+        "pk": 4,
+        "model": "poll.choice",
+        "fields": {
+            "text": "Mostly",
+            "code": "d1",
+            "question": 1
+        }
+    },
+    {
+        "pk": 1,
+        "model": "poll.user",
+        "fields": {
+            "gender": "M",
+            "connection": 1,
+            "age": 12
+        }
+    },
+    {
+        "pk": 1,
+        "model": "poll.userresponse",
+        "fields": {
+            "question": 1,
+            "user": 1,
+            "choice": 1
+        }
+    },
+    {
+        "pk": 2,
+        "model": "poll.userresponse",
+        "fields": {
+            "question": 1,
+            "user": 1,
+            "choice": 1
+        }
+    },
+    {
+        "pk": 3,
+        "model": "poll.userresponse",
+        "fields": {
+            "question": 1,
+            "user": 1,
+            "choice": 1
+        }
+    },
+    {
+        "pk": 4,
+        "model": "poll.userresponse",
+        "fields": {
+            "question": 1,
+            "user": 1,
+            "choice": 2
+        }
+    },
+    {
+        "pk": 5,
+        "model": "poll.userresponse",
+        "fields": {
+            "question": 1,
+            "user": 1,
+            "choice": 2
+        }
+    },
+    {
+        "pk": 6,
+        "model": "poll.userresponse",
+        "fields": {
+            "question": 1,
+            "user": 1,
+            "choice": 2
+        }
+    },
+    {
+        "pk": 7,
+        "model": "poll.userresponse",
+        "fields": {
+            "question": 1,
+            "user": 1,
+            "choice": 2
+        }
+    },
+    {
+        "pk": 8,
+        "model": "poll.userresponse",
+        "fields": {
+            "question": 1,
+            "user": 1,
+            "choice": 1
+        }
+    },
+    {
+        "pk": 9,
+        "model": "poll.userresponse",
+        "fields": {
+            "question": 1,
+            "user": 1,
+            "choice": 1
+        }
+    },
+    {
+        "pk": 10,
+        "model": "poll.userresponse",
+        "fields": {
+            "question": 1,
+            "user": 1,
+            "choice": 2
+        }
+    },
+    {
+        "pk": 11,
+        "model": "poll.userresponse",
+        "fields": {
+            "question": 1,
+            "user": 1,
+            "choice": 1
+        }
+    },
+    {
+        "pk": 12,
+        "model": "poll.userresponse",
+        "fields": {
+            "question": 1,
+            "user": 1,
+            "choice": 2
+        }
+    },
+    {
+        "pk": 13,
+        "model": "poll.userresponse",
+        "fields": {
+            "question": 1,
+            "user": 1,
+            "choice": 2
+        }
+    },
+    {
+        "pk": 14,
+        "model": "poll.userresponse",
+        "fields": {
+            "question": 1,
+            "user": 1,
+            "choice": 4
+        }
+    },
+    {
+        "pk": 15,
+        "model": "poll.userresponse",
+        "fields": {
+            "question": 1,
+            "user": 1,
+            "choice": 3
+        }
+    },
+    {
+        "pk": 16,
+        "model": "poll.userresponse",
+        "fields": {
+            "question": 1,
+            "user": 1,
+            "choice": 1
+        }
+    },
+    {
+        "pk": 17,
+        "model": "poll.userresponse",
+        "fields": {
+            "question": 1,
+            "user": 1,
+            "choice": 3
+        }
+    },
+    {
+        "pk": 18,
+        "model": "poll.userresponse",
+        "fields": {
+            "question": 1,
+            "user": 1,
+            "choice": 3
+        }
+    },
+    {
+        "pk": 19,
+        "model": "poll.userresponse",
+        "fields": {
+            "question": 1,
+            "user": 1,
+            "choice": 3
+        }
+    },
+    {
+        "pk": 20,
+        "model": "poll.userresponse",
+        "fields": {
+            "question": 1,
+            "user": 1,
+            "choice": 3
+        }
+    },
+    {
+        "pk": 21,
+        "model": "poll.userresponse",
+        "fields": {
+            "question": 1,
+            "user": 1,
+            "choice": 1
+        }
+    },
+    {
+        "pk": 22,
+        "model": "poll.userresponse",
+        "fields": {
+            "question": 1,
+            "user": 1,
+            "choice": 4
+        }
+    },
+    {
+        "pk": 23,
+        "model": "poll.userresponse",
+        "fields": {
+            "question": 1,
+            "user": 1,
+            "choice": 4
+        }
+    },
+    {
+        "pk": 24,
+        "model": "poll.userresponse",
+        "fields": {
+            "question": 1,
+            "user": 1,
+            "choice": 4
+        }
+    }
+]

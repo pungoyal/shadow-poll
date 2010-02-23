@@ -89,13 +89,15 @@ class QuestionTest(TestCase):
     #     self.assertEquals(len(question1.matching_choices('a b')), 0)
 
     def test_response_break_up(self):
-        question = Question(id=1)
+        self.assertNotEquals(len(UserResponse.objects.all()), 0)
+
+        question = Question.objects.get(id=1)
         break_up = question.response_break_up()
 
-        self.assertEquals(break_up[0], 22.6)
-        self.assertEquals(break_up[1], 18.8)
-        self.assertEquals(break_up[2], 52.2)
-        self.assertEquals(break_up[3], 6.4)
+        self.assertEquals(break_up[0], 33.3)
+        self.assertEquals(break_up[1], 29.2)
+        self.assertEquals(break_up[2], 16.7)
+        self.assertEquals(break_up[3], 20.8)
 
     def test_sum_of_break_up_values_should_be_100(self):
         question = Question(id=1)

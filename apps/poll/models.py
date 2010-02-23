@@ -1,8 +1,10 @@
+from __future__ import division
 import re
 from django.db import models
 from apps.reporters.models import Reporter, PersistantConnection
-from register.models import Registration
-from django.db.models import Avg
+from apps.register.models import Registration
+from django.db.models import Avg,Count
+import math
 
 """
 'Separator' is what differentiates arguments in the messages we accept.
@@ -43,10 +45,16 @@ class Question(models.Model):
         options = self.humanize_options()
         return "%s%s %s" % (self.text,self.helper_text, options)
 
-    # dummy method right now. should be done when the model refactoring is complete.
     def response_break_up(self):
-#        responses = UserResponse.objects.filter(question=self)
-        break_up = [22.6, 18.8, 52.2, 6.4]
+        break_up = []
+        relevant_responses = UserResponse.objects.filter(question=self)
+
+        grouped_responses = relevant_responses.values('choice').annotate(Count('choice'))
+        total_responses = relevant_responses.aggregate(Count('choice'))
+
+        for gr in grouped_responses:
+            break_up.append(round(gr['choice__count']*100/total_responses['choice__count'], 1))
+
         return break_up
 
     def humanize_options(self):
@@ -85,6 +93,9 @@ class Choice(models.Model):
 
     def parse(self, response):
         return self.code == response
+
+    def __unicode__(self):
+        return "%s:%s" % (self.text, self.code)
 
 GENDER = ( ('M', 'Male'), ('F', 'Female') )
 
