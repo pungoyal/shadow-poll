@@ -1,32 +1,4 @@
 [
-    {
-        "pk": 1,
-        "model": "tree.category",
-        "fields": {
-			"name":"Always"
-        }
-    },
-	{
-        "pk": 2,
-        "model": "tree.category",
-        "fields": {
-			"name":"Most of the times"
-        }
-    },
-	{
-        "pk": 3,
-        "model": "tree.category",
-        "fields": {
-			"name":"Never"
-        }
-    },
-	{
-        "pk": 4,
-        "model": "tree.category",
-        "fields": {
-			"name":"Rarely"
-        }
-    },
 	{
         "pk": 1,
         "model": "charts.colormap",
@@ -55,203 +27,89 @@
         "pk": 4,
         "model": "charts.colormap",
         "fields": {
-			"category" :4,
+			"catego" :4,
 			"color":"Blue"
         }
     },
 	{
         "pk": 1,
-        "model": "tree.entry",
+        "model": "poll.useresponse",
         "fields": {
-            "district": 10,
-            "governorate": 2,
-            "text": "[u'b']",
-            "transition": 2,
-            "sequence_id": 1,
-            "session": 2,
-            "time": "2010-02-15 21:56:05"
+            "user": 1,
+            "question": 1,
+            "choice": 1
         }
-    },
-    {
+  },
+	{
         "pk": 2,
-        "model": "tree.entry",
+        "model": "poll.useresponse",
         "fields": {
-            "district": 10,
-            "governorate": 3,
-            "text": "[u'b', u'f', u'g']",
-            "transition": 11,
-            "sequence_id": 2,
-            "session": 2,
-            "time": "2010-02-15 21:56:26"
+            "user": 1,
+            "question": 1,
+            "choice": 3
         }
-    },
-    {
+  },
+	{
         "pk": 3,
-        "model": "tree.entry",
+        "model": "poll.useresponse",
         "fields": {
-            "district": 10,
-            "governorate": 3,
-            "text": "[u'c']",
-            "transition": 19,
-            "sequence_id": 3,
-            "session": 2,
-            "time": "2010-02-15 21:56:34"
+            "user": 1,
+            "question": 1,
+            "choice": 1
         }
-    },
-    {
+  },
+	{
         "pk": 4,
-        "model": "tree.entry",
+        "model": "poll.useresponse",
         "fields": {
-            "district": 10,
-            "governorate": 1,
-            "text": "[u'd']",
-            "transition": 4,
-            "sequence_id": 1,
-            "session": 3,
-            "time": "2010-02-15 21:56:51"
+            "user": 1,
+            "question": 1,
+            "choice": 2
         }
-    },
-    {
+  },
+	{
         "pk": 5,
-        "model": "tree.entry",
+        "model": "poll.useresponse",
         "fields": {
-            "district": 10,
-            "governorate": 13,
-            "text": "[u'd']",
-            "transition": 4,
-            "sequence_id": 1,
-            "session": 3,
-            "time": "2010-02-15 21:56:51"
+            "user": 1,
+            "question": 1,
+            "choice": 1
         }
-    },
-    {
+  },
+	{
         "pk": 6,
-        "model": "tree.entry",
+        "model": "poll.useresponse",
         "fields": {
-            "district": 10,
-            "governorate": 1,
-            "text": "[u'd']",
-            "transition": 4,
-            "sequence_id": 1,
-            "session": 3,
-            "time": "2010-02-15 21:56:51"
+            "user": 1,
+            "question": 1,
+            "choice": 1
         }
-    },
-    {
+  },
+	{
         "pk": 7,
-        "model": "tree.entry",
+        "model": "poll.useresponse",
         "fields": {
-            "district": 10,
-            "governorate": 13,
-            "text": "[u'd']",
-            "transition": 4,
-            "sequence_id": 1,
-            "session": 3,
-            "time": "2010-02-15 21:56:51"
+            "user": 1,
+            "question": 1,
+            "choice": 1
         }
-    },
-    {
+  },
+	{
         "pk": 8,
-        "model": "tree.entry",
+        "model": "poll.useresponse",
         "fields": {
-            "district": 10,
-            "governorate": 6,
-            "text": "[u'b', u'f', u'g']",
-            "transition": 11,
-            "sequence_id": 2,
-            "session": 2,
-            "time": "2010-02-15 21:56:26"
+            "user": 1,
+            "question": 1,
+            "choice": 1
         }
-    },
-    {
+  },
+	{
         "pk": 9,
-        "model": "tree.entry",
+        "model": "poll.useresponse",
         "fields": {
-            "district": 10,
-            "governorate": 6,
-            "text": "[u'b', u'f', u'g']",
-            "transition": 11,
-            "sequence_id": 2,
-            "session": 2,
-            "time": "2010-02-15 21:56:26"
+            "user": 1,
+            "question": 1,
+            "choice": 1
         }
-    },
-    {
-        "pk": 10,
-        "model": "tree.entry",
-        "fields": {
-            "district": 10,
-            "governorate": 7,
-            "text": "[u'b', u'f', u'g']",
-            "transition": 11,
-            "sequence_id": 2,
-            "session": 2,
-            "time": "2010-02-15 21:56:26"
-        }
-    },
-    {
-        "pk": 11,
-        "model": "tree.entry",
-        "fields": {
-            "district": 10,
-            "governorate": 8,
-            "text": "[u'b', u'f', u'g']",
-            "transition": 11,
-            "sequence_id": 2,
-            "session": 2,
-            "time": "2010-02-15 21:56:26"
-        }
-    },
-    {
-        "pk": 12,
-        "model": "tree.entry",
-        "fields": {
-            "district": 10,
-            "governorate": 8,
-            "text": "[u'b', u'f', u'g']",
-            "transition": 11,
-            "sequence_id": 2,
-            "session": 2,
-            "time": "2010-02-15 21:56:26"
-        }
-    },
-    {
-        "pk": 13,
-        "model": "tree.entry",
-        "fields": {
-            "district": 10,
-            "governorate": 9,
-            "text": "[u'b', u'f', u'g']",
-            "transition": 11,
-            "sequence_id": 2,
-            "session": 2,
-            "time": "2010-02-15 21:56:26"
-        }
-    },
-    {
-        "pk": 14,
-        "model": "tree.entry",
-        "fields": {
-            "district": 10,
-            "governorate": 13,
-            "text": "[u'b', u'f', u'g']",
-            "transition": 11,
-            "sequence_id": 2,
-            "session": 2,
-            "time": "2010-02-15 21:56:26"
-        }
-    },
-    {
-        "pk": 15,
-        "model": "tree.entry",
-        "fields": {
-            "district": 10,
-            "governorate": 17,
-            "text": "[u'b', u'f', u'g']",
-            "transition": 11,
-            "sequence_id": 2,
-            "session": 2,
-            "time": "2010-02-15 21:56:26"
-        }
-    }
+  }
 ]

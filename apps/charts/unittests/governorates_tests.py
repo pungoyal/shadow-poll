@@ -21,8 +21,8 @@ class GovernoratesTest(TestCase):
         self.assertEquals(states[9].style(), "s0")
         self.assertEquals(states[1].style(), "s7")
         
-    def test_get_category_from_id(self):
-        self.color_map = ColorMap()
-        self.cat_id = "3"
-        self.color = self.color_map.get_color_for_category(self.cat_id)
-        self.assertEquals(str(self.color), "Green")
+    # def test_get_category_from_id(self):
+    #     self.color_map = ColorMap()
+    #     self.cat_id = "3"
+    #     self.color = self.color_map.get_color_for_category(self.cat_id)
+    #     self.assertEquals(str(self.color), "Green")

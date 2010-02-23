@@ -106,6 +106,8 @@ class User(models.Model):
     age = models.IntegerField(default=None, null=True, blank=True)
     gender = models.CharField(max_length=1, choices=GENDER, default=None, 
                               null=True, blank=True)
+    location = models.IntegerField(null=True)
+
     def __unicode__(self):
         return " User : connection %s" % str(self.connection)
 
