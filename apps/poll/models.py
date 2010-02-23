@@ -33,13 +33,14 @@ class DemographicData(models.Model):
 class Question(models.Model):
     text = models.TextField()
     max_choices = models.IntegerField(default=1)
+    helper_text = models.CharField(max_length=100, default='')
     error_response = models.TextField(null=True, blank=True)
     next_question = models.ForeignKey('self', null = True,default = None)
     is_first = models.BooleanField(default=False)
 
     def __unicode__(self):
         options = self.humanize_options()
-        return "%s %s" % (self.text, options)
+        return "%s%s %s" % (self.text,self.helper_text, options)
     
     def humanize_options(self):
         choices = Choice.objects.filter(question=self)
