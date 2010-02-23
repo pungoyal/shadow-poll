@@ -5,6 +5,7 @@ import internationalization.app as i18n_app
 from poll.models import *
 from reporters.models import Reporter, PersistantConnection, PersistantBackend
 import unittest
+from math import fsum
 
 class QuestionTest(TestScript):
     apps = (poll_App,)
@@ -89,6 +90,22 @@ class QuestionTest(TestScript):
         choice2.save()
         choice3.save()
         self.assertEquals(str(question), "question 1(Prioritize) a. apple b. bannana c. carrot")
+
     # def test_matching_choices_matches_number_of_allowed_choices(self):
     #     question2 = Question(text = "question 2", max_choices = 3)
     #     self.assertEquals(len(question1.matching_choices('a b')), 0)
+
+    def test_response_break_up(self):
+        question = Question(id=1)
+        break_up = question.response_break_up()
+
+        self.assertEquals(break_up[0], 22.6)
+        self.assertEquals(break_up[1], 18.8)
+        self.assertEquals(break_up[2], 52.2)
+        self.assertEquals(break_up[3], 6.4)
+
+    def test_sum_of_break_up_values_should_be_100(self):
+        question = Question(id=1)
+        break_up = question.response_break_up()
+
+        self.assertEquals(fsum(break_up), 100)

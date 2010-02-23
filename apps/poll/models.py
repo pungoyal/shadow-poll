@@ -12,11 +12,11 @@ SEPARATOR = ' '
 
 #only one questionnaire object in the db to hold the trigger for the poll
 class Questionnaire(models.Model):
-    # users can launch a poll by texting 'trigger param param'
-    # where 'param' is any one of the demographic data which 
-    # links to questionnaire
+# users can launch a poll by texting 'trigger param param'
+# where 'param' is any one of the demographic data which
+# links to questionnaire
     trigger = models.CharField(max_length=10)
-    
+
     def __unicode__(self):
         return "%s" % (self.trigger)
 
@@ -29,7 +29,7 @@ class DemographicData(models.Model):
     regex = models.CharField(max_length=32)
     order = models.IntegerField()
     type = models.CharField(max_length=16, choices=DATA_TYPE)
-    
+
 class Question(models.Model):
     text = models.TextField()
     max_choices = models.IntegerField(default=1)
@@ -41,13 +41,18 @@ class Question(models.Model):
     def __unicode__(self):
         options = self.humanize_options()
         return "%s%s %s" % (self.text,self.helper_text, options)
-    
+
+    # dummy method right now. should be done when the model refactoring is complete.
+    def response_break_up(self):
+        break_up = [22.6, 18.8, 52.2, 6.4]
+        return break_up
+
     def humanize_options(self):
         choices = Choice.objects.filter(question=self)
         text = []
         for ch in choices:
             text.append(ch.code + ". "+ch.text)
-            
+
         return " ".join(text)
 
     def matching_choices(self,answer):
@@ -63,28 +68,27 @@ class Question(models.Model):
                 if choice.parse(answered_choice):
                     matching_choices.append(choice)
                     break
-                
+
         return matching_choices if len(matching_choices) == len(answered_choices) else []
-        
 
     @classmethod
     def first(klass):
-        # ro - this seems wrong. what happens when we have multiple questionnaires?
+    # ro - this seems wrong. what happens when we have multiple questionnaires?
         return Question.objects.filter(is_first=True)[0]
 
 class Choice(models.Model):
     code = models.CharField(max_length=2)
     text = models.TextField(null=True)
     question = models.ForeignKey(Question)
-    
+
     def parse(self, response):
         return self.code == response
-        
+
 GENDER = ( ('M', 'Male'), ('F', 'Female') )
 class User(models.Model):
     connection = models.ForeignKey(PersistantConnection)
     age = models.IntegerField(default=None, null=True, blank=True)
-    gender = models.CharField(max_length=1, choices=GENDER, default=None, 
+    gender = models.CharField(max_length=1, choices=GENDER, default=None,
                               null=True, blank=True)
 
 class UserSession(models.Model):
@@ -92,7 +96,7 @@ class UserSession(models.Model):
     connection = models.ForeignKey(PersistantConnection)
     question = models.ForeignKey(Question, null=True)
     questionnaire = models.ForeignKey(Questionnaire, null=True)
-    
+
     def respond(self, message):
         if self._is_trigger(message):
             self.question = None
@@ -102,36 +106,36 @@ class UserSession(models.Model):
             self.save()
             self._save_user(message)
             return self.question.text
-           
+
         matching_choices = self.question.matching_choices(message)
 
         if len(matching_choices) > 0:
             self._save_response(self.question, matching_choices)
             self.question = self.question.next_question
-            return self._next_question(self.question)   
-        
+            return self._next_question(self.question)
+
         self.save()
         return "error_parsing_response"
-    
+
     def _save_response(self,question,choices):
         for choice in choices:
             user_response = UserResponse(user = self.user, question =question, choice = choice)
             user_response.save()
 
     def _save_user(self, message):
-        # todo : this could be made more generic to handle different kinds
-        # of user registation criteria, similar to the forms app.
+    # todo : this could be made more generic to handle different kinds
+    # of user registation criteria, similar to the forms app.
         self.user = User(connection = self.connection)
         message = message.strip().lstrip(self.questionnaire.trigger.lower()).strip()
         if len(message) != 0:
-            # there are arguments
+        # there are arguments
             arguments = message.split(SEPARATOR)
             data = list( DemographicData.objects.filter(questionnaire=self.questionnaire).order_by('order') )
             for a in arguments:
-                # for each arguments, see if it matches a demographic data we seek
+            # for each arguments, see if it matches a demographic data we seek
                 for datum in data:
-                    # the following jerryrigging is so that the regex specified
-                    # matches the argument given in its entirety
+                # the following jerryrigging is so that the regex specified
+                # matches the argument given in its entirety
                     regex = re.compile( '(%s)$' % datum.regex.strip().lower() )
                     match = regex.match( a )
                     if match:
@@ -149,7 +153,7 @@ class UserSession(models.Model):
                         # we're done with this datum
                         break
         self.user.save()
-        
+
     def _next_question(self,question):
         if question == None:
             return "thanks"
@@ -161,8 +165,8 @@ class UserSession(models.Model):
     def _is_trigger(self, message):
         for questionnaire in Questionnaire.objects.all():
             if message.strip().lower().startswith(questionnaire.trigger.strip().lower()):
-                # todo - ro: move this to 'first access' once i understand better the 
-                # relationship between usersession and questionnaire
+            # todo - ro: move this to 'first access' once i understand better the
+            # relationship between usersession and questionnaire
                 self.questionnaire = questionnaire
                 return True
         return False
@@ -177,8 +181,7 @@ class UserSession(models.Model):
             session.question = None
             return session
         return sessions[0]
-    
-    
+
 class UserResponse(models.Model):
     user = models.ForeignKey(User)
     question = models.ForeignKey(Question)

@@ -4,7 +4,7 @@ from django.template import loader
 from rapidsms.webui.utils import render_to_response
 
 from apps.charts.models import Governorates
-from apps.tree.models import Question
+from apps.poll.models import Question
 
 def get_governorates(request):
     reports = Governorates.objects.kml()

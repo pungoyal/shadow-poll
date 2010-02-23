@@ -6,24 +6,6 @@ import internationalization.app as i18n_app
 from models import *
 from reporters.models import Reporter, PersistantConnection, PersistantBackend
 import unittest
-from math import fsum
-
-class QuestionTest(unittest.TestCase):
-    def test_response_break_up(self):
-        question = Question(id=1)
-        break_up = question.response_break_up()
-
-        self.assertEquals(break_up[0], 22.6)
-        self.assertEquals(break_up[1], 18.8)
-        self.assertEquals(break_up[2], 52.2)
-        self.assertEquals(break_up[3], 6.4)
-
-    def test_sum_of_break_up_values_should_be_100(self):
-        question = Question(id=1)
-        break_up = question.response_break_up()
-
-        self.assertEquals(fsum(break_up), 100)
-
 
 class TestApp (TestScript):
     apps = (App, reporters_app.App)
