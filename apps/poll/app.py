@@ -1,4 +1,5 @@
 import rapidsms
+from models import UserSession
 
 class App (rapidsms.app.App):
     def start (self):
@@ -10,8 +11,10 @@ class App (rapidsms.app.App):
         pass
 
     def handle (self, message):
-        """Add your main application logic in the handle phase."""
-        pass
+        session = UserSession.open(message.persistant_connection)
+        response = session.respond(message.text)
+        message.respond(response)
+        return True
 
     def cleanup (self, message):
         """Perform any clean up after all handlers have run in the

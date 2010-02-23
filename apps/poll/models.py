@@ -40,7 +40,7 @@ class Question(models.Model):
 
     def __unicode__(self):
         options = self.humanize_options()
-        return "%s%s %s" % (self.text,self.helper_text, options)
+        return "%s %s %s" % (self.text,self.helper_text, options)
     
     def humanize_options(self):
         choices = Choice.objects.filter(question=self)
@@ -69,8 +69,9 @@ class Question(models.Model):
 
     @classmethod
     def first(klass):
-        # ro - this seems wrong. what happens when we have multiple questionnaires?
-        return Question.objects.filter(is_first=True)[0]
+        firsts= Question.objects.filter(is_first=True)
+        return firsts[0] if len(firsts)>0 else None
+        
 
 class Choice(models.Model):
     code = models.CharField(max_length=2)
@@ -82,32 +83,41 @@ class Choice(models.Model):
         
 GENDER = ( ('M', 'Male'), ('F', 'Female') )
 class User(models.Model):
-    connection = models.ForeignKey(PersistantConnection)
+    connection = models.ForeignKey(PersistantConnection, null=True)
     age = models.IntegerField(default=None, null=True, blank=True)
     gender = models.CharField(max_length=1, choices=GENDER, default=None, 
                               null=True, blank=True)
+    def __unicode__(self):
+        return " User : connection %s" % str(self.connection)
+    
 
 class UserSession(models.Model):
-    user = models.ForeignKey(User, null=True)
-    connection = models.ForeignKey(PersistantConnection)
+    user = models.ForeignKey(User)
     question = models.ForeignKey(Question, null=True)
     questionnaire = models.ForeignKey(Questionnaire, null=True)
     
+    def __unicode__(self):
+        return "session for : %s" % (self.user)
     def respond(self, message):
         if self._is_trigger(message):
             self.question = None
 
         if self._first_access():
             self.question = Question.first()
+
+            temp_user = self.user
+            temp_user.save()
+            self.user = temp_user
+
             self.save()
-            self._save_user(message)
-            return self.question.text
+            return str(self.question)
            
         matching_choices = self.question.matching_choices(message)
 
         if len(matching_choices) > 0:
             self._save_response(self.question, matching_choices)
             self.question = self.question.next_question
+            self.save()
             return self._next_question(self.question)   
         
         self.save()
@@ -118,42 +128,10 @@ class UserSession(models.Model):
             user_response = UserResponse(user = self.user, question =question, choice = choice)
             user_response.save()
 
-    def _save_user(self, message):
-        # todo : this could be made more generic to handle different kinds
-        # of user registation criteria, similar to the forms app.
-        self.user = User(connection = self.connection)
-        message = message.strip().lstrip(self.questionnaire.trigger.lower()).strip()
-        if len(message) != 0:
-            # there are arguments
-            arguments = message.split(SEPARATOR)
-            data = list( DemographicData.objects.filter(questionnaire=self.questionnaire).order_by('order') )
-            for a in arguments:
-                # for each arguments, see if it matches a demographic data we seek
-                for datum in data:
-                    # the following jerryrigging is so that the regex specified
-                    # matches the argument given in its entirety
-                    regex = re.compile( '(%s)$' % datum.regex.strip().lower() )
-                    match = regex.match( a )
-                    if match:
-                        if datum.type == 'i': # integer
-                            val = int(match.group(0))
-                        elif datum.type == 'c': # character
-                            val = match.group(0)[0]
-                        else:
-                            val = match.group(0)
-                        # we're good. save it!
-                        if hasattr(self.user, datum.name):
-                            setattr( self.user, datum.name, val)
-                        # after we match the first time, we don't need to match again
-                        data.remove(datum)
-                        # we're done with this datum
-                        break
-        self.user.save()
-        
     def _next_question(self,question):
         if question == None:
             return "thanks"
-        return question.text
+        return str(question)
 
     def _first_access(self):
         return self.question == None
@@ -161,8 +139,6 @@ class UserSession(models.Model):
     def _is_trigger(self, message):
         for questionnaire in Questionnaire.objects.all():
             if message.strip().lower().startswith(questionnaire.trigger.strip().lower()):
-                # todo - ro: move this to 'first access' once i understand better the 
-                # relationship between usersession and questionnaire
                 self.questionnaire = questionnaire
                 return True
         return False
@@ -170,12 +146,14 @@ class UserSession(models.Model):
     # assuming only one session for a connection throughout the poll
     @classmethod
     def open(klass,connection):
-        sessions = UserSession.objects.filter(connection = connection)
+        users = User.objects.filter(connection = connection)
+        temp_user = users[0] if(len(users)) > 0 else User(connection = connection)
+        sessions = UserSession.objects.filter(user = temp_user)
         if len(sessions) == 0:
-            session = UserSession()
-            session.connection = connection
-            session.question = None
+            session = UserSession(question = None)
+            session.user = temp_user
             return session
+
         return sessions[0]
     
     

@@ -1,522 +1,214 @@
 [
     {
         "pk": 1,
-        "model": "tree.question",
+        "model": "poll.question",
         "fields": {
-            "max_choices": 1,
-            "text": "I feel happy: a) Always; b) Most of the time; c) Rarely; d) Never. Choose a,b,c or d.",
-            "error_response": "Placeholder error for question number 1. Please re-send."
+            "text": "I feel happy",
+	    "helper_text": "Choose a,b,c or d.",
+            "error_response": "Placeholder error for question number 1. Please re-send.",
+	    "max_choices": 1,
+	    "next_question": 2,
+	    "is_first": true
         }
     },
     {
         "pk": 2,
-        "model": "tree.question",
+        "model": "poll.question",
         "fields": {
             "max_choices": 3,
-            "text": "The three things I need most are: (Prioritize your first, second, and third.) a. Peace and Security b. Go to school regularly c. Health care when sick d. Clean neighborhood e. Clean drinking water f. Enough food g. Be loved h. Not have to work i. Be listened to j. A place to play k. Family and friends to be safe",
-            "error_response": "Placeholder error for question number 2. Please re-send."
+            "text": "The three things I need most are",
+            "helper_text": "(Prioritize your first, second, and third.)",
+	    "error_response": "Placeholder error for question number 2. Please re-send.",
+	    "next_question": 3
         }
     },
     {
         "pk": 3,
-        "model": "tree.question",
+        "model": "poll.question",
         "fields": {
             "max_choices": 1,
-            "text": "Compared to my parents, my life in the future will be: a) Better; b) About the same; c) Worse; d) I don't know. Choose a,b,c or d.",
+            "text": "Compared to my parents, my life in the future will be",
+	    "helper_text": "Choose a,b,c or d.",
             "error_response": "Placeholder error for question number 3. Please re-send."
+      } 
+    },
+    {
+        "pk": 1,
+        "model": "poll.questionnaire",
+        "fields": {
+            "trigger": "poll"
         }
     },
     {
         "pk": 1,
-        "model": "tree.tree",
+        "model": "poll.choice",
         "fields": {
-            "root_state": 1,
-            "trigger": "poll",
-            "completion_text": "Your responses have been recorded. Thank you for participating in the poll."
-        }
-    },
-    {
-        "pk": 1,
-        "model": "tree.answer",
-        "fields": {
-            "code": "a"
+            "code": "a",
+	    "text": "Always",
+	    "question":1
         }
     },
     {
         "pk": 2,
-        "model": "tree.answer",
+        "model": "poll.choice",
         "fields": {
-            "code": "b"
+            "code": "b",
+	    "text": "Most of the time",
+	    "question":1
         }
     },
     {
         "pk": 3,
-        "model": "tree.answer",
+        "model": "poll.choice",
         "fields": {
-            "code": "c"
+            "code": "c",
+	    "text": "Rarely",
+	    "question":1
         }
     },
     {
         "pk": 4,
-        "model": "tree.answer",
+        "model": "poll.choice",
         "fields": {
-            "code": "d"
+            "code": "d",
+	    "text": "Never",
+	    "question":1
         }
     },
     {
         "pk": 5,
-        "model": "tree.answer",
+        "model": "poll.choice",
         "fields": {
-            "code": "a"
+            "code": "a",
+	    "text": "Peace and Security",
+	    "question":2
         }
     },
     {
         "pk": 6,
-        "model": "tree.answer",
+        "model": "poll.choice",
         "fields": {
-            "code": "b"
+            "code": "b",
+	    "text": "Go to school regularly",
+	    "question":2
         }
     },
     {
         "pk": 7,
-        "model": "tree.answer",
+        "model": "poll.choice",
         "fields": {
-            "code": "c"
+            "code": "c",
+	    "text": "Health care when sick",
+	    "question":2
         }
     },
     {
         "pk": 8,
-        "model": "tree.answer",
+        "model": "poll.choice",
         "fields": {
-            "code": "d"
+            "code": "d",
+	    "text": "Clean neighbourhood",
+	    "question":2
         }
     },
     {
         "pk": 9,
-        "model": "tree.answer",
+        "model": "poll.choice",
         "fields": {
-            "code": "e"
+            "code": "e",
+	    "text": "Clean drinking water",
+	    "question":2
         }
     },
     {
         "pk": 10,
-        "model": "tree.answer",
+        "model": "poll.choice",
         "fields": {
-            "code": "f"
+            "code": "f",
+	    "text": "Enough food",
+	    "question":2
         }
     },
     {
         "pk": 11,
-        "model": "tree.answer",
+        "model": "poll.choice",
         "fields": {
-            "code": "g"
+            "code": "g",
+	    "text": "be loved",
+	    "question":2
         }
     },
     {
         "pk": 12,
-        "model": "tree.answer",
+        "model": "poll.choice",
         "fields": {
-            "code": "h"
+            "code": "h",
+	    "text": "Not have to work",
+	    "question":2
         }
     },
     {
         "pk": 13,
-        "model": "tree.answer",
+        "model": "poll.choice",
         "fields": {
-            "code": "i"
+            "code": "i",
+	    "text": "Be listened to",
+	    "question":2
         }
     },
     {
         "pk": 14,
-        "model": "tree.answer",
+        "model": "poll.choice",
         "fields": {
-            "code": "j"
+            "code": "j",
+	    "text": "A place to place",
+	    "question":2
         }
     },
     {
         "pk": 15,
-        "model": "tree.answer",
+        "model": "poll.choice",
         "fields": {
-            "code": "k"
+            "code": "k",
+	    "text": "Family and friends to be safe",
+	    "question":2
         }
     },
     {
         "pk": 16,
-        "model": "tree.answer",
+        "model": "poll.choice",
         "fields": {
-            "code": "l"
+            "code": "a",
+	    "text": "Better",
+	    "question":3
         }
     },
     {
         "pk": 17,
-        "model": "tree.answer",
+        "model": "poll.choice",
         "fields": {
-            "code": "a"
+            "code": "b",
+	    "text": "About the same",
+	    "question":3
         }
     },
     {
         "pk": 18,
-        "model": "tree.answer",
+        "model": "poll.choice",
         "fields": {
-            "code": "b"
+            "code": "c",
+	    "text": "Worse",
+	    "question":3
         }
     },
     {
         "pk": 19,
-        "model": "tree.answer",
+        "model": "poll.choice",
         "fields": {
-            "code": "c"
-        }
-    },
-    {
-        "pk": 20,
-        "model": "tree.answer",
-        "fields": {
-            "code": "d"
-        }
-    },
-	{
-        "pk": 21,
-        "model": "tree.answer",
-        "fields": {
-            "code": "a1"
-        }
-    },
-	{
-        "pk": 22,
-        "model": "tree.answer",
-        "fields": {
-            "code": "b1"
-        }
-    },
-	{
-        "pk": 23,
-        "model": "tree.answer",
-        "fields": {
-            "code": "c1"
-        }
-    },
-	{
-        "pk": 24,
-        "model": "tree.answer",
-        "fields": {
-            "code": "d1"
-        }
-    },
-	{
-        "pk": 25,
-        "model": "tree.answer",
-        "fields": {
-            "code": "a3"
-        }
-    },
-	{
-        "pk": 26,
-        "model": "tree.answer",
-        "fields": {
-            "code": "b3"
-        }
-    },
-	{
-        "pk": 27,
-        "model": "tree.answer",
-        "fields": {
-            "code": "c3"
-        }
-    },
-	{
-        "pk": 28,
-        "model": "tree.answer",
-        "fields": {
-            "code": "d3"
-        }
-    },
-    {
-        "pk": 1,
-        "model": "tree.treestate",
-        "fields": {
-            "num_retries": 3,
-            "question": 1,
-            "name": "default"
-        }
-    },
-    {
-        "pk": 2,
-        "model": "tree.treestate",
-        "fields": {
-            "num_retries": 3,
-            "question": 2,
-            "name": "three things"
-        }
-    },
-    {
-        "pk": 3,
-        "model": "tree.treestate",
-        "fields": {
-            "num_retries": 3,
-            "question": 3,
-            "name": "life"
-        }
-    },
-    {
-        "pk": 1,
-        "model": "tree.transition",
-        "fields": {
-            "answer": 1,
-            "current_state": 1,
-            "next_state": 2
-        }
-    },
-    {
-        "pk": 2,
-        "model": "tree.transition",
-        "fields": {
-            "answer": 2,
-            "current_state": 1,
-            "next_state": 2
-        }
-    },
-    {
-        "pk": 3,
-        "model": "tree.transition",
-        "fields": {
-            "answer": 3,
-            "current_state": 1,
-            "next_state": 2
-        }
-    },
-    {
-        "pk": 4,
-        "model": "tree.transition",
-        "fields": {
-            "answer": 4,
-            "current_state": 1,
-            "next_state": 2
-        }
-    },
-    {
-        "pk": 5,
-        "model": "tree.transition",
-        "fields": {
-            "answer": 5,
-            "current_state": 2,
-            "next_state": 3
-        }
-    },
-    {
-        "pk": 6,
-        "model": "tree.transition",
-        "fields": {
-            "answer": 6,
-            "current_state": 2,
-            "next_state": 3
-        }
-    },
-    {
-        "pk": 7,
-        "model": "tree.transition",
-        "fields": {
-            "answer": 7,
-            "current_state": 2,
-            "next_state": 3
-        }
-    },
-    {
-        "pk": 8,
-        "model": "tree.transition",
-        "fields": {
-            "answer": 8,
-            "current_state": 2,
-            "next_state": 3
-        }
-    },
-    {
-        "pk": 9,
-        "model": "tree.transition",
-        "fields": {
-            "answer": 9,
-            "current_state": 2,
-            "next_state": 3
-        }
-    },
-    {
-        "pk": 10,
-        "model": "tree.transition",
-        "fields": {
-            "answer": 10,
-            "current_state": 2,
-            "next_state": 3
-        }
-    },
-    {
-        "pk": 11,
-        "model": "tree.transition",
-        "fields": {
-            "answer": 11,
-            "current_state": 2,
-            "next_state": 3
-        }
-    },
-    {
-        "pk": 12,
-        "model": "tree.transition",
-        "fields": {
-            "answer": 12,
-            "current_state": 2,
-            "next_state": 3
-        }
-    },
-    {
-        "pk": 13,
-        "model": "tree.transition",
-        "fields": {
-            "answer": 13,
-            "current_state": 2,
-            "next_state": 3
-        }
-    },
-    {
-        "pk": 14,
-        "model": "tree.transition",
-        "fields": {
-            "answer": 14,
-            "current_state": 2,
-            "next_state": 3
-        }
-    },
-    {
-        "pk": 15,
-        "model": "tree.transition",
-        "fields": {
-            "answer": 15,
-            "current_state": 2,
-            "next_state": 3
-        }
-    },
-    {
-        "pk": 16,
-        "model": "tree.transition",
-        "fields": {
-            "answer": 16,
-            "current_state": 2,
-            "next_state": 3
-        }
-    },
-    {
-        "pk": 17,
-        "model": "tree.transition",
-        "fields": {
-            "answer": 17,
-            "current_state": 3,
-            "next_state": null
-        }
-    },
-    {
-        "pk": 18,
-        "model": "tree.transition",
-        "fields": {
-            "answer": 18,
-            "current_state": 3,
-            "next_state": null
-        }
-    },
-    {
-        "pk": 19,
-        "model": "tree.transition",
-        "fields": {
-            "answer": 19,
-            "current_state": 3,
-            "next_state": null
-        }
-    },
-    {
-        "pk": 20,
-        "model": "tree.transition",
-        "fields": {
-            "answer": 20,
-            "current_state": 3,
-            "next_state": null
-        }
-    },
-	{
-        "pk": 20,
-        "model": "tree.transition",
-        "fields": {
-            "answer": 20,
-            "current_state": 3,
-            "next_state": null
-        }
-    },
-	{
-        "pk": 21,
-        "model": "tree.transition",
-        "fields": {
-            "answer": 21,
-            "current_state": 1,
-            "next_state": 2
-        }
-    },
-	{
-        "pk": 22,
-        "model": "tree.transition",
-        "fields": {
-            "answer": 22,
-            "current_state": 1,
-            "next_state": 2
-        }
-    },
-	{
-        "pk": 23,
-        "model": "tree.transition",
-        "fields": {
-            "answer": 23,
-            "current_state": 1,
-            "next_state": 2
-        }
-    },
-	{
-        "pk": 24,
-        "model": "tree.transition",
-        "fields": {
-            "answer": 24,
-            "current_state": 1,
-            "next_state": 2
-        }
-    },
-	{
-        "pk": 25,
-        "model": "tree.transition",
-        "fields": {
-            "answer": 25,
-            "current_state": 3,
-            "next_state": null
-        }
-    },
-	{
-        "pk": 26,
-        "model": "tree.transition",
-        "fields": {
-            "answer": 26,
-            "current_state": 3,
-            "next_state": null
-        }
-    },
-	{
-        "pk": 27,
-        "model": "tree.transition",
-        "fields": {
-            "answer": 27,
-            "current_state": 3,
-            "next_state": null
-        }
-    },
-	{
-        "pk": 28,
-        "model": "tree.transition",
-        "fields": {
-            "answer": 28,
-            "current_state": 3,
-            "next_state": null
+            "code": "d",
+	    "text": "I don't know",
+	    "question":3
         }
     }
+    
 ]
