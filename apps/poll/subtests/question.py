@@ -57,6 +57,3 @@ class QuestionTest(TestScript):
         self.assertEquals(len(question1.matching_choices('a')), 1)
         self.assertEquals(len(question1.matching_choices(None)), 0)
        
-    # def test_matching_choices_matches_number_of_allowed_choices(self):
-    #     question2 = Question(text = "question 2", max_choices = 3)
-    #     self.assertEquals(len(question1.matching_choices('a b')), 0)
