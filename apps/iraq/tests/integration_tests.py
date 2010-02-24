@@ -46,16 +46,16 @@ class TestIntegration(TestScript):
     # 00919980131127 < ردودكم قد سجلت. أشكركم على المشاركة في الانتخابات.
     # """
     
-    # testTreeAppWithoutRegister = """
-    #     00919980131127 > poll
-    #     00919980131127 < I feel happy: a) Always; b) Most of the time; c) Rarely; d) Never. Choose a,b,c or d.
-    #     00919980131127 > a
-    #     00919980131127 < The three things I need most are: (Prioritize your first, second, and third.) a. Peace and Security b. Go to school regularly c. Health care when sick d. Clean neighborhood e. Clean drinking water f. Enough food g. Be loved h. Not have to work i. Be listened to j. A place to play k. Family and friends to be safe
-    #     00919980131127 > c d e
-    #     00919980131127 < Compared to my parents, my life in the future will be: a) Better; b) About the same; c) Worse; d) I don't know. Choose a,b,c or d.
-    #     00919980131127 > c
-    #     00919980131127 < Your responses have been recorded. Thank you for participating in the poll.
-    # """
+    testTreeAppWithoutRegister = """
+        00919980131127 > poll
+        00919980131127 < I feel happy Choose a,b,c or d. a. Always b. Most of the time c. Rarely d. Never
+        00919980131127 > a
+        00919980131127 < The three things I need most are (Prioritize your first, second, and third.) a. Peace and Security b. Go to school regularly c. Health care when sick d. Clean neighbourhood e. Clean drinking water f. Enough food g. be loved h. Not have to work i. Be listened to j. A place to place k. Family and friends to be safe
+        00919980131127 > c d e
+        00919980131127 < Compared to my parents, my life in the future will be Choose a,b,c or d. a. Better b. About the same c. Worse d. I don't know
+        00919980131127 > c
+        00919980131127 < Your responses have been recorded. Thank you for participating in the poll.
+    """
     
     # testTreeAppFail = """
     #     00919980131127 > register poll 100 1001
