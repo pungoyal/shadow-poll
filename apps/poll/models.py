@@ -6,25 +6,18 @@ from apps.register.models import Registration
 from django.db.models import Avg,Count
 import math
 
-"""
-'Separator' is what differentiates arguments in the messages we accept.
-This will most probably be a space, but we pull it out here on the off-chance
-that this ends up being something else (like a semi-colon)
-"""
 SEPARATOR = ' '
+DATA_TYPE = ( ('i','integer'), ('s','string'), ('c','character') )
+GENDER = ( ('M', 'Male'), ('F', 'Female') )
 
 #only one questionnaire object in the db to hold the trigger for the poll
 class Questionnaire(models.Model):
-# users can launch a poll by texting 'trigger param param'
-# where 'param' is any one of the demographic data which
-# links to questionnaire
     trigger = models.CharField(max_length=10)
     max_retries = models.IntegerField(null=True)
 
     def __unicode__(self):
         return "%s" % (self.trigger)
 
-DATA_TYPE = ( ('i','integer'), ('s','string'), ('c','character') )
 class DemographicData(models.Model):
     """ This is a db model so that we can add an arbitrary number
     of demographic data to any given poll"""
@@ -87,7 +80,6 @@ class Question(models.Model):
         firsts= Question.objects.filter(is_first=True)
         return firsts[0] if len(firsts)>0 else None
 
-
 class Choice(models.Model):
     code = models.CharField(max_length=2)
     text = models.TextField(null=True)
@@ -99,8 +91,6 @@ class Choice(models.Model):
     def __unicode__(self):
         return "%s:%s" % (self.text, self.code)
 
-GENDER = ( ('M', 'Male'), ('F', 'Female') )
-
 class User(models.Model):
     connection = models.ForeignKey(PersistantConnection, null=True)
     age = models.IntegerField(default=None, null=True, blank=True)
@@ -110,7 +100,6 @@ class User(models.Model):
 
     def __unicode__(self):
         return " User : connection %s" % str(self.connection)
-
 
 class UserSession(models.Model):
     user = models.ForeignKey(User)
