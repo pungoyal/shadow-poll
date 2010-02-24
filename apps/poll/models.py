@@ -137,7 +137,7 @@ class UserSession(models.Model):
 
 
         matching_choices = self.question.matching_choices(message)
-
+        
         if len(matching_choices) > 0:
             self._save_response(self.question, matching_choices)
             self.question = self.question.next_question
