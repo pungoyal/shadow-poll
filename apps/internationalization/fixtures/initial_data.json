@@ -743,5 +743,14 @@
 	    "code": "err6", 
 	    "language": 2
 	}
+    },
+ {
+	"pk": 85, 
+	"model": "internationalization.translation", 
+	"fields": {
+	    "translation": "Your responses have been recorded. Thank you for participating in the poll.", 
+	    "code": "thanks", 
+	    "language": 1
+	}
     }
 ]

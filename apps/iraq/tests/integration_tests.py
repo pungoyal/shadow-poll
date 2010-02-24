@@ -22,7 +22,7 @@ class TestIntegration(TestScript):
         00919980131127 > c d e
         00919980131127 < Compared to my parents, my life in the future will be Choose a,b,c or d. a. Better b. About the same c. Worse d. I don't know
         00919980131127 > worse
-        00919980131127 < thanks
+        00919980131127 < Your responses have been recorded. Thank you for participating in the poll.
     """
     # test_registration_message_in_arabic = u"""
     # 00919980131127 > التصويت
