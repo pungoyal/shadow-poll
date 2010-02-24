@@ -4,41 +4,190 @@
 {% load region-tags %}
 {% load webapp-tags %}
 
-
-  {% block header %}
-  <div id='header'>
-    <a href="/charts">
-      <h2>UNICEF Map Demo</h2>
-    </a>
-  </div>
-  {% endblock %}
+{% block stylesheets %}
+<link rel="stylesheet" href="/static/charts/stylesheets/reset.css" type="text/css" media="screen, projection">
+<link rel="stylesheet" href="/static/charts/stylesheets/main.css" type="text/css" media="screen, projection">
+<link rel="stylesheet" href="/static/charts/stylesheets/print.css" type="text/css" media="print">
+{% endblock %}
 
 
-  {% block content %}
+{% block header %}
+<div id='header'>
+    <div id="language_menu">
+        <ul>
+            <li class="en"><a href="#" class="you_here">English</a></li>
+            <li class="arabic"><a href="#">Arabic</a></li>
+        </ul>
+    </div>
+    <div id="site_header">
+        <h1> AN IRAQ FIT FOR CHILDREN </h1>
 
-    <div id='main'>
-      {% block main %}
-      {% endblock %}
+        <div id="top_menu">
+            <ul>
+                <li class="home first"><a href="#"><span>Home</span></a></li>
+                <li class="about"><a href="#"><span>About</span></a></li>
+                <li class="poll last"><a href="#"><span>Poll</span></a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+<div id='main_content' class="clearfix">
+    {% block main %}
+    {% block breadcrumb %}
+    <div id="breadcrumb_container" class="clearfix">
+        <ul class="breadcrumbs">
+            <li><a href="#">Iraq</a></li>
+            <li><a href="#">Bhagdad</a></li>
+            <li class="active">District</li>
+        </ul>
+        <ul class="secondary_links">
+            <li class="download"><a href="#">Download</a></li>
+            <li class="print"><a href="#">Print</a></li>
+        </ul>
+    </div>
+    {% endblock %}
+
+    <div id="content_area">
+        {% block question_section %}
+        <div class="question_section">
+            <h2>What makes you most happy?</h2>
+            <ol>
+                <li>Lorem Ipsum</li>
+                <li>Dolar Lorem ipsum</li>
+                <li>dolor sit amet</li>
+                <li>consetetur sadipscing elitr</li>
+                <li>sed diam nonumy eirmod</li>
+                <li>tempor invidunt ut labore et</li>
+            </ol>
+            <p class="total_responses"> 215 responses <br/>
+                from Bhagdad</p>
+            </p>
+        </div>
+        {% endblock %}
+        {% block filter_container %}
+        <div id="filter_container">
+            <div class="filter_section">
+                <form>
+                    <fieldset>
+                        <legend><span>Filter map by</span></legend>
+                        <div class="field_container">
+                            <input name="filter" type="radio" value="all" id="all" checked/>
+                            <label for="all">All responses</label>
+                        </div>
+                        <div class="field_container">
+                            <input name="filter" type="radio" value="Boys" id="Boys"/>
+                            <label for="Boys">Boys</label>
+                        </div>
+                        <div class="field_container">
+                            <input name="filter" type="radio" value="Girls" id="Girls"/>
+                            <label for="Girls">Girls</label>
+                        </div>
+                        <div class="field_container">
+                            <input name="filter" type="radio" value="Ages_0_8" id="Ages_0_8"/>
+                            <label for="Ages_0_8">Ages 0-8</label>
+                        </div>
+                        <div class="field_container">
+                            <input name="filter" type="radio" value="Ages_9_12" id="Ages_9_12"/>
+                            <label for="Ages_9_12">Ages 9-12</label>
+                        </div>
+                        <div class="field_container">
+                            <input name="filter" type="radio" value="Ages_13plus" id="Ages_13plus"/>
+                            <label for="Ages_13plus">Ages 13+</label>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+            <div class="keys_section">
+                <p class="color_key"> Color indicates the top response category for each governarate. </p>
+
+                <p class="point_key"> Points are scaled by total number of responses in each governarate. </p>
+            </div>
+        </div>
+        {% endblock %}
+        {% block map_container %}
+        <div id="map_container" class="clearfix"><img src="assets/map.jpg"/></div>
+        {% endblock %}
+        {% block chart_container %}
+        <div id="chart_container" class="clearfix">
+            <div class="response_category"><img src="assets/response_category.jpg"/></div>
+            <div class="chart_results">
+                <div class="chart_desc">
+                    <p> Lorem Ipsum Dolar Lorem ipsum dolor sit amet, consetetur
+
+                        sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et
+
+                        dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam
+
+                        et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata
+
+                        sanctus est Lorem ipsum dolor sit amet.</p>
+                </div>
+                <div class="chart_details">
+                    <div class="chart_bar">
+                        <h3><span class="response_criteria">Top Response for Bhagdad</span> <span
+                                class="top_concern">Security 65%</span></h3>
+                        <img src="assets/chart_bar.jpg"/>
+
+                        <p class="chart_note"> National results</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endblock %}
+    </div>
+    {% endblock %}
+
+    {% block sidebar %}
+    <div id="sidebar">
+        <div id="poll_qt"><img src="assets/poll_q.jpg"/></div>
+    </div>
+    {% endblock %}
+</div>
+
+<div id='footer'>
+    {% get_languages %}
+    {% block footer %}
+    <div id="sub_sections">
+        <div class="column  first">
+            <h3>Legal</h3>
+
+            <p> copyright + Legal </p>
+        </div>
+        <div class="column  ">
+            <h3>Poll Questions</h3>
+            <ul>
+                <li><a href="#">I feel happy...</a></li>
+                <li><a href="#">What makes you most happy...</a></li>
+                <li><a href="#">What makes you least happy...</a></li>
+                <li><a href="#">Compared to my parents, my life will be...</a></li>
+                <li><a href="#">If i were leading the country all children...</a></li>
+            </ul>
+        </div>
+        <div class="column  last">
+            <h3>Sections</h3>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Poll</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="unicef_logo">
+        <a href="http://www.unicef.org/" target="_blank" title="UNICEF - United for children"><img
+                src="images/unicef_footer_logo.gif" alt="UNICEF"/></a>
     </div>
 
-    <div id='right'>
-      {% block right %} 
-      {% endblock %}
-    </div> 
+    {% endblock %}
 
-    <div id='footer'>
-      {% get_languages %}
-      {% block footer %}
-      {% endblock %}
-      
-    </div>
-  {% endblock %}
+</div>
 
 {% block i18nscript %}
-  <script type="application/javascript">
-    function test(lang){
-    $.post("/i18n/setlang/", {language : lang});
-    location.reload();
+<script type="application/javascript">
+    function test(lang) {
+        $.post("/i18n/setlang/", {language : lang});
+        location.reload();
     }
-  </script>
+</script>
 {% endblock %}

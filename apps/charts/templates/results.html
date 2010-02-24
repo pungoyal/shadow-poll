@@ -2,34 +2,3 @@
 {% load i18n %}
 
 {% block title %}Map{% endblock %}
-
-{% block stylesheets %}
-<link type="text/css" rel="stylesheet" href="/static/charts/stylesheets/results.css" />
-<link type="text/css" rel="stylesheet" href="/static/charts/stylesheets/map.css" />
-{% endblock %}
-
-{% block main %}
-<div id='mainHeader'>
-  {% block mainHeader %}
-  {% include "mainHeader.html" %}
-  {% endblock %}
-</div>
-<div id='map'>
-  {% block map %}
-  {% include "map.html" %}
-  {% endblock %}
-</div>
-<div id='charts'>
-  {% block charts %}
-  {% include "charts.html" %}
-  {% endblock %}
-</div>
-{% endblock %}
-
-{% block right %}
-<div id='filters'>
-  {% block filters %}
-  {% include "filters.html" %}
-  {% endblock %}
-</div>
-{% endblock %}
