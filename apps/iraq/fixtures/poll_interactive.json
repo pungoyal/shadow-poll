@@ -36,7 +36,8 @@
         "pk": 1,
         "model": "poll.questionnaire",
         "fields": {
-            "trigger": "poll"
+            "trigger": "poll",
+						"max_retries":3
         }
     },
     {

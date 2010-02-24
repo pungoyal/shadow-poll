@@ -46,7 +46,7 @@ class UserSessionTest(TestCase):
         self.setup_choices(self.question2)
         self.setup_choices(self.question3)
 
-        Questionnaire(trigger = "trigger").save()
+        Questionnaire(trigger = "trigger", max_retries=3).save()
         self.user = User(connection = self.pconnection)
         self.user.save()
 
@@ -124,5 +124,14 @@ class UserSessionTest(TestCase):
         self.assertEquals(len(User.objects.all()), initial_number_of_users + 1)
         session.respond('a')
         self.assertEquals(len(UserResponse.objects.all()), initial_number_of_responses + 1)
+
+    def test_end_session_on_reaching_max_num_allowed_retries(self):
+        session = UserSession.open(self.pconnection1)
+        session.question = self.question1
+        session.user = self.user
+        session.respond('t')
+        session.respond('t')
+        session.respond('t')
+        self.assertEquals(session.question, None)
 
         

@@ -3,7 +3,8 @@
         "pk": 1,
         "model": "poll.questionnaire",
         "fields": {
-			"trigger": "poll"
+						"trigger": "poll",
+						"max_retries":3
         }
     },
 	{
@@ -15,34 +16,34 @@
             "error_response": "Placeholder error for question number 1. Please re-send.",
 			"next_question": 2
         }
-    },
+  },
     {
         "pk": 2,
         "model": "poll.question",
         "fields": {
-			"text": "The three things I need most are",
+						"text": "The three things I need most are",
             "max_choices": 3,
             "error_response": "Placeholder error for question number 2. Please re-send.",
-			"next_question": 3
+						"next_question": 3
         }
     },
     {
         "pk": 3,
         "model": "poll.question",
         "fields": {
-			"text": "Compared to my parents, my life in the future will be",
+						"text": "Compared to my parents, my life in the future will be",
             "max_choices": 1,
             "error_response": "Placeholder error for question number 3. Please re-send."
         }
     },
 	{
-		"pk": 1,
-		"model": "poll.choice",
-		"fields": {
-			"code": "a",
-			"text": "Always",
-			"question": 1
-		}
+			"pk": 1,
+			"model": "poll.choice",
+			"fields": {
+					"code": "a",
+					"text": "Always",
+					"question": 1
+			}
 	},
 	{
 		"pk": 2,

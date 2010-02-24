@@ -19,6 +19,7 @@ class Questionnaire(models.Model):
 # where 'param' is any one of the demographic data which
 # links to questionnaire
     trigger = models.CharField(max_length=10)
+    max_retries = models.IntegerField(null=True)
 
     def __unicode__(self):
         return "%s" % (self.trigger)
@@ -48,7 +49,6 @@ class Question(models.Model):
     def response_break_up(self):
         break_up = []
         relevant_responses = UserResponse.objects.filter(question=self)
-
         grouped_responses = relevant_responses.values('choice').annotate(Count('choice'))
         total_responses = relevant_responses.aggregate(Count('choice'))
 
@@ -116,6 +116,7 @@ class UserSession(models.Model):
     user = models.ForeignKey(User)
     question = models.ForeignKey(Question, null=True)
     questionnaire = models.ForeignKey(Questionnaire, null=True)
+    num_attempt = models.IntegerField(default=1)
     
     def __unicode__(self):
         return "session for : %s" % (self.user)
@@ -140,9 +141,17 @@ class UserSession(models.Model):
         if len(matching_choices) > 0:
             self._save_response(self.question, matching_choices)
             self.question = self.question.next_question
+            self.num_attempt = 1
             self.save()
-            return self._next_question(self.question)   
-
+            return self._next_question(self.question)
+        
+        if self._has_user_exceeded_max_attempts():
+            self.question = None
+            self.num_attempt = 1
+            self.save()
+            return "err3"
+        
+        self.num_attempt = self.num_attempt + 1
         self.save()
         return "error_parsing_response"
 
@@ -165,6 +174,10 @@ class UserSession(models.Model):
                 self.questionnaire = questionnaire
                 return True
         return False
+    
+    def _has_user_exceeded_max_attempts(self):
+        max_r = Questionnaire.objects.all()[0].max_retries
+        return self.num_attempt >= max_r
 
     # assuming only one session for a connection throughout the poll
     @classmethod
