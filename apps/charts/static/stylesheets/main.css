@@ -283,12 +283,64 @@ a:hover {
 	border-left: 0;
 	border-bottom: 0;
 }
+/* Side bar */
 #sidebar {
 	float: right;
 	width: 200px;
 }
-#sidebar #poll_qt {
+#sidebar .nav_questions {
 	margin: 0 10px;
+	border: 8px solid #87C8A2;
+	text-align: center;
+	border-radius-bottomleft: 3px;
+	border-radius-bottomright: 3px;
+	-moz-border-radius-bottomleft: 3px;
+	-moz-border-radius-bottomright: 3px;
+	-webkit-border-radius-bottomleft: 3px;
+	-webkit-border-radius-bottomright: 3px;
+	line-height: 1.1;
+	padding: 2px 2px 0;
+}
+.nav_questions ul {
+	text-align: left;
+}
+.nav_questions ul li a, .nav_questions ul li a:visited {
+	color: #fff;
+	font-weight: bold;
+	text-decoration: none;
+}
+.nav_questions ul li a {
+	background: #202020;
+	color: #808080;
+	display: block;
+	padding: 10px;
+	border-bottom: 1px solid #303030;
+}
+.nav_questions ul li a:hover, .nav_questions ul li.active a {
+	background: #404040;
+	color: #fff;
+	text-decoration: none;
+}
+.nav_questions p.note {
+	width: 96%;
+	margin-left: -5px;
+	text-align: left;
+	padding: 8px;
+	background: #f3653a;
+	border-radius: 3px;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+}
+.nav_questions p.note a {
+	font-size: 0.75em;
+	line-height: 1.2;
+	font-weight: bold;
+	color: #fffaf9;
+	background: url(../img/note_arrow.gif) no-repeat 100% 75%;
+	padding-right: 15px;
+}
+.nav_questions p.note a {
+	text-decoration: none;
 }
 /* Filter Area */
 #filter_container {
@@ -335,11 +387,11 @@ a:hover {
 #footer {
 	background: none;
 }
-#footer .unicef_logo{
+#footer .unicef_logo {
 	width: 100%;
 	clear: both;
 	text-align: right;
-	background: none;	
+	background: none;
 }
 /* chart */
 .response_category {
@@ -348,6 +400,69 @@ a:hover {
 	padding: 10px 0;
 	float: left;
 	width: 100%;
+}
+.response_category .response_category_header {
+	float: left;
+	width: 24%;
+	margin-left:10px;
+}
+.response_category_header h4 {
+	color: #808080;
+	font-size:0.8em;
+	line-height: 1;
+}
+.response_category_header p {
+	color: #67b989;
+	font-size:0.7em;
+	font-weight:bold;
+}
+.response_category ul {
+	float: right;
+	width: 74%;
+}
+.response_category ul li {
+	background: url(../img/bg_sprite.gif) no-repeat 0 -170px;
+	width: 124px;
+	height: 25px;
+	margin-right: 5px;
+	padding-left: 18px;
+}
+.response_category ul li span {
+	display: block;
+	font-size: 0.6em;
+	font-weight: bold;
+	padding: 5px 18px 5px 0;
+	
+	background: url(../img/bg_sprite.gif) no-repeat 100% -170px;
+}
+.response_category ul li.educ {
+	background-position:  0 -170px;
+}
+.response_category ul li.food {
+	background-position:  0 -200px;
+}
+.response_category ul li.secu {
+	background-position:  0 -230px;
+}
+.response_category ul li.envi {
+	background-position:  0 -260px;
+	margin: 0;
+}
+.response_category ul li.educ span {
+	background-position:  100% -170px;
+	color: #75b907;
+}
+.response_category ul li.food span {
+	background-position:  100% -200px;
+	color: #ab0bb5;
+}
+.response_category ul li.secu span {
+	background-position:  100% -230px;
+	color: #b6470a;
+}
+.response_category ul li.envi span {
+	background-position:  100% -260px;
+	color: #075cb9;
 }
 .chart_results {
 	float: left;
@@ -373,11 +488,9 @@ a:hover {
 .chart_note {
 	color:#91886F;
 	float:right;
-    margin-top: -45px;
-    font-size: 0.75em;
 }
 /* Link List */
-#language_menu ul li, #top_menu ul li, #poll_questions ul li {
+#language_menu ul li, #top_menu ul li, #poll_questions ul li, .response_category ul li {
 	list-style: none;
 	float: left;
 }
@@ -401,7 +514,7 @@ a:hover {
 .clearfix {
 	display: block;
 }
-/* Grid
+/* Grid */
 .showgrid {
-	background: transparent url(../images/grid.png) repeat scroll 0 0;
-} */
+	background: transparent url(../img/grid.png) repeat scroll 0 0;
+}
