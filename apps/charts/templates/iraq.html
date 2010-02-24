@@ -10,6 +10,7 @@
 <link rel="stylesheet" href="/static/charts/stylesheets/print.css" type="text/css" media="print">
 {% endblock %}
 
+{% block title %}UNCIEF{% endblock %}
 
 {% block header %}
 <div id='header'>
@@ -52,8 +53,8 @@
         {% endblock %}
 
         <div id="content_area">
-            {% block question_section %}
             <div class="question_section">
+                {% block question %}
                 <h2>What makes you most happy?</h2>
                 <ol>
                     <li>Lorem Ipsum</li>
@@ -66,8 +67,8 @@
                 <p class="total_responses"> 215 responses <br/>
                     from Bhagdad</p>
                 </p>
+                {% endblock %}
             </div>
-            {% endblock %}
             {% block filter_container %}
             <div id="filter_container">
                 <div class="filter_section">
@@ -108,12 +109,26 @@
                 </div>
             </div>
             {% endblock %}
-            {% block map_container %}
-            <div id="map_container" class="clearfix"><img src="/static/charts/img/assets/map.jpg"/></div>
-            {% endblock %}
-            {% block chart_container %}
+            <div id="map_container" class="clearfix">
+                {% block map_container %}
+                <img src="/static/charts/img/assets/map.jpg"/>
+                {% endblock %}
+            </div>
+            {% block charts_container %}
             <div id="chart_container" class="clearfix">
-                <div class="response_category"><img src="/static/charts/img/assets/response_category.jpg"/></div>
+                <div class="response_category">
+                    <div class="response_category_header">
+                        <h4>Response categories</h4>
+
+                        <p>What do these mean?</p>
+                    </div>
+                    <ul>
+                        <li class="educ"><span>Education</span></li>
+                        <li class="food"><span>Food, Water, Shelter</span></li>
+                        <li class="secu"><span>Security</span></li>
+                        <li class="envi"><span>Social Environment</span></li>
+                    </ul>
+                </div>
                 <div class="chart_results">
                     <div class="chart_desc">
                         <p> Lorem Ipsum Dolar Lorem ipsum dolor sit amet, consetetur
@@ -127,13 +142,18 @@
                             sanctus est Lorem ipsum dolor sit amet.</p>
                     </div>
                     <div class="chart_details">
+                        {% block chart %}
                         <div class="chart_bar">
                             <h3><span class="response_criteria">Top Response for Bhagdad</span> <span
                                     class="top_concern">Security 65%</span></h3>
-                            <img src="/static/charts/img/assets/chart_bar.jpg"/>
 
+                            <div id="chart">
+                                <img src="/static/charts/img/assets/chart_bar.jpg"/>
+                            </div>
                             <p class="chart_note"> National results</p>
                         </div>
+                        {% endblock %}
+
                     </div>
                 </div>
             </div>
@@ -143,7 +163,15 @@
     </div>
     {% block sidebar %}
     <div id="sidebar">
-        <div id="poll_qt"><img src="/static/charts/img/assets/poll_q.jpg"/></div>
+        <div class="nav_questions"><img src="/static/charts/img/poll_q_img_1.gif" alt=""/>
+            <ul>
+                <li><a href="question1"> I feel happy </a></li>
+                <li><a href="question2"> What makes you least happy? </a></li>
+                <li><a href="question3"> Compared to my parents, my life ... </a></li>
+                <li class="last"><a href="#">If i was leading the country ... </a></li>
+            </ul>
+            <p class="note"><a href="#">Read about how UNICEF used SMS to conduct the survey</a></p>
+        </div>
     </div>
     {% endblock %}
 </div>

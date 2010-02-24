@@ -1,4 +1,44 @@
 {% extends 'iraq.html' %}
 {% load i18n %}
 
-{% block title %}Map{% endblock %}
+{% block javascripts %}
+<script src="/static/charts/javascripts/raphael-min.js"></script>
+<script src="/static/charts/javascripts/graphs.js"></script>
+<script src="http://www.openlayers.org/dev/OpenLayers.js"></script>
+<script src="http://js.mapbox.com/ol/2.8/mapbox.js"></script>
+<script src="/static/charts/javascripts/openlayers_plus_blockswitcher.js"></script>
+{% endblock %}
+
+{% block title_suffix %}Map{% endblock %}
+
+{% block question %}
+<h2>{{ question.text }}</h2>
+<ol>
+
+    {% for choice in choices %}
+    <li>
+        {{ choice.text }}
+    </li>
+    {% endfor %}
+</ol>
+<p class="total_responses"> 215 responses <br/>
+    from Bhagdad</p>
+</p>
+{% endblock %}
+
+{% block chart %}
+<div class="chart_bar">
+    <h3>
+        <span class="response_criteria">Top Response for {{ region }}</span>
+        <span class="top_concern">{{ top_response }} {{ percentage }}%</span>
+    </h3>
+
+    <div id="chart">
+        <script type="text/javascript">
+            var data = {{ chart_data }}
+            var country_data = {{ national_data }}
+        </script>
+    </div>
+    <p class="chart_note">National results</p>
+</div>
+{% endblock %}
