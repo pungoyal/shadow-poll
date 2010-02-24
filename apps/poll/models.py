@@ -5,7 +5,10 @@ from apps.reporters.models import Reporter, PersistantConnection
 from apps.register.models import Registration
 from django.db.models import Avg,Count
 import math
-from domain.constants import *
+
+SEPARATOR = ' '
+DATA_TYPE = ( ('i','integer'), ('s','string'), ('c','character') )
+GENDER = ( ('M', 'Male'), ('F', 'Female') )
 
 #only one questionnaire object in the db to hold the trigger for the poll
 class Questionnaire(models.Model):
