@@ -304,19 +304,18 @@ a:hover {
 .nav_questions ul {
 	text-align: left;
 }
-.nav_questions ul li a, .nav_questions ul li a:visited {
-	color: #fff;
+.nav_questions ul li a {
 	font-weight: bold;
 	text-decoration: none;
 }
-.nav_questions ul li a {
+.nav_questions ul li a, .nav_questions ul li a:visited{
 	background: #202020;
 	color: #808080;
 	display: block;
 	padding: 10px;
 	border-bottom: 1px solid #303030;
 }
-.nav_questions ul li a:hover, .nav_questions ul li.active a {
+.nav_questions ul li a:hover, .nav_questions ul li.active a, .nav_questions ul li.active a:visited {
 	background: #404040;
 	color: #fff;
 	text-decoration: none;
@@ -488,6 +487,8 @@ a:hover {
 .chart_note {
 	color:#91886F;
 	float:right;
+    margin-top: -45px;
+    font-size: 0.75em;
 }
 /* Link List */
 #language_menu ul li, #top_menu ul li, #poll_questions ul li, .response_category ul li {
