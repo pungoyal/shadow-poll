@@ -104,7 +104,8 @@ if __name__ == '__main__':
 
 
 	issue_cmd(['python','manage.py','syncdb'], 'Could not sync db')
-        issue_cmd(['python','manage.py', 'loaddata',os.path.join(APP_DIR, 'apps/poll/fixtures/poll_responses.json')], 'Could not load poll_responses')
+        issue_cmd(['python','manage.py', 'loaddata',os.path.join(APP_DIR, 'apps/iraq/fixtures/poll_interactive.json')], 'Could not load poll_responses')
+	issue_cmd(['python','manage.py', 'loaddata',os.path.join(APP_DIR, 'apps/poll/fixtures/functional_test_data.json')], 'Could not load poll_responses')
 
 	print "Starting iraq-children server"
 	issue_cmd([INIT_SCRIPT, 'start'], 'Could not start IraqChildren server')
