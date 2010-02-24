@@ -25,12 +25,12 @@ a:hover {
 	background: #fff;
 }
 #header {
-	background: url(../images/bg_hdr.gif) repeat-x 0 0;
+	background: url(../img/bg_hdr.gif) repeat-x 0 0;
 	height: 120px;
 	overflow: hidden;
 }
 #language_menu {
-	background: url(../images/bg_language.gif) no-repeat 0 0;
+	background: url(../img/bg_language.gif) no-repeat 0 0;
 	height: 30px;
 	overflow: hidden;
 }
@@ -41,7 +41,7 @@ a:hover {
 	text-indent: -999em;
 }
 #language_menu ul li a {
-	background: url(../images/bg_sprite.gif) no-repeat 0 -110px;
+	background: url(../img/bg_sprite.gif) no-repeat 0 -110px;
 	width: 50px;
 	height: 25px;
 	overflow: hidden;
@@ -81,7 +81,7 @@ a:hover {
 	display: block;
 	width: 128px;
 	height: 52px;
-	background: url(../images/bg_sprite.gif) no-repeat 0 0;
+	background: url(../img/bg_sprite.gif) no-repeat 0 0;
 }
 #top_menu ul li a:hover {
 	background-position: 0 -55px;
@@ -101,7 +101,7 @@ a:hover {
 /* Intro Banner */
 #intro {
 	height:180px;
-	background:#FFFFFF url(../images/intro_bg.gif) no-repeat scroll left top;
+	background:#FFFFFF url(../img/intro_bg.gif) no-repeat scroll left top;
 	border-bottom:1px solid #C4C1BC;
 	float: left;
 	width: 100%;
@@ -120,7 +120,7 @@ a:hover {
 	padding-right:20px;
 }
 #intro p.intro_link a {
-	background:transparent url(../images/arrow_right.gif) no-repeat scroll 100% 100%;
+	background:transparent url(../img/arrow_right.gif) no-repeat scroll 100% 100%;
 	color:#009966;
 	font-weight:bold;
 	padding-right:12px;
@@ -147,7 +147,7 @@ a:hover {
 }
 .breadcrumbs li {
 	padding-right: 20px;
-	background: url(../images/breadcrumb_arrow.gif) no-repeat 100% 50%;
+	background: url(../img/breadcrumb_arrow.gif) no-repeat 100% 50%;
 	margin-right: 12px;
 }
 .breadcrumbs li.active {
@@ -163,14 +163,14 @@ a:hover {
 	padding-left: 22px;
 }
 .secondary_links .download a {
-	background: url(../images/download_icon.gif) no-repeat 0 50%;
+	background: url(../img/download_icon.gif) no-repeat 0 50%;
 	margin-right: 24px;
 }
 .secondary_links .print a {
-	background: url(../images/print_icon.gif) no-repeat 0 50%;
+	background: url(../img/print_icon.gif) no-repeat 0 50%;
 }
 #poll_questions {
-	background:transparent url(../images/bg_poll_q.gif) repeat-x scroll 0 100%;
+	background:transparent url(../img/bg_poll_q.gif) repeat-x scroll 0 100%;
 	overflow:hidden;
 	padding:0 10px;
 	height:300px;
@@ -326,10 +326,10 @@ a:hover {
 }
 .keys_section .color_key {
 	border-bottom: 1px solid #C4C1BC;
-	background: url(../images/color_key.gif) no-repeat 10px 10px;
+	background: url(../img/color_key.gif) no-repeat 10px 10px;
 }
 .keys_section .point_key {
-	background: url(../images/point_key.gif) no-repeat 10px 10px;
+	background: url(../img/point_key.gif) no-repeat 10px 10px;
 }
 /* footer */
 #footer {
@@ -399,7 +399,7 @@ a:hover {
 .clearfix {
 	display: block;
 }
-/* Grid */
+/* Grid
 .showgrid {
-	background: transparent url(src/grid.png) repeat scroll 0 0;
-}
+	background: transparent url(../images/grid.png) repeat scroll 0 0;
+} */
