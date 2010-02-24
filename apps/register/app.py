@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 import rapidsms
 from rapidsms.webui import settings
-from rapidsms.i18n import ugettext_from_locale as _t
 from models import *
 
 class App (rapidsms.app.App):
@@ -21,12 +20,10 @@ class App (rapidsms.app.App):
                 message.language = settings.LANGUAGE_CODE
             try:
                 r.parse(message)
-                response = "Thanks for registering."
-                message.__setattr__("error_id", "err2")
+                response = "err2"
             except Exception, e:
-                response = "Register not understood."
-                message.__setattr__("error_id", "err1")
-            message.respond(_t(response, message.language ))
+                response = "err1"
+            message.respond(response)
             return True
     
     def cleanup (self, message):
