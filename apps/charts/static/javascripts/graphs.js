@@ -4,11 +4,11 @@ window.onload=function() {
 
     var paper = Raphael(document.getElementById("chart"), canvasWidth, 120);
 	var colors=["#ccff8a","#ea4cf4","#f8b088","#8bc0fa"];
-	var fontColors=["#4CC552","magenta","orange","cornflowerblue"];
+	var fontColors=["#75b907","#BC2EBC","#CC6633","#2966B8"];
 	var x = 0;
     var y = 5;
     var darkHeight = 10;
-    var lightHeight = 40;
+    var lightHeight = 30;
     var fillerWidth = 2;
 
 	for (var i=0; i < data.length; i++) {
@@ -24,7 +24,7 @@ window.onload=function() {
         percentageText.attr({
             fill: fontColors[i],
             stroke: fontColors[i],
-            fontSize: 20,
+            font: "12px 'Arial'",
             opacity: 1
         });
 
