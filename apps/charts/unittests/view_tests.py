@@ -2,7 +2,7 @@ from django.test import TestCase, Client
 
 class ViewTests(TestCase):
     
-    fixtures = ['functional_test_data']
+    fixtures = ['functional_test_data', 'poll_interactive']
     def setUp(self):
         self.client = Client()        
 

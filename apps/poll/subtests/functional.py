@@ -5,7 +5,7 @@ from rapidsms.tests.scripted import TestScript
 from math import fsum
 
 class StatsTest(TestScript):
-    fixtures = ['functional_test_data.json']
+    fixtures = ['functional_test_data.json', 'poll_interactive']
     apps = (poll_app,)
     
     def test_response_break_up(self):
