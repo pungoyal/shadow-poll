@@ -1,4 +1,18 @@
 {% extends 'iraq.html' %}
 {% load i18n %}
 
-{% block title %}Map{% endblock %}
+{% block javascripts %}
+<script src="/static/charts/javascripts/raphael-min.js"></script>
+<script src="/static/charts/javascripts/graphs.js"></script>
+{% endblock %}
+
+{% block title_suffix %}Map{% endblock %}
+
+{% block chart %}
+<div id="chart">
+    <script type="text/javascript">
+    var data = {{ chart_data }}
+    var country_data = {{ national_data }}
+</script>
+</div>
+{% endblock %}

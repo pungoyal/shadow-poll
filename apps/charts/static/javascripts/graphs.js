@@ -1,8 +1,8 @@
 window.onload=function() {
-    var canvasWidth = 420;
+    var canvasWidth = 390;
     var factor = (canvasWidth/107);
 
-    var paper = Raphael(document.getElementById("voteBar"), canvasWidth, 120);
+    var paper = Raphael(document.getElementById("chart"), canvasWidth, 120);
 	var colors=["#ccff8a","#ea4cf4","#f8b088","#8bc0fa"];
 	var fontColors=["#4CC552","magenta","orange","cornflowerblue"];
 	var x = 0;

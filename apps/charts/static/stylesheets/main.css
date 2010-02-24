@@ -373,6 +373,8 @@ a:hover {
 .chart_note {
 	color:#91886F;
 	float:right;
+    margin-top: -45px;
+    font-size: 0.75em;
 }
 /* Link List */
 #language_menu ul li, #top_menu ul li, #poll_questions ul li {
