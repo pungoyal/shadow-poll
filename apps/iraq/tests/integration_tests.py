@@ -76,54 +76,39 @@ class TestIntegration(TestScript):
         00919980131127 < Your responses have been recorded. Thank you for participating in the poll.
     """
     
-    # testTreeAppFailSessionEnd = """
-    #     00919980131127 > register poll 100 1001
-    #     00919980131127 < Thank you, to initiate the poll sms the keyword Poll with your age and gender
-    #     00919980131127 > poll
-    #     00919980131127 <  I feel happy Choose a,b,c or d. a. Always b. Most of the time c. Rarely d. Never
-    #     00919980131127 > x
-    #     00919980131127 < You have selected an invalid choice, please choose one among the above listed choice
-    #     00919980131127 > x
-    #     00919980131127 < You have selected an invalid choice, please choose one among the above listed choice
-    #     00919980131127 > x
-    #     00919980131127 < You have selected an invalid choice, please choose one among the above listed choice
-    #     00919980131127 < Due to errors the poll has been stopped. To restart, type the keyword Poll with your age and gender
-    #     00919980131127 > a
-    #     00919980131127 < We didn't understand your response.
-    #     00919980131127 > poll
-    #     00919980131127 < I feel happy: a) Always; b) Most of the time; c) Rarely; d) Never. Choose a,b,c or d.
-    # """
+    testTreeAppFailSessionEnd = """
+        00919980131127 > register poll 100 1001
+        00919980131127 < Thank you, to initiate the poll sms the keyword Poll with your age and gender
+        00919980131127 > poll
+        00919980131127 <  I feel happy Choose a,b,c or d. a. Always b. Most of the time c. Rarely d. Never
+        00919980131127 > x
+        00919980131127 < You have selected an invalid choice, please choose one among the above listed choice
+        00919980131127 > x
+        00919980131127 < You have selected an invalid choice, please choose one among the above listed choice
+        00919980131127 > x
+        00919980131127 < Due to errors the poll has been stopped. To restart, type the keyword Poll with your age and gender
+        00919980131127 > a
+        00919980131127 <  I feel happy Choose a,b,c or d. a. Always b. Most of the time c. Rarely d. Never
+        00919980131127 > poll
+        00919980131127 < I feel happy Choose a,b,c or d. a. Always b. Most of the time c. Rarely d. Never
+    """
     
-    # testTreeAppFailSessionEnd_2 = """
-    #     00919980131127 > register poll 100 1001
-    #     00919980131127 < Thank you, to initiate the poll sms the keyword Poll with your age and gender
-    #     00919980131127 > poll
-    #     00919980131127 < I feel happy: a) Always; b) Most of the time; c) Rarely; d) Never. Choose a,b,c or d.
-    #     00919980131127 > Always Nevr
-    #     00919980131127 < Please choose one option
-    #     00919980131127 > Al Neb
-    #     00919980131127 < Please choose one option
-    #     00919980131127 > Alllllll
-    #     00919980131127 < You have selected an invalid choice, please choose one among the above listed choice
-    #     00919980131127 < Due to errors the poll has been stopped. To restart, type the keyword Poll with your age and gender
-    #     00919980131127 > a
-    #     00919980131127 < We didn't understand your response.
-    #     00919980131127 > poll
-    #     00919980131127 < I feel happy: a) Always; b) Most of the time; c) Rarely; d) Never. Choose a,b,c or d.
-    # """
-    
-    # testTreeAppFailMultipleResponse = """
-    #     00919980131127 > register poll 100 1001
-    #     00919980131127 < Thank you, to initiate the poll sms the keyword Poll with your age and gender
-    #     00919980131127 > poll
-    #     00919980131127 < I feel happy: a) Always; b) Most of the time; c) Rarely; d) Never. Choose a,b,c or d.
-    #     00919980131127 > always never
-    #     00919980131127 < Please choose one option
-    #     00919980131127 > a b
-    #     00919980131127 < Please choose one option
-    #     00919980131127 > always
-    #     00919980131127 < The three things I need most are: (Prioritize your first, second, and third.) a. Peace and Security b. Go to school regularly c. Health care when sick d. Clean neighborhood e. Clean drinking water f. Enough food g. Be loved h. Not have to work i. Be listened to j. A place to play k. Family and friends to be safe
-    # """
+    testTreeAppFailSessionEnd_2 = """
+        00919980131127 > register poll 100 1001
+        00919980131127 < Thank you, to initiate the poll sms the keyword Poll with your age and gender
+        00919980131127 > poll
+        00919980131127 <  I feel happy Choose a,b,c or d. a. Always b. Most of the time c. Rarely d. Never
+        00919980131127 > Always Nevr
+        00919980131127 <  You have selected an invalid choice, please choose one among the above listed choice
+        00919980131127 > Al Neb
+        00919980131127 <  You have selected an invalid choice, please choose one among the above listed choice
+        00919980131127 > Alllllll
+        00919980131127 < Due to errors the poll has been stopped. To restart, type the keyword Poll with your age and gender
+        00919980131127 > a
+        00919980131127 < I feel happy Choose a,b,c or d. a. Always b. Most of the time c. Rarely d. Never
+        00919980131127 > poll
+        00919980131127 <  I feel happy Choose a,b,c or d. a. Always b. Most of the time c. Rarely d. Never
+    """
     
     # testTreeAppJunkMessage = """
     #     00919980131127 > dfsdsdsdsd
