@@ -1,7 +1,8 @@
 from django.test import TestCase, Client
 
 class ViewTests(TestCase):
-
+    
+    fixtures = ['functional_test_data']
     def setUp(self):
         self.client = Client()        
 
