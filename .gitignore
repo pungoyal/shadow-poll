@@ -11,3 +11,4 @@
 .idea
 .idea/*
 /apps/internationalization/.#tests.py
+*DS_Store
