@@ -2,7 +2,7 @@ from __future__ import division
 from math import ceil
 from django.contrib.gis.db import models
 
-from polls.models import User, UserResponse
+from poll.models import User, UserResponse
 # class ColorMap(models.Model):
 #     category = models.ForeignKey(Category)
 #     color = models.CharField(max_length=20)
