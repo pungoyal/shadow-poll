@@ -5,10 +5,7 @@ from apps.reporters.models import Reporter, PersistantConnection
 from apps.register.models import Registration
 from django.db.models import Avg,Count
 import math
-
-SEPARATOR = ' '
-DATA_TYPE = ( ('i','integer'), ('s','string'), ('c','character') )
-GENDER = ( ('M', 'Male'), ('F', 'Female') )
+from domain.constants import *
 
 #only one questionnaire object in the db to hold the trigger for the poll
 class Questionnaire(models.Model):
@@ -19,8 +16,6 @@ class Questionnaire(models.Model):
         return "%s" % (self.trigger)
 
 class DemographicData(models.Model):
-    """ This is a db model so that we can add an arbitrary number
-    of demographic data to any given poll"""
     questionnaire = models.ForeignKey(Questionnaire)
     name = models.CharField(max_length=32)
     regex = models.CharField(max_length=32)
@@ -168,7 +163,6 @@ class UserSession(models.Model):
         max_r = Questionnaire.objects.all()[0].max_retries
         return self.num_attempt >= max_r
 
-    # assuming only one session for a connection throughout the poll
     @classmethod
     def open(klass,connection):
         users = User.objects.filter(connection = connection)
