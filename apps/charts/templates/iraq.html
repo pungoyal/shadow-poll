@@ -10,7 +10,7 @@
 <link rel="stylesheet" href="/static/charts/stylesheets/print.css" type="text/css" media="print">
 {% endblock %}
 
-{% block title %}UNCIEF{% endblock %}        
+{% block title %}UNCIEF{% endblock %}
 
 {% block header %}
 <div id='header'>
@@ -109,9 +109,11 @@
                 </div>
             </div>
             {% endblock %}
-            {% block map_container %}
-            <div id="map_container" class="clearfix"><img src="/static/charts/img/assets/map.jpg"/></div>
-            {% endblock %}
+            <div id="map_container" class="clearfix">
+                {% block map_container %}
+                <img src="/static/charts/img/assets/map.jpg"/>
+                {% endblock %}
+            </div>
             {% block charts_container %}
             <div id="chart_container" class="clearfix">
                 <div class="response_category"><img src="/static/charts/img/assets/response_category.jpg"/></div>
@@ -128,17 +130,17 @@
                             sanctus est Lorem ipsum dolor sit amet.</p>
                     </div>
                     <div class="chart_details">
+                        {% block chart %}
                         <div class="chart_bar">
                             <h3><span class="response_criteria">Top Response for Bhagdad</span> <span
                                     class="top_concern">Security 65%</span></h3>
-                            {% block chart %}
                             <div id="chart">
                                 <img src="/static/charts/img/assets/chart_bar.jpg"/>
                             </div>
-                            {% endblock %}
-
                             <p class="chart_note"> National results</p>
                         </div>
+                        {% endblock %}
+
                     </div>
                 </div>
             </div>
