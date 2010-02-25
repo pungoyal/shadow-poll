@@ -6,9 +6,13 @@ from apps.register.models import Registration
 from django.db.models import Avg,Count
 import math
 
+##########################################################################
+
 SEPARATOR = ' '
 DATA_TYPE = ( ('i','integer'), ('s','string'), ('c','character') )
 GENDER = ( ('M', 'Male'), ('F', 'Female') )
+
+##########################################################################
 
 #only one questionnaire object in the db to hold the trigger for the poll
 class Questionnaire(models.Model):
@@ -18,12 +22,16 @@ class Questionnaire(models.Model):
     def __unicode__(self):
         return "%s" % (self.trigger)
 
+##########################################################################
+
 class DemographicData(models.Model):
     questionnaire = models.ForeignKey(Questionnaire)
     name = models.CharField(max_length=32)
     regex = models.CharField(max_length=32)
     order = models.IntegerField()
     type = models.CharField(max_length=16, choices=DATA_TYPE)
+
+##########################################################################
 
 class Question(models.Model):
     text = models.TextField()
@@ -78,6 +86,8 @@ class Question(models.Model):
         firsts= Question.objects.filter(is_first=True)
         return firsts[0] if len(firsts)>0 else None
 
+##########################################################################
+
 class Choice(models.Model):
     code = models.CharField(max_length=2)
     text = models.TextField(null=True)
@@ -89,6 +99,8 @@ class Choice(models.Model):
     def __unicode__(self):
         return "%s:%s" % (self.text, self.code)
 
+##########################################################################
+
 class User(models.Model):
     connection = models.ForeignKey(PersistantConnection, null=True)
     age = models.IntegerField(default=None, null=True, blank=True)
@@ -98,6 +110,8 @@ class User(models.Model):
 
     def __unicode__(self):
         return " User : connection %s" % str(self.connection)
+
+##########################################################################
 
 class UserSession(models.Model):
     user = models.ForeignKey(User)
@@ -177,8 +191,10 @@ class UserSession(models.Model):
             return session
 
         return sessions[0]
+##########################################################################
 
 class UserResponse(models.Model):
     user = models.ForeignKey(User)
     question = models.ForeignKey(Question)
     choice = models.ForeignKey(Choice)    
+##########################################################################
