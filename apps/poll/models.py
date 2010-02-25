@@ -39,15 +39,18 @@ class Question(models.Model):
         relevant_responses = UserResponse.objects.filter(question=self)
         grouped_responses = relevant_responses.values('choice').annotate(Count('choice'))
         total_responses = relevant_responses.aggregate(Count('choice'))
-
         for gr in grouped_responses:
             break_up.append(round(gr['choice__count']*100/total_responses['choice__count'], 1))
 
         return break_up
 
-    def get_num_response_loc(self, location_id):
-        return len(UserResponse.objects.filter(question=self))
+    def max_voted_choice_loc(self, location_id):
+        relevant_responses = UserResponse.objects.filter(user__location = location_id)
+        choice_id =  relevant_responses.values('choice').annotate(Count('choice')).order_by('-choice__count')[0]['choice']
+        return Choice.objects.get(id = choice_id)
 
+    def get_num_response_loc(self, location_id):
+        return len(UserResponse.objects.filter(user__location = location_id))
 
     def humanize_options(self):
         choices = Choice.objects.filter(question=self)
