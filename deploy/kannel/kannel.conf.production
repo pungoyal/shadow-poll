@@ -26,6 +26,7 @@ wdp-interface-name = "*"
 log-file = "/var/log/kannel/bearerbox.log"
 box-deny-ip = "*.*.*.*"
 box-allow-ip = "127.0.0.1;212.35.67.178;212.35.67.179;212.35.67.180;212.35.67.181"
+sms-resend-retry = 3
 
 group = wapbox
 bearerbox-host = 127.0.0.1

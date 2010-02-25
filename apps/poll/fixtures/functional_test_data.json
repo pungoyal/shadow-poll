@@ -1,5 +1,24 @@
 [
+{
+        "pk": 1,
+        "model": "reporters.persistantbackend",
+        "fields": {
+            "slug": "foo",
+            "title": "foo"
+        }
+    },
     {
+        "pk": 1,
+        "model": "reporters.persistantconnection",
+        "fields": {
+            "last_seen": null,
+            "reporter": null,
+            "is_bot": false,
+            "identity": "foo",
+            "backend": 1
+        }
+    },    
+{
         "pk": 1,
         "model": "poll.user",
         "fields": {
