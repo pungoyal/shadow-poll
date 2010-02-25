@@ -4,9 +4,6 @@
 {% block javascripts %}
 <script src="/static/charts/javascripts/raphael-min.js"></script>
 <script src="/static/charts/javascripts/graphs.js"></script>
-<script src="http://www.openlayers.org/dev/OpenLayers.js"></script>
-<script src="http://js.mapbox.com/ol/2.8/mapbox.js"></script>
-<script src="/static/charts/javascripts/openlayers_plus_blockswitcher.js"></script>
 {% endblock %}
 
 {% block title_suffix %}Map{% endblock %}
@@ -21,8 +18,9 @@
     </li>
     {% endfor %}
 </ol>
-<p class="total_responses"> 215 responses <br/>
-    from Bhagdad</p>
+<p class="total_responses">
+    215 responses <br/>
+    from Bhagdad
 </p>
 {% endblock %}
 
