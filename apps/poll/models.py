@@ -168,11 +168,6 @@ class UserSession(models.Model):
 
         if self._first_access():
             self.question = Question.first()
-
-            temp_user = self.user
-            temp_user.save()
-            self.user = temp_user
-
             self.save()
             return str(self.question)
 
