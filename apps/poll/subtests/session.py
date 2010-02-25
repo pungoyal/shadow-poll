@@ -46,7 +46,12 @@ class UserSessionTest(TestCase):
         self.setup_choices(self.question2)
         self.setup_choices(self.question3)
 
-        Questionnaire(trigger = "trigger", max_retries=3).save()
+        q = Questionnaire(trigger = "trigger", max_retries=3)
+        q.save()
+        DemographicParser(questionnaire=q, name='age', regex='[0-9]+', 
+                        order=1, type='i').save()
+        DemographicParser(questionnaire=q, name='gender', 
+                        regex='m|f|male|female', order=2, type='c').save()
         self.user = User(connection = self.pconnection)
         self.user.save()
 
@@ -134,4 +139,11 @@ class UserSessionTest(TestCase):
         session.respond('t')
         self.assertEquals(session.question, None)
 
+    def test_user_demographics_saved_when_present(self):
+        session = UserSession.open(self.pconnection1)
+        session.respond('trigger 13 f')
+        latest_user = User.objects.all().order_by('-id')[0]
+        self.assertEquals(latest_user.age, 13)
+        self.assertEquals(latest_user.gender, 'f')
+        
         

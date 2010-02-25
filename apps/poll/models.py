@@ -24,12 +24,28 @@ class Questionnaire(models.Model):
 
 ##########################################################################
 
-class DemographicData(models.Model):
+class DemographicParser(models.Model):
     questionnaire = models.ForeignKey(Questionnaire)
     name = models.CharField(max_length=32)
     regex = models.CharField(max_length=32)
     order = models.IntegerField()
     type = models.CharField(max_length=16, choices=DATA_TYPE)
+
+    def parse_and_set(self, message, user) :
+        arguments = message.split(SEPARATOR)
+        for a in arguments:
+            regex = re.compile( '(%s)$' % self.regex.strip().lower() )
+            match = regex.match( a )
+            if match:
+                if self.type == 'i':
+                    val = int(match.group(0))
+                elif self.type == 'c':
+                    val = match.group(0)[0]
+                else:
+                    val = match.group(0)
+                if hasattr(user, self.name):
+                        setattr(user, self.name, val)
+                        break
 
 ##########################################################################
 
@@ -128,6 +144,7 @@ class UserSession(models.Model):
     def respond(self, message):
         if self._is_trigger(message):
             self.question = None
+            self.user = self._save_user(self.user, message)
 
         if self._first_access():
             self.question = Question.first()
@@ -159,6 +176,15 @@ class UserSession(models.Model):
         self.save()
         return "error_parsing_response"
 
+    def _save_user(self, user, message):
+        message = message.strip().lstrip(self.questionnaire.trigger.lower()).strip()
+        parsers = list( DemographicParser.objects.filter(questionnaire=self.questionnaire).order_by('order') )
+        for parser in parsers:
+            parser.parse_and_set(message, user)
+        user.save()
+        return user
+
+ 
     def _save_response(self,question,choices):
         for choice in choices:
             user_response = UserResponse(user = self.user, question =question, choice = choice)
@@ -194,10 +220,12 @@ class UserSession(models.Model):
             return session
 
         return sessions[0]
+
 ##########################################################################
 
 class UserResponse(models.Model):
     user = models.ForeignKey(User)
     question = models.ForeignKey(Question)
     choice = models.ForeignKey(Choice)    
+
 ##########################################################################
