@@ -16,11 +16,11 @@ class TestIntegration(TestScript):
         00919980131127 > register poll 100 1001
         00919980131127 < Thank you, to initiate the poll sms the keyword Poll with your age and gender
         00919980131127 > poll
-        00919980131127 < I feel happy Choose a,b,c or d. a. Always b. Most of the time c. Rarely d. Never
+        00919980131127 < I feel happy: (Choose a,b,c or d.) a. Always b. Most of the time c. Rarely d. Never
         00919980131127 > most of the time
-        00919980131127 < The three things I need most are (Prioritize your first, second, and third.) a. Peace and Security b. Go to school regularly c. Health care when sick d. Clean neighbourhood e. Clean drinking water f. Enough food g. be loved h. Not have to work i. Be listened to j. A place to place k. Family and friends to be safe
+        00919980131127 < The three things I need most are: (Prioritize your first, second, and third.) a. Peace and Security b. Go to school regularly c. Health care when sick d. Clean neighbourhood e. Clean drinking water f. Enough food g. be loved h. Not have to work i. Be listened to j. A place to place k. Family and friends to be safe
         00919980131127 > c d e
-        00919980131127 < Compared to my parents, my life in the future will be Choose a,b,c or d. a. Better b. About the same c. Worse d. I don't know
+        00919980131127 < Compared to my parents, my life in the future will be: (Choose a,b,c or d.) a. Better b. About the same c. Worse d. I don't know
         00919980131127 > worse
         00919980131127 < Your responses have been recorded. Thank you for participating in the poll.
     """
@@ -37,11 +37,11 @@ class TestIntegration(TestScript):
     
     testTreeAppWithoutRegister = """
         00919980131127 > poll
-        00919980131127 < I feel happy Choose a,b,c or d. a. Always b. Most of the time c. Rarely d. Never
+        00919980131127 < I feel happy: (Choose a,b,c or d.) a. Always b. Most of the time c. Rarely d. Never
         00919980131127 > a
-        00919980131127 < The three things I need most are (Prioritize your first, second, and third.) a. Peace and Security b. Go to school regularly c. Health care when sick d. Clean neighbourhood e. Clean drinking water f. Enough food g. be loved h. Not have to work i. Be listened to j. A place to place k. Family and friends to be safe
+        00919980131127 < The three things I need most are: (Prioritize your first, second, and third.) a. Peace and Security b. Go to school regularly c. Health care when sick d. Clean neighbourhood e. Clean drinking water f. Enough food g. be loved h. Not have to work i. Be listened to j. A place to place k. Family and friends to be safe
         00919980131127 > c d e
-        00919980131127 < Compared to my parents, my life in the future will be Choose a,b,c or d. a. Better b. About the same c. Worse d. I don't know
+        00919980131127 < Compared to my parents, my life in the future will be: (Choose a,b,c or d.) a. Better b. About the same c. Worse d. I don't know
         00919980131127 > c
         00919980131127 < Your responses have been recorded. Thank you for participating in the poll.
     """
@@ -50,15 +50,15 @@ class TestIntegration(TestScript):
         00919980131127 > register poll 100 1001
         00919980131127 < Thank you, to initiate the poll sms the keyword Poll with your age and gender
         00919980131127 > poll
-        00919980131127 <  I feel happy Choose a,b,c or d. a. Always b. Most of the time c. Rarely d. Never
+        00919980131127 <  I feel happy: (Choose a,b,c or d.) a. Always b. Most of the time c. Rarely d. Never
         00919980131127 > a
-        00919980131127 < The three things I need most are (Prioritize your first, second, and third.) a. Peace and Security b. Go to school regularly c. Health care when sick d. Clean neighbourhood e. Clean drinking water f. Enough food g. be loved h. Not have to work i. Be listened to j. A place to place k. Family and friends to be safe
+        00919980131127 < The three things I need most are: (Prioritize your first, second, and third.) a. Peace and Security b. Go to school regularly c. Health care when sick d. Clean neighbourhood e. Clean drinking water f. Enough food g. be loved h. Not have to work i. Be listened to j. A place to place k. Family and friends to be safe
         00919980131127 > c d y
         00919980131127 < You have selected an invalid choice, please choose one among the above listed choice
         00919980131127 > z d a
         00919980131127 < You have selected an invalid choice, please choose one among the above listed choice
         00919980131127 > c d a
-        00919980131127 < Compared to my parents, my life in the future will be Choose a,b,c or d. a. Better b. About the same c. Worse d. I don't know
+        00919980131127 < Compared to my parents, my life in the future will be: (Choose a,b,c or d.) a. Better b. About the same c. Worse d. I don't know
         00919980131127 > p
         00919980131127 < You have selected an invalid choice, please choose one among the above listed choice
         00919980131127 > a
@@ -69,7 +69,7 @@ class TestIntegration(TestScript):
         00919980131127 > register poll 100 1001
         00919980131127 < Thank you, to initiate the poll sms the keyword Poll with your age and gender
         00919980131127 > poll
-        00919980131127 <  I feel happy Choose a,b,c or d. a. Always b. Most of the time c. Rarely d. Never
+        00919980131127 <  I feel happy: (Choose a,b,c or d.) a. Always b. Most of the time c. Rarely d. Never
         00919980131127 > x
         00919980131127 < You have selected an invalid choice, please choose one among the above listed choice
         00919980131127 > x
@@ -77,16 +77,16 @@ class TestIntegration(TestScript):
         00919980131127 > x
         00919980131127 < Due to errors the poll has been stopped. To restart, type the keyword Poll with your age and gender
         00919980131127 > a
-        00919980131127 <  I feel happy Choose a,b,c or d. a. Always b. Most of the time c. Rarely d. Never
+        00919980131127 <  I feel happy: (Choose a,b,c or d.) a. Always b. Most of the time c. Rarely d. Never
         00919980131127 > poll
-        00919980131127 < I feel happy Choose a,b,c or d. a. Always b. Most of the time c. Rarely d. Never
+        00919980131127 < I feel happy: (Choose a,b,c or d.) a. Always b. Most of the time c. Rarely d. Never
     """
     
     testTreeAppFailSessionEnd_2 = """
         00919980131127 > register poll 100 1001
         00919980131127 < Thank you, to initiate the poll sms the keyword Poll with your age and gender
         00919980131127 > poll
-        00919980131127 <  I feel happy Choose a,b,c or d. a. Always b. Most of the time c. Rarely d. Never
+        00919980131127 <  I feel happy: (Choose a,b,c or d.) a. Always b. Most of the time c. Rarely d. Never
         00919980131127 > Always Nevr
         00919980131127 <  You have selected an invalid choice, please choose one among the above listed choice
         00919980131127 > Al Neb
@@ -94,9 +94,9 @@ class TestIntegration(TestScript):
         00919980131127 > Alllllll
         00919980131127 < Due to errors the poll has been stopped. To restart, type the keyword Poll with your age and gender
         00919980131127 > a
-        00919980131127 < I feel happy Choose a,b,c or d. a. Always b. Most of the time c. Rarely d. Never
+        00919980131127 < I feel happy: (Choose a,b,c or d.) a. Always b. Most of the time c. Rarely d. Never
         00919980131127 > poll
-        00919980131127 <  I feel happy Choose a,b,c or d. a. Always b. Most of the time c. Rarely d. Never
+        00919980131127 <  I feel happy: (Choose a,b,c or d.) a. Always b. Most of the time c. Rarely d. Never
     """
     
     # testTreeAppJunkMessage = """
