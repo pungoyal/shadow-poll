@@ -24,3 +24,9 @@ class StatsTest(TestScript):
         break_up = question.response_break_up()
 
         self.assertEquals(fsum(break_up), 100)
+
+    def test_max_voted_option_in_loc(self):
+        question = Question(id=1)
+        choice = question.max_voted_choice_loc(location_id=1)
+        self.assertEquals(choice.text, "Always")
+        

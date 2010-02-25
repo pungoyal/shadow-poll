@@ -118,3 +118,4 @@ class QuestionTest(TestCase):
         UserResponse(user = self.user, question = question, choice = choice2).save()
         UserResponse(user = self.user, question = question, choice = choice2).save()
         self.assertEquals(question.get_num_response_loc(1), 3)
+
