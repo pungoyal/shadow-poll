@@ -45,6 +45,9 @@ class Question(models.Model):
 
         return break_up
 
+    def get_num_response_loc(self, location_id):
+        return len(UserResponse.objects.filter(question=self))
+
 
     def humanize_options(self):
         choices = Choice.objects.filter(question=self)

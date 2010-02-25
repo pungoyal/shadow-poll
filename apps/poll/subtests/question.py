@@ -1,10 +1,30 @@
 from apps.poll.models import *
 from apps.reporters.models import Reporter, PersistantConnection, PersistantBackend
 
-from unittest import TestCase
+from django.test import TestCase
+from rapidsms.tests.scripted import TestScript
 from math import fsum
 
+from poll.app import App as poll_App
+
 class QuestionTest(TestCase):
+
+    apps = (poll_App)
+
+    def setUp(self):
+        self.backend = PersistantBackend(slug="MockBackend1")
+        self.backend.save()
+        self.reporter = Reporter(alias="ReporterName1")
+        self.reporter.save()
+        self.pconnection = PersistantConnection(backend=self.backend, 
+                                                reporter=self.reporter, 
+                                                identity="1000")
+        self.pconnection.save()
+
+        self.reporter.connections.add(self.pconnection)
+        
+        self.user = User(connection=self.pconnection, age=12, gender='m', location=1)
+        self.user.save()
 
     def test_save(self):
         initial_no_of_questions = len(Question.objects.all())
@@ -85,4 +105,16 @@ class QuestionTest(TestCase):
         choice3.save()
         self.assertEquals(str(question), "question 1 (Prioritize) a. apple b. bannana c. carrot")
 
-    
+    def test_get_max_num_of_response_from_location(self):
+        question = Question(text = 'question 1',max_choices = 1, helper_text="(Prioritize)")
+        question.save()
+        choice1 = Choice(code= 'a',question=question, text="apple")
+        choice2 = Choice(code= 'b',question=question, text="bannana")
+        choice3 = Choice(code= 'c',question=question, text="carrot")
+        choice1.save()
+        choice2.save()
+        choice3.save()
+        UserResponse(user = self.user, question = question, choice = choice1).save()
+        UserResponse(user = self.user, question = question, choice = choice2).save()
+        UserResponse(user = self.user, question = question, choice = choice2).save()
+        self.assertEquals(question.get_num_response_loc(1), 3)
