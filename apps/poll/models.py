@@ -93,11 +93,18 @@ class Question(models.Model):
         return firsts[0] if len(firsts)>0 else None
 
 ##########################################################################
+class Category(models.Model):
+    name = models.CharField(max_length=25)
+    
+    def __unicode__(self):
+        return self.name
 
+##########################################################################
 class Choice(models.Model):
     code = models.CharField(max_length=2)
     text = models.TextField(null=True)
     question = models.ForeignKey(Question)
+    category = models.ForeignKey(Category, null=True)
 
     def parse(self, response):
         return self.code == response
