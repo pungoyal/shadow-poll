@@ -1,5 +1,5 @@
 [
-{
+    {
         "pk": 1,
         "model": "reporters.persistantbackend",
         "fields": {
@@ -18,14 +18,14 @@
             "backend": 1
         }
     },    
-{
+    {
         "pk": 1,
         "model": "poll.user",
         "fields": {
             "gender": "M",
             "connection": 1,
             "age": 12,
-						"location":1
+	    "governorate":1
         }
     },
     {

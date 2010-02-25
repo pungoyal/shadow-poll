@@ -25,8 +25,9 @@ class StatsTest(TestScript):
 
         self.assertEquals(fsum(break_up), 100)
 
-    def test_max_voted_option_in_loc(self):
+    def test_most_voted_option_in_loc(self):
         question = Question(id=1)
-        choice = question.max_voted_choice_loc(location_id=1)
+        choice = question.most_voted_choice_by_governorate(governorate_id=1)
         self.assertEquals(choice.text, "Always")
-        
+        choice = question.most_voted_choice_by_governorate(governorate_id=5)
+        self.assertEquals(choice, None)

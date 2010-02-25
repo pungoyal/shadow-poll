@@ -23,7 +23,7 @@ class QuestionTest(TestCase):
 
         self.reporter.connections.add(self.pconnection)
         
-        self.user = User(connection=self.pconnection, age=12, gender='m', location=1)
+        self.user = User(connection=self.pconnection, age=12, gender='m', governorate=1, district=1)
         self.user.save()
 
     def test_save(self):
@@ -117,5 +117,5 @@ class QuestionTest(TestCase):
         UserResponse(user = self.user, question = question, choice = choice1).save()
         UserResponse(user = self.user, question = question, choice = choice2).save()
         UserResponse(user = self.user, question = question, choice = choice2).save()
-        self.assertEquals(question.get_num_response_loc(1), 3)
+        self.assertEquals(question.get_number_of_responses_by_governorate(1), 3)
 

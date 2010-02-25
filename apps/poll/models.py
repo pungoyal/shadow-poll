@@ -71,13 +71,17 @@ class Question(models.Model):
 
         return break_up
 
-    def max_voted_choice_loc(self, location_id):
-        relevant_responses = UserResponse.objects.filter(user__location = location_id)
+    def most_voted_choice_by_governorate(self, governorate_id):
+        relevant_responses = UserResponse.objects.filter(user__governorate = governorate_id)
+        
+        if len(relevant_responses) < 1 :
+            return None
+        
         choice_id =  relevant_responses.values('choice').annotate(Count('choice')).order_by('-choice__count')[0]['choice']
         return Choice.objects.get(id = choice_id)
 
-    def get_num_response_loc(self, location_id):
-        return len(UserResponse.objects.filter(user__location = location_id))
+    def get_number_of_responses_by_governorate(self, governorate_id):
+        return len(UserResponse.objects.filter(user__governorate = governorate_id))
 
     def humanize_options(self):
         choices = Choice.objects.filter(question=self)
@@ -145,7 +149,8 @@ class User(models.Model):
     age = models.IntegerField(default=None, null=True, blank=True)
     gender = models.CharField(max_length=1, choices=GENDER, default=None, 
                               null=True, blank=True)
-    location = models.IntegerField(null=True)
+    governorate = models.IntegerField(null=True)
+    district = models.IntegerField(null=True)
 
     def __unicode__(self):
         return " User : connection %s" % str(self.connection)
@@ -162,6 +167,7 @@ class UserSession(models.Model):
         return "session for : %s" % (self.user)
 
     def respond(self, message):
+
         if self._is_trigger(message):
             self.question = None
             self.user = self._save_user(self.user, message)
