@@ -2,8 +2,49 @@
 {% load i18n %}
 
 {% block javascripts %}
+<script src="http://www.openlayers.org/dev/OpenLayers.js"></script>
 <script src="/static/charts/javascripts/raphael-min.js"></script>
 <script src="/static/charts/javascripts/graphs.js"></script>
+<script type="text/javascript">
+        var map;
+        OpenLayers.IMAGE_RELOAD_ATTEMPTS = 3;
+
+        OpenLayers.ImgPath = "http://js.mapbox.com/theme/dark/";
+ 
+        $(document).ready(function(){
+            var options = {
+                projection: new OpenLayers.Projection("EPSG:900913"),
+                displayProjection: new OpenLayers.Projection("EPSG:4326"),
+                units: "m",
+                numZoomLevels: 12,
+                maxResolution: 156543.0339,
+                maxExtent: new OpenLayers.Bounds(-20037500, -20037500, 20037500, 20037500)
+            };
+            map = new OpenLayers.Map('map', options);
+ 
+            // create WMS layer
+            var iraq = new OpenLayers.Layer.TMS(
+                "Iraq Terrain",
+                [
+                "http://a.tile.mapbox.com/",
+                "http://b.tile.mapbox.com/",
+                "http://c.tile.mapbox.com/",
+                "http://d.tile.mapbox.com/"],
+                {
+                'layername': 'iraq',
+                'type':'jpg'
+                }
+            );
+ 
+            map.addLayers([iraq]); 
+            map.addControl(new OpenLayers.Control.LayerSwitcher());
+            map.addControl(new OpenLayers.Control.Permalink());
+
+            if (!map.getCenter()) {
+              map.zoomToExtent(new OpenLayers.Bounds.fromString("4139217,3209132,5603139,4652263"));
+            }
+        });
+</script>
 {% endblock %}
 
 {% block title_suffix %}Map{% endblock %}
@@ -23,7 +64,9 @@
     from Bhagdad
 </p>
 {% endblock %}
-
+{% block map_container %}
+<div id="map" style="widh:500px; height:400px;"></div>
+{% endblock %}
 {% block chart %}
 <div class="chart_bar">
     <h3>
