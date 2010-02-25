@@ -42,6 +42,28 @@
     },
     {
         "pk": 1,
+        "model": "poll.demographicparser",
+        "fields": {
+            "regex": "m|f|male|female",
+            "questionnaire": 1,
+            "type": "s",
+            "name": "gender",
+            "order": 2
+        }
+    },
+    {
+        "pk": 2,
+        "model": "poll.demographicparser",
+        "fields": {
+            "regex": "[0-9]+",
+            "questionnaire": 1,
+            "type": "i",
+            "name": "age",
+            "order": 1
+        }
+    },
+    {
+        "pk": 1,
         "model": "poll.choice",
         "fields": {
             "code": "a",
