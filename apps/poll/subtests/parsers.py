@@ -43,6 +43,19 @@ class DemographicParserTest(TestCase):
         self.assertEquals(user.age, 15)
         self.assertEquals(user.gender, 'm')
 
+    def test_female_trigger_age(self):
+        user = User()
+        self.parse_using_parsers('female poll 15', user)
+        self.assertTrue(user is not None)
+        self.assertEquals(user.age, 15)
+        self.assertEquals(user.gender, 'f')
+
+        user = User()
+        self.parse_using_parsers('male poll 15', user)
+        self.assertTrue(user is not None)
+        self.assertEquals(user.age, 15)
+        self.assertEquals(user.gender, 'm')
+
     def test_trigger_Gender_age(self):
         user = User()
         self.parse_using_parsers('poll Male 10', user)

@@ -112,7 +112,7 @@
         "fields": {
             "regex": "m|f|male|female",
             "questionnaire": 1,
-            "type": "s",
+            "type": "c",
             "name": "gender",
             "order": 2
         }
