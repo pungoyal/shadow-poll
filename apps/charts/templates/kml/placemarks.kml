@@ -1,5 +1,4 @@
 {% extends "kml/base.kml" %}
-{% load kmltags %}
 
 {% block style %}
 {% include style %}
