@@ -34,8 +34,8 @@ class DemographicParser(models.Model):
     def parse_and_set(self, message, user) :
         arguments = message.split(SEPARATOR)
         for a in arguments:
-            regex = re.compile( '(%s)$' % self.regex.strip().lower() )
-            match = regex.match( a )
+            regex = re.compile( '(%s)$' % self.regex.strip() )
+            match = regex.match( a.lower() )
             if match:
                 if self.type == 'i':
                     val = int(match.group(0))
