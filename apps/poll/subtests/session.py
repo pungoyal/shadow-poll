@@ -1,10 +1,10 @@
 from django.test import TestCase
-from rapidsms.tests.scripted import TestScript
 from poll.app import App as poll_App
 import reporters.app as reporters_app
 import internationalization.app as i18n_app
-from poll.models import *
+from poll.models import Question, Questionnaire, DemographicParser, User, UserSession, Choice, UserResponse
 from reporters.models import Reporter, PersistantConnection, PersistantBackend
+from register.models import Registration
 import unittest
 
 class UserSessionTest(TestCase):

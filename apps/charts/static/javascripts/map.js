@@ -14,7 +14,7 @@
                 numZoomLevels: 12,
                 maxResolution: 156543.0339,
                 maxExtent: new OpenLayers.Bounds(-20037500, -20037500, 20037500, 20037500),
-                restrictedExtent: new OpenLayers.Bounds(4139217,3209132,5603139,4652263)
+                //restrictedExtent: new OpenLayers.Bounds(4139217,3209132,5603139,4652263)
             };
             map = new OpenLayers.Map('map', options);
  
@@ -37,7 +37,7 @@
             map.addControl(new OpenLayers.Control.Permalink());
 
             if (!map.getCenter()) {
-//              map.zoomToExtent(new OpenLayers.Bounds.fromString("4139217,3209132,5603139,4652263"));
+              map.zoomToExtent(new OpenLayers.Bounds.fromString("4139217,3209132,5603139,4652263"));
 map.zoomTo(6);
             }
 
