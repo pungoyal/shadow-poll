@@ -77,23 +77,27 @@ map.addLayer(cities);
 {% block title_suffix %}Map{% endblock %}
 
 {% block question %}
-<h2>{{ question.text }}</h2>
-<ol>
+<div class="question">
+    <h2>{{ question.text }}</h2>
+    <ol>
 
-    {% for choice in choices %}
-    <li>
-        {{ choice.text }}
-    </li>
-    {% endfor %}
-</ol>
+        {% for choice in choices %}
+        <li>
+            {{ choice.text }}
+        </li>
+        {% endfor %}
+    </ol>
+</div>
 <p class="total_responses">
     215 responses <br/>
     from Bhagdad
 </p>
 {% endblock %}
+        
 {% block map_container %}
 <div id="map" style="widh:500px; height:400px;"></div>
 {% endblock %}
+        
 {% block chart %}
 <div class="chart_bar">
     <h3>
