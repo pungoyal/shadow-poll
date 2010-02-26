@@ -24,6 +24,8 @@ class GovernoratesTest(TestCase):
         self.assertEquals(states[1].style(), "s7")
     
     def test_style(self):
-        gov = Governorates.objects.get(id =1)
-        question = Question.objects.get(id=1)
-        print gov.style(question)
+        gov1 = Governorates.objects.get(id = 7)
+        gov = Governorates.objects.get(id = 5)
+        question = Question.objects.get(id = 1)
+        self.assertEquals(gov.style(question), "s1-14")
+        self.assertEquals(gov1.style(question), "s2-15")

@@ -81,7 +81,7 @@ class Question(models.Model):
         return Category.objects.get(choice__id = choice_id)
 
     def get_number_of_responses_by_governorate(self, governorate_id):
-        return len(UserResponse.objects.filter(user__governorate = governorate_id))
+        return len(UserResponse.objects.filter(question = self, user__governorate = governorate_id))
 
     def humanize_options(self):
         choices = Choice.objects.filter(question=self)

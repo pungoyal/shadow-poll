@@ -4,6 +4,7 @@ from django.contrib.gis.db import models
 
 from poll.models import User, UserResponse
 
+MAX_SCALE_LENGTH_IN_STYLE = 18
 
 class Governorates(models.Model):    
     the_geom = models.PointField(srid=4326)
@@ -22,9 +23,8 @@ class Governorates(models.Model):
     
     def style(self, question):
         most_voted_category = question.most_voted_category_by_governorate(self.id)
-        number_of_response
         if most_voted_category:
-            style_id = "s%d-%d" % (most_voted_category.color.id, int(ceil(( len(UserResponse.objects.filter(question = question, user__governorate=self.id)) / question.get_number_of_responses_by_governorate(self.id)) * 18)))
+            style_id = "s%d-%d" % (most_voted_category.color.id, int(( len(UserResponse.objects.filter(question=question.id, user__governorate=self.id)) / len(UserResponse.objects.filter(user__governorate=self.id))) * MAX_SCALE_LENGTH_IN_STYLE))
             return style_id
         return ''
     

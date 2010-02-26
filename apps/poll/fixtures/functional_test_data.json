@@ -452,5 +452,122 @@
             "user": 2,
             "choice": 2
         }
+    },
+    {
+        "pk": 44,
+        "model": "poll.userresponse",
+        "fields": {
+            "question": 1,
+            "user": 2,
+            "choice": 2
+        }
+    },
+    {
+        "pk": 45,
+        "model": "poll.userresponse",
+        "fields": {
+            "question": 1,
+            "user": 2,
+            "choice": 2
+        }
+    },
+    {
+        "pk": 46,
+        "model": "poll.userresponse",
+        "fields": {
+            "question": 1,
+            "user": 2,
+            "choice": 2
+        }
+    },
+    {
+        "pk": 47,
+        "model": "poll.userresponse",
+        "fields": {
+            "question": 1,
+            "user": 2,
+            "choice": 2
+        }
+    },
+    {
+        "pk": 48,
+        "model": "poll.userresponse",
+        "fields": {
+            "question": 1,
+            "user": 2,
+            "choice": 2
+        }
+    },
+    {
+        "pk": 49,
+        "model": "poll.userresponse",
+        "fields": {
+            "question": 1,
+            "user": 2,
+            "choice": 2
+        }
+    },
+    {
+        "pk": 50,
+        "model": "poll.userresponse",
+        "fields": {
+            "question": 1,
+            "user": 2,
+            "choice": 2
+        }
+    },
+    {
+        "pk": 51,
+        "model": "poll.userresponse",
+        "fields": {
+            "question": 1,
+            "user": 2,
+            "choice": 2
+        }
+    },
+    {
+        "pk": 52,
+        "model": "poll.userresponse",
+        "fields": {
+            "question": 1,
+            "user": 2,
+            "choice": 2
+        }
+    },
+    {
+        "pk": 53,
+        "model": "poll.userresponse",
+        "fields": {
+            "question": 1,
+            "user": 2,
+            "choice": 2
+        }
+    },
+    {
+        "pk": 54,
+        "model": "poll.userresponse",
+        "fields": {
+            "question": 1,
+            "user": 2,
+            "choice": 2
+        }
+    },
+    {
+        "pk": 55,
+        "model": "poll.userresponse",
+        "fields": {
+            "question": 1,
+            "user": 2,
+            "choice": 2
+        }
+    },
+    {
+        "pk": 56,
+        "model": "poll.userresponse",
+        "fields": {
+            "question": 1,
+            "user": 2,
+            "choice": 2
+        }
     }
 ]
