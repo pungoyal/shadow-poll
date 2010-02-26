@@ -1,11 +1,8 @@
 from django.test import TestCase
-from poll.app import App as poll_App
-from poll.models import *
-from reporters.models import Reporter, PersistantConnection, PersistantBackend
+from apps.poll.models import *
+from apps.reporters.models import Reporter, PersistantConnection, PersistantBackend
 
 class DemographicParserTest(TestCase):
-    apps = (poll_App,)
-
     def setUp(self):
         q = Questionnaire() 
         ageParser = DemographicParser(questionnaire=q, name='age', regex='[0-9]+', 
@@ -46,20 +43,39 @@ class DemographicParserTest(TestCase):
         self.assertEquals(user.age, 15)
         self.assertEquals(user.gender, 'm')
 
+    def test_trigger_Gender_age(self):
+        user = User()
+        self.parse_using_parsers('poll Male 10', user)
+        self.assertTrue(user is not None)
+        self.assertEquals(user.age, 10)
+        self.assertEquals(user.gender, 'm')
+
+        user = User()
+        self.parse_using_parsers('poll Female 10', user)
+        self.assertTrue(user is not None)
+        self.assertEquals(user.age, 10)
+        self.assertEquals(user.gender, 'f')
+
     def test_trigger_gender_age(self):
         user = User()
         self.parse_using_parsers('poll female 100', user)
         self.assertTrue(user is not None)
         self.assertEquals(user.age, 100)
         self.assertEquals(user.gender, 'f')
-        
+
     def test_trigger_junk(self):
+        user = User()
+        self.parse_using_parsers('poll make 10', user)
+        self.assertTrue(user is not None)
+        self.assertEquals(user.age, 10)
+        self.assertEquals(user.gender, None)
+
         user = User()
         self.parse_using_parsers('poll feeemale 100a', user)
         self.assertTrue(user is not None)
         self.assertEquals(user.age, None)
         self.assertEquals(user.gender, None)
-        
+
     def test_trigger_age_junk(self):
         user = User()
         self.parse_using_parsers('poll 14 asdf', user)
@@ -73,4 +89,3 @@ class DemographicParserTest(TestCase):
         self.assertTrue(user is not None)
         self.assertEquals(user.age, None)
         self.assertEquals(user.gender, 'f')
-        
