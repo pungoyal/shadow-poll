@@ -221,7 +221,7 @@ class UserSession(models.Model):
 
     def _is_trigger(self, message):
         for questionnaire in Questionnaire.objects.all():
-            if message.strip().lower().startswith(questionnaire.trigger.strip().lower()):
+            if message.strip().lower().find(questionnaire.trigger.strip().lower()) > -1:
                 self.questionnaire = questionnaire
                 return True
         return False
@@ -234,14 +234,23 @@ class UserSession(models.Model):
     def open(klass,connection):
         users = User.objects.filter(connection = connection)
         user = users[0] if(len(users)) > 0 else User(connection = connection)
-        
         sessions = UserSession.objects.filter(user = user)
         if len(sessions) == 0:
             session = UserSession(question = None)
+            UserSession._set_user_geolocation_if_registered(user)
             session.user = user
             return session
 
         return sessions[0]
+
+    @classmethod
+    def _set_user_geolocation_if_registered(klass, user):
+        registrations = list(Registration.objects.filter(phone=user.connection))
+        if len(registrations) == 0:
+            return
+        registration = registrations[0]
+        user.governorate = registration.governorate
+        user.district = registration.district
 
 ##########################################################################
 
