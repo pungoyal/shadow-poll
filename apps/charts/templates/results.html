@@ -61,7 +61,7 @@ var cities = new OpenLayers.Layer.Vector("Cities KML", {
         )
     ),
     protocol: new OpenLayers.Protocol.HTTP({
-        url: "/get_kml/",
+        url: "/get_kml/{{question.id}}",
         format: new OpenLayers.Format.KML({
             extractStyles: true,
             extractAttributes: true

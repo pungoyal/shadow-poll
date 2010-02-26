@@ -71,14 +71,14 @@ class Question(models.Model):
 
         return break_up
 
-    def most_voted_choice_by_governorate(self, governorate_id):
+    def most_voted_category_by_governorate(self, governorate_id):
         relevant_responses = UserResponse.objects.filter(user__governorate = governorate_id)
         
         if len(relevant_responses) < 1 :
             return None
         
         choice_id =  relevant_responses.values('choice').annotate(Count('choice')).order_by('-choice__count')[0]['choice']
-        return Choice.objects.get(id = choice_id)
+        return Category.objects.get(choice__id = choice_id)
 
     def get_number_of_responses_by_governorate(self, governorate_id):
         return len(UserResponse.objects.filter(user__governorate = governorate_id))

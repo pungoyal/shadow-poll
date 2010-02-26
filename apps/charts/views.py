@@ -4,13 +4,18 @@ from django.template import loader
 from rapidsms.webui.utils import render_to_response
 
 from apps.charts.models import Governorates
-from apps.poll.models import Question, Choice
+from apps.poll.models import Question, Choice, Color
 
-def get_governorates(request):
+def get_governorates(request, question_number):
     reports = Governorates.objects.kml()
+    question = Question.objects.get(id=question_number)
+    placemarks_info_list = []
+    for governorates in reports:
+        placemarks_info_list.append({'id': governorates.id, 'name': governorates.name, 'description': governorates.description, 'kml': governorates.kml, 'style': governorates.style(question)})
+    colors = Color.objects.all()
     scales = [sqrt(i * 0.1) for i in range(1, 20)]
     style = 'kml/population_points.kml'
-    r = _render_to_kml('kml/placemarks.kml', {'places' : reports, 'scales' : scales, 'style' : style})
+    r = _render_to_kml('kml/placemarks.kml', {'places' : placemarks_info_list, 'scales' : scales, 'style' : style, 'colors': colors})
     r['Content-Disposition'] = 'attachment;filename=reports.kml'
     return r
 

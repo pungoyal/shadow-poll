@@ -1,8 +1,10 @@
 from django.test import TestCase
 from apps.charts.models import *
-
+from poll.app import App as poll_app
+from poll.models import Question
 class GovernoratesTest(TestCase):
-    fixtures = ['test_charts']
+    fixtures = ['test_charts', 'functional_test_data.json', 'poll_interactive']
+    apps = (poll_app,)
 
     def fails_test_num_response(self):
         states = Governorates.objects.all()
@@ -20,4 +22,8 @@ class GovernoratesTest(TestCase):
         self.assertEquals(states[2].style(), "s14")
         self.assertEquals(states[9].style(), "s0")
         self.assertEquals(states[1].style(), "s7")
-
+    
+    def test_style(self):
+        gov = Governorates.objects.get(id =1)
+        question = Question.objects.get(id=1)
+        print gov.style(question)
