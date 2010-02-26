@@ -233,11 +233,12 @@ class UserSession(models.Model):
     @classmethod
     def open(klass,connection):
         users = User.objects.filter(connection = connection)
-        temp_user = users[0] if(len(users)) > 0 else User(connection = connection)
-        sessions = UserSession.objects.filter(user = temp_user)
+        user = users[0] if(len(users)) > 0 else User(connection = connection)
+        
+        sessions = UserSession.objects.filter(user = user)
         if len(sessions) == 0:
             session = UserSession(question = None)
-            session.user = temp_user
+            session.user = user
             return session
 
         return sessions[0]
