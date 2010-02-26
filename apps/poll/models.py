@@ -155,6 +155,14 @@ class User(models.Model):
     def __unicode__(self):
         return " User : connection %s" % str(self.connection)
 
+    def set_user_geolocation_if_registered(self, connection):
+        registrations = list(Registration.objects.filter(phone=connection))
+        if len(registrations) == 0:
+            return
+        registration = registrations[0]
+        self.governorate = registration.governorate
+        self.district = registration.district
+
 ##########################################################################
 
 class UserSession(models.Model):
@@ -221,7 +229,7 @@ class UserSession(models.Model):
 
     def _is_trigger(self, message):
         for questionnaire in Questionnaire.objects.all():
-            if message.strip().lower().startswith(questionnaire.trigger.strip().lower()):
+            if message.strip().lower().find(questionnaire.trigger.strip().lower()) > -1:
                 self.questionnaire = questionnaire
                 return True
         return False
@@ -233,11 +241,12 @@ class UserSession(models.Model):
     @classmethod
     def open(klass,connection):
         users = User.objects.filter(connection = connection)
-        temp_user = users[0] if(len(users)) > 0 else User(connection = connection)
-        sessions = UserSession.objects.filter(user = temp_user)
+        user = users[0] if(len(users)) > 0 else User(connection = connection)
+        sessions = UserSession.objects.filter(user = user)
         if len(sessions) == 0:
             session = UserSession(question = None)
-            session.user = temp_user
+            user.set_user_geolocation_if_registered(connection)
+            session.user = user
             return session
 
         return sessions[0]

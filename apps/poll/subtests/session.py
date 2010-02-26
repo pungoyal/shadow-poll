@@ -1,10 +1,10 @@
 from django.test import TestCase
-from rapidsms.tests.scripted import TestScript
 from poll.app import App as poll_App
 import reporters.app as reporters_app
 import internationalization.app as i18n_app
-from poll.models import *
+from poll.models import Question, Questionnaire, DemographicParser, User, UserSession, Choice, UserResponse
 from reporters.models import Reporter, PersistantConnection, PersistantBackend
+from register.models import Registration
 import unittest
 
 class UserSessionTest(TestCase):
@@ -54,6 +54,10 @@ class UserSessionTest(TestCase):
                         regex='m|f|male|female', order=2, type='c').save()
         self.user = User(connection = self.pconnection)
         self.user.save()
+
+        r = Registration(governorate = 3, district = 4, phone = self.pconnection)
+        r.save()
+
 
     def setup_choices(self,question):
         choice1 = Choice(code= 'a',question=question, text="a")
@@ -146,4 +150,11 @@ class UserSessionTest(TestCase):
         self.assertEquals(latest_user.age, 13)
         self.assertEquals(latest_user.gender, 'f')
         
+        
+    def test_user_location_from_registration(self):
+        session = UserSession.open(self.pconnection)
+        session.respond('trigger 14 f')
+        latest_user = User.objects.all().order_by('-id')[0]
+        self.assertEquals(latest_user.governorate, 3)
+        self.assertEquals(latest_user.district, 4)
         

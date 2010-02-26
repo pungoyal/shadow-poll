@@ -241,6 +241,10 @@ a:hover {
 	float: left;
 	width: 800px;
 }
+#content_area .question {
+    width:80%;
+    margin-left: 10px;
+}
 #content_area .question_section {
 	padding: 18px 0;
 	width: 100%;
@@ -249,7 +253,6 @@ a:hover {
 }
 .question_section h2 {
 	font-size: 1.75em;
-	margin-left: 10px;
 	margin-bottom: 10px;
 	display: inline;
 }
