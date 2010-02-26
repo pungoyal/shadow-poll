@@ -221,7 +221,7 @@ class UserSession(models.Model):
 
     def _is_trigger(self, message):
         for questionnaire in Questionnaire.objects.all():
-            if message.strip().lower().startswith(questionnaire.trigger.strip().lower()):
+            if message.strip().lower().find(questionnaire.trigger.strip().lower()) > -1:
                 self.questionnaire = questionnaire
                 return True
         return False
