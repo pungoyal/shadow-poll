@@ -55,6 +55,10 @@ class UserSessionTest(TestCase):
         self.user = User(connection = self.pconnection)
         self.user.save()
 
+        r = Registration(governorate = 3, district = 4, phone = self.pconnection)
+        r.save()
+
+
     def setup_choices(self,question):
         choice1 = Choice(code= 'a',question=question, text="a")
         choice2 = Choice(code= 'b',question=question, text="a")
@@ -146,4 +150,11 @@ class UserSessionTest(TestCase):
         self.assertEquals(latest_user.age, 13)
         self.assertEquals(latest_user.gender, 'f')
         
+        
+    def test_user_location_from_registration(self):
+        session = UserSession.open(self.pconnection)
+        session.respond('trigger 14 f')
+        latest_user = User.objects.all().order_by('-id')[0]
+        self.assertEquals(latest_user.governorate, 3)
+        self.assertEquals(latest_user.district, 4)
         

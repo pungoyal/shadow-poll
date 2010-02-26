@@ -13,13 +13,13 @@ class App (rapidsms.app.App):
         pass
 
     def handle (self, message):
-        if message.text.lower().startswith("register"):
-            r = Registration()
+        if message.text.lower().find("register") > -1:
+            registration = Registration()
             if not hasattr(message, 'language'):
                 # fail gracefully
                 message.language = settings.LANGUAGE_CODE
             try:
-                r.parse(message)
+                registration.parse(message)
                 response = "err2"
             except Exception, e:
                 response = "err1"

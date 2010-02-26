@@ -233,14 +233,24 @@ class UserSession(models.Model):
     @classmethod
     def open(klass,connection):
         users = User.objects.filter(connection = connection)
-        temp_user = users[0] if(len(users)) > 0 else User(connection = connection)
-        sessions = UserSession.objects.filter(user = temp_user)
+        user = users[0] if(len(users)) > 0 else User(connection = connection)
+        sessions = UserSession.objects.filter(user = user)
         if len(sessions) == 0:
             session = UserSession(question = None)
-            session.user = temp_user
+            UserSession._set_user_geolocation_if_registered(user)
+            session.user = user
             return session
 
         return sessions[0]
+
+    @classmethod
+    def _set_user_geolocation_if_registered(klass, user):
+        registrations = list(Registration.objects.filter(phone=user.connection))
+        if len(registrations) == 0:
+            return
+        registration = registrations[0]
+        user.governorate = registration.governorate
+        user.district = registration.district
 
 ##########################################################################
 
