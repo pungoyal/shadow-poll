@@ -14,7 +14,8 @@ var question_id = $("#question-id").html();
                 units: "m",
                 numZoomLevels: 12,
                 maxResolution: 156543.0339,
-                maxExtent: new OpenLayers.Bounds(-20037500, -20037500, 20037500, 20037500)
+                maxExtent: new OpenLayers.Bounds(-20037500, -20037500, 20037500, 20037500),
+								controls: []
             };
             map = new OpenLayers.Map('map', options);
  
@@ -33,7 +34,7 @@ var question_id = $("#question-id").html();
             );
  
             map.addLayers([iraq]); 
-            map.addControl(new OpenLayers.Control.LayerSwitcher());
+//            map.addControl(new OpenLayers.Control.LayerSwitcher());
             map.addControl(new OpenLayers.Control.Permalink());
 
             if (!map.getCenter()) {
