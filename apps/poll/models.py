@@ -155,6 +155,14 @@ class User(models.Model):
     def __unicode__(self):
         return " User : connection %s" % str(self.connection)
 
+    def set_user_geolocation_if_registered(self, connection):
+        registrations = list(Registration.objects.filter(phone=connection))
+        if len(registrations) == 0:
+            return
+        registration = registrations[0]
+        self.governorate = registration.governorate
+        self.district = registration.district
+
 ##########################################################################
 
 class UserSession(models.Model):
@@ -237,20 +245,11 @@ class UserSession(models.Model):
         sessions = UserSession.objects.filter(user = user)
         if len(sessions) == 0:
             session = UserSession(question = None)
-            UserSession._set_user_geolocation_if_registered(user)
+            user.set_user_geolocation_if_registered(connection)
             session.user = user
             return session
 
         return sessions[0]
-
-    @classmethod
-    def _set_user_geolocation_if_registered(klass, user):
-        registrations = list(Registration.objects.filter(phone=user.connection))
-        if len(registrations) == 0:
-            return
-        registration = registrations[0]
-        user.governorate = registration.governorate
-        user.district = registration.district
 
 ##########################################################################
 
