@@ -15,5 +15,10 @@ class TestIntegration(TestScript):
 
     test_arabic_error_when_given_random_junk = u"""
         00919980131127 > تصويت
-        00919980131127 < لقد اخترت خيارا غير موجودة ، يرجى اختيار واحد من بين الخيارات المذكورة سابقاً
+        00919980131127 <   انا أشعر بالسعادة : (الرجاء إختيار أ,ب,ج  أو د)   أ.دائماً    ب.معظم الوقت    ج. نادراً    د.لا أشعر بالسعادة أبداً
+    """
+
+    test_error_when_given_random_junk = u"""
+        00919980131127 > junk
+        00919980131127 <  I feel happy: (Choose a,b,c or d.) a. Always b. Most of the time c. Rarely d. Never
     """

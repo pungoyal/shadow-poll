@@ -17,7 +17,7 @@ class TestSMSCommands (TestScript):
     def setUp(self):
         TestScript.setUp(self)
         
-    test_do_not_ignore_after_4_different = """
+    fail_do_not_ignore_after_4_different = """
         8005551210 > junk 1
         8005551210 < We didn't understand your response.
         8005551210 > junk 2

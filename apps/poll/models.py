@@ -183,6 +183,8 @@ class UserSession(models.Model):
         if self._first_access():
             # THIS THROWS AN UGLY ERROR WHEN TRIGGER IS POORLY FORMED
             # todo: FIX this to recover nicely
+            if hasattr(self.user, 'id'):
+                self.user = self._save_user(self.user, message)
             self.question = Question.first()
             self.save()
             return str(self.question)
@@ -208,6 +210,9 @@ class UserSession(models.Model):
         return "error_parsing_response"
     
     def _save_user(self, user, message):
+        if not self.questionnaire:
+            # default to the first question
+            self.questionnaire = Questionnaire.objects.all().order_by('pk')[0]
         message = message.strip().lstrip(self.questionnaire.trigger.lower()).strip()
         parsers = list( DemographicParser.objects.filter(questionnaire=self.questionnaire).order_by('order') )
         for parser in parsers:
@@ -249,6 +254,7 @@ class UserSession(models.Model):
             session = UserSession(question = None)
             user.set_user_geolocation_if_registered(connection)
             session.user = user
+            session.user.save()
             return session
 
         return sessions[0]
