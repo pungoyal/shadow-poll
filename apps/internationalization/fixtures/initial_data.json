@@ -761,5 +761,15 @@
             "code": "thanks", 
             "language": 2
         }
+    },
+    {
+        "pk": 87,
+        "model": "internationalization.translation",
+        "fields": {
+            "translation": "\u062a\u0635\u0648\u064a\u062a",
+            "code": "poll",
+            "language": 2
+        }
     }
+
 ]
