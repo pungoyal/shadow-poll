@@ -276,8 +276,17 @@
 						"question":2
         }
     },
-    {
+	{
         "pk": 16,
+        "model": "poll.choice",
+        "fields": {
+            "code": "l",
+						"text": "others",
+						"question":2
+        }
+    },
+    {
+        "pk": 17,
         "model": "poll.choice",
         "fields": {
             "code": "a",
@@ -286,7 +295,7 @@
         }
     },
     {
-        "pk": 17,
+        "pk": 18,
         "model": "poll.choice",
         "fields": {
             "code": "b",
@@ -295,7 +304,7 @@
         }
     },
     {
-        "pk": 18,
+        "pk": 19,
         "model": "poll.choice",
         "fields": {
             "code": "c",
@@ -304,7 +313,7 @@
         }
     },
     {
-        "pk": 19,
+        "pk": 20,
         "model": "poll.choice",
         "fields": {
             "code": "d",
