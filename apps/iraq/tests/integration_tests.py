@@ -35,7 +35,7 @@ class TestIntegration(TestScript):
     00919980131127 > أ
    00919980131127 < ردودكم قد سجلت. أشكركم على المشاركة في الانتخابات
     """
-    test_registration_message_in_arabic_fail = u"""
+    test_registration_message_in_arabic_options_jumbled = u"""
     00919980131127 > التصويت
     00919980131127 < انا أشعر بالسعادة : (الرجاء إختيار أ,ب,ج  أو د)   أ.دائماً    ب.معظم الوقت    ج. نادراً    د.لا أشعر بالسعادة أبداً
     00919980131127 > أ
