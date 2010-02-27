@@ -17,23 +17,6 @@ class TestSMSCommands (TestScript):
     def setUp(self):
         TestScript.setUp(self)
         
-    test_ignore_after_4_of_the_same = """
-        8005551210 > junk
-        8005551210 < We didn't understand your response.
-        8005551210 > junk
-        8005551210 < We didn't understand your response.
-        8005551210 > junk
-        8005551210 < We didn't understand your response.
-        8005551210 > junk
-        8005551210 < 
-        8005551210 > junk
-        8005551210 < 
-        8005551210 > junk
-        8005551210 < 
-        8005551210 > junk
-        8005551210 < 
-        """
-
     test_do_not_ignore_after_4_different = """
         8005551210 > junk 1
         8005551210 < We didn't understand your response.
@@ -49,27 +32,6 @@ class TestSMSCommands (TestScript):
         8005551210 < We didn't understand your response.
         """
 
-    test_some_different_some_same = """
-        8005551210 > junk 1
-        8005551210 < We didn't understand your response.
-        8005551210 > junk
-        8005551210 < We didn't understand your response.
-        8005551210 > junk
-        8005551210 < We didn't understand your response.
-        8005551210 > junk 4
-        8005551210 < We didn't understand your response.
-        8005551210 > junk
-        8005551210 < We didn't understand your response.
-        8005551210 > junk
-        8005551210 < We didn't understand your response.
-        8005551210 > junk
-        8005551210 < We didn't understand your response.
-        8005551210 > junk
-        8005551210 < 
-        8005551210 > junk
-        8005551210 < 
-        """
-
 class TestBot(DjTestScript):
     def setUp(self):
         self.backend = PersistantBackend(slug="MockBackend")
@@ -77,14 +39,6 @@ class TestBot(DjTestScript):
         self.conn = PersistantConnection(backend=self.backend, 
                                                 identity="1000")
         self.conn.save()
-    
-    def test_ignore_before_timeout(self):
-        for i in range(0,5):
-            IncomingMessage(text="123",identity=str(self.conn.identity), 
-                            backend=str(self.conn.backend), 
-                            received=datetime.now()).save()
-        # this is a bot
-        self.assertTrue( _test_and_set_bot(self.conn) )
 
     def test_allow_after_timeout(self):
         for i in range(0,5):
