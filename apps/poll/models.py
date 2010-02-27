@@ -181,6 +181,8 @@ class UserSession(models.Model):
             self.user = self._save_user(self.user, message)
 
         if self._first_access():
+            # THIS THROWS AN UGLY ERROR WHEN TRIGGER IS POORLY FORMED
+            # todo: FIX this to recover nicely
             self.question = Question.first()
             self.save()
             return str(self.question)
@@ -204,7 +206,7 @@ class UserSession(models.Model):
         self.num_attempt = self.num_attempt + 1
         self.save()
         return "error_parsing_response"
-
+    
     def _save_user(self, user, message):
         message = message.strip().lstrip(self.questionnaire.trigger.lower()).strip()
         parsers = list( DemographicParser.objects.filter(questionnaire=self.questionnaire).order_by('order') )
