@@ -13,7 +13,7 @@ from rapidsms.tests.scripted import TestScript
 import apps.internationalization.app as internationalization_app
 import apps.logger.app as logger_app
 import apps.echo.app as echo_app
-from apps.logger.models import OutgoingMessage
+from apps.logger.models import IncomingMessage, OutgoingMessage
 
 class TestSchedule (TestScript):
     apps = (internationalization_app.App, logger_app.App, echo_app.App)
@@ -21,6 +21,17 @@ class TestSchedule (TestScript):
     def setUp(self):
         TestScript.setUp(self)
     
+    def test_arabic_incoming_message_logged(self):
+        """ Inject random arabic and make sure random arabic comes back out """
+        arabic_input = u"التصويت"
+        script = u"""
+            1250 > %(input)s
+            1250 < ARABICYou ARABICsaid: ARABICpoll
+        """ % {'input':arabic_input}
+        self.runScript(script)
+        logged_message = IncomingMessage.objects.all().order_by('-received')[0]
+        self.assertEquals(logged_message.text, arabic_input)
+        
     def test_arabic_outgoing_message_logged(self):
         """ Inject random arabic and make sure random arabic comes back out """
         arabic_response = u"ARABICYou ARABICsaid: ARABICpoll"
@@ -29,6 +40,5 @@ class TestSchedule (TestScript):
             1250 < %(response)s
         """ % {'response':arabic_response}
         self.runScript(script)
-        msgs = OutgoingMessage.objects.all().order_by('-sent')
-        logged_message = msgs[0]
+        logged_message = OutgoingMessage.objects.all().order_by('-sent')[0]
         self.assertEquals(logged_message.text, arabic_response)
