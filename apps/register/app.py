@@ -20,9 +20,9 @@ class App (rapidsms.app.App):
                 message.language = settings.LANGUAGE_CODE
             try:
                 registration.parse(message)
-                response = "err2"
+                response = "initiate_poll_message"
             except Exception, e:
-                response = "err1"
+                response = "incorrect_register_format_error"
             message.respond(response)
             return True
     

@@ -203,7 +203,7 @@ class UserSession(models.Model):
             self.question = None
             self.num_attempt = 1
             self.save()
-            return "err3"
+            return "session_closed_due_to_max_retries"
         
         self.num_attempt = self.num_attempt + 1
         self.save()

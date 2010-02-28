@@ -263,7 +263,7 @@
         "model": "poll.choice",
         "fields": {
             "code": "j",
-						"text": "A place to place",
+						"text": "A place to play",
 						"question":2
         }
     },
