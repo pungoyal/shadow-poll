@@ -2,8 +2,8 @@
 from django.test import TestCase
 from rapidsms.tests.scripted import TestScript
 
-from app import App
-from models import *
+from apps.internationalization.app import App
+from apps.internationalization.models import *
 
 class TestTranslator(TestCase):
     def test_translate_from_english_to_english(self):

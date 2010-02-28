@@ -770,6 +770,14 @@
             "code": "poll",
             "language": 2
         }
+    },
+    {
+        "pk": 88,
+        "model": "internationalization.translation",
+        "fields": {
+            "translation": "ARABICYou ARABICsaid: ARABICpoll",
+            "code": "You said: poll",
+            "language": 2
+        }
     }
-
 ]
