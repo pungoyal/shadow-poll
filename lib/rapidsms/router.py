@@ -12,13 +12,14 @@ class Router (component.Receiver):
     incoming_phases = ('parse', 'handle', 'cleanup')
     outgoing_phases = ('outgoing',)
 
-    def __init__(self):
+    def __init__(self, fail_soft=True):
         component.Receiver.__init__(self)
         self.backends = []
         self.apps = []
         self.events = []
         self.running = False
         self.logger = None
+        self.fail_soft = fail_soft
 
     def log(self, level, msg, *args):
         self.logger.write(self, level, msg, *args)
@@ -293,6 +294,8 @@ class Router (component.Receiver):
                     handled = getattr(app, phase)(message)
                 except Exception, e:
                     self.error("%s failed on %s: %r\n%s", app, phase, e, traceback.print_exc())
+                    if not self.fail_soft:
+                        raise
                 if phase == 'handle':
                     if handled is True:
                         self.debug("%s short-circuited handle phase", app.slug)
@@ -330,6 +333,8 @@ class Router (component.Receiver):
                     continue_sending = getattr(app, phase)(message)
                 except Exception, e:
                     self.error("%s failed on %s: %r\n%s", app, phase, e, traceback.print_exc())
+                    if not self.fail_soft:
+                        raise
                 if continue_sending is False:
                     self.info("App '%s' cancelled outgoing message", app.slug)
                     return False
