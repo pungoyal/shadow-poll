@@ -8,7 +8,7 @@ from apps.internationalization.app import App as i18n_app
 from rapidsms.tests.scripted import TestScript
 from apps.poll.app import App as poll_app
 
-class TestIntegration(TestScript):
+class TestIntegration_2(TestScript):
     """ Test our various SMS apps all together now """
     fixtures = ['poll_interactive.json']
     apps = (reporter_app, register_app, default_app, i18n_app, poll_app)
