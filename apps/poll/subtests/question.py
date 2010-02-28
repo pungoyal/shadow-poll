@@ -2,8 +2,6 @@ from apps.poll.models import *
 from apps.reporters.models import Reporter, PersistantConnection, PersistantBackend
 
 from django.test import TestCase
-from rapidsms.tests.scripted import TestScript
-from math import fsum
 
 from poll.app import App as poll_App
 
