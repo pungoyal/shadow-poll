@@ -24,8 +24,7 @@ class App(rapidsms.app.App):
     def handle(self, msg):
         if not msg.responses and not msg.persistant_connection.is_bot:
             if not _test_and_set_bot(msg.persistant_connection):
-                # TODO: i18n from the reporters app
-                msg.respond(u"لقد اخترت خيارا غير موجودة ، يرجى اختيار واحد من بين الخيارات المذكورة سابقاً", 
+                msg.respond("We didn't understand your response.",
                             StatusCodes.GENERIC_ERROR)
                 return True
 
