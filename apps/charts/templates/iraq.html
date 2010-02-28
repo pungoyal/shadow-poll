@@ -5,9 +5,9 @@
 {% load webapp-tags %}
 
 {% block stylesheets %}
-<link rel="stylesheet" href="/static/charts/stylesheets/reset.css" type="text/css" media="screen, projection">
-<link rel="stylesheet" href="/static/charts/stylesheets/main.css" type="text/css" media="screen, projection">
-<link rel="stylesheet" href="/static/charts/stylesheets/print.css" type="text/css" media="print">
+<link rel="stylesheet" href="/static/charts/dynamicstylesheets/{{ stylesheetlang }}/reset.css" type="text/css" media="screen, projection">
+<link rel="stylesheet" href="/static/charts/dynamicstylesheets/{{ stylesheetlang }}/main.css" type="text/css" media="screen, projection">
+<link rel="stylesheet" href="/static/charts/dynamicstylesheets/{{ stylesheetlang }}/print.css" type="text/css" media="print">
 {% endblock %}
 
 {% block title %}UNICEF{% endblock %}
