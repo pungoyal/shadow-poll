@@ -98,11 +98,6 @@ class TestScript (TestCase):
                     # Encode 'strange' characters for proper output on the console
                     # so we don't get 'unprintable assertion errors'
                     encoding = sys.stdout.encoding
-                    try:
-                        txt = txt.encode(sys.stdout.encoding, 'replace')
-                    except UnicodeDecodeError:
-                        # This error occurs when the input is not standardized (i.e. unicode)
-                        self.fail("Could not encode unit test string to stdout character encoding. Make sure your RapidSMS unit tests are unicode strings!")
                 else:
                     """ 
                     This should really be ascii (since this is the most platform-independent)
@@ -111,6 +106,12 @@ class TestScript (TestCase):
                     """
                     encoding = 'utf-8'
                 
+                try:
+                    txt = txt.encode(encoding, 'replace')
+                except UnicodeDecodeError:
+                    # This error occurs when the input is not standardized (i.e. unicode)
+                    self.fail("Could not encode unit test string to stdout character encoding. Make sure your RapidSMS unit tests are unicode strings!")
+
                 if len(txt) == 0 and msg is None:
                     last_msg = txt
                     continue
@@ -126,8 +127,7 @@ class TestScript (TestCase):
                     msgIsNotNoneMsg = "Message was not returned.\nMessage: '%s')" % (last_msg)
                 self.assertTrue(msg is not None, msgIsNotNoneMsg)
                 
-                if sys.stdout.encoding:
-                    msg.text = msg.text.encode(sys.stdout.encoding, 'replace')
+                msg.text = msg.text.encode(encoding, 'replace')
 
                 try:
                     msgWrongRecipient = "Expected to send to %s, but message was sent to %s\nMessage: '%s'" % \
@@ -142,7 +142,7 @@ class TestScript (TestCase):
                 except UnicodeDecodeError: 
                     msgUnexpectedReceipt = "Unexpected response. \nReceived text: %s" % \
                                           (msg.text)                    
-                self.assertEquals(msg.text.strip(), txt.strip(), msgUnexpectedReceipt.encode(encoding))
+                self.assertEquals(msg.text.strip(), txt.strip(), msgUnexpectedReceipt)
 
                 last_msg = txt
         self.router.stop()
