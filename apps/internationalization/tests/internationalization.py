@@ -80,11 +80,11 @@ class TestTranslator(TestCase):
         
     def test_get_error_msg_from_code(self):
         t = Translator()
-        self.error_id = "err1"
+        self.error_id = "incorrect_register_format_error"
         self.language = "en"
         self.assertEqual(t.get_error_text(self.error_id, self.language), u"We don't understand. Correct format is register poll governorate-code district-code")
         
-        self.error_id = "err1"
+        self.error_id = "incorrect_register_format_error"
         self.language = "ar"
         self.assertEqual(t.get_error_text(self.error_id, self.language), u"عذراً, رسالتك غير مفهومة. الصيغة الصحيحة هي    تسجيل   التصويت    رمز المحافظة    رمز القضاء")
 
