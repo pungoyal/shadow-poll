@@ -31,6 +31,9 @@ class DemographicParser(models.Model):
     order = models.IntegerField()
     type = models.CharField(max_length=16, choices=DATA_TYPE)
 
+    def __unicode__(self):
+        return "%s" % (self.name)
+
     def parse_and_set(self, message, user) :
         arguments = message.split(SEPARATOR)
         for a in arguments:
@@ -136,11 +139,11 @@ class Choice(models.Model):
     question = models.ForeignKey(Question)
     category = models.ForeignKey(Category, null = True)
 
-    def parse(self, response):
-        return self.code == response
-
     def __unicode__(self):
         return "%s:%s" % (self.text, self.code)
+
+    def parse(self, response):
+        return self.code == response
 
 ##########################################################################
 
@@ -265,5 +268,11 @@ class UserResponse(models.Model):
     user = models.ForeignKey(User)
     question = models.ForeignKey(Question)
     choice = models.ForeignKey(Choice)    
+
+    def __str__(self):
+        return unicode(self).encode('utf-8')
+
+    def __unicode__(self):
+        return "USER: %s, QUESTION: %s, RESPONSE: %s" % (self.user.connection, self.question.pk, self.choice)
 
 ##########################################################################
