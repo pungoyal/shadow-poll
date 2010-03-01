@@ -17,7 +17,8 @@ a:hover {
 #wrapper {
 	background: #f7f4f1;
 	width: 1000px;
-	float: left;
+	margin: 0 auto;
+	overflow: hidden;
 }
 #header, #intro, #main_content, #footer {
 	width: 100%;
@@ -47,10 +48,10 @@ a:hover {
 	overflow: hidden;
 	display: block;
 }
-#language_menu ul li a:hover, #language_menu ul li a.you_here {
+#language_menu ul li a:hover, #language_menu ul li a.current_language {
 	background-position: 0 -140px;
 }
-#language_menu ul li.arabic a:hover, #language_menu ul li.arabic a.you_here {
+#language_menu ul li.arabic a:hover, #language_menu ul li.arabic a.current_language {
 	background-position: -55px -140px;
 }
 #language_menu ul li.arabic a {

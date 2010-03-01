@@ -6,8 +6,6 @@ from rapidsms.webui.utils import render_to_response
 from apps.charts.models import Governorate
 from apps.poll.models import Question, Choice, Color
 
-from django.utils.cache import patch_vary_headers
-from django.utils import translation
 
 def get_governorates(request, question_number):
     reports = Governorate.objects.kml()
@@ -27,20 +25,8 @@ def graphs(request, question_number):
     choices = Choice.objects.filter(question=question)
     response_break_up = question.response_break_up()
 
-    language = get_language_from_request(request)
-    translation.activate(language)
-    current_language = translation.get_language()
-    
-    return render_to_response(request, "results.html", {"chart_data": response_break_up, "national_data": response_break_up, "region": "Iraq", "top_response": "Security", "percentage": "64", "question": question, "choices": choices,"stylesheetlang": current_language})
+    return render_to_response(request, "results.html", {"chart_data": response_break_up, "national_data": response_break_up, "region": "Iraq", "top_response": "Security", "percentage": "64", "question": question, "choices": choices})
 
-def get_language_from_request(request):
-    from rapidsms.webui import settings
-    supported = dict(settings.LANGUAGES)
-    if hasattr(request, 'session'):
-        lang_code = request.session.get('django_language', None)
-        if lang_code in supported and lang_code is not None:
-            return lang_code
-    return settings.LANGUAGE_CODE
 
 def show_governorate(request, governorate_id):
     governorate = Governorate.objects.get(id=governorate_id)
