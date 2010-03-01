@@ -106,6 +106,36 @@
 						"color": 4
 				}
 		},
+		{
+				"pk":"5",
+				"model": "poll.category",
+				"fields":{
+						"name": "Better",
+						"color": 1
+				}
+		},
+		{
+				"pk":"6",
+				"model": "poll.category",
+				"fields":{
+						"name": "About the same",
+						"color": 2
+				}
+		},{
+				"pk":"7",
+				"model": "poll.category",
+				"fields":{
+						"name": "Worse",
+						"color": 3
+				}
+		},{
+				"pk":"8",
+				"model": "poll.category",
+				"fields":{
+						"name": "I don't know",
+						"color": 4
+				}
+		},
     {
         "pk": 1,
         "model": "poll.demographicparser",
@@ -267,7 +297,7 @@
 						"question":2
         }
     },
-	{
+		{
         "pk": 16,
         "model": "poll.choice",
         "fields": {
@@ -282,7 +312,8 @@
         "fields": {
             "code": "a",
 						"text": "Better",
-						"question":3
+						"question":3,
+						"category": 5
         }
     },
     {
@@ -291,7 +322,8 @@
         "fields": {
             "code": "b",
 						"text": "About the same",
-						"question":3
+						"question":3,
+						"category": 6
         }
     },
     {
@@ -300,7 +332,8 @@
         "fields": {
             "code": "c",
 						"text": "Worse",
-						"question":3
+						"question":3,
+						"category": 7
         }
     },
     {
@@ -309,7 +342,8 @@
         "fields": {
             "code": "d",
 						"text": "I don't know",
-						"question":3
+						"question":3,
+						"category": 8
         }
     }
     
