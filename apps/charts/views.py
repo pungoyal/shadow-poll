@@ -9,29 +9,6 @@ from rapidsms.webui.utils import render_to_response
 from apps.charts.models import Governorate
 from apps.poll.models import Question, Choice, Color
 
-def get_governorates(request, question_number):
-    reports = Governorate.objects.kml()
-    question = Question.objects.get(id=question_number)
-    placemarks_info_list = []
-    for governorates in reports:
-        placemarks_info_list.append({'id': governorates.id, 'name': governorates.name, 'description': governorates.description, 'kml': governorates.kml, 'style': governorates.style(question)})
-    colors = Color.objects.all()
-    scales = [sqrt(i * 0.1) for i in range(1, 20)]
-    style = 'kml/population_points.kml'
-    r = _render_to_kml('kml/placemarks.kml', {'places' : placemarks_info_list, 'scales' : scales, 'style' : style, 'colors': colors})
-    r['Content-Disposition'] = 'attachment;filename=reports.kml'
-    return r
-
-def graphs(request, question_number):
-    question = Question.objects.get(id=question_number)
-    choices = Choice.objects.filter(question=question)
-    categories = Category.objects.filter(id = choices.category__id)
-    print categories
-    response_break_up = question.response_break_up()
-
-    return render_to_response(request, "results.html", {"chart_data": response_break_up, "national_data": response_break_up, "region": "Iraq", "top_response": "Security", "percentage": "64", "question": question, "choices": choices})
-
-
 def show_governorate(request, governorate_id):
     governorate = Governorate.objects.get(id=governorate_id)
     return render_to_response(request, 'results.html', {"bbox": governorate.bounding_box, "chart_data": []})
