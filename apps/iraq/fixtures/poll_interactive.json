@@ -169,15 +169,6 @@
         }
     },
     {
-        "pk": 4,
-        "model": "poll.choice",
-        "fields": {
-            "code": "d",
-						"text": "Never",
-						"question":1
-        }
-    },
-    {
         "pk": 5,
         "model": "poll.choice",
         "fields": {

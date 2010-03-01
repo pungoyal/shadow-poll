@@ -25,6 +25,8 @@ def get_governorates(request, question_number):
 def graphs(request, question_number):
     question = Question.objects.get(id=question_number)
     choices = Choice.objects.filter(question=question)
+    categories = Category.objects.filter(id = choices.category__id)
+    print categories
     response_break_up = question.response_break_up()
 
     return render_to_response(request, "results.html", {"chart_data": response_break_up, "national_data": response_break_up, "region": "Iraq", "top_response": "Security", "percentage": "64", "question": question, "choices": choices})
@@ -43,6 +45,8 @@ def home_page(request):
 def show_iraq_by_question(request, question_number, 
                           template='results.html', context={}):
     question = get_object_or_404(Question, pk=question_number)
+    choices_of_question = Choice.objects.filter(question = question)
+    categories = [choice.category for choice in choices_of_question]
     response_break_up = question.response_break_up()
     context.update(   {"chart_data": response_break_up, 
                        "national_data": response_break_up, 
@@ -51,7 +55,8 @@ def show_iraq_by_question(request, question_number,
                        "top_response": "Security", 
                        "percentage": "64",
                        "question": question, 
-                       "choices": Choice.objects.filter(question=question)
+                       "choices": Choice.objects.filter(question=question),
+                       "categories": categories
                        })    
     return render_to_response(request, template, context)
 
