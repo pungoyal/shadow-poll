@@ -3,23 +3,24 @@ from models import *
 from utils import get_translation as _
 
 class App (rapidsms.app.App):
-#    PRIORITY = "first"
-
-    def priority(self):
-        return 1
+    """
+    The priority of internationalization.app should be high, but not highest
+    (since logger should be the highest)
+    """
+    PRIORITY = "high"
+    t = None
 
     def start (self):
         """Configure your app in the start phase."""
-        pass
+        self.t = Translator()
 
     def parse (self, message):
-        t = Translator()
         msg_text = message.text
         message.language = "ar"
-        if t.is_english(msg_text):
+        if self.t.is_english(msg_text):
             message.language = "en"
         
-        translated = t.translate(t.to_lower(msg_text, message.language))
+        translated = self.t.translate(self.t.to_lower(msg_text, message.language))
         
         message.text = translated
         self.debug("Translated '%s' to '%s'" % (msg_text, translated))
@@ -34,8 +35,7 @@ class App (rapidsms.app.App):
         pass
 
     def outgoing (self, message):
-        text = message.text
-        message.text = _(text, message.language)
+        message.text = _(message.text, message.language)
 
     def stop (self):
         """Perform global app cleanup when the application is stopped."""

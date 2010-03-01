@@ -24,8 +24,7 @@ class App(rapidsms.app.App):
     def handle(self, msg):
         if not msg.responses and not msg.persistant_connection.is_bot:
             if not _test_and_set_bot(msg.persistant_connection):
-                # TODO: i18n from the reporters app
-                msg.respond(u"لقد اخترت خيارا غير موجودة ، يرجى اختيار واحد من بين الخيارات المذكورة سابقاً", 
+                msg.respond("We didn't understand your response.",
                             StatusCodes.GENERIC_ERROR)
                 return True
 
@@ -44,19 +43,15 @@ def _test_and_set_bot(connection):
         identity=str(connection.identity), 
         backend=str(connection.backend)
         ).order_by('-pk')[:MAX_NUM_DUPLICATES]
-    """
-    we remove this temporarily since history.count() is causing some weird errors
-    TODO - fix
     if history and history.count() == MAX_NUM_DUPLICATES:
-            # if the last X messages had the same text
-            # and all occurred within Y minutes of each
-            # assume we are talking to a bot and ignore
-            all_same = True
-            for i in range(1, MAX_NUM_DUPLICATES):
-                all_same = all_same and ( history[i].text == history[i-1].text )
-            if all_same and history[MAX_NUM_DUPLICATES-1].received > (datetime.now() - timedelta(minutes=TIMEOUT)):
-                connection.is_bot = True
-                connection.save()
-                return True
-    """
+        # if the last X messages had the same text
+        # and all occurred within Y minutes of each
+        # assume we are talking to a bot and ignore
+        all_same = True
+        for i in range(1, MAX_NUM_DUPLICATES):
+            all_same = all_same and ( history[i].text == history[i-1].text )
+        if all_same and history[MAX_NUM_DUPLICATES-1].received > (datetime.now() - timedelta(minutes=TIMEOUT)):
+            connection.is_bot = True
+            connection.save()
+            return True
     return False

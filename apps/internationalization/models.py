@@ -81,8 +81,10 @@ class Translator(models.Model):
             return False
     
     def to_lower(self, string, language):
+        """ ro: someone explain this to me?
         if language == "en":
             return string.lower()
         else:
             return string
-        
+        """
+        return string.lower()

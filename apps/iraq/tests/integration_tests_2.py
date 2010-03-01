@@ -8,17 +8,17 @@ from apps.internationalization.app import App as i18n_app
 from rapidsms.tests.scripted import TestScript
 from apps.poll.app import App as poll_app
 
-class TestIntegration_2(TestScript):
+class TestIntegration2(TestScript):
     """ Test our various SMS apps all together now """
     fixtures = ['poll_interactive.json']
     apps = (reporter_app, register_app, default_app, i18n_app, poll_app)
 
-    test_arabic_error_when_given_random_junk = u"""
+    test_receive_first_question_when_given_random_junk_arabic = u"""
         00919980131127 > تصويت
         00919980131127 <   انا أشعر بالسعادة : (الرجاء إختيار أ,ب,ج  أو د)   أ.دائماً    ب.معظم الوقت    ج. نادراً    د.لا أشعر بالسعادة أبداً
     """
 
-    test_error_when_given_random_junk = u"""
+    test_receive_first_question_when_given_random_junk = u"""
         00919980131127 > junk
         00919980131127 <  I feel happy: (Choose a,b,c or d.) a. Always b. Most of the time c. Rarely d. Never
     """

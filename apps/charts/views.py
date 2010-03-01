@@ -3,14 +3,14 @@ from django.http import HttpResponse, HttpResponseNotFound, HttpResponseServerEr
 from django.template import loader
 from rapidsms.webui.utils import render_to_response
 
-from apps.charts.models import Governorates
+from apps.charts.models import Governorate
 from apps.poll.models import Question, Choice, Color
 
 from django.utils.cache import patch_vary_headers
 from django.utils import translation
 
 def get_governorates(request, question_number):
-    reports = Governorates.objects.kml()
+    reports = Governorate.objects.kml()
     question = Question.objects.get(id=question_number)
     placemarks_info_list = []
     for governorates in reports:
@@ -43,7 +43,7 @@ def get_language_from_request(request):
     return settings.LANGUAGE_CODE
 
 def show_governorate(request, governorate_id):
-    governorate = Governorates.objects.get(id=governorate_id)
+    governorate = Governorate.objects.get(id=governorate_id)
     return render_to_response(request, 'results.html', {"bbox": governorate.bounding_box, "chart_data": []})
 
 def home_page(request):
