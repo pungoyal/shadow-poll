@@ -65,22 +65,29 @@ def view_500(request):
     return response
 
 def get_kml_by_governorate(request, question_number):
+    print "*****"
     reports = Governorate.objects.kml()
     question = Question.objects.get(id=question_number)
     placemarks_info_list = []
-    for governorates in reports:
-        placemarks_info_list.append({'id': governorates.id, 
+    style_dict_list = []
+    for (counter, governorates) in enumerate(reports):
+        style_dict = governorates.style(question)
+        if style_dict:
+            style_str = "s%s-%d" % (style_dict['color'].id, len(style_dict_list))
+            print style_str
+            placemarks_info_list.append({'id': governorates.id, 
                                      'name': governorates.name, 
                                      'description': governorates.description, 
                                      'kml': governorates.kml, 
-                                     'style': governorates.style(question)})
+                                     'style': style_str})
+            style_dict_list.append({'id': style_dict['color'].id, 'percentage': style_dict['percentage'], 'file_name': style_dict['color'].file_name})
+    print placemarks_info_list
+    print style_dict_list
     colors = Color.objects.all()
-    scales = [sqrt(i * 0.1) for i in range(1, 20)]
     style = 'kml/population_points.kml'
     r = _render_to_kml('kml/placemarks.kml', {'places' : placemarks_info_list, 
-                                              'scales' : scales, 
-                                              'style' : style, 
-                                              'colors': colors})
+                                              'style_dict_list' : style_dict_list, 
+                                              'style' : style})
     r['Content-Disposition'] = 'attachment;filename=reports.kml'
     return r
 
