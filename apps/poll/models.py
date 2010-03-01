@@ -10,7 +10,9 @@ import math
 
 SEPARATOR = ' '
 DATA_TYPE = ( ('i','integer'), ('s','string'), ('c','character') )
-GENDER = ( ('M', 'Male'), ('F', 'Female') )
+# the male and female option should be lower case, to facilitate
+# mapping login in demographic parser
+GENDER = ( ('m', 'Male'), ('f', 'Female') )
 
 ##########################################################################
 
@@ -64,9 +66,12 @@ class Question(models.Model):
         options = self.humanize_options()
         return "%s %s %s" % (self.text,self.helper_text, options)
 
-    def response_break_up(self):
+    def response_break_up(self, governorate_id=None):
+        # ro: should this return a 'dict' instead of a list?
         break_up = []
         relevant_responses = UserResponse.objects.filter(question=self)
+        if governorate_id is not None:
+            relevant_responses = relevant_responses.filter(user__governorate=governorate_id)
         grouped_responses = relevant_responses.values('choice').annotate(Count('choice'))
         total_responses = relevant_responses.aggregate(Count('choice'))
         for gr in grouped_responses:
