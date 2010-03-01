@@ -73,9 +73,7 @@ $(document).ready(function(){
 	
 	//bbox = '{{ bbox }}'
 	var bbox = $("#bbox").html();
-	if (bbox == '')
-	    map.zoomTo(1);
-	else 
+	if (bbox != '')
 	{
 	    wkt = new OpenLayers.Format.WKT();
 	    vector = wkt.read(bbox);
