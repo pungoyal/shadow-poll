@@ -10,7 +10,9 @@ import math
 
 SEPARATOR = ' '
 DATA_TYPE = ( ('i','integer'), ('s','string'), ('c','character') )
-GENDER = ( ('M', 'Male'), ('F', 'Female') )
+# the male and female option should be lower case, to facilitate
+# mapping login in demographic parser
+GENDER = ( ('m', 'Male'), ('f', 'Female') )
 
 ##########################################################################
 
