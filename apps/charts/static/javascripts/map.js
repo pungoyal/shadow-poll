@@ -42,7 +42,7 @@ var question_id = $("#question-id").html();
 map.zoomTo(6);
             }
 
-var cities = new OpenLayers.Layer.Vector("Cities KML", {
+var bubbles = new OpenLayers.Layer.Vector("Poll Responses", {
     projection: map.displayProjection,
     strategies: [new OpenLayers.Strategy.Fixed()],
     styleMap: new OpenLayers.StyleMap(
@@ -64,6 +64,6 @@ var cities = new OpenLayers.Layer.Vector("Cities KML", {
         })
     })
 });
-cities.setOpacity(0.5);
-map.addLayer(cities);
+bubbles.setOpacity(0.5);
+map.addLayer(bubbles);
         });
