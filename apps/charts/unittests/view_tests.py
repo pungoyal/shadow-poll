@@ -4,7 +4,7 @@ from charts.models import Governorate
 
 class ViewTests(TestCase):
     
-    fixtures = ['functional_test_data', 'poll_interactive']
+    fixtures = ['functional_test_data']
     def setUp(self):
         self.client = Client()        
 

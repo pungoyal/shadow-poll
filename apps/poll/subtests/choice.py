@@ -5,6 +5,7 @@ from poll.models import Color
 class ChoiceTest(TestCase):
     
     def setUp(self):
+        Question.objects.all().delete()
         self.question = Question(text = 'question 1', max_choices = 3)
         self.question.save()
 

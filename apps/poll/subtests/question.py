@@ -10,6 +10,7 @@ class QuestionTest(TestCase):
     apps = (poll_App)
 
     def setUp(self):
+        Question.objects.all().delete()
         self.backend = PersistantBackend(slug="MockBackend1")
         self.backend.save()
         self.reporter = Reporter(alias="ReporterName1")

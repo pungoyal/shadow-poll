@@ -11,6 +11,7 @@ class UserSessionTest(TestCase):
     apps = (poll_App,)
 
     def setUp(self):
+        Question.objects.all().delete()
         self.backend = PersistantBackend(slug="MockBackend")
         self.backend.save()
         self.reporter = Reporter(alias="ReporterName")

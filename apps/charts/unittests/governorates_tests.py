@@ -3,7 +3,7 @@ from apps.charts.models import *
 from poll.app import App as poll_app
 from poll.models import Question
 class GovernorateTest(TestCase):
-    fixtures = ['test_charts', 'functional_test_data.json', 'poll_interactive']
+    fixtures = ['test_charts', 'functional_test_data.json']
     apps = (poll_app,)
 
     def fails_test_num_response(self):
