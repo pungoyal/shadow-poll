@@ -9,6 +9,9 @@ from rapidsms.webui.utils import render_to_response
 from apps.charts.models import Governorate
 from apps.poll.models import Question, Choice, Color
 
+def voice_home_page(request):
+    return render_to_response(request, "messages.html")
+
 def show_governorate(request, governorate_id):
     governorate = Governorate.objects.get(id=governorate_id)
     return render_to_response(request, 'results.html', {"bbox": governorate.bounding_box, "chart_data": []})
