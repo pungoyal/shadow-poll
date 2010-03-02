@@ -6,12 +6,19 @@ from poll.models import User, UserResponse
 
 MAX_SCALE_LENGTH_IN_STYLE = 18
 
-class Governorate(models.Model):    
-    the_geom = models.PointField(srid=4326)
+class Geography(models.Model):
     name = models.CharField(max_length=200)
-    objects = models.GeoManager()
     bounding_box = models.CharField(max_length=1000)
     
+    # geodjango fields
+    centroid = models.PointField(srid=4326)
+    
+    # geodjango internals
+    objects = models.GeoManager()
+    
+    class Meta:
+        abstract= True
+
     def __unicode__(self):
         return "%s" % (self.name)
 
@@ -33,3 +40,9 @@ class Governorate(models.Model):
     
     def exposed(self):
         return {'name': self.id}
+
+class Governorate(Geography):
+    pass
+        
+class District(Geography):
+    governorate = models.ForeignKey(Governorate, null=True)
