@@ -33,3 +33,9 @@ class Governorate(models.Model):
     
     def exposed(self):
         return {'name': self.id}
+        
+class Audio(models.Model):
+    location = models.CharField(max_length=150)
+    age = models.IntegerField()
+    name = models.CharField(max_length=100)
+    translation = models.TextField()
