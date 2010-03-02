@@ -1,10 +1,138 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-        "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-    <title></title>
-</head>
-<body>
+{% extends 'layout.html' %}
+{% load i18n %}
+{% load i18ntags %}
+{% load region-tags %}
+{% load webapp-tags %}
 
-</body>
-</html>
+{% block stylesheets %}
+<link rel="stylesheet" href="/static/charts/stylesheets/reset.css" type="text/css" media="screen, projection">
+<link rel="stylesheet" href="/static/charts/stylesheets/main.css" type="text/css" media="screen, projection">
+{% ifequal LANGUAGE_CODE "ar"%}
+<link rel="stylesheet" href="/static/charts/stylesheets/arabic.css" type="text/css" media="screen, projection">
+{% endifequal %}
+<link rel="stylesheet" href="/static/charts/stylesheets/print.css" type="text/css" media="print">
+{% endblock %}
+
+{% block title %}UNICEF{% endblock %}
+
+{% block header %}
+<div id='header'>
+    <div id="language_menu">
+        <ul>
+            <li class="en"><a href="javascript:switch_to_language('en')" {% ifequal LANGUAGE_CODE "en"  %} class="current_language" {% endifequal %}>English</a></li>
+            <li class="arabic"><a href="javascript:switch_to_language('ar')"  {% ifequal LANGUAGE_CODE "ar"  %} class="current_language" {% endifequal %}>Arabic</a></li>
+        </ul>
+    </div>
+    <div id="site_header">
+        <h1> AN IRAQ FIT FOR CHILDREN </h1>
+
+        <div id="top_menu">
+            <ul>
+                <li class="home first"><a href="#"><span>Home</span></a></li>
+                <li class="about"><a href="#"><span>About</span></a></li>
+                <li class="poll last"><a href="#"><span>Poll</span></a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block content %}
+<div id='main_content' class="clearfix">
+    <div id="main" class="clearfix">
+
+        <div id="content_area">
+            {% block filter_container %}
+            <div id="filter_container">
+                <div class="filter_section">
+                    <form>
+                        <fieldset>
+                            <legend><span>Filter messages by</span></legend>
+                            <div class="field_container">
+                                <input name="filter" type="radio" value="all" id="all" checked/>
+                                <label for="all">All responses</label>
+                            </div>
+                            <div class="field_container">
+                                <input name="filter" type="radio" value="Boys" id="Boys"/>
+                                <label for="Boys">Boys</label>
+                            </div>
+                            <div class="field_container">
+                                <input name="filter" type="radio" value="Girls" id="Girls"/>
+                                <label for="Girls">Girls</label>
+                            </div>
+                            <div class="field_container">
+                                <input name="filter" type="radio" value="Ages_0_8" id="Ages_0_8"/>
+                                <label for="Ages_0_8">Ages 0-8</label>
+                            </div>
+                            <div class="field_container">
+                                <input name="filter" type="radio" value="Ages_9_12" id="Ages_9_12"/>
+                                <label for="Ages_9_12">Ages 9-12</label>
+                            </div>
+                            <div class="field_container">
+                                <input name="filter" type="radio" value="Ages_13plus" id="Ages_13plus"/>
+                                <label for="Ages_13plus">Ages 13+</label>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+            {% endblock %}
+            <div id="map_container" class="clearfix">
+                {% block map_container %}
+                {% endblock %}
+            </div>
+        </div>
+
+    </div>
+    {% block sidebar %}
+    <div id="sidebar">
+        <div class="nav_questions"><img src="/static/charts/img/poll_q_img_1.gif" alt=""/>
+            <ul>
+                <li><a href="question1"> I feel happy </a></li>
+                <li><a href="question2"> What makes you least happy? </a></li>
+                <li><a href="question3"> Compared to my parents, my life ... </a></li>
+                <li class="last"><a href="#">If i was leading the country ... </a></li>
+            </ul>
+            <p class="note"><a href="#">Read about how UNICEF used SMS to conduct the survey</a></p>
+        </div>
+    </div>
+    {% endblock %}
+</div>
+{% endblock %}
+
+<div id='footer'>
+    {% get_languages %}
+    {% block footer %}
+    <div id="sub_sections">
+        <div class="column  first">
+            <h3>Legal</h3>
+
+            <p> copyright + Legal </p>
+        </div>
+        <div class="column  ">
+            <h3>Poll Questions</h3>
+            <ul>
+                <li><a href="#">I feel happy...</a></li>
+                <li><a href="#">What makes you most happy...</a></li>
+                <li><a href="#">What makes you least happy...</a></li>
+                <li><a href="#">Compared to my parents, my life will be...</a></li>
+                <li><a href="#">If i were leading the country all children...</a></li>
+            </ul>
+        </div>
+        <div class="column  last">
+            <h3>Sections</h3>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Poll</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="unicef_logo">
+        <a href="http://www.unicef.org/" target="_blank" title="UNICEF - United for children"><img
+                src="/static/charts/img/unicef_footer_logo.gif" alt="UNICEF"/></a>
+    </div>
+
+    {% endblock %}
+
+</div>
