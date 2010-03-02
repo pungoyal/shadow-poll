@@ -68,7 +68,7 @@ $(document).ready(function(){
 	        })
 	    })
 	});
-	bubbles.setOpacity(0.5);
+	bubbles.setOpacity(0.9);
 	map.addLayer(bubbles);
 	
 	//bbox = '{{ bbox }}'
