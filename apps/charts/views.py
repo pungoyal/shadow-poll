@@ -6,12 +6,12 @@ from django.utils import translation
 
 from rapidsms.webui.utils import render_to_response
 
-from apps.charts.models import Governorate, District, Audio
+from apps.charts.models import Governorate, District, Audio, VoiceMessage
 from apps.poll.models import Question, Choice, Color
 
 def voice_home_page(request):
-    audio_files = Audio.objects.all()
-    return render_to_response(request, "messages.html", {"audio": audio_files})
+    messages = VoiceMessage.objects.all()
+    return render_to_response(request, "messages.html", {"messages": messages})
 
 def show_governorate(request, governorate_id, template='results.html'):
     governorate = Governorate.objects.get(id=governorate_id)
@@ -49,11 +49,17 @@ def show_by_question(request, question_id, template, context={}):
     question = get_object_or_404(Question, pk=question_id)
     national_response_break_up = question.response_break_up()
     choices_of_question = Choice.objects.filter(question = question)
-    categories = [choice.category for choice in choices_of_question]
+    categories = []
+    for choice in choices_of_question:
+        if choice.category:
+            categories.append(choice.category)
+    unique_categories = set(categories)
+    categories = list(unique_categories)
     context.update( {"categories": categories,
                     "question": question, 
                     "national_data": national_response_break_up, 
-                    "choices": Choice.objects.filter(question=question)
+                    "choices": Choice.objects.filter(question=question), 
+                    "questions" : Question.objects.all()
                     })
     if 'chart_data' not in context:
         # if chart_data not set, default to national view
