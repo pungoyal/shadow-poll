@@ -37,7 +37,8 @@ def show_iraq_by_question(request, question_number,
                        "percentage": "64",
                        "question": question, 
                        "choices": Choice.objects.filter(question=question),
-                       "categories": categories
+                       "categories": categories,
+                       "questions" : Question.objects.all()
                        })    
     return render_to_response(request, template, context)
 
