@@ -80,21 +80,23 @@ $(document).ready(function(){
      * CONTROLS
      */
     
-    function onFeatureSelect(event) {
-        var feature = event.feature;
-        governorate_id = feature.attributes['id'];
-    	window.document.location = '/charts/' + governorate_id + 
-    							   '/question' + question_id;
+    if (governorate_id == '')
+    {
+	    function onFeatureSelect(event) {
+	        var feature = event.feature;
+	        governorate_id = feature.attributes['id'];
+	    	window.document.location = '/charts/' + governorate_id + 
+	    							   '/question' + question_id;
+	    }
+	    
+	    bubbles.events.on({
+	        "featureselected": onFeatureSelect,
+	    });
+    
+        select = new OpenLayers.Control.SelectFeature([bubbles]);
+        map.addControl(select);
+        select.activate();
     }
-    
-    bubbles.events.on({
-        "featureselected": onFeatureSelect,
-    });
-    
-    select = new OpenLayers.Control.SelectFeature([bubbles]);
-    map.addControl(select);
-    select.activate();
-
 
     /**
      * ZOOM
@@ -112,7 +114,7 @@ $(document).ready(function(){
     // This makes sure we zoom to the appropriate country/governorate level
     var bbox = $("#bbox").html();
     if (bbox != '')
-    {
+    {	
         wkt = new OpenLayers.Format.WKT();
         vector = wkt.read(bbox);
         bounds = vector.geometry.getBounds().transform(new OpenLayers.Projection('EPSG:4326'), new OpenLayers.Projection('EPSG:900913'));
