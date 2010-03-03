@@ -307,6 +307,7 @@ a:hover {
 	line-height: 1.1;
 	padding: 2px 2px 0;
 }
+
 .nav_questions ul {
 	text-align: left;
 }
@@ -326,6 +327,7 @@ a:hover {
 	color: #fff;
 	text-decoration: none;
 }
+
 .nav_questions p.note {
 	width: 96%;
 	margin-left: -5px;
