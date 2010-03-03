@@ -35,7 +35,8 @@
             "gender": "M",
             "connection": 1,
             "age": 12,
-						"governorate":5
+			"governorate":5,
+			"district":1
         }
     },
 		{
@@ -45,7 +46,8 @@
             "gender": "M",
             "connection": 1,
             "age": 12,
-						"governorate":7
+			"governorate":7,
+			"district":2
         }
     },
     {
