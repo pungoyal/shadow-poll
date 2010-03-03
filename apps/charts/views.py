@@ -1,9 +1,13 @@
+import os, mimetypes
+
+
 from math import sqrt
-from django.http import HttpResponse, HttpResponseNotFound, HttpResponseServerError
+from django.http import HttpResponse, HttpResponseNotFound, HttpResponseServerError,Http404
 from django.shortcuts import get_object_or_404
 from django.template import loader
 from django.utils import translation
 
+from rapidsms.webui import settings
 from rapidsms.webui.utils import render_to_response
 
 from apps.charts.models import Governorate, District, VoiceMessage
@@ -13,36 +17,49 @@ def voice_home_page(request):
     messages = VoiceMessage.objects.all()
     return render_to_response(request, "messages.html", {"messages": messages})
 
+def play_audio(request, file_name):
+    media_dir = settings.RAPIDSMS_APPS["charts"]["media_dir"]
+    abspath = os.path.join(media_dir, file_name)
+
+    if not os.path.exists(abspath):
+        raise Http404("Could not find media '%s' at location '%s'" % (file_name, media_dir))
+
+    mimetype = mimetypes.guess_type(abspath)[0] or 'application/octet-stream'
+    contents = open(abspath, 'rb').read()
+    response = HttpResponse(contents, mimetype=mimetype)
+    response["Content-Length"] = len(contents)
+    return response
+
 def show_governorate(request, governorate_id, template='results.html'):
     governorate = Governorate.objects.get(id=governorate_id)
-    return render_to_response(request, template, 
-                              {"bbox": governorate.bounding_box, 
+    return render_to_response(request, template,
+                              {"bbox": governorate.bounding_box,
                                "governorate": governorate,
-                                "chart_data": []
-                               })
+                               "chart_data": []
+                              })
 
-def show_iraq_by_question(request, question_id, 
+def show_iraq_by_question(request, question_id,
                           template='results.html', context={}):
-    context.update(   {"region": "Iraq", 
+    context.update(   {"region": "Iraq",
                        # TODO - fix
-                       "top_response": "Security", 
+                       "top_response": "Security",
                        "percentage": "64",
-                       })    
+    })
     return show_by_question(request, question_id, template, context)
 
-def show_governorate_by_question(request, governorate_id, question_id, 
+def show_governorate_by_question(request, governorate_id, question_id,
                                  template='results.html', context={}):
     governorate = get_object_or_404(Governorate, pk=governorate_id)
     question = get_object_or_404(Question, pk=question_id)
     response_break_up = question.response_break_up(governorate_id)
-    context.update(   {"region": governorate.name, 
-                       "chart_data": response_break_up, 
+    context.update(   {"region": governorate.name,
+                       "chart_data": response_break_up,
                        # TODO - fix
-                       "top_response": "Security", 
-                       "percentage": "64", 
+                       "top_response": "Security",
+                       "percentage": "64",
                        "governorate": governorate,
                        "bbox": governorate.bounding_box,
-                       })
+    })
     return show_by_question(request, question_id, template, context)
 
 def show_by_question(request, question_id, template, context={}):
@@ -56,14 +73,14 @@ def show_by_question(request, question_id, template, context={}):
     unique_categories = set(categories)
     categories = list(unique_categories)
     context.update( {"categories": categories,
-                    "question": question, 
-                    "national_data": national_response_break_up, 
-                    "choices": Choice.objects.filter(question=question), 
-                    "questions" : Question.objects.all()
-                    })
+                     "question": question,
+                     "national_data": national_response_break_up,
+                     "choices": Choice.objects.filter(question=question),
+                     "questions" : Question.objects.all()
+    })
     if 'chart_data' not in context:
-        # if chart_data not set, default to national view
-        context.update( {"chart_data": national_response_break_up}) 
+    # if chart_data not set, default to national view
+        context.update( {"chart_data": national_response_break_up})
     return render_to_response(request, template, context)
 
 def home_page(request):
@@ -101,20 +118,21 @@ def get_kml(request, question_id, kml):
         if style_dict:
             style_str = "s%s-%d" % (style_dict['color'].id, len(style_dict_list))
             placemarks_info_list.append({'id': governorates.id,
-                                     'name': governorates.name, 
-                                     'description': governorates.description, 
-                                     'kml': governorates.kml, 
-                                     'style': style_str})
-            style_dict_list.append({'id': style_dict['color'].id, 'percentage': style_dict['percentage'], 'file_name': style_dict['color'].file_name})
+                                         'name': governorates.name,
+                                         'description': governorates.description,
+                                         'kml': governorates.kml,
+                                         'style': style_str})
+            style_dict_list.append({'id': style_dict['color'].id, 'percentage': style_dict['percentage'],
+                                    'file_name': style_dict['color'].file_name})
     colors = Color.objects.all()
     style = 'kml/population_points.kml'
-    r = _render_to_kml('kml/placemarks.kml', {'places' : placemarks_info_list, 
-                                              'style_dict_list' : style_dict_list, 
+    r = _render_to_kml('kml/placemarks.kml', {'places' : placemarks_info_list,
+                                              'style_dict_list' : style_dict_list,
                                               'style' : style})
     r['Content-Disposition'] = 'attachment;filename=boundaries.kml'
     return r
 
 def _render_to_kml(*args, **kwargs):
     "Renders the response as KML (using the correct MIME type)."
-    return HttpResponse(loader.render_to_string(*args, **kwargs), 
+    return HttpResponse(loader.render_to_string(*args, **kwargs),
                         mimetype='application/vnd.google-earth.kml+xml')

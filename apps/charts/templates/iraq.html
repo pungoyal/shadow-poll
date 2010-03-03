@@ -19,8 +19,8 @@
 <div id='header'>
     <div id="language_menu">
         <ul>
-            <li class="en"><a href="#" class="current_language">English</a></li>
-            <li class="arabic"><a href="#">Arabic</a></li>
+            <li class="en"><a href="javascript:switch_to_language('en')" {% ifequal LANGUAGE_CODE "en"  %} class="current_language" {% endifequal %}>English</a></li>
+            <li class="arabic"><a href="javascript:switch_to_language('ar')" {% ifequal LANGUAGE_CODE "ar"  %} class="current_language" {% endifequal %} >Arabic</a></li>
         </ul>
     </div>
     <div id="site_header">
@@ -130,7 +130,7 @@
 										{% if categories %}
                     <ul>
 											{% for cat in categories %}
-                        <li class="category{{ forloop.counter0 }}"><span>{{cat.name}}</span></li>
+                        <li class="category{{ forloop.counter0 }}"><span>{% trans cat.name %}</span></li>
                       {% endfor %}
                     </ul>
 										{% endif %}
@@ -222,12 +222,3 @@
     {% endblock %}
 
 </div>
-
-{% block i18nscript %}
-<script type="application/javascript">
-    function test(lang) {
-        $.post("/i18n/setlang/", {language : lang});
-        location.reload();
-    }
-</script>
-{% endblock %}
