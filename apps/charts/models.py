@@ -58,16 +58,16 @@ class Governorate(Geography):
     code = models.CharField(max_length=16, unique=True)
     
     def _bubble_size(self, question):
-        responses = UserResponse.objects.filter(question=question.id, user__governorate=self.id)
-        all_responses = UserResponse.objects.filter(user__governorate=self.id)
+        responses = UserResponse.objects.filter(question=question.id, user__governorate=self.code)
+        all_responses = UserResponse.objects.filter(user__governorate=self.code)
         return self._percentage_to_display(responses.count(), all_responses.count())
 
     def most_voted_category(self):
-        relevant_responses = UserResponse.objects.filter(user__governorate = self.id)
+        relevant_responses = UserResponse.objects.filter(user__governorate = self.code)
         return Category.most_popular(relevant_responses)
 
     def num_responses(self):
-        return len(UserResponse.objects.filter(user__governorate = self.id))
+        return len(UserResponse.objects.filter(user__governorate = self.code))
 
 class District(Geography):
     code = models.CharField(max_length=16)
@@ -77,16 +77,16 @@ class District(Geography):
         unique_together = ("governorate", "code")
 
     def _bubble_size(self, question):
-        responses = UserResponse.objects.filter(question=question.id, user__district=self.id)
-        all_responses = UserResponse.objects.filter(user__district=self.id)
+        responses = UserResponse.objects.filter(question=question.id, user__district=self.code)
+        all_responses = UserResponse.objects.filter(user__district=self.code)
         return self._percentage_to_display(responses.count(), all_responses.count())
 
     def most_voted_category(self):
-        relevant_responses = UserResponse.objects.filter(user__district = self.id)
+        relevant_responses = UserResponse.objects.filter(user__district = self.code)
         return Category.most_popular(relevant_responses)
 
     def num_responses(self):
-        return len(UserResponse.objects.filter(user__district = self.id))
+        return len(UserResponse.objects.filter(user__district = self.code))
 
 GENDER = ( ('m', 'Male'), ('f', 'Female') )
 
