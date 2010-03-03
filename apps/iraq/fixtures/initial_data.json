@@ -99,7 +99,7 @@
         "model": "poll.category",
         "fields":{
             "name": "Always",
-            "color": 1
+            "color": 2
         }
     },
     {
@@ -107,16 +107,18 @@
         "model": "poll.category",
         "fields":{
             "name": "Most of the time",
-            "color": 2
+            "color": 3
         }
-    },{
+    },
+		{
         "pk":"3",
         "model": "poll.category",
         "fields":{
             "name": "Mostly",
-            "color": 3
+            "color": 1
         }
-    },{
+    },
+		{
         "pk":"4",
         "model": "poll.category",
         "fields":{
@@ -129,7 +131,7 @@
         "model": "poll.category",
         "fields":{
             "name": "Better",
-            "color": 1
+            "color": 3
         }
     },
     {
@@ -137,7 +139,7 @@
         "model": "poll.category",
         "fields":{
             "name": "About the same",
-            "color": 2
+            "color": 1
         }
     },
 		{
@@ -145,7 +147,7 @@
         "model": "poll.category",
         "fields":{
             "name": "Worse",
-            "color": 3
+            "color": 4
         }
     },
 		{
@@ -153,7 +155,7 @@
         "model": "poll.category",
         "fields":{
             "name": "I don't know",
-            "color": 4
+            "color": 2
         }
     },
 		{
@@ -161,7 +163,7 @@
         "model": "poll.category",
         "fields":{
             "name": "Security",
-            "color": 1
+            "color": 2
         }
     },
 		{
@@ -169,7 +171,7 @@
         "model": "poll.category",
         "fields":{
             "name": "Education",
-            "color": 2
+            "color": 3
         }
     },
 		{
@@ -177,7 +179,7 @@
         "model": "poll.category",
         "fields":{
             "name": "Social Environment",
-            "color": 3
+            "color": 1
         }
     },
 		{
