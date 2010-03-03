@@ -91,7 +91,7 @@ class QuestionTest(TestCase):
         choice1.save()
         choice2.save()
         choice3.save()
-        self.assertEquals(str(question), "question 1  a. apple b. bannana c. carrot")
+        self.assertEquals(str(question), "question 1:  a. apple b. bannana c. carrot")
 
     def test_questions_with_helper_text(self):
         question = Question(text = 'question 1',max_choices = 1, helper_text="(Prioritize)")
@@ -102,7 +102,7 @@ class QuestionTest(TestCase):
         choice1.save()
         choice2.save()
         choice3.save()
-        self.assertEquals(str(question), "question 1 (Prioritize) a. apple b. bannana c. carrot")
+        self.assertEquals(str(question), "question 1: (Prioritize) a. apple b. bannana c. carrot")
 
     def test_get_max_num_of_response_from_location(self):
         question = Question(text = 'question 1',max_choices = 1, helper_text="(Prioritize)")

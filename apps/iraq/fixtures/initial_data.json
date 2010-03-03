@@ -21,7 +21,7 @@
         "pk": 1,
         "model": "poll.question",
         "fields": {
-            "text": "I feel happy:",
+            "text": "I feel happy",
             "helper_text": "(Choose a,b,c or d.)",
             "error_response": "Placeholder error for question number 1. Please re-send.",
             "max_choices": 1,
@@ -34,7 +34,7 @@
         "model": "poll.question",
         "fields": {
             "max_choices": 3,
-            "text": "The three things I need most are:",
+            "text": "The three things I need most are",
             "helper_text": "(Prioritize your first, second, and third.)",
             "error_response": "Placeholder error for question number 2. Please re-send.",
             "next_question": 3
@@ -45,7 +45,7 @@
         "model": "poll.question",
         "fields": {
             "max_choices": 1,
-            "text": "Compared to my parents, my life in the future will be:",
+            "text": "Compared to my parents, my life in the future will be",
             "helper_text": "(Choose a,b,c or d.)",
             "error_response": "Placeholder error for question number 3. Please re-send."
         } 
@@ -315,7 +315,7 @@
         "model": "poll.choice",
         "fields": {
             "code": "g",
-            "text": "be loved",
+            "text": "Be loved",
             "question":2,
 						"category": 11
         }
@@ -365,7 +365,7 @@
         "model": "poll.choice",
         "fields": {
             "code": "l",
-            "text": "others",
+            "text": "Others",
             "question":2
         }
     },

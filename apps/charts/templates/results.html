@@ -20,7 +20,7 @@
 
         {% for choice in choices %}
         <li>
-            {{ choice.text }}
+            <span style="color: {{choice.category.color}};">{{ choice.text }}</span>
         </li>
         {% endfor %}
     </ol>

@@ -440,32 +440,32 @@ a:hover {
 	padding: 5px 18px 5px 0;
 	background: url(../img/bg_sprite.gif) no-repeat 100% -170px;
 }
-.response_category ul li.educ {
+.response_category ul li.category0 {
 	background-position:  0 -170px;
 }
-.response_category ul li.food {
+.response_category ul li.category1 {
 	background-position:  0 -200px;
 }
-.response_category ul li.secu {
+.response_category ul li.category2 {
 	background-position:  0 -230px;
 }
-.response_category ul li.envi {
+.response_category ul li.category3 {
 	background-position:  0 -260px;
 	margin: 0;
 }
-.response_category ul li.educ span {
+.response_category ul li.category0 span {
 	background-position:  100% -170px;
 	color: #75b907;
 }
-.response_category ul li.food span {
+.response_category ul li.category1 span {
 	background-position:  100% -200px;
 	color: #ab0bb5;
 }
-.response_category ul li.secu span {
+.response_category ul li.category2 span {
 	background-position:  100% -230px;
 	color: #b6470a;
 }
-.response_category ul li.envi span {
+.response_category ul li.category3 span {
 	background-position:  100% -260px;
 	color: #075cb9;
 }
