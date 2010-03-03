@@ -253,7 +253,9 @@ a:hover {
 	font-size: 1.75em;
 	margin-left: 10px;
 	margin-bottom: 10px;
-	display: inline;
+	display: block;
+	line-height: 1em;
+	width:650px;
 }
 .question_section ol {
 	display: block;
