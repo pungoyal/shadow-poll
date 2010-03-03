@@ -1,5 +1,6 @@
 from apps.poll.models import *
 from poll.app import App as poll_app
+from charts.models import Governorate
 from apps.reporters.models import Reporter, PersistantConnection, PersistantBackend
 from rapidsms.tests.scripted import TestScript
 try:
@@ -34,7 +35,9 @@ class StatsTest(TestScript):
 
     def test_most_voted_category_in_loc(self):
         question = Question(id=1)
-        category = question.most_voted_category_by_governorate(governorate_id=1)
+        governorate = Governorate.objects.get(id=1)
+        category = governorate.most_voted_category()
         self.assertEquals(category, None)
-        category = question.most_voted_category_by_governorate(governorate_id=5)
+        governorate = Governorate.objects.get(id=5)
+        category = governorate.most_voted_category()
         self.assertEquals(category.name, 'Always')

@@ -82,18 +82,6 @@ class Question(models.Model):
             break_up.append(round(gr['choice__count']*100/total_responses['choice__count'], 1))
         return break_up
 
-    def most_voted_category_by_governorate(self, governorate_id):
-        relevant_responses = UserResponse.objects.filter(user__governorate = governorate_id)
-        
-        if len(relevant_responses) < 1 :
-            return None
-        
-        choice_id =  relevant_responses.values('choice').annotate(Count('choice')).order_by('-choice__count')[0]['choice']
-        return Category.objects.get(choice__id = choice_id)
-
-    def get_number_of_responses_by_governorate(self, governorate_id):
-        return len(UserResponse.objects.filter(question = self, user__governorate = governorate_id))
-
     def humanize_options(self):
         choices = Choice.objects.filter(question=self)
         text = []
@@ -139,6 +127,14 @@ class Category(models.Model):
     
     def __unicode__(self):
         return self.name
+    
+    @staticmethod
+    def most_popular(user_responses):
+        """ user_responses is a django query object """
+        if len(user_responses) < 1 :
+            return None
+        choice_id =  user_responses.values('choice').annotate(Count('choice')).order_by('-choice__count')[0]['choice']
+        return Category.objects.get(choice__id = choice_id)    
 
 ##########################################################################
 class Choice(models.Model):
