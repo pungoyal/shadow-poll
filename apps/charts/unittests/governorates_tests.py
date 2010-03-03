@@ -1,10 +1,10 @@
 from django.test import TestCase
-from apps.charts.models import *
-from poll.app import App as poll_app
-from poll.models import Question, Color
+
+from apps.charts.models import Governorate
+from apps.poll.models import Question,Color
+
 class GovernorateTest(TestCase):
     fixtures = ['test_charts', 'functional_test_data.json']
-    apps = (poll_app,)
 
     def fails_test_num_response(self):
         states = Governorate.objects.all()
@@ -22,7 +22,7 @@ class GovernorateTest(TestCase):
         self.assertEquals(states[2].style(), "s14")
         self.assertEquals(states[9].style(), "s0")
         self.assertEquals(states[1].style(), "s7")
-    
+
     def test_style(self):
         gov1 = Governorate.objects.get(id = 7)
         gov = Governorate.objects.get(id = 5)

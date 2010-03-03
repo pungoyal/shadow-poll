@@ -6,12 +6,12 @@ from django.utils import translation
 
 from rapidsms.webui.utils import render_to_response
 
-from apps.charts.models import Governorate, Audio
+from apps.charts.models import Governorate, VoiceMessage
 from apps.poll.models import Question, Choice, Color
 
 def voice_home_page(request):
-    audio_files = Audio.objects.all()
-    return render_to_response(request, "messages.html", {"audio": audio_files})
+    messages = VoiceMessage.objects.all()
+    return render_to_response(request, "messages.html", {"messages": messages})
 
 def show_governorate(request, governorate_id):
     governorate = Governorate.objects.get(id=governorate_id)
@@ -27,7 +27,12 @@ def show_iraq_by_question(request, question_number,
                           template='results.html', context={}):
     question = get_object_or_404(Question, pk=question_number)
     choices_of_question = Choice.objects.filter(question = question)
-    categories = [choice.category for choice in choices_of_question]
+    categories = []
+    for choice in choices_of_question:
+        if choice.category:
+            categories.append(choice.category)
+    unique_categories = set(categories)
+    categories = list(unique_categories)
     response_break_up = question.response_break_up()
     context.update(   {"chart_data": response_break_up, 
                        "national_data": response_break_up, 
