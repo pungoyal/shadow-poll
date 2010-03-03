@@ -1,7 +1,7 @@
 from django.test import TestCase
 from apps.charts.models import *
 from poll.app import App as poll_app
-from poll.models import Question
+from poll.models import Question, Color
 class GovernorateTest(TestCase):
     fixtures = ['test_charts', 'functional_test_data.json']
     apps = (poll_app,)
@@ -27,5 +27,7 @@ class GovernorateTest(TestCase):
         gov1 = Governorate.objects.get(id = 7)
         gov = Governorate.objects.get(id = 5)
         question = Question.objects.get(id = 1)
-        self.assertEquals(gov.style(question), "s1-14")
-        self.assertEquals(gov1.style(question), "s2-15")
+        color = Color.objects.get(id=1)
+        color1 = Color.objects.get(id=2)
+        self.assertEquals(gov.style(question), {'color': color, 'percentage': 0.78260869565217395})
+        self.assertEquals(gov1.style(question), {'color': color1, 'percentage': 0.87878787878787878} )

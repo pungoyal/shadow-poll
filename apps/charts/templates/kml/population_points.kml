@@ -1,12 +1,10 @@
-{% for color in colors%}
-{% for i in scales %}
-<Style id="s{{color.id}}-{{ forloop.counter0 }}">
+{% for color_and_scale in style_dict_list %}
+<Style id="s{{ color_and_scale.id }}-{{ forloop.counter0 }}">
   <IconStyle>
-    <scale>{{i}}</scale>
+    <scale>{{ color_and_scale.percentage }}</scale>
     <Icon>
-      <href>/static/charts/img/{{color.file_name}}</href>
+      <href>/static/charts/img/{{color_and_scale.file_name}}</href>
     </Icon>
   </IconStyle>
 </Style>
-{% endfor %}
 {% endfor %}

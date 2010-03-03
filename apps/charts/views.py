@@ -6,29 +6,12 @@ from django.utils import translation
 
 from rapidsms.webui.utils import render_to_response
 
-from apps.charts.models import Governorate
+from apps.charts.models import Governorate, Audio
 from apps.poll.models import Question, Choice, Color
 
-def get_governorates(request, question_number):
-    reports = Governorate.objects.kml()
-    question = Question.objects.get(id=question_number)
-    placemarks_info_list = []
-    for governorates in reports:
-        placemarks_info_list.append({'id': governorates.id, 'name': governorates.name, 'description': governorates.description, 'kml': governorates.kml, 'style': governorates.style(question)})
-    colors = Color.objects.all()
-    scales = [sqrt(i * 0.1) for i in range(1, 20)]
-    style = 'kml/population_points.kml'
-    r = _render_to_kml('kml/placemarks.kml', {'places' : placemarks_info_list, 'scales' : scales, 'style' : style, 'colors': colors})
-    r['Content-Disposition'] = 'attachment;filename=reports.kml'
-    return r
-
-def graphs(request, question_number):
-    question = Question.objects.get(id=question_number)
-    choices = Choice.objects.filter(question=question)
-    response_break_up = question.response_break_up()
-
-    return render_to_response(request, "results.html", {"chart_data": response_break_up, "national_data": response_break_up, "region": "Iraq", "top_response": "Security", "percentage": "64", "question": question, "choices": choices})
-
+def voice_home_page(request):
+    audio_files = Audio.objects.all()
+    return render_to_response(request, "messages.html", {"audio": audio_files})
 
 def show_governorate(request, governorate_id):
     governorate = Governorate.objects.get(id=governorate_id)
@@ -43,6 +26,8 @@ def home_page(request):
 def show_iraq_by_question(request, question_number, 
                           template='results.html', context={}):
     question = get_object_or_404(Question, pk=question_number)
+    choices_of_question = Choice.objects.filter(question = question)
+    categories = [choice.category for choice in choices_of_question]
     response_break_up = question.response_break_up()
     context.update(   {"chart_data": response_break_up, 
                        "national_data": response_break_up, 
@@ -51,7 +36,8 @@ def show_iraq_by_question(request, question_number,
                        "top_response": "Security", 
                        "percentage": "64",
                        "question": question, 
-                       "choices": Choice.objects.filter(question=question)
+                       "choices": Choice.objects.filter(question=question),
+                       "categories": categories
                        })    
     return render_to_response(request, template, context)
 
@@ -86,19 +72,22 @@ def get_kml_by_governorate(request, question_number):
     reports = Governorate.objects.kml()
     question = Question.objects.get(id=question_number)
     placemarks_info_list = []
-    for governorates in reports:
-        placemarks_info_list.append({'id': governorates.id, 
+    style_dict_list = []
+    for (counter, governorates) in enumerate(reports):
+        style_dict = governorates.style(question)
+        if style_dict:
+            style_str = "s%s-%d" % (style_dict['color'].id, len(style_dict_list))
+            placemarks_info_list.append({'id': governorates.id,
                                      'name': governorates.name, 
                                      'description': governorates.description, 
                                      'kml': governorates.kml, 
-                                     'style': governorates.style(question)})
+                                     'style': style_str})
+            style_dict_list.append({'id': style_dict['color'].id, 'percentage': style_dict['percentage'], 'file_name': style_dict['color'].file_name})
     colors = Color.objects.all()
-    scales = [sqrt(i * 0.1) for i in range(1, 20)]
     style = 'kml/population_points.kml'
     r = _render_to_kml('kml/placemarks.kml', {'places' : placemarks_info_list, 
-                                              'scales' : scales, 
-                                              'style' : style, 
-                                              'colors': colors})
+                                              'style_dict_list' : style_dict_list, 
+                                              'style' : style})
     r['Content-Disposition'] = 'attachment;filename=reports.kml'
     return r
 

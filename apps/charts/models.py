@@ -34,9 +34,9 @@ class Geography(models.Model):
     def style(self, question):
         most_voted_category = question.most_voted_category_by_governorate(self.id)
         if most_voted_category:
-            style_id = "s%d-%d" % (most_voted_category.color.id, int(( len(UserResponse.objects.filter(question=question.id, user__governorate=self.id)) / len(UserResponse.objects.filter(user__governorate=self.id))) * MAX_SCALE_LENGTH_IN_STYLE))
+            style_id = {'color': most_voted_category.color, 'percentage': len(UserResponse.objects.filter(question=question.id, user__governorate=self.id)) / len(UserResponse.objects.filter(user__governorate=self.id))}
             return style_id
-        return ''
+        return None
     
     def exposed(self):
         return {'name': self.id}
@@ -46,3 +46,9 @@ class Governorate(Geography):
         
 class District(Geography):
     governorate = models.ForeignKey(Governorate, null=True)
+        
+class Audio(models.Model):
+    location = models.CharField(max_length=150)
+    age = models.IntegerField()
+    name = models.CharField(max_length=100)
+    translation = models.TextField()

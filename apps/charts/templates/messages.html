@@ -14,6 +14,7 @@
 {% endblock %}
 
 {% block title %}UNICEF{% endblock %}
+{% block title_suffix %}Voice Messages{% endblock %}        
 
 {% block header %}
 <div id='header'>
@@ -41,45 +42,13 @@
 <div id='main_content' class="clearfix">
     <div id="main" class="clearfix">
 
-        {% block breadcrumb %}
-        <div id="breadcrumb_container" class="clearfix">
-            <ul class="breadcrumbs">
-                <li><a href="/charts/question1">Iraq</a></li>
-                <li><a href="#">Bhagdad</a></li>
-                <li class="active">District</li>
-            </ul>
-            <ul class="secondary_links">
-                <li class="download"><a href="#">Download</a></li>
-                <li class="print"><a href="#">Print</a></li>
-            </ul>
-        </div>
-        {% endblock %}
-
         <div id="content_area">
-            <div class="question_section">
-                {% block question %}
-                <div class="question">
-                    <h2>What makes you most happy?</h2>
-                    <ol>
-                        <li>Lorem Ipsum</li>
-                        <li>Dolar Lorem ipsum</li>
-                        <li>dolor sit amet</li>
-                        <li>consetetur sadipscing elitr</li>
-                        <li>sed diam nonumy eirmod</li>
-                        <li>tempor invidunt ut labore et</li>
-                    </ol>
-                </div>
-                <p class="total_responses"> 215 responses <br/>
-                    from Bhagdad</p>
-                </p>
-                {% endblock %}
-            </div>
             {% block filter_container %}
             <div id="filter_container">
                 <div class="filter_section">
                     <form>
                         <fieldset>
-                            <legend><span>Filter map by</span></legend>
+                            <legend><span>Filter messages by</span></legend>
                             <div class="field_container">
                                 <input name="filter" type="radio" value="all" id="all" checked/>
                                 <label for="all">All responses</label>
@@ -107,63 +76,13 @@
                         </fieldset>
                     </form>
                 </div>
-                <div class="keys_section">
-                    <p class="color_key"> Color indicates the top response category for each governarate. </p>
-
-                    <p class="point_key"> Points are scaled by total number of responses in each governarate. </p>
-                </div>
             </div>
             {% endblock %}
             <div id="map_container" class="clearfix">
                 {% block map_container %}
-                <img src="/static/charts/img/assets/map.jpg"/>
+                
                 {% endblock %}
             </div>
-            {% block charts_container %}
-            <div id="chart_container" class="clearfix">
-                <div class="response_category">
-                    <div class="response_category_header">
-                        <h4>Response categories</h4>
-
-                        <p>What do these mean?</p>
-                    </div>
-										{% if categories %}
-                    <ul>
-											{% for cat in categories %}
-                        <li class="category{{ forloop.counter0 }}"><span>{{cat.name}}</span></li>
-                      {% endfor %}
-                    </ul>
-										{% endif %}
-                </div>
-                <div class="chart_results">
-                    <div class="chart_desc">
-                        <p> Lorem Ipsum Dolar Lorem ipsum dolor sit amet, consetetur
-
-                            sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et
-
-                            dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam
-
-                            et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata
-
-                            sanctus est Lorem ipsum dolor sit amet.</p>
-                    </div>
-                    <div class="chart_details">
-                        {% block chart %}
-                        <div class="chart_bar">
-                            <h3><span class="response_criteria">Top Response for Bhagdad</span> <span
-                                    class="top_concern">Security 65%</span></h3>
-
-                            <div id="chart">
-                                <img src="/static/charts/img/assets/chart_bar.jpg"/>
-                            </div>
-                            <p class="chart_note"> National results</p>
-                        </div>
-                        {% endblock %}
-
-                    </div>
-                </div>
-            </div>
-            {% endblock %}
         </div>
 
     </div>
