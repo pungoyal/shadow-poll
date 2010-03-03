@@ -34,9 +34,21 @@ class Geography(models.Model):
     def style(self, question):
         most_voted_category = question.most_voted_category_by_governorate(self.id)
         if most_voted_category:
-            style_id = {'color': most_voted_category.color, 'percentage': len(UserResponse.objects.filter(question=question.id, user__governorate=self.id)) / len(UserResponse.objects.filter(user__governorate=self.id))}
+            percentage = self._percentage_to_display(question)
+            style_id = {'color': most_voted_category.color, 
+                        'percentage': percentage }
             return style_id
         return None
+    
+    def _percentage_to_display(self, question, governorate_id=None):
+        """ This formula returns the size of the bubble we want to display 
+        Currently this is calculated as 
+        (percentage who voted for the popular question / total votes )
+        """
+        responses_to_most_voted = UserResponse.objects.filter(question=question.id, user__governorate=self.id)
+        all_responses = UserResponse.objects.filter(user__governorate=self.id)
+        percentage = responses_to_most_voted.count() / all_responses.count()
+        return percentage
     
     def exposed(self):
         return {'name': self.id}

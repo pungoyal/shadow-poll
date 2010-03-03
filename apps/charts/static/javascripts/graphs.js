@@ -1,3 +1,13 @@
+
+/* 
+ * This is a bar chart of regional responses by category, shown on top of 
+ * a bar chart of national responses by category
+ * argument: regional_poll_responses 
+ *           - list of responses by category for a region (what unit?)
+ * arguments: national_poll_responses 
+ *           - list of responses by category total (what unit?)
+ */
+
 window.onload=function() {
     var canvasWidth = 390;
     var factor = (canvasWidth/107);
@@ -11,8 +21,8 @@ window.onload=function() {
     var lightHeight = 30;
     var fillerWidth = 2;
 
-	for (var i=0; i < data.length; i++) {
-        var width = data[i]*factor;
+	for (var i=0; i < regional_poll_responses.length; i++) {
+        var width = regional_poll_responses[i]*factor;
         var lightRectangle = paper.rect(x,y,width,lightHeight);
 		lightRectangle.attr({
 			fill: colors[i],
@@ -20,7 +30,7 @@ window.onload=function() {
 			opacity: 0.30
 		});
 
-        var percentageText = paper.text(x+width/2.0,y+lightHeight/2.0,data[i]+"%")
+        var percentageText = paper.text(x+width/2.0,y+lightHeight/2.0,regional_poll_responses[i]+"%")
         percentageText.attr({
             fill: fontColors[i],
             stroke: fontColors[i],
@@ -47,8 +57,8 @@ window.onload=function() {
     y = y+lightHeight;
     x=0;
     
-    for (var i=0; i < country_data.length; i++) {
-        var width = country_data[i]*factor;        
+    for (var i=0; i < national_poll_responses.length; i++) {
+        var width = national_poll_responses[i]*factor;        
         var r = paper.rect(x, y+30, width, 5)
         r.attr({
             fill: colors[i],
