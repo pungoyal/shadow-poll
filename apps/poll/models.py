@@ -113,6 +113,7 @@ class Question(models.Model):
 
 ##########################################################################
 class Color(models.Model):
+    """ ro - color has nothing to do with poll. This should be in charts app."""
     file_name = models.CharField(max_length=20)
     color_code = models.CharField(max_length=25)
     

@@ -95,6 +95,15 @@
 
     },
     {
+        "pk": 5,
+        "model": "poll.color",
+        "fields":{
+            "file_name": "grey_dot.png",
+						 "color_code": "#cdc9c9"
+        }
+
+    },
+    {
         "pk":"1",
         "model": "poll.category",
         "fields":{

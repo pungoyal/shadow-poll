@@ -2,7 +2,7 @@ from __future__ import division
 from math import ceil
 from django.contrib.gis.db import models
 
-from poll.models import User, UserResponse, Category
+from poll.models import User, UserResponse, Category, Color
 
 MAX_SCALE_LENGTH_IN_STYLE = 18
 
@@ -34,6 +34,10 @@ class Geography(models.Model):
             percentage = self._bubble_size(question)
             style_id = {'color': most_voted_category.color, 
                         'percentage': percentage }
+            return style_id
+        else:
+            style_id = {'color': Color.objects.get(file_name="grey_dot.png"), 
+                        'percentage': 0.5 }
             return style_id
         return None
     
