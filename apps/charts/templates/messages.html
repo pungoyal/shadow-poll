@@ -16,7 +16,7 @@
 {% endblock %}
 
 {% block title %}UNICEF{% endblock %}
-{% block title_suffix %}Voice Messages{% endblock %}        
+{% block title_suffix %}Voice Messages{% endblock %}
 
 {% block header %}
 <div id="language_menu">
@@ -80,121 +80,44 @@
             {% endblock %}
             <div id="message_container">
                 <ul>
+                    {% for message in messages %}
                     <li>
-                        <div class="child_details"><img src="/static/charts/img/child_boy.gif" alt="boy"/>
+                        <div class="child_details"><img src="/static/charts/img/{{ message.get_child_image }}.gif" alt="boy"/>
 
-                            <p><span class="name">Abida</span></p>
+                            <p><span class="name">{{ message.name }}</span></p>
 
-                            <p><span class="age">Age 12</span> / <span class="region">shulla</span></p>
+                            <p><span class="age">Age {{message.age}}</span> / <span class="region">{{message.district.name}}</span></p>
                         </div>
                         <div class="message_details">
                             <div class="message">
-                                <p>Lorem Ipsum Dolar Lorem ipsum dolog elitr, sed diam nore et dolore magna aliquyam
-                                    erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea
-                                    rebum. </p>
+                                <p>{{ message.english_text }}</p>
 
-                                <div class="audio"><a href="#"><img src="/static/charts/img/speaker_icon.gif" alt="play audio message"
+                                <div class="audio"><a href="content/{{ cat.location }}"><img src="/static/charts/img/speaker_icon.gif"
+                                                                    alt="play audio message"
                                                                     title="play audio message"/></a></div>
                             </div>
                         </div>
                     </li>
-                    <li>
-                        <div class="child_details"><img src="/static/charts/img/child_boy.gif" alt="boy"/>
-
-                            <p><span class="name">Yusuf</span></p>
-
-                            <p><span class="age">Age 14</span> / <span class="region">shulla</span></p>
-                        </div>
-                        <div class="message_details">
-                            <div class="message">
-                                <p>Lorem Ipsum Dolar Lorem ipsum dolor sit amet, consetetur sadiet dolo sed diam
-                                    voluptua. At vero eos et accusam et justo duo dolores et ea rebum. </p>
-
-                                <div class="audio"><a href="#"><img src="/static/charts/img/speaker_icon.gif" alt="play audio message"
-                                                                    title="play audio message"/></a></div>
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="child_details"><img src="/static/charts/img/child_girl.gif" alt="child name"/>
-
-                            <p><span class="name">zanaa</span></p>
-
-                            <p><span class="age">Age 10</span> / <span class="region">shulla</span></p>
-                        </div>
-                        <div class="message_details">
-                            <div class="message">
-                                <p>Lorem Ipsum Dolar Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sedr
-                                    invidunt ut l magna aliquyam erat, sed diam voluptua. At vero eos ett ea rebum. </p>
-
-                                <div class="audio"><a href="#"><img src="/static/charts/img/speaker_icon.gif" alt="play audio message"
-                                                                    title="play audio message"/></a></div>
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="child_details"><img src="/static/charts/img/child_boy.gif" alt="child name"/>
-
-                            <p><span class="name">zaid</span></p>
-
-                            <p><span class="age">Age 14</span> / <span class="region">shulla</span></p>
-                        </div>
-                        <div class="message_details">
-                            <div class="message">
-                                <p>Lorem Ipsum Dolar Lorem ipsum dolor sit amet, consetetur sadipsvidunt udiam voluptua.
-                                    At vero eos et accusam et justo duo dolores et ea rebum. </p>
-
-                                <div class="audio"><a href="#"><img src="/static/charts/img/speaker_icon.gif" alt="play audio message"
-                                                                    title="play audio message"/></a></div>
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="child_details"><img src="/static/charts/img/child_girl.gif" alt="child name"/>
-
-                            <p><span class="name">vania</span></p>
-
-                            <p><span class="age">Age 9</span> / <span class="region">shulla</span></p>
-                        </div>
-                        <div class="message_details">
-                            <div class="message">
-                                <p>Lorem Ipsum Dolar Lorem ipsum dolor sit amet, consetetu tempor invidunt ut lab
-                                    voluptua. At vero eos et accusam et justo duo dolores et ea rebum. </p>
-
-                                <div class="audio"><a href="#"><img src="/static/charts/img/speaker_icon.gif" alt="play audio message"
-                                                                    title="play audio message"/></a></div>
-                            </div>
-                        </div>
-                    </li>
+                    {% endfor %}
                 </ul>
-            </div>
-            <div id="map_container" class="clearfix">
-                {% block map_container %}
-                {% for cat in audio %}
-                <div id="audio">
-                    <b>{{cat.name}}</b> / Age {{ cat.age }}
-                    <a href="content/{{ cat.location }}">Play</a>
-                </div>
-                {% endfor %}
-                {% endblock %}
             </div>
         </div>
 
     </div>
     {% block sidebar %}
     <div id="sidebar">
-    <div class="nav_questions"> <img src="/static/charts/img/poll_q_img_1.gif" alt="" />
-      <ul>
-        <li> <a href="#"> I feel happy </a> </li>
-        <li> <a href="#"> What makes you most happy? </a> </li>
-        <li> <a href="#"> What makes you least happy? </a> </li>
-        <li> <a href="#"> Compared to my parents, my life ... </a> </li>
-        <li class="last"><a href="#">If i was leading the country ... </a> </li>
-      </ul>
-      <p class="note"><a href="#">Read about how UNICEF used SMS to conduct the survey</a> </p>
+        <div class="nav_questions"><img src="/static/charts/img/poll_q_img_1.gif" alt=""/>
+            <ul>
+                <li><a href="#"> I feel happy </a></li>
+                <li><a href="#"> What makes you most happy? </a></li>
+                <li><a href="#"> What makes you least happy? </a></li>
+                <li><a href="#"> Compared to my parents, my life ... </a></li>
+                <li class="last"><a href="#">If i was leading the country ... </a></li>
+            </ul>
+            <p class="note"><a href="#">Read about how UNICEF used SMS to conduct the survey</a></p>
+        </div>
+        <!--/SideBar-->
     </div>
-    <!--/SideBar-->
-  </div>
     {% endblock %}
 </div>
 {% endblock %}

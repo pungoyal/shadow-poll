@@ -6,12 +6,12 @@ from django.utils import translation
 
 from rapidsms.webui.utils import render_to_response
 
-from apps.charts.models import Governorate, Audio
+from apps.charts.models import Governorate, VoiceMessage
 from apps.poll.models import Question, Choice, Color
 
 def voice_home_page(request):
-    audio_files = Audio.objects.all()
-    return render_to_response(request, "messages.html", {"audio": audio_files})
+    messages = VoiceMessage.objects.all()
+    return render_to_response(request, "messages.html", {"messages": messages})
 
 def show_governorate(request, governorate_id):
     governorate = Governorate.objects.get(id=governorate_id)
