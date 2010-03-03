@@ -16,19 +16,19 @@
 <span id="governorate-id" style="display:none;">{{ governorate.id }}</span>
 <span id="bbox" style="display:none;">{{bbox}}</span>
 <div class="question">
-    <h2>{{ question.text }}</h2>
+    <h2>{% trans question.text %}</h2>
     <ol>
 
         {% for choice in choices %}
         <li>
-            <span style="color: {{choice.category.color.color_code}};">{{ choice.text }}</span>
+            <span style="color: {{choice.category.color.color_code}};">{% trans choice.text %}</span>
         </li>
         {% endfor %}
     </ol>
 </div>
 <p class="total_responses">
-    215 responses <br/>
-    from Bhagdad
+    215 {% trans 'responses' %} <br/>
+    {% trans 'from Bhagdad' %}
 </p>
 {% endblock %}
         
@@ -39,8 +39,8 @@
 {% block chart %}
 <div class="chart_bar">
     <h3>
-        <span class="response_criteria">Top Response for {{ region }}</span>
-        <span class="top_concern">{{ top_response }} {{ percentage }}%</span>
+        <span class="response_criteria"> {% trans 'Top Response for' %} {% trans region %}</span>
+        <span class="top_concern">{% trans top_response %} {{ percentage }}%</span>
     </h3>
 
     <div id="chart">
@@ -50,6 +50,6 @@
             var national_poll_responses = {{ national_data }}
         </script>
     </div>
-    <p class="chart_note">National results</p>
+    <p class="chart_note">{% trans 'National results' %}</p>
 </div>
 {% endblock %}

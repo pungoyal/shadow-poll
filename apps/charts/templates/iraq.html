@@ -130,7 +130,7 @@
 										{% if categories %}
                     <ul>
 											{% for cat in categories %}
-                        <li class="category{{ forloop.counter0 }}"><span>{{cat.name}}</span></li>
+                        <li class="category{{ forloop.counter0 }}"><span>{% trans cat.name %}</span></li>
                       {% endfor %}
                     </ul>
 										{% endif %}
