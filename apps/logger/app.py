@@ -7,6 +7,13 @@ import models
 from models import OutgoingMessage, IncomingMessage
 
 class App(rapidsms.app.App):
+    """ 
+    logger app must be the first one called on incoing
+    and the last one called on outgoing so that we can
+    properly catch the end user's experience
+    (after translation, censorship, etc.)
+    """
+    PRIORITY = "highest"
     
     def parse(self, message):
         # make and save messages on their way in and 

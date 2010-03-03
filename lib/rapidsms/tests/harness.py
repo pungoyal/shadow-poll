@@ -28,7 +28,7 @@ class MockLogger (list):
 # a subclass of Router with all the moving parts replaced
 class MockRouter (Router):
     def __init__ (self):
-        Router.__init__(self)
+        Router.__init__(self, fail_soft=False)
         self.logger = MockLogger()
 
     def add_backend (self, backend):

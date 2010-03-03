@@ -10,7 +10,9 @@ import math
 
 SEPARATOR = ' '
 DATA_TYPE = ( ('i','integer'), ('s','string'), ('c','character') )
-GENDER = ( ('M', 'Male'), ('F', 'Female') )
+# the male and female option should be lower case, to facilitate
+# mapping login in demographic parser
+GENDER = ( ('m', 'Male'), ('f', 'Female') )
 
 ##########################################################################
 
@@ -30,6 +32,9 @@ class DemographicParser(models.Model):
     regex = models.CharField(max_length=32)
     order = models.IntegerField()
     type = models.CharField(max_length=16, choices=DATA_TYPE)
+
+    def __unicode__(self):
+        return "%s" % (self.name)
 
     def parse_and_set(self, message, user) :
         arguments = message.split(SEPARATOR)
@@ -61,9 +66,12 @@ class Question(models.Model):
         options = self.humanize_options()
         return "%s %s %s" % (self.text,self.helper_text, options)
 
-    def response_break_up(self):
+    def response_break_up(self, governorate_id=None):
+        # ro: should this return a 'dict' instead of a list?
         break_up = []
         relevant_responses = UserResponse.objects.filter(question=self)
+        if governorate_id is not None:
+            relevant_responses = relevant_responses.filter(user__governorate=governorate_id)
         grouped_responses = relevant_responses.values('choice').annotate(Count('choice'))
         total_responses = relevant_responses.aggregate(Count('choice'))
         for gr in grouped_responses:
@@ -71,17 +79,17 @@ class Question(models.Model):
 
         return break_up
 
-    def most_voted_choice_by_governorate(self, governorate_id):
+    def most_voted_category_by_governorate(self, governorate_id):
         relevant_responses = UserResponse.objects.filter(user__governorate = governorate_id)
         
         if len(relevant_responses) < 1 :
             return None
         
         choice_id =  relevant_responses.values('choice').annotate(Count('choice')).order_by('-choice__count')[0]['choice']
-        return Choice.objects.get(id = choice_id)
+        return Category.objects.get(choice__id = choice_id)
 
     def get_number_of_responses_by_governorate(self, governorate_id):
-        return len(UserResponse.objects.filter(user__governorate = governorate_id))
+        return len(UserResponse.objects.filter(question = self, user__governorate = governorate_id))
 
     def humanize_options(self):
         choices = Choice.objects.filter(question=self)
@@ -136,11 +144,11 @@ class Choice(models.Model):
     question = models.ForeignKey(Question)
     category = models.ForeignKey(Category, null = True)
 
-    def parse(self, response):
-        return self.code == response
-
     def __unicode__(self):
         return "%s:%s" % (self.text, self.code)
+
+    def parse(self, response):
+        return self.code == response
 
 ##########################################################################
 
@@ -181,6 +189,10 @@ class UserSession(models.Model):
             self.user = self._save_user(self.user, message)
 
         if self._first_access():
+            # THIS THROWS AN UGLY ERROR WHEN TRIGGER IS POORLY FORMED
+            # todo: FIX this to recover nicely
+            if hasattr(self.user, 'id'):
+                self.user = self._save_user(self.user, message)
             self.question = Question.first()
             self.save()
             return str(self.question)
@@ -199,13 +211,16 @@ class UserSession(models.Model):
             self.question = None
             self.num_attempt = 1
             self.save()
-            return "err3"
+            return "session_closed_due_to_max_retries"
         
         self.num_attempt = self.num_attempt + 1
         self.save()
         return "error_parsing_response"
-
+    
     def _save_user(self, user, message):
+        if not self.questionnaire:
+            # default to the first question
+            self.questionnaire = Questionnaire.objects.all().order_by('pk')[0]
         message = message.strip().lstrip(self.questionnaire.trigger.lower()).strip()
         parsers = list( DemographicParser.objects.filter(questionnaire=self.questionnaire).order_by('order') )
         for parser in parsers:
@@ -247,6 +262,7 @@ class UserSession(models.Model):
             session = UserSession(question = None)
             user.set_user_geolocation_if_registered(connection)
             session.user = user
+            session.user.save()
             return session
 
         return sessions[0]
@@ -257,5 +273,11 @@ class UserResponse(models.Model):
     user = models.ForeignKey(User)
     question = models.ForeignKey(Question)
     choice = models.ForeignKey(Choice)    
+
+    def __str__(self):
+        return unicode(self).encode('utf-8')
+
+    def __unicode__(self):
+        return "USER: %s, QUESTION: %s, RESPONSE: %s" % (self.user.connection, self.question.pk, self.choice)
 
 ##########################################################################

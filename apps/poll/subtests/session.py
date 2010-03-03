@@ -11,6 +11,7 @@ class UserSessionTest(TestCase):
     apps = (poll_App,)
 
     def setUp(self):
+        Question.objects.all().delete()
         self.backend = PersistantBackend(slug="MockBackend")
         self.backend.save()
         self.reporter = Reporter(alias="ReporterName")
@@ -158,3 +159,15 @@ class UserSessionTest(TestCase):
         self.assertEquals(latest_user.governorate, 3)
         self.assertEquals(latest_user.district, 4)
         
+    def test_junk_message(self):
+        backend = PersistantBackend(slug="MockBackend1")
+        backend.save()
+        reporter = Reporter(alias="ReporterName1")
+        reporter.save()
+        pconnection = PersistantConnection(backend=backend, 
+                                                reporter=reporter, 
+                                                identity="1001")
+        pconnection.save()
+        session = UserSession.open(pconnection)
+        session.respond('junk')
+        self.assertEquals(session.question, self.question1)

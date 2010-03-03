@@ -97,12 +97,21 @@ class TestScript (TestCase):
                 if sys.stdout.encoding:
                     # Encode 'strange' characters for proper output on the console
                     # so we don't get 'unprintable assertion errors'
-                    try:
-                        txt = txt.encode(sys.stdout.encoding, 'replace')
-                    except UnicodeDecodeError:
-                        # This error occurs when the input is not standardized (i.e. unicode)
-                        self.fail("Could not encode unit test string to stdout character encoding. Make sure your RapidSMS unit tests are unicode strings!")
-                        
+                    encoding = sys.stdout.encoding
+                else:
+                    """ 
+                    This should really be ascii (since this is the most platform-independent)
+                    Then again, maybe we should just assume anyone mucking around in unicode
+                    has a unicode-friendly console?
+                    """
+                    encoding = 'utf-8'
+                
+                try:
+                    txt = txt.encode(encoding, 'replace')
+                except UnicodeDecodeError:
+                    # This error occurs when the input is not standardized (i.e. unicode)
+                    self.fail("Could not encode unit test string to stdout character encoding. Make sure your RapidSMS unit tests are unicode strings!")
+
                 if len(txt) == 0 and msg is None:
                     last_msg = txt
                     continue
@@ -118,8 +127,7 @@ class TestScript (TestCase):
                     msgIsNotNoneMsg = "Message was not returned.\nMessage: '%s')" % (last_msg)
                 self.assertTrue(msg is not None, msgIsNotNoneMsg)
                 
-                if sys.stdout.encoding:
-                    msg.text = msg.text.encode(sys.stdout.encoding, 'replace')
+                msg.text = msg.text.encode(encoding, 'replace')
 
                 try:
                     msgWrongRecipient = "Expected to send to %s, but message was sent to %s\nMessage: '%s'" % \
@@ -132,7 +140,7 @@ class TestScript (TestCase):
                     msgUnexpectedReceipt = "\nMessage: %s\nReceived text: %s\nExpected text: %s\n" % \
                                           (last_msg, msg.text, txt)
                 except UnicodeDecodeError: 
-                    msgUnexpectedReceipt = "Unexpected response. \nResponse: %s" % \
+                    msgUnexpectedReceipt = "Unexpected response. \nReceived text: %s" % \
                                           (msg.text)                    
                 self.assertEquals(msg.text.strip(), txt.strip(), msgUnexpectedReceipt)
 

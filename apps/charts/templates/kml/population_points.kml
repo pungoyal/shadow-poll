@@ -1,20 +1,9 @@
-{% comment %}
-
-One possibility for KML features.
-
-A detail about the way that KML is styled: instead of providing
-size parameters, you provide a scale parameter which scales the
-default 14px/etc image to different sizes. Thus for styles like this one
-which make the image much larger, go with a PNG of the maximum size
-possible.
-
-{% endcomment %}
-{% for i in scales %}
-<Style id="s{{ forloop.counter0 }}">
+{% for color_and_scale in style_dict_list %}
+<Style id="s{{ color_and_scale.id }}-{{ forloop.counter0 }}">
   <IconStyle>
-    <scale>{{i}}</scale>
+    <scale>{{ color_and_scale.percentage }}</scale>
     <Icon>
-      <href>/static/charts/img/green_dot.png</href>
+      <href>/static/charts/img/{{color_and_scale.file_name}}</href>
     </Icon>
   </IconStyle>
 </Style>

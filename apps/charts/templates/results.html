@@ -2,15 +2,18 @@
 {% load i18n %}
 
 {% block javascripts %}
-<script src="http://www.openlayers.org/dev/OpenLayers.js"></script>
+<script src="/static/charts/javascripts/OpenLayers-2.8/OpenLayers.js"></script>
 <script src="/static/charts/javascripts/raphael-min.js"></script>
 <script src="/static/charts/javascripts/graphs.js"></script>
-<script src="/static/charts/javascripts/map.js"></script>
+<script src="/static/charts/javascripts/map.js" ></script>
+<script src="/static/charts/javascripts/language_switcher.js"></script>
 {% endblock %}
 
 {% block title_suffix %}Map{% endblock %}
 
 {% block question %}
+<span id="question-id" style="display:none;">{{question.id}}</span>
+<span id="bbox" style="display:none;">{{bbox}}</span>
 <div class="question">
     <h2>{{ question.text }}</h2>
     <ol>
