@@ -1,7 +1,7 @@
 from django.test import TestCase
 from apps.poll.models import User
 from apps.register.models import Registration
-from reporters.models import Reporter, PersistantConnection, PersistantBackend
+from apps.reporters.models import Reporter, PersistantConnection, PersistantBackend
 
 class UserTest(TestCase):
     def setUp(self):

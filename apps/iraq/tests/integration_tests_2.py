@@ -10,7 +10,6 @@ from apps.poll.app import App as poll_app
 
 class TestIntegration2(TestScript):
     """ Test our various SMS apps all together now """
-    fixtures = ['poll_interactive.json']
     apps = (reporter_app, register_app, default_app, i18n_app, poll_app)
 
     test_receive_first_question_when_given_random_junk_arabic = u"""

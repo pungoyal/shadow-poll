@@ -17,7 +17,8 @@ a:hover {
 #wrapper {
 	background: #f7f4f1;
 	width: 1000px;
-	margin: 0 auto;
+	/*float: left;*/
+		margin: 0 auto;
 	overflow: hidden;
 }
 #header, #intro, #main_content, #footer {
@@ -242,10 +243,6 @@ a:hover {
 	float: left;
 	width: 800px;
 }
-#content_area .question {
-    width:80%;
-    margin-left: 10px;
-}
 #content_area .question_section {
 	padding: 18px 0;
 	width: 100%;
@@ -254,6 +251,7 @@ a:hover {
 }
 .question_section h2 {
 	font-size: 1.75em;
+	margin-left: 10px;
 	margin-bottom: 10px;
 	display: inline;
 }
@@ -284,8 +282,12 @@ a:hover {
 	float:left;
 	width:100%;
 	border: 1px solid #C4C1BC;
-	border-left: 0;
-	border-bottom: 0;
+	border-width: 1px 1px 0 0;
+	
+}
+.chart_note {
+	float:left;
+
 }
 /* Side bar */
 #sidebar {
@@ -312,7 +314,7 @@ a:hover {
 	font-weight: bold;
 	text-decoration: none;
 }
-.nav_questions ul li a, .nav_questions ul li a:visited{
+.nav_questions ul li a, .nav_questions ul li a:visited {
 	background: #202020;
 	color: #808080;
 	display: block;
@@ -351,6 +353,7 @@ a:hover {
 	width: 198px;
 	font-size: 0.8em;
 	border-right:1px solid #C4C1BC;
+	background: #fff;
 }
 .filter_section {
 	height: 270px;
@@ -435,7 +438,6 @@ a:hover {
 	font-size: 0.6em;
 	font-weight: bold;
 	padding: 5px 18px 5px 0;
-	
 	background: url(../img/bg_sprite.gif) no-repeat 100% -170px;
 }
 .response_category ul li.category0 {
@@ -491,8 +493,8 @@ a:hover {
 .chart_note {
 	color:#91886F;
 	float:right;
-    margin-top: -45px;
-    font-size: 0.75em;
+	font-size: 0.75em;
+	margin-top: -45px;
 }
 /* Link List */
 #language_menu ul li, #top_menu ul li, #poll_questions ul li, .response_category ul li {

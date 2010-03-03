@@ -8,7 +8,7 @@ except Exception, e:
     pass
 
 class StatsTest(TestScript):
-    fixtures = ['functional_test_data.json', 'poll_interactive']
+    fixtures = ['functional_test_data.json']
     apps = (poll_app,)
     
     def test_response_break_up(self):
