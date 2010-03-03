@@ -64,19 +64,22 @@ class Question(models.Model):
 
     def __unicode__(self):
         options = self.humanize_options()
-        return "%s %s %s" % (self.text,self.helper_text, options)
+        return "%s: %s %s" % (self.text,self.helper_text, options)
 
     def response_break_up(self, governorate_id=None):
+        """ 
+        returns the percentage of votes going to each category as a list 
+        if no responses are received yet, then return empty list
+        """
         # ro: should this return a 'dict' instead of a list?
-        break_up = []
         relevant_responses = UserResponse.objects.filter(question=self)
         if governorate_id is not None:
             relevant_responses = relevant_responses.filter(user__governorate=governorate_id)
         grouped_responses = relevant_responses.values('choice').annotate(Count('choice'))
         total_responses = relevant_responses.aggregate(Count('choice'))
+        break_up = []
         for gr in grouped_responses:
             break_up.append(round(gr['choice__count']*100/total_responses['choice__count'], 1))
-
         return break_up
 
     def most_voted_category_by_governorate(self, governorate_id):

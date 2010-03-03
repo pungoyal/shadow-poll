@@ -13,6 +13,7 @@
 
 {% block question %}
 <span id="question-id" style="display:none;">{{question.id}}</span>
+<span id="governorate-id" style="display:none;">{{ governorate.id }}</span>
 <span id="bbox" style="display:none;">{{bbox}}</span>
 <div class="question">
     <h2>{{ question.text }}</h2>
@@ -20,7 +21,7 @@
 
         {% for choice in choices %}
         <li>
-            {{ choice.text }}
+            <span style="color: {{choice.category.color}};">{{ choice.text }}</span>
         </li>
         {% endfor %}
     </ol>
@@ -44,8 +45,9 @@
 
     <div id="chart">
         <script type="text/javascript">
-            var data = {{ chart_data }}
-            var country_data = {{ national_data }}
+        	// these variables are used by graph.js
+            var regional_poll_responses = {{ chart_data }}
+            var national_poll_responses = {{ national_data }}
         </script>
     </div>
     <p class="chart_note">National results</p>
