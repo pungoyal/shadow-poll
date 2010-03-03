@@ -62,8 +62,8 @@
         "pk": 1,
         "model": "poll.color",
         "fields": {
-            "name": "orange",
-            "file_name": "orange_dot.png"
+            "file_name": "orange_dot.png",
+						"color_code": "#F8B088"
         }
         
     },
@@ -71,8 +71,8 @@
         "pk": 2,
         "model": "poll.color",
         "fields":{
-            "name": "green",
-            "file_name": "green_dot.png"
+            "file_name": "green_dot.png",
+						"color_code": "#CCF98A"
         }
         
     },
@@ -80,8 +80,8 @@
         "pk": 3,
         "model": "poll.color",
         "fields": {
-            "name": "mauve",
-            "file_name": "mauve_dot.png"
+            "file_name": "mauve_dot.png",
+						"color_code": "rgb(234, 76, 244)"
         }
         
     },
@@ -89,8 +89,8 @@
         "pk": 4,
         "model": "poll.color",
         "fields":{
-            "name": "orange",
-            "file_name": "orange_dot.png"
+            "file_name": "blue_dot.png",
+						"color_code": "#8BC0FA"
         }
 
     },

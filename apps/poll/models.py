@@ -125,11 +125,11 @@ class Question(models.Model):
 
 ##########################################################################
 class Color(models.Model):
-    name = models.CharField(max_length=10)
     file_name = models.CharField(max_length=20)
+    color_code = models.CharField(max_length=25)
     
     def __unicode__(self):
-        return self.name
+        return self.color_code
 
 ##########################################################################
 
