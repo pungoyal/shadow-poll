@@ -51,7 +51,7 @@ msgid "Print"
 msgstr "طباعة"
 
 msgid "AN IRAQ FIT FOR CHILDREN"
-msgstr "مؤسسة العراق من أجل الأطفال"
+msgstr "العراق يلائم الأطفال"
 
 msgid "Home"
 msgstr "الصفحة الرئيسية"
