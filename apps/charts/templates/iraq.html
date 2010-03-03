@@ -171,8 +171,12 @@
     <div id="sidebar">
         <div class="nav_questions"><img src="/static/charts/img/poll_q_img_1.gif" alt=""/>
             <ul>
-	      {% for question in questions %}
-	      <li><a href="question{{question.id}}">{% trans question.text %}</a></li>
+	      {% for q in questions %}
+	      <li 
+		  {% ifequal q.id question.id %}
+		  class = "active"
+		  {% endifequal %}
+		  <a href="question{{q.id}}">{% trans q.text %}</a></li>
 	      {% endfor %}
             </ul>
             <p class="note"><a href="#">{% trans 'Read about how UNICEF used SMS to conduct the survey' %}</a></p>
