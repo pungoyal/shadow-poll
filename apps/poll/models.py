@@ -64,7 +64,7 @@ class Question(models.Model):
 
     def __unicode__(self):
         options = self.humanize_options()
-        return "%s %s %s" % (self.text,self.helper_text, options)
+        return "%s: %s %s" % (self.text,self.helper_text, options)
 
     def response_break_up(self, governorate_id=None):
         """ 
