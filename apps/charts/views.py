@@ -6,7 +6,7 @@ from django.utils import translation
 
 from rapidsms.webui.utils import render_to_response
 
-from apps.charts.models import Governorate, District, Audio, VoiceMessage
+from apps.charts.models import Governorate, District, VoiceMessage
 from apps.poll.models import Question, Choice, Color
 
 def voice_home_page(request):
