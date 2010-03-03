@@ -1,0 +1,47 @@
+#content_area {
+	background: #eeeae2;
+}
+#message_container {
+	float: left;
+	width: 580px;
+	padding: 10px;
+}
+#message_container ul li {
+	float:left;
+	margin-bottom:10px;
+}
+.child_details {
+	float: left;
+	width: 25%;
+	margin-right: 10px;
+	text-align: right;
+}
+.message_details {
+	background:transparent url(../img/msg_arrow.gif) no-repeat scroll 0 80%;
+	float:left;
+	padding-left:15px;
+	width:70%;
+}
+.message_details .message {
+	padding: 10px;
+	background: #faf9f8;
+}
+.message_details .audio {
+	padding: 10px;
+	text-align: right;
+}
+.child_details p {
+	font-weight: bold;
+}
+.child_details .name {
+	color: #404040;
+	text-transform: capitalize;
+}
+.child_details .age {
+	color: #f3653a;
+	text-transform: uppercase;
+}
+.child_details .region {
+	color: #bfb9a9;
+	text-transform: uppercase;
+}
