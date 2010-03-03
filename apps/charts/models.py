@@ -55,6 +55,8 @@ class Geography(models.Model):
         return {'name': self.id}
 
 class Governorate(Geography):
+    code = models.CharField(max_length=16, unique=True)
+    
     def _bubble_size(self, question):
         responses = UserResponse.objects.filter(question=question.id, user__governorate=self.id)
         all_responses = UserResponse.objects.filter(user__governorate=self.id)
@@ -68,7 +70,11 @@ class Governorate(Geography):
         return len(UserResponse.objects.filter(user__governorate = self.id))
 
 class District(Geography):
-    governorate = models.ForeignKey(Governorate, null=True)
+    code = models.CharField(max_length=16)
+    governorate = models.ForeignKey(Governorate)
+    
+    class Meta:
+        unique_together = ("governorate", "code")
 
     def _bubble_size(self, question):
         responses = UserResponse.objects.filter(question=question.id, user__district=self.id)
