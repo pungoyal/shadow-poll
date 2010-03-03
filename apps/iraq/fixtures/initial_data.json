@@ -3,18 +3,18 @@
         "pk": 1, 
         "model": "auth.user", 
         "fields": {
-             "username": "a", 
-             "first_name": "", 
-             "last_name": "", 
-             "is_active": true, 
-             "is_superuser": true, 
-             "is_staff": true, 
-             "last_login": "2010-01-12 10:25:50", 
-             "groups": [], 
-             "user_permissions": [], 
-             "password": "sha1$74d04$0bc2a24e24715690fa11c9926623259293c5057a", 
-             "email": "p@p.com", 
-             "date_joined": "2010-01-12 10:25:30"
+            "username": "a", 
+            "first_name": "", 
+            "last_name": "", 
+            "is_active": true, 
+            "is_superuser": true, 
+            "is_staff": true, 
+            "last_login": "2010-01-12 10:25:50", 
+            "groups": [], 
+            "user_permissions": [], 
+            "password": "sha1$74d04$0bc2a24e24715690fa11c9926623259293c5057a", 
+            "email": "p@p.com", 
+            "date_joined": "2010-01-12 10:25:30"
         }
     },
     {
@@ -22,11 +22,11 @@
         "model": "poll.question",
         "fields": {
             "text": "I feel happy:",
-                        "helper_text": "(Choose a,b,c or d.)",
+            "helper_text": "(Choose a,b,c or d.)",
             "error_response": "Placeholder error for question number 1. Please re-send.",
-                        "max_choices": 1,
-                        "next_question": 2,
-                        "is_first": true
+            "max_choices": 1,
+            "next_question": 2,
+            "is_first": true
         }
     },
     {
@@ -36,8 +36,8 @@
             "max_choices": 3,
             "text": "The three things I need most are:",
             "helper_text": "(Prioritize your first, second, and third.)",
-                        "error_response": "Placeholder error for question number 2. Please re-send.",
-                        "next_question": 3
+            "error_response": "Placeholder error for question number 2. Please re-send.",
+            "next_question": 3
         }
     },
     {
@@ -46,114 +46,148 @@
         "fields": {
             "max_choices": 1,
             "text": "Compared to my parents, my life in the future will be:",
-                        "helper_text": "(Choose a,b,c or d.)",
+            "helper_text": "(Choose a,b,c or d.)",
             "error_response": "Placeholder error for question number 3. Please re-send."
-                } 
+        } 
     },
     {
         "pk": 1,
         "model": "poll.questionnaire",
         "fields": {
             "trigger": "poll",
-                        "max_retries":3
+            "max_retries":3
         }
     },
-        {
-                "pk": 1,
-                "model": "poll.color",
-                "fields": {
-                        "name": "pink",
-                        "file_name": "pink_dot.png"
-                }
-                
-        },
-        {
-                "pk": 2,
-                "model": "poll.color",
-                "fields":{
-                        "name": "green",
-                        "file_name": "green_dot.png"
-                }
-                
-        },
-        {
-                "pk": 3,
-                "model": "poll.color",
-                "fields": {
-                        "name": "purple",
-                        "file_name": "purple_dot.png"
-                }
-                
-        },
-        {
-                "pk": 4,
-                "model": "poll.color",
-                "fields":{
-                        "name": "orange",
-                        "file_name": "orange_dot.png"
-                }
+    {
+        "pk": 1,
+        "model": "poll.color",
+        "fields": {
+            "name": "pink",
+            "file_name": "pink_dot.png"
+        }
+        
+    },
+    {
+        "pk": 2,
+        "model": "poll.color",
+        "fields":{
+            "name": "green",
+            "file_name": "green_dot.png"
+        }
+        
+    },
+    {
+        "pk": 3,
+        "model": "poll.color",
+        "fields": {
+            "name": "purple",
+            "file_name": "purple_dot.png"
+        }
+        
+    },
+    {
+        "pk": 4,
+        "model": "poll.color",
+        "fields":{
+            "name": "orange",
+            "file_name": "orange_dot.png"
+        }
 
-        },
-        {
-                "pk":"1",
-                "model": "poll.category",
-                "fields":{
-                        "name": "Always",
-                        "color": 1
-                }
-        },
-        {
-                "pk":"2",
-                "model": "poll.category",
-                "fields":{
-                        "name": "Most of the time",
-                        "color": 2
-                }
-        },{
-                "pk":"3",
-                "model": "poll.category",
-                "fields":{
-                        "name": "Mostly",
-                        "color": 3
-                }
-        },{
-                "pk":"4",
-                "model": "poll.category",
-                "fields":{
-                        "name": "Never",
-                        "color": 4
-                }
-        },
-        {
-                "pk":"5",
-                "model": "poll.category",
-                "fields":{
-                        "name": "Better",
-                        "color": 1
-                }
-        },
-        {
-                "pk":"6",
-                "model": "poll.category",
-                "fields":{
-                        "name": "About the same",
-                        "color": 2
-                }
-        },{
-                "pk":"7",
-                "model": "poll.category",
-                "fields":{
-                        "name": "Worse",
-                        "color": 3
-                }
-        },{
-                "pk":"8",
-                "model": "poll.category",
-                "fields":{
-                        "name": "I don't know",
-                        "color": 4
-                }
-        },
+    },
+    {
+        "pk":"1",
+        "model": "poll.category",
+        "fields":{
+            "name": "Always",
+            "color": 1
+        }
+    },
+    {
+        "pk":"2",
+        "model": "poll.category",
+        "fields":{
+            "name": "Most of the time",
+            "color": 2
+        }
+    },{
+        "pk":"3",
+        "model": "poll.category",
+        "fields":{
+            "name": "Mostly",
+            "color": 3
+        }
+    },{
+        "pk":"4",
+        "model": "poll.category",
+        "fields":{
+            "name": "Never",
+            "color": 4
+        }
+    },
+    {
+        "pk":"5",
+        "model": "poll.category",
+        "fields":{
+            "name": "Better",
+            "color": 1
+        }
+    },
+    {
+        "pk":"6",
+        "model": "poll.category",
+        "fields":{
+            "name": "About the same",
+            "color": 2
+        }
+    },
+		{
+        "pk":"7",
+        "model": "poll.category",
+        "fields":{
+            "name": "Worse",
+            "color": 3
+        }
+    },
+		{
+        "pk":"8",
+        "model": "poll.category",
+        "fields":{
+            "name": "I don't know",
+            "color": 4
+        }
+    },
+		{
+        "pk":"9",
+        "model": "poll.category",
+        "fields":{
+            "name": "Security",
+            "color": 1
+        }
+    },
+		{
+        "pk":"10",
+        "model": "poll.category",
+        "fields":{
+            "name": "Education",
+            "color": 2
+        }
+    },
+		{
+        "pk":"11",
+        "model": "poll.category",
+        "fields":{
+            "name": "Social Environment",
+            "color": 3
+        }
+    },
+		{
+        "pk":"12",
+        "model": "poll.category",
+        "fields":{
+            "name": "Food water and shelter",
+            "color": 4
+        }
+    },
     {
         "pk": 1,
         "model": "poll.demographicparser",
@@ -164,7 +198,7 @@
             "name": "gender",
             "order": 2
         }
-    },
+    },		
     {
         "pk": 2,
         "model": "poll.demographicparser",
@@ -181,9 +215,9 @@
         "model": "poll.choice",
         "fields": {
             "code": "a",
-                        "text": "Always",
-                        "question":1,
-                        "category": 1
+            "text": "Always",
+            "question":1,
+            "category": 1
         }
     },
     {
@@ -191,9 +225,9 @@
         "model": "poll.choice",
         "fields": {
             "code": "b",
-                        "text": "Most of the time",
-                        "question":1,
-                        "category": 2
+            "text": "Most of the time",
+            "question":1,
+            "category": 2
         }
     },
     {
@@ -201,9 +235,9 @@
         "model": "poll.choice",
         "fields": {
             "code": "c",
-                        "text": "Rarely",
-                        "question":1,
-                        "category": 3
+            "text": "Rarely",
+            "question":1,
+            "category": 3
         }
     },
     {
@@ -211,9 +245,9 @@
         "model": "poll.choice",
         "fields": {
             "code": "d",
-                        "text": "Never",
-                        "question":1,
-                        "category": 4
+            "text": "Never",
+            "question":1,
+            "category": 4
         }
     },
     {
@@ -221,8 +255,9 @@
         "model": "poll.choice",
         "fields": {
             "code": "a",
-                        "text": "Peace and Security",
-                        "question":2
+            "text": "Peace and Security",
+            "question":2,
+						"category": 9
         }
     },
     {
@@ -230,8 +265,9 @@
         "model": "poll.choice",
         "fields": {
             "code": "b",
-                        "text": "Go to school regularly",
-                        "question":2
+            "text": "Go to school regularly",
+            "question":2,
+						"category": 10
         }
     },
     {
@@ -239,8 +275,9 @@
         "model": "poll.choice",
         "fields": {
             "code": "c",
-                        "text": "Health care when sick",
-                        "question":2
+            "text": "Health care when sick",
+            "question":2,
+						"category": 11
         }
     },
     {
@@ -248,8 +285,9 @@
         "model": "poll.choice",
         "fields": {
             "code": "d",
-                        "text": "Clean neighbourhood",
-                        "question":2
+            "text": "Clean neighbourhood",
+            "question":2,
+						"category": 11
         }
     },
     {
@@ -257,8 +295,9 @@
         "model": "poll.choice",
         "fields": {
             "code": "e",
-                        "text": "Clean drinking water",
-                        "question":2
+            "text": "Clean drinking water",
+            "question":2,
+						"category": 12
         }
     },
     {
@@ -266,8 +305,9 @@
         "model": "poll.choice",
         "fields": {
             "code": "f",
-                        "text": "Enough food",
-                        "question":2
+            "text": "Enough food",
+            "question":2,
+						"category":12
         }
     },
     {
@@ -275,8 +315,9 @@
         "model": "poll.choice",
         "fields": {
             "code": "g",
-                        "text": "be loved",
-                        "question":2
+            "text": "be loved",
+            "question":2,
+						"category": 11
         }
     },
     {
@@ -284,8 +325,9 @@
         "model": "poll.choice",
         "fields": {
             "code": "h",
-                        "text": "Not have to work",
-                        "question":2
+            "text": "Not have to work",
+            "question":2,
+						"category": 11
         }
     },
     {
@@ -293,8 +335,9 @@
         "model": "poll.choice",
         "fields": {
             "code": "i",
-                        "text": "Be listened to",
-                        "question":2
+            "text": "Be listened to",
+            "question":2,
+						"category": 11
         }
     },
     {
@@ -302,8 +345,9 @@
         "model": "poll.choice",
         "fields": {
             "code": "j",
-                        "text": "A place to play",
-                        "question":2
+            "text": "A place to play",
+            "question":2,
+						"category":11
         }
     },
     {
@@ -311,17 +355,18 @@
         "model": "poll.choice",
         "fields": {
             "code": "k",
-                        "text": "Family and friends to be safe",
-                        "question":2
+            "text": "Family and friends to be safe",
+            "question":2,
+						"category": 9
         }
     },
-        {
+    {
         "pk": 16,
         "model": "poll.choice",
         "fields": {
             "code": "l",
-                        "text": "others",
-                        "question":2
+            "text": "others",
+            "question":2
         }
     },
     {
@@ -329,9 +374,9 @@
         "model": "poll.choice",
         "fields": {
             "code": "a",
-                        "text": "Better",
-                        "question":3,
-                        "category": 5
+            "text": "Better",
+            "question":3,
+            "category": 5
         }
     },
     {
@@ -339,9 +384,9 @@
         "model": "poll.choice",
         "fields": {
             "code": "b",
-                        "text": "About the same",
-                        "question":3,
-                        "category": 6
+            "text": "About the same",
+            "question":3,
+            "category": 6
         }
     },
     {
@@ -349,9 +394,9 @@
         "model": "poll.choice",
         "fields": {
             "code": "c",
-                        "text": "Worse",
-                        "question":3,
-                        "category": 7
+            "text": "Worse",
+            "question":3,
+            "category": 7
         }
     },
     {
@@ -359,9 +404,9 @@
         "model": "poll.choice",
         "fields": {
             "code": "d",
-                        "text": "I don't know",
-                        "question":3,
-                        "category": 8
+            "text": "I don't know",
+            "question":3,
+            "category": 8
         }
     }
     

@@ -27,7 +27,12 @@ def show_iraq_by_question(request, question_number,
                           template='results.html', context={}):
     question = get_object_or_404(Question, pk=question_number)
     choices_of_question = Choice.objects.filter(question = question)
-    categories = [choice.category for choice in choices_of_question]
+    categories = []
+    for choice in choices_of_question:
+        if choice.category:
+            categories.append(choice.category)
+    unique_categories = set(categories)
+    categories = list(unique_categories)
     response_break_up = question.response_break_up()
     context.update(   {"chart_data": response_break_up, 
                        "national_data": response_break_up, 
