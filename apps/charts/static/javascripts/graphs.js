@@ -66,7 +66,7 @@ window.onload=function() {
             opacity: 0.70
         });
         x = x + width;
-        var filler = paper.rect(x,y,fillerWidth,darkHeight + lightHeight)
+        var filler = paper.rect(x,y+30,fillerWidth,5)
         filler.attr({
             fill: "white",
             stroke: "white"
