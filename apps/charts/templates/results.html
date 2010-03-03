@@ -21,7 +21,7 @@
 
         {% for choice in choices %}
         <li>
-            <span style="color: {{choice.category.color}};">{{ choice.text }}</span>
+            <span style="color: {{choice.category.color.color_code}};">{{ choice.text }}</span>
         </li>
         {% endfor %}
     </ol>

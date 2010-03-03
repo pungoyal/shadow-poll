@@ -1,10 +1,31 @@
 @charset "utf-8";
 /* Arabic Style sheet */
-body { direction: rtl;}
+body {
+	direction: rtl;
+}
 #top_menu {
 	float:left;
 	left:0;
 	right: auto;
+}
+#top_menu ul li a {
+	background-image:  url(../img/arabic/bg_sprite_ar.gif);
+	background-position: 100% 0;
+}
+#top_menu ul li a:hover {
+	background-position: 100% -55px;
+}
+#top_menu ul li.about a {
+	background-position: -135px 0;
+}
+#top_menu ul li.about a:hover {
+	background-position: -135px -55px;
+}
+#top_menu ul li.poll a {
+	background-position: -10px 0;
+}
+#top_menu ul li.poll a:hover {
+	background-position: -10px -55px;
 }
 #top_menu ul li a:hover, #language_menu ul li a:hover {
 	text-decoration: none;
@@ -15,8 +36,15 @@ body { direction: rtl;}
 #language_menu ul {
 	float:left;
 }
-#language_menu ul li.arabic a.you_here {
-	background-position:-55px -140px;
+#language_menu ul li a {
+	background-image:  url(../img/arabic/bg_sprite_ar.gif);
+	background-position: 100% -110px;
+}
+#language_menu ul li.en a:hover {
+	background-position: 100% -140px;
+}
+#language_menu ul li.arabic a.current_language {
+	background-position: -280px -140px;
 }
 #breadcrumb_container ul li {
 	float:right;
@@ -46,8 +74,8 @@ body { direction: rtl;}
 	margin-right:24px;
 }
 .question_section h2, .question_section ol {
-margin-left:0;
-margin-right:10px;
+	margin-left:0;
+	margin-right:10px;
 }
 .question_section .total_responses {
 	left:10px;
@@ -115,4 +143,17 @@ margin-right:10px;
 }
 #footer .unicef_logo {
 	text-align:left;
+}
+
+.response_category ul li,
+.response_category ul li span {
+	background-image:  url(../img/arabic/bg_sprite_ar.gif);
+}
+.response_category ul li {
+	background-position: 100% -170px;
+	margin-left: 5px;
+	margin-right: 0;
+}
+.response_category ul li span {
+	background-position: 0 -170px;
 }
