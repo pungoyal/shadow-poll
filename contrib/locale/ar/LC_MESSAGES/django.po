@@ -1,16 +1,9 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
-#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-02-02 15:20+0200\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: rani <rani@hotmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -40,4 +33,80 @@ msgstr "الخريطة ويبين استطلاع الردود التي وردت 
 #: apps/charts/templates/map.html:28
 msgid "the various governorates in Iraq."
 msgstr "في مختلف المحافظات في العراق"
+
+#: apps/charts/templates/iraq.html:29
+msgid "Iraq"
+msgstr "العراق"
+
+msgid "Bhagdad"
+msgstr "بغداد"
+
+msgid "District"
+msgstr "القضاء"
+
+msgid "Download"
+msgstr "تحميل"
+
+msgid "Print"
+msgstr "طباعة"
+
+msgid "AN IRAQ FIT FOR CHILDREN"
+msgstr "مؤسسة العراق من أجل الأطفال"
+
+msgid "Home"
+msgstr "الصفحة الرئيسية"
+
+msgid "About"
+msgstr "عن المؤسسة"
+
+msgid "Poll"
+msgstr "التصويت"
+
+msgid "Filter map by"
+msgstr "تصفية الخارطة بواسطة"
+
+msgid "All responses"
+msgstr "جميع الإجابات"
+
+msgid "Boys"
+msgstr "الأولاد"
+
+msgid "Girls"
+msgstr "البنات"
+
+msgid "Ages 0-8"
+msgstr "العمر من ٠-٨"
+
+msgid "Ages 9-12"
+msgstr "العمر من ٩-١٢"
+
+msgid "Ages 13+"
+msgstr "العمر اكبر من ١٣"
+
+msgid "Color indicates the top response category for each governarate."
+msgstr "اللون الذي يدل على أعلى فئة إجابة لكل محافظة."
+
+msgid "Points are scaled by total number of responses in each governarate."
+msgstr "هذه النقاط تتغير مساحتها حسب مجموع أعداد الإجابات لكل محافظة."
+
+msgid "Response categories"
+msgstr "فئات الإجابات"
+
+msgid "What do these mean?"
+msgstr "ما معنى هذا؟"
+
+msgid "Read about how UNICEF used SMS to conduct the survey"
+msgstr "إقراء حول كيفية إستخدام اليونيسيف للرسائل القصيرة لإجراء الإحصائيات"
+
+msgid "I feel happy"
+msgstr "انا أشعر بالسعادة"
+
+msgid "What makes you least happy?"
+msgstr "ما هي الأسباب التي تجعلك غير سعيد؟"
+
+msgid "Compared to my parents, my life ..."
+msgstr "بالمقارنة مع ابي و امي حياتي سوف تكون..."
+
+msgid "If i was leading the country ..."
+msgstr "اذا كنت حاكم الدولة سوف..."
 

@@ -19,18 +19,18 @@
 <div id='header'>
     <div id="language_menu">
         <ul>
-            <li class="en"><a href="javascript:switch_to_language('en')" {% ifequal LANGUAGE_CODE "en"  %} class="current_language" {% endifequal %}>English</a></li>
-            <li class="arabic"><a href="javascript:switch_to_language('ar')"  {% ifequal LANGUAGE_CODE "ar"  %} class="current_language" {% endifequal %}>Arabic</a></li>
+            <li class="en"><a href="#" class="current_language">English</a></li>
+            <li class="arabic"><a href="#">Arabic</a></li>
         </ul>
     </div>
     <div id="site_header">
-        <h1> AN IRAQ FIT FOR CHILDREN </h1>
+        <h1>{% trans 'AN IRAQ FIT FOR CHILDREN' %}</h1>
 
         <div id="top_menu">
             <ul>
-                <li class="home first"><a href="#"><span>Home</span></a></li>
-                <li class="about"><a href="#"><span>About</span></a></li>
-                <li class="poll last"><a href="#"><span>Poll</span></a></li>
+                <li class="home first"><a href="#"><span>{% trans 'Home' %}</span></a></li>
+                <li class="about"><a href="#"><span>{% trans 'About' %}</span></a></li>
+                <li class="poll last"><a href="#"><span>{% trans 'Poll' %}</span></a></li>
             </ul>
         </div>
     </div>
@@ -44,13 +44,13 @@
         {% block breadcrumb %}
         <div id="breadcrumb_container" class="clearfix">
             <ul class="breadcrumbs">
-                <li><a href="/charts/question1">Iraq</a></li>
-                <li><a href="#">Bhagdad</a></li>
-                <li class="active">District</li>
+                <li><a href="/charts/question1">{% trans 'Iraq' %}</a></li>
+                <li><a href="#">{% trans 'Bhagdad' %}</a></li>
+                <li class="active">{% trans 'District' %}</li>
             </ul>
             <ul class="secondary_links">
-                <li class="download"><a href="#">Download</a></li>
-                <li class="print"><a href="#">Print</a></li>
+                <li class="download"><a href="#">{% trans 'Download' %}</a></li>
+                <li class="print"><a href="#">{% trans 'Print' %}</a></li>
             </ul>
         </div>
         {% endblock %}
@@ -70,7 +70,7 @@
                     </ol>
                 </div>
                 <p class="total_responses"> 215 responses <br/>
-                    from Bhagdad</p>
+                    from Bhagdad	</p>
                 </p>
                 {% endblock %}
             </div>
@@ -79,38 +79,38 @@
                 <div class="filter_section">
                     <form>
                         <fieldset>
-                            <legend><span>Filter map by</span></legend>
+                            <legend><span>{% trans 'Filter map by' %}</span></legend>
                             <div class="field_container">
                                 <input name="filter" type="radio" value="all" id="all" checked/>
-                                <label for="all">All responses</label>
+                                <label for="all">{% trans 'All responses' %}</label>
                             </div>
                             <div class="field_container">
                                 <input name="filter" type="radio" value="Boys" id="Boys"/>
-                                <label for="Boys">Boys</label>
+                                <label for="Boys">{% trans 'Boys' %}</label>
                             </div>
                             <div class="field_container">
                                 <input name="filter" type="radio" value="Girls" id="Girls"/>
-                                <label for="Girls">Girls</label>
+                                <label for="Girls">{% trans 'Girls' %}</label>
                             </div>
                             <div class="field_container">
                                 <input name="filter" type="radio" value="Ages_0_8" id="Ages_0_8"/>
-                                <label for="Ages_0_8">Ages 0-8</label>
+                                <label for="Ages_0_8">{% trans 'Ages 0-8' %}</label>
                             </div>
                             <div class="field_container">
                                 <input name="filter" type="radio" value="Ages_9_12" id="Ages_9_12"/>
-                                <label for="Ages_9_12">Ages 9-12</label>
+                                <label for="Ages_9_12">{% trans 'Ages 9-12' %}</label>
                             </div>
                             <div class="field_container">
                                 <input name="filter" type="radio" value="Ages_13plus" id="Ages_13plus"/>
-                                <label for="Ages_13plus">Ages 13+</label>
+                                <label for="Ages_13plus">{% trans 'Ages 13+' %}</label>
                             </div>
                         </fieldset>
                     </form>
                 </div>
                 <div class="keys_section">
-                    <p class="color_key"> Color indicates the top response category for each governarate. </p>
+                    <p class="color_key"> {% trans 'Color indicates the top response category for each governarate.' %} </p>
 
-                    <p class="point_key"> Points are scaled by total number of responses in each governarate. </p>
+                    <p class="point_key"> {% trans 'Points are scaled by total number of responses in each governarate.' %} </p>
                 </div>
             </div>
             {% endblock %}
@@ -123,9 +123,9 @@
             <div id="chart_container" class="clearfix">
                 <div class="response_category">
                     <div class="response_category_header">
-                        <h4>Response categories</h4>
+                        <h4>{% trans 'Response categories' %}</h4>
 
-                        <p>What do these mean?</p>
+                        <p>{% trans 'What do these mean?' %}</p>
                     </div>
 										{% if categories %}
                     <ul>
@@ -145,12 +145,12 @@
 
                             et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata
 
-                            sanctus est Lorem ipsum dolor sit amet.</p>
+                            sanctus est Lorem ipsum dolor sit amet. </p>
                     </div>
                     <div class="chart_details">
                         {% block chart %}
                         <div class="chart_bar">
-                            <h3><span class="response_criteria">Top Response for Bhagdad</span> <span
+                            <h3><span class="response_criteria">Top Response for Bhagdad 123123</span> <span
                                     class="top_concern">Security 65%</span></h3>
 
                             <div id="chart">
@@ -171,12 +171,12 @@
     <div id="sidebar">
         <div class="nav_questions"><img src="/static/charts/img/poll_q_img_1.gif" alt=""/>
             <ul>
-                <li><a href="question1"> I feel happy </a></li>
-                <li><a href="question2"> What makes you least happy? </a></li>
-                <li><a href="question3"> Compared to my parents, my life ... </a></li>
-                <li class="last"><a href="#">If i was leading the country ... </a></li>
+                <li><a href="question1">{% trans 'I feel happy' %}</a></li>
+                <li><a href="question2">{% trans 'What makes you least happy?' %}</a></li>
+                <li><a href="question3">{% trans 'Compared to my parents, my life ...' %}</a></li>
+                <li class="last"><a href="#">{% trans 'If i was leading the country ...' %}</a></li>
             </ul>
-            <p class="note"><a href="#">Read about how UNICEF used SMS to conduct the survey</a></p>
+            <p class="note"><a href="#">{% trans 'Read about how UNICEF used SMS to conduct the survey' %}</a></p>
         </div>
     </div>
     {% endblock %}
@@ -219,3 +219,12 @@
     {% endblock %}
 
 </div>
+
+{% block i18nscript %}
+<script type="application/javascript">
+    function test(lang) {
+        $.post("/i18n/setlang/", {language : lang});
+        location.reload();
+    }
+</script>
+{% endblock %}
