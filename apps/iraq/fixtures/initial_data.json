@@ -62,8 +62,8 @@
         "pk": 1,
         "model": "poll.color",
         "fields": {
-            "name": "pink",
-            "file_name": "pink_dot.png"
+            "name": "orange",
+            "file_name": "orange_dot.png"
         }
         
     },
@@ -80,8 +80,8 @@
         "pk": 3,
         "model": "poll.color",
         "fields": {
-            "name": "purple",
-            "file_name": "purple_dot.png"
+            "name": "mauve",
+            "file_name": "mauve_dot.png"
         }
         
     },
