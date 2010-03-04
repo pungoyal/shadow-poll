@@ -183,4 +183,4 @@ class UserSessionTest(TestCase):
         pconnection.save()
         session = UserSession.open(pconnection)
 
-        self.assertEquals(session.respond('junk'), str(self.question1) )
+        self.assertEquals(session.respond('junk'), TRIGGER_INCORRECT_MESSAGE )
