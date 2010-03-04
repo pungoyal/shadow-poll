@@ -59,9 +59,9 @@ def show_by_question(request, question_id, governorate_id, template, context={})
     question = get_object_or_404(Question, pk=question_id)
     response_break_up = question.response_break_up(governorate_id)
 
-    max_voted=(u'No responses yet!', 0)
-    if(len(response_break_up) != 0):
-        max_voted = max(response_break_up.iteritems(), key=operator.itemgetter(1))
+    if len(response_break_up) == 0:
+        response_break_up.append("No reponses yet")
+        response_break_up.append(0)
 
     choices_of_question = Choice.objects.filter(question = question)
 
@@ -75,10 +75,10 @@ def show_by_question(request, question_id, governorate_id, template, context={})
 
     context.update( {"categories": categories,
                      "question": question,
-                     "chart_data": response_break_up.values(),                     
-                     "top_response": max_voted[0],
-                     "percentage": max_voted[1],
-                     "national_data": national_response_break_up.values(),
+                     "chart_data": response_break_up[1:],                     
+                     "top_response": response_break_up[0],
+                     "percentage": max(response_break_up[1:]),
+                     "national_data": national_response_break_up[1:],
                      "choices": Choice.objects.filter(question=question),
                      "questions" : Question.objects.all()
     })
