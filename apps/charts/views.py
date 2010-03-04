@@ -46,8 +46,6 @@ def show_governorate_by_question(request, governorate_id, question_id,
                                  template='results.html', context={}):
     governorate = get_object_or_404(Governorate, pk=governorate_id)
 
-    question = get_object_or_404(Question, pk=question_id)
-
     context.update(   {"region": governorate.name,
                        "governorate": governorate,
                        "bbox": governorate.bounding_box,
@@ -61,8 +59,7 @@ def show_by_question(request, question_id, governorate_id, template, context={})
     question = get_object_or_404(Question, pk=question_id)
     response_break_up = question.response_break_up(governorate_id)
 
-    #TODO: puneet: fixing
-    max_voted=(u'To be fixed', 0)
+    max_voted=(u'No responses yet!', 0)
     if(len(response_break_up) != 0):
         max_voted = max(response_break_up.iteritems(), key=operator.itemgetter(1))
 

@@ -76,7 +76,8 @@ class Question(models.Model):
         relevant_responses = UserResponse.objects.filter(question=self)
         if governorate_id is not None:
             relevant_responses = relevant_responses.filter(user__governorate=governorate_id)
-        grouped_responses = relevant_responses.values('choice').annotate(Count('choice'))
+        grouped_responses = relevant_responses.values('choice').annotate(Count('choice')).order_by('choice')
+
         total_responses = relevant_responses.aggregate(Count('choice'))
         break_up = {}
         for grouped_response in grouped_responses:
