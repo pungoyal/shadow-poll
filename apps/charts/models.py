@@ -37,7 +37,7 @@ class Geography(models.Model):
             return style_id
         else:
             style_id = {'color': Color.objects.get(file_name="grey_dot.png"), 
-                        'percentage': 0.5 }
+                        'percentage': 0.6 }
             return style_id
         return None
     
