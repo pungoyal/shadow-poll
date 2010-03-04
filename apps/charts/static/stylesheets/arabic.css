@@ -77,6 +77,11 @@ body {
 	margin-left:0;
 	margin-right:10px;
 }
+.choice
+{
+	margin-left: 10px;
+	margin-right: 10px;	
+}
 .question_section .total_responses {
 	left:10px;
 	right: auto;

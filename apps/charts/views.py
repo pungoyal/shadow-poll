@@ -58,7 +58,7 @@ def show_governorate_by_question(request, governorate_id, question_id,
                        "top_response": "Security",
                        "percentage": "64",
                        "governorate": governorate,
-                       "bbox": governorate.bounding_box,
+                       "bbox": governorate.bounding_box,                       
     })
     return show_by_question(request, question_id, template, context)
 
@@ -72,11 +72,14 @@ def show_by_question(request, question_id, template, context={}):
             categories.append(choice.category)
     unique_categories = set(categories)
     categories = list(unique_categories)
+
+    character_english =  ['a', 'b', 'c', 'd', 'e', 'f','g','h','i','j','k','l','m','n']
     context.update( {"categories": categories,
                      "question": question,
                      "national_data": national_response_break_up,
                      "choices": Choice.objects.filter(question=question),
-                     "questions" : Question.objects.all()
+                     "questions" : Question.objects.all(),
+                     "character_english": character_english
     })
     if 'chart_data' not in context:
     # if chart_data not set, default to national view
