@@ -194,13 +194,12 @@ class UserSession(models.Model):
         return "session for : %s" % (self.user)
 
     def respond(self, message):
-     
+
+        # default to the first questionnaire     
         if not self.questionnaire:
-            # default to the first questionnaire
             self.questionnaire = Questionnaire.objects.all().order_by('pk')[0]
 
         if self._is_trigger(message):
-
             self.question = None
             message = message.strip().lstrip(self.questionnaire.trigger.lower()).strip()
             parsers = list(DemographicParser.objects.filter(questionnaire=self.questionnaire).order_by('order') )
@@ -214,10 +213,8 @@ class UserSession(models.Model):
             self.user = self._save_user(self.user)
 
         if self._first_access():
-            # THIS THROWS AN UGLY ERROR WHEN TRIGGER IS POORLY FORMED
-            # todo: FIX this to recover nicely
-            if hasattr(self.user, 'id'):
-                self.user = self._save_user(self.user)
+            if self.user.id == None:
+                return TRIGGER_INCORRECT_MESSAGE
             self.question = Question.first()
             self.save()
             return str(self.question)
@@ -279,7 +276,6 @@ class UserSession(models.Model):
             session = UserSession(question = None)
             user.set_user_geolocation_if_registered(connection)
             session.user = user
-            session.user.save()
             return session
 
         return sessions[0]
