@@ -14,7 +14,8 @@ class DemographicParserTest(TestCase):
 
     def parse_using_parsers(self, message, user):
         for parser in self.parsers:
-            parser.parse_and_set(message, user)
+            val = parser.parse(message)
+            user.set_value(parser.name, val)
 
     def test_trigger(self):
         user = User()
@@ -102,3 +103,5 @@ class DemographicParserTest(TestCase):
         self.assertTrue(user is not None)
         self.assertEquals(user.age, None)
         self.assertEquals(user.gender, 'f')
+
+        

@@ -29,3 +29,12 @@ class UserTest(TestCase):
         self.assertEquals(user.governorate , None)
         self.assertEquals(user.district, None)
         
+    def set_value_on_user(self):
+        user = User()
+        self.assertEquals(user.age, None)
+        self.assertEquals(user.gender, None)
+        user.set_value("age", 12)
+        self.assertEquals(user.age, 12)
+        self.assertEquals(user.gender, None)
+        user.set_value("gender", "f")
+        self.assertEquals(user.gender, "f")        

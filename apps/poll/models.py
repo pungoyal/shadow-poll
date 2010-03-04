@@ -32,15 +32,18 @@ class DemographicParser(models.Model):
     regex = models.CharField(max_length=32)
     order = models.IntegerField()
     type = models.CharField(max_length=16, choices=DATA_TYPE)
+    mandatory = models.BooleanField()
 
     def __unicode__(self):
         return "%s" % (self.name)
 
-    def parse_and_set(self, message, user) :
+    def parse(self, message) :
         arguments = message.split(SEPARATOR)
+        val = None
         for a in arguments:
             regex = re.compile( '(%s)$' % str(self.regex).strip() )
             match = regex.match( a.lower() )
+
             if match:
                 if self.type == 'i':
                     val = int(match.group(0))
@@ -48,9 +51,8 @@ class DemographicParser(models.Model):
                     val = match.group(0)[0]
                 else:
                     val = match.group(0)
-                if hasattr(user, self.name):
-                        setattr(user, self.name, val)
-                        break
+                break     
+        return val
 
 ##########################################################################
 
@@ -171,6 +173,10 @@ class User(models.Model):
         self.governorate = registration.governorate
         self.district = registration.district
 
+    def set_value(self, field, value):
+        if hasattr(self, field):
+            setattr(self, field, value)
+
 ##########################################################################
 
 class UserSession(models.Model):
@@ -224,7 +230,9 @@ class UserSession(models.Model):
         message = message.strip().lstrip(self.questionnaire.trigger.lower()).strip()
         parsers = list( DemographicParser.objects.filter(questionnaire=self.questionnaire).order_by('order') )
         for parser in parsers:
-            parser.parse_and_set(message, user)
+            demographic_information = parser.parse(message)
+            user.set_value(parser.name, demographic_information)
+
         user.save()
         return user
 
