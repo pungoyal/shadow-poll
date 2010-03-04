@@ -14,7 +14,7 @@ class TestIntegration2(TestScript):
 
     test_receive_first_question_when_given_random_junk_arabic = u"""
         00919980131127 > تصويت
-        00919980131127 <   انا أشعر بالسعادة : (الرجاء إختيار أ,ب,ج  أو د)   أ.دائماً    ب.معظم الوقت    ج. نادراً    د.لا أشعر بالسعادة أبداً
+        00919980131127 < ناسف لاننا لم نفهم ردكم, الرجاء ادخال العمر بالارقام ونوع الجنس إما ذكر او انثى
     """
 
     test_receive_first_question_when_given_random_junk = u"""

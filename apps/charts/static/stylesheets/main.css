@@ -503,8 +503,9 @@ a:hover {
 .chart_note {
 	color:#91886F;
 	float:right;
-	font-size: 0.75em;
+	font-size: 0.70em;
 	margin-top: -45px;
+	font-weight: bold;
 }
 /* Link List */
 #language_menu ul li, #top_menu ul li, #poll_questions ul li, .response_category ul li {

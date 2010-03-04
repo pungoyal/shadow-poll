@@ -6,7 +6,7 @@ from poll.models import Question, Questionnaire, DemographicParser, User, UserSe
 from reporters.models import Reporter, PersistantConnection, PersistantBackend
 from register.models import Registration
 import unittest
-
+from apps.poll.models import TRIGGER_INCORRECT_MESSAGE
 class UserSessionTest(TestCase):
     apps = (poll_App,)
 
@@ -113,7 +113,7 @@ class UserSessionTest(TestCase):
         self.assertEquals(session.respond("c"), str(self.question3))
         self.assertEquals(session.question, self.question3)
         
-        self.assertEquals(session.respond("trigger"), str(self.question1))
+        self.assertEquals(session.respond("trigger 13 m"), str(self.question1))
         self.assertEquals(session.question, self.question1)
 
 
@@ -130,7 +130,7 @@ class UserSessionTest(TestCase):
         initial_number_of_users = len(User.objects.all())
         
         session = UserSession.open(self.pconnection1)
-        session.respond('trigger')
+        session.respond('trigger 14 f')
         self.assertEquals(len(User.objects.all()), initial_number_of_users + 1)
         session.respond('a')
         self.assertEquals(len(UserResponse.objects.all()), initial_number_of_responses + 1)
@@ -159,6 +159,19 @@ class UserSessionTest(TestCase):
         self.assertEquals(latest_user.governorate, 3)
         self.assertEquals(latest_user.district, 4)
         
+    def test_junk_trigger_message(self):
+        backend = PersistantBackend(slug="MockBackend1")
+        backend.save()
+        reporter = Reporter(alias="ReporterName1")
+        reporter.save()
+        pconnection = PersistantConnection(backend=backend, 
+                                                reporter=reporter, 
+                                                identity="1001")
+        pconnection.save()
+        session = UserSession.open(pconnection)
+
+        self.assertEquals(session.respond('trigger junk'), TRIGGER_INCORRECT_MESSAGE )
+
     def test_junk_message(self):
         backend = PersistantBackend(slug="MockBackend1")
         backend.save()
@@ -169,5 +182,5 @@ class UserSessionTest(TestCase):
                                                 identity="1001")
         pconnection.save()
         session = UserSession.open(pconnection)
-        session.respond('junk')
-        self.assertEquals(session.question, self.question1)
+
+        self.assertEquals(session.respond('junk'), str(self.question1) )

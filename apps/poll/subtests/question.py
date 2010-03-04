@@ -3,11 +3,7 @@ from apps.reporters.models import Reporter, PersistantConnection, PersistantBack
 
 from django.test import TestCase
 
-from poll.app import App as poll_App
-
 class QuestionTest(TestCase):
-
-    apps = (poll_App)
 
     def setUp(self):
         Question.objects.all().delete()
@@ -55,23 +51,7 @@ class QuestionTest(TestCase):
 
         self.assertEquals(first_question, question2)
 
-    def setup_choices(self,question):
-        choice1 = Choice(code= 'a',question=question)
-        choice2 = Choice(code= 'b',question=question)
-        choice3 = Choice(code= 'c',question=question)
-        choice1.save()
-        choice2.save()
-        choice3.save()
-
-    def test_matching_choices(self):
-        question1 = Question(text = 'question 1',max_choices = 1)
-        question1.save()
-        self.setup_choices(question1)
-        self.assertEquals(len(question1.matching_choices('jdenjn')), 0)
-        self.assertEquals(len(question1.matching_choices('a')), 1)
-        self.assertEquals(len(question1.matching_choices(None)), 0)
-
-    def test_humanize_options(self):
+    def setup_question_and_choices(self):
         question = Question(text = 'question 1',max_choices = 1)
         question.save()
         choice1 = Choice(code= 'a',question=question, text="apple")
@@ -80,17 +60,20 @@ class QuestionTest(TestCase):
         choice1.save()
         choice2.save()
         choice3.save()
+        return question
+
+    def test_matching_choices(self):
+        question = self.setup_question_and_choices()
+        self.assertEquals(len(question.matching_choices('jdenjn')), 0)
+        self.assertEquals(len(question.matching_choices('a')), 1)
+        self.assertEquals(len(question.matching_choices(None)), 0)
+
+    def test_humanize_options(self):
+        question = self.setup_question_and_choices()
         self.assertEquals(question.humanize_options(), "a. apple b. bannana c. carrot")
 
     def test_humanize_questions(self):
-        question = Question(text = 'question 1',max_choices = 1)
-        question.save()
-        choice1 = Choice(code= 'a',question=question, text="apple")
-        choice2 = Choice(code= 'b',question=question, text="bannana")
-        choice3 = Choice(code= 'c',question=question, text="carrot")
-        choice1.save()
-        choice2.save()
-        choice3.save()
+        question = self.setup_question_and_choices()
         self.assertEquals(str(question), "question 1:  a. apple b. bannana c. carrot")
 
     def test_questions_with_helper_text(self):
@@ -114,9 +97,13 @@ class QuestionTest(TestCase):
         choice2.save()
         choice3.save()
         UserResponse(user = self.user, question = question, choice = choice1).save()
+        UserResponse(user = self.user, question = question, choice = choice1).save()
         UserResponse(user = self.user, question = question, choice = choice2).save()
-        UserResponse(user = self.user, question = question, choice = choice2).save()
-        num_responses_for_governorate = UserResponse.objects.filter(question = question, 
-                                                                    user__governorate = "1").count()
-        self.assertEquals(num_responses_for_governorate, 3)
 
+        response_break_up = question.response_break_up()
+
+        self.assertEquals(len(response_break_up), 3)
+        self.assertEquals(response_break_up[0], choice1.text)
+
+        self.assertEquals(response_break_up[1], 66.7)
+        self.assertEquals(response_break_up[2], 33.3)

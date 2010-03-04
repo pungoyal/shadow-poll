@@ -32,14 +32,13 @@ class Geography(models.Model):
         most_voted_category = self.most_voted_category()
         if most_voted_category:
             percentage = self._bubble_size(question)
-            style_id = {'color': most_voted_category.color, 
-                        'percentage': percentage }
-            return style_id
-        else:
-            style_id = {'color': Color.objects.get(file_name="grey_dot.png"), 
-                        'percentage': 0.6 }
-            return style_id
-        return None
+            style = {'color': most_voted_category.color, 
+                     'percentage': percentage }
+            return style
+        # default to grey
+        style = {'color': Color.objects.get(file_name="grey_dot.png"), 
+                 'percentage': 0.6 }
+        return style
     
     def _percentage_to_display(self, count, total):
         """ This formula returns the size of the bubble we want to display 
@@ -81,16 +80,16 @@ class District(Geography):
         unique_together = ("governorate", "code")
 
     def _bubble_size(self, question):
-        responses = UserResponse.objects.filter(question=question.id, user__district=self.code)
-        all_responses = UserResponse.objects.filter(user__district=self.code)
+        responses = UserResponse.objects.filter(question=question.id, user__district=self.code, user__governorate=self.governorate.code)
+        all_responses = UserResponse.objects.filter(user__district=self.code, user__governorate=self.governorate.code)
         return self._percentage_to_display(responses.count(), all_responses.count())
 
     def most_voted_category(self):
-        relevant_responses = UserResponse.objects.filter(user__district = self.code)
+        relevant_responses = UserResponse.objects.filter(user__district = self.code, user__governorate=self.governorate.code)
         return Category.most_popular(relevant_responses)
 
     def num_responses(self):
-        return len(UserResponse.objects.filter(user__district = self.code))
+        return len(UserResponse.objects.filter(user__district = self.code, user__governorate=self.governorate.code))
 
 GENDER = ( ('m', 'Male'), ('f', 'Female') )
 
