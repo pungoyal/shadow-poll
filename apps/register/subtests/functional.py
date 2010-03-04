@@ -48,7 +48,6 @@ class TestRegisterArabicScript (TestScript):
     
     arabic_error_message = u"عذراً, رسالتك غير مفهومة. الصيغة الصحيحة هي    تسجيل   التصويت    رمز المحافظة    رمز القضاء"
     test_incomplete_information_passed_in_the_register_message_arabic = u"""
-        00919980131127 > تسجيل التصويت 1شش شس 00 001
+        00919980131127 > تسجيل الت243صويت 1شش01
         00919980131127 < %(error_msg)s
     """ % {"error_msg":arabic_error_message}
-

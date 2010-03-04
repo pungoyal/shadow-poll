@@ -19,8 +19,8 @@ class UserTest(TestCase):
     def test_set_user_geolocation(self):
         user = User()
         user.set_user_geolocation_if_registered(self.pconnection)
-        self.assertEquals(user.governorate , 3)
-        self.assertEquals(user.district, 4)
+        self.assertEquals(user.governorate , "3")
+        self.assertEquals(user.district, "4")
     
 
     def test_dont_set_geolocation_when_not_present(self):
