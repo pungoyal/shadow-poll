@@ -30,7 +30,7 @@ window.onload=function() {
 			opacity: 0.30
 		});
 
-        var percentageText = paper.text(x+width/2.0,y+lightHeight/2.0,regional_poll_responses[i]+"%")
+        var percentageText = paper.text(x+width/2.0,y+lightHeight/2.0,regional_poll_responses[i]+"%");
         percentageText.attr({
             fill: fontColors[i],
             stroke: fontColors[i],
@@ -46,7 +46,7 @@ window.onload=function() {
 		});
         x = x + width;
         
-        var filler = paper.rect(x,y,fillerWidth,darkHeight + lightHeight)
+        var filler = paper.rect(x,y,fillerWidth,darkHeight + lightHeight);
         filler.attr({
             fill: "white",
             stroke: "white"
@@ -59,14 +59,14 @@ window.onload=function() {
     
     for (var i=0; i < national_poll_responses.length; i++) {
         var width = national_poll_responses[i]*factor;        
-        var r = paper.rect(x, y+30, width, 5)
+        var r = paper.rect(x, y+30, width, 5);
         r.attr({
             fill: colors[i],
             stroke: colors[i],
             opacity: 0.70
         });
         x = x + width;
-        var filler = paper.rect(x,y+30,fillerWidth,5)
+        var filler = paper.rect(x,y+30,fillerWidth,5);
         filler.attr({
             fill: "white",
             stroke: "white"

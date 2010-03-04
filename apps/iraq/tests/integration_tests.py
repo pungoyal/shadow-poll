@@ -14,7 +14,7 @@ class TestIntegration(TestScript):
     testTreeApp = """
         00919980131127 > register poll 100 1001
         00919980131127 < Thank you, to initiate the poll sms the keyword Poll with your age and gender
-        00919980131127 > poll
+        00919980131127 > poll 12 f
         00919980131127 < I feel happy: (Choose a,b,c or d.) a. Always b. Most of the time c. Rarely d. Never
         00919980131127 > most of the time
         00919980131127 < The three things I need most are: (Prioritize your first, second, and third.) a. Peace and Security b. Go to school regularly c. Health care when sick d. Clean neighbourhood e. Clean drinking water f. Enough food g. Be loved h. Not have to work i. Be listened to j. A place to play k. Family and friends to be safe l. Others
@@ -25,10 +25,10 @@ class TestIntegration(TestScript):
     """
 
     test_registration_message_in_arabic = u"""
-    00919980131127 > التصويت
+    00919980131127 > انثى 12 التصويت
     00919980131127 < انا أشعر بالسعادة : (الرجاء إختيار أ,ب,ج  أو د)   أ.دائماً    ب.معظم الوقت    ج. نادراً    د.لا أشعر بالسعادة أبداً
     00919980131127 > أ
-    
+
     00919980131127 < أكثر ثلاثة أمور أحتاج إليها هي (الرجاء ترتيبها حسب الأولوية): أ) السلام و الأمان ب) الذهاب إلى المدرسة بانتظام ج) الحصول على العلاج عندما امرض د) العيش في حي نظيف هـ) وجود مياه شرب نظيفة و) وجود طعام كافي ز) الشعور بمحبة الآخرين لي ح) عدم اضطراري للعمل ط) الإصغاء إلى آرائي ي)وجود مكان للعب ك)شعور أسرتي وأصدقائي بالأمان ل) أخرى (إجابة مفتوحة). ستستخدم الردود على هذه النقطة خلال المرحلة التجريبية للحصول على المعلومات اللازمة لإجراء التعديلات المحتملة للخيارات.
     00919980131127 > ب ج أ
     00919980131127 < بالمقارنة مع وضع أبي و أمي, أتوقع أن تكون حياتي في المستقبل : (الرجاء إختيار أ,ب,ج  أو د)  أ.أحسن  ب.متشابهة لحياتهما  ج.أسوأ  د.لا أعرف
@@ -36,7 +36,7 @@ class TestIntegration(TestScript):
    00919980131127 < ردودكم قد سجلت. أشكركم على المشاركة في الانتخابات
     """
     test_registration_message_in_arabic_options_jumbled = u"""
-    00919980131127 > التصويت
+    00919980131127 > انثى 12 التصويت
     00919980131127 < انا أشعر بالسعادة : (الرجاء إختيار أ,ب,ج  أو د)   أ.دائماً    ب.معظم الوقت    ج. نادراً    د.لا أشعر بالسعادة أبداً
     00919980131127 > أ
     00919980131127 < أكثر ثلاثة أمور أحتاج إليها هي (الرجاء ترتيبها حسب الأولوية): أ) السلام و الأمان ب) الذهاب إلى المدرسة بانتظام ج) الحصول على العلاج عندما امرض د) العيش في حي نظيف هـ) وجود مياه شرب نظيفة و) وجود طعام كافي ز) الشعور بمحبة الآخرين لي ح) عدم اضطراري للعمل ط) الإصغاء إلى آرائي ي)وجود مكان للعب ك)شعور أسرتي وأصدقائي بالأمان ل) أخرى (إجابة مفتوحة). ستستخدم الردود على هذه النقطة خلال المرحلة التجريبية للحصول على المعلومات اللازمة لإجراء التعديلات المحتملة للخيارات.
@@ -46,7 +46,7 @@ class TestIntegration(TestScript):
    00919980131127 < ردودكم قد سجلت. أشكركم على المشاركة في الانتخابات
    """
     testTreeAppWithoutRegister = """
-        00919980131127 > poll
+        00919980131127 > poll 14 m
         00919980131127 < I feel happy: (Choose a,b,c or d.) a. Always b. Most of the time c. Rarely d. Never
         00919980131127 > a
         00919980131127 < The three things I need most are: (Prioritize your first, second, and third.) a. Peace and Security b. Go to school regularly c. Health care when sick d. Clean neighbourhood e. Clean drinking water f. Enough food g. Be loved h. Not have to work i. Be listened to j. A place to play k. Family and friends to be safe l. Others
@@ -59,7 +59,7 @@ class TestIntegration(TestScript):
     testTreeAppFail = """
         00919980131127 > register poll 100 1001
         00919980131127 < Thank you, to initiate the poll sms the keyword Poll with your age and gender
-        00919980131127 > poll
+        00919980131127 > poll 15 m
         00919980131127 <  I feel happy: (Choose a,b,c or d.) a. Always b. Most of the time c. Rarely d. Never
         00919980131127 > a
         00919980131127 < The three things I need most are: (Prioritize your first, second, and third.) a. Peace and Security b. Go to school regularly c. Health care when sick d. Clean neighbourhood e. Clean drinking water f. Enough food g. Be loved h. Not have to work i. Be listened to j. A place to play k. Family and friends to be safe l. Others
@@ -78,7 +78,7 @@ class TestIntegration(TestScript):
     testTreeAppFailSessionEnd = """
         00919980131127 > register poll 100 1001
         00919980131127 < Thank you, to initiate the poll sms the keyword Poll with your age and gender
-        00919980131127 > poll
+        00919980131127 > poll 9 f
         00919980131127 <  I feel happy: (Choose a,b,c or d.) a. Always b. Most of the time c. Rarely d. Never
         00919980131127 > x
         00919980131127 < You have selected an invalid choice, please choose one among the above listed choice
@@ -88,14 +88,14 @@ class TestIntegration(TestScript):
         00919980131127 < Due to errors the poll has been stopped. To restart, type the keyword Poll with your age and gender
         00919980131127 > a
         00919980131127 <  I feel happy: (Choose a,b,c or d.) a. Always b. Most of the time c. Rarely d. Never
-        00919980131127 > poll
+        00919980131127 > poll 15 m
         00919980131127 < I feel happy: (Choose a,b,c or d.) a. Always b. Most of the time c. Rarely d. Never
     """
     
     testTreeAppFailSessionEnd_2 = """
         00919980131127 > register poll 100 1001
         00919980131127 < Thank you, to initiate the poll sms the keyword Poll with your age and gender
-        00919980131127 > poll
+        00919980131127 > poll 16 m
         00919980131127 <  I feel happy: (Choose a,b,c or d.) a. Always b. Most of the time c. Rarely d. Never
         00919980131127 > Always Nevr
         00919980131127 <  You have selected an invalid choice, please choose one among the above listed choice
@@ -105,7 +105,7 @@ class TestIntegration(TestScript):
         00919980131127 < Due to errors the poll has been stopped. To restart, type the keyword Poll with your age and gender
         00919980131127 > a
         00919980131127 < I feel happy: (Choose a,b,c or d.) a. Always b. Most of the time c. Rarely d. Never
-        00919980131127 > poll
+        00919980131127 > poll 10 f
         00919980131127 <  I feel happy: (Choose a,b,c or d.) a. Always b. Most of the time c. Rarely d. Never
     """
     

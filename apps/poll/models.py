@@ -14,6 +14,9 @@ DATA_TYPE = ( ('i','integer'), ('s','string'), ('c','character') )
 # mapping login in demographic parser
 GENDER = ( ('m', 'Male'), ('f', 'Female') )
 
+FINAL_APPRECIATION_MESSAGE = 'thanks'
+TRIGGER_INCORRECT_MESSAGE = 'trigger_error'
+
 ##########################################################################
 
 #only one questionnaire object in the db to hold the trigger for the poll
@@ -73,15 +76,32 @@ class Question(models.Model):
         returns the percentage of votes going to each category as a list 
         if no responses are received yet, then return empty list
         """
-        # ro: should this return a 'dict' instead of a list?
         relevant_responses = UserResponse.objects.filter(question=self)
         if governorate_id is not None:
             relevant_responses = relevant_responses.filter(user__governorate=governorate_id)
-        grouped_responses = relevant_responses.values('choice').annotate(Count('choice'))
-        total_responses = relevant_responses.aggregate(Count('choice'))
+        grouped_responses = relevant_responses.values('choice').annotate(Count('choice')).order_by('choice')
+
         break_up = []
-        for gr in grouped_responses:
-            break_up.append(round(gr['choice__count']*100/total_responses['choice__count'], 1))
+
+        if len(grouped_responses) == 0:
+            return break_up
+
+        total_responses = relevant_responses.aggregate(Count('choice'))
+
+        # finding the most voted choice.
+        #TODO i am sure python has a better way of doing it. i just need to find it - puneet
+        max_choice = grouped_responses[0]['choice']
+        max_count = grouped_responses[0]['choice__count']
+
+        for group in grouped_responses:
+            count = group['choice__count']
+            if count > max_count:
+                max_choice=group['choice']
+                max_count=count
+            break_up.append(round(count*100/total_responses['choice__count'], 1))
+
+        break_up.insert(0, Choice.objects.get(id=max_choice).text)
+
         return break_up
 
     def humanize_options(self):
@@ -189,16 +209,30 @@ class UserSession(models.Model):
         return "session for : %s" % (self.user)
 
     def respond(self, message):
+     
+        if not self.questionnaire:
+            # default to the first questionnaire
+            self.questionnaire = Questionnaire.objects.all().order_by('pk')[0]
 
         if self._is_trigger(message):
+
             self.question = None
-            self.user = self._save_user(self.user, message)
+            message = message.strip().lstrip(self.questionnaire.trigger.lower()).strip()
+            parsers = list(DemographicParser.objects.filter(questionnaire=self.questionnaire).order_by('order') )
+
+            for parser in parsers:
+                demographic_information = parser.parse(message)
+                if demographic_information == None:
+                    return TRIGGER_INCORRECT_MESSAGE
+                self.user.set_value(parser.name, demographic_information)
+                
+            self.user = self._save_user(self.user)
 
         if self._first_access():
             # THIS THROWS AN UGLY ERROR WHEN TRIGGER IS POORLY FORMED
             # todo: FIX this to recover nicely
             if hasattr(self.user, 'id'):
-                self.user = self._save_user(self.user, message)
+                self.user = self._save_user(self.user)
             self.question = Question.first()
             self.save()
             return str(self.question)
@@ -222,21 +256,11 @@ class UserSession(models.Model):
         self.num_attempt = self.num_attempt + 1
         self.save()
         return "error_parsing_response"
-    
-    def _save_user(self, user, message):
-        if not self.questionnaire:
-            # default to the first question
-            self.questionnaire = Questionnaire.objects.all().order_by('pk')[0]
-        message = message.strip().lstrip(self.questionnaire.trigger.lower()).strip()
-        parsers = list( DemographicParser.objects.filter(questionnaire=self.questionnaire).order_by('order') )
-        for parser in parsers:
-            demographic_information = parser.parse(message)
-            user.set_value(parser.name, demographic_information)
 
+    def _save_user(self, user):
         user.save()
         return user
 
- 
     def _save_response(self,question,choices):
         for choice in choices:
             user_response = UserResponse(user = self.user, question =question, choice = choice)
@@ -244,7 +268,7 @@ class UserSession(models.Model):
 
     def _next_question(self,question):
         if question == None:
-            return "thanks"
+            return FINAL_APPRECIATION_MESSAGE
         return str(question)
 
     def _first_access(self):
