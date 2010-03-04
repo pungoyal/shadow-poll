@@ -14,6 +14,9 @@ DATA_TYPE = ( ('i','integer'), ('s','string'), ('c','character') )
 # mapping login in demographic parser
 GENDER = ( ('m', 'Male'), ('f', 'Female') )
 
+FINAL_APPRECIATION_MESSAGE = 'thanks'
+TRIGGER_INCORRECT_MESSAGE = 'trigger_error'
+
 ##########################################################################
 
 #only one questionnaire object in the db to hold the trigger for the poll
@@ -206,16 +209,30 @@ class UserSession(models.Model):
         return "session for : %s" % (self.user)
 
     def respond(self, message):
+     
+        if not self.questionnaire:
+            # default to the first questionnaire
+            self.questionnaire = Questionnaire.objects.all().order_by('pk')[0]
 
         if self._is_trigger(message):
+
             self.question = None
-            self.user = self._save_user(self.user, message)
+            message = message.strip().lstrip(self.questionnaire.trigger.lower()).strip()
+            parsers = list(DemographicParser.objects.filter(questionnaire=self.questionnaire).order_by('order') )
+
+            for parser in parsers:
+                demographic_information = parser.parse(message)
+                if demographic_information == None:
+                    return TRIGGER_INCORRECT_MESSAGE
+                self.user.set_value(parser.name, demographic_information)
+                
+            self.user = self._save_user(self.user)
 
         if self._first_access():
             # THIS THROWS AN UGLY ERROR WHEN TRIGGER IS POORLY FORMED
             # todo: FIX this to recover nicely
             if hasattr(self.user, 'id'):
-                self.user = self._save_user(self.user, message)
+                self.user = self._save_user(self.user)
             self.question = Question.first()
             self.save()
             return str(self.question)
@@ -239,21 +256,11 @@ class UserSession(models.Model):
         self.num_attempt = self.num_attempt + 1
         self.save()
         return "error_parsing_response"
-    
-    def _save_user(self, user, message):
-        if not self.questionnaire:
-            # default to the first question
-            self.questionnaire = Questionnaire.objects.all().order_by('pk')[0]
-        message = message.strip().lstrip(self.questionnaire.trigger.lower()).strip()
-        parsers = list( DemographicParser.objects.filter(questionnaire=self.questionnaire).order_by('order') )
-        for parser in parsers:
-            demographic_information = parser.parse(message)
-            user.set_value(parser.name, demographic_information)
 
+    def _save_user(self, user):
         user.save()
         return user
 
- 
     def _save_response(self,question,choices):
         for choice in choices:
             user_response = UserResponse(user = self.user, question =question, choice = choice)
@@ -261,7 +268,7 @@ class UserSession(models.Model):
 
     def _next_question(self,question):
         if question == None:
-            return "thanks"
+            return FINAL_APPRECIATION_MESSAGE
         return str(question)
 
     def _first_access(self):
