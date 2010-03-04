@@ -38,5 +38,5 @@ class ViewTests(TestCase):
         self.assertContains(response, "<scale>0.878787878788</scale>")
 
     def test_messaging_page_is_accesible(self):
-        response = self.client.get("/messaging")
+        response = self.client.get("/messages")
         self.assertEquals(response.status_code, 200)
