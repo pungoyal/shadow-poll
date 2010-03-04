@@ -86,7 +86,7 @@ class Question(models.Model):
         total_responses = relevant_responses.aggregate(Count('choice'))
 
         # finding the most voted choice.
-        #TODO i am sure python has a better way to doing it. i just need to find it - puneet
+        #TODO i am sure python has a better way of doing it. i just need to find it - puneet
         max_choice = grouped_responses[0]['choice']
         max_count = grouped_responses[0]['choice__count']
 
