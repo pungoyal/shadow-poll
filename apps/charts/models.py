@@ -56,6 +56,10 @@ class Geography(models.Model):
 
 class Governorate(Geography):
     code = models.CharField(max_length=16, unique=True)
+
+    # this is used by openlayers so that we can manually specify
+    # a zoom level which will properly 'fill the image' with the district
+    zoom_level = models.IntegerField(null=True, blank=True)
     
     def _bubble_size(self, question):
         responses = UserResponse.objects.filter(question=question.id, user__governorate=self.code)

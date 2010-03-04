@@ -113,12 +113,19 @@ $(document).ready(function(){
     
     // This makes sure we zoom to the appropriate country/governorate level
     var bbox = $("#bbox").html();
+    var governorate_zoom = $("#governorate-zoom").html();
     if (bbox != '')
     {	
         wkt = new OpenLayers.Format.WKT();
         vector = wkt.read(bbox);
-        bounds = vector.geometry.getBounds().transform(new OpenLayers.Projection('EPSG:4326'), new OpenLayers.Projection('EPSG:900913'));
+        bounds = vector.geometry.getBounds().transform(
+        			new OpenLayers.Projection('EPSG:4326'), 
+        			new OpenLayers.Projection('EPSG:900913'));
         map.zoomToExtent(bounds);
+        if (governorate_zoom != '')
+        {
+            map.zoomTo(governorate_zoom);
+        }
     }
 
 });
