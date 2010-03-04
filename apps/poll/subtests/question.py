@@ -96,12 +96,14 @@ class QuestionTest(TestCase):
         choice1.save()
         choice2.save()
         choice3.save()
+        UserResponse(user = self.user, question = question, choice = choice1).save()
+        UserResponse(user = self.user, question = question, choice = choice1).save()
         UserResponse(user = self.user, question = question, choice = choice2).save()
-        UserResponse(user = self.user, question = question, choice = choice1).save()
-        UserResponse(user = self.user, question = question, choice = choice1).save()
 
         response_break_up = question.response_break_up()
 
-        self.assertEquals(len(response_break_up), 2)
-        self.assertEquals(response_break_up[choice2.text], 33.3)
-        self.assertEquals(response_break_up[choice1.text], 66.7)
+        self.assertEquals(len(response_break_up), 3)
+        self.assertEquals(response_break_up[0], choice1.text)
+
+        self.assertEquals(response_break_up[1], 66.7)
+        self.assertEquals(response_break_up[2], 33.3)

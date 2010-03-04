@@ -81,11 +81,26 @@ class Question(models.Model):
             relevant_responses = relevant_responses.filter(user__governorate=governorate_id)
         grouped_responses = relevant_responses.values('choice').annotate(Count('choice')).order_by('choice')
 
+        break_up = []
+
+        if len(grouped_responses) == 0:
+            return break_up
+
         total_responses = relevant_responses.aggregate(Count('choice'))
-        break_up = {}
-        for grouped_response in grouped_responses:
-            choice_name = Choice.objects.get(id=grouped_response['choice']).text
-            break_up[choice_name]=(round(grouped_response['choice__count']*100/total_responses['choice__count'], 1))
+
+        # finding the most voted choice.
+        #TODO i am sure python has a better way of doing it. i just need to find it - puneet
+        max_choice = grouped_responses[0]['choice']
+        max_count = grouped_responses[0]['choice__count']
+
+        for group in grouped_responses:
+            count = group['choice__count']
+            if count > max_count:
+                max_choice=group['choice']
+                max_count=count
+            break_up.append(round(count*100/total_responses['choice__count'], 1))
+
+        break_up.insert(0, Choice.objects.get(id=max_choice).text)
 
         return break_up
 

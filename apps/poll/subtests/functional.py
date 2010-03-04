@@ -17,17 +17,19 @@ class StatsTest(TestCase):
         break_up = question.response_break_up()
         choices = Choice.objects.filter(question=question).order_by('id')
 
-        self.assertEquals(break_up[choices[0].text], 14.9)
-        self.assertEquals(break_up[choices[1].text], 55.3)
-        self.assertEquals(break_up[choices[2].text], 23.4)
-        self.assertEquals(break_up[choices[3].text], 6.4)
+        self.assertEquals(break_up[0], u'Most of the time')
+
+        self.assertEquals(break_up[1], 14.9)
+        self.assertEquals(break_up[2], 55.3)
+        self.assertEquals(break_up[3], 23.4)
+        self.assertEquals(break_up[4], 6.4)
 
     def test_sum_of_break_up_values_should_be_100(self):
         question = Question.objects.get(id=1)
         break_up = question.response_break_up()
 
         try:
-            self.assertEquals(fsum(break_up.values()), 100)
+            self.assertEquals(fsum(break_up[1:]), 100)
         except NameError:
         # TODO - put some equivalent test here
             pass
