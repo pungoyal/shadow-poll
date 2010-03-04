@@ -1,13 +1,9 @@
 import os
+import sys
 from django.core.management.base import CommandError, AppCommand, _make_writeable
-from optparse import make_option
 
 class Command(AppCommand):
-    option_list = AppCommand.option_list + (
-    )
-
-    help = ("Creates a Django jobs command directory structure for the given app name"
-            " in the current directory.")
+    help = ("Creates a Django jobs command directory structure for the given app name in the current directory.")
     args = "[appname]"
     label = 'application name'
 
@@ -17,24 +13,16 @@ class Command(AppCommand):
     can_import_settings = True
 
     def handle_app(self, app, **options):
-        directory = os.getcwd()
-        app_name = app.__name__.split('.')[-2]
-        project_dir = os.path.join(directory, app_name)
-        if not os.path.exists(project_dir):
-            try:
-                os.mkdir(project_dir)
-            except OSError, e:
-                raise CommandError(e)
-        
-        copy_template('jobs_template', project_dir)
-            
+        app_dir = os.path.dirname(app.__file__)
+        copy_template('jobs_template', app_dir)
+
 def copy_template(template_name, copy_to):
     """copies the specified template directory to the copy_to location"""
-    import extensions
+    import django_extensions
     import re
     import shutil
     
-    template_dir = os.path.join(extensions.__path__[0], 'conf', template_name)
+    template_dir = os.path.join(django_extensions.__path__[0], 'conf', template_name)
 
     # walks the template structure and copies it
     for d, subdirs, files in os.walk(template_dir):

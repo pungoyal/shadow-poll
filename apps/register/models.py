@@ -6,8 +6,8 @@ from rapidsms.webui import settings
 
 class Registration(models.Model):
     public_identifier = models.CharField(max_length=10)
-    governorate = models.IntegerField()
-    district = models.IntegerField()
+    governorate = models.CharField(max_length=16)
+    district = models.CharField(max_length=16)
     phone = models.ForeignKey(PersistantConnection)
     date = models.DateTimeField(default=datetime.now)
     

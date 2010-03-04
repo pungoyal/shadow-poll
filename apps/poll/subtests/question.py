@@ -117,6 +117,6 @@ class QuestionTest(TestCase):
         UserResponse(user = self.user, question = question, choice = choice2).save()
         UserResponse(user = self.user, question = question, choice = choice2).save()
         num_responses_for_governorate = UserResponse.objects.filter(question = question, 
-                                                                    user__governorate = 1).count()
+                                                                    user__governorate = "1").count()
         self.assertEquals(num_responses_for_governorate, 3)
 
