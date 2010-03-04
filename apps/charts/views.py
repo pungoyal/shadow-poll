@@ -1,5 +1,4 @@
-import os, mimetypes
-
+import os, mimetypes, operator
 
 from math import sqrt
 from django.http import HttpResponse, HttpResponseNotFound, HttpResponseServerError,Http404
@@ -40,41 +39,46 @@ def show_governorate(request, governorate_id, template='results.html'):
 
 def show_iraq_by_question(request, question_id,
                           template='results.html', context={}):
-    context.update(   {"region": "Iraq",
-                       # TODO - fix
-                       "top_response": "Security",
-                       "percentage": "64",
-    })
-    return show_by_question(request, question_id, template, context)
+    context.update({"region": "Iraq"})
+    return show_by_question(request, question_id, None,  template, context)
 
 def show_governorate_by_question(request, governorate_id, question_id,
                                  template='results.html', context={}):
     governorate = get_object_or_404(Governorate, pk=governorate_id)
-    question = get_object_or_404(Question, pk=question_id)
-    response_break_up = question.response_break_up(governorate_id)
+
     context.update(   {"region": governorate.name,
-                       "chart_data": response_break_up,
-                       # TODO - fix
-                       "top_response": "Security",
-                       "percentage": "64",
                        "governorate": governorate,
                        "bbox": governorate.bounding_box,
     })
-    return show_by_question(request, question_id, template, context)
+    return show_by_question(request, question_id, governorate_id, template, context)
 
-def show_by_question(request, question_id, template, context={}):
+def show_by_question(request, question_id, governorate_id, template, context={}):
     question = get_object_or_404(Question, pk=question_id)
     national_response_break_up = question.response_break_up()
+
+    question = get_object_or_404(Question, pk=question_id)
+    response_break_up = question.response_break_up(governorate_id)
+
+    max_voted=(u'No responses yet!', 0)
+    if(len(response_break_up) != 0):
+        max_voted = max(response_break_up.iteritems(), key=operator.itemgetter(1))
+
     choices_of_question = Choice.objects.filter(question = question)
+
     categories = []
     for choice in choices_of_question:
         if choice.category:
             categories.append(choice.category)
+
     unique_categories = set(categories)
     categories = list(unique_categories)
+
     context.update( {"categories": categories,
                      "question": question,
-                     "national_data": national_response_break_up,
+                     "chart_data": response_break_up.values(),                     
+                     "top_response": max_voted[0],
+                     "percentage": max_voted[1],
+                     "national_data": national_response_break_up.values(),
                      "choices": Choice.objects.filter(question=question),
                      "questions" : Question.objects.all()
     })
