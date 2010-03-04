@@ -113,14 +113,14 @@ def get_kml(request, question_id, kml):
     question = Question.objects.get(id=question_id)
     placemarks_info_list = []
     style_dict_list = []
-    for (counter, governorates) in enumerate(kml):
-        style_dict = governorates.style(question)
+    for (counter, geography) in enumerate(kml):
+        style_dict = geography.style(question)
         if style_dict:
             style_str = "s%s-%d" % (style_dict['color'].id, len(style_dict_list))
-            placemarks_info_list.append({'id': governorates.id,
-                                         'name': governorates.name,
-                                         'description': governorates.description,
-                                         'kml': governorates.kml,
+            placemarks_info_list.append({'id': geography.id,
+                                         'name': geography.name,
+                                         'description': geography.description,
+                                         'kml': geography.kml,
                                          'style': style_str})
             style_dict_list.append({'id': style_dict['color'].id, 'percentage': style_dict['percentage'],
                                     'file_name': style_dict['color'].file_name})
