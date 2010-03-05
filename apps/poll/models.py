@@ -157,7 +157,7 @@ class Color(models.Model):
     code = models.CharField(max_length=25)
 
     def __unicode__(self):
-        return "rank:%s code:%s" % (self.rank, self.code)
+        return "file:%s code:%s" % (self.file_name, self.code)
 
 ##########################################################################
 

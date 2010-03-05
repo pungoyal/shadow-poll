@@ -72,7 +72,7 @@
         "model": "poll.color",
         "fields":{
             "file_name": "green_dot.png",
-            "code": "#CCF98A"
+            "code": "#75B907"
         }
 
     },

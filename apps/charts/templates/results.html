@@ -1,5 +1,6 @@
 {% extends 'iraq.html' %}
 {% load i18n %}
+{% load chart_extras %}
 
 {% block javascripts %}
 <script src="/static/charts/javascripts/OpenLayers-2.8/OpenLayers.js"></script>
@@ -46,6 +47,7 @@
 <div class="chart_bar">
     <h3>
         <span class="response_criteria"> {% trans 'Top Response for' %} {% trans region %}</span>
+        <span class="top_concern">{{ top_response|dict_lookup:'text'}} {{ top_response|dict_lookup:'percentage' }}%</span>
     </h3>
 
     <div id="chart">
