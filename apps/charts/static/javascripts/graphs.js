@@ -13,8 +13,6 @@ window.onload=function() {
     var factor = (canvasWidth/107);
 
     var paper = Raphael(document.getElementById("chart"), canvasWidth, 120);
-	var colors=["#ccff8a","#ea4cf4","#f8b088","#8bc0fa"];
-	var fontColors=["#75b907","#BC2EBC","#CC6633","#2966B8"];
 	var x = 0;
     var y = 5;
     var darkHeight = 10;
@@ -25,23 +23,23 @@ window.onload=function() {
         var width = regional_poll_responses[i]*factor;
         var lightRectangle = paper.rect(x,y,width,lightHeight);
 		lightRectangle.attr({
-			fill: colors[i],
-			stroke: colors[i],
+			fill: colors[i]['code'],
+			stroke: colors[i]['code'],
 			opacity: 0.30
 		});
 
         var percentageText = paper.text(x+width/2.0,y+lightHeight/2.0,regional_poll_responses[i]+"%");
         percentageText.attr({
-            fill: fontColors[i],
-            stroke: fontColors[i],
+            fill: colors[i]['code'],
+            stroke: colors[i]['code'],
             font: "12px 'Arial'",
             opacity: 1
         });
 
         var darkRectangle = paper.rect(x,y+lightHeight,width,darkHeight);
 		darkRectangle.attr({
-			fill: colors[i],
-			stroke: colors[i],
+			fill: colors[i]['code'],
+			stroke: colors[i]['code'],
 			opacity: 1
 		});
         x = x + width;
@@ -61,8 +59,8 @@ window.onload=function() {
         var width = national_poll_responses[i]*factor;        
         var r = paper.rect(x, y+30, width, 5);
         r.attr({
-            fill: colors[i],
-            stroke: colors[i],
+            fill: colors[i]['code'],
+            stroke: colors[i]['code'],
             opacity: 0.70
         });
         x = x + width;

@@ -73,7 +73,7 @@ def show_by_question(request, question_id, governorate_id, template, context={})
     unique_categories = set(categories)
     categories = list(unique_categories)
 
-    colors = list(Color.objects.exclude(rank = None).order_by('rank').values_list('code'))
+    colors = json.dumps(list(Color.objects.exclude(rank = None).order_by('rank').values('code')))
 
     character_english =  ['a', 'b', 'c', 'd', 'e', 'f','g','h','i','j','k','l','m','n']
     context.update( {"categories": categories,
