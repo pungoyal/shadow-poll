@@ -1,5 +1,4 @@
-import os, mimetypes
-
+import os, mimetypes, json
 
 from math import sqrt
 from django.http import HttpResponse, HttpResponseNotFound, HttpResponseServerError,Http404
@@ -74,6 +73,8 @@ def show_by_question(request, question_id, governorate_id, template, context={})
     unique_categories = set(categories)
     categories = list(unique_categories)
 
+    colors = list(Color.objects.exclude(rank = None).order_by('rank').values_list('code'))
+
     character_english =  ['a', 'b', 'c', 'd', 'e', 'f','g','h','i','j','k','l','m','n']
     context.update( {"categories": categories,
                      "question": question,
@@ -83,11 +84,9 @@ def show_by_question(request, question_id, governorate_id, template, context={})
                      "national_data": national_response_break_up[1:],
                      "choices": Choice.objects.filter(question=question),
                      "character_english": character_english,
+                     "chart_colors": colors,
                      "questions" : Question.objects.all()
     })
-    if 'chart_data' not in context:
-    # if chart_data not set, default to national view
-        context.update( {"chart_data": national_response_break_up})
     return render_to_response(request, template, context)
 
 def home_page(request):

@@ -137,10 +137,11 @@ class Question(models.Model):
 class Color(models.Model):
     """ ro - color has nothing to do with poll. This should be in charts app."""
     file_name = models.CharField(max_length=20)
-    color_code = models.CharField(max_length=25)
-    
+    code = models.CharField(max_length=25)
+    rank = models.IntegerField(null=True) # used for co-relating to choices on the UI
+
     def __unicode__(self):
-        return self.color_code
+        return "rank:%s code:%s" % (self.rank, self.code)
 
 ##########################################################################
 

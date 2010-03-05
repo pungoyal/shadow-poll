@@ -27,7 +27,7 @@
 			{% endifequal %}
 		 {% endfor %}
        
-        <span style="color: {{choice.category.color.color_code}};">{% trans choice.text %}</span>
+        <span style="color: {{choice.category.color.code}};">{% trans choice.text %}</span>
         <br />
         {% endfor %}
     </div>
@@ -52,8 +52,8 @@
     <div id="chart">
         <script type="text/javascript">
         	// these variables are used by graph.js
-            var regional_poll_responses = {{ chart_data }}
-            var national_poll_responses = {{ national_data }}
+            var regional_poll_responses = {{ chart_data }};
+            var national_poll_responses = {{ national_data }};
         </script>
     </div>
     <p class="chart_note">{% trans 'National results' %}</p>
