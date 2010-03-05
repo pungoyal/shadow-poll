@@ -143,3 +143,93 @@ msgstr "من بغداد"
 msgid "National results"
 msgstr "النتائج الوطنية"
 
+msgid "Peace and Security"
+msgstr "السلام و الأمن"
+
+msgid "Go to school regularly"
+msgstr "الذهاب الى المدرسة بانتظام"
+
+msgid "Health care when sick"
+msgstr "الرعاية الصحية للمرضى"
+
+msgid "Clean neighbourhood"
+msgstr "حي نظيف"
+
+msgid "Clean drinking water"
+msgstr "مياه شرب نظيفة"
+
+msgid "Enough food"
+msgstr "طعام كافي"
+
+msgid "Be loved"
+msgstr "ان أكون محبوباً"
+
+msgid "Not have to work"
+msgstr "لا أحتاج للعمل"
+
+msgid "Be listened to"
+msgstr "ان يسمعوا رأيي"
+
+msgid "A place to play"
+msgstr "مكان للعب	"
+
+msgid "Family and friends to be safe"
+msgstr "أن يعيش اهلي و اصدقائي بأمان"
+
+msgid "Others"
+msgstr "شيء اخر"
+
+msgid "Better"
+msgstr "افضل"
+
+msgid "About the same"
+msgstr "نفس الشيء"
+
+msgid "Worse"
+msgstr "اسوء"
+
+msgid "I don't know"
+msgstr "لا اعرف"
+
+msgid "a"
+msgstr "أ"
+
+msgid "b"
+msgstr "ب"
+
+msgid "c"
+msgstr "ج"
+
+msgid "d"
+msgstr "د"
+
+msgid "e"
+msgstr "ه"
+
+msgid "f"
+msgstr "و"
+
+msgid "g"
+msgstr "ز"
+
+msgid "h"
+msgstr "ح"
+
+msgid "i"
+msgstr "ط"
+
+msgid "j"
+msgstr "ي"
+
+msgid "k"
+msgstr "ك"
+
+msgid "l"
+msgstr "ل"
+
+msgid "m"
+msgstr "م"
+
+msgid "n"
+msgstr "ن"
+

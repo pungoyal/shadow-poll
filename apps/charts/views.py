@@ -1,4 +1,5 @@
-import os, mimetypes, operator
+import os, mimetypes
+
 
 from math import sqrt
 from django.http import HttpResponse, HttpResponseNotFound, HttpResponseServerError,Http404
@@ -39,48 +40,46 @@ def show_governorate(request, governorate_id, template='results.html'):
 
 def show_iraq_by_question(request, question_id,
                           template='results.html', context={}):
-    context.update({"region": "Iraq"})
-    return show_by_question(request, question_id, None,  template, context)
+    context.update(   {"region": "Iraq",
+                       # TODO - fix
+                       "top_response": "Security",
+                       "percentage": "64",
+    })
+    return show_by_question(request, question_id, template, context)
 
 def show_governorate_by_question(request, governorate_id, question_id,
                                  template='results.html', context={}):
     governorate = get_object_or_404(Governorate, pk=governorate_id)
-
-    context.update(   {"region": governorate.name,
-                       "governorate": governorate,
-                       "bbox": governorate.bounding_box,
-    })
-    return show_by_question(request, question_id, governorate_id, template, context)
-
-def show_by_question(request, question_id, governorate_id, template, context={}):
-    question = get_object_or_404(Question, pk=question_id)
-    national_response_break_up = question.response_break_up()
-
     question = get_object_or_404(Question, pk=question_id)
     response_break_up = question.response_break_up(governorate_id)
+    context.update(   {"region": governorate.name,
+                       "chart_data": response_break_up,
+                       # TODO - fix
+                       "top_response": "Security",
+                       "percentage": "64",
+                       "governorate": governorate,
+                       "bbox": governorate.bounding_box,                       
+    })
+    return show_by_question(request, question_id, template, context)
 
-    if len(response_break_up) == 0:
-        response_break_up.append("No reponses yet")
-        response_break_up.append(0)
-
+def show_by_question(request, question_id, template, context={}):
+    question = get_object_or_404(Question, pk=question_id)
+    national_response_break_up = question.response_break_up()
     choices_of_question = Choice.objects.filter(question = question)
-
     categories = []
     for choice in choices_of_question:
         if choice.category:
             categories.append(choice.category)
-
     unique_categories = set(categories)
     categories = list(unique_categories)
 
+    character_english =  ['a', 'b', 'c', 'd', 'e', 'f','g','h','i','j','k','l','m','n']
     context.update( {"categories": categories,
                      "question": question,
-                     "chart_data": response_break_up[1:],                     
-                     "top_response": response_break_up[0],
-                     "percentage": max(response_break_up[1:]),
-                     "national_data": national_response_break_up[1:],
+                     "national_data": national_response_break_up,
                      "choices": Choice.objects.filter(question=question),
-                     "questions" : Question.objects.all()
+                     "questions" : Question.objects.all(),
+                     "character_english": character_english
     })
     if 'chart_data' not in context:
     # if chart_data not set, default to national view

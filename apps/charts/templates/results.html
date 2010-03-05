@@ -18,14 +18,19 @@
 <span id="bbox" style="display:none;">{{bbox}}</span>
 <div class="question">
     <h2>{% trans question.text %}</h2>
-    <ol>
-
+    <div class="choice" >
         {% for choice in choices %}
-        <li>
-            <span style="color: {{choice.category.color.color_code}};">{% trans choice.text %}</span>
-        </li>
+       
+	     {% for char in character_english %}
+		 	{% ifequal forloop.counter  forloop.parentloop.counter %}				
+				{% trans char %} &nbsp;.&nbsp;
+			{% endifequal %}
+		 {% endfor %}
+       
+        <span style="color: {{choice.category.color.color_code}};">{% trans choice.text %}</span>
+        <br />
         {% endfor %}
-    </ol>
+    </div>
 </div>
 <p class="total_responses">
     215 {% trans 'responses' %} <br/>
