@@ -63,7 +63,7 @@
         "model": "poll.color",
         "fields": {
             "file_name": "orange_dot.png",
-						"color_code": "#F8B088"
+            "code": "#F8B088"
         }
 
     },
@@ -72,7 +72,7 @@
         "model": "poll.color",
         "fields":{
             "file_name": "green_dot.png",
-						"color_code": "#CCF98A"
+            "code": "#CCF98A"
         }
 
     },
@@ -81,7 +81,7 @@
         "model": "poll.color",
         "fields": {
             "file_name": "mauve_dot.png",
-						"color_code": "rgb(234, 76, 244)"
+            "code": "rgb(234, 76, 244)"
         }
 
     },
@@ -90,7 +90,7 @@
         "model": "poll.color",
         "fields":{
             "file_name": "blue_dot.png",
-						"color_code": "#8BC0FA"
+            "code": "#8BC0FA"
         }
 
     },
@@ -99,7 +99,7 @@
         "model": "poll.color",
         "fields":{
             "file_name": "grey_dot.png",
-						 "color_code": "#cdc9c9"
+            "code": "#cdc9c9"
         }
 
     },
