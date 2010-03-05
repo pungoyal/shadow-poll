@@ -73,18 +73,14 @@ def show_by_question(request, question_id, governorate_id, template, context={})
     unique_categories = set(categories)
     categories = list(unique_categories)
 
-    colors = json.dumps(list(Color.objects.exclude(rank = None).order_by('rank').values('code')))
-
     character_english =  ['a', 'b', 'c', 'd', 'e', 'f','g','h','i','j','k','l','m','n']
     context.update( {"categories": categories,
                      "question": question,
-                     "chart_data": response_break_up[1:],
                      "top_response": response_break_up[0],
-                     "percentage": max(response_break_up[1:]),
-                     "national_data": national_response_break_up[1:],
+                     "chart_data": json.dumps(response_break_up[1:]),
+                     "national_data": json.dumps(national_response_break_up[1:]),
                      "choices": Choice.objects.filter(question=question),
                      "character_english": character_english,
-                     "chart_colors": colors,
                      "questions" : Question.objects.all()
     })
     return render_to_response(request, template, context)

@@ -84,23 +84,40 @@ class Question(models.Model):
         break_up = []
 
         if len(grouped_responses) == 0:
+            no_response = {}
+            no_response['text'] = "No responses yet"
+            no_response['percentage'] = 0
+            no_response['color'] = "#FF0000"
+            break_up.append(no_response)
             return break_up
 
         total_responses = relevant_responses.aggregate(Count('choice'))
 
         # finding the most voted choice.
         #TODO i am sure python has a better way of doing it. i just need to find it - puneet
-        max_choice = grouped_responses[0]['choice']
-        max_count = grouped_responses[0]['choice__count']
+        max_percentage = grouped_responses[0]['choice__count']
 
         for group in grouped_responses:
             count = group['choice__count']
-            if count > max_count:
-                max_choice=group['choice']
-                max_count=count
-            break_up.append(round(count*100/total_responses['choice__count'], 1))
+            choice = group['choice']
+            color = Category.objects.get(choice=choice).color.code
 
-        break_up.insert(0, Choice.objects.get(id=max_choice).text)
+            percentage = round(count*100/total_responses['choice__count'], 1)
+
+            if percentage > max_percentage:
+                max_percentage=percentage
+                max_choice=choice
+                max_color = color
+            response = {}
+            response['percentage'] = percentage
+            response['color'] = color
+            break_up.append(response)
+
+        top_response = {}
+        top_response['text'] = Choice.objects.get(id=max_choice).text
+        top_response['percentage'] = max_percentage
+        top_response['color'] = max_color
+        break_up.insert(0, top_response)
 
         return break_up
 
@@ -138,7 +155,6 @@ class Color(models.Model):
     """ ro - color has nothing to do with poll. This should be in charts app."""
     file_name = models.CharField(max_length=20)
     code = models.CharField(max_length=25)
-    rank = models.IntegerField(null=True) # used for co-relating to choices on the UI
 
     def __unicode__(self):
         return "rank:%s code:%s" % (self.rank, self.code)

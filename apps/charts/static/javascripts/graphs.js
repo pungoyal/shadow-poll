@@ -20,26 +20,26 @@ window.onload=function() {
     var fillerWidth = 2;
 
 	for (var i=0; i < regional_poll_responses.length; i++) {
-        var width = regional_poll_responses[i]*factor;
+        var width = regional_poll_responses[i]['percentage']*factor;
         var lightRectangle = paper.rect(x,y,width,lightHeight);
 		lightRectangle.attr({
-			fill: colors[i]['code'],
-			stroke: colors[i]['code'],
+			fill: regional_poll_responses[i]['color'],
+			stroke: regional_poll_responses[i]['color'],
 			opacity: 0.30
 		});
 
-        var percentageText = paper.text(x+width/2.0,y+lightHeight/2.0,regional_poll_responses[i]+"%");
+        var percentageText = paper.text(x+width/2.0,y+lightHeight/2.0,regional_poll_responses[i]['percentage']+"%");
         percentageText.attr({
-            fill: colors[i]['code'],
-            stroke: colors[i]['code'],
+            fill: regional_poll_responses[i]['color'],
+            stroke: regional_poll_responses[i]['color'],
             font: "12px 'Arial'",
             opacity: 1
         });
 
         var darkRectangle = paper.rect(x,y+lightHeight,width,darkHeight);
 		darkRectangle.attr({
-			fill: colors[i]['code'],
-			stroke: colors[i]['code'],
+			fill: regional_poll_responses[i]['color'],
+			stroke: regional_poll_responses[i]['color'],
 			opacity: 1
 		});
         x = x + width;
@@ -56,11 +56,11 @@ window.onload=function() {
     x=0;
     
     for (var i=0; i < national_poll_responses.length; i++) {
-        var width = national_poll_responses[i]*factor;        
+        var width = national_poll_responses[i]['percentage']*factor;
         var r = paper.rect(x, y+30, width, 5);
         r.attr({
-            fill: colors[i]['code'],
-            stroke: colors[i]['code'],
+            fill: national_poll_responses[i]['color'],
+            stroke: national_poll_responses[i]['color'],
             opacity: 0.70
         });
         x = x + width;
