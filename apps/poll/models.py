@@ -87,7 +87,7 @@ class Question(models.Model):
             no_response = {}
             no_response['text'] = "No responses yet"
             no_response['percentage'] = 0
-            no_response['color'] = "#FF0000"
+            no_response['color'] = "#FAAFBE"
             break_up.append(no_response)
             return break_up
 
