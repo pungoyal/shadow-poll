@@ -27,7 +27,7 @@
 			{% endifequal %}
 		 {% endfor %}
        
-        <span style="color: {{choice.category.color.color_code}};">{% trans choice.text %}</span>
+        <span style="color: {{choice.category.color.color_code}};">{% trans choice.text %} ({{choice.num_votes }} votes)</span>
         <br />
         {% endfor %}
     </div>

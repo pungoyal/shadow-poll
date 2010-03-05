@@ -168,7 +168,13 @@ class Choice(models.Model):
 
     def __unicode__(self):
         return "%s:%s" % (self.text, self.code)
-
+    
+    def num_votes(self, governorate=None):
+        if governorate is not None:
+            return UserResponse.objects.filter(choice=self, 
+                                               user__governorate=governorate.id).count()
+        return UserResponse.objects.filter(choice=self).count()
+        
     def parse(self, response):
         return self.code == response
 

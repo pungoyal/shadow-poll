@@ -46,11 +46,14 @@ def show_iraq_by_question(request, question_id,
 def show_governorate_by_question(request, governorate_id, question_id,
                                  template='results.html', context={}):
     governorate = get_object_or_404(Governorate, pk=governorate_id)
-
+    question = get_object_or_404(Question, pk=question_id)
+    choices = Choice.objects.filter(question=question)
+    for choice in choices:
+        choice.num_votes = choice.num_votes(governorate)
     context.update(   {"region": governorate.name,
                        "governorate": governorate,
                        "bbox": governorate.bounding_box,
-    })
+                       "choices": choices})
     return show_by_question(request, question_id, governorate_id, template, context)
 
 def show_by_question(request, question_id, governorate_id, template, context={}):
@@ -81,13 +84,14 @@ def show_by_question(request, question_id, governorate_id, template, context={})
                      "top_response": response_break_up[0],
                      "percentage": max(response_break_up[1:]),
                      "national_data": national_response_break_up[1:],
-                     "choices": Choice.objects.filter(question=question),
                      "character_english": character_english,
                      "questions" : Question.objects.all()
     })
     if 'chart_data' not in context:
     # if chart_data not set, default to national view
         context.update( {"chart_data": national_response_break_up})
+    if 'choices' not in context:
+        context.update( {"choices": Choice.objects.filter(question=question)})
     return render_to_response(request, template, context)
 
 def home_page(request):
