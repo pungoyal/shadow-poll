@@ -9,7 +9,7 @@ class ChoiceTest(TestCase):
         self.question = Question(text = 'question 1', max_choices = 3)
         self.question.save()
 
-        self.color = Color(name = "pink", file_name = "pink.jpg")
+        self.color = Color(code = "pink", file_name = "pink.jpg")
         self.color.save()
         self.category = Category(name="Dummy", color = self.color)
         self.category.save()

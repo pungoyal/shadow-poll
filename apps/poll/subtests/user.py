@@ -19,8 +19,8 @@ class UserTest(TestCase):
     def test_set_user_geolocation(self):
         user = User()
         user.set_user_geolocation_if_registered(self.pconnection)
-        self.assertEquals(user.governorate , 3)
-        self.assertEquals(user.district, 4)
+        self.assertEquals(user.governorate , "3")
+        self.assertEquals(user.district, "4")
     
 
     def test_dont_set_geolocation_when_not_present(self):
@@ -29,3 +29,12 @@ class UserTest(TestCase):
         self.assertEquals(user.governorate , None)
         self.assertEquals(user.district, None)
         
+    def set_value_on_user(self):
+        user = User()
+        self.assertEquals(user.age, None)
+        self.assertEquals(user.gender, None)
+        user.set_value("age", 12)
+        self.assertEquals(user.age, 12)
+        self.assertEquals(user.gender, None)
+        user.set_value("gender", "f")
+        self.assertEquals(user.gender, "f")        

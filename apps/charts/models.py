@@ -2,7 +2,7 @@ from __future__ import division
 from math import ceil
 from django.contrib.gis.db import models
 
-from poll.models import User, UserResponse
+from poll.models import User, UserResponse, Category, Color
 
 MAX_SCALE_LENGTH_IN_STYLE = 18
 
@@ -22,9 +22,6 @@ class Geography(models.Model):
     def __unicode__(self):
         return "%s" % (self.name)
 
-    def num_responses(self):
-        return len(UserResponse.objects.filter(user__governorate = self.id))
-
     def total_responses(self):
         return len(UserResponse.objects.all())
 
@@ -32,32 +29,67 @@ class Geography(models.Model):
         return "Iraqi Governorate"
 
     def style(self, question):
-        most_voted_category = question.most_voted_category_by_governorate(self.id)
+        most_voted_category = self.most_voted_category()
         if most_voted_category:
-            percentage = self._percentage_to_display(question)
-            style_id = {'color': most_voted_category.color, 
-                        'percentage': percentage }
-            return style_id
-        return None
+            percentage = self._bubble_size(question)
+            style = {'color': most_voted_category.color, 
+                     'percentage': percentage }
+            return style
+        # default to grey
+        style = {'color': Color.objects.get(file_name="grey_dot.png"), 
+                 'percentage': 0.6 }
+        return style
     
-    def _percentage_to_display(self, question, governorate_id=None):
+    def _percentage_to_display(self, count, total):
         """ This formula returns the size of the bubble we want to display 
-        Currently this is calculated as 
-        (percentage who voted for the popular question / total votes )
+        responses - count of userresponses
+        all_responses - count of all userresponses
         """
-        responses_to_most_voted = UserResponse.objects.filter(question=question.id, user__governorate=self.id)
-        all_responses = UserResponse.objects.filter(user__governorate=self.id)
-        percentage = responses_to_most_voted.count() / all_responses.count()
+        if total == 0:
+            return 0
+        percentage = count / total
         return percentage
     
     def exposed(self):
         return {'name': self.id}
 
 class Governorate(Geography):
-    pass
+    code = models.CharField(max_length=16, unique=True)
+
+    # this is used by openlayers so that we can manually specify
+    # a zoom level which will properly 'fill the image' with the district
+    zoom_level = models.IntegerField(null=True, blank=True)
+    
+    def _bubble_size(self, question):
+        responses = UserResponse.objects.filter(question=question.id, user__governorate=self.code)
+        all_responses = UserResponse.objects.filter(user__governorate=self.code)
+        return self._percentage_to_display(responses.count(), all_responses.count())
+
+    def most_voted_category(self):
+        relevant_responses = UserResponse.objects.filter(user__governorate = self.code)
+        return Category.most_popular(relevant_responses)
+
+    def num_responses(self):
+        return len(UserResponse.objects.filter(user__governorate = self.code))
 
 class District(Geography):
-    governorate = models.ForeignKey(Governorate, null=True)
+    code = models.CharField(max_length=16)
+    governorate = models.ForeignKey(Governorate)
+    
+    class Meta:
+        unique_together = ("governorate", "code")
+
+    def _bubble_size(self, question):
+        responses = UserResponse.objects.filter(question=question.id, user__district=self.code, user__governorate=self.governorate.code)
+        all_responses = UserResponse.objects.filter(user__district=self.code, user__governorate=self.governorate.code)
+        return self._percentage_to_display(responses.count(), all_responses.count())
+
+    def most_voted_category(self):
+        relevant_responses = UserResponse.objects.filter(user__district = self.code, user__governorate=self.governorate.code)
+        return Category.most_popular(relevant_responses)
+
+    def num_responses(self):
+        return len(UserResponse.objects.filter(user__district = self.code, user__governorate=self.governorate.code))
 
 GENDER = ( ('m', 'Male'), ('f', 'Female') )
 

@@ -19,16 +19,17 @@
         }
     },    
     {
-        "pk": 1,
-        "model": "poll.user",
+        "pk": 2,
+        "model": "reporters.persistantconnection",
         "fields": {
-            "gender": "M",
-            "connection": 1,
-            "age": 12,
-						"governorate":1
+            "last_seen": null,
+            "reporter": null,
+            "is_bot": false,
+            "identity": "bar",
+            "backend": 1
         }
-    },
-		{
+    },    
+	{
         "pk": 1,
         "model": "poll.user",
         "fields": {
@@ -44,7 +45,7 @@
         "model": "poll.user",
         "fields": {
             "gender": "M",
-            "connection": 1,
+            "connection": 2,
             "age": 12,
 			"governorate":7,
 			"district":2

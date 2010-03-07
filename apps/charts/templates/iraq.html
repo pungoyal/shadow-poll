@@ -19,8 +19,8 @@
 <div id='header'>
     <div id="language_menu">
         <ul>
-            <li class="en"><a href="#" class="current_language">English</a></li>
-            <li class="arabic"><a href="#">Arabic</a></li>
+            <li class="en"><a href="javascript:switch_to_language('en')" {% ifequal LANGUAGE_CODE "en"  %} class="current_language" {% endifequal %}>English</a></li>
+            <li class="arabic"><a href="javascript:switch_to_language('ar')" {% ifequal LANGUAGE_CODE "ar"  %} class="current_language" {% endifequal %} >Arabic</a></li>
         </ul>
     </div>
     <div id="site_header">
@@ -130,7 +130,7 @@
 										{% if categories %}
                     <ul>
 											{% for cat in categories %}
-                        <li class="category{{ forloop.counter0 }}"><span>{{cat.name}}</span></li>
+                        <li class="category{{ forloop.counter0 }}"><span>{% trans cat.name %}</span></li>
                       {% endfor %}
                     </ul>
 										{% endif %}
@@ -171,8 +171,12 @@
     <div id="sidebar">
         <div class="nav_questions"><img src="/static/charts/img/poll_q_img_1.gif" alt=""/>
             <ul>
-	      {% for question in questions %}
-	      <li><a href="question{{question.id}}">{% trans question.text %}</a></li>
+	      {% for q in questions %}
+	      <li 
+		  {% ifequal q.id question.id %}
+		  class = "active"
+		  {% endifequal %}
+		  <a href="question{{q.id}}">{% trans q.text %}</a></li>
 	      {% endfor %}
             </ul>
             <p class="note"><a href="#">{% trans 'Read about how UNICEF used SMS to conduct the survey' %}</a></p>
@@ -218,12 +222,3 @@
     {% endblock %}
 
 </div>
-
-{% block i18nscript %}
-<script type="application/javascript">
-    function test(lang) {
-        $.post("/i18n/setlang/", {language : lang});
-        location.reload();
-    }
-</script>
-{% endblock %}

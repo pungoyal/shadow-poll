@@ -164,6 +164,12 @@ a:hover {
 .secondary_links li a {
 	padding-left: 22px;
 }
+.choice
+{
+	margin-left: 10px;
+	margin-right: 10px;	
+	font-size: 13px;
+}
 .secondary_links .download a {
 	background: url(../img/download_icon.gif) no-repeat 0 50%;
 	margin-right: 24px;
@@ -253,7 +259,9 @@ a:hover {
 	font-size: 1.75em;
 	margin-left: 10px;
 	margin-bottom: 10px;
-	display: inline;
+	display: block;
+	line-height: 1em;
+	width:650px;
 }
 .question_section ol {
 	display: block;
@@ -307,6 +315,7 @@ a:hover {
 	line-height: 1.1;
 	padding: 2px 2px 0;
 }
+
 .nav_questions ul {
 	text-align: left;
 }
@@ -326,6 +335,7 @@ a:hover {
 	color: #fff;
 	text-decoration: none;
 }
+
 .nav_questions p.note {
 	width: 96%;
 	margin-left: -5px;
@@ -488,13 +498,13 @@ a:hover {
 }
 .top_concern {
 	font-size: 1.75em;
-	color: #f3653a;
 }
 .chart_note {
 	color:#91886F;
 	float:right;
-	font-size: 0.75em;
+	font-size: 0.70em;
 	margin-top: -45px;
+	font-weight: bold;
 }
 /* Link List */
 #language_menu ul li, #top_menu ul li, #poll_questions ul li, .response_category ul li {

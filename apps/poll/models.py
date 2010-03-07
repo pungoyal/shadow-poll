@@ -14,6 +14,9 @@ DATA_TYPE = ( ('i','integer'), ('s','string'), ('c','character') )
 # mapping login in demographic parser
 GENDER = ( ('m', 'Male'), ('f', 'Female') )
 
+FINAL_APPRECIATION_MESSAGE = 'thanks'
+TRIGGER_INCORRECT_MESSAGE = 'trigger_error'
+
 ##########################################################################
 
 #only one questionnaire object in the db to hold the trigger for the poll
@@ -32,15 +35,18 @@ class DemographicParser(models.Model):
     regex = models.CharField(max_length=32)
     order = models.IntegerField()
     type = models.CharField(max_length=16, choices=DATA_TYPE)
+    mandatory = models.BooleanField()
 
     def __unicode__(self):
         return "%s" % (self.name)
 
-    def parse_and_set(self, message, user) :
+    def parse(self, message) :
         arguments = message.split(SEPARATOR)
+        val = None
         for a in arguments:
             regex = re.compile( '(%s)$' % str(self.regex).strip() )
             match = regex.match( a.lower() )
+
             if match:
                 if self.type == 'i':
                     val = int(match.group(0))
@@ -48,9 +54,8 @@ class DemographicParser(models.Model):
                     val = match.group(0)[0]
                 else:
                     val = match.group(0)
-                if hasattr(user, self.name):
-                        setattr(user, self.name, val)
-                        break
+                break     
+        return val
 
 ##########################################################################
 
@@ -71,28 +76,50 @@ class Question(models.Model):
         returns the percentage of votes going to each category as a list 
         if no responses are received yet, then return empty list
         """
-        # ro: should this return a 'dict' instead of a list?
         relevant_responses = UserResponse.objects.filter(question=self)
         if governorate_id is not None:
             relevant_responses = relevant_responses.filter(user__governorate=governorate_id)
-        grouped_responses = relevant_responses.values('choice').annotate(Count('choice'))
-        total_responses = relevant_responses.aggregate(Count('choice'))
+        grouped_responses = relevant_responses.values('choice').annotate(Count('choice')).order_by('choice')
+
         break_up = []
-        for gr in grouped_responses:
-            break_up.append(round(gr['choice__count']*100/total_responses['choice__count'], 1))
+
+        if len(grouped_responses) == 0:
+            no_response = {}
+            no_response['text'] = "No responses yet"
+            no_response['percentage'] = 0
+            no_response['color'] = "#FAAFBE"
+            break_up.append(no_response)
+            return break_up
+
+        total_responses = relevant_responses.aggregate(Count('choice'))
+
+        # finding the most voted choice.
+        #TODO i am sure python has a better way of doing it. i just need to find it - puneet
+        max_percentage = grouped_responses[0]['choice__count']
+
+        for group in grouped_responses:
+            count = group['choice__count']
+            choice = group['choice']
+            color = Category.objects.get(choice=choice).color.code
+
+            percentage = round(count*100/total_responses['choice__count'], 1)
+
+            if percentage > max_percentage:
+                max_percentage=percentage
+                max_choice=choice
+                max_color = color
+            response = {}
+            response['percentage'] = percentage
+            response['color'] = color
+            break_up.append(response)
+
+        top_response = {}
+        top_response['text'] = Choice.objects.get(id=max_choice).text
+        top_response['percentage'] = max_percentage
+        top_response['color'] = max_color
+        break_up.insert(0, top_response)
+
         return break_up
-
-    def most_voted_category_by_governorate(self, governorate_id):
-        relevant_responses = UserResponse.objects.filter(user__governorate = governorate_id)
-        
-        if len(relevant_responses) < 1 :
-            return None
-        
-        choice_id =  relevant_responses.values('choice').annotate(Count('choice')).order_by('-choice__count')[0]['choice']
-        return Category.objects.get(choice__id = choice_id)
-
-    def get_number_of_responses_by_governorate(self, governorate_id):
-        return len(UserResponse.objects.filter(question = self, user__governorate = governorate_id))
 
     def humanize_options(self):
         choices = Choice.objects.filter(question=self)
@@ -125,11 +152,12 @@ class Question(models.Model):
 
 ##########################################################################
 class Color(models.Model):
-    name = models.CharField(max_length=10)
+    """ ro - color has nothing to do with poll. This should be in charts app."""
     file_name = models.CharField(max_length=20)
-    
+    code = models.CharField(max_length=25)
+
     def __unicode__(self):
-        return self.name
+        return "file:%s code:%s" % (self.file_name, self.code)
 
 ##########################################################################
 
@@ -139,6 +167,14 @@ class Category(models.Model):
     
     def __unicode__(self):
         return self.name
+    
+    @staticmethod
+    def most_popular(user_responses):
+        """ user_responses is a django query object """
+        if len(user_responses) < 1 :
+            return None
+        choice_id =  user_responses.values('choice').annotate(Count('choice')).order_by('-choice__count')[0]['choice']
+        return Category.objects.get(choice__id = choice_id)    
 
 ##########################################################################
 class Choice(models.Model):
@@ -174,6 +210,10 @@ class User(models.Model):
         self.governorate = registration.governorate
         self.district = registration.district
 
+    def set_value(self, field, value):
+        if hasattr(self, field):
+            setattr(self, field, value)
+
 ##########################################################################
 
 class UserSession(models.Model):
@@ -187,15 +227,26 @@ class UserSession(models.Model):
 
     def respond(self, message):
 
+        # default to the first questionnaire     
+        if not self.questionnaire:
+            self.questionnaire = Questionnaire.objects.all().order_by('pk')[0]
+
         if self._is_trigger(message):
             self.question = None
-            self.user = self._save_user(self.user, message)
+            message = message.strip().lstrip(self.questionnaire.trigger.lower()).strip()
+            parsers = list(DemographicParser.objects.filter(questionnaire=self.questionnaire).order_by('order') )
+
+            for parser in parsers:
+                demographic_information = parser.parse(message)
+                if demographic_information == None:
+                    return TRIGGER_INCORRECT_MESSAGE
+                self.user.set_value(parser.name, demographic_information)
+                
+            self.user = self._save_user(self.user)
 
         if self._first_access():
-            # THIS THROWS AN UGLY ERROR WHEN TRIGGER IS POORLY FORMED
-            # todo: FIX this to recover nicely
-            if hasattr(self.user, 'id'):
-                self.user = self._save_user(self.user, message)
+            if self.user.id == None:
+                return TRIGGER_INCORRECT_MESSAGE
             self.question = Question.first()
             self.save()
             return str(self.question)
@@ -219,19 +270,11 @@ class UserSession(models.Model):
         self.num_attempt = self.num_attempt + 1
         self.save()
         return "error_parsing_response"
-    
-    def _save_user(self, user, message):
-        if not self.questionnaire:
-            # default to the first question
-            self.questionnaire = Questionnaire.objects.all().order_by('pk')[0]
-        message = message.strip().lstrip(self.questionnaire.trigger.lower()).strip()
-        parsers = list( DemographicParser.objects.filter(questionnaire=self.questionnaire).order_by('order') )
-        for parser in parsers:
-            parser.parse_and_set(message, user)
+
+    def _save_user(self, user):
         user.save()
         return user
 
- 
     def _save_response(self,question,choices):
         for choice in choices:
             user_response = UserResponse(user = self.user, question =question, choice = choice)
@@ -239,7 +282,7 @@ class UserSession(models.Model):
 
     def _next_question(self,question):
         if question == None:
-            return "thanks"
+            return FINAL_APPRECIATION_MESSAGE
         return str(question)
 
     def _first_access(self):
@@ -265,7 +308,6 @@ class UserSession(models.Model):
             session = UserSession(question = None)
             user.set_user_geolocation_if_registered(connection)
             session.user = user
-            session.user.save()
             return session
 
         return sessions[0]
