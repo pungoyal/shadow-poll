@@ -166,4 +166,4 @@ class QuestionTest(TestCase):
         self.assertEquals(len(response_break_up), 1)
         self.assertEquals(response_break_up[0]['text'], "No responses yet")
         self.assertEquals(response_break_up[0]['percentage'], 0.0)
-        self.assertEquals(response_break_up[0]['color'], "#FF0000")
+        self.assertEquals(response_break_up[0]['color'], "#FAAFBE")

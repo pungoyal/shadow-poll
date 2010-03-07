@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
 "PO-Revision-Date: \n"
-"Last-Translator: sohaib <sohaib2001us@hotmail.com>\n"
+"Last-Translator: rani <rani@hotmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -232,4 +232,7 @@ msgstr "م"
 
 msgid "n"
 msgstr "ن"
+
+msgid "Boys And Girls"
+msgstr "الاولاد و البنات معا"
 
