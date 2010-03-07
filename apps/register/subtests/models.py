@@ -21,16 +21,16 @@ class RegistrationTest(TestCase):
         self.pconnection.save()
         self.reporter.connections.add(self.pconnection)
         
-        message = Message(text='register poll 100 1001', connection=self.connection)
-        message.persistant_connection = self.pconnection
+        self. message = Message(text='register poll 100 1001', connection=self.connection)
+        self.message.persistant_connection = self.pconnection
 
     
     def test_parse(self):
-        # there should only be one registration object in this fixture
-        self.reg = Registration.objects.get()
+        self.reg = Registration()
+        self.reg.parse(self.message)
         self.assertEquals(self.reg.public_identifier, 'poll')
-        self.assertEquals(self.reg.governorate, "10")
-        self.assertEquals(self.reg.district, "8")
+        self.assertEquals(self.reg.governorate, "100")
+        self.assertEquals(self.reg.district, "1001")
         self.assertEquals(self.reg.phone.identity, "1000")
 
     def test_load_by_mobile_number(self):

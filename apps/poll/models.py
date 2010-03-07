@@ -165,15 +165,11 @@ class User(models.Model):
     district = models.IntegerField(null=True)
 
     def __unicode__(self):
-        return " User : connection %s" % str(self.connection)
+        return "user connection : %s " % str(self.connection)
 
     def set_user_geolocation_if_registered(self, connection):
-        registrations = list(Registration.objects.filter(phone=connection))
-        if len(registrations) == 0:
-            return
-        registration = registrations[0]
-        self.governorate = registration.governorate
-        self.district = registration.district
+        self.governorate = connection.governorate
+        self.district = connection.district
 
     def set_value(self, field, value):
         if hasattr(self, field):
@@ -192,10 +188,12 @@ class UserSession(models.Model):
 
     def respond(self, message):
 
+ #       print self._is_trigger(message)
         if self._is_trigger(message):
             self.question = None
             self.user = self._save_user(self.user, message)
-
+        
+#        print self._first_access()
         if self._first_access():
             # THIS THROWS AN UGLY ERROR WHEN TRIGGER IS POORLY FORMED
             # todo: FIX this to recover nicely
@@ -265,17 +263,18 @@ class UserSession(models.Model):
 
     @classmethod
     def open(klass,connection):
-        users = User.objects.filter(connection = connection)
-        user = users[0] if(len(users)) > 0 else User(connection = connection)
+        users = User.objects.filter(connection = connection, governorate = connection.governorate, district = connection.district)
+        user = users[0] if(len(users)) > 0 else User(connection = connection, governorate = connection.governorate, district = connection.district)
         sessions = UserSession.objects.filter(user = user)
         if len(sessions) == 0:
             session = UserSession(question = None)
             user.set_user_geolocation_if_registered(connection)
+            user.save()
             session.user = user
-            session.user.save()
             return session
 
         return sessions[0]
+
 
 ##########################################################################
 
