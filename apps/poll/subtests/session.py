@@ -190,3 +190,9 @@ class UserSessionTest(TestCase):
     def test_junk_message(self):
         session = UserSession.open(self.pconnection)
         self.assertEquals(session.respond('junk'), TRIGGER_INCORRECT_MESSAGE )
+
+    def test_recreate_user_if_demographic_data_changes(self):
+        session = UserSession.open(self.pconnection)
+        session.respond("trigger m 16")
+        session.respond("trigger m 12")
+        self.assertEquals(len(User.objects.all()), 2)

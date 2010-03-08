@@ -236,6 +236,9 @@ class UserSession(models.Model):
                 if demographic_information == None:
                     return TRIGGER_INCORRECT_MESSAGE
                 self.user.set_value(parser.name, demographic_information)
+                if not self.user_exist_with_same_demographic_info(self.user):
+                    user = User(connection = self.user.connection, age = self.user.age, gender = self.user.gender, governorate = self.user.governorate, district = self.user.district)
+                    self.user = user
                 
             self.user = self._save_user(self.user)
 
@@ -268,6 +271,12 @@ class UserSession(models.Model):
     def _save_user(self, user):
         user.save()
         return user
+
+    def user_exist_with_same_demographic_info(self, user):
+        users_with_same_demographic_info = User.objects.filter(connection = user.connection, age = user.age, gender = user.gender, governorate = user.governorate, district = user.district)
+        if len(users_with_same_demographic_info) == 0:
+            return False
+        return True
 
     def _save_response(self,question,choices):
         for choice in choices:
