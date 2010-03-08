@@ -59,7 +59,7 @@ class Governorate(Geography):
     # a zoom level which will properly 'fill the image' with the district
     zoom_level = models.IntegerField(null=True, blank=True)
     
-    def _bubble_size(self, question, selected_gender):
+    def _bubble_size(self, question, selected_gender=None):
         """ number of responses in the most popular category for this question
         divided by total responses to this question 
         """
@@ -102,7 +102,7 @@ class District(Geography):
     class Meta:
         unique_together = ("governorate", "code")
 
-    def _bubble_size(self, question,selected_gender):
+    def _bubble_size(self, question, selected_gender):
         """ number of responses in the most popular category for this question
         divided by total responses to this question 
         """

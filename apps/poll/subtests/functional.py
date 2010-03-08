@@ -32,8 +32,8 @@ class StatsTest(TestCase):
     def test_most_voted_category_in_loc(self):
         question = Question(id=1)
         governorate = Governorate.objects.get(id=1)
-        category = governorate.most_voted_category()
+        category = governorate.most_popular_category()
         self.assertEquals(category, None)
         governorate = Governorate.objects.get(id=5)
-        category = governorate.most_voted_category()
+        category = governorate.most_popular_category()
         self.assertEquals(category.name, 'Always')
