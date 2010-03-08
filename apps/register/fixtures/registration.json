@@ -3,9 +3,7 @@
         "pk": 1, 
         "model": "register.registration", 
         "fields": {
-            "governorate": 10, 
             "public_identifier": "poll", 
-            "district": 8, 
             "phone": 1
         }
     }, 

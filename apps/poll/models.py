@@ -59,6 +59,15 @@ class DemographicParser(models.Model):
 
 ##########################################################################
 
+class ResponseBreakUp():
+    #FAAFBE is the default color that shows up when there are no responses for a level
+    def __init__(self, text="No responses yet", percentage=0, color="#FAAFBE"):
+        self.text = text
+        self.percentage = percentage
+        self.color = color
+
+##########################################################################
+
 class Question(models.Model):
     text = models.TextField()
     max_choices = models.IntegerField(default=1)
@@ -73,7 +82,7 @@ class Question(models.Model):
 
     def response_break_up(self, governorate_id=None):
         """ 
-        returns the percentage of votes going to each category as a list 
+        returns the percentage of votes going to each category as a list
         if no responses are received yet, then return empty list
         """
         relevant_responses = UserResponse.objects.filter(question=self)
@@ -84,41 +93,16 @@ class Question(models.Model):
         break_up = []
 
         if len(grouped_responses) == 0:
-            no_response = {}
-            no_response['text'] = "No responses yet"
-            no_response['percentage'] = 0
-            no_response['color'] = "#FAAFBE"
-            break_up.append(no_response)
+            break_up.append(ResponseBreakUp(text="No responses yet", percentage = 0, color= "#FAAFBE"))
             return break_up
 
         total_responses = relevant_responses.aggregate(Count('choice'))
 
-        # finding the most voted choice.
-        #TODO i am sure python has a better way of doing it. i just need to find it - puneet
-        max_percentage = grouped_responses[0]['choice__count']
-
         for group in grouped_responses:
-            count = group['choice__count']
-            choice = group['choice']
-            color = Category.objects.get(choice=choice).color.code
-
-            percentage = round(count*100/total_responses['choice__count'], 1)
-
-            if percentage > max_percentage:
-                max_percentage=percentage
-                max_choice=choice
-                max_color = color
-            response = {}
-            response['percentage'] = percentage
-            response['color'] = color
-            break_up.append(response)
-
-        top_response = {}
-        top_response['text'] = Choice.objects.get(id=max_choice).text
-        top_response['percentage'] = max_percentage
-        top_response['color'] = max_color
-        break_up.insert(0, top_response)
-
+            color = Category.objects.get(choice=group['choice']).color.code
+            choice_text = Choice.objects.get(id=group['choice']).text
+            percentage = round(group['choice__count']*100/total_responses['choice__count'], 1)
+            break_up.append(ResponseBreakUp(text=choice_text, percentage = percentage, color= color))
         return break_up
 
     def humanize_options(self):
@@ -209,15 +193,11 @@ class User(models.Model):
     district = models.IntegerField(null=True)
 
     def __unicode__(self):
-        return " User : connection %s" % str(self.connection)
+        return "user connection : %s " % str(self.connection)
 
     def set_user_geolocation_if_registered(self, connection):
-        registrations = list(Registration.objects.filter(phone=connection))
-        if len(registrations) == 0:
-            return
-        registration = registrations[0]
-        self.governorate = registration.governorate
-        self.district = registration.district
+        self.governorate = connection.governorate
+        self.district = connection.district
 
     def set_value(self, field, value):
         if hasattr(self, field):
@@ -235,7 +215,6 @@ class UserSession(models.Model):
         return "session for : %s" % (self.user)
 
     def respond(self, message):
-
         # default to the first questionnaire     
         if not self.questionnaire:
             self.questionnaire = Questionnaire.objects.all().order_by('pk')[0]
@@ -259,8 +238,7 @@ class UserSession(models.Model):
             self.question = Question.first()
             self.save()
             return str(self.question)
-
-
+        
         matching_choices = self.question.matching_choices(message)
         
         if len(matching_choices) > 0:
@@ -310,8 +288,8 @@ class UserSession(models.Model):
 
     @classmethod
     def open(klass,connection):
-        users = User.objects.filter(connection = connection)
-        user = users[0] if(len(users)) > 0 else User(connection = connection)
+        users = User.objects.filter(connection = connection, governorate = connection.governorate, district = connection.district)
+        user = users[0] if(len(users)) > 0 else User(connection = connection, governorate = connection.governorate, district = connection.district)
         sessions = UserSession.objects.filter(user = user)
         if len(sessions) == 0:
             session = UserSession(question = None)
@@ -320,6 +298,7 @@ class UserSession(models.Model):
             return session
 
         return sessions[0]
+
 
 ##########################################################################
 

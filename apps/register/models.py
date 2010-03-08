@@ -6,8 +6,6 @@ from rapidsms.webui import settings
 
 class Registration(models.Model):
     public_identifier = models.CharField(max_length=10)
-    governorate = models.CharField(max_length=16)
-    district = models.CharField(max_length=16)
     phone = models.ForeignKey(PersistantConnection)
     date = models.DateTimeField(default=datetime.now)
     
@@ -17,6 +15,9 @@ class Registration(models.Model):
         self.governorate = parts[2]
         self.district = parts[3]
         self.phone = message.persistant_connection
+        self.phone.governorate = parts[2]
+        self.phone.district = parts[3]
+        self.phone.save()
         self.save()
 
     def __str__(self):
