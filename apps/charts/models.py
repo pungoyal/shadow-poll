@@ -4,8 +4,6 @@ from django.contrib.gis.db import models
 
 from poll.models import User, UserResponse, Category, Color
 
-MAX_SCALE_LENGTH_IN_STYLE = 18
-
 class Geography(models.Model):
     name = models.CharField(max_length=200)
     bounding_box = models.CharField(max_length=1000)
@@ -29,12 +27,13 @@ class Geography(models.Model):
         return "Iraqi Governorate"
 
     def style(self, question):
-        most_voted_category = self.most_voted_category()
+        most_voted_category = self.most_popular_category()
         if most_voted_category:
-            percentage = self._bubble_size(question)
-            style = {'color': most_voted_category.color, 
-                     'percentage': percentage }
-            return style
+            scale = self._bubble_size(question)
+            if scale:
+                style = {'color': most_voted_category.color, 
+                         'percentage': scale }
+                return style
         # default to grey
         style = {'color': Color.objects.get(file_name="grey_dot.png"), 
                  'percentage': 0.6 }
@@ -47,7 +46,7 @@ class Geography(models.Model):
         """
         if total == 0:
             return 0
-        percentage = count / total
+        percentage = float(count) / float(total)
         return percentage
     
     def exposed(self):
@@ -61,11 +60,20 @@ class Governorate(Geography):
     zoom_level = models.IntegerField(null=True, blank=True)
     
     def _bubble_size(self, question):
-        responses = UserResponse.objects.filter(question=question.id, user__governorate=self.code)
-        all_responses = UserResponse.objects.filter(user__governorate=self.code)
+        """ number of responses in the most popular category for this question
+        divided by total responses to this question 
+        """
+        category = self.most_popular_category()
+        if category is None:
+            return 0
+        responses = UserResponse.objects.filter(choice__category=category, 
+                                                question=question, 
+                                                user__governorate=self.code)
+        all_responses = UserResponse.objects.filter(question=question, 
+                                                    user__governorate=self.code)
         return self._percentage_to_display(responses.count(), all_responses.count())
 
-    def most_voted_category(self):
+    def most_popular_category(self):
         relevant_responses = UserResponse.objects.filter(user__governorate = self.code)
         return Category.most_popular(relevant_responses)
 
@@ -80,11 +88,22 @@ class District(Geography):
         unique_together = ("governorate", "code")
 
     def _bubble_size(self, question):
-        responses = UserResponse.objects.filter(question=question.id, user__district=self.code, user__governorate=self.governorate.code)
-        all_responses = UserResponse.objects.filter(user__district=self.code, user__governorate=self.governorate.code)
+        """ number of responses in the most popular category for this question
+        divided by total responses to this question 
+        """
+        category = self.most_popular_category()
+        if category is None:
+            return 0
+        responses = UserResponse.objects.filter(choice__category=category, 
+                                                question=question, 
+                                                user__district=self.code, 
+                                                user__governorate=self.governorate.code)
+        all_responses = UserResponse.objects.filter(question=question, 
+                                                    user__district=self.code, 
+                                                    user__governorate=self.governorate.code)
         return self._percentage_to_display(responses.count(), all_responses.count())
 
-    def most_voted_category(self):
+    def most_popular_category(self):
         relevant_responses = UserResponse.objects.filter(user__district = self.code, user__governorate=self.governorate.code)
         return Category.most_popular(relevant_responses)
 

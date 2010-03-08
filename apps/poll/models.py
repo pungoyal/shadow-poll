@@ -156,8 +156,11 @@ class Category(models.Model):
         """ user_responses is a django query object """
         if len(user_responses) < 1 :
             return None
-        choice_id =  user_responses.values('choice').annotate(Count('choice')).order_by('-choice__count')[0]['choice']
-        return Category.objects.get(choice__id = choice_id)    
+        category_id =  user_responses.values('choice__category')\
+                       .annotate(Count('choice__category'))\
+                       .order_by('-choice__category__count')\
+                       [0]['choice__category']
+        return Category.objects.get(pk = category_id)    
 
 ##########################################################################
 class Choice(models.Model):
