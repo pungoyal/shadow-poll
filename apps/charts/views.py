@@ -1,4 +1,4 @@
-import os, mimetypes
+import os, mimetypes, operator
 
 from math import sqrt
 from django.http import HttpResponse, HttpResponseNotFound, HttpResponseServerError,Http404,\
@@ -59,7 +59,7 @@ def show_by_question(request, question_id, governorate_id, template, context={})
 
     question = get_object_or_404(Question, pk=question_id)
     response_break_up = question.response_break_up(governorate_id)
-    #print request.GET.get('g', '')
+
     if len(response_break_up) == 0:
         response_break_up.append("No reponses yet")
         response_break_up.append(0)
@@ -74,12 +74,17 @@ def show_by_question(request, question_id, governorate_id, template, context={})
     unique_categories = set(categories)
     categories = list(unique_categories)
     character_english =  ['a', 'b', 'c', 'd', 'e', 'f','g','h','i','j','k','l','m','n']
-   
+
+    top_response = response_break_up[0] 
+    for break_up in response_break_up:
+        if(break_up.percentage > top_response.percentage):
+            top_response = break_up
+
     context.update( {"categories": categories,
                      "question": question,
-                     "top_response": response_break_up[0],
-                     "chart_data": simplejson.dumps([r.__dict__ for r in response_break_up[1:]]),
-                     "national_data": simplejson.dumps([r.__dict__ for r in national_response_break_up[1:]]),
+                     "top_response": top_response,
+                     "chart_data": simplejson.dumps([r.__dict__ for r in response_break_up]),
+                     "national_data": simplejson.dumps([r.__dict__ for r in national_response_break_up]),
                      "choices": Choice.objects.filter(question=question),
                      "character_english": character_english,
                      "questions" : Question.objects.all()
