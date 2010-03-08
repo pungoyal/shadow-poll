@@ -135,10 +135,10 @@ class QuestionTest(TestCase):
         self.assertEquals(response_break_up[2].color, banana.category.color.code)
         self.assertEquals(response_break_up[3].color, ginger.category.color.code)
 
-        self.assertEquals(response_break_up[0].text, apple.text)
-        self.assertEquals(response_break_up[1].text, carrot.text)
-        self.assertEquals(response_break_up[2].text, banana.text)
-        self.assertEquals(response_break_up[3].text, ginger.text)
+        self.assertEquals(response_break_up[0].choice_text, apple.text)
+        self.assertEquals(response_break_up[1].choice_text, carrot.text)
+        self.assertEquals(response_break_up[2].choice_text, banana.text)
+        self.assertEquals(response_break_up[3].choice_text, ginger.text)
 
     def test_get_response_break_up_for_no_responses(self):
         question = Question(text = 'question 1',max_choices = 1, helper_text="(Prioritize)")
@@ -166,6 +166,7 @@ class QuestionTest(TestCase):
         response_break_up = question.response_break_up()
 
         self.assertEquals(len(response_break_up), 1)
-        self.assertEquals(response_break_up[0].text, "No responses yet")
+        self.assertEquals(response_break_up[0].choice_text, "No responses yet")
         self.assertEquals(response_break_up[0].percentage, 0.0)
         self.assertEquals(response_break_up[0].color, "#FAAFBE")
+        self.assertEquals(response_break_up[0].category_text, "")

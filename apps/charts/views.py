@@ -78,15 +78,19 @@ def show_by_question(request, question_id, governorate_id, template, context={})
     categories = list(unique_categories)
     character_english =  ['a', 'b', 'c', 'd', 'e', 'f', 'g', 
                           'h', 'i', 'j', 'k', 'l', 'm', 'n']
-    top_response = response_break_up[0] 
+
+    #finding the highest voted response
+    top_response = response_break_up[0]
     for break_up in response_break_up:
         if(break_up.percentage > top_response.percentage):
             top_response = break_up
 
+    json_string = simplejson.dumps([r.__dict__ for r in response_break_up])
+
     context.update( {"categories": categories,
                      "question": question,
                      "top_response": top_response,
-                     "chart_data": simplejson.dumps([r.__dict__ for r in response_break_up]),
+                     "chart_data": json_string,
                      "national_data": simplejson.dumps([r.__dict__ for r in national_response_break_up]),
                      "choices": Choice.objects.filter(question=question),
                      "character_english": character_english,
