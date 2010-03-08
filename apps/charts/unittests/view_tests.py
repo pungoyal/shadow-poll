@@ -34,8 +34,8 @@ class ViewTests(TestCase):
     def test_kml_data(self):
         # test kml contents
         response = self.client.get('/get_kml/question1')
-        self.assertContains(response, "<scale>0.782608695652</scale>")
-        self.assertContains(response, "<scale>0.878787878788</scale>")
+        self.assertContains(response, "<scale>0.333333333333</scale>")
+        self.assertContains(response, "<scale>0.758620689655</scale>")
 
     def test_messaging_page_is_accesible(self):
         response = self.client.get("/messages/")

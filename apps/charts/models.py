@@ -10,7 +10,7 @@ class Geography(models.Model):
 
     # geodjango fields
     centroid = models.PointField(srid=4326)
-
+    
     # geodjango internals
     objects = models.GeoManager()
 
@@ -26,10 +26,10 @@ class Geography(models.Model):
     def description(self):
         return "Iraqi Governorate"
 
-    def style(self, question):
+    def style(self, question, selected_gender=None):
         most_voted_category = self.most_popular_category()
         if most_voted_category:
-            scale = self._bubble_size(question)
+            scale = self._bubble_size(question, selected_gender)
             if scale:
                 style = {'color': most_voted_category.color, 
                          'percentage': scale }
@@ -102,7 +102,7 @@ class District(Geography):
     class Meta:
         unique_together = ("governorate", "code")
 
-    def _bubble_size(self, question, selected_gender):
+    def _bubble_size(self, question, selected_gender=None):
         """ number of responses in the most popular category for this question
         divided by total responses to this question 
         """
@@ -130,7 +130,6 @@ class District(Geography):
                 user_ids.append(current.id)
             responses=responses.filter(user__in=user_ids)                
         #end of modifications
-        
         return self._percentage_to_display(responses.count(), all_responses.count())
 
     def most_popular_category(self):

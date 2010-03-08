@@ -1,4 +1,8 @@
-import os, mimetypes, json
+import os, mimetypes
+try:
+    import json
+except Exception, e:
+    import simplejson as json
 
 from math import sqrt
 from django.http import HttpResponse, HttpResponseNotFound, HttpResponseServerError,Http404,\
@@ -91,7 +95,6 @@ def show_by_question(request, question_id, governorate_id, template, context={})
         context.update( {"chart_data": national_response_break_up})
     if 'choices' not in context:
         context.update( {"choices": Choice.objects.filter(question=question)})
-    })
     return render_to_response(request, template, context)
 
 def home_page(request):
