@@ -61,10 +61,11 @@ class DemographicParser(models.Model):
 
 class ResponseBreakUp():
     #FAAFBE is the default color that shows up when there are no responses for a level
-    def __init__(self, text="No responses yet", percentage=0, color="#FAAFBE"):
-        self.text = text
+    def __init__(self, choice_text="No responses yet", percentage=0, color="#FAAFBE", category_text=""):
+        self.choice_text = choice_text
         self.percentage = percentage
         self.color = color
+        self.category_text = category_text
 
 ##########################################################################
 
@@ -93,16 +94,17 @@ class Question(models.Model):
         break_up = []
 
         if len(grouped_responses) == 0:
-            break_up.append(ResponseBreakUp(text="No responses yet", percentage = 0, color= "#FAAFBE"))
+            break_up.append(ResponseBreakUp())
             return break_up
 
         total_responses = relevant_responses.aggregate(Count('choice'))
 
         for group in grouped_responses:
-            color = Category.objects.get(choice=group['choice']).color.code
-            choice_text = Choice.objects.get(id=group['choice']).text
+            choice = Choice.objects.get(id=group['choice'])
+            category = choice.category
             percentage = round(group['choice__count']*100/total_responses['choice__count'], 1)
-            break_up.append(ResponseBreakUp(text=choice_text, percentage = percentage, color= color))
+
+            break_up.append(ResponseBreakUp(choice_text=choice.text, percentage = percentage, color= category.color.code, category_text=category.name))
         return break_up
 
     def humanize_options(self):
