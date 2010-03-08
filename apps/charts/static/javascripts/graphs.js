@@ -13,8 +13,6 @@ window.onload=function() {
     var factor = (canvasWidth/107);
 
     var paper = Raphael(document.getElementById("chart"), canvasWidth, 120);
-	var colors=["#ccff8a","#ea4cf4","#f8b088","#8bc0fa"];
-	var fontColors=["#75b907","#BC2EBC","#CC6633","#2966B8"];
 	var x = 0;
     var y = 5;
     var darkHeight = 10;
@@ -22,26 +20,26 @@ window.onload=function() {
     var fillerWidth = 2;
 
 	for (var i=0; i < regional_poll_responses.length; i++) {
-        var width = regional_poll_responses[i]*factor;
+        var width = regional_poll_responses[i]['percentage']*factor;
         var lightRectangle = paper.rect(x,y,width,lightHeight);
 		lightRectangle.attr({
-			fill: colors[i],
-			stroke: colors[i],
+			fill: regional_poll_responses[i]['color'],
+			stroke: regional_poll_responses[i]['color'],
 			opacity: 0.30
 		});
 
-        var percentageText = paper.text(x+width/2.0,y+lightHeight/2.0,regional_poll_responses[i]+"%");
+        var percentageText = paper.text(x+width/2.0,y+lightHeight/2.0,regional_poll_responses[i]['percentage']+"%");
         percentageText.attr({
-            fill: fontColors[i],
-            stroke: fontColors[i],
+            fill: regional_poll_responses[i]['color'],
+            stroke: regional_poll_responses[i]['color'],
             font: "12px 'Arial'",
             opacity: 1
         });
 
         var darkRectangle = paper.rect(x,y+lightHeight,width,darkHeight);
 		darkRectangle.attr({
-			fill: colors[i],
-			stroke: colors[i],
+			fill: regional_poll_responses[i]['color'],
+			stroke: regional_poll_responses[i]['color'],
 			opacity: 1
 		});
         x = x + width;
@@ -58,11 +56,11 @@ window.onload=function() {
     x=0;
     
     for (var i=0; i < national_poll_responses.length; i++) {
-        var width = national_poll_responses[i]*factor;        
+        var width = national_poll_responses[i]['percentage']*factor;
         var r = paper.rect(x, y+30, width, 5);
         r.attr({
-            fill: colors[i],
-            stroke: colors[i],
+            fill: national_poll_responses[i]['color'],
+            stroke: national_poll_responses[i]['color'],
             opacity: 0.70
         });
         x = x + width;

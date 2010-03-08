@@ -29,5 +29,5 @@ class GovernorateTest(TestCase):
         question = Question.objects.get(id = 1)
         color = Color.objects.get(id=2)
         color1 = Color.objects.get(id=3)
-        self.assertEquals(gov.style(question), {'color': color, 'percentage': 0.78260869565217395})
-        self.assertEquals(gov1.style(question), {'color': color1, 'percentage': 0.87878787878787878} )
+        self.assertEquals(gov.style(question,"M_F"), {'color': color, 'percentage': 0.78260869565217395})
+        self.assertEquals(gov1.style(question,"M_F"), {'color': color1, 'percentage': 0.87878787878787878} )

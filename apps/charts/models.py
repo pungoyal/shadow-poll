@@ -59,7 +59,7 @@ class Governorate(Geography):
     # a zoom level which will properly 'fill the image' with the district
     zoom_level = models.IntegerField(null=True, blank=True)
     
-    def _bubble_size(self, question):
+    def _bubble_size(self, question, selected_gender):
         """ number of responses in the most popular category for this question
         divided by total responses to this question 
         """
@@ -69,6 +69,21 @@ class Governorate(Geography):
         responses = UserResponse.objects.filter(choice__category=category, 
                                                 question=question, 
                                                 user__governorate=self.code)
+        #filter by gender       
+        if selected_gender == "M":
+            gen=User.objects.filter(gender__in=["M","m","Male","MALE"])
+            user_ids=[]
+            for current in gen:
+                user_ids.append(current.id)
+            responses=responses.filter(user__in=user_ids)
+        if selected_gender == "F":
+            gen=User.objects.filter(gender__in=["F","F","Female","FEMALE"])
+            user_ids=[]
+            for current in gen:
+                user_ids.append(current.id)
+            responses=responses.filter(user__in=user_ids)                
+        #end of modifications
+        
         all_responses = UserResponse.objects.filter(question=question, 
                                                     user__governorate=self.code)
         return self._percentage_to_display(responses.count(), all_responses.count())
@@ -87,7 +102,7 @@ class District(Geography):
     class Meta:
         unique_together = ("governorate", "code")
 
-    def _bubble_size(self, question):
+    def _bubble_size(self, question,selected_gender):
         """ number of responses in the most popular category for this question
         divided by total responses to this question 
         """
@@ -101,6 +116,21 @@ class District(Geography):
         all_responses = UserResponse.objects.filter(question=question, 
                                                     user__district=self.code, 
                                                     user__governorate=self.governorate.code)
+        #filter by gender       
+        if selected_gender == "M":
+            gen=User.objects.filter(gender__in=["M","m","Male","MALE"])
+            user_ids=[]
+            for current in gen:
+                user_ids.append(current.id)
+            responses=responses.filter(user__in=user_ids)
+        if selected_gender == "F":
+            gen=User.objects.filter(gender__in=["F","F","Female","FEMALE"])
+            user_ids=[]
+            for current in gen:
+                user_ids.append(current.id)
+            responses=responses.filter(user__in=user_ids)                
+        #end of modifications
+        
         return self._percentage_to_display(responses.count(), all_responses.count())
 
     def most_popular_category(self):

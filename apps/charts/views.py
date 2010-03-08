@@ -1,8 +1,8 @@
-import os, mimetypes
-
+import os, mimetypes, json
 
 from math import sqrt
-from django.http import HttpResponse, HttpResponseNotFound, HttpResponseServerError,Http404
+from django.http import HttpResponse, HttpResponseNotFound, HttpResponseServerError,Http404,\
+    HttpRequest
 from django.shortcuts import get_object_or_404
 from django.template import loader
 from django.utils import translation
@@ -62,7 +62,7 @@ def show_by_question(request, question_id, governorate_id, template, context={})
 
     question = get_object_or_404(Question, pk=question_id)
     response_break_up = question.response_break_up(governorate_id)
-
+    #print request.GET.get('g', '')
     if len(response_break_up) == 0:
         response_break_up.append("No reponses yet")
         response_break_up.append(0)
@@ -76,15 +76,13 @@ def show_by_question(request, question_id, governorate_id, template, context={})
 
     unique_categories = set(categories)
     categories = list(unique_categories)
-
     character_english =  ['a', 'b', 'c', 'd', 'e', 'f', 'g', 
                           'h', 'i', 'j', 'k', 'l', 'm', 'n']
     context.update( {"categories": categories,
                      "question": question,
-                     "chart_data": response_break_up[1:],
                      "top_response": response_break_up[0],
-                     "percentage": max(response_break_up[1:]),
-                     "national_data": national_response_break_up[1:],
+                     "percentage": json.dumps(response_break_up[1:]),
+                     "national_data": json.dumps(national_response_break_up[1:]),
                      "character_english": character_english,
                      "questions" : Question.objects.all()
     })
@@ -93,6 +91,7 @@ def show_by_question(request, question_id, governorate_id, template, context={})
         context.update( {"chart_data": national_response_break_up})
     if 'choices' not in context:
         context.update( {"choices": Choice.objects.filter(question=question)})
+    })
     return render_to_response(request, template, context)
 
 def home_page(request):
@@ -117,6 +116,7 @@ def get_kml_for_governorate(request, governorate_id, question_id):
     return get_kml(request, question_id, district_kml)
 
 def get_kml_for_iraq(request, question_id):
+    #betnada in arabic
     governorate_kml = Governorate.objects.kml()
     return get_kml(request, question_id, governorate_kml)
 
@@ -125,8 +125,9 @@ def get_kml(request, question_id, kml):
     question = Question.objects.get(id=question_id)
     placemarks_info_list = []
     style_dict_list = []
+    selected_gender = request.GET.get('g')
     for (counter, geography) in enumerate(kml):
-        style_dict = geography.style(question)
+        style_dict = geography.style(question,selected_gender)
         if style_dict:
             style_str = "s%s-%d" % (style_dict['color'].id, len(style_dict_list))
             placemarks_info_list.append({'id': geography.id,
