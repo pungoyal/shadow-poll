@@ -124,19 +124,19 @@ class QuestionTest(TestCase):
         response_break_up = question.response_break_up()
 
         self.assertEquals(len(response_break_up), 5)
-        self.assertEquals(response_break_up[0]['text'], carrot.text)
-        self.assertEquals(response_break_up[0]['percentage'], 40.0)
-        self.assertEquals(response_break_up[0]['color'], carrot.category.color.code)
+        self.assertEquals(response_break_up[0].text, carrot.text)
+        self.assertEquals(response_break_up[0].percentage, 40.0)
+        self.assertEquals(response_break_up[0].color, carrot.category.color.code)
 
-        self.assertEquals(response_break_up[1]['percentage'], 30.0)
-        self.assertEquals(response_break_up[2]['percentage'], 40.0)
-        self.assertEquals(response_break_up[3]['percentage'], 20.0)
-        self.assertEquals(response_break_up[4]['percentage'], 10.0)
+        self.assertEquals(response_break_up[1].percentage, 30.0)
+        self.assertEquals(response_break_up[2].percentage, 40.0)
+        self.assertEquals(response_break_up[3].percentage, 20.0)
+        self.assertEquals(response_break_up[4].percentage, 10.0)
 
-        self.assertEquals(response_break_up[1]['color'], apple.category.color.code)
-        self.assertEquals(response_break_up[2]['color'], carrot.category.color.code)
-        self.assertEquals(response_break_up[3]['color'], banana.category.color.code)
-        self.assertEquals(response_break_up[4]['color'], ginger.category.color.code)
+        self.assertEquals(response_break_up[1].color, apple.category.color.code)
+        self.assertEquals(response_break_up[2].color, carrot.category.color.code)
+        self.assertEquals(response_break_up[3].color, banana.category.color.code)
+        self.assertEquals(response_break_up[4].color, ginger.category.color.code)
 
     def test_get_response_break_up_for_no_responses(self):
         question = Question(text = 'question 1',max_choices = 1, helper_text="(Prioritize)")
@@ -164,6 +164,6 @@ class QuestionTest(TestCase):
         response_break_up = question.response_break_up()
 
         self.assertEquals(len(response_break_up), 1)
-        self.assertEquals(response_break_up[0]['text'], "No responses yet")
-        self.assertEquals(response_break_up[0]['percentage'], 0.0)
-        self.assertEquals(response_break_up[0]['color'], "#FAAFBE")
+        self.assertEquals(response_break_up[0].text, "No responses yet")
+        self.assertEquals(response_break_up[0].percentage, 0.0)
+        self.assertEquals(response_break_up[0].color, "#FAAFBE")

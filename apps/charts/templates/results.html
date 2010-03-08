@@ -47,7 +47,7 @@
 <div class="chart_bar">
     <h3>
         <span class="response_criteria"> {% trans 'Top Response for' %} {% trans region %}</span>
-        <span class="top_concern" style="color: {{top_response|dict_lookup:'color'}};">{{ top_response|dict_lookup:'text'}} {{ top_response|dict_lookup:'percentage' }}%</span>
+        <span class="top_concern" style="color: {{top_response.color}};">{% trans top_response.text %} {{ top_response.percentage }}%</span>
     </h3>
 
     <div id="chart">

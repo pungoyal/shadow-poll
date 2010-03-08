@@ -1,11 +1,11 @@
-import os, mimetypes, json
+import os, mimetypes
 
 from math import sqrt
 from django.http import HttpResponse, HttpResponseNotFound, HttpResponseServerError,Http404,\
     HttpRequest
 from django.shortcuts import get_object_or_404
 from django.template import loader
-from django.utils import translation
+from django.utils import translation, simplejson
 
 from rapidsms.webui import settings
 from rapidsms.webui.utils import render_to_response
@@ -78,8 +78,8 @@ def show_by_question(request, question_id, governorate_id, template, context={})
     context.update( {"categories": categories,
                      "question": question,
                      "top_response": response_break_up[0],
-                     "chart_data": json.dumps(response_break_up[1:]),
-                     "national_data": json.dumps(national_response_break_up[1:]),
+                     "chart_data": simplejson.dumps([r.__dict__ for r in response_break_up[1:]]),
+                     "national_data": simplejson.dumps([r.__dict__ for r in national_response_break_up[1:]]),
                      "choices": Choice.objects.filter(question=question),
                      "character_english": character_english,
                      "questions" : Question.objects.all()
