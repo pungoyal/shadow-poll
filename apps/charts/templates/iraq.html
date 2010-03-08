@@ -131,13 +131,13 @@
 
                         <p>{% trans 'What do these mean?' %}</p>
                     </div>
-										{% if categories %}
+					{% if categories %}
                     <ul>
-											{% for cat in categories %}
-                        <li class="category{{ forloop.counter0 }}"><span>{% trans cat.name %}</span></li>
-                      {% endfor %}
+						{% for cat in categories %}
+                        	<li class="category{{ forloop.counter0 }}"><span>{% trans cat.name %}</span></li>
+						{% endfor %}
                     </ul>
-										{% endif %}
+					{% endif %}
                 </div>
                 <div class="chart_results">
                     <div class="chart_desc">
