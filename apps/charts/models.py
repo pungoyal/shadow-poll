@@ -27,7 +27,7 @@ class Geography(models.Model):
         return "Iraqi Governorate"
 
     def style(self, question, selected_gender=None):
-        most_voted_category = self.most_popular_category()
+        most_voted_category = self.most_popular_category(question)
         if most_voted_category:
             scale = self._bubble_size(question, selected_gender)
             if scale:
@@ -63,7 +63,7 @@ class Governorate(Geography):
         """ number of responses in the most popular category for this question
         divided by total responses to this question 
         """
-        category = self.most_popular_category()
+        category = self.most_popular_category(question)
         if category is None:
             return 0
         responses = UserResponse.objects.filter(choice__category=category, 
@@ -88,8 +88,8 @@ class Governorate(Geography):
                                                     user__governorate=self.code)
         return self._percentage_to_display(responses.count(), all_responses.count())
 
-    def most_popular_category(self):
-        relevant_responses = UserResponse.objects.filter(user__governorate = self.code)
+    def most_popular_category(self, question):
+        relevant_responses = UserResponse.objects.filter(user__governorate = self.code, question=question)
         return Category.most_popular(relevant_responses)
 
     def num_responses(self):
@@ -106,7 +106,7 @@ class District(Geography):
         """ number of responses in the most popular category for this question
         divided by total responses to this question 
         """
-        category = self.most_popular_category()
+        category = self.most_popular_category(question)
         if category is None:
             return 0
         responses = UserResponse.objects.filter(choice__category=category, 
@@ -132,8 +132,8 @@ class District(Geography):
         #end of modifications
         return self._percentage_to_display(responses.count(), all_responses.count())
 
-    def most_popular_category(self):
-        relevant_responses = UserResponse.objects.filter(user__district = self.code, user__governorate=self.governorate.code)
+    def most_popular_category(self, question):
+        relevant_responses = UserResponse.objects.filter(user__district = self.code, user__governorate=self.governorate.code, question=question)
         return Category.most_popular(relevant_responses)
 
     def num_responses(self):
