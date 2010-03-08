@@ -610,15 +610,6 @@
         }
     },
     {
-        "pk": 61,
-        "model": "poll.userresponse",
-        "fields": {
-            "question": 2,
-            "user": 2,
-            "choice": 12
-        }
-    },
-    {
         "pk": 62,
         "model": "poll.userresponse",
         "fields": {
