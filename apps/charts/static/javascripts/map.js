@@ -40,19 +40,25 @@ $(document).ready(function(){
      */
 
     var question_id = $("#question-id").html();
-    var governorate_id = $("#governorate-id").html();
-    var splt_gender_code=location.href.split("?")
-    var gender_code=""
-    if (splt_gender_code[1] != 'undifiend')
+    var governorate_id = $("#governorate-id").html(); 
+    var gender_code = location.href.split("?")[1]
+    
+    function construct_kml_url(governorate_id, question_id, gender_code)
     {
-    		gender_code= "?" + splt_gender_code[1]
+        var kml_url = "/get_kml";
+        if (governorate_id != '' && governorate_id != null)
+        {
+            kml_url = kml_url + "/" + governorate_id;
+        }
+        kml_url = kml_url + "/question"+ question_id;
+        if (gender_code != '' && gender_code != null)
+        {
+            kml_url = kml_url + '?' + gender_code;
+        }
+        return kml_url;
     }
-    var kml_url = "/get_kml" 
-    if (governorate_id != '')
-    {
-        kml_url = kml_url + "/" + governorate_id + gender_code
-    }
-    kml_url = kml_url + "/question"+ question_id + gender_code
+    kml_url = construct_kml_url(governorate_id, question_id, gender_code)
+    
     var bubbles = new OpenLayers.Layer.Vector(
         "Poll Responses", 
         {
