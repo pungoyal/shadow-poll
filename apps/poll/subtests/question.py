@@ -123,22 +123,16 @@ class QuestionTest(TestCase):
 
         response_break_up = question.response_break_up()
 
-        self.assertEquals(len(response_break_up), 4)
+        self.assertEquals(len(response_break_up), 2)
 
-        self.assertEquals(response_break_up[0].percentage, 30.0)
-        self.assertEquals(response_break_up[1].percentage, 40.0)
-        self.assertEquals(response_break_up[2].percentage, 20.0)
-        self.assertEquals(response_break_up[3].percentage, 10.0)
+        self.assertEquals(response_break_up[0].percentage, 50.0)
+        self.assertEquals(response_break_up[1].percentage, 50.0)
 
-        self.assertEquals(response_break_up[0].color, apple.category.color.code)
-        self.assertEquals(response_break_up[1].color, carrot.category.color.code)
-        self.assertEquals(response_break_up[2].color, banana.category.color.code)
-        self.assertEquals(response_break_up[3].color, ginger.category.color.code)
+        self.assertEquals(response_break_up[0].color, fruits.color.code)
+        self.assertEquals(response_break_up[1].color, vegetables.color.code)
 
-        self.assertEquals(response_break_up[0].choice_text, apple.text)
-        self.assertEquals(response_break_up[1].choice_text, carrot.text)
-        self.assertEquals(response_break_up[2].choice_text, banana.text)
-        self.assertEquals(response_break_up[3].choice_text, ginger.text)
+        self.assertEquals(response_break_up[0].text, fruits.name)
+        self.assertEquals(response_break_up[1].text, vegetables.name)
 
     def test_get_response_break_up_for_no_responses(self):
         question = Question(text = 'question 1',max_choices = 1, helper_text="(Prioritize)")
@@ -166,7 +160,6 @@ class QuestionTest(TestCase):
         response_break_up = question.response_break_up()
 
         self.assertEquals(len(response_break_up), 1)
-        self.assertEquals(response_break_up[0].choice_text, "No responses yet")
+        self.assertEquals(response_break_up[0].text, "No responses yet")
         self.assertEquals(response_break_up[0].percentage, 0.0)
         self.assertEquals(response_break_up[0].color, "#FAAFBE")
-        self.assertEquals(response_break_up[0].category_text, "")

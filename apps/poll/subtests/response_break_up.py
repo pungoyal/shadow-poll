@@ -16,11 +16,10 @@ class ResponseBreakUpTest(TestCase):
 
         list = []
         list.append(r)
-        list.append(ResponseBreakUp(choice_text="foo", percentage=12.21, color="#ff0000", category_text="bar"))
+        list.append(ResponseBreakUp(text="foo", percentage=12.21, color="#ff0000"))
         list.append(r)
 
         json = simplejson.dumps([r.__dict__ for r in list])
         self.assertNotEquals(json.find("#ff0000"), -1)
         self.assertNotEquals(json.find("foo"), -1)
         self.assertNotEquals(json.find("12.21"), -1)
-        self.assertNotEquals(json.find("bar"), -1)
