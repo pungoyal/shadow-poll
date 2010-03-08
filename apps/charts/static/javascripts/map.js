@@ -41,12 +41,18 @@ $(document).ready(function(){
 
     var question_id = $("#question-id").html();
     var governorate_id = $("#governorate-id").html();
+    var splt_gender_code=location.href.split("?")
+    var gender_code=""
+    if (splt_gender_code[1] != 'undifiend')
+    {
+    		gender_code= "?" + splt_gender_code[1]
+    }
     var kml_url = "/get_kml" 
     if (governorate_id != '')
     {
-        kml_url = kml_url + "/" + governorate_id
+        kml_url = kml_url + "/" + governorate_id + gender_code
     }
-    kml_url = kml_url + "/question"+ question_id
+    kml_url = kml_url + "/question"+ question_id + gender_code
     var bubbles = new OpenLayers.Layer.Vector(
         "Poll Responses", 
         {
@@ -85,8 +91,15 @@ $(document).ready(function(){
 	    function onFeatureSelect(event) {
 	        var feature = event.feature;
 	        governorate_id = feature.attributes['id'];
+	        var splt_gender_code=location.href.split("?")
+	        var gender_code = ""
+	            if (splt_gender_code[1] != 'undifiend')
+	            {
+	            		gender_code="?" + splt_gender_code[1]
+	            }
+	        
 	    	window.document.location = '/charts/' + governorate_id + 
-	    							   '/question' + question_id;
+	    							   '/question' + question_id + gender_code;
 	    }
 	    
 	    bubbles.events.on({

@@ -85,12 +85,16 @@
                                 <label for="all">{% trans 'All responses' %}</label>
                             </div>
                             <div class="field_container">
-                                <input name="filter" type="radio" value="Boys" id="Boys"/>
+                                <input name="filter" type="radio" value="M" onclick="window.location.href=location.href.replace('?g=M_F', '').replace('?g=M', '').replace('?g=F', '') + '?g=M'" id="Boys"/>
                                 <label for="Boys">{% trans 'Boys' %}</label>
                             </div>
                             <div class="field_container">
-                                <input name="filter" type="radio" value="Girls" id="Girls"/>
+                                <input name="filter" type="radio" value="F" onclick="window.location.href=location.href.replace('?g=M_F', '').replace('?g=M', '').replace('?g=F', '') + '?g=F'" id="Girls"/>
                                 <label for="Girls">{% trans 'Girls' %}</label>
+                            </div>
+                            <div class="field_container">
+                                <input name="filter" type="radio" value="M_F" onclick="window.location.href=location.href.replace('?g=M_F', '').replace('?g=M', '').replace('?g=F', '') + '?g=M_F'" id="Boys_Girls"/>
+                                <label for="Boys_Girls">{% trans 'Boys And Girls' %}</label>
                             </div>
                             <div class="field_container">
                                 <input name="filter" type="radio" value="Ages_0_8" id="Ages_0_8"/>
@@ -150,7 +154,7 @@
                     <div class="chart_details">
                         {% block chart %}
                         <div class="chart_bar">
-                            <h3><span class="response_criteria">Top Response for Bhagdad 123123</span> <span
+                            <h3><span class="response_criteria">Top Response for Bhagdad</span> <span
                                     class="top_concern">Security 65%</span></h3>
 
                             <div id="chart">

@@ -164,6 +164,12 @@ a:hover {
 .secondary_links li a {
 	padding-left: 22px;
 }
+.choice
+{
+	margin-left: 10px;
+	margin-right: 10px;	
+	font-size: 13px;
+}
 .secondary_links .download a {
 	background: url(../img/download_icon.gif) no-repeat 0 50%;
 	margin-right: 24px;
@@ -492,7 +498,6 @@ a:hover {
 }
 .top_concern {
 	font-size: 1.75em;
-	color: #f3653a;
 }
 .chart_note {
 	color:#91886F;

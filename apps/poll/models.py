@@ -14,6 +14,9 @@ DATA_TYPE = ( ('i','integer'), ('s','string'), ('c','character') )
 # mapping login in demographic parser
 GENDER = ( ('m', 'Male'), ('f', 'Female') )
 
+FINAL_APPRECIATION_MESSAGE = 'thanks'
+TRIGGER_INCORRECT_MESSAGE = 'trigger_error'
+
 ##########################################################################
 
 #only one questionnaire object in the db to hold the trigger for the poll
@@ -78,11 +81,43 @@ class Question(models.Model):
             relevant_responses = relevant_responses.filter(user__governorate=governorate_id)
         grouped_responses = relevant_responses.values('choice').annotate(Count('choice')).order_by('choice')
 
+        break_up = []
+
+        if len(grouped_responses) == 0:
+            no_response = {}
+            no_response['text'] = "No responses yet"
+            no_response['percentage'] = 0
+            no_response['color'] = "#FAAFBE"
+            break_up.append(no_response)
+            return break_up
+
         total_responses = relevant_responses.aggregate(Count('choice'))
-        break_up = {}
-        for grouped_response in grouped_responses:
-            choice_name = Choice.objects.get(id=grouped_response['choice']).text
-            break_up[choice_name]=(round(grouped_response['choice__count']*100/total_responses['choice__count'], 1))
+
+        # finding the most voted choice.
+        #TODO i am sure python has a better way of doing it. i just need to find it - puneet
+        max_percentage = grouped_responses[0]['choice__count']
+
+        for group in grouped_responses:
+            count = group['choice__count']
+            choice = group['choice']
+            color = Category.objects.get(choice=choice).color.code
+
+            percentage = round(count*100/total_responses['choice__count'], 1)
+
+            if percentage > max_percentage:
+                max_percentage=percentage
+                max_choice=choice
+                max_color = color
+            response = {}
+            response['percentage'] = percentage
+            response['color'] = color
+            break_up.append(response)
+
+        top_response = {}
+        top_response['text'] = Choice.objects.get(id=max_choice).text
+        top_response['percentage'] = max_percentage
+        top_response['color'] = max_color
+        break_up.insert(0, top_response)
 
         return break_up
 
@@ -119,10 +154,10 @@ class Question(models.Model):
 class Color(models.Model):
     """ ro - color has nothing to do with poll. This should be in charts app."""
     file_name = models.CharField(max_length=20)
-    color_code = models.CharField(max_length=25)
-    
+    code = models.CharField(max_length=25)
+
     def __unicode__(self):
-        return self.color_code
+        return "file:%s code:%s" % (self.file_name, self.code)
 
 ##########################################################################
 
@@ -187,23 +222,30 @@ class UserSession(models.Model):
         return "session for : %s" % (self.user)
 
     def respond(self, message):
+        # default to the first questionnaire     
+        if not self.questionnaire:
+            self.questionnaire = Questionnaire.objects.all().order_by('pk')[0]
 
- #       print self._is_trigger(message)
         if self._is_trigger(message):
             self.question = None
-            self.user = self._save_user(self.user, message)
-        
-#        print self._first_access()
+            message = message.strip().lstrip(self.questionnaire.trigger.lower()).strip()
+            parsers = list(DemographicParser.objects.filter(questionnaire=self.questionnaire).order_by('order') )
+
+            for parser in parsers:
+                demographic_information = parser.parse(message)
+                if demographic_information == None:
+                    return TRIGGER_INCORRECT_MESSAGE
+                self.user.set_value(parser.name, demographic_information)
+                
+            self.user = self._save_user(self.user)
+
         if self._first_access():
-            # THIS THROWS AN UGLY ERROR WHEN TRIGGER IS POORLY FORMED
-            # todo: FIX this to recover nicely
-            if hasattr(self.user, 'id'):
-                self.user = self._save_user(self.user, message)
+            if self.user.id == None:
+                return TRIGGER_INCORRECT_MESSAGE
             self.question = Question.first()
             self.save()
             return str(self.question)
-
-
+        
         matching_choices = self.question.matching_choices(message)
         
         if len(matching_choices) > 0:
@@ -222,21 +264,11 @@ class UserSession(models.Model):
         self.num_attempt = self.num_attempt + 1
         self.save()
         return "error_parsing_response"
-    
-    def _save_user(self, user, message):
-        if not self.questionnaire:
-            # default to the first question
-            self.questionnaire = Questionnaire.objects.all().order_by('pk')[0]
-        message = message.strip().lstrip(self.questionnaire.trigger.lower()).strip()
-        parsers = list( DemographicParser.objects.filter(questionnaire=self.questionnaire).order_by('order') )
-        for parser in parsers:
-            demographic_information = parser.parse(message)
-            user.set_value(parser.name, demographic_information)
 
+    def _save_user(self, user):
         user.save()
         return user
 
- 
     def _save_response(self,question,choices):
         for choice in choices:
             user_response = UserResponse(user = self.user, question =question, choice = choice)
@@ -244,7 +276,7 @@ class UserSession(models.Model):
 
     def _next_question(self,question):
         if question == None:
-            return "thanks"
+            return FINAL_APPRECIATION_MESSAGE
         return str(question)
 
     def _first_access(self):
@@ -269,7 +301,6 @@ class UserSession(models.Model):
         if len(sessions) == 0:
             session = UserSession(question = None)
             user.set_user_geolocation_if_registered(connection)
-            user.save()
             session.user = user
             return session
 

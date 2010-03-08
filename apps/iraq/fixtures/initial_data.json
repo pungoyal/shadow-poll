@@ -1,19 +1,19 @@
 [
     {
-        "pk": 1, 
-        "model": "auth.user", 
+        "pk": 1,
+        "model": "auth.user",
         "fields": {
-            "username": "a", 
-            "first_name": "", 
-            "last_name": "", 
-            "is_active": true, 
-            "is_superuser": true, 
-            "is_staff": true, 
-            "last_login": "2010-01-12 10:25:50", 
-            "groups": [], 
-            "user_permissions": [], 
-            "password": "sha1$74d04$0bc2a24e24715690fa11c9926623259293c5057a", 
-            "email": "p@p.com", 
+            "username": "a",
+            "first_name": "",
+            "last_name": "",
+            "is_active": true,
+            "is_superuser": true,
+            "is_staff": true,
+            "last_login": "2010-01-12 10:25:50",
+            "groups": [],
+            "user_permissions": [],
+            "password": "sha1$74d04$0bc2a24e24715690fa11c9926623259293c5057a",
+            "email": "p@p.com",
             "date_joined": "2010-01-12 10:25:30"
         }
     },
@@ -48,7 +48,7 @@
             "text": "Compared to my parents, my life in the future will be",
             "helper_text": "(Choose a,b,c or d.)",
             "error_response": "Placeholder error for question number 3. Please re-send."
-        } 
+        }
     },
     {
         "pk": 1,
@@ -63,34 +63,34 @@
         "model": "poll.color",
         "fields": {
             "file_name": "orange_dot.png",
-						"color_code": "#F8B088"
+            "code": "#F8B088"
         }
-        
+
     },
     {
         "pk": 2,
         "model": "poll.color",
         "fields":{
             "file_name": "green_dot.png",
-						"color_code": "#CCF98A"
+            "code": "#75B907"
         }
-        
+
     },
     {
         "pk": 3,
         "model": "poll.color",
         "fields": {
             "file_name": "mauve_dot.png",
-						"color_code": "rgb(234, 76, 244)"
+            "code": "rgb(234, 76, 244)"
         }
-        
+
     },
     {
         "pk": 4,
         "model": "poll.color",
         "fields":{
             "file_name": "blue_dot.png",
-						"color_code": "#8BC0FA"
+            "code": "#8BC0FA"
         }
 
     },
@@ -99,7 +99,7 @@
         "model": "poll.color",
         "fields":{
             "file_name": "grey_dot.png",
-						 "color_code": "#cdc9c9"
+            "code": "#cdc9c9"
         }
 
     },
@@ -119,7 +119,7 @@
             "color": 3
         }
     },
-		{
+    {
         "pk":"3",
         "model": "poll.category",
         "fields":{
@@ -127,7 +127,7 @@
             "color": 1
         }
     },
-		{
+    {
         "pk":"4",
         "model": "poll.category",
         "fields":{
@@ -151,7 +151,7 @@
             "color": 1
         }
     },
-		{
+    {
         "pk":"7",
         "model": "poll.category",
         "fields":{
@@ -159,7 +159,7 @@
             "color": 4
         }
     },
-		{
+    {
         "pk":"8",
         "model": "poll.category",
         "fields":{
@@ -167,7 +167,7 @@
             "color": 2
         }
     },
-		{
+    {
         "pk":"9",
         "model": "poll.category",
         "fields":{
@@ -175,7 +175,7 @@
             "color": 2
         }
     },
-		{
+    {
         "pk":"10",
         "model": "poll.category",
         "fields":{
@@ -183,7 +183,7 @@
             "color": 3
         }
     },
-		{
+    {
         "pk":"11",
         "model": "poll.category",
         "fields":{
@@ -191,7 +191,7 @@
             "color": 1
         }
     },
-		{
+    {
         "pk":"12",
         "model": "poll.category",
         "fields":{
@@ -209,7 +209,7 @@
             "name": "gender",
             "order": 2
         }
-    },		
+    },
     {
         "pk": 2,
         "model": "poll.demographicparser",
@@ -268,7 +268,7 @@
             "code": "a",
             "text": "Peace and Security",
             "question":2,
-						"category": 9
+            "category": 9
         }
     },
     {
@@ -278,7 +278,7 @@
             "code": "b",
             "text": "Go to school regularly",
             "question":2,
-						"category": 10
+            "category": 10
         }
     },
     {
@@ -288,7 +288,7 @@
             "code": "c",
             "text": "Health care when sick",
             "question":2,
-						"category": 11
+            "category": 11
         }
     },
     {
@@ -298,7 +298,7 @@
             "code": "d",
             "text": "Clean neighbourhood",
             "question":2,
-						"category": 11
+            "category": 11
         }
     },
     {
@@ -308,7 +308,7 @@
             "code": "e",
             "text": "Clean drinking water",
             "question":2,
-						"category": 12
+            "category": 12
         }
     },
     {
@@ -318,7 +318,7 @@
             "code": "f",
             "text": "Enough food",
             "question":2,
-						"category":12
+            "category":12
         }
     },
     {
@@ -328,7 +328,7 @@
             "code": "g",
             "text": "Be loved",
             "question":2,
-						"category": 11
+            "category": 11
         }
     },
     {
@@ -338,7 +338,7 @@
             "code": "h",
             "text": "Not have to work",
             "question":2,
-						"category": 11
+            "category": 11
         }
     },
     {
@@ -348,7 +348,7 @@
             "code": "i",
             "text": "Be listened to",
             "question":2,
-						"category": 11
+            "category": 11
         }
     },
     {
@@ -358,7 +358,7 @@
             "code": "j",
             "text": "A place to play",
             "question":2,
-						"category":11
+            "category":11
         }
     },
     {
@@ -368,7 +368,7 @@
             "code": "k",
             "text": "Family and friends to be safe",
             "question":2,
-						"category": 9
+            "category": 9
         }
     },
     {
@@ -420,5 +420,5 @@
             "category": 8
         }
     }
-    
+
 ]
