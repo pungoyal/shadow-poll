@@ -572,5 +572,77 @@
             "user": 2,
             "choice": 2
         }
+    },
+    {
+        "pk": 57,
+        "model": "poll.userresponse",
+        "fields": {
+            "question": 2,
+            "user": 2,
+            "choice": 15
+        }
+    },
+    {
+        "pk": 58,
+        "model": "poll.userresponse",
+        "fields": {
+            "question": 2,
+            "user": 2,
+            "choice": 15
+        }
+    },
+    {
+        "pk": 59,
+        "model": "poll.userresponse",
+        "fields": {
+            "question": 2,
+            "user": 2,
+            "choice": 14
+        }
+    },
+    {
+        "pk": 60,
+        "model": "poll.userresponse",
+        "fields": {
+            "question": 2,
+            "user": 2,
+            "choice": 13
+        }
+    },
+    {
+        "pk": 61,
+        "model": "poll.userresponse",
+        "fields": {
+            "question": 2,
+            "user": 2,
+            "choice": 12
+        }
+    },
+    {
+        "pk": 62,
+        "model": "poll.userresponse",
+        "fields": {
+            "question": 2,
+            "user": 1,
+            "choice": 15
+        }
+    },
+    {
+        "pk": 63,
+        "model": "poll.userresponse",
+        "fields": {
+            "question": 2,
+            "user": 1,
+            "choice": 14
+        }
+    },
+    {
+        "pk": 64,
+        "model": "poll.userresponse",
+        "fields": {
+            "question": 2,
+            "user": 1,
+            "choice": 13
+        }
     }
 ]
