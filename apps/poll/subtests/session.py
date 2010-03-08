@@ -18,12 +18,12 @@ class UserSessionTest(TestCase):
         self.reporter.save()
         self.pconnection = PersistantConnection(backend=self.backend, 
                                                 reporter=self.reporter, 
-                                                identity="1000")
+                                                identity="1000", governorate = 2, district = 4)
         self.pconnection.save()
 
         self.pconnection1 = PersistantConnection(backend=self.backend, 
                                                 reporter=self.reporter, 
-                                                identity="10001")
+                                                identity="10001", governorate = 7, district = 8)
         self.pconnection1.save()
 
         self.reporter.connections.add(self.pconnection)
@@ -53,12 +53,12 @@ class UserSessionTest(TestCase):
                         order=1, type='i').save()
         DemographicParser(questionnaire=q, name='gender', 
                         regex='m|f|male|female', order=2, type='c').save()
-        self.user = User(connection = self.pconnection)
-        self.user.save()
 
-        r = Registration(governorate = 3, district = 4, phone = self.pconnection)
+        r = Registration(phone = self.pconnection)
         r.save()
-
+        
+        r1 = Registration(phone = self.pconnection)
+        r1.save()
 
     def setup_choices(self,question):
         choice1 = Choice(code= 'a',question=question, text="a")
@@ -70,17 +70,22 @@ class UserSessionTest(TestCase):
 
     def test_open_new_session(self):
         session = UserSession.open(self.pconnection)
+        user = session.user
+        user.save()
         self.assertEquals(session.question, None)
-
         
     def test_respond_with_first_question_on_new_session_for_any_message(self):
         session = UserSession.open(self.pconnection)
-        self.assertEquals(session.respond("text"), str(self.question1))
+        user = session.user
+        user.save()
+        self.assertEquals(session.respond("trigger m 16"), str(self.question1))
 
     def test_correct_response_to_question_sends_next_question(self):
         session = UserSession.open(self.pconnection)
+        user = session.user
+        user.save()
         self.assertEquals(session.question, None)
-        response1 = session.respond("text")
+        response1 = session.respond("trigger m 16")
         self.assertEquals(session.question, self.question1)
         response2 = session.respond("a")
         self.assertEquals(response2, str(self.question2))
@@ -88,8 +93,10 @@ class UserSessionTest(TestCase):
 
     def test_wrong_response_to_question_sends_error(self):
         session = UserSession.open(self.pconnection)
+        user = session.user
+        user.save()
         self.assertEquals(session.question, None)
-        response1 = session.respond("text")
+        response1 = session.respond("trigger f 16")
         self.assertEquals(session.question, self.question1)
         response2 = session.respond("django")
         self.assertEquals(response2, "error_parsing_response")
@@ -97,19 +104,23 @@ class UserSessionTest(TestCase):
 
     def test_retrieve_ongoing_session_at_question2(self):
         session = UserSession.open(self.pconnection)
-        session.user = self.user
+        user = session.user
+        user.save()
+        session.user = user
         session.question = self.question2
         session.save()
+
         session = UserSession.open(self.pconnection)
+
         self.assertEquals(session.respond("b"), str(self.question3))
         self.assertEquals(session.question, self.question3)
         
     def test_close_ongoing_session_at_trigger(self):
         session = UserSession.open(self.pconnection)
-        session.user = self.user
+        user = session.user
+        user.save()
+        session.user = user
         session.question = self.question2
-        session.save()
-        session = UserSession.open(self.pconnection)
         self.assertEquals(session.respond("c"), str(self.question3))
         self.assertEquals(session.question, self.question3)
         
@@ -119,8 +130,10 @@ class UserSessionTest(TestCase):
 
     def test_close_session_on_last_answer(self):
         session = UserSession.open(self.pconnection)
+        user = session.user
+        user.save()
+        session.user = user
         session.question = self.question3
-        session.user  = self.user
         self.assertEquals(session.respond("c"), "thanks")
         self.assertEquals(session.question, None)
 
@@ -137,8 +150,10 @@ class UserSessionTest(TestCase):
 
     def test_end_session_on_reaching_max_num_allowed_retries(self):
         session = UserSession.open(self.pconnection1)
+        user = session.user
+        user.save()
+        session.user = user
         session.question = self.question1
-        session.user = self.user
         session.respond('t')
         session.respond('t')
         session.respond('t')
@@ -156,7 +171,7 @@ class UserSessionTest(TestCase):
         session = UserSession.open(self.pconnection)
         session.respond('trigger 14 f')
         latest_user = User.objects.all().order_by('-id')[0]
-        self.assertEquals(latest_user.governorate, 3)
+        self.assertEquals(latest_user.governorate, 2)
         self.assertEquals(latest_user.district, 4)
         
     def test_junk_trigger_message(self):
@@ -173,14 +188,5 @@ class UserSessionTest(TestCase):
         self.assertEquals(session.respond('trigger junk'), TRIGGER_INCORRECT_MESSAGE )
 
     def test_junk_message(self):
-        backend = PersistantBackend(slug="MockBackend1")
-        backend.save()
-        reporter = Reporter(alias="ReporterName1")
-        reporter.save()
-        pconnection = PersistantConnection(backend=backend, 
-                                                reporter=reporter, 
-                                                identity="1001")
-        pconnection.save()
-        session = UserSession.open(pconnection)
-
+        session = UserSession.open(self.pconnection)
         self.assertEquals(session.respond('junk'), TRIGGER_INCORRECT_MESSAGE )

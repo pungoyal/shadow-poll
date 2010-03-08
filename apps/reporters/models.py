@@ -290,6 +290,8 @@ class PersistantConnection(models.Model):
     identity  = models.CharField(max_length=30)
     reporter  = models.ForeignKey(Reporter, related_name="connections", blank=True, null=True)
     last_seen = models.DateTimeField(blank=True, null=True)
+    governorate = models.IntegerField(null=True)
+    district = models.IntegerField(null=True)
     # some connections are spambots; we should probably ignore them
     is_bot    = models.BooleanField(default=False)    
     

@@ -197,15 +197,11 @@ class User(models.Model):
     district = models.IntegerField(null=True)
 
     def __unicode__(self):
-        return " User : connection %s" % str(self.connection)
+        return "user connection : %s " % str(self.connection)
 
     def set_user_geolocation_if_registered(self, connection):
-        registrations = list(Registration.objects.filter(phone=connection))
-        if len(registrations) == 0:
-            return
-        registration = registrations[0]
-        self.governorate = registration.governorate
-        self.district = registration.district
+        self.governorate = connection.governorate
+        self.district = connection.district
 
     def set_value(self, field, value):
         if hasattr(self, field):
@@ -223,7 +219,6 @@ class UserSession(models.Model):
         return "session for : %s" % (self.user)
 
     def respond(self, message):
-
         # default to the first questionnaire     
         if not self.questionnaire:
             self.questionnaire = Questionnaire.objects.all().order_by('pk')[0]
@@ -247,8 +242,7 @@ class UserSession(models.Model):
             self.question = Question.first()
             self.save()
             return str(self.question)
-
-
+        
         matching_choices = self.question.matching_choices(message)
         
         if len(matching_choices) > 0:
@@ -298,8 +292,8 @@ class UserSession(models.Model):
 
     @classmethod
     def open(klass,connection):
-        users = User.objects.filter(connection = connection)
-        user = users[0] if(len(users)) > 0 else User(connection = connection)
+        users = User.objects.filter(connection = connection, governorate = connection.governorate, district = connection.district)
+        user = users[0] if(len(users)) > 0 else User(connection = connection, governorate = connection.governorate, district = connection.district)
         sessions = UserSession.objects.filter(user = user)
         if len(sessions) == 0:
             session = UserSession(question = None)
@@ -308,6 +302,7 @@ class UserSession(models.Model):
             return session
 
         return sessions[0]
+
 
 ##########################################################################
 
