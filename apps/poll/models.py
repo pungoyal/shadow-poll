@@ -177,7 +177,7 @@ class Choice(models.Model):
     def num_votes(self, governorate=None):
         if governorate is not None:
             return UserResponse.objects.filter(choice=self, 
-                                               user__governorate=governorate.id).count()
+                                               user__governorate=governorate.code).count()
         return UserResponse.objects.filter(choice=self).count()
         
     def parse(self, response):

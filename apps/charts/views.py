@@ -90,7 +90,6 @@ def show_by_question(request, question_id, governorate_id, template, context={})
                      "top_response": top_response,
                      "chart_data": simplejson.dumps([r.__dict__ for r in response_break_up]),
                      "national_data": simplejson.dumps([r.__dict__ for r in national_response_break_up]),
-                     "choices": Choice.objects.filter(question=question),
                      "character_english": character_english,
                      "questions" : Question.objects.all()
     })
