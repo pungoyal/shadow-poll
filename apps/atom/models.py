@@ -15,9 +15,7 @@ class Entry(models.Model):
 
     file_url = models.CharField(max_length = 255)
 
-    def __init__(self, entry, *args, **kwargs):
-        super(Entry, self).__init__(*args, **kwargs)
-
+    def consume(self, entry):
         self.title = entry.title
         self.uid = entry.id
         self.updated = entry.updated.replace("T", " ").replace("Z", "")
@@ -25,13 +23,14 @@ class Entry(models.Model):
         self.district = int(entry.district)
         self.age = int(entry.age)
 
-        self.female = self.parse_gender(entry.gender)
+        self.female = self._parse_gender(entry.gender)
         self.file_url = entry.links[0].href
 
-    def parse_gender(self, gender):
-        if gender is None:
+    def _parse_gender(self, gender):
+        if gender is None or len(gender) == 0:
             return None
-        if gender == 'f':
+        gender = gender.strip()
+        if gender.lower() == 'f':
             return True
         return False
 
@@ -42,6 +41,8 @@ class IVRFeedParser(object):
 
         entries = []
         for entry in d.entries:
-            entries.append(Entry(entry))
+            e = Entry()
+            e.consume(entry)
+            entries.append(e)
         return entries
         
