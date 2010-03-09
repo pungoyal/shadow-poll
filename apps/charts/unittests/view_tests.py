@@ -38,7 +38,7 @@ class ViewTests(TestCase):
         self.assertContains(response, "<scale>0.758620689655</scale>")
         response = self.client.get('/get_kml/7/question1' + query)
         self.assertContains(response, "<scale>0.758620689655</scale>")
-        response = self.client.get('/get_kml/5/question2?gender=m,f&age=a1,a2,a3')
+        response = self.client.get('/get_kml/5/question2' + query)
         self.assertContains(response, "<scale>0.666666666667</scale>")
         #self.assertContains(response, "<scale>0.5</scale>")
         response = self.client.get('/get_kml/7/question2' + query)
