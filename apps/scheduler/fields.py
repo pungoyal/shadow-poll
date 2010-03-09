@@ -40,8 +40,7 @@ class PickledObjectField(models.Field):
     
     def get_db_prep_save(self, value):
         if value is not None and not isinstance(value, PickledObject):
-            value = PickledObject('"""%s"""' % pickle.dumps(value))
-        print "db_prep_save %s" % value
+            value = unicode(PickledObject(pickle.dumps(value)))
         return value
     
     def get_internal_type(self): 
