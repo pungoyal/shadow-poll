@@ -1,4 +1,5 @@
 from __future__ import division
+from datetime import datetime
 import re
 from django.db import models
 from apps.reporters.models import Reporter, PersistantConnection
@@ -106,6 +107,16 @@ class Question(models.Model):
 
         return break_up
 
+    def get_categories(self):
+        choices_of_question = Choice.objects.filter(question = self)
+        categories = []
+        for choice in choices_of_question:
+            if choice.category:
+                categories.append(choice.category)
+        unique_categories = set(categories)
+        categories = list(unique_categories)
+        return categories
+
     def humanize_options(self):
         choices = Choice.objects.filter(question=self)
         text = []
@@ -192,6 +203,7 @@ class User(models.Model):
                               null=True, blank=True)
     governorate = models.IntegerField(null=True)
     district = models.IntegerField(null=True)
+    time_created = models.DateTimeField(default=datetime.now)
 
     def __unicode__(self):
         signature = "user connection: %s " % str(self.connection)
@@ -224,7 +236,7 @@ class UserSession(models.Model):
         # default to the first questionnaire     
         if not self.questionnaire:
             self.questionnaire = Questionnaire.objects.all().order_by('pk')[0]
-
+        
         if self._is_trigger(message):
             self.question = None
             message = message.strip().lstrip(self.questionnaire.trigger.lower()).strip()
@@ -240,7 +252,7 @@ class UserSession(models.Model):
                     self.user = user
                 
             self.user = self._save_user(self.user)
-
+        
         if self._first_access():
             if self.user.id == None:
                 return TRIGGER_INCORRECT_MESSAGE
@@ -303,7 +315,7 @@ class UserSession(models.Model):
 
     @classmethod
     def open(klass,connection):
-        users = User.objects.filter(connection = connection, governorate = connection.governorate, district = connection.district)
+        users = User.objects.filter(connection = connection, governorate = connection.governorate, district = connection.district).order_by('-time_created')
         user = users[0] if(len(users)) > 0 else User(connection = connection, governorate = connection.governorate, district = connection.district)
         sessions = UserSession.objects.filter(user = user)
         if len(sessions) == 0:

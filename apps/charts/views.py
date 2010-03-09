@@ -68,14 +68,8 @@ def show_by_question(request, question_id, governorate_id, template, context={})
         response_break_up.append(0)
 
     choices_of_question = Choice.objects.filter(question = question)
+    categories = question.get_categories()
 
-    categories = []
-    for choice in choices_of_question:
-        if choice.category:
-            categories.append(choice.category)
-
-    unique_categories = set(categories)
-    categories = list(unique_categories)
     character_english =  ['a', 'b', 'c', 'd', 'e', 'f', 'g',
                           'h', 'i', 'j', 'k', 'l', 'm', 'n']
 

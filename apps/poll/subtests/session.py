@@ -196,3 +196,18 @@ class UserSessionTest(TestCase):
         session.respond("trigger m 16")
         session.respond("trigger m 12")
         self.assertEquals(len(User.objects.all()), 2)
+
+    def test_reset_session_on_sending_trigger(self):
+        session = UserSession.open(self.pconnection)
+        session.respond("trigger m 16")
+        
+        session = UserSession.open(self.pconnection)
+        self.assertEquals(session.question, self.question1)
+        session.respond("trigger f 12")
+
+        self.assertEquals(session.question, self.question1)
+        session = UserSession.open(self.pconnection)
+        session.respond("a")
+
+        self.assertEquals(session.question, self.question2)
+        

@@ -9,10 +9,17 @@
 <link rel="stylesheet" href="/static/charts/stylesheets/main.css" type="text/css" media="screen, projection">
 <link rel="stylesheet" href="/static/charts/stylesheets/messages.css" type="text/css" media="screen, projection">
 <link rel="stylesheet" href="/static/charts/stylesheets/print.css" type="text/css" media="print">
+
 {% ifequal LANGUAGE_CODE "ar"%}
 <link rel="stylesheet" href="/static/charts/stylesheets/arabic.css" type="text/css" media="screen, projection">
+
 {% endifequal %}
 <!--[if lt IE 8]><link rel="stylesheet" href="/static/charts/stylesheets/ie.css" type="text/css" media="screen, projection"><![endif]-->
+{% endblock %}
+
+{% block javascripts %}
+<script src="/static/charts/javascripts/jquery.jplayer.min.js"></script>
+<script src="/static/charts/javascripts/messages.js"></script>
 {% endblock %}
 
 {% block title %}UNICEF{% endblock %}
@@ -93,12 +100,12 @@
                         <div class="message_details">
                             <div class="message">
                                 <p>{{ message.english_text }}</p>
-
-                                <div class="audio"><a href="audio/{{ message.sound_file_name }}"><img
-                                        src="/static/charts/img/speaker_icon.gif"
-                                        alt="play audio message"
-                                        title="play audio message"/></a></div>
-                            </div>
+                                <div id = "audio{{message.id}}" class = "audio">
+				</div>
+				<div id = "player{{message.id}}" class="jp-single-player">
+				  {% include "jplayer.html" %}
+				</div>
+			    </div>
                         </div>
                     </li>
                     {% endfor %}
