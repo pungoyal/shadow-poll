@@ -26,7 +26,7 @@
 				{% trans char %} &nbsp;.&nbsp;
 			{% endifequal %}
 		 {% endfor %}
-        <span style="color: {{choice.category.color.code}};">{% trans choice.text %} ({{choice.num_votes }} votes)</span>
+        <span style="color: {{choice.category.color.code}};">{% trans choice.text %} ({{choice.num_votes}} vote{{choice.num_votes|pluralize}})</span>
         <br />
         {% endfor %}
     </div>
