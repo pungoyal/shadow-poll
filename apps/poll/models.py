@@ -61,11 +61,10 @@ class DemographicParser(models.Model):
 
 class ResponseBreakUp():
     #FAAFBE is the default color that shows up when there are no responses for a level
-    def __init__(self, choice_text="No responses yet", percentage=0, color="#FAAFBE", category_text=""):
-        self.choice_text = choice_text
+    def __init__(self, text="No responses yet", percentage=0, color="#FAAFBE"):
         self.percentage = percentage
         self.color = color
-        self.category_text = category_text
+        self.text = text
 
 ##########################################################################
 
@@ -89,7 +88,7 @@ class Question(models.Model):
         relevant_responses = UserResponse.objects.filter(question=self)
         if governorate_id is not None:
             relevant_responses = relevant_responses.filter(user__governorate=governorate_id)
-        grouped_responses = relevant_responses.values('choice').annotate(Count('choice')).order_by('choice')
+        grouped_responses = relevant_responses.values('choice__category').annotate(Count('choice')).order_by('choice__category')
 
         break_up = []
 
@@ -100,12 +99,22 @@ class Question(models.Model):
         total_responses = relevant_responses.aggregate(Count('choice'))
 
         for group in grouped_responses:
-            choice = Choice.objects.get(id=group['choice'])
-            category = choice.category
+            category = Category.objects.get(id=group['choice__category'])
             percentage = round(group['choice__count']*100/total_responses['choice__count'], 1)
 
-            break_up.append(ResponseBreakUp(choice_text=choice.text, percentage = percentage, color= category.color.code, category_text=category.name))
+            break_up.append(ResponseBreakUp(percentage = percentage, color= category.color.code, text=category.name))
+
         return break_up
+
+    def get_categories(self):
+        choices_of_question = Choice.objects.filter(question = self)
+        categories = []
+        for choice in choices_of_question:
+            if choice.category:
+                categories.append(choice.category)
+        unique_categories = set(categories)
+        categories = list(unique_categories)
+        return categories
 
     def humanize_options(self):
         choices = Choice.objects.filter(question=self)
@@ -178,7 +187,7 @@ class Choice(models.Model):
     def num_votes(self, governorate=None):
         if governorate is not None:
             return UserResponse.objects.filter(choice=self, 
-                                               user__governorate=governorate.id).count()
+                                               user__governorate=governorate.code).count()
         return UserResponse.objects.filter(choice=self).count()
         
     def parse(self, response):

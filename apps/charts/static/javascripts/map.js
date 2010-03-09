@@ -99,7 +99,7 @@ $(document).ready(function(){
 	        governorate_id = feature.attributes['id'];
 	        var splt_gender_code=location.href.split("?")
 	        var gender_code = ""
-	            if (splt_gender_code[1] != 'undifiend')
+	            if (splt_gender_code[1] != null && splt_gender_code[1] != '')
 	            {
 	            		gender_code="?" + splt_gender_code[1]
 	            }
