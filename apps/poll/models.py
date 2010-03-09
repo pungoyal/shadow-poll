@@ -152,7 +152,7 @@ class Category(models.Model):
     
     def __unicode__(self):
         return self.name
-    
+
     @staticmethod
     def most_popular(user_responses):
         """ user_responses is a django query object """
@@ -194,7 +194,12 @@ class User(models.Model):
     district = models.IntegerField(null=True)
 
     def __unicode__(self):
-        return "user connection : %s " % str(self.connection)
+        signature = "user connection: %s " % str(self.connection)
+        if self.age:
+            signature = signature + " age: %s" % self.age
+        if self.gender:
+            signature = signature + " gender: %s" % self.gender            
+        return signature
 
     def set_user_geolocation_if_registered(self, connection):
         self.governorate = connection.governorate
