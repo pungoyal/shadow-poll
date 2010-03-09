@@ -41,23 +41,32 @@ $(document).ready(function(){
 
     var question_id = $("#question-id").html();
     var governorate_id = $("#governorate-id").html(); 
-    var gender_code = location.href.split("?")[1]
     
-    function construct_kml_url(governorate_id, question_id, gender_code)
+    var query=location.href.split("?")   
+    var full_query=""
+    
+    if (query[1] != 'undifiend')
+    {
+    		full_query= "?" + query[1]    		
+    }
+    construct_kml_url(governorate_id,question_id,full_query);
+
+    
+    function construct_kml_url(governorate_id, question_id, full_query)
     {
         var kml_url = "/get_kml";
         if (governorate_id != '' && governorate_id != null)
         {
-            kml_url = kml_url + "/" + governorate_id;
+            kml_url = kml_url + "/" + governorate_id + + full_query;
         }
-        kml_url = kml_url + "/question"+ question_id;
-        if (gender_code != '' && gender_code != null)
+        kml_url = kml_url + "/question"+ question_id + full_query;
+        if (full_query != '' && full_query != null)
         {
-            kml_url = kml_url + '?' + gender_code;
+            kml_url = kml_url + '?' + full_query;
         }
         return kml_url;
     }
-    kml_url = construct_kml_url(governorate_id, question_id, gender_code)
+    kml_url = construct_kml_url(governorate_id, question_id, full_query)
     
     var bubbles = new OpenLayers.Layer.Vector(
         "Poll Responses", 
@@ -97,15 +106,18 @@ $(document).ready(function(){
 	    function onFeatureSelect(event) {
 	        var feature = event.feature;
 	        governorate_id = feature.attributes['id'];
-	        var splt_gender_code=location.href.split("?")
-	        var gender_code = ""
-	            if (splt_gender_code[1] != null && splt_gender_code[1] != '')
-	            {
-	            		gender_code="?" + splt_gender_code[1]
-	            }
+	        var query=location.href.split("?")
+	        var full_query=""
+
+	        if (query[1] != 'undifiend')
+		    {
+	        	full_query= "?" + query[1]
+		    }	        
+
 	        
-	    	window.document.location = '/charts/' + governorate_id + 
-	    							   '/question' + question_id + gender_code;
+	        window.document.location = '/charts/' + governorate_id + 
+			   							'/question' + question_id + full_query;
+
 	    }
 	    
 	    bubbles.events.on({
