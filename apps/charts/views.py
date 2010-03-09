@@ -127,7 +127,6 @@ def get_kml(request, question_id, kml):
     style_dict_list = []
     gender = request.GET.get('gender')
     age = request.GET.get('age')
-    print gender 
     selected_options={}
     
     if gender <>"" :

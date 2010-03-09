@@ -98,11 +98,9 @@ class Governorate(Geography):
             selected_users =User.objects.filter(gender__in=gender )           
         
         #**************************************
-        print selected_users
         user_ids=[]
         for current in selected_users:
             user_ids.append(current.id)
-        print category
         
         responses=responses.filter(user__in=user_ids)
         #end of modifications

@@ -2,6 +2,7 @@ from django.test import TestCase, Client
 from apps.poll.models import Question
 from apps.charts.models import Governorate
 
+query="?gender=m,f&age=a1,a2,a3"
 class ViewTests(TestCase):
     fixtures = ['functional_test_data']
     def setUp(self):
@@ -13,10 +14,10 @@ class ViewTests(TestCase):
         questions = Question.objects.all()
         governorates = Governorate.objects.all()
         for question in questions:
-            url = '/charts/question%s' % question.id
+            url = '/charts/question%s' % question.id + query
             self.assertEquals(self.client.get(url).status_code, 200)
             for governorate in governorates:
-                url = '/charts/%s/question%s' % (governorate.id, question.id)
+                url = '/charts/%s/question%s' % (governorate.id, question.id) + query
                 self.assertEquals(self.client.get(url).status_code, 200)
 
     def test_kml(self):
@@ -24,15 +25,15 @@ class ViewTests(TestCase):
         questions = Question.objects.all()
         governorates = Governorate.objects.all()
         for question in questions:
-            url = '/get_kml/question%s' % question.id
+            url = '/get_kml/question%s' % question.id + query
             self.assertEquals(self.client.get(url).status_code, 200)
             for governorate in governorates:
-                url = '/get_kml/%s/question%s' % (governorate.id, question.id)
+                url = '/get_kml/%s/question%s' % (governorate.id, question.id) + query
                 self.assertEquals(self.client.get(url).status_code, 200, 
                                   msg = "%s did not return 200" % url)
     
     def test_kml_data(self):
-        response = self.client.get('/get_kml/question1')
+        response = self.client.get('/get_kml/question1?gender=m,f&age=a1,a2,a3')
         self.assertContains(response, "<scale>0.333333333333</scale>")
         self.assertContains(response, "<scale>0.758620689655</scale>")
         response = self.client.get('/get_kml/7/question1')
