@@ -4,15 +4,13 @@ from django.contrib.gis.db import models
 
 from poll.models import User, UserResponse, Category, Color
 
-MAX_SCALE_LENGTH_IN_STYLE = 18
-
 class Geography(models.Model):
     name = models.CharField(max_length=200)
     bounding_box = models.CharField(max_length=1000)
 
     # geodjango fields
     centroid = models.PointField(srid=4326)
-
+    
     # geodjango internals
     objects = models.GeoManager()
 
@@ -28,13 +26,14 @@ class Geography(models.Model):
     def description(self):
         return "Iraqi Governorate"
 
-    def style(self, question,gender):
-        most_voted_category = self.most_voted_category()
+    def style(self, question, selected_gender=None):
+        most_voted_category = self.most_popular_category(question)
         if most_voted_category:
-            percentage = self._bubble_size(question,gender)
-            style = {'color': most_voted_category.color, 
-                     'percentage': percentage }
-            return style
+            scale = self._bubble_size(question, selected_gender)
+            if scale:
+                style = {'color': most_voted_category.color, 
+                         'percentage': scale }
+                return style
         # default to grey
         style = {'color': Color.objects.get(file_name="grey_dot.png"), 
                  'percentage': 0.6 }
@@ -47,7 +46,7 @@ class Geography(models.Model):
         """
         if total == 0:
             return 0
-        percentage = count / total
+        percentage = float(count) / float(total)
         return percentage
     
     def exposed(self):
@@ -60,8 +59,16 @@ class Governorate(Geography):
     # a zoom level which will properly 'fill the image' with the district
     zoom_level = models.IntegerField(null=True, blank=True)
     
-    def _bubble_size(self, question,selected_gender):
-        responses = UserResponse.objects.filter(question=question.id, user__governorate=self.code)
+    def _bubble_size(self, question, selected_gender=None):
+        """ number of responses in the most popular category for this question
+        divided by total responses to this question 
+        """
+        category = self.most_popular_category(question)
+        if category is None:
+            return 0
+        responses = UserResponse.objects.filter(choice__category=category, 
+                                                question=question, 
+                                                user__governorate=self.code)
         #filter by gender       
         if selected_gender == "M":
             gen=User.objects.filter(gender__in=["M","m","Male","MALE"])
@@ -77,12 +84,12 @@ class Governorate(Geography):
             responses=responses.filter(user__in=user_ids)                
         #end of modifications
         
-        all_responses = UserResponse.objects.filter(user__governorate=self.code)
-        
+        all_responses = UserResponse.objects.filter(question=question, 
+                                                    user__governorate=self.code)
         return self._percentage_to_display(responses.count(), all_responses.count())
 
-    def most_voted_category(self):
-        relevant_responses = UserResponse.objects.filter(user__governorate = self.code)
+    def most_popular_category(self, question):
+        relevant_responses = UserResponse.objects.filter(user__governorate = self.code, question=question)
         return Category.most_popular(relevant_responses)
 
     def num_responses(self):
@@ -95,10 +102,20 @@ class District(Geography):
     class Meta:
         unique_together = ("governorate", "code")
 
-    def _bubble_size(self, question,selected_gender):
-        responses = UserResponse.objects.filter(question=question.id, user__district=self.code, user__governorate=self.governorate.code)
-        all_responses = UserResponse.objects.filter(user__district=self.code, user__governorate=self.governorate.code)
-        
+    def _bubble_size(self, question, selected_gender=None):
+        """ number of responses in the most popular category for this question
+        divided by total responses to this question 
+        """
+        category = self.most_popular_category(question)
+        if category is None:
+            return 0
+        responses = UserResponse.objects.filter(choice__category=category, 
+                                                question=question, 
+                                                user__district=self.code, 
+                                                user__governorate=self.governorate.code)
+        all_responses = UserResponse.objects.filter(question=question, 
+                                                    user__district=self.code, 
+                                                    user__governorate=self.governorate.code)
         #filter by gender       
         if selected_gender == "M":
             gen=User.objects.filter(gender__in=["M","m","Male","MALE"])
@@ -113,12 +130,10 @@ class District(Geography):
                 user_ids.append(current.id)
             responses=responses.filter(user__in=user_ids)                
         #end of modifications
-        
-        
         return self._percentage_to_display(responses.count(), all_responses.count())
 
-    def most_voted_category(self):
-        relevant_responses = UserResponse.objects.filter(user__district = self.code, user__governorate=self.governorate.code)
+    def most_popular_category(self, question):
+        relevant_responses = UserResponse.objects.filter(user__district = self.code, user__governorate=self.governorate.code, question=question)
         return Category.most_popular(relevant_responses)
 
     def num_responses(self):

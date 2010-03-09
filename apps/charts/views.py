@@ -39,25 +39,28 @@ def show_governorate(request, governorate_id, template='results.html'):
                               })
 
 def show_iraq_by_question(request, question_id,
-                          template='results.html', context={}):
+                          template='results.html'):
+    context = {}
     context.update({"region": "Iraq"})
-    return show_by_question(request, question_id, None,  template, context)
+    return show_by_question(request, question_id, None, template, context)
 
 def show_governorate_by_question(request, governorate_id, question_id,
-                                 template='results.html', context={}):
+                                 template='results.html'):
+    context = {}
     governorate = get_object_or_404(Governorate, pk=governorate_id)
-
+    question = get_object_or_404(Question, pk=question_id)
+    choices = Choice.objects.filter(question=question)
+    for choice in choices:
+        choice.num_votes = choice.num_votes(governorate)
     context.update(   {"region": governorate.name,
                        "governorate": governorate,
                        "bbox": governorate.bounding_box,
-    })
+                       "choices": choices})
     return show_by_question(request, question_id, governorate_id, template, context)
 
 def show_by_question(request, question_id, governorate_id, template, context={}):
     question = get_object_or_404(Question, pk=question_id)
     national_response_break_up = question.response_break_up()
-
-    question = get_object_or_404(Question, pk=question_id)
     response_break_up = question.response_break_up(governorate_id)
 
     if len(response_break_up) == 0:
@@ -65,17 +68,13 @@ def show_by_question(request, question_id, governorate_id, template, context={})
         response_break_up.append(0)
 
     choices_of_question = Choice.objects.filter(question = question)
+    categories = question.get_categories()
 
-    categories = []
-    for choice in choices_of_question:
-        if choice.category:
-            categories.append(choice.category)
+    character_english =  ['a', 'b', 'c', 'd', 'e', 'f', 'g',
+                          'h', 'i', 'j', 'k', 'l', 'm', 'n']
 
-    unique_categories = set(categories)
-    categories = list(unique_categories)
-    character_english =  ['a', 'b', 'c', 'd', 'e', 'f','g','h','i','j','k','l','m','n']
-
-    top_response = response_break_up[0] 
+    #finding the highest voted response
+    top_response = response_break_up[0]
     for break_up in response_break_up:
         if(break_up.percentage > top_response.percentage):
             top_response = break_up
@@ -85,10 +84,14 @@ def show_by_question(request, question_id, governorate_id, template, context={})
                      "top_response": top_response,
                      "chart_data": simplejson.dumps([r.__dict__ for r in response_break_up]),
                      "national_data": simplejson.dumps([r.__dict__ for r in national_response_break_up]),
-                     "choices": Choice.objects.filter(question=question),
                      "character_english": character_english,
                      "questions" : Question.objects.all()
-    })
+    }) 
+    if 'chart_data' not in context:
+    # if chart_data not set, default to national view
+        context.update( {"chart_data": national_response_break_up})
+    if 'choices' not in context:
+        context.update( {"choices": choices_of_question} )
     return render_to_response(request, template, context)
 
 def home_page(request):

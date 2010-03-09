@@ -2,7 +2,7 @@ from django.utils import simplejson
 from django.core import serializers
 from django.test import TestCase
 
-from apps.poll.models import ResponseBreakUp
+from apps.poll.models import ResponseBreakUp,Category
 
 class ResponseBreakUpTest(TestCase):
     # to ensure we do not add 'unserializable' objects in ResponseBreakUp

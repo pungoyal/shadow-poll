@@ -63,9 +63,9 @@ class DemographicParser(models.Model):
 class ResponseBreakUp():
     #FAAFBE is the default color that shows up when there are no responses for a level
     def __init__(self, text="No responses yet", percentage=0, color="#FAAFBE"):
-        self.text = text
         self.percentage = percentage
         self.color = color
+        self.text = text
 
 ##########################################################################
 
@@ -89,22 +89,33 @@ class Question(models.Model):
         relevant_responses = UserResponse.objects.filter(question=self)
         if governorate_id is not None:
             relevant_responses = relevant_responses.filter(user__governorate=governorate_id)
-        grouped_responses = relevant_responses.values('choice').annotate(Count('choice')).order_by('choice')
+        grouped_responses = relevant_responses.values('choice__category').annotate(Count('choice')).order_by('choice__category')
 
         break_up = []
 
         if len(grouped_responses) == 0:
-            break_up.append(ResponseBreakUp(text="No responses yet", percentage = 0, color= "#FAAFBE"))
+            break_up.append(ResponseBreakUp())
             return break_up
 
         total_responses = relevant_responses.aggregate(Count('choice'))
 
         for group in grouped_responses:
-            color = Category.objects.get(choice=group['choice']).color.code
-            choice_text = Choice.objects.get(id=group['choice']).text
+            category = Category.objects.get(id=group['choice__category'])
             percentage = round(group['choice__count']*100/total_responses['choice__count'], 1)
-            break_up.append(ResponseBreakUp(text=choice_text, percentage = percentage, color= color))
+
+            break_up.append(ResponseBreakUp(percentage = percentage, color= category.color.code, text=category.name))
+
         return break_up
+
+    def get_categories(self):
+        choices_of_question = Choice.objects.filter(question = self)
+        categories = []
+        for choice in choices_of_question:
+            if choice.category:
+                categories.append(choice.category)
+        unique_categories = set(categories)
+        categories = list(unique_categories)
+        return categories
 
     def humanize_options(self):
         choices = Choice.objects.filter(question=self)
@@ -158,8 +169,11 @@ class Category(models.Model):
         """ user_responses is a django query object """
         if len(user_responses) < 1 :
             return None
-        choice_id =  user_responses.values('choice').annotate(Count('choice')).order_by('-choice__count')[0]['choice']
-        return Category.objects.get(choice__id = choice_id)    
+        category_id =  user_responses.values('choice__category')\
+                       .annotate(Count('choice__category'))\
+                       .order_by('-choice__category__count')\
+                       [0]['choice__category']
+        return Category.objects.get(pk = category_id)    
 
 ##########################################################################
 class Choice(models.Model):
@@ -170,7 +184,13 @@ class Choice(models.Model):
 
     def __unicode__(self):
         return "%s:%s" % (self.text, self.code)
-
+    
+    def num_votes(self, governorate=None):
+        if governorate is not None:
+            return UserResponse.objects.filter(choice=self, 
+                                               user__governorate=governorate.code).count()
+        return UserResponse.objects.filter(choice=self).count()
+        
     def parse(self, response):
         return self.code == response
 
