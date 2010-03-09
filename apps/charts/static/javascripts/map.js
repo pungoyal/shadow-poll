@@ -57,17 +57,17 @@ $(document).ready(function(){
         var kml_url = "/get_kml";
         if (governorate_id != '' && governorate_id != null)
         {
-            kml_url = kml_url + "/" + governorate_id + + full_query;
+            kml_url = kml_url + "/" + governorate_id ;
         }
-        kml_url = kml_url + "/question"+ question_id + full_query;
+        kml_url = kml_url + "/question"+ question_id ;
         if (full_query != '' && full_query != null)
         {
-            kml_url = kml_url + '?' + full_query;
+            kml_url = kml_url + full_query;
         }
         return kml_url;
     }
-    kml_url = construct_kml_url(governorate_id, question_id, full_query)
     
+    kml_url = construct_kml_url(governorate_id, question_id, full_query)
     var bubbles = new OpenLayers.Layer.Vector(
         "Poll Responses", 
         {

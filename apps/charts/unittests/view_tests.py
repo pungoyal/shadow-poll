@@ -1,6 +1,7 @@
 from django.test import TestCase, Client
-from apps.poll.models import Question
+from apps.poll.models import Question, User
 from apps.charts.models import Governorate
+from math import ceil
 
 query="?gender=m,f&age=a1,a2,a3"
 class ViewTests(TestCase):
@@ -32,16 +33,15 @@ class ViewTests(TestCase):
                 self.assertEquals(self.client.get(url).status_code, 200, 
                                   msg = "%s did not return 200" % url)
     
-    def test_kml_data(self):
-        response = self.client.get('/get_kml/question1?gender=m,f&age=a1,a2,a3')
-        self.assertContains(response, "<scale>0.333333333333</scale>")
+    def test_kml_data(self):        
+        response = self.client.get('/get_kml/question1' + query)
         self.assertContains(response, "<scale>0.758620689655</scale>")
-        response = self.client.get('/get_kml/7/question1')
+        response = self.client.get('/get_kml/7/question1' + query)
         self.assertContains(response, "<scale>0.758620689655</scale>")
-        response = self.client.get('/get_kml/question2')
+        response = self.client.get('/get_kml/5/question2' + query)
         self.assertContains(response, "<scale>0.666666666667</scale>")
-        self.assertContains(response, "<scale>0.5</scale>")
-        response = self.client.get('/get_kml/7/question2')
+        #self.assertContains(response, "<scale>0.5</scale>")
+        response = self.client.get('/get_kml/7/question2' + query)
         self.assertContains(response, "<scale>0.5</scale>")
 
     def test_messaging_page_is_accesible(self):

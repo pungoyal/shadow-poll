@@ -116,7 +116,6 @@ def get_kml_for_governorate(request, governorate_id, question_id):
     return get_kml(request, question_id, district_kml)
 
 def get_kml_for_iraq(request, question_id):
-    #betnada in arabic
     governorate_kml = Governorate.objects.kml()
     return get_kml(request, question_id, governorate_kml)
 
@@ -138,7 +137,6 @@ def get_kml(request, question_id, kml):
         selected_options["age"] = age
     if age == "" :
         selected_options["age"] = ""
-
     for (counter, geography) in enumerate(kml):
         style_dict = geography.style(question,selected_options)
         if style_dict:
