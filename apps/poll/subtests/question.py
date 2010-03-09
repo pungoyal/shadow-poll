@@ -87,77 +87,60 @@ class QuestionTest(TestCase):
         choice3.save()
         self.assertEquals(str(question), "question 1: (Prioritize) a. apple b. bannana c. carrot")
 
+    def setup_question_choices_and_categories(self):
+        self.question = Question(text = 'question 1',max_choices = 1, helper_text="(Prioritize)")
+        self.question.save()
+
+        self.blue = Color(file_name="blue.png", code="#blue")
+        self.red = Color(file_name="red.png", code="#red")
+        self.blue.save()
+        self.red.save()
+
+        self.fruits = Category(name="fruits", color=self.red)
+        self.fruits.save()
+        self.vegetables = Category(name="vegetables",color=self.blue)
+        self.vegetables.save()
+
+        self.apple = Choice(code= 'a',question=self.question, text="apple", category=self.fruits)
+        self.carrot = Choice(code= 'b',question=self.question, text="carrot", category=self.vegetables)
+        self.banana = Choice(code= 'c',question=self.question, text="banana", category=self.fruits)
+        self.ginger = Choice(code= 'd',question=self.question, text="ginger", category=self.vegetables)
+        self.apple.save()
+        self.carrot.save()
+        self.banana.save()
+        self.ginger.save()
+
     def test_get_response_break_up(self):
-        question = Question(text = 'question 1',max_choices = 1, helper_text="(Prioritize)")
-        question.save()
+        self.setup_question_choices_and_categories()
 
-        blue = Color(file_name="blue.png", code="#blue")
-        red = Color(file_name="red.png", code="#red")
-        blue.save()
-        red.save()
+        UserResponse(user = self.user, question = self.question, choice = self.apple).save()
+        UserResponse(user = self.user, question = self.question, choice = self.apple).save()
+        UserResponse(user = self.user, question = self.question, choice = self.apple).save()
+        UserResponse(user = self.user, question = self.question, choice = self.carrot).save()
+        UserResponse(user = self.user, question = self.question, choice = self.carrot).save()
+        UserResponse(user = self.user, question = self.question, choice = self.carrot).save()
+        UserResponse(user = self.user, question = self.question, choice = self.carrot).save()
+        UserResponse(user = self.user, question = self.question, choice = self.banana).save()
+        UserResponse(user = self.user, question = self.question, choice = self.banana).save()
+        UserResponse(user = self.user, question = self.question, choice = self.ginger).save()
 
-        fruits = Category(name="fruits", color=red)
-        fruits.save()
-        vegetables = Category(name="vegetables",color=blue)
-        vegetables.save()
-
-        apple = Choice(code= 'a',question=question, text="apple", category=fruits)
-        carrot = Choice(code= 'b',question=question, text="carrot", category=vegetables)
-        banana = Choice(code= 'c',question=question, text="banana", category=fruits)
-        ginger = Choice(code= 'd',question=question, text="ginger", category=vegetables)
-        apple.save()
-        carrot.save()
-        banana.save()
-        ginger.save()
-        
-        UserResponse(user = self.user, question = question, choice = apple).save()
-        UserResponse(user = self.user, question = question, choice = apple).save()
-        UserResponse(user = self.user, question = question, choice = apple).save()
-        UserResponse(user = self.user, question = question, choice = carrot).save()
-        UserResponse(user = self.user, question = question, choice = carrot).save()
-        UserResponse(user = self.user, question = question, choice = carrot).save()
-        UserResponse(user = self.user, question = question, choice = carrot).save()
-        UserResponse(user = self.user, question = question, choice = banana).save()
-        UserResponse(user = self.user, question = question, choice = banana).save()
-        UserResponse(user = self.user, question = question, choice = ginger).save()
-
-        response_break_up = question.response_break_up()
+        response_break_up = self.question.response_break_up()
 
         self.assertEquals(len(response_break_up), 2)
 
         self.assertEquals(response_break_up[0].percentage, 50.0)
         self.assertEquals(response_break_up[1].percentage, 50.0)
 
-        self.assertEquals(response_break_up[0].color, fruits.color.code)
-        self.assertEquals(response_break_up[1].color, vegetables.color.code)
+        self.assertEquals(response_break_up[0].color, self.fruits.color.code)
+        self.assertEquals(response_break_up[1].color, self.vegetables.color.code)
 
-        self.assertEquals(response_break_up[0].text, fruits.name)
-        self.assertEquals(response_break_up[1].text, vegetables.name)
+        self.assertEquals(response_break_up[0].text, self.fruits.name)
+        self.assertEquals(response_break_up[1].text, self.vegetables.name)
 
     def test_get_response_break_up_for_no_responses(self):
-        question = Question(text = 'question 1',max_choices = 1, helper_text="(Prioritize)")
-        question.save()
+        self.setup_question_choices_and_categories()
 
-        blue = Color(file_name="blue.png", code="#blue")
-        red = Color(file_name="red.png", code="#red")
-        blue.save()
-        red.save()
-
-        fruits = Category(name="fruits", color=red)
-        fruits.save()
-        vegetables = Category(name="vegetables",color=blue)
-        vegetables.save()
-
-        apple = Choice(code= 'a',question=question, text="apple", category=fruits)
-        carrot = Choice(code= 'b',question=question, text="carrot", category=vegetables)
-        banana = Choice(code= 'c',question=question, text="banana", category=fruits)
-        ginger = Choice(code= 'd',question=question, text="ginger", category=vegetables)
-        apple.save()
-        carrot.save()
-        banana.save()
-        ginger.save()
-
-        response_break_up = question.response_break_up()
+        response_break_up = self.question.response_break_up()
 
         self.assertEquals(len(response_break_up), 1)
         self.assertEquals(response_break_up[0].text, "No responses yet")
