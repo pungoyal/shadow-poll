@@ -32,8 +32,8 @@
     </div>
 </div>
 <p class="total_responses">
-    215 {% trans 'responses' %} <br/>
-    {% trans 'from Bhagdad' %}
+    {{ total_responses }} {% trans 'responses' %} <br/>
+    {% trans 'from' %} {{ region }}
 </p>
 {% endblock %}
         

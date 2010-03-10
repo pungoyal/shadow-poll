@@ -11,7 +11,7 @@ from rapidsms.webui import settings
 from rapidsms.webui.utils import render_to_response
 
 from apps.charts.models import Governorate, District, VoiceMessage
-from apps.poll.models import Question, Choice, Color
+from apps.poll.models import Question, Choice, Color, UserResponse
 
 def voice_home_page(request):
     messages = VoiceMessage.objects.all()
@@ -41,7 +41,9 @@ def show_governorate(request, governorate_id, template='results.html'):
 def show_iraq_by_question(request, question_id,
                           template='results.html'):
     context = {}
-    context.update({"region": "Iraq"})
+    total_responses = len(UserResponse.objects.all())
+    context.update({"region": "Iraq", 
+                    'total_responses': total_responses})
     return show_by_question(request, question_id, None, template, context)
 
 def show_governorate_by_question(request, governorate_id, question_id,
@@ -50,12 +52,14 @@ def show_governorate_by_question(request, governorate_id, question_id,
     governorate = get_object_or_404(Governorate, pk=governorate_id)
     question = get_object_or_404(Question, pk=question_id)
     choices = Choice.objects.filter(question=question)
+    total_responses = len(UserResponse.objects.filter(user__governorate = governorate_id))
     for choice in choices:
         choice.num_votes = choice.num_votes(governorate)
     context.update(   {"region": governorate.name,
                        "governorate": governorate,
                        "bbox": governorate.bounding_box,
-                       "choices": choices})
+                       "choices": choices,
+                       "total_responses": total_responses})
     return show_by_question(request, question_id, governorate_id, template, context)
 
 def show_by_question(request, question_id, governorate_id, template, context={}):
