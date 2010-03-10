@@ -44,9 +44,10 @@
         {% block breadcrumb %}
         <div id="breadcrumb_container" class="clearfix">
             <ul class="breadcrumbs">
-                <li><a href="/charts/question1">{% trans 'Iraq' %}</a></li>
-                <li><a href="#">{% trans 'Bhagdad' %}</a></li>
-                <li class="active">{% trans 'District' %}</li>
+              <li {% if governorate %} {% else %}class="active" {% endif %}> {% if governorate %} <a href="/charts/question{{ question.id }}">{% trans "Iraq" %}</a>  {% else %}  {% trans "Iraq" %} {% endif %}</li>
+								{% if governorate %}
+                <li class="active">{% trans region  %}</li>
+								{% endif %}
             </ul>
             <ul class="secondary_links">
                 <li class="download"><a href="#">{% trans 'Download' %}</a></li>

@@ -32,8 +32,8 @@
     </div>
 </div>
 <p class="total_responses">
-    {{ total_responses }} {% trans 'responses' %} <br/>
-    {% trans 'from' %} {{ region }}
+   {% blocktrans %}{{ total_responses }} responses <br/>
+    from {{ region }} {% endblocktrans %} 
 </p>
 {% endblock %}
         

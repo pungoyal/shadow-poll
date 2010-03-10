@@ -1,6 +1,8 @@
-from apps.poll.models import DemographicParser, User, Questionnaire
+from apps.poll.models import DemographicParser, User, Questionnaire, UserSession, Question
 from unittest import TestCase
-from apps.poll.responders import TriggerResponder, TRIGGER_INCORRECT_MESSAGE
+from apps.poll.trigger_responder import TriggerResponder
+from apps.poll.messages import TRIGGER_INCORRECT_MESSAGE
+
 class ResponderTest(TestCase):
 
     def setUp(self):
@@ -12,19 +14,26 @@ class ResponderTest(TestCase):
 
         self.parsers = [ageParser, genderParser]
         self.user = User()
-        kwargs =   {"parsers": self.parsers, 
+        self.session = UserSession()
+        self.question =Question(text="what")
+        self.kwargs =   {"parsers": self.parsers, 
                     "user": self.user,
                     "trigger" : self.q.trigger,
-                    "question" : "what"
+                    "question" :self.question ,
+                    "session" : self.session
                     }
-        self.trigger_responder  = TriggerResponder(kwargs)
+        self.trigger_responder  = TriggerResponder(self.kwargs)
+
 
     def test_criteria_for_trigger(self):
         self.assertEquals(self.trigger_responder.criteria("poll"), True)
         
+
     def test_action_for_trigger(self):
         response = self.trigger_responder.action("poll 12 f")
         self.assertNotEquals(response, TRIGGER_INCORRECT_MESSAGE)
         self.assertEquals(self.user.age, 12)
         self.assertEquals(self.user.gender, "f")
-        self.assertEquals(response, "what")
+        self.assertEquals(response, str(self.question))
+
+        
