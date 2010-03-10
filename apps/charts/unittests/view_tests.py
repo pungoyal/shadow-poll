@@ -18,7 +18,7 @@ class ViewTests(TestCase):
             url = '/charts/question%s' % question.id + query
             self.assertEquals(self.client.get(url).status_code, 200)
             for governorate in governorates:
-                url = '/charts/%s/question%s' % (governorate.id, question.id) + query
+                url = '/charts/question%s/%s' % (question.id, governorate.id) + query
                 self.assertEquals(self.client.get(url).status_code, 200)
 
     def test_kml(self):

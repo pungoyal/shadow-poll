@@ -46,7 +46,7 @@ def show_iraq_by_question(request, question_id,
                     'total_responses': total_responses})
     return show_by_question(request, question_id, None, template, context)
 
-def show_governorate_by_question(request, governorate_id, question_id,
+def show_governorate_by_question(request, question_id, governorate_id,
                                  template='results.html'):
     context = {}
     governorate = get_object_or_404(Governorate, pk=governorate_id)
