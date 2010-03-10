@@ -81,33 +81,26 @@
                         <fieldset>
                             <legend><span>{% trans 'Filter map by' %}</span></legend>
                             <div class="field_container">
-                                <input name="filter" type="radio" value="all" id="all" checked/>
-                                <label for="all">{% trans 'All responses' %}</label>
-                            </div>
-                            <div class="field_container">
-                                <input name="filter" type="radio" value="M" onclick="window.location.href=location.href.replace('?g=M_F', '').replace('?g=M', '').replace('?g=F', '') + '?g=M'" id="Boys"/>
+                                <input name="filter" type="checkbox" value="m"  onclick="javascript:select_checkbox()"  id="Boys" checked="checked" />
                                 <label for="Boys">{% trans 'Boys' %}</label>
                             </div>
                             <div class="field_container">
-                                <input name="filter" type="radio" value="F" onclick="window.location.href=location.href.replace('?g=M_F', '').replace('?g=M', '').replace('?g=F', '') + '?g=F'" id="Girls"/>
+                                <input name="filter" type="checkbox" value="f" onclick="javascript:select_checkbox()" id="Girls" checked="checked"/>
                                 <label for="Girls">{% trans 'Girls' %}</label>
+                            </div>                          
+                            <div class="field_container">
+                                <input name="filter" type="checkbox" value="a1" onclick="javascript:select_checkbox()" id="Ages_6_11" checked="checked"/>
+                                <label for="Ages_6_11">{% trans 'Ages 6-11' %}</label>
                             </div>
                             <div class="field_container">
-                                <input name="filter" type="radio" value="M_F" onclick="window.location.href=location.href.replace('?g=M_F', '').replace('?g=M', '').replace('?g=F', '') + '?g=M_F'" id="Boys_Girls"/>
-                                <label for="Boys_Girls">{% trans 'Boys And Girls' %}</label>
+                                <input name="filter" type="checkbox" value="a2" onclick="javascript:select_checkbox()" id="Ages_12_14" checked="checked"/>
+                                <label for="Ages_12_14">{% trans 'Ages 12-14' %}</label>
                             </div>
                             <div class="field_container">
-                                <input name="filter" type="radio" value="Ages_0_8" id="Ages_0_8"/>
-                                <label for="Ages_0_8">{% trans 'Ages 0-8' %}</label>
+                                <input name="filter" type="checkbox" value="a3" onclick="javascript:select_checkbox()" id="Ages_15_17" checked="checked"/>
+                                <label for="Ages_15_17">{% trans 'Ages 15-17' %}</label>
                             </div>
-                            <div class="field_container">
-                                <input name="filter" type="radio" value="Ages_9_12" id="Ages_9_12"/>
-                                <label for="Ages_9_12">{% trans 'Ages 9-12' %}</label>
-                            </div>
-                            <div class="field_container">
-                                <input name="filter" type="radio" value="Ages_13plus" id="Ages_13plus"/>
-                                <label for="Ages_13plus">{% trans 'Ages 13+' %}</label>
-                            </div>
+
                         </fieldset>
                     </form>
                 </div>
@@ -180,7 +173,7 @@
 		  {% ifequal q.id question.id %}
 		  class = "active"
 		  {% endifequal %}
-		  <a href="question{{q.id}}">{% trans q.text %}</a></li>
+		  <a href="javascript:redirect_question('question{{q.id}}')">{% trans q.text %}</a></li>
 	      {% endfor %}
             </ul>
             <p class="note"><a href="#">{% trans 'Read about how UNICEF used SMS to conduct the survey' %}</a></p>
@@ -222,6 +215,81 @@
         <a href="http://www.unicef.org/" target="_blank" title="UNICEF - United for children"><img
                 src="/static/charts/img/unicef_footer_logo.gif" alt="UNICEF"/></a>
     </div>
+<script language="javascript" type="text/javascript" >
+	function redirect_question(question_no)
+	{
+		//window.location.href = question_no + "?" + location.href.split("?")[1]
+		var url = location.href.split("?")[1];
+		if (url != undefined)
+		{
+			window.location.href = question_no + "?" + location.href.split("?")[1]
+		}
+		else
+		{
+			window.location.href = question_no + "?gender=&age="
+		}
+	}
+	function select_checkbox()
+	{
+		var elLength = document.forms[0].elements.length;
+		var url = location.href.split("?")[0];
+		var gender = ""
+		var age = ""
+		url = url + "?";
+		for (i=0; i<elLength; i++)
+	    {
+	        var type = document.forms[0].elements[i].type;
+	        if (type=="checkbox" && document.forms[0].elements[i].checked){
+		        if (document.forms[0].elements[i].value == "m" || document.forms[0].elements[i].value == "f")
+		        {
+		        	gender = gender + document.forms[0].elements[i].value + ","
+		        }
+		        if (document.forms[0].elements[i].value == "a1" || document.forms[0].elements[i].value == "a2" || document.forms[0].elements[i].value == "a3")
+		        {
+		        	age = age + document.forms[0].elements[i].value + ","
+		        }	        	            
+	        }	        
+	    }
+	    if (gender != "")
+	    {
+	    	gender = gender.substring(0,gender.length-1);
+	    }
+	    if (age != "")
+	    {
+	    	age = age.substring(0,age.length-1);
+	    }
+	    window.location.href = url + "gender=" + gender + "&age=" + age ;
+	}
+
+	var url_query = location.href.split("?")[1];
+	if (url_query != undefined)
+	{
+		var split_gender = url_query.split("&")[0].split("=")[1];
+
+		var split_age = url_query.split("&")[1].split("=")[1];
+
+		var all_query= split_gender + "," + split_age 
+		
+
+		var elLength = document.forms[0].elements.length;
+		for (i=0; i<elLength; i++)
+	    {
+	        var type = document.forms[0].elements[i].type;
+	        if (type=="checkbox")
+	        {
+	        	if (all_query.contains(document.forms[0].elements[i].value))
+	        	{
+	        		document.forms[0].elements[i].checked=true;        			
+	        	}
+	        	else
+	        	{
+	        		document.forms[0].elements[i].checked=false;  
+	        	}
+		               	            
+	        }	        
+	    }
+	}
+	</script>
 
     {% endblock %}
 

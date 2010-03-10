@@ -74,14 +74,14 @@ msgstr "الأولاد"
 msgid "Girls"
 msgstr "البنات"
 
-msgid "Ages 0-8"
-msgstr "العمر من ٠-٨"
+msgid "Ages 6-11"
+msgstr "العمر من ٦-١١"
 
-msgid "Ages 9-12"
-msgstr "العمر من ٩-١٢"
+msgid "Ages 12-14"
+msgstr "العمر من ١٢-١٤"
 
-msgid "Ages 13+"
-msgstr "العمر اكبر من ١٣"
+msgid "Ages 15-17"
+msgstr "العمر من ١٥-١٧"
 
 msgid "Color indicates the top response category for each governarate."
 msgstr "اللون الذي يدل على أعلى فئة إجابة لكل محافظة."

@@ -33,9 +33,9 @@
         "pk": 1,
         "model": "poll.user",
         "fields": {
-            "gender": "M",
+            "gender": "m",
             "connection": 1,
-            "age": 12,
+            "age": 13,
 			"governorate":5,
 			"district":1
         }
@@ -44,7 +44,7 @@
         "pk": 2,
         "model": "poll.user",
         "fields": {
-            "gender": "M",
+            "gender": "m",
             "connection": 2,
             "age": 12,
 			"governorate":7,
