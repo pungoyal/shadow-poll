@@ -68,8 +68,6 @@ def show_by_question(request, question_id, governorate_id, template, context={})
         response_break_up.append(0)
 
     choices_of_question = Choice.objects.filter(question = question)
-    categories = question.get_categories()
-
     character_english =  ['a', 'b', 'c', 'd', 'e', 'f', 'g',
                           'h', 'i', 'j', 'k', 'l', 'm', 'n']
 
@@ -79,7 +77,7 @@ def show_by_question(request, question_id, governorate_id, template, context={})
         if(break_up.percentage > top_response.percentage):
             top_response = break_up
 
-    context.update( {"categories": categories,
+    context.update( {"categories": question.get_categories(),
                      "question": question,
                      "top_response": top_response,
                      "chart_data": simplejson.dumps([r.__dict__ for r in response_break_up]),

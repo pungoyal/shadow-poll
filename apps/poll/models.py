@@ -108,14 +108,7 @@ class Question(models.Model):
         return break_up
 
     def get_categories(self):
-        choices_of_question = Choice.objects.filter(question = self)
-        categories = []
-        for choice in choices_of_question:
-            if choice.category:
-                categories.append(choice.category)
-        unique_categories = set(categories)
-        categories = list(unique_categories)
-        return categories
+        return Choice.objects.filter(question=self).values('category__name').annotate(Count('category__name')).order_by('category').values('category__name')
 
     def humanize_options(self):
         choices = Choice.objects.filter(question=self)
