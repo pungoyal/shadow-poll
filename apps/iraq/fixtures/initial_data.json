@@ -140,7 +140,7 @@
         "model": "poll.category",
         "fields":{
             "name": "Better",
-            "color": 3
+            "color": 2
         }
     },
     {
@@ -148,7 +148,7 @@
         "model": "poll.category",
         "fields":{
             "name": "About the same",
-            "color": 1
+            "color": 3
         }
     },
     {
@@ -156,7 +156,7 @@
         "model": "poll.category",
         "fields":{
             "name": "Worse",
-            "color": 4
+            "color": 1
         }
     },
     {
@@ -164,7 +164,7 @@
         "model": "poll.category",
         "fields":{
             "name": "I don't know",
-            "color": 2
+            "color": 4
         }
     },
     {
@@ -377,7 +377,8 @@
         "fields": {
             "code": "l",
             "text": "Others",
-            "question":2
+            "question":2,
+            "category": 9
         }
     },
     {
