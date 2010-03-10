@@ -6,13 +6,13 @@ from apps.atom.models import IVRFeedParser
 class FeedParserTest (TestCase):
     def setUp(self):
         path = os.path.dirname(__file__)
-        path = os.path.join(path, "data", "atom.xml")
+        path = os.path.join(path, "data", "atom.xml.template")
         self.file_stream = open(path, 'r')
 
     def test_parse_feed(self):
         parser = IVRFeedParser()
         entries = parser.parse(self.file_stream)
-        self.assertEquals(len(entries), 2)
+        self.assertEquals(len(entries), 1)
 
         firstEntry = entries[0]
 
@@ -23,4 +23,4 @@ class FeedParserTest (TestCase):
         self.assertEquals(firstEntry.district, 3)
         self.assertEquals(firstEntry.age, 6)
         self.assertEquals(firstEntry.female, True)
-        self.assertEquals(firstEntry.file_url, 'http://www.zain.iq.com/ivr/unicef/data/789.mp3')
+        self.assertEquals(firstEntry.file_url, 'REPLACE_ME')

@@ -65,12 +65,19 @@ class IVRFeedParser(object):
             d = feedparser.parse(feed_xml)
         except Exception, e:
             logger.error(feed_xml)
+            logger.error(e)            
+            raise
         entries = []
         for entry in d.entries:
             e = Entry()
             try:
                 e.consume(entry)
+                e.save()
             except Exception, e:
+                # we make a best-effort attempt to parse all entries
                 logger.error(entry)
-            entries.append(e)
+                logger.error(e)
+            else:
+                # only append the entry after it saves correctly
+                entries.append(e)
         return entries
