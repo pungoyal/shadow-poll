@@ -68,8 +68,6 @@ def show_by_question(request, question_id, governorate_id, template, context={})
         response_break_up.append(0)
 
     choices_of_question = Choice.objects.filter(question = question)
-    categories = question.get_categories()
-
     character_english =  ['a', 'b', 'c', 'd', 'e', 'f', 'g',
                           'h', 'i', 'j', 'k', 'l', 'm', 'n']
 
@@ -79,7 +77,7 @@ def show_by_question(request, question_id, governorate_id, template, context={})
         if(break_up.percentage > top_response.percentage):
             top_response = break_up
 
-    context.update( {"categories": categories,
+    context.update( {"categories": question.get_categories(),
                      "question": question,
                      "top_response": top_response,
                      "chart_data": simplejson.dumps([r.__dict__ for r in response_break_up]),
@@ -116,7 +114,6 @@ def get_kml_for_governorate(request, governorate_id, question_id):
     return get_kml(request, question_id, district_kml)
 
 def get_kml_for_iraq(request, question_id):
-    #betnada in arabic
     governorate_kml = Governorate.objects.kml()
     return get_kml(request, question_id, governorate_kml)
 
@@ -138,7 +135,6 @@ def get_kml(request, question_id, kml):
         selected_options["age"] = age
     if age == "" :
         selected_options["age"] = ""
-
     for (counter, geography) in enumerate(kml):
         style_dict = geography.style(question,selected_options)
         if style_dict:
