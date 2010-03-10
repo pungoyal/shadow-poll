@@ -1,15 +1,15 @@
 $(document).ready(function(){
 		      $(".audio").
 			  each(function(index){
-				   addPlayer(this.id);
+				   addPlayer(this.id, index == 0 );
 			       });
 });
 
-var addPlayer = function(audible){
-    $("#" +audible).
-	jPlayer({
+var addPlayer = function(audible, play){
+    $("#" +audible)
+	.jPlayer({
 		    ready:function(){
-			this.element.jPlayer("setFile", "http://www.miaowmusic.com/mp3/Miaow-07-Bubble.mp3", "http://www.miaowmusic.com/ogg/Miaow-07-Bubble.ogg").jPlayer("play");
+			this.element.jPlayer("setFile", "http://www.miaowmusic.com/mp3/Miaow-07-Bubble.mp3", "http://www.miaowmusic.com/ogg/Miaow-07-Bubble.ogg").jPlayer(play?"play":"pause");
 
 		    },
 		    nativeSupport: false,
@@ -21,6 +21,5 @@ var addPlayer = function(audible){
 		     jpTotalTime.text($.jPlayer.convertTime(totalTime));
 		     demoStatusInfo(this.element, jpStatus); 
 		 });
-    
 };
 

@@ -1,5 +1,27 @@
+import logging
+import logging.handlers
 from django.db import models
+
 import feedparser
+
+DEBUG_LOG_FILENAME = 'debug.log'
+ERROR_LOG_FILENAME = 'error.log'
+
+logger = logging.getLogger("FeedParser")
+logger.setLevel(logging.DEBUG)
+
+debug_handler = logging.handlers.RotatingFileHandler(DEBUG_LOG_FILENAME)
+debug_handler.setLevel(logging.DEBUG)
+
+error_handler = logging.handlers.RotatingFileHandler(ERROR_LOG_FILENAME)
+error_handler.setLevel(logging.ERROR)
+
+formatter = logging.Formatter("%(asctime)s - %(name)s - %(levelname)s - %(message)s")
+debug_handler.setFormatter(formatter)
+error_handler.setFormatter(formatter)
+
+logger.addHandler(debug_handler)
+logger.addHandler(error_handler)
 
 class Entry(models.Model):
     title = models.CharField(max_length=255)
@@ -34,15 +56,21 @@ class Entry(models.Model):
             return True
         return False
 
-
 class IVRFeedParser(object):
     def parse(self, stream):
-        d = feedparser.parse(stream)
+        feed_xml = stream.read()
+        logger.debug(feed_xml)
 
+        try:
+            d = feedparser.parse(feed_xml)
+        except Exception, e:
+            logger.error(feed_xml)
         entries = []
         for entry in d.entries:
             e = Entry()
-            e.consume(entry)
+            try:
+                e.consume(entry)
+            except Exception, e:
+                logger.error(entry)
             entries.append(e)
         return entries
-        
