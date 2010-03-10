@@ -87,6 +87,15 @@ class QuestionTest(TestCase):
         choice3.save()
         self.assertEquals(str(question), "question 1: (Prioritize) a. apple b. bannana c. carrot")
 
+    def test_get_categories(self):
+        self.setup_question_choices_and_categories()
+
+        categories = self.question.get_categories()
+        self.assertEquals(len(categories), 2)
+        self.assertEquals(categories[0]['category__name'], self.fruits.name)
+        self.assertEquals(categories[1]['category__name'], self.vegetables.name)
+
+
     def setup_question_choices_and_categories(self):
         self.question = Question(text = 'question 1',max_choices = 1, helper_text="(Prioritize)")
         self.question.save()
@@ -101,8 +110,8 @@ class QuestionTest(TestCase):
         self.vegetables = Category(name="vegetables",color=self.blue)
         self.vegetables.save()
 
-        self.apple = Choice(code= 'a',question=self.question, text="apple", category=self.fruits)
         self.carrot = Choice(code= 'b',question=self.question, text="carrot", category=self.vegetables)
+        self.apple = Choice(code= 'a',question=self.question, text="apple", category=self.fruits)
         self.banana = Choice(code= 'c',question=self.question, text="banana", category=self.fruits)
         self.ginger = Choice(code= 'd',question=self.question, text="ginger", category=self.vegetables)
         self.apple.save()
