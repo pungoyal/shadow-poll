@@ -40,10 +40,24 @@ class ViewTests(TestCase):
         self.assertContains(response, "<scale>0.758620689655</scale>")
         response = self.client.get('/get_kml/5/question2' + query)
         self.assertContains(response, "<scale>0.666666666667</scale>")
-        #self.assertContains(response, "<scale>0.5</scale>")
         response = self.client.get('/get_kml/7/question2' + query)
         self.assertContains(response, "<scale>0.5</scale>")
-
+        response = self.client.get('/get_kml/question1' + "?gender=f&age=a1,a2")        
+        self.assertContains(response, "<scale>0.6</scale>")
+    def test_user_filter(self):
+        governorates = Governorate.objects.all()
+        for governorate in governorates:            
+            self.assertEquals(governorate.user_filter({'gender': 'm,f', 'age': 'a1,a2,a3'}),[1, 2])
+            
+        for governorate in governorates:            
+            self.assertEquals(governorate.user_filter({'gender': 'f', 'age': 'a1,a2,a3'}),[])
+            
+        for governorate in governorates:            
+            self.assertEquals(governorate.user_filter({'gender': 'f', 'age': 'a1,a3'}),[])
+        
+        for governorate in governorates:            
+            self.assertEquals(governorate.user_filter({'gender': 'm', 'age': 'a2'}),[1, 2])
+            
     def test_messaging_page_is_accesible(self):
         response = self.client.get("/messages/")
         self.assertEquals(response.status_code, 200)

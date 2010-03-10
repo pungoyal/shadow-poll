@@ -27,7 +27,7 @@ class Geography(models.Model):
         return "Iraqi Governorate"
 
     def style(self, question, selected_options=None):
-        most_voted_category = self.most_popular_category(question)
+        most_voted_category = self.most_popular_category(question,selected_options)
         if most_voted_category:
             scale = self._bubble_size(question, selected_options)
             if scale:
@@ -64,75 +64,33 @@ class Governorate(Geography):
         """ number of responses in the most popular category for this question
         divided by total responses to this question 
         """
-        category = self.most_popular_category(question)
+        category = self.most_popular_category(question,selected_options)
         if category is None:
             return 0
         responses = UserResponse.objects.filter(choice__category=category, 
                                                 question=question, 
                                                 user__governorate=self.code)
-        #filter by selected options from check box's
-        gender = selected_options["gender"] # m,f
-        age_code = selected_options["age"] # a1,a2,a3
-        
-        if gender <> "" :
-            gender = str(gender).split(",")
-        if age_code <>"":
-            age_code = age_code.split(",")
-        age_range = ""
-               
-        if len(age_code) > 0:
-            for a in age_code:
-                age_range = age_range +  AGE_RANGE[a] + ","
-        if len(age_code) > 0:
-            age_range = age_range[:len(age_range)-1]
-            age_range = age_range.split(",")
-        #**************************************
-        #retrieve users depends on what what filter has been selected
-        if len(age_range) > 0 and len(gender) > 0 :
-            selected_users = User.objects.filter(gender__in=gender,age__in=age_range)
-        elif len(age_range) > 0 and len(gender) == 0 :
-            selected_users = User.objects.filter(age__in=age_range)
-        elif len(gender) > 0 and len(age_range) == 0 :
-            selected_users =User.objects.filter(gender__in=gender )           
-        
-        #**************************************
         user_ids=[]
-        for current in selected_users:
-            user_ids.append(current.id)
+        user_ids = self.user_filter(selected_options)
 
         responses=responses.filter(user__in=user_ids)
-        #end of modifications
-
+       
         all_responses = UserResponse.objects.filter(question=question, 
-                                                    user__governorate=self.code)
+                                                    user__governorate=self.code,user__in=user_ids)
         return self._percentage_to_display(responses.count(), all_responses.count())
 
-    def most_popular_category(self, question):
-        relevant_responses = UserResponse.objects.filter(user__governorate = self.code, question=question)
+    def most_popular_category(self, question,selected_options=None):
+        
+        user_ids=[]
+        user_ids = self.user_filter(selected_options)
+            
+        relevant_responses = UserResponse.objects.filter(user__governorate = self.code, question=question,user__in=user_ids)
         return Category.most_popular(relevant_responses)
 
     def num_responses(self):
         return len(UserResponse.objects.filter(user__governorate = self.code))
-
-class District(Geography):
-    code = models.CharField(max_length=16)
-    governorate = models.ForeignKey(Governorate)
     
-    class Meta:
-        unique_together = ("governorate", "code")
-
-    def _bubble_size(self, question, selected_options=None):
-        """ number of responses in the most popular category for this question
-        divided by total responses to this question 
-        """
-        category = self.most_popular_category(question)
-        if category is None:
-            return 0
-        responses = UserResponse.objects.filter(choice__category=category, 
-                                                question=question, 
-                                                user__district=self.code, 
-                                                user__governorate=self.governorate.code)
-        
+    def user_filter(self,selected_options=None):
         #filter by selected options from check box's
         gender = selected_options["gender"] # m,f
         age_code = selected_options["age"] # a1,a2,a3
@@ -164,23 +122,80 @@ class District(Geography):
         user_ids=[]
         for current in selected_users:
             user_ids.append(current.id)
+        return user_ids
+
+class District(Geography):
+    code = models.CharField(max_length=16)
+    governorate = models.ForeignKey(Governorate)
+    
+    class Meta:
+        unique_together = ("governorate", "code")
+
+    def _bubble_size(self, question, selected_options=None):
+        """ number of responses in the most popular category for this question
+        divided by total responses to this question 
+        """
+        category = self.most_popular_category(question,selected_options)
+        if category is None:
+            return 0
+        responses = UserResponse.objects.filter(choice__category=category, 
+                                                question=question, 
+                                                user__district=self.code, 
+                                                user__governorate=self.governorate.code)
+        user_ids=[]
+        user_ids = self.user_filter(selected_options)
         
-        responses=responses.filter(user__in=user_ids)
-        #end of modifications
-        
+        responses=responses.filter(user__in=user_ids) 
         
         all_responses = UserResponse.objects.filter(question=question, 
                                                     user__district=self.code, 
-                                                    user__governorate=self.governorate.code)
+                                                    user__governorate=self.governorate.code,user__in=user_ids)
         
         return self._percentage_to_display(responses.count(), all_responses.count())
 
-    def most_popular_category(self, question):
-        relevant_responses = UserResponse.objects.filter(user__district = self.code, user__governorate=self.governorate.code, question=question)
+    def most_popular_category(self, question,selected_options=None):
+        user_ids=[]
+        user_ids = self.user_filter(selected_options)
+        
+        relevant_responses = UserResponse.objects.filter(user__district = self.code, user__governorate=self.governorate.code, question=question,user__in=user_ids)
         return Category.most_popular(relevant_responses)
 
     def num_responses(self):
         return len(UserResponse.objects.filter(user__district = self.code, user__governorate=self.governorate.code))
+    
+    def user_filter(self,selected_options=None):
+        #filter by selected options from check box's
+        gender = selected_options["gender"] # m,f
+        age_code = selected_options["age"] # a1,a2,a3
+        
+        if gender <> "" :
+            gender = gender.split(",")
+        
+        if age_code <>"":
+            age_code = age_code.split(",")
+        
+        age_range = ""
+        
+        if len(age_code) > 0:
+            for a in age_code:
+                age_range = age_range +  AGE_RANGE[a] + ","
+        if len(age_code) > 0:
+            age_range = age_range[:len(age_range)-1]
+            age_range = age_range.split(",")
+        #**************************************
+        #retrieve users depends on what what filter has been selected
+        if len(age_range) > 0 and len(gender) > 0 :
+            selected_users = User.objects.filter(gender__in=gender ) & User.objects.filter(age__in=age_range)
+        elif len(age_range) > 0 and len(gender) == 0 :
+            selected_users = User.objects.filter(age__in=age_range)
+        elif len(gender) > 0 and len(age_range) == 0 :
+            selected_users =User.objects.filter(gender__in=gender )           
+        
+        #**************************************
+        user_ids=[]
+        for current in selected_users:
+            user_ids.append(current.id)
+        return user_ids
 
 GENDER = ( ('m', 'Male'), ('f', 'Female') )
 
