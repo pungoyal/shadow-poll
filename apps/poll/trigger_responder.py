@@ -1,15 +1,11 @@
 from apps.poll.messages import FINAL_APPRECIATION_MESSAGE,TRIGGER_INCORRECT_MESSAGE
-
+from apps.poll.responder import Responder
 clean = lambda s : s.strip().lower()     
 
-class TriggerResponder(object):
+class TriggerResponder(Responder):
     
     def __init__(self,kwargs):
-        self.trigger = kwargs.get("trigger","poll")
-        self.parsers = kwargs.get("parsers", [])
-        self.user = kwargs.get("user", None)
-        self.question =  kwargs.get("question", FINAL_APPRECIATION_MESSAGE)
-
+        super(TriggerResponder, self).__init__(kwargs)
         self.criteria = lambda message:clean(message).find(clean(self.trigger)) > -1
 
 
@@ -23,4 +19,7 @@ class TriggerResponder(object):
         for key in user_info:
             self.user.set_value(key,user_info[key])
             
-        return self.question    
+        self.session.question = self.next_question
+        
+        return str(self.session.question)    
+
