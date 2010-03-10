@@ -5,6 +5,7 @@ from django.db import models
 from apps.reporters.models import Reporter, PersistantConnection
 from apps.register.models import Registration
 from django.db.models import Avg,Count
+from apps.poll.messages import *
 import math
 
 ##########################################################################
@@ -15,8 +16,6 @@ DATA_TYPE = ( ('i','integer'), ('s','string'), ('c','character') )
 # mapping login in demographic parser
 GENDER = ( ('m', 'Male'), ('f', 'Female') )
 
-FINAL_APPRECIATION_MESSAGE = 'thanks'
-TRIGGER_INCORRECT_MESSAGE = 'trigger_error'
 
 ##########################################################################
 
@@ -47,7 +46,6 @@ class DemographicParser(models.Model):
         for a in arguments:
             regex = re.compile( '(%s)$' % str(self.regex).strip() )
             match = regex.match( a.lower() )
-
             if match:
                 if self.type == 'i':
                     val = int(match.group(0))
