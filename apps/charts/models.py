@@ -215,11 +215,9 @@ class VoiceMessage(models.Model):
     def get_child_image(self):
         if self.female is None:
             return "child_no_identity"
-
         if self.female:
             return "child_girl"
-
         return "child_boy"
 
     def __unicode__(self):
-        return "%s %s %s %s" % (self.name, self.gender, self.age, self.sound_file_name)
+        return "%s %s %s %s" % (self.name, self.female, self.age, self.sound_file_name)

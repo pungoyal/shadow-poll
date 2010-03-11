@@ -46,7 +46,6 @@ class SyncAtomJob(BaseJob):
             voice_message = VoiceMessage()
             voice_message.fill(entry, file_name)
             voice_message.save()
-            #create a new audiomessage and save
 
             voice_messages.append(voice_message)
 
