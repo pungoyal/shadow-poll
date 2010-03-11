@@ -174,7 +174,7 @@
 		  {% ifequal q.id question.id %}
 		  class = "active"
 		  {% endifequal %}
-		  <a href="">
+		  <a href="/charts/question{{q.id}}{% if governorate %}/{{governorate.id}}{% endif %}">
 		  	{% trans q.text %}
 		  </a></li>
 	      {% endfor %}
