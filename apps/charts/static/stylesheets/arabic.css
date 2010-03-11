@@ -190,3 +190,7 @@ body {
 .response_category ul li span {
 		background-position: 0 -170px;
 }
+
+.filter_section {
+		height:340px;
+}

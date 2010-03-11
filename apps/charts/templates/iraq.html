@@ -206,9 +206,9 @@
 </div>
 {% endblock %}
 
+{% block footer %}
 <div id='footer'>
-    {% get_languages %}
-    {% block footer %}
+   
     <div id="sub_sections">
         <div class="column  first">
             <h3>Legal</h3>
@@ -218,11 +218,9 @@
         <div class="column  ">
             <h3>Poll Questions</h3>
             <ul>
-                <li><a href="#">I feel happy...</a></li>
-                <li><a href="#">What makes you most happy...</a></li>
-                <li><a href="#">What makes you least happy...</a></li>
-                <li><a href="#">Compared to my parents, my life will be...</a></li>
-                <li><a href="#">If i were leading the country all children...</a></li>
+							{% for ques in questions %}
+                <li><a href="#"> {{ ques.text }}</a></li>
+								{% endfor %}
             </ul>
         </div>
         <div class="column  last">
@@ -238,6 +236,5 @@
         <a href="http://www.unicef.org/" target="_blank" title="UNICEF - United for children"><img
                 src="/static/charts/img/unicef_footer_logo.gif" alt="UNICEF"/></a>
     </div>
-    {% endblock %}
-
 </div>
+{% endblock %}
