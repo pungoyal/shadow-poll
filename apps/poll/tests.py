@@ -7,3 +7,4 @@ from subtests.response_break_up import *
 from subtests.responder import *
 from subtests.valid_answer_responder import *
 from subtests.string import *
+from subtests.list import *
