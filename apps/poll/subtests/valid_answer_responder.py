@@ -19,11 +19,13 @@ class ValidAnswerResponderTest(TestCase):
         self.choice2.save()
         self.choice3.save()
         
+        self.next_question  = Question(text="next")
 
         self.session.question = self.question
         self.kwargs =  {"user": self.user,
-                    "question" :self.question ,
+                    "next_question" :self.next_question ,
                     "session" : self.session
+                        
                     }
         self.trigger_responder  = ValidAnswerResponder(self.kwargs)
 
@@ -32,8 +34,9 @@ class ValidAnswerResponderTest(TestCase):
         self.assertEquals(self.trigger_responder.criteria("c"), True)
         self.assertEquals(self.trigger_responder.criteria("w"), False)
         
-
-
+    def test_valid_answer_response(self):
+        response = self.trigger_responder.action("c")
+        self.assertEquals(response, str(self.next_question))
         
 
         

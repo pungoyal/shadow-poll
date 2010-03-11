@@ -9,5 +9,9 @@ class Responder(object) :
         self.trigger = kwargs.get("trigger","poll")
         self.parsers = kwargs.get("parsers", [])
         self.user = kwargs.get("user", None)
-        self.next_question =  kwargs.get("question", None)
+        self.next_question =  kwargs.get("next_question", None)
         self.session = kwargs.get("session", None)
+
+
+    def proceed_to_next_question(self):
+        self.session.question = self.next_question
