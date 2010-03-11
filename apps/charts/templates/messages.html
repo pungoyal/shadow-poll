@@ -1,19 +1,11 @@
-{% extends 'layout.html' %}
+{% extends 'iraq.html' %}
 {% load i18n %}
 {% load i18ntags %}
 {% load region-tags %}
 {% load webapp-tags %}
 
-{% block stylesheets %}
-<link rel="stylesheet" href="/static/charts/stylesheets/reset.css" type="text/css" media="screen, projection">
-<link rel="stylesheet" href="/static/charts/stylesheets/main.css" type="text/css" media="screen, projection">
+{% block page_stylesheets %}
 <link rel="stylesheet" href="/static/charts/stylesheets/messages.css" type="text/css" media="screen, projection">
-<link rel="stylesheet" href="/static/charts/stylesheets/print.css" type="text/css" media="print">
-
-{% ifequal LANGUAGE_CODE "ar"%}
-<link rel="stylesheet" href="/static/charts/stylesheets/arabic.css" type="text/css" media="screen, projection">
-
-{% endifequal %}
 <!--[if lt IE 8]><link rel="stylesheet" href="/static/charts/stylesheets/ie.css" type="text/css" media="screen, projection"><![endif]-->
 {% endblock %}
 
@@ -22,28 +14,7 @@
 <script src="/static/charts/javascripts/messages.js"></script>
 {% endblock %}
 
-{% block title %}UNICEF{% endblock %}
 {% block title_suffix %}Voice Messages{% endblock %}
-
-{% block header %}
-<div id="language_menu">
-    <ul>
-        <li class="en"><a href="#" class="current_language">English</a></li>
-        <li class="arabic"><a href="#">Arabic</a></li>
-    </ul>
-</div>
-<div id="site_header">
-    <h1> AN IRAQ FIT FOR CHILDREN </h1>
-
-    <div id="top_menu">
-        <ul>
-            <li class="home first"><a href="#"><span>Home</span></a></li>
-            <li class="about"><a href="#"><span>About</span></a></li>
-            <li class="poll last"><a href="#"><span>Poll</span></a></li>
-        </ul>
-    </div>
-</div>
-{% endblock %}
 
 {% block content %}
 <div id='main_content' class="clearfix">
