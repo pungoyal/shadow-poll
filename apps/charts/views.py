@@ -99,7 +99,7 @@ def show_by_question(request, question_id, governorate_id, template, context={})
 def home_page(request):
     response = HttpResponse()
     response.write("<h1>Homepage coming soon. </h1>")
-    response.write("Head to <a href='question1?gender=m,f&age=a1,a2,a3'>Question 1</a> page")
+    response.write("Head to <a href='question1'>Question 1</a> page")
     return response
 
 def view_404(request):
@@ -126,21 +126,8 @@ def get_kml(request, question_id, kml):
     question = Question.objects.get(id=question_id)
     placemarks_info_list = []
     style_dict_list = []
-    gender = request.GET.get('gender')
-    age = request.GET.get('age')
-    selected_options={}
-    
-    if gender <>"" :
-        selected_options["gender"] = gender
-    if gender =="":
-        selected_options["gender"] = ""
-    
-    if age <> "" :
-        selected_options["age"] = age
-    if age == "" :
-        selected_options["age"] = ""
     for (counter, geography) in enumerate(kml):
-        style_dict = geography.style(question,selected_options)
+        style_dict = geography.style(question)
         if style_dict:
             style_str = "s%s-%d" % (style_dict['color'].id, len(style_dict_list))
             placemarks_info_list.append({'id': geography.id,
