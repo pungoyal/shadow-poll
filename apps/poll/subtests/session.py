@@ -219,3 +219,5 @@ class UserSessionTest(TestCase):
         self.assertEquals(session.question.max_choices, 2)
         error = session.respond("a")
         self.assertEquals(error, "err_less_thank_expected_choices")
+
+        
