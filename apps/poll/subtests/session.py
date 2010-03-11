@@ -136,7 +136,7 @@ class UserSessionTest(TestCase):
         session.question = self.question3
         self.assertEquals(session.respond("c"), "thanks")
         self.assertEquals(session.question, None)
-
+        self.assertEquals(session.user, None)
 
     def test_user_interaction_is_saved_when_successful(self):
         initial_number_of_responses = len(UserResponse.objects.all())
@@ -211,3 +211,11 @@ class UserSessionTest(TestCase):
 
         self.assertEquals(session.question, self.question2)
         
+    def test_less_than_required_choices_reminds_user(self):
+        self.question1.max_choices = 2
+        self.question1.save()
+        session = UserSession.open(self.pconnection)
+        session.respond("trigger m 16")
+        self.assertEquals(session.question.max_choices, 2)
+        error = session.respond("a")
+        self.assertEquals(error, "err_less_thank_expected_choices")

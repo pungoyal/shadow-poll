@@ -807,6 +807,15 @@
             "code": "a", 
             "language": 2
         }
+    },
+    {
+	"pk": 92, 
+	"model": "internationalization.translation", 
+	"fields": {
+	    "translation": "Please may you enter three choices, in order of preference, to move to the next question", 
+	    "code": "err_less_thank_expected_choices", 
+	    "language": 1
+	}
     }
 
 ]

@@ -3,7 +3,7 @@ from unittest import TestCase
 from apps.poll.trigger_responder import TriggerResponder
 from apps.poll.messages import TRIGGER_INCORRECT_MESSAGE
 
-class ResponderTest(TestCase):
+class TriggerResponderTest(TestCase):
 
     def setUp(self):
         self.q = Questionnaire(trigger = "poll")
@@ -17,11 +17,11 @@ class ResponderTest(TestCase):
         self.session = UserSession()
         self.question =Question(text="what")
         self.kwargs =   {"parsers": self.parsers, 
-                    "user": self.user,
-                    "trigger" : self.q.trigger,
-                    "question" :self.question ,
-                    "session" : self.session
-                    }
+                         "user": self.user,
+                         "trigger" : self.q.trigger,
+                         "next_question" : self.question ,
+                         "session" : self.session
+                         }
         self.trigger_responder  = TriggerResponder(self.kwargs)
 
 
