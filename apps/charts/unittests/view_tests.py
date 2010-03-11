@@ -18,7 +18,7 @@ class ViewTests(TestCase):
             url = '/charts/question%s' % question.id
             self.assertEquals(self.client.get(url).status_code, 200)
             for governorate in governorates:
-                url = '/charts/question%s/%s' % (question.id, governorate.id)
+                url = '/charts/question%s/governorate%s' % (question.id, governorate.id)
                 self.assertEquals(self.client.get(url).status_code, 200)
 
     def test_kml(self):
@@ -29,18 +29,18 @@ class ViewTests(TestCase):
             url = '/get_kml/question%s' % question.id
             self.assertEquals(self.client.get(url).status_code, 200)
             for governorate in governorates:
-                url = '/get_kml/%s/question%s' % (governorate.id, question.id)
+                url = '/get_kml/question%s/governorate%s/' % (question.id, governorate.id)
                 self.assertEquals(self.client.get(url).status_code, 200, 
                                   msg = "%s did not return 200" % url)
     
     def test_kml_data(self):        
         response = self.client.get('/get_kml/question1' + query)
         self.assertContains(response, "<scale>0.758620689655</scale>")
-        response = self.client.get('/get_kml/7/question1' + query)
+        response = self.client.get('/get_kml/question1/governorate7' + query)
         self.assertContains(response, "<scale>0.758620689655</scale>")
-        response = self.client.get('/get_kml/5/question2' + query)
+        response = self.client.get('/get_kml/question2/governorate5' + query)
         self.assertContains(response, "<scale>0.666666666667</scale>")
-        response = self.client.get('/get_kml/7/question2' + query)
+        response = self.client.get('/get_kml/question2/governorate7' + query)
         self.assertContains(response, "<scale>0.5</scale>")
         response = self.client.get('/get_kml/question1' + "?gender=f&age=a1,a2")        
         self.assertContains(response, "<scale>0.6</scale>")

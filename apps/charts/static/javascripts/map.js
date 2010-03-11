@@ -43,12 +43,12 @@ $(document).ready(function(){
     var governorate_id = $("#governorate-id").html(); 
     function construct_kml_url(governorate_id, question_id)
     {
-        var kml_url = "/get_kml";
-        if (governorate_id != '' && governorate_id != null)
+        var kml_url = "/get_kml/question" + question_id ;
+        if (governorate_id != null && governorate_id != '')
         {
-            kml_url = kml_url + "/" + governorate_id ;
+            kml_url = kml_url + "/governorate" + governorate_id ;
         }
-        return kml_url + "/question"+ question_id ;
+        return kml_url
     }
     
     kml_url = construct_kml_url(governorate_id, question_id);
@@ -90,7 +90,7 @@ $(document).ready(function(){
 	    function onFeatureSelect(event) {
 	        var feature = event.feature;
 	        governorate_id = feature.attributes['id'];
-	        window.document.location = '/charts/' + 'question' + question_id + '/' +governorate_id;
+	        window.document.location = '/charts/' + 'question' + question_id + '/governorate' +governorate_id;
 
 	    }
 	    

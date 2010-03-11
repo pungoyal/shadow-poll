@@ -112,7 +112,7 @@ def view_500(request):
     response.write("Something went wrong")
     return response
 
-def get_kml_for_governorate(request, governorate_id, question_id):
+def get_kml_for_governorate(request, question_id, governorate_id):
     gov = Governorate.objects.get(pk=governorate_id)
     district_kml = District.objects.filter(governorate=gov).kml()
     return get_kml(request, question_id, district_kml)
