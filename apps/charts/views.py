@@ -14,7 +14,8 @@ from apps.charts.models import Governorate, District, VoiceMessage
 from apps.poll.models import Question, Choice, Color, UserResponse
 
 def home_page(request, template = "home_page.html"):
-    return render_to_response(request, template)
+    questions = Question.objects.all()
+    return render_to_response(request, template, {'questions' : questions})
 
 def voice_home_page(request):
     messages = VoiceMessage.objects.all()

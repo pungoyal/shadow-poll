@@ -1,4 +1,9 @@
 {% extends 'iraq.html' %}
+{% load i18n %}
+
+{% block javascripts %}
+<script src="/static/charts/javascripts/language_switcher.js"></script>
+{% endblock %}
 
 {% block content %}
 <div id="intro">
@@ -9,19 +14,15 @@
     <div id="poll_questions">
       <p class="poll_title">Click on a question to see the poll results </p>
       <ul>
-        <li> <a href="#"> <img src="/static/charts/img/no-image.png" alt="" />
-            <p>I feel happy...</p> </a>
+				{% for ques in questions %}
+        <li> <a href="/charts/question{{ques.id}}"> <img src="/static/charts/img/no-image.png" alt="" />
+            <p>{% trans ques.text %}</p> </a>
         </li>
-        <li> <a href="#"> <img src="/static/charts/img/no-image.png" alt="" />
-            <p>The three things I need most are...</p> </a>
-        </li>
-        <li> <a href="#"> <img src="/static/charts/img/no-image.png" alt="" />
-            <p>Compared to my parents, my life in the future will be...</p> </a>
-        </li>
+				{% endfor %}
         <!--<li> <a href="#"> <img src="img/no-image.png" alt="" />
             <p>Compared to my parents, my life will be...</p> </a>
         </li>-->
-        <li class="last"> <a href="#"> <img src="/static/charts/img/no-image.png" alt="" />
+        <li class="last"> <a href="/messages"> <img src="/static/charts/img/no-image.png" alt="" />
             <p>Take me to voice message page...</p> </a>
         </li>
       </ul>
