@@ -31,11 +31,11 @@ class Entry(models.Model):
     age = models.IntegerField(null = True)
     female = models.NullBooleanField(null = True)
     phone_number = models.CharField(max_length = 20)
-
     governorate = models.IntegerField(null = True)
     district = models.IntegerField(null = True)
 
     file_url = models.CharField(max_length = 255)
+    processed = models.BooleanField(default = False)
 
     def consume(self, entry):
         self.title = entry.title

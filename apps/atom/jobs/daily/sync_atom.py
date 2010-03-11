@@ -3,18 +3,21 @@ import uuid
 import urllib2
 
 from apps.django_extensions.management.jobs import BaseJob
-
 from apps.atom.models import IVRFeedParser
+from apps.charts.models import VoiceMessage
 
 atom_url = "file:///Users/Puneet/work/atom10.xml"
 path = "atom.xml"
 data_dir = "/tmp"
 
+#share the same logging as IVRFeedParser()
+#change all 'prints' to 'log'
+
 class SyncAtomJob(BaseJob):
     help = "Sync with the IVR atom feed"
 
     def execute(self):
-        # add config stuff here
+        # load values from config here
         self.sync_atom(atom_url)
 
     def sync_atom(self, atom_url):
@@ -23,6 +26,8 @@ class SyncAtomJob(BaseJob):
         print "Parsing ATOM feed"
         parser = IVRFeedParser()
         entries = parser.parse(response)
+
+        voice_messages = []
 
         for entry in entries:
             print "Downloading audio file %s" % entry.file_url
@@ -37,6 +42,14 @@ class SyncAtomJob(BaseJob):
             fout = open(file_name, 'w+b')
             fout.write(response.read())
             fout.close()
-            #mark file as processed
-            #create a new audiomessage and save
+
+            voice_message = VoiceMessage()
+            voice_message.fill(entry, file_name)
+            voice_message.save()
+
+            voice_messages.append(voice_message)
+
+            entry.processed = True
+            entry.save()
         print "Generated all remote submissions archive"
+        return voice_messages
