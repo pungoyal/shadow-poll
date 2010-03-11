@@ -20,42 +20,43 @@
 <div id='main_content' class="clearfix">
     <div id="main" class="clearfix">
 
+        {% if messages %}
         <div id="content_area">
-            {% block filter_container %}
-            <div id="filter_container">
-                <div class="filter_section">
-                    <form>
-                        <fieldset>
-                            <legend><span>Filter messages by</span></legend>
-                            <div class="field_container">
-                                <input name="filter" type="radio" value="all" id="all" checked/>
-                                <label for="all">All responses</label>
-                            </div>
-                            <div class="field_container">
-                                <input name="filter" type="radio" value="Boys" id="Boys"/>
-                                <label for="Boys">Boys</label>
-                            </div>
-                            <div class="field_container">
-                                <input name="filter" type="radio" value="Girls" id="Girls"/>
-                                <label for="Girls">Girls</label>
-                            </div>
-                            <div class="field_container">
-                                <input name="filter" type="radio" value="Ages_0_8" id="Ages_0_8"/>
-                                <label for="Ages_0_8">Ages 0-8</label>
-                            </div>
-                            <div class="field_container">
-                                <input name="filter" type="radio" value="Ages_9_12" id="Ages_9_12"/>
-                                <label for="Ages_9_12">Ages 9-12</label>
-                            </div>
-                            <div class="field_container">
-                                <input name="filter" type="radio" value="Ages_13plus" id="Ages_13plus"/>
-                                <label for="Ages_13plus">Ages 13+</label>
-                            </div>
-                        </fieldset>
-                    </form>
-                </div>
-            </div>
-            {% endblock %}
+	            {% block filter_container %}
+	            <div id="filter_container">
+	                <div class="filter_section">
+	                    <form>
+	                        <fieldset>
+	                            <legend><span>Filter messages by</span></legend>
+	                            <div class="field_container">
+	                                <input name="filter" type="radio" value="all" id="all" checked/>
+	                                <label for="all">All responses</label>
+	                            </div>
+	                            <div class="field_container">
+	                                <input name="filter" type="radio" value="Boys" id="Boys"/>
+	                                <label for="Boys">Boys</label>
+	                            </div>
+	                            <div class="field_container">
+	                                <input name="filter" type="radio" value="Girls" id="Girls"/>
+	                                <label for="Girls">Girls</label>
+	                            </div>
+	                            <div class="field_container">
+	                                <input name="filter" type="radio" value="Ages_0_8" id="Ages_0_8"/>
+	                                <label for="Ages_0_8">Ages 0-8</label>
+	                            </div>
+	                            <div class="field_container">
+	                                <input name="filter" type="radio" value="Ages_9_12" id="Ages_9_12"/>
+	                                <label for="Ages_9_12">Ages 9-12</label>
+	                            </div>
+	                            <div class="field_container">
+	                                <input name="filter" type="radio" value="Ages_13plus" id="Ages_13plus"/>
+	                                <label for="Ages_13plus">Ages 13+</label>
+	                            </div>
+	                        </fieldset>
+	                    </form>
+	                </div>
+	            </div>
+	            {% endblock %}
             <div id="message_container">
                 <ul>
                     {% for message in messages %}
@@ -71,19 +72,20 @@
                         <div class="message_details">
                             <div class="message">
                                 <p>{{ message.english_text }}</p>
-                                <div id = "jquery_jplayer{{message.id}}" class = "audio">
-				</div>
-				<div id = "player{{message.id}}" class="jp-single-player">
-				  {% include "jplayer.html" %}
-				</div>
-			    </div>
-                        </div>
+                                <div id = "jquery_jplayer{{message.id}}" class = "audio">                            
+								</div>
+							<div id = "player{{message.id}}" class="jp-single-player">
+  							{% include "jplayer.html" %}
+						</div>
                     </li>
                     {% endfor %}
                 </ul>
             </div>
         </div>
-
+		{% else %}
+			<!-- TODO: add better styling here -->
+    		<h1>No messages to display.</h1>
+ 	    {% endif %}
     </div>
     {% block sidebar %}
     <div id="sidebar">
