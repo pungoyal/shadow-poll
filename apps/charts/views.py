@@ -13,6 +13,9 @@ from rapidsms.webui.utils import render_to_response
 from apps.charts.models import Governorate, District, VoiceMessage
 from apps.poll.models import Question, Choice, Color, UserResponse
 
+def home_page(request, template = "home_page.html"):
+    return render_to_response(request, template)
+
 def voice_home_page(request):
     messages = VoiceMessage.objects.all()
     return render_to_response(request, "messages.html", {"messages": messages})
@@ -88,11 +91,7 @@ def show_by_question(request, question_id, governorate_id, template, context={})
         context.update( {"choices": choices_of_question} )
     return render_to_response(request, template, context)
 
-def home_page(request):
-    response = HttpResponse()
-    response.write("<h1>Homepage coming soon. </h1>")
-    response.write("Head to <a href='question1'>Question 1</a> page")
-    return response
+
 
 def view_404(request):
     response = HttpResponseNotFound()
