@@ -63,7 +63,7 @@
         "model": "poll.color",
         "fields": {
             "file_name": "orange_dot.png",
-            "code": "#F8B088"
+            "code": "#B6470A"
         }
 
     },
@@ -81,7 +81,7 @@
         "model": "poll.color",
         "fields": {
             "file_name": "mauve_dot.png",
-            "code": "rgb(234, 76, 244)"
+            "code": "#AB0BB5"
         }
 
     },
@@ -90,7 +90,7 @@
         "model": "poll.color",
         "fields":{
             "file_name": "blue_dot.png",
-            "code": "#8BC0FA"
+            "code": "#075CB9"
         }
 
     },

@@ -18,18 +18,6 @@
 <span id="bbox" style="display:none;">{{bbox}}</span>
 <div class="question">
     <h2>{% trans question.text %}</h2>
-    <div class="choice" >
-        {% for choice in choices %}
-       
-	     {% for char in character_english %}
-		 	{% ifequal forloop.counter  forloop.parentloop.counter %}				
-				{% trans char %} &nbsp;.&nbsp;
-			{% endifequal %}
-		 {% endfor %}
-        <span style="color: {{choice.category.color.code}};">{% trans choice.text %} ({{choice.num_votes}} vote{{choice.num_votes|pluralize}})</span>
-        <br />
-        {% endfor %}
-    </div>
 </div>
 <p class="total_responses">
    {% blocktrans %}{{ total_responses }} responses <br/>
