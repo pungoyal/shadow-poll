@@ -215,7 +215,7 @@ class User(models.Model):
 ##########################################################################
 
 class UserSession(models.Model):
-    user = models.ForeignKey(User)
+    user = models.ForeignKey(User, null = True)
     question = models.ForeignKey(Question, null=True)
     questionnaire = models.ForeignKey(Questionnaire, null=True)
     num_attempt = models.IntegerField(default=1)
@@ -287,8 +287,13 @@ class UserSession(models.Model):
 
     def _next_question(self,question):
         if question == None:
-            return FINAL_APPRECIATION_MESSAGE
+           self. _close_session()
+           return FINAL_APPRECIATION_MESSAGE
         return str(question)
+
+    def _close_session(self):
+        self.user = None
+        self.save()
 
     def _first_access(self):
         return self.question == None

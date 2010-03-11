@@ -136,7 +136,7 @@ class UserSessionTest(TestCase):
         session.question = self.question3
         self.assertEquals(session.respond("c"), "thanks")
         self.assertEquals(session.question, None)
-
+        self.assertEquals(session.user, None)
 
     def test_user_interaction_is_saved_when_successful(self):
         initial_number_of_responses = len(UserResponse.objects.all())
