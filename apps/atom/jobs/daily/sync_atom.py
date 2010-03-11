@@ -2,42 +2,37 @@ import os
 import uuid
 import urllib2
 
+from rapidsms.webui import settings
+
 from apps.django_extensions.management.jobs import BaseJob
 from apps.atom.models import IVRFeedParser
 from apps.charts.models import VoiceMessage
 
-atom_url = "file:///Users/Puneet/work/atom10.xml"
-path = "atom.xml"
-data_dir = "/tmp"
-
-#share the same logging as IVRFeedParser()
-#change all 'prints' to 'log'
+# share the same logging as IVRFeedParser()
+# change all 'prints' to 'log'
 
 class SyncAtomJob(BaseJob):
     help = "Sync with the IVR atom feed"
+    media_dir = settings.RAPIDSMS_APPS["atom"]["media_dir"]
 
     def execute(self):
-        # load values from config here
+        atom_url = settings.RAPIDSMS_APPS["atom"]["atom_url"]
         self.sync_atom(atom_url)
 
     def sync_atom(self, atom_url):
-        print "Fetching ATOM feed"
         response = urllib2.urlopen(atom_url)
-        print "Parsing ATOM feed"
         parser = IVRFeedParser()
         entries = parser.parse(response)
 
         voice_messages = []
 
         for entry in entries:
-            print "Downloading audio file %s" % entry.file_url
             response = urllib2.urlopen(entry.file_url)
             extension = entry.file_url.rsplit(".")[-1]
             file_name = str(uuid.uuid4())
             if len(extension) < 5:
                 file_name = file_name + '.'+ extension
-            file_name = os.path.join(data_dir, file_name)
-            print "Saving file to %s" % file_name
+            file_name = os.path.join(self.media_dir, file_name)
 
             fout = open(file_name, 'w+b')
             fout.write(response.read())
@@ -51,5 +46,4 @@ class SyncAtomJob(BaseJob):
 
             entry.processed = True
             entry.save()
-        print "Generated all remote submissions archive"
         return voice_messages

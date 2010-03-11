@@ -7,7 +7,8 @@ from apps.register.models import Registration
 from django.db.models import Avg,Count
 from apps.poll.messages import *
 import math
-
+from apps.poll.string import clean, has_word
+from apps.poll.list import remove_duplicates
 ##########################################################################
 
 SEPARATOR = ' '
@@ -122,12 +123,12 @@ class Question(models.Model):
             return matching_choices
 
         all_choices = Choice.objects.filter(question = self)
-        answered_choices = answer.strip(' ').rsplit(' ')
-
+        answered_choices = remove_duplicates(answer.strip(' ').rsplit(' '))
+        
         for answered_choice in answered_choices:
             for choice in all_choices:
-                if choice.parse(answered_choice):
-                    matching_choices.append(choice)
+                if choice.parse(answered_choice) :
+                    matching_choices.append(choice) 
                     break
 
         return matching_choices if len(matching_choices) == len(answered_choices) else []
@@ -304,7 +305,7 @@ class UserSession(models.Model):
 
     def _is_trigger(self, message):
         for questionnaire in Questionnaire.objects.all():
-            if message.strip().lower().find(questionnaire.trigger.strip().lower()) > -1:
+            if  has_word((message, questionnaire.trigger)):
                 self.questionnaire = questionnaire
                 return True
         return False
