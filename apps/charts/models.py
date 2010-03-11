@@ -197,25 +197,29 @@ class District(Geography):
             user_ids.append(current.id)
         return user_ids
 
-GENDER = ( ('m', 'Male'), ('f', 'Female') )
-
 class VoiceMessage(models.Model):
     name = models.CharField(max_length=100, null=True)
     age = models.IntegerField(null=True)
-    gender = models.CharField(max_length=1, choices=GENDER, default=None, null=True, blank=True)
+    female = models.NullBooleanField(null = True, blank=True)
     district = models.ForeignKey(District, null=True)
     arabic_text = models.TextField(null=True)
     english_text = models.TextField(null=True)
-    sound_file_name = models.CharField(max_length=150)
+    sound_file_name = models.CharField(max_length=150) # full file path on the system
+
+    def fill(self, entry, path):
+        self.age = entry.age
+        self.female = entry.female
+        self.district = District.objects.get(id=entry.district)
+        self.sound_file_name = path
 
     def get_child_image(self):
-        if self.gender == 'm':
-            return "child_boy"
+        if self.female is None:
+            return "child_no_identity"
 
-        if self.gender == 'f':
+        if self.female:
             return "child_girl"
 
-        return "child_no_identity"
+        return "child_boy"
 
     def __unicode__(self):
         return "%s %s %s %s" % (self.name, self.gender, self.age, self.sound_file_name)
