@@ -74,8 +74,10 @@
                                 <p>{{ message.english_text }}</p>
                                 <div id = "jquery_jplayer{{message.id}}" class = "audio">                            
 								</div>
-							<div id = "player{{message.id}}" class="jp-single-player">
-  							{% include "jplayer.html" %}
+								<div id = "player{{message.id}}" class="jp-single-player">
+  								{% include "jplayer.html" %}
+  								</div>
+  							</div>
 						</div>
                     </li>
                     {% endfor %}
