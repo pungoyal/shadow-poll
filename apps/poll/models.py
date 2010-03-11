@@ -7,7 +7,7 @@ from apps.register.models import Registration
 from django.db.models import Avg,Count
 from apps.poll.messages import *
 import math
-
+from apps.poll.string import clean, has_word
 ##########################################################################
 
 SEPARATOR = ' '
@@ -304,7 +304,7 @@ class UserSession(models.Model):
 
     def _is_trigger(self, message):
         for questionnaire in Questionnaire.objects.all():
-            if message.strip().lower().find(questionnaire.trigger.strip().lower()) > -1:
+            if  has_word((message, questionnaire.trigger)):
                 self.questionnaire = questionnaire
                 return True
         return False
