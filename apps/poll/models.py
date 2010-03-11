@@ -163,7 +163,7 @@ class Category(models.Model):
             return None
         category_id =  user_responses.values('choice__category')\
                        .annotate(Count('choice__category'))\
-                       .order_by('-choice__category__count')\
+                       .order_by('-choice__category__count', 'choice__category')\
                        [0]['choice__category']
         return Category.objects.get(pk = category_id)    
 
