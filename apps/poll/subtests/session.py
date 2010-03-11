@@ -211,3 +211,11 @@ class UserSessionTest(TestCase):
 
         self.assertEquals(session.question, self.question2)
         
+    def test_less_than_required_choices_reminds_user(self):
+        self.question1.max_choices = 2
+        self.question1.save()
+        session = UserSession.open(self.pconnection)
+        session.respond("trigger m 16")
+        self.assertEquals(session.question.max_choices, 2)
+        error = session.respond("a")
+        self.assertEquals(error, "err_less_thank_expected_choices")

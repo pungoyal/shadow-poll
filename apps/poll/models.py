@@ -252,8 +252,12 @@ class UserSession(models.Model):
             return str(self.question)
         
         matching_choices = self.question.matching_choices(message)
-        
+
         if len(matching_choices) > 0:
+
+            if(len(matching_choices) < self.question.max_choices):
+                return "err_less_thank_expected_choices"
+
             self._save_response(self.question, matching_choices)
             self.question = self.question.next_question
             self.num_attempt = 1
