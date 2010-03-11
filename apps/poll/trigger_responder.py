@@ -19,7 +19,7 @@ class TriggerResponder(Responder):
         for key in user_info:
             self.user.set_value(key,user_info[key])
             
-        self.session.question = self.next_question
+        self.proceed_to_next_question()
         
         return str(self.session.question)    
 

@@ -8,5 +8,5 @@ class ValidAnswerResponder(Responder):
         self.criteria = lambda message : len(self.session.question.matching_choices(message)) > 0
 
     def action(self,message):
-        pass
+        self.proceed_to_next_question()
         
