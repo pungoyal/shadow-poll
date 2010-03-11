@@ -1,164 +1,192 @@
 @charset "utf-8";
 /* Arabic Style sheet */
 body {
-	direction: rtl;
+		direction: rtl;
 }
 #top_menu {
-	float:left;
-	left:0;
-	right: auto;
+		float:left;
+		left:0;
+		right: auto;
 }
 #top_menu ul li a {
-	background-image:  url(../img/arabic/bg_sprite_ar.gif);
-	background-position: 100% 0;
+		background-image:  url(../img/arabic/bg_sprite_ar.gif);
+		background-position: 100% 0;
 }
 #top_menu ul li a:hover {
-	background-position: 100% -55px;
+		background-position: 100% -55px;
 }
 #top_menu ul li.about a {
-	background-position: -135px 0;
+		background-position: -135px 0;
 }
 #top_menu ul li.about a:hover {
-	background-position: -135px -55px;
+		background-position: -135px -55px;
 }
 #top_menu ul li.poll a {
-	background-position: -10px 0;
+		background-position: -10px 0;
 }
 #top_menu ul li.poll a:hover {
-	background-position: -10px -55px;
+		background-position: -10px -55px;
 }
 #top_menu ul li a:hover, #language_menu ul li a:hover {
-	text-decoration: none;
+		text-decoration: none;
 }
 #language_menu {
-	background:transparent url(../img/arabic/bg_language_right.gif) no-repeat scroll 100% 0;
+		background:transparent url(../img/arabic/bg_language_right.gif) no-repeat scroll 100% 0;
 }
 #language_menu ul {
-	float:left;
+		float:left;
 }
 #language_menu ul li a {
-	background-image:  url(../img/arabic/bg_sprite_ar.gif);
-	background-position: 100% -110px;
+		background-image:  url(../img/arabic/bg_sprite_ar.gif);
+		background-position: 100% -110px;
 }
 #language_menu ul li.en a:hover {
-	background-position: 100% -140px;
+		background-position: 100% -140px;
 }
 #language_menu ul li.arabic a.current_language {
-	background-position: -280px -140px;
+		background-position: -280px -140px;
 }
 #breadcrumb_container ul li {
-	float:right;
+		float:right;
 }
 .breadcrumbs {
-	float:right;
+		float:right;
 }
 .breadcrumbs li {
-	background:transparent url(../img/arabic/breadcrumb_arrow_left.gif) no-repeat scroll 0 50%;
-	margin-right:0;
-	padding-right:0;
-	margin-left:12px;
-	padding-left:20px;
+		background:transparent url(../img/arabic/breadcrumb_arrow_left.gif) no-repeat scroll 0 50%;
+		margin-right:0;
+		padding-right:0;
+		margin-left:12px;
+		padding-left:20px;
 }
 .secondary_links {
-	float:left;
+		float:left;
 }
 .secondary_links li a, .secondary_links li.download a, .secondary_links li.print a {
-	padding-left:0;
-	padding-right:22px;
-	background-position: 100% 50%;
+		padding-left:0;
+		padding-right:22px;
+		background-position: 100% 50%;
 }
 .secondary_links li.download a {
-	margin-right:0;
+		margin-right:0;
 }
 .secondary_links li.print a {
-	margin-right:24px;
+		margin-right:24px;
 }
 .question_section h2, .question_section ol {
-	margin-left:0;
-	margin-right:10px;
+		margin-left:0;
+		margin-right:10px;
 }
 .choice
 {
-	margin-left: 10px;
-	margin-right: 10px;	
+		margin-left: 10px;
+		margin-right: 10px;	
 }
 .question_section .total_responses {
-	left:10px;
-	right: auto;
+		left:10px;
+		right: auto;
 }
+
+#intro{
+		background-position: right top;
+}
+
+#intro p.intro_text{
+		margin-left:0;
+		margin-right:300px;
+}
+
+#intro p.intro_link{
+		float:left;
+		padding-left:20px;
+		padding-right:0;
+}
+
+#intro p.intro_link a{
+		background:url("../img/arrow_left.gif") no-repeat scroll left center;
+		padding-left:12px;
+		padding-right:0;
+}
+
+
+#poll_questions ul li{
+		margin-left: 20px;
+		margin-right: 0;
+}
+
 #main {
-	float:right;
-	width:800px;
+		float:right;
+		width:800px;
 }
 #sidebar {
-	float:left;
-	width:200px;
+		float:left;
+		width:200px;
 }
 #filter_container {
-	border-left:1px solid #C4C1BC;
-	float:left;
+		border-left:1px solid #C4C1BC;
+		float:left;
 }
 #map_container {
-	float:right;
+		float:right;
 }
 #chart_container {
-	border-width: 1px 0 0 1px;
-	float:right;
+		border-width: 1px 0 0 1px;
+		float:right;
 }
 .filter_section fieldset legend {
-	padding: 5px 10px 5px 0;
+		padding: 5px 10px 5px 0;
 }
 .nav_questions ul {
-	text-align:right;
+		text-align:right;
 }
 .nav_questions p.note a {
-	text-align:right;
-	padding-left:15px;
-	padding-right:0;
-	background:transparent url(../img/arabic/note_arrow_left.gif) no-repeat scroll 0 75%;
+		text-align:right;
+		padding-left:15px;
+		padding-right:0;
+		background:transparent url(../img/arabic/note_arrow_left.gif) no-repeat scroll 0 75%;
 }
 .nav_questions p.note {
-	margin-right:-5px;
-	margin-left: 0;
-	text-align:right;
+		margin-right:-5px;
+		margin-left: 0;
+		text-align:right;
 }
 .keys_section p {
-	padding:7px 63px 7px 10px;
+		padding:7px 63px 7px 10px;
 }
 .keys_section .color_key, .keys_section .point_key {
-	background-position: 95% 10px;
+		background-position: 95% 10px;
 }
 .response_category .response_category_header {
-	float:right;
-	margin-left:0;
-	margin-right:10px;
+		float:right;
+		margin-left:0;
+		margin-right:10px;
 }
 .response_category ul {
-	float:left;
+		float:left;
 }
 #language_menu ul li, #top_menu ul li, #poll_questions ul li, .response_category ul li {
-	float:right;
+		float:right;
 }
 #sub_sections .column {
-	float: right;
+		float: right;
 }
 #sub_sections .first h3, #sub_sections .first p, #sub_sections .first ul #sub_sections .first div {
-	padding-right:10px;
-	padding-left:0px;
+		padding-right:10px;
+		padding-left:0px;
 }
 #footer .unicef_logo {
-	text-align:left;
+		text-align:left;
 }
 
 .response_category ul li,
 .response_category ul li span {
-	background-image:  url(../img/arabic/bg_sprite_ar.gif);
+		background-image:  url(../img/arabic/bg_sprite_ar.gif);
 }
 .response_category ul li {
-	background-position: 100% -170px;
-	margin-left: 5px;
-	margin-right: 0;
+		background-position: 100% -170px;
+		margin-left: 5px;
+		margin-right: 0;
 }
 .response_category ul li span {
-	background-position: 0 -170px;
+		background-position: 0 -170px;
 }

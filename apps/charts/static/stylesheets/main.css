@@ -122,11 +122,12 @@ a:hover {
 		padding-right:20px;
 }
 #intro p.intro_link a {
-		background:transparent url(../img/arrow_right.gif) no-repeat scroll 100% 100%;
+		background:transparent url(../img/arrow_right.gif) no-repeat scroll right center;
 		color:#009966;
 		font-weight:bold;
 		padding-right:12px;
 }
+
 #breadcrumb_container {
 		border-bottom: 1px solid #ccc;
 		width: 100%;
