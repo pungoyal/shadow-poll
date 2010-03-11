@@ -30,14 +30,6 @@ def play_audio(request, file_name):
     response["Content-Length"] = len(contents)
     return response
 
-def show_governorate(request, governorate_id, template='results.html'):
-    governorate = Governorate.objects.get(id=governorate_id)
-    return render_to_response(request, template,
-                              {"bbox": governorate.bounding_box,
-                               "governorate": governorate,
-                               "chart_data": []
-                              })
-
 def show_iraq_by_question(request, question_id,
                           template='results.html'):
     context = {}
