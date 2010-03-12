@@ -145,14 +145,14 @@ body {
 		float: right;
 }
 
-.nav_questions p.note a {
+.nav_questions .note a {
 		text-align:right;
 		padding-left:15px;
 		padding-right:0;
 		background:transparent url(../img/arabic/note_arrow_left.gif) no-repeat scroll 0 75%;
 }
 
-.nav_questions p.note {
+.nav_questions .note {
 		margin-right:-5px;
 		margin-left: 0;
 		text-align:right;
