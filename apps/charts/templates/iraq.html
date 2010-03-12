@@ -110,6 +110,14 @@
                     </form>
                 </div>
                 {% block filter_legend %}{% endblock %}
+                <div class="keys_section">
+									<ul>
+                    <li class="color_key"> {% trans 'Color indicates the top response category for each governarate.' %} </li>
+										<li class="no_response_key"> {% trans 'Indicates no responses have been receieved.' %} </li>
+
+                    <li class="point_key"> {% trans 'Points are scaled by total number of responses in each governarate.' %} </li>
+										</ul>
+                </div>
             </div>
             {% endblock %}
             
@@ -187,27 +195,27 @@
 	   <li>
 				 <span class="li_char">
 	     {% for char in character_english %}
-		 	{% ifequal forloop.counter  forloop.parentloop.counter %}				
-				{% trans char %} &nbsp;.&nbsp;
+		 	{% ifequal forloop.counter  forloop.parentloop.counter %}
+			 {% trans char %}  &nbsp;.&nbsp;
 			{% endifequal %}
 		 {% endfor %}
 			 </span>
-	   <span class="choice_text" style="color: {{choice.category.color.code}};">{% trans choice.text %}<em> ({{choice.num_votes}} vote{{choice.num_votes|pluralize}})</em></span></li>
-	    {% endfor %}
-	</ol>
-	</li>
+       <span class="choice_text" style="color: {{choice.category.color.code}};">{% trans choice.text %}<em> ({{choice.num_votes}} vote{{choice.num_votes|pluralize}})</em></span></li>
+ 
+        {% endfor %}
+    </ol>
+</li>
 	      {% endfor %}
-	        </ul>
-	<div class="note">
-	    <ul>
-	      <li><a href="#">Take me to voice message page</a></li>
-	      <li class="last"><a href="#">Read about how UNICEF used SMS to conduct the survey</a> </li>
-	    </ul>
-	  </div>
-	    </div>
-	</div>
-	{% endblock %}
-
+            </ul>
+<div class="note">
+        <ul>
+          <li><a href="#"> {% trans 'Take me to voice message page' %}</a></li>
+          <li class="last"><a href="#">{% trans 'Read about how UNICEF used SMS to conduct the survey' %}</a> </li>
+        </ul>
+      </div>
+        </div>
+    </div>
+    {% endblock %}
 </div>
 {% endblock %}
 
@@ -224,16 +232,16 @@
             <h3>Poll Questions</h3>
             <ul>
 							{% for ques in questions %}
-                <li><a href="/charts/question{{ques.id}}"> {{ ques.text }}</a></li>
+                <li><a href="/charts/question{{ques.id}}"> {% trans ques.text %}</a></li>
 								{% endfor %}
             </ul>
         </div>
         <div class="column  last">
             <h3>Sections</h3>
             <ul>
-                <li><a href="#">Home</a></li>
-                <li><a href="#">About</a></li>
-                <li><a href="#">Poll</a></li>
+                <li><a href="#">{% trans 'Home' %}</a></li>
+                <li><a href="#">{% trans 'About' %}</a></li>
+                <li><a href="#">{% trans 'Poll' %}</a></li>
             </ul>
         </div>
     </div>
