@@ -19,7 +19,9 @@ def home_page(request, template = "home_page.html"):
 
 def voice_home_page(request):
     messages = VoiceMessage.objects.all()
-    return render_to_response(request, "messages.html", {"messages": messages})
+    return render_to_response(request, "messages.html", 
+                              {"messages": messages, 
+                               "questions": Question.objects.all().order_by('pk')})
 
 def play_audio(request, file_name):
     media_dir = settings.RAPIDSMS_APPS["charts"]["media_dir"]

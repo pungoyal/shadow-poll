@@ -58,8 +58,10 @@
         {% endblock %}
 
         <div id="content_area">
-            <div class="question_section">
+        	{% block messages %}{% endblock %}
+            
                 {% block question %}
+                <div class="question_section">
                 <div class="question">
                     <h2>What makes you most happy?</h2>
                     <ol>
@@ -74,8 +76,9 @@
                 <p class="total_responses"> 215 responses <br/>
                     from Baghdad	</p>
                 </p>
+                </div>
                 {% endblock %}
-            </div>
+            
             {% block filter_container %}
             <div id="filter_container">
                 <div class="filter_section">
@@ -106,18 +109,16 @@
                         </fieldset>
                     </form>
                 </div>
-                <div class="keys_section">
-                    <p class="color_key"> {% trans 'Color indicates the top response category for each governarate.' %} </p>
-
-                    <p class="point_key"> {% trans 'Points are scaled by total number of responses in each governarate.' %} </p>
-                </div>
+                {% block filter_legend %}{% endblock %}
             </div>
             {% endblock %}
-            <div id="map_container" class="clearfix">
+            
                 {% block map_container %}
+                <div id="map_container" class="clearfix">
                 <img src="/static/charts/img/assets/map.jpg"/>
+                </div>
                 {% endblock %}
-            </div>
+            
             {% block charts_container %}
             <div id="chart_container" class="clearfix">
                 <div class="response_category">
@@ -166,10 +167,13 @@
         </div>
 
     </div>
-    {% block sidebar %}
-    <div id="sidebar">
-        <div class="nav_questions"><img src="/static/charts/img/poll_q_img_1.gif" alt=""/>
-            <ul class="side_nav">
+
+
+	
+	{% block sidebar %}
+	<div id="sidebar">
+	    <div class="nav_questions"><img src="/static/charts/img/poll_q_img_1.gif" alt=""/>
+	        <ul class="side_nav">
 	      {% for q in questions %}
 	      <li 
 		  {% ifequal q.id question.id %}
@@ -178,9 +182,9 @@
 		  <a href="/charts/question{{q.id}}{% if governorate %}/governorate{{governorate.id}}{% endif %}">
 		  	{% trans q.text %}
 		  </a>
-    <ol>
-        {% for choice in choices %}
-       <li>
+	<ol>
+	    {% for choice in choices %}
+	   <li>
 				 <span class="li_char">
 	     {% for char in character_english %}
 		 	{% ifequal forloop.counter  forloop.parentloop.counter %}				
@@ -188,21 +192,22 @@
 			{% endifequal %}
 		 {% endfor %}
 			 </span>
-       <span class="choice_text" style="color: {{choice.category.color.code}};">{% trans choice.text %}<em> ({{choice.num_votes}} vote{{choice.num_votes|pluralize}})</em></span></li>
-        {% endfor %}
-    </ol>
-</li>
+	   <span class="choice_text" style="color: {{choice.category.color.code}};">{% trans choice.text %}<em> ({{choice.num_votes}} vote{{choice.num_votes|pluralize}})</em></span></li>
+	    {% endfor %}
+	</ol>
+	</li>
 	      {% endfor %}
-            </ul>
-<div class="note">
-        <ul>
-          <li><a href="#">Take me to voice message page</a></li>
-          <li class="last"><a href="#">Read about how UNICEF used SMS to conduct the survey</a> </li>
-        </ul>
-      </div>
-        </div>
-    </div>
-    {% endblock %}
+	        </ul>
+	<div class="note">
+	    <ul>
+	      <li><a href="#">Take me to voice message page</a></li>
+	      <li class="last"><a href="#">Read about how UNICEF used SMS to conduct the survey</a> </li>
+	    </ul>
+	  </div>
+	    </div>
+	</div>
+	{% endblock %}
+
 </div>
 {% endblock %}
 

@@ -12,6 +12,7 @@
 {% block title_suffix %}Map{% endblock %}
 
 {% block question %}
+<div class="question_section">
 <span id="question-id" style="display:none;">{{question.id}}</span>
 <span id="governorate-id" style="display:none;">{{ governorate.id }}</span>
 <span id="governorate-zoom" style="display:none;">{{ governorate.zoom_level }}</span>
@@ -23,10 +24,13 @@
    {% blocktrans %}{{ total_responses }} responses <br/>
     from {{ region }} {% endblocktrans %} 
 </p>
+</div>
 {% endblock %}
         
 {% block map_container %}
+<div id="map_container" class="clearfix">
 <div id="map" style="widh:500px; height:465px;"></div>
+</div>
 {% endblock %}
         
 {% block chart %}
@@ -45,4 +49,12 @@
     </div>
     <p class="chart_note">{% trans 'National results' %}</p>
 </div>
+{% endblock %}
+
+{% block filter_legend %}
+    <div class="keys_section">
+        <p class="color_key"> {% trans 'Color indicates the top response category for each governarate.' %} </p>
+
+        <p class="point_key"> {% trans 'Points are scaled by total number of responses in each governarate.' %} </p>
+    </div>
 {% endblock %}
