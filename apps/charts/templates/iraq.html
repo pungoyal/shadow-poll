@@ -107,9 +107,12 @@
                     </form>
                 </div>
                 <div class="keys_section">
-                    <p class="color_key"> {% trans 'Color indicates the top response category for each governarate.' %} </p>
+									<ul>
+                    <li class="color_key"> {% trans 'Color indicates the top response category for each governarate.' %} </li>
+										<li class="no_response_key"> {% trans 'Indicates no responses have been receieved.' %} </li>
 
-                    <p class="point_key"> {% trans 'Points are scaled by total number of responses in each governarate.' %} </p>
+                    <li class="point_key"> {% trans 'Points are scaled by total number of responses in each governarate.' %} </li>
+										</ul>
                 </div>
             </div>
             {% endblock %}
@@ -183,12 +186,13 @@
        <li>
 				 <span class="li_char">
 	     {% for char in character_english %}
-		 	{% ifequal forloop.counter  forloop.parentloop.counter %}				
-				{% trans char %} &nbsp;.&nbsp;
+		 	{% ifequal forloop.counter  forloop.parentloop.counter %}
+			 {% trans char %}  &nbsp;.&nbsp;
 			{% endifequal %}
 		 {% endfor %}
 			 </span>
        <span class="choice_text" style="color: {{choice.category.color.code}};">{% trans choice.text %}<em> ({{choice.num_votes}} vote{{choice.num_votes|pluralize}})</em></span></li>
+ 
         {% endfor %}
     </ol>
 </li>

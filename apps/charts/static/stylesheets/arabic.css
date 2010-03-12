@@ -8,6 +8,7 @@ body {
 		left:0;
 		right: auto;
 }
+
 #top_menu ul li a {
 		background-image:  url(../img/arabic/bg_sprite_ar.gif);
 		background-position: 100% 0;
@@ -136,24 +137,29 @@ body {
 .filter_section fieldset legend {
 		padding: 5px 10px 5px 0;
 }
-.nav_questions ul {
-		text-align:right;
+.nav_questions ul.side_nav {
+		text-align: right;
 }
+
+.nav_questions ul.side_nav li ol li span.li_char {
+		float: right;
+}
+
 .nav_questions p.note a {
 		text-align:right;
 		padding-left:15px;
 		padding-right:0;
 		background:transparent url(../img/arabic/note_arrow_left.gif) no-repeat scroll 0 75%;
 }
+
 .nav_questions p.note {
 		margin-right:-5px;
 		margin-left: 0;
 		text-align:right;
 }
-.keys_section p {
+
+#filter_container .keys_section ul li {
 		padding:7px 63px 7px 10px;
-}
-.keys_section .color_key, .keys_section .point_key {
 		background-position: 95% 10px;
 }
 .response_category .response_category_header {

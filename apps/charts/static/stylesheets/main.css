@@ -385,9 +385,10 @@ a:hover {
 		background: #fff;
 }
 .filter_section {
-		height: 281px;
+		height: 230px;
 		border-bottom: 1px solid #C4C1BC;
 }
+
 .filter_section fieldset legend {
 		background: #eeeae2;
 		border-bottom:1px solid #C4C1BC;
@@ -408,16 +409,29 @@ a:hover {
 .filter_section .field_container input {
 		margin-left:10px;
 }
-.keys_section p {
+
+.keys_section ul{
+		list-style: none;
+}
+
+.keys_section ul li {
 		padding:7px 10px 7px 63px;
 }
+
 .keys_section .color_key {
 		border-bottom: 1px solid #C4C1BC;
 		background: url(../img/color_key.gif) no-repeat 10px 10px;
 }
+
 .keys_section .point_key {
 		background: url(../img/point_key.gif) no-repeat 10px 10px;
 }
+
+.keys_section .no_response_key {
+		background: url(../img/grey_dot_small.png) no-repeat 10px 10px;
+		border-bottom: 1px solid #C4C1BC;
+}
+
 /* footer */
 #footer {
 		background: none;
