@@ -125,6 +125,7 @@ body {
 }
 #filter_container {
 		border-left:1px solid #C4C1BC;
+		border-right:0;
 		float:left;
 }
 #map_container {
@@ -199,4 +200,14 @@ body {
 
 .filter_section {
 		height:340px;
+}
+
+/* Messages */
+#content_area #message_container {
+	border-left:1px solid #C4C1BC;
+	border-right: 0;
+	float:right;
+}
+#message_container .child_details {
+	float:right;
 }
