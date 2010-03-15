@@ -221,7 +221,7 @@
             <p> copyright + Legal </p>
         </div>
         <div class="column  ">
-            <h3>Poll Questions</h3>
+            <h3>{% trans 'Poll Questions' %}</h3>
             <ul>
 							{% for ques in questions %}
                 <li><a href="/charts/question{{ques.id}}"> {% trans ques.text %}</a></li>
@@ -229,7 +229,7 @@
             </ul>
         </div>
         <div class="column  last">
-            <h3>Sections</h3>
+            <h3>{% trans 'Sections' %}</h3>
             <ul>
                 <li><a href="#">{% trans 'Home' %}</a></li>
                 <li><a href="#">{% trans 'About' %}</a></li>

@@ -28,7 +28,7 @@
             <li>
                 <div class="child_details"><img src="/static/charts/img/{{ message.get_child_image }}.gif"
                                                 alt="child"/>
-                    <p><span class="age">Age {{message.age}}</span> / <span class="region">{{message.district.name}}</span>
+                    <p><span class="age">{% trans 'Age' %} {{message.age}}</span> / <span class="region">{% trans message.district.name %}</span>
                     </p>
                 </div>
                 <div class="message_details">
