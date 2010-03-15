@@ -22,6 +22,11 @@ def voice_home_page(request):
     return render_to_response(request, "messages.html", 
                               {"messages": messages, 
                                "questions": Question.objects.all().order_by('pk')})
+def voice_admin_page(request):
+    messages = VoiceMessage.objects.all()
+    return render_to_response(request, "messages_admin.html",
+                              {"messages": messages,
+                               "questions": Question.objects.all().order_by('pk')})
 
 def play_audio(request, file_name):
     media_dir = settings.RAPIDSMS_APPS["charts"]["media_dir"]

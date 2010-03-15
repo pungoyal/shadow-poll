@@ -124,6 +124,7 @@ class VoiceMessage(models.Model):
     arabic_text = models.TextField(null=True)
     english_text = models.TextField(null=True)
     sound_file_name = models.CharField(max_length=150) # full file path on the system
+    translated = models.BooleanField(default = False)
 
     def fill(self, entry, path):
         self.age = entry.age
