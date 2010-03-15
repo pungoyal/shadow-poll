@@ -196,6 +196,7 @@ class User(models.Model):
     governorate = models.IntegerField(null=True)
     district = models.IntegerField(null=True)
     time_created = models.DateTimeField(default=datetime.now)
+    active = models.BooleanField()
 
     def __unicode__(self):
         signature = "user connection: %s " % str(self.connection)
@@ -268,7 +269,7 @@ class UserSession(models.Model):
     def _respond_to_trigger(self, message):
         if not self._is_trigger(message): return 
         ''' create new user '''
-        self.user = User(connection = self.user.connection, governorate = self.user.governorate, district = self.user.district)
+        self.user = User(connection = self.user.connection, governorate = self.user.governorate, district = self.user.district, active = True)
         message = message.strip().lstrip(self.questionnaire.trigger.lower()).strip()
         parsers = list(DemographicParser.objects.filter(questionnaire=self.questionnaire).order_by('order') )
         
@@ -321,8 +322,9 @@ class UserSession(models.Model):
         return str(question)
 
     def _close_session(self):
-        self.question = None
-        self.user = None
+        if self.user :
+            self.user.active = False
+            self.user = self._save_user(self.user)
         self.save()
 
     def _first_access(self):
@@ -341,8 +343,8 @@ class UserSession(models.Model):
 
     @classmethod
     def open(klass,connection):
-        users = User.objects.filter(connection = connection, governorate = connection.governorate, district = connection.district).order_by('-time_created')
-        user = users[0] if(len(users)) > 0 else User(connection = connection, governorate = connection.governorate, district = connection.district)
+        users = User.objects.filter(connection = connection, governorate = connection.governorate, district = connection.district, active = True).order_by('-time_created')
+        user = users[0] if(len(users)) > 0 else User(connection = connection, governorate = connection.governorate, district = connection.district, active = True)
         sessions = UserSession.objects.filter(user = user)
         if len(sessions) == 0:
             session = UserSession(question = None)
