@@ -224,6 +224,43 @@ class UserSession(models.Model):
     def __unicode__(self):
         return "session for : %s" % (self.user)
 
+    def respond(self, message):
+        self._set_default_questionnaire()
+
+        ''' respond to a trigger message'''
+        response = self._respond_to_trigger(message)
+        if response != None: 
+            self._save_session()
+            return response
+        
+        '''if its not a trigger its an attempt'''
+        self.num_attempt = self.num_attempt + 1
+        ''' respond to an answer '''
+        response =  self._respond_to_answer(message)
+        if response != None: 
+            error_message =  self._respond_to_exceeding_attempts()
+            self._save_session()
+            return response if not error_message else error_message
+        
+        '''if last question answered'''
+        response = self._respond_to_last_answer()
+        if response != None:
+            self._save_session()
+            self._close_session()
+            return response
+
+        self._save_session()
+        return str(self.question)
+
+    def _respond_to_last_answer(self):
+        if self.question == None:
+            return FINAL_APPRECIATION_MESSAGE
+
+    def _save_session(self):
+        if self.user:
+            self.user.save()
+        self.save()
+
     ''' default to the first questionnaire'''
     def _set_default_questionnaire(self):
         if not self.questionnaire:
@@ -231,6 +268,9 @@ class UserSession(models.Model):
 
     def _respond_to_trigger(self, message):
         if not self._is_trigger(message): return 
+        ''' create new user '''
+        self.user = User(connection = self.user.connection, governorate = self.user.governorate, district = self.user.district)
+
         message = message.strip().lstrip(self.questionnaire.trigger.lower()).strip()
         parsers = list(DemographicParser.objects.filter(questionnaire=self.questionnaire).order_by('order') )
         
@@ -239,10 +279,15 @@ class UserSession(models.Model):
             if demographic_information == None:
                 return TRIGGER_INCORRECT_MESSAGE
             self.user.set_value(parser.name, demographic_information)
-            
+     
         self.question = Question.first()
-        
+        self.num_attempt = 0
+        return str(self.question)
+
     def _respond_to_answer(self,message):
+        if not self.question : 
+            return TRIGGER_INCORRECT_MESSAGE
+
         matching_choices = self.question.matching_choices(message)
         if len(matching_choices) > 0:
             if(len(matching_choices) < self.question.max_choices):
@@ -250,42 +295,20 @@ class UserSession(models.Model):
 
             self._save_response(self.question, matching_choices)
             self.question = self.question.next_question
-            self.num_attempt = 1
-
+            self.num_attempt = 0
+        else:
+            return "error_parsing_response"
+        
 
     def _respond_to_exceeding_attempts(self):
         if self._has_user_exceeded_max_attempts():
+            self.num_attempt = 0
             self._close_session()
             return "session_closed_due_to_max_retries"
     
-
-    def respond(self, error_message):
-        self._set_default_questionnaire()
-
-        error_message = self._respond_to_trigger(error_message)
-        if error_message != None: return error_message
-        
-        '''if its not a trigger its an attempt'''
-        self.num_attempt = self.num_attempt + 1
-        
-        error_message =  self._respond_to_answer(error_message)
-        if error_message != None: return error_message
-
-        error_message = self._respond_to_exceeding_attempts(error_message)
-        if error_message != None: return error_message
-
-        self.save()
-        return "error_parsing_response"
-
     def _save_user(self, user):
         user.save()
         return user
-
-    def user_exist_with_same_demographic_info(self, user):
-        users_with_same_demographic_info = User.objects.filter(connection = user.connection, age = user.age, gender = user.gender, governorate = user.governorate, district = user.district)
-        if len(users_with_same_demographic_info) == 0:
-            return False
-        return True
 
     def _save_response(self,question,choices):
         for choice in choices:
@@ -299,6 +322,7 @@ class UserSession(models.Model):
         return str(question)
 
     def _close_session(self):
+        self.question = None
         self.user = None
         self.save()
 
