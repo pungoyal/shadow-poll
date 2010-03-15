@@ -257,8 +257,7 @@ class UserSession(models.Model):
             return FINAL_APPRECIATION_MESSAGE
 
     def _save_session(self):
-        if self.user:
-            self.user.save()
+        self.user = self._save_user(self.user)
         self.save()
 
     ''' default to the first questionnaire'''
@@ -270,7 +269,6 @@ class UserSession(models.Model):
         if not self._is_trigger(message): return 
         ''' create new user '''
         self.user = User(connection = self.user.connection, governorate = self.user.governorate, district = self.user.district)
-
         message = message.strip().lstrip(self.questionnaire.trigger.lower()).strip()
         parsers = list(DemographicParser.objects.filter(questionnaire=self.questionnaire).order_by('order') )
         
@@ -307,6 +305,7 @@ class UserSession(models.Model):
             return "session_closed_due_to_max_retries"
     
     def _save_user(self, user):
+        if not user : return
         user.save()
         return user
 
