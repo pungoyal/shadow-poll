@@ -6,20 +6,29 @@ from django.http import HttpResponse, HttpResponseNotFound, HttpResponseServerEr
 from django.shortcuts import get_object_or_404
 from django.template import loader
 from django.utils import translation, simplejson
+from django.utils.translation import ugettext as _
 
 from rapidsms.webui import settings
 from rapidsms.webui.utils import render_to_response
 
 from apps.charts.models import Governorate, District, VoiceMessage
+from apps.charts.forms import VoiceMessageForm
 from apps.poll.models import Question, Choice, Color, UserResponse
 
 def voice_translate(request, message_id, template = "message.html"):
+    context = {}
     message = get_object_or_404(VoiceMessage, pk=message_id)
     if request.method == "POST":
-
-        request.POST['arabic_text']
-        request.POST['english_text']
-    return render_to_response(request, template, {'message' : message})
+        form = VoiceMessageForm(request.POST, instance=message)
+        if form.is_valid():
+            form.save()
+            context['status'] = _("Translation saved.")
+        else:
+            context['status'] = _(form.errors)
+    else:
+        form = VoiceMessageForm(instance=message)
+    context['form'] = form
+    return render_to_response(request, template, context)
 
 def home_page(request, template = "home_page.html"):
     questions = Question.objects.all()
@@ -33,7 +42,10 @@ def voice_home_page(request):
 
 def voice_admin_page(request):
     messages = VoiceMessage.objects.filter(translated = False).order_by('-date_recorded')[:5]
-    return render_to_response(request, "messages_admin.html", {"messages": messages})
+    context = {}
+    context['num_translated_messages'] = VoiceMessage.objects.filter(translated=True).count()
+    context["messages"] = messages
+    return render_to_response(request, "messages_admin.html", context)
 
 def show_mdg(request, question_id, template='mdg.html'):
     context = {}

@@ -25,12 +25,12 @@
 {% block messages %}
 <div id="content_area">
     <div id="message_container">
+    	<div id="status">{{status}}</div>
         <form method="post">
-            English: <textarea rows="7" cols="40" name="english_text">{{message.english_text|default:""}}</textarea> <br/>
-            Arabic: <textarea rows="7" cols="40" name="arabic_text" >{{message.arabic_text|default:""}}</textarea>
-            <br/>
+        	{{ form.as_p }}
             <input type="submit" value="Save"/>
         </form>
+        <a href="{% url messages_admin %}">Go Back</a>
     </div>
 </div>
 {% endblock %}

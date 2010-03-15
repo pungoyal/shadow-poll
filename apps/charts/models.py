@@ -121,8 +121,8 @@ class VoiceMessage(models.Model):
     age = models.IntegerField(null=True)
     female = models.NullBooleanField(null = True, blank=True)
     district = models.ForeignKey(District, null=True)
-    arabic_text = models.TextField(null=True, blank=True)
-    english_text = models.TextField(null=True, blank=True)
+    arabic_text = models.TextField(null=True, blank=True, verbose_name="Arabic Translation")
+    english_text = models.TextField(null=True, blank=True, verbose_name="English Translation")
     sound_file_name = models.CharField(max_length=150) # full file path on the system
     translated = models.BooleanField(default = False)
     date_recorded = models.DateTimeField()

@@ -5,7 +5,7 @@ from math import ceil
 
 query="?gender=m,f&age=a1,a2,a3"
 class ViewTests(TestCase):
-    fixtures = ['functional_test_data']
+    fixtures = ['functional_test_data', 'messages']
     def setUp(self):
         self.client = Client()
 
@@ -43,6 +43,10 @@ class ViewTests(TestCase):
         response = self.client.get('/get_kml/question2/governorate7' + query)
         self.assertContains(response, "<scale>0.5</scale>")
 
-    def test_messaging_page_is_accesible(self):
+    def test_messaging_pages_is_accesible(self):
         response = self.client.get("/messages/")
+        self.assertEquals(response.status_code, 200)
+        response = self.client.get("/messages/translate/")
+        self.assertEquals(response.status_code, 200)
+        response = self.client.get("/message/translate/1")
         self.assertEquals(response.status_code, 200)

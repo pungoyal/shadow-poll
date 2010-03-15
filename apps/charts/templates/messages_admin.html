@@ -28,10 +28,12 @@
     <div id="message_container">
         <h2>List of messages to be translated</h2>
         Click to hear and append translation(s). <br/><br/>
+        
         {% for message in messages %}
         <a href="/messages/translate/{{message.id}}">{{message.date_recorded}}</a>
         <br/>
         {% endfor %}
+	    {% blocktrans %} {{ num_translated_messages }} translated so far {% endblocktrans %}<br/>
     </div>
 </div>
 {% else %}
