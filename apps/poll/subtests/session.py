@@ -93,8 +93,6 @@ class UserSessionTest(TestCase):
 
     def test_wrong_response_to_question_sends_error(self):
         session = UserSession.open(self.pconnection)
-        user = session.user
-        user.save()
         self.assertEquals(session.question, None)
         response1 = session.respond("trigger f 16")
         self.assertEquals(session.question, self.question1)
@@ -135,8 +133,7 @@ class UserSessionTest(TestCase):
         session.user = user
         session.question = self.question3
         self.assertEquals(session.respond("c"), "thanks")
-        self.assertEquals(session.question, None)
-        self.assertEquals(session.user, None)
+        self.assertEquals(session.user.active, False)
 
     def test_user_interaction_is_saved_when_successful(self):
         initial_number_of_responses = len(UserResponse.objects.all())
@@ -157,7 +154,8 @@ class UserSessionTest(TestCase):
         session.respond('t')
         session.respond('t')
         session.respond('t')
-        self.assertEquals(session.question, None)
+        self.assertEquals(session.user.active, False)
+
 
     def test_user_demographics_saved_when_present(self):
         session = UserSession.open(self.pconnection1)
@@ -200,13 +198,11 @@ class UserSessionTest(TestCase):
     def test_reset_session_on_sending_trigger(self):
         session = UserSession.open(self.pconnection)
         session.respond("trigger m 16")
-        
-        session = UserSession.open(self.pconnection)
+
         self.assertEquals(session.question, self.question1)
         session.respond("trigger f 12")
 
         self.assertEquals(session.question, self.question1)
-        session = UserSession.open(self.pconnection)
         session.respond("a")
 
         self.assertEquals(session.question, self.question2)

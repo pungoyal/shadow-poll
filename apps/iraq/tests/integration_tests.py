@@ -237,7 +237,7 @@ class TestIntegration(TestScript):
         00919980131127 > Alllllll
         00919980131127 < Due to errors the poll has been stopped. To restart, type the keyword Poll with your age and gender
         00919980131127 > a
-        00919980131127 < I feel happy: (Choose a,b,c or d.) a. Always b. Most of the time c. Rarely d. Never
+        00919980131127 < Sorry we did not understand your response. Please may you enter Age as a number and Gender as either M or F
         00919980131127 > poll 10 f
         00919980131127 <  I feel happy: (Choose a,b,c or d.) a. Always b. Most of the time c. Rarely d. Never
     """

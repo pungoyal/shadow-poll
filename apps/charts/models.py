@@ -35,9 +35,9 @@ class Geography(models.Model):
                          'percentage': scale }
                 return style
         # default to grey
-        style = {'color': Color.objects.get(file_name="grey_dot.png"), 
-                 'percentage': 0.6 }
-        return style
+        # style = {'color': Color.objects.get(file_name="grey_dot.png"), 
+        #          'percentage': 0.6 }
+        return ''
     
     def _percentage_to_display(self, count, total):
         """ This formula returns the size of the bubble we want to display 
@@ -121,8 +121,8 @@ class VoiceMessage(models.Model):
     age = models.IntegerField(null=True)
     female = models.NullBooleanField(null = True, blank=True)
     district = models.ForeignKey(District, null=True)
-    arabic_text = models.TextField(null=True)
-    english_text = models.TextField(null=True)
+    arabic_text = models.TextField(null=True, blank=True)
+    english_text = models.TextField(null=True, blank=True)
     sound_file_name = models.CharField(max_length=150) # full file path on the system
     translated = models.BooleanField(default = False)
     date_recorded = models.DateTimeField()
