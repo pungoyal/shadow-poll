@@ -9,4 +9,4 @@ class ValidAnswerResponder(Responder):
 
     def action(self,message):
         self.proceed_to_next_question()
-        
+        return str(self.session.question)
