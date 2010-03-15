@@ -20,9 +20,9 @@
 {% block question %}{% endblock %}
 
 {% block messages %}
-    {% if messages %}
     <div id="content_area">
     <div id="message_container">
+    {% if messages %}
         <ul>
             {% for message in messages %}
             <li>
@@ -33,7 +33,13 @@
                 </div>
                 <div class="message_details">
                     <div class="message">
-                        <p>{{ message.english_text }}</p>
+                        <p>
+                        	{% ifequal LANGUAGE_CODE "en"  %}
+	                        	{{ message.english_text|default:"" }}
+	                        {% else %}
+	                        	{{ message.arabic_text|default:"" }}
+                        	{% endifequal %}
+                        </p>
                         <div id = "jquery_jplayer{{message.id}}" class = "audio">                            
 						</div>
 						<div id = "player{{message.id}}" class="jp-single-player">
@@ -44,10 +50,10 @@
             </li>
             {% endfor %}
         </ul>
-    </div>
-    </div>
 	{% else %}
 		<!-- TODO: add better styling here -->
-		<h1>No messages to display.</h1>
+		<h1>{% trans 'No messages to display' %}.</h1>
  	{% endif %}
+    </div>
+    </div>
 {% endblock %}
