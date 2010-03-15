@@ -3,7 +3,8 @@ import charts.views as views
 
 urlpatterns = patterns('charts',
                        (r'^messages/$', 'views.voice_home_page'),
-                       (r'^messages/admin/$', 'views.voice_admin_page'),
+                       (r'^messages/translation/$', 'views.voice_admin_page'),
+                       (r'^messages/translate/([0-9]+)$', 'views.voice_translate'),
                        (r'^messages/audio/(.*)$', 'views.play_audio'),
 
                        (r'^charts/$', 'views.home_page'),

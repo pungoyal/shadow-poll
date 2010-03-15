@@ -13,6 +13,14 @@ from rapidsms.webui.utils import render_to_response
 from apps.charts.models import Governorate, District, VoiceMessage
 from apps.poll.models import Question, Choice, Color, UserResponse
 
+def voice_translate(request, message_id, template = "message.html"):
+    message = get_object_or_404(VoiceMessage, pk=message_id)
+    if request.method == "POST":
+
+        request.POST['arabic_text']
+        request.POST['english_text']
+    return render_to_response(request, template, {'message' : message})
+
 def home_page(request, template = "home_page.html"):
     questions = Question.objects.all()
     return render_to_response(request, template, {'questions' : questions})
@@ -22,11 +30,10 @@ def voice_home_page(request):
     return render_to_response(request, "messages.html", 
                               {"messages": messages, 
                                "questions": Question.objects.all().order_by('pk')})
+
 def voice_admin_page(request):
-    messages = VoiceMessage.objects.all()
-    return render_to_response(request, "messages_admin.html",
-                              {"messages": messages,
-                               "questions": Question.objects.all().order_by('pk')})
+    messages = VoiceMessage.objects.filter(translated = False).order_by('-date_recorded')[:5]
+    return render_to_response(request, "messages_admin.html", {"messages": messages})
 
 def show_mdg(request, question_id, template='mdg.html'):
     context = {}

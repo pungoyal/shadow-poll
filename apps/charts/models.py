@@ -125,12 +125,14 @@ class VoiceMessage(models.Model):
     english_text = models.TextField(null=True)
     sound_file_name = models.CharField(max_length=150) # full file path on the system
     translated = models.BooleanField(default = False)
+    date_recorded = models.DateTimeField()
 
     def fill(self, entry, path):
         self.age = entry.age
         self.female = entry.female
         self.district = District.objects.get(id=entry.district)
         self.sound_file_name = path
+        self.date_recorded = entry.updated
 
     def get_child_image(self):
         if self.female is None:
