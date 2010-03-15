@@ -35,9 +35,9 @@ class Geography(models.Model):
                          'percentage': scale }
                 return style
         # default to grey
-        style = {'color': Color.objects.get(file_name="grey_dot.png"), 
-                 'percentage': 0.6 }
-        return style
+        # style = {'color': Color.objects.get(file_name="grey_dot.png"), 
+        #          'percentage': 0.6 }
+        return ''
     
     def _percentage_to_display(self, count, total):
         """ This formula returns the size of the bubble we want to display 
