@@ -1,5 +1,5 @@
 $(document).ready(function(){
-var geoserver_url = "http://"+window.location.host+"/geoserver/wms";
+var geoserver_url = "http://"+window.location.host+"/geoserver/ows";
 var mdg_overlay = new OpenLayers.Layer.WMS(
                 "MDG Data",
                 geoserver_url,

@@ -34,5 +34,15 @@ $(document).ready(function(){
     map.addLayers([iraq]); 
     map.addControl(new OpenLayers.Control.Permalink());
 
-
+    /**
+     * ZOOM
+     */
+    // center is set, for example, by zooming and panning
+    // the first time we load the page, 'center' is not set,
+    // so we must specify zoomextent
+    if (!map.getCenter()) 
+    {
+        map.zoomToExtent(new OpenLayers.Bounds.fromString("4139217,3209132,5603139,4652263"));
+        map.zoomTo(6);
+    }
 });
