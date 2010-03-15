@@ -42,8 +42,6 @@ class ViewTests(TestCase):
         self.assertContains(response, "<scale>0.666666666667</scale>")
         response = self.client.get('/get_kml/question2/governorate7' + query)
         self.assertContains(response, "<scale>0.5</scale>")
-        response = self.client.get('/get_kml/question1' + "?gender=f&age=a1,a2")        
-        self.assertContains(response, "<scale>0.6</scale>")
 
     def test_messaging_page_is_accesible(self):
         response = self.client.get("/messages/")
