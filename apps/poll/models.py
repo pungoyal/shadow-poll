@@ -224,54 +224,56 @@ class UserSession(models.Model):
     def __unicode__(self):
         return "session for : %s" % (self.user)
 
-    def respond(self, message):
-        # default to the first questionnaire     
+    ''' default to the first questionnaire'''
+    def _set_default_questionnaire(self):
         if not self.questionnaire:
             self.questionnaire = Questionnaire.objects.all().order_by('pk')[0]
-        
-        if self._is_trigger(message):
-            self.question = None
-            message = message.strip().lstrip(self.questionnaire.trigger.lower()).strip()
-            parsers = list(DemographicParser.objects.filter(questionnaire=self.questionnaire).order_by('order') )
 
-            for parser in parsers:
-                demographic_information = parser.parse(message)
-                if demographic_information == None:
-                    return TRIGGER_INCORRECT_MESSAGE
-                self.user.set_value(parser.name, demographic_information)
-                if not self.user_exist_with_same_demographic_info(self.user):
-                    user = User(connection = self.user.connection, age = self.user.age, gender = self.user.gender, governorate = self.user.governorate, district = self.user.district)
-                    self.user = user
-                
-            self.user = self._save_user(self.user)
+    def _respond_to_trigger(self, message):
+        if not self._is_trigger(message): return 
+        message = message.strip().lstrip(self.questionnaire.trigger.lower()).strip()
+        parsers = list(DemographicParser.objects.filter(questionnaire=self.questionnaire).order_by('order') )
         
-        if self._first_access():
-            if self.user.id == None:
+        for parser in parsers:
+            demographic_information = parser.parse(message)
+            if demographic_information == None:
                 return TRIGGER_INCORRECT_MESSAGE
-            self.question = Question.first()
-            self.save()
-            return str(self.question)
+            self.user.set_value(parser.name, demographic_information)
+            
+        self.question = Question.first()
         
+    def _respond_to_answer(self,message):
         matching_choices = self.question.matching_choices(message)
-
         if len(matching_choices) > 0:
-
             if(len(matching_choices) < self.question.max_choices):
                 return "err_less_thank_expected_choices"
 
             self._save_response(self.question, matching_choices)
             self.question = self.question.next_question
             self.num_attempt = 1
-            self.save()
-            return self._next_question(self.question)
-        
+
+
+    def _respond_to_exceeding_attempts(self):
         if self._has_user_exceeded_max_attempts():
-            self.question = None
-            self.num_attempt = 1
-            self.save()
+            self._close_session()
             return "session_closed_due_to_max_retries"
+    
+
+    def respond(self, error_message):
+        self._set_default_questionnaire()
+
+        error_message = self._respond_to_trigger(error_message)
+        if error_message != None: return error_message
         
+        '''if its not a trigger its an attempt'''
         self.num_attempt = self.num_attempt + 1
+        
+        error_message =  self._respond_to_answer(error_message)
+        if error_message != None: return error_message
+
+        error_message = self._respond_to_exceeding_attempts(error_message)
+        if error_message != None: return error_message
+
         self.save()
         return "error_parsing_response"
 

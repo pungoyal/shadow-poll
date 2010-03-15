@@ -35,7 +35,7 @@ class ValidAnswerResponderTest(TestCase):
         self.assertEquals(self.trigger_responder.criteria("w"), False)
         
     def test_valid_answer_response(self):
-        pass
+        self.assertEquals(self.trigger_responder.action("c"), str(self.next_question))
         
 
         
