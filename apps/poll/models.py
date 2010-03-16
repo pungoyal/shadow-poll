@@ -4,7 +4,6 @@ import re
 from django.db import models
 from django.utils.translation import ugettext as _
 from apps.reporters.models import Reporter, PersistantConnection
-from apps.register.models import Registration
 from django.db.models import Avg,Count
 from apps.poll.messages import *
 import math

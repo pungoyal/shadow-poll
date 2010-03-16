@@ -5,6 +5,7 @@ from rapidsms.tests.scripted import TestScript
 from register.models import *
 from reporters.models import PersistantBackend, PersistantConnection, Reporter
 from register.app import App
+from charts.models import Geography
 
 class RegistrationTest(TestCase):
     fixtures = ['registration']
@@ -24,14 +25,14 @@ class RegistrationTest(TestCase):
         self. message = Message(text='register poll 100 1001', connection=self.connection)
         self.message.persistant_connection = self.pconnection
 
+        self.message_with_correct_geo_codes = Message(text='register poll 1 3', connection=self.connection)
+        self.message_with_correct_geo_codes.persistant_connection = self.pconnection
+
     
     def test_parse(self):
         self.reg = Registration()
-        self.reg.parse(self.message)
-        self.assertEquals(self.reg.public_identifier, 'poll')
-        self.assertEquals(self.reg.governorate, "100")
-        self.assertEquals(self.reg.district, "1001")
-        self.assertEquals(self.reg.phone.identity, "1000")
+        registration_info = self.reg._parse(self.message)
+        self.assertEquals(registration_info.public_identifier, 'poll')
 
     def test_load_by_mobile_number(self):
         query_result = Registration.objects.filter(phone__identity = '100')
@@ -48,4 +49,12 @@ class RegistrationTest(TestCase):
         r.governorate = "12"
         r.district = "8"
         r.phone = self.pconnection
-        self.assertEquals(str(r), "1000 Poll 12 8")
+        self.assertEquals(str(r), "1000 Poll")
+
+    def test_valid_location(self):
+        r = Registration()
+        self.assertEquals(r.respond(self.message_with_correct_geo_codes), "initiate_poll_message")
+
+    def test_invalid_location(self):
+        r = Registration()
+        self.assertEquals(r.respond(self.message), "location_does_not_exist")

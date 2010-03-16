@@ -20,7 +20,7 @@ class TestRegisterScript (TestScript):
 
     test_register_needs_keyword_at_the_start_of_the_message_rapidsms = """
       00919880438062 > not_keyword poll 100 1001
-      00919880438062 > register poll 100 1001
+      00919880438062 > register poll 1 3
       00919880438062 < Thank you, to initiate the poll sms the keyword Poll with your age and gender
       """
 
@@ -42,7 +42,7 @@ class TestRegisterArabicScript (TestScript):
         TestScript.setUp(self)
 
     test_registration_message_in_arabic = u"""
-        00919980131127 > تسجيل التصويت 100 1001
+        00919980131127 > تسجيل التصويت 1 3
         00919980131127 < شكراً لكم, للشروع في التصويت عن طريق الرسائل القصيرة الرجاء إرسال  التصويت   العمر   الجنس 
     """
     

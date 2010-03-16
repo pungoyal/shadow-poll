@@ -734,5 +734,23 @@
             "code": "err_less_thank_expected_choices", 
             "language": 1
         }
+    },
+    {
+        "pk": 93, 
+        "model": "internationalization.translation", 
+        "fields": {
+            "translation": "\u0639\u0630\u0631\u0627\u064b, \u0631\u0633\u0627\u0644\u062a\u0643 \u063a\u064a\u0631 \u0645\u0641\u0647\u0648\u0645\u0629. \u0627\u0644\u0635\u064a\u063a\u0629 \u0627\u0644\u0635\u062d\u064a\u062d\u0629 \u0647\u064a    \u062a\u0633\u062c\u064a\u0644   \u0627\u0644\u062a\u0635\u0648\u064a\u062a    \u0631\u0645\u0632 \u0627\u0644\u0645\u062d\u0627\u0641\u0638\u0629    \u0631\u0645\u0632 \u0627\u0644\u0642\u0636\u0627\u0621", 
+            "code": "location_does_not_exist", 
+            "language": 2
+        }
+    },
+    {
+        "pk": 94, 
+        "model": "internationalization.translation", 
+        "fields": {
+            "translation": "Sorry, the geo location entered is incorrect. Please try again.", 
+            "code": "location_does_not_exist", 
+            "language": 1
+        }
     }
 ]
