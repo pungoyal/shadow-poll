@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
 "PO-Revision-Date: \n"
-"Last-Translator: rani <rani@hotmail.com>\n"
+"Last-Translator: sohaib <sohaib2001us@hotmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -20,7 +20,7 @@ msgid "Register not understood."
 msgstr "لم نستطيع فهم الرسالة المسجلة, الرجاء إرسال - التسجيل  الدراسة  المحافظة  الحي"
 
 msgid "Submit"
-msgstr "اختيار"
+msgstr "إختيار"
 
 #: apps/charts/templates/map.html:27
 msgid "Welcome to the Iraq Children Happiness Website."
@@ -51,13 +51,13 @@ msgid "Print"
 msgstr "طباعة"
 
 msgid "AN IRAQ FIT FOR CHILDREN"
-msgstr "العراق يلائم الأطفال"
+msgstr "&nbsp;&nbsp;عراق يلائم الأطفال"
 
 msgid "Home"
 msgstr "الصفحة الرئيسية"
 
 msgid "About"
-msgstr "عن المؤسسة"
+msgstr "نبذة عنّا"
 
 msgid "Poll"
 msgstr "التصويت"
@@ -73,6 +73,9 @@ msgstr "الأولاد"
 
 msgid "Girls"
 msgstr "البنات"
+
+msgid "Boys And Girls"
+msgstr "الأولاد و البنات معاً"
 
 msgid "Ages 6-11"
 msgstr "العمر من ٦-١١"
@@ -99,46 +102,58 @@ msgid "Read about how UNICEF used SMS to conduct the survey"
 msgstr "إقراء حول كيفية إستخدام اليونيسيف للرسائل القصيرة لإجراء الإحصائيات"
 
 msgid "I feel happy"
-msgstr "انا أشعر بالسعادة"
+msgstr "أنا أشعر بالسعادة"
 
 msgid "What makes you least happy?"
 msgstr "ما هي الأسباب التي تجعلك غير سعيد؟"
 
 msgid "Compared to my parents, my life in the future will be"
-msgstr "بالمقارنة مع ابي و امي حياتي سوف تكون"
+msgstr "بالمقارنة مع أبي و أمي حياتي سوف تكون"
 
 msgid "If i was leading the country"
-msgstr "اذا كنت حاكم الدولة سوف"
+msgstr "إذا كنت الحاكم سوف"
 
 msgid "Always"
-msgstr "دائما"
+msgstr "دائماً"
 
 msgid "Most of the time"
 msgstr "معظم الوقت"
 
 msgid "Rarely"
-msgstr "نادرا"
+msgstr "نادراً"
 
 msgid "Never"
-msgstr "ابدا"
+msgstr "أبداً"
 
 msgid "The three things I need most are"
-msgstr "اكثر ثلاثة اشياء احتاجها هي"
+msgstr "أكثر ثلاثة أشياء أحتاجها هي"
 
 msgid "Mostly"
-msgstr "غالبا"
+msgstr "غالباً"
 
 msgid "Top Response for"
-msgstr "الاستجابة الاعلى في"
+msgstr "الإستجابة الأعلى في"
+
+msgid "لا يوجد إجابات"
+msgstr "No responses yet"
 
 msgid "Security"
 msgstr "الأمن"
 
-msgid "responses"
-msgstr "اجابة"
+msgid "Social Environment"
+msgstr "البيئة الإجتماعية"
 
-msgid "from Bhagdad"
-msgstr "من بغداد"
+msgid "Education"
+msgstr "التعليم"
+
+msgid "Food water and shelter"
+msgstr "الطعام و الشراب و المسكن"
+
+msgid "responses"
+msgstr "إجابة"
+
+msgid "from"
+msgstr "من"
 
 msgid "National results"
 msgstr "النتائج الوطنية"
@@ -147,49 +162,52 @@ msgid "Peace and Security"
 msgstr "السلام و الأمن"
 
 msgid "Go to school regularly"
-msgstr "الذهاب الى المدرسة بانتظام"
+msgstr "الذهاب الى المدرسة بإنتظام"
 
 msgid "Health care when sick"
-msgstr "الرعاية الصحية للمرضى"
+msgstr "توفير رعاية الصحية للمرضى"
 
 msgid "Clean neighbourhood"
 msgstr "حي نظيف"
 
 msgid "Clean drinking water"
-msgstr "مياه شرب نظيفة"
+msgstr "توفير مياه شرب نظيفة"
 
 msgid "Enough food"
-msgstr "طعام كافي"
+msgstr "توفير طعام كافي"
 
 msgid "Be loved"
-msgstr "ان أكون محبوباً"
+msgstr "أن أكون محبوباً"
 
 msgid "Not have to work"
-msgstr "لا أحتاج للعمل"
+msgstr "أن لا أحتاج للعمل"
 
 msgid "Be listened to"
-msgstr "ان يسمعوا رأيي"
+msgstr "أن يستمع الناس الى رأيي"
 
 msgid "A place to play"
-msgstr "مكان للعب	"
+msgstr "توفير مكان للعب"
 
 msgid "Family and friends to be safe"
-msgstr "أن يعيش اهلي و اصدقائي بأمان"
+msgstr "أن يعيش أهلي و أصدقائي بأمان"
 
 msgid "Others"
-msgstr "شيء اخر"
+msgstr "شيء آخر"
 
 msgid "Better"
-msgstr "افضل"
+msgstr "أفضل"
 
 msgid "About the same"
 msgstr "نفس الشيء"
 
 msgid "Worse"
-msgstr "اسوء"
+msgstr "أسوأ"
 
 msgid "I don't know"
-msgstr "لا اعرف"
+msgstr "لا أعرف"
+
+msgid "vote"
+msgstr "صوت"
 
 msgid "a"
 msgstr "أ"
@@ -204,7 +222,7 @@ msgid "d"
 msgstr "د"
 
 msgid "e"
-msgstr "ه"
+msgstr "هـ"
 
 msgid "f"
 msgstr "و"
@@ -233,43 +251,137 @@ msgstr "م"
 msgid "n"
 msgstr "ن"
 
-msgid "Boys And Girls"
-msgstr "الاولاد و البنات معا"
-
-msgid "Take me to voice message page"
+msgid "s"
 msgstr ""
+
+msgid "1"
+msgstr "١"
+
+msgid "2"
+msgstr "٢"
+
+msgid "3"
+msgstr "٣"
+
+msgid "4"
+msgstr "٤"
+
+msgid "5"
+msgstr "٥"
+
+msgid "6"
+msgstr "٦"
+
+msgid "7"
+msgstr "٧"
+
+msgid "8"
+msgstr "٨"
+
+msgid "9"
+msgstr "٩"
+
+msgid "0"
+msgstr "٠"
+
+msgid "."
+msgstr ","
+
+msgid "Anbar"
+msgstr "الأنبار"
+
+msgid "Babil"
+msgstr "بابل"
+
+msgid "Baghdad"
+msgstr "بغداد"
+
+msgid "Basrah"
+msgstr "البصرة"
+
+msgid "Dahuk"
+msgstr "دهوك"
+
+msgid "Diyala"
+msgstr "ديالى"
+
+msgid "Erbil"
+msgstr "أربيل"
+
+msgid "Kerbala"
+msgstr "كربلاء"
+
+msgid "Missan"
+msgstr "ميسان"
+
+msgid "Muthanna"
+msgstr "المثنّى"
+
+msgid "Najaf"
+msgstr "النجف"
+
+msgid "Ninewa"
+msgstr "نينوى"
+
+msgid "Qadissiya"
+msgstr "القادسية"
+
+msgid "Salah al-Din"
+msgstr "صلاح الدين"
+
+msgid "Sulaymaniyah"
+msgstr "السليمانية"
+
+msgid "Kirkuk"
+msgstr "كركوك"
+
+msgid "Thi-Qar"
+msgstr "ذي قار"
+
+msgid "Wassit"
+msgstr "واسط"
+
+msgid "Legal"
+msgstr "قانوني"
+
+msgid "copyright + Legal"
+msgstr "قانوني + حقوق النشر"
 
 msgid "Poll Questions"
-msgstr ""
+msgstr "أسئلة التصويت"
 
 msgid "Sections"
-msgstr ""
+msgstr "الأقسام"
+
+msgid "Take me to voice message page"
+msgstr "أنقلني الى صفحة الرسائل الصوتية"
 
 msgid "Age"
-msgstr ""
+msgstr "العمر"
 
 msgid "No messages to display"
-msgstr ""
+msgstr "لا يوجد رسائل للعرض"
 
 msgid " %(num_translated_messages)s translated so far "
-msgstr ""
+msgstr " %(num_translated_messages)s تم ترجمته حتى الآن "
 
 msgid "Map"
-msgstr ""
+msgstr "الخارطة"
 
 msgid ""
 "%(total_responses)s responses <br/>\n"
 "    from %(region)s "
 msgstr ""
+"%(total_responses)s إجابة <br/>\n"
+"    من %(region)s "
 
 msgid "Translation saved."
-msgstr ""
+msgstr "تم حفظ الترجمة."
 
 msgid "No responses yet"
-msgstr "اجابة"
+msgstr "لا يوجد إجابات"
 
 msgid "%(counter)s vote"
 msgid_plural "%(counter)s votes"
-msgstr[0] ""
-msgstr[1] ""
-
+msgstr[0] "%(counter)s صوت"
+msgstr[1] "%(counter)s صوت"
