@@ -26,6 +26,9 @@
 <div id="content_area">
     <div id="message_container">
     	<div id="status">{{status}}</div>
+    	{% for message in messages %}
+	    {% include 'partials/jplayer.html' %}
+	    {% endfor %}
         <form method="post">
         	{{ form.as_p }}
             <input type="submit" value="Save"/>

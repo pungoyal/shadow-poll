@@ -43,34 +43,7 @@
 		{{ message.arabic_text|default:"" }}
 		{% endifequal %}
 	      </p>
-	      <div id = "jquery_jplayer{{ forloop.counter  }}" class = "audio">                            
-	      </div>
-	      <input type="hidden" id="soundfile_{{ forloop.counter }}" value="{{message.sound_file_url}}" />
-	      <div id = "player{{ forloop.counter }}" class="jp-single-player">
-		<div class="jp-single-player">
-		  <div class="jp-interface">
-		    <ul class="jp-controls">
-		      <li id="jplayer_play{{ forloop.counter }}" class="jp-play">play</li>
-		      <li id="jplayer_pause{{ forloop.counter }}" class="jp-pause">pause</li>
-
-		      <li id="jplayer_stop{{ forloop.counter }}" class="jp-stop">stop</li>
-		      <li id="jplayer_volume_min{{ forloop.counter }}" class="jp-volume-min">min volume</li>
-		      <li id="jplayer_volume_max{{ forloop.counter }}" class="jp-volume-max">max volume</li>
-		    </ul>
-		    <div class="jp-progress">
-		      <div id="jplayer_load_bar{{ forloop.counter }}" class="jp-load-bar">
-			<div id="jplayer_play_bar{{ forloop.counter }}" class="jp-play-bar"></div>
-
-		      </div>
-		    </div>
-		    <div id="jplayer_volume_bar{{ forloop.counter }}" class="jp-volume-bar">
-		      <div id="jplayer_volume_bar_value{{ forloop.counter }}" class="jp-volume-bar-value"></div>
-		    </div>
-		    <div id="jplayer_play_time{{ forloop.counter }}" class="jp-play-time"></div>
-		    <div id="jplayer_total_time{{ forloop.counter }}" class="jp-total-time"></div>
-		  </div>
-		</div>
-	      </div>
+	      {% include 'partials/jplayer.html' %}
 	    </div>
 	  </div>
 	</li>

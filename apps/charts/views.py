@@ -50,6 +50,8 @@ def voice_translate(request, message_id, template = "translate_message.html"):
     else:
         form = VoiceMessageForm(instance=message)
     context['form'] = form
+    context['message'] = message
+    context['messages'] = [message]
     return render_to_response(request, template, context)
 
 def show_mdg(request, question_id, mdg, template='mdg.html'):
