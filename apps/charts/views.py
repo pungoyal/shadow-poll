@@ -17,7 +17,7 @@ from apps.poll.models import Question, Choice, Color, UserResponse
 
 DEFAULT_MDG_INDICATOR = 'mdgs_poverty'
 
-def voice_translate(request, message_id, template = "message.html"):
+def voice_translate(request, message_id, template = "translate_message.html"):
     context = {}
     message = get_object_or_404(VoiceMessage, pk=message_id)
     if request.method == "POST":
@@ -47,7 +47,7 @@ def voice_admin_page(request):
     context = {}
     context['num_translated_messages'] = VoiceMessage.objects.filter(translated=True).count()
     context["messages"] = messages
-    return render_to_response(request, "messages_admin.html", context)
+    return render_to_response(request, "translate_messages.html", context)
 
 def show_mdg(request, question_id, mdg, template='mdg.html'):
     context = {}
