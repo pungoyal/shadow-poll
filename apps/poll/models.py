@@ -2,7 +2,7 @@ from __future__ import division
 from datetime import datetime
 import re
 from django.db import models
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import ugettext as _
 from apps.reporters.models import Reporter, PersistantConnection
 from apps.register.models import Registration
 from django.db.models import Avg,Count
