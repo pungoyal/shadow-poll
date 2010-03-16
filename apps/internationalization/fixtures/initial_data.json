@@ -1,759 +1,678 @@
 [
     {
-        "pk": 1,
-        "model": "internationalization.language",
+        "pk": 1, 
+        "model": "internationalization.language", 
         "fields": {
-            "code": "en",
+            "code": "en", 
             "name": "English"
         }
-    },
+    }, 
     {
-        "pk": 2,
-        "model": "internationalization.language",
+        "pk": 2, 
+        "model": "internationalization.language", 
         "fields": {
-            "code": "ar",
+            "code": "ar", 
             "name": "Arabic"
         }
-    },
+    }, 
     {
-        "pk": 6,
-        "model": "internationalization.translation",
+        "pk": 6, 
+        "model": "internationalization.translation", 
         "fields": {
-            "translation": "\u062a\u0633\u062c\u064a\u0644",
-            "code": "register",
+            "translation": "\u062a\u0633\u062c\u064a\u0644", 
+            "code": "register", 
             "language": 2
         }
-    },
+    }, 
     {
-        "pk": 7,
-        "model": "internationalization.translation",
+        "pk": 7, 
+        "model": "internationalization.translation", 
         "fields": {
-            "translation": "\u0627\u0644\u062a\u0635\u0648\u064a\u062a",
-            "code": "poll",
+            "translation": "\u0627\u0644\u062a\u0635\u0648\u064a\u062a", 
+            "code": "poll", 
             "language": 2
         }
-    },
+    }, 
     {
-        "pk": 8,
-        "model": "internationalization.translation",
+        "pk": 8, 
+        "model": "internationalization.translation", 
         "fields": {
-            "translation": "\u0660",
-            "code": "0",
+            "translation": "\u0660", 
+            "code": "0", 
             "language": 2
         }
-    },
+    }, 
     {
-        "pk": 9,
-        "model": "internationalization.translation",
+        "pk": 9, 
+        "model": "internationalization.translation", 
         "fields": {
-            "translation": "\u0661",
-            "code": "1",
+            "translation": "\u0661", 
+            "code": "1", 
             "language": 2
         }
-    },
+    }, 
     {
-        "pk": 10,
-        "model": "internationalization.translation",
+        "pk": 10, 
+        "model": "internationalization.translation", 
         "fields": {
-            "translation": "\u0662",
-            "code": "2",
+            "translation": "\u0662", 
+            "code": "2", 
             "language": 2
         }
-    },
+    }, 
     {
-        "pk": 11,
-        "model": "internationalization.translation",
+        "pk": 11, 
+        "model": "internationalization.translation", 
         "fields": {
-            "translation": "\u0663",
-            "code": "3",
+            "translation": "\u0663", 
+            "code": "3", 
             "language": 2
         }
-    },
+    }, 
     {
-        "pk": 12,
-        "model": "internationalization.translation",
+        "pk": 12, 
+        "model": "internationalization.translation", 
         "fields": {
-            "translation": "\u0664",
-            "code": "4",
+            "translation": "\u0664", 
+            "code": "4", 
             "language": 2
         }
-    },
+    }, 
     {
-        "pk": 13,
-        "model": "internationalization.translation",
+        "pk": 13, 
+        "model": "internationalization.translation", 
         "fields": {
-            "translation": "\u0665",
-            "code": "5",
+            "translation": "\u0665", 
+            "code": "5", 
             "language": 2
         }
-    },
+    }, 
     {
-        "pk": 14,
-        "model": "internationalization.translation",
+        "pk": 14, 
+        "model": "internationalization.translation", 
         "fields": {
-            "translation": "\u0666",
-            "code": "6",
+            "translation": "\u0666", 
+            "code": "6", 
             "language": 2
         }
-    },
+    }, 
     {
-        "pk": 15,
-        "model": "internationalization.translation",
+        "pk": 15, 
+        "model": "internationalization.translation", 
         "fields": {
-            "translation": "\u0667",
-            "code": "7",
+            "translation": "\u0667", 
+            "code": "7", 
             "language": 2
         }
-    },
+    }, 
     {
-        "pk": 16,
-        "model": "internationalization.translation",
+        "pk": 16, 
+        "model": "internationalization.translation", 
         "fields": {
-            "translation": "\u0668",
-            "code": "8",
+            "translation": "\u0668", 
+            "code": "8", 
             "language": 2
         }
-    },
+    }, 
     {
-        "pk": 17,
-        "model": "internationalization.translation",
+        "pk": 17, 
+        "model": "internationalization.translation", 
         "fields": {
-            "translation": "\u0669",
-            "code": "9",
+            "translation": "\u0669", 
+            "code": "9", 
             "language": 2
         }
-    },
+    }, 
     {
-        "pk": 18,
-        "model": "internationalization.translation",
+        "pk": 18, 
+        "model": "internationalization.translation", 
         "fields": {
-            "translation": "\u0623",
-            "code": "a",
+            "translation": "\u0623", 
+            "code": "a", 
             "language": 2
         }
-    },
+    }, 
     {
-        "pk": 19,
-        "model": "internationalization.translation",
+        "pk": 19, 
+        "model": "internationalization.translation", 
         "fields": {
-            "translation": "\u0628",
-            "code": "b",
+            "translation": "\u0628", 
+            "code": "b", 
             "language": 2
         }
-    },
+    }, 
     {
-        "pk": 20,
-        "model": "internationalization.translation",
+        "pk": 20, 
+        "model": "internationalization.translation", 
         "fields": {
-            "translation": "\u062c",
-            "code": "c",
+            "translation": "\u062c", 
+            "code": "c", 
             "language": 2
         }
-    },
+    }, 
     {
-        "pk": 21,
-        "model": "internationalization.translation",
+        "pk": 21, 
+        "model": "internationalization.translation", 
         "fields": {
-            "translation": "\u062f",
-            "code": "d",
+            "translation": "\u062f", 
+            "code": "d", 
             "language": 2
         }
-    },
+    }, 
     {
-        "pk": 22,
-        "model": "internationalization.translation",
+        "pk": 22, 
+        "model": "internationalization.translation", 
         "fields": {
-            "translation": "\u0647",
-            "code": "e",
+            "translation": "\u0647", 
+            "code": "e", 
             "language": 2
         }
-    },
+    }, 
     {
-        "pk": 23,
-        "model": "internationalization.translation",
+        "pk": 23, 
+        "model": "internationalization.translation", 
         "fields": {
-            "translation": "\u0648",
-            "code": "f",
+            "translation": "\u0648", 
+            "code": "f", 
             "language": 2
         }
-    },
+    }, 
     {
-        "pk": 24,
-        "model": "internationalization.translation",
+        "pk": 24, 
+        "model": "internationalization.translation", 
         "fields": {
-            "translation": "\u0632",
-            "code": "g",
+            "translation": "\u0632", 
+            "code": "g", 
             "language": 2
         }
-    },
+    }, 
     {
-        "pk": 25,
-        "model": "internationalization.translation",
+        "pk": 25, 
+        "model": "internationalization.translation", 
         "fields": {
-            "translation": "\u062d",
-            "code": "h",
+            "translation": "\u062d", 
+            "code": "h", 
             "language": 2
         }
-    },
+    }, 
     {
-        "pk": 26,
-        "model": "internationalization.translation",
+        "pk": 26, 
+        "model": "internationalization.translation", 
         "fields": {
-            "translation": "\u0637",
-            "code": "i",
+            "translation": "\u0637", 
+            "code": "i", 
             "language": 2
         }
-    },
+    }, 
     {
-        "pk": 27,
-        "model": "internationalization.translation",
+        "pk": 27, 
+        "model": "internationalization.translation", 
         "fields": {
-            "translation": "\u064a",
-            "code": "j",
+            "translation": "\u064a", 
+            "code": "j", 
             "language": 2
         }
-    },
+    }, 
     {
-        "pk": 28,
-        "model": "internationalization.translation",
+        "pk": 28, 
+        "model": "internationalization.translation", 
         "fields": {
-            "translation": "\u0643",
-            "code": "k",
+            "translation": "\u0643", 
+            "code": "k", 
             "language": 2
         }
-    },
+    }, 
     {
-        "pk": 29,
-        "model": "internationalization.translation",
+        "pk": 29, 
+        "model": "internationalization.translation", 
         "fields": {
-            "translation": "\u0644",
-            "code": "l",
+            "translation": "\u0644", 
+            "code": "l", 
             "language": 2
         }
-    },
+    }, 
     {
-        "pk": 30,
-        "model": "internationalization.translation",
+        "pk": 30, 
+        "model": "internationalization.translation", 
         "fields": {
-            "translation": "\u0630\u0643\u0631",
-            "code": "male",
+            "translation": "\u0630\u0643\u0631", 
+            "code": "male", 
             "language": 2
         }
-    },
+    }, 
     {
-        "pk": 31,
-        "model": "internationalization.translation",
+        "pk": 31, 
+        "model": "internationalization.translation", 
         "fields": {
-            "translation": "\u0627\u0646\u062b\u0649",
-            "code": "female",
+            "translation": "\u0627\u0646\u062b\u0649", 
+            "code": "female", 
             "language": 2
         }
-    },
+    }, 
     {
-        "pk": 32,
-        "model": "internationalization.translation",
+        "pk": 32, 
+        "model": "internationalization.translation", 
         "fields": {
-            "translation": "\u0623\u0646\u062b\u0649",
-            "code": "female",
+            "translation": "\u0623\u0646\u062b\u0649", 
+            "code": "female", 
             "language": 2
         }
-    },
+    }, 
     {
-        "pk": 5,
-        "model": "internationalization.translation",
+        "pk": 5, 
+        "model": "internationalization.translation", 
         "fields": {
-            "translation": "fem",
-            "code": "female",
+            "translation": "fem", 
+            "code": "female", 
             "language": 1
         }
-    },
+    }, 
     {
-        "pk": 3,
-        "model": "internationalization.translation",
+        "pk": 3, 
+        "model": "internationalization.translation", 
         "fields": {
-            "translation": "reg",
-            "code": "register",
+            "translation": "reg", 
+            "code": "register", 
             "language": 1
         }
-    },
+    }, 
     {
-        "pk": 33,
-        "model": "internationalization.translation",
+        "pk": 33, 
+        "model": "internationalization.translation", 
         "fields": {
-            "translation": "\u0627\u0646\u0627 \u0623\u0634\u0639\u0631 \u0628\u0627\u0644\u0633\u0639\u0627\u062f\u0629 : (\u0627\u0644\u0631\u062c\u0627\u0621 \u0625\u062e\u062a\u064a\u0627\u0631 \u0623,\u0628,\u062c  \u0623\u0648 \u062f)   \u0623.\u062f\u0627\u0626\u0645\u0627\u064b    \u0628.\u0645\u0639\u0638\u0645 \u0627\u0644\u0648\u0642\u062a    \u062c. \u0646\u0627\u062f\u0631\u0627\u064b    \u062f.\u0644\u0627 \u0623\u0634\u0639\u0631 \u0628\u0627\u0644\u0633\u0639\u0627\u062f\u0629 \u0623\u0628\u062f\u0627\u064b",
-            "code": "I feel happy: (Choose a,b,c or d.) a. Always b. Most of the time c. Rarely d. Never",
+            "translation": "\u0627\u0646\u0627 \u0623\u0634\u0639\u0631 \u0628\u0627\u0644\u0633\u0639\u0627\u062f\u0629 : (\u0627\u0644\u0631\u062c\u0627\u0621 \u0625\u062e\u062a\u064a\u0627\u0631 \u0623,\u0628,\u062c  \u0623\u0648 \u062f)   \u0623.\u062f\u0627\u0626\u0645\u0627\u064b    \u0628.\u0645\u0639\u0638\u0645 \u0627\u0644\u0648\u0642\u062a    \u062c. \u0646\u0627\u062f\u0631\u0627\u064b    \u062f.\u0644\u0627 \u0623\u0634\u0639\u0631 \u0628\u0627\u0644\u0633\u0639\u0627\u062f\u0629 \u0623\u0628\u062f\u0627\u064b", 
+            "code": "I feel happy: (Choose a,b,c or d.) a. Always b. Most of the time c. Rarely d. Never", 
             "language": 2
         }
-    },
+    }, 
     {
-        "pk": 35,
-        "model": "internationalization.translation",
+        "pk": 35, 
+        "model": "internationalization.translation", 
         "fields": {
-            "translation": "\u0645\u0639\u0638\u0645 \u0627\u0644\u0623\u0648\u0642\u0627\u062a",
-            "code": "b",
+            "translation": "\u0645\u0639\u0638\u0645 \u0627\u0644\u0623\u0648\u0642\u0627\u062a", 
+            "code": "b", 
             "language": 2
         }
-    },
+    }, 
     {
-        "pk": 34,
-        "model": "internationalization.translation",
+        "pk": 34, 
+        "model": "internationalization.translation", 
         "fields": {
-            "translation": "\u0639\u0644\u0649 \u0627\u0644\u062f\u0648\u0627\u0645",
-            "code": "a",
+            "translation": "\u0639\u0644\u0649 \u0627\u0644\u062f\u0648\u0627\u0645", 
+            "code": "a", 
             "language": 2
         }
-    },
+    }, 
     {
-        "pk": 37,
-        "model": "internationalization.translation",
+        "pk": 37, 
+        "model": "internationalization.translation", 
         "fields": {
-            "translation": "\u0644\u0627 \u0623\u0634\u0639\u0631 \u0628\u0647\u0627 \u0639\u0644\u0649 \u0627\u0644\u0625\u0637\u0644\u0627\u0642",
-            "code": "d",
+            "translation": "\u0644\u0627 \u0623\u0634\u0639\u0631 \u0628\u0647\u0627 \u0639\u0644\u0649 \u0627\u0644\u0625\u0637\u0644\u0627\u0642", 
+            "code": "d", 
             "language": 2
         }
-    },
+    }, 
     {
-        "pk": 36,
-        "model": "internationalization.translation",
+        "pk": 36, 
+        "model": "internationalization.translation", 
         "fields": {
-            "translation": "\u0646\u0627\u062f\u0631\u0627\u064b",
-            "code": "c",
+            "translation": "\u0646\u0627\u062f\u0631\u0627\u064b", 
+            "code": "c", 
             "language": 2
         }
-    },
+    }, 
     {
-        "pk": 38,
-        "model": "internationalization.translation",
+        "pk": 38, 
+        "model": "internationalization.translation", 
         "fields": {
-            "translation": "\u0627\u0644\u0633\u0644\u0627\u0645 \u0648 \u0627\u0644\u0623\u0645\u0627\u0646",
-            "code": "a",
+            "translation": "\u0627\u0644\u0633\u0644\u0627\u0645 \u0648 \u0627\u0644\u0623\u0645\u0627\u0646", 
+            "code": "a", 
             "language": 2
         }
-    },
+    }, 
     {
-        "pk": 39,
-        "model": "internationalization.translation",
+        "pk": 39, 
+        "model": "internationalization.translation", 
         "fields": {
-            "translation": "\u0627\u0644\u0630\u0647\u0627\u0628 \u0625\u0644\u0649 \u0627\u0644\u0645\u062f\u0631\u0633\u0629 \u0628\u0627\u0646\u062a\u0638\u0627\u0645",
-            "code": "b",
+            "translation": "\u0627\u0644\u0630\u0647\u0627\u0628 \u0625\u0644\u0649 \u0627\u0644\u0645\u062f\u0631\u0633\u0629 \u0628\u0627\u0646\u062a\u0638\u0627\u0645", 
+            "code": "b", 
             "language": 2
         }
-    },
+    }, 
     {
-        "pk": 40,
-        "model": "internationalization.translation",
+        "pk": 40, 
+        "model": "internationalization.translation", 
         "fields": {
-            "translation": "\u0627\u0644\u062d\u0635\u0648\u0644 \u0639\u0644\u0649 \u0627\u0644\u0639\u0644\u0627\u062c \u0639\u0646\u062f\u0645\u0627 \u0627\u0645\u0631\u0636",
-            "code": "c",
+            "translation": "\u0627\u0644\u062d\u0635\u0648\u0644 \u0639\u0644\u0649 \u0627\u0644\u0639\u0644\u0627\u062c \u0639\u0646\u062f\u0645\u0627 \u0627\u0645\u0631\u0636", 
+            "code": "c", 
             "language": 2
         }
-    },
+    }, 
     {
-        "pk": 41,
-        "model": "internationalization.translation",
+        "pk": 41, 
+        "model": "internationalization.translation", 
         "fields": {
-            "translation": "\u0627\u0644\u0639\u064a\u0634 \u0641\u064a \u062d\u064a \u0646\u0638\u064a\u0641",
-            "code": "d",
+            "translation": "\u0627\u0644\u0639\u064a\u0634 \u0641\u064a \u062d\u064a \u0646\u0638\u064a\u0641", 
+            "code": "d", 
             "language": 2
         }
-    },
+    }, 
     {
-        "pk": 42,
-        "model": "internationalization.translation",
+        "pk": 42, 
+        "model": "internationalization.translation", 
         "fields": {
-            "translation": "\u0648\u062c\u0648\u062f \u0645\u064a\u0627\u0647 \u0634\u0631\u0628 \u0646\u0638\u064a\u0641\u0629",
-            "code": "e",
+            "translation": "\u0648\u062c\u0648\u062f \u0645\u064a\u0627\u0647 \u0634\u0631\u0628 \u0646\u0638\u064a\u0641\u0629", 
+            "code": "e", 
             "language": 2
         }
-    },
+    }, 
     {
-        "pk": 43,
-        "model": "internationalization.translation",
+        "pk": 43, 
+        "model": "internationalization.translation", 
         "fields": {
-            "translation": "\u0648\u062c\u0648\u062f \u0637\u0639\u0627\u0645 \u0643\u0627\u0641\u064a",
-            "code": "f",
+            "translation": "\u0648\u062c\u0648\u062f \u0637\u0639\u0627\u0645 \u0643\u0627\u0641\u064a", 
+            "code": "f", 
             "language": 2
         }
-    },
+    }, 
     {
-        "pk": 44,
-        "model": "internationalization.translation",
+        "pk": 44, 
+        "model": "internationalization.translation", 
         "fields": {
-            "translation": "\u0627\u0644\u0634\u0639\u0648\u0631 \u0628\u0645\u062d\u0628\u0629 \u0627\u0644\u0622\u062e\u0631\u064a\u0646 \u0644\u064a",
-            "code": "g",
+            "translation": "\u0627\u0644\u0634\u0639\u0648\u0631 \u0628\u0645\u062d\u0628\u0629 \u0627\u0644\u0622\u062e\u0631\u064a\u0646 \u0644\u064a", 
+            "code": "g", 
             "language": 2
         }
-    },
+    }, 
     {
-        "pk": 45,
-        "model": "internationalization.translation",
+        "pk": 45, 
+        "model": "internationalization.translation", 
         "fields": {
-            "translation": "\u0639\u062f\u0645 \u0627\u0636\u0637\u0631\u0627\u0631\u064a \u0644\u0644\u0639\u0645\u0644",
-            "code": "h",
+            "translation": "\u0639\u062f\u0645 \u0627\u0636\u0637\u0631\u0627\u0631\u064a \u0644\u0644\u0639\u0645\u0644", 
+            "code": "h", 
             "language": 2
         }
-    },
+    }, 
     {
-        "pk": 46,
-        "model": "internationalization.translation",
+        "pk": 46, 
+        "model": "internationalization.translation", 
         "fields": {
-            "translation": "\u0627\u0644\u0625\u0635\u063a\u0627\u0621 \u0625\u0644\u0649 \u0622\u0631\u0627\u0626\u064a",
-            "code": "i",
+            "translation": "\u0627\u0644\u0625\u0635\u063a\u0627\u0621 \u0625\u0644\u0649 \u0622\u0631\u0627\u0626\u064a", 
+            "code": "i", 
             "language": 2
         }
-    },
+    }, 
     {
-        "pk": 47,
-        "model": "internationalization.translation",
+        "pk": 47, 
+        "model": "internationalization.translation", 
         "fields": {
-            "translation": "\u0648\u062c\u0648\u062f \u0645\u0643\u0627\u0646 \u0644\u0644\u0639\u0628",
-            "code": "j",
+            "translation": "\u0648\u062c\u0648\u062f \u0645\u0643\u0627\u0646 \u0644\u0644\u0639\u0628", 
+            "code": "j", 
             "language": 2
         }
-    },
+    }, 
     {
-        "pk": 48,
-        "model": "internationalization.translation",
+        "pk": 48, 
+        "model": "internationalization.translation", 
         "fields": {
-            "translation": "\u0634\u0639\u0648\u0631 \u0623\u0633\u0631\u062a\u064a \u0648\u0623\u0635\u062f\u0642\u0627\u0626\u064a \u0628\u0627\u0644\u0623\u0645\u0627\u0646",
-            "code": "k",
+            "translation": "\u0634\u0639\u0648\u0631 \u0623\u0633\u0631\u062a\u064a \u0648\u0623\u0635\u062f\u0642\u0627\u0626\u064a \u0628\u0627\u0644\u0623\u0645\u0627\u0646", 
+            "code": "k", 
             "language": 2
         }
-    },
+    }, 
     {
-        "pk": 49,
-        "model": "internationalization.translation",
+        "pk": 49, 
+        "model": "internationalization.translation", 
         "fields": {
-            "translation": "\u0623\u0641\u0636\u0644",
-            "code": "a",
+            "translation": "\u0623\u0641\u0636\u0644", 
+            "code": "a", 
             "language": 2
         }
-    },
+    }, 
     {
-        "pk": 50,
-        "model": "internationalization.translation",
+        "pk": 50, 
+        "model": "internationalization.translation", 
         "fields": {
-            "translation": "\u0646\u0641\u0633 \u0627\u0644\u0634\u064a\u0621 \u062a\u0642\u0631\u064a\u0628\u0627\u064b",
-            "code": "b",
+            "translation": "\u0646\u0641\u0633 \u0627\u0644\u0634\u064a\u0621 \u062a\u0642\u0631\u064a\u0628\u0627\u064b", 
+            "code": "b", 
             "language": 2
         }
-    },
+    }, 
     {
-        "pk": 51,
-        "model": "internationalization.translation",
+        "pk": 51, 
+        "model": "internationalization.translation", 
         "fields": {
-            "translation": "\u0623\u0633\u0648\u0623",
-            "code": "c",
+            "translation": "\u0623\u0633\u0648\u0623", 
+            "code": "c", 
             "language": 2
         }
-    },
+    }, 
     {
-        "pk": 52,
-        "model": "internationalization.translation",
+        "pk": 52, 
+        "model": "internationalization.translation", 
         "fields": {
-            "translation": "\u0644\u0627 \u0623\u0639\u0631\u0641",
-            "code": "d",
+            "translation": "\u0644\u0627 \u0623\u0639\u0631\u0641", 
+            "code": "d", 
             "language": 2
         }
-    },
+    }, 
     {
-        "pk": 53,
-        "model": "internationalization.translation",
+        "pk": 53, 
+        "model": "internationalization.translation", 
         "fields": {
-            "translation": "\u0628\u0627\u0644\u0645\u0642\u0627\u0631\u0646\u0629 \u0645\u0639 \u0648\u0636\u0639 \u0623\u0628\u064a \u0648 \u0623\u0645\u064a, \u0623\u062a\u0648\u0642\u0639 \u0623\u0646 \u062a\u0643\u0648\u0646 \u062d\u064a\u0627\u062a\u064a \u0641\u064a \u0627\u0644\u0645\u0633\u062a\u0642\u0628\u0644 : (\u0627\u0644\u0631\u062c\u0627\u0621 \u0625\u062e\u062a\u064a\u0627\u0631 \u0623,\u0628,\u062c  \u0623\u0648 \u062f)  \u0623.\u0623\u062d\u0633\u0646  \u0628.\u0645\u062a\u0634\u0627\u0628\u0647\u0629 \u0644\u062d\u064a\u0627\u062a\u0647\u0645\u0627  \u062c.\u0623\u0633\u0648\u0623  \u062f.\u0644\u0627 \u0623\u0639\u0631\u0641",
-            "code": "Compared to my parents, my life in the future will be: (Choose a,b,c or d.) a. Better b. About the same c. Worse d. I don't know",
+            "translation": "\u0628\u0627\u0644\u0645\u0642\u0627\u0631\u0646\u0629 \u0645\u0639 \u0648\u0636\u0639 \u0623\u0628\u064a \u0648 \u0623\u0645\u064a, \u0623\u062a\u0648\u0642\u0639 \u0623\u0646 \u062a\u0643\u0648\u0646 \u062d\u064a\u0627\u062a\u064a \u0641\u064a \u0627\u0644\u0645\u0633\u062a\u0642\u0628\u0644 : (\u0627\u0644\u0631\u062c\u0627\u0621 \u0625\u062e\u062a\u064a\u0627\u0631 \u0623,\u0628,\u062c  \u0623\u0648 \u062f)  \u0623.\u0623\u062d\u0633\u0646  \u0628.\u0645\u062a\u0634\u0627\u0628\u0647\u0629 \u0644\u062d\u064a\u0627\u062a\u0647\u0645\u0627  \u062c.\u0623\u0633\u0648\u0623  \u062f.\u0644\u0627 \u0623\u0639\u0631\u0641", 
+            "code": "Compared to my parents, my life in the future will be: (Choose a,b,c or d.) a. Better b. About the same c. Worse d. I don't know", 
             "language": 2
         }
-    },
+    }, 
     {
-        "pk": 54,
-        "model": "internationalization.translation",
+        "pk": 54, 
+        "model": "internationalization.translation", 
         "fields": {
-            "translation": "\u0623\u0643\u062b\u0631 \u062b\u0644\u0627\u062b\u0629 \u0623\u0645\u0648\u0631 \u0623\u062d\u062a\u0627\u062c \u0625\u0644\u064a\u0647\u0627 \u0647\u064a (\u0627\u0644\u0631\u062c\u0627\u0621 \u062a\u0631\u062a\u064a\u0628\u0647\u0627 \u062d\u0633\u0628 \u0627\u0644\u0623\u0648\u0644\u0648\u064a\u0629): \u0623) \u0627\u0644\u0633\u0644\u0627\u0645 \u0648 \u0627\u0644\u0623\u0645\u0627\u0646 \u0628) \u0627\u0644\u0630\u0647\u0627\u0628 \u0625\u0644\u0649 \u0627\u0644\u0645\u062f\u0631\u0633\u0629 \u0628\u0627\u0646\u062a\u0638\u0627\u0645 \u062c) \u0627\u0644\u062d\u0635\u0648\u0644 \u0639\u0644\u0649 \u0627\u0644\u0639\u0644\u0627\u062c \u0639\u0646\u062f\u0645\u0627 \u0627\u0645\u0631\u0636 \u062f) \u0627\u0644\u0639\u064a\u0634 \u0641\u064a \u062d\u064a \u0646\u0638\u064a\u0641 \u0647\u0640) \u0648\u062c\u0648\u062f \u0645\u064a\u0627\u0647 \u0634\u0631\u0628 \u0646\u0638\u064a\u0641\u0629 \u0648) \u0648\u062c\u0648\u062f \u0637\u0639\u0627\u0645 \u0643\u0627\u0641\u064a \u0632) \u0627\u0644\u0634\u0639\u0648\u0631 \u0628\u0645\u062d\u0628\u0629 \u0627\u0644\u0622\u062e\u0631\u064a\u0646 \u0644\u064a \u062d) \u0639\u062f\u0645 \u0627\u0636\u0637\u0631\u0627\u0631\u064a \u0644\u0644\u0639\u0645\u0644 \u0637) \u0627\u0644\u0625\u0635\u063a\u0627\u0621 \u0625\u0644\u0649 \u0622\u0631\u0627\u0626\u064a \u064a)\u0648\u062c\u0648\u062f \u0645\u0643\u0627\u0646 \u0644\u0644\u0639\u0628 \u0643)\u0634\u0639\u0648\u0631 \u0623\u0633\u0631\u062a\u064a \u0648\u0623\u0635\u062f\u0642\u0627\u0626\u064a \u0628\u0627\u0644\u0623\u0645\u0627\u0646 \u0644) \u0623\u062e\u0631\u0649",		
-            "code": "The three things I need most are: (Prioritize your first, second, and third.) a. Peace and Security b. Go to school regularly c. Health care when sick d. Clean neighbourhood e. Clean drinking water f. Enough food g. Be loved h. Not have to work i. Be listened to j. A place to play k. Family and friends to be safe l. Others",
+            "translation": "\u0623\u0643\u062b\u0631 \u062b\u0644\u0627\u062b\u0629 \u0623\u0645\u0648\u0631 \u0623\u062d\u062a\u0627\u062c \u0625\u0644\u064a\u0647\u0627 \u0647\u064a (\u0627\u0644\u0631\u062c\u0627\u0621 \u062a\u0631\u062a\u064a\u0628\u0647\u0627 \u062d\u0633\u0628 \u0627\u0644\u0623\u0648\u0644\u0648\u064a\u0629): \u0623) \u0627\u0644\u0633\u0644\u0627\u0645 \u0648 \u0627\u0644\u0623\u0645\u0627\u0646 \u0628) \u0627\u0644\u0630\u0647\u0627\u0628 \u0625\u0644\u0649 \u0627\u0644\u0645\u062f\u0631\u0633\u0629 \u0628\u0627\u0646\u062a\u0638\u0627\u0645 \u062c) \u0627\u0644\u062d\u0635\u0648\u0644 \u0639\u0644\u0649 \u0627\u0644\u0639\u0644\u0627\u062c \u0639\u0646\u062f\u0645\u0627 \u0627\u0645\u0631\u0636 \u062f) \u0627\u0644\u0639\u064a\u0634 \u0641\u064a \u062d\u064a \u0646\u0638\u064a\u0641 \u0647\u0640) \u0648\u062c\u0648\u062f \u0645\u064a\u0627\u0647 \u0634\u0631\u0628 \u0646\u0638\u064a\u0641\u0629 \u0648) \u0648\u062c\u0648\u062f \u0637\u0639\u0627\u0645 \u0643\u0627\u0641\u064a \u0632) \u0627\u0644\u0634\u0639\u0648\u0631 \u0628\u0645\u062d\u0628\u0629 \u0627\u0644\u0622\u062e\u0631\u064a\u0646 \u0644\u064a \u062d) \u0639\u062f\u0645 \u0627\u0636\u0637\u0631\u0627\u0631\u064a \u0644\u0644\u0639\u0645\u0644 \u0637) \u0627\u0644\u0625\u0635\u063a\u0627\u0621 \u0625\u0644\u0649 \u0622\u0631\u0627\u0626\u064a \u064a)\u0648\u062c\u0648\u062f \u0645\u0643\u0627\u0646 \u0644\u0644\u0639\u0628 \u0643)\u0634\u0639\u0648\u0631 \u0623\u0633\u0631\u062a\u064a \u0648\u0623\u0635\u062f\u0642\u0627\u0626\u064a \u0628\u0627\u0644\u0623\u0645\u0627\u0646 \u0644) \u0623\u062e\u0631\u0649", 
+            "code": "The three things I need most are: (Prioritize your first, second, and third.) a. Peace and Security b. Go to school regularly c. Health care when sick d. Clean neighbourhood e. Clean drinking water f. Enough food g. Be loved h. Not have to work i. Be listened to j. A place to play k. Family and friends to be safe l. Others", 
             "language": 2
         }
-    },
+    }, 
     {
-        "pk": 55,
-        "model": "internationalization.translation",
+        "pk": 55, 
+        "model": "internationalization.translation", 
         "fields": {
-            "translation": "\u0631\u062f\u0648\u062f\u0643\u0645 \u0642\u062f \u0633\u062c\u0644\u062a. \u0623\u0634\u0643\u0631\u0643\u0645 \u0639\u0644\u0649 \u0627\u0644\u0645\u0634\u0627\u0631\u0643\u0629 \u0641\u064a \u0627\u0644\u062a\u0635\u0648\u064a\u062a.",
-            "code": "Your responses have been recorded. Thank you for participating in the poll.",
+            "translation": "\u0631\u062f\u0648\u062f\u0643\u0645 \u0642\u062f \u0633\u062c\u0644\u062a. \u0623\u0634\u0643\u0631\u0643\u0645 \u0639\u0644\u0649 \u0627\u0644\u0645\u0634\u0627\u0631\u0643\u0629 \u0641\u064a \u0627\u0644\u062a\u0635\u0648\u064a\u062a.", 
+            "code": "Your responses have been recorded. Thank you for participating in the poll.", 
             "language": 2
         }
-    },
+    }, 
     {
-        "pk": 56,
-        "model": "internationalization.translation",
+        "pk": 65, 
+        "model": "internationalization.translation", 
         "fields": {
-            "translation": "always",
-            "code": "a",
+            "translation": "\u0639\u0644\u0649 \u0627\u0644\u062f\u0648\u0627\u0645", 
+            "code": "a1", 
+            "language": 2
+        }
+    }, 
+    {
+        "pk": 66, 
+        "model": "internationalization.translation", 
+        "fields": {
+            "translation": "\u0645\u0639\u0638\u0645 \u0627\u0644\u0623\u0648\u0642\u0627\u062a", 
+            "code": "b1", 
+            "language": 2
+        }
+    }, 
+    {
+        "pk": 67, 
+        "model": "internationalization.translation", 
+        "fields": {
+            "translation": "\u0646\u0627\u062f\u0631\u0627\u064b", 
+            "code": "c1", 
+            "language": 2
+        }
+    }, 
+    {
+        "pk": 68, 
+        "model": "internationalization.translation", 
+        "fields": {
+            "translation": "\u0644\u0627 \u0623\u0634\u0639\u0631 \u0628\u0647\u0627 \u0639\u0644\u0649 \u0627\u0644\u0625\u0637\u0644\u0627\u0642", 
+            "code": "d1", 
+            "language": 2
+        }
+    }, 
+    {
+        "pk": 69, 
+        "model": "internationalization.translation", 
+        "fields": {
+            "translation": "\u0623\u0641\u0636\u0644", 
+            "code": "a3", 
+            "language": 2
+        }
+    }, 
+    {
+        "pk": 70, 
+        "model": "internationalization.translation", 
+        "fields": {
+            "translation": "\u0646\u0641\u0633 \u0627\u0644\u0634\u064a\u0621 \u062a\u0642\u0631\u064a\u0628\u0627\u064b", 
+            "code": "b3", 
+            "language": 2
+        }
+    }, 
+    {
+        "pk": 71, 
+        "model": "internationalization.translation", 
+        "fields": {
+            "translation": "\u0623\u0633\u0648\u0623", 
+            "code": "c3", 
+            "language": 2
+        }
+    }, 
+    {
+        "pk": 72, 
+        "model": "internationalization.translation", 
+        "fields": {
+            "translation": "\u0644\u0627 \u0623\u0639\u0631\u0641", 
+            "code": "d3", 
+            "language": 2
+        }
+    }, 
+    {
+        "pk": 73, 
+        "model": "internationalization.translation", 
+        "fields": {
+            "translation": "We don't understand. Correct format is register poll governorate-code district-code", 
+            "code": "incorrect_register_format_error", 
             "language": 1
         }
-    },
+    }, 
     {
-        "pk": 57,
-        "model": "internationalization.translation",
+        "pk": 74, 
+        "model": "internationalization.translation", 
         "fields": {
-            "translation": "most of the time",
-            "code": "b",
+            "translation": "Thank you, to initiate the poll sms the keyword Poll with your age and gender", 
+            "code": "initiate_poll_message", 
             "language": 1
         }
-    },
+    }, 
     {
-        "pk": 58,
-        "model": "internationalization.translation",
+        "pk": 75, 
+        "model": "internationalization.translation", 
         "fields": {
-            "translation": "rarely",
-            "code": "c",
+            "translation": "Due to errors the poll has been stopped. To restart, type the keyword Poll with your age and gender", 
+            "code": "session_closed_due_to_max_retries", 
             "language": 1
         }
-    },
+    }, 
     {
-        "pk": 59,
-        "model": "internationalization.translation",
+        "pk": 76, 
+        "model": "internationalization.translation", 
         "fields": {
-            "translation": "never",
-            "code": "d",
+            "translation": "You have repeated your choices, please select any three unique choices", 
+            "code": "error_choices_repeated", 
             "language": 1
         }
-    },
+    }, 
     {
-        "pk": 60,
-        "model": "internationalization.translation",
+        "pk": 77, 
+        "model": "internationalization.translation", 
         "fields": {
-            "translation": "better",
-            "code": "a",
+            "translation": "You have selected an invalid choice, please choose one among the above listed choice", 
+            "code": "error_parsing_response", 
             "language": 1
         }
-    },
+    }, 
     {
-        "pk": 61,
-        "model": "internationalization.translation",
+        "pk": 78, 
+        "model": "internationalization.translation", 
         "fields": {
-            "translation": "about the same",
-            "code": "b",
+            "translation": "Please choose one option", 
+            "code": "error_choose_one_option", 
             "language": 1
         }
-    },
+    }, 
     {
-        "pk": 62,
-        "model": "internationalization.translation",
+        "pk": 79, 
+        "model": "internationalization.translation", 
         "fields": {
-            "translation": "worse",
-            "code": "c",
+            "translation": "\u0639\u0630\u0631\u0627\u064b, \u0631\u0633\u0627\u0644\u062a\u0643 \u063a\u064a\u0631 \u0645\u0641\u0647\u0648\u0645\u0629. \u0627\u0644\u0635\u064a\u063a\u0629 \u0627\u0644\u0635\u062d\u064a\u062d\u0629 \u0647\u064a    \u062a\u0633\u062c\u064a\u0644   \u0627\u0644\u062a\u0635\u0648\u064a\u062a    \u0631\u0645\u0632 \u0627\u0644\u0645\u062d\u0627\u0641\u0638\u0629    \u0631\u0645\u0632 \u0627\u0644\u0642\u0636\u0627\u0621", 
+            "code": "incorrect_register_format_error", 
+            "language": 2
+        }
+    }, 
+    {
+        "pk": 80, 
+        "model": "internationalization.translation", 
+        "fields": {
+            "translation": "\u0634\u0643\u0631\u0627\u064b \u0644\u0643\u0645, \u0644\u0644\u0634\u0631\u0648\u0639 \u0641\u064a \u0627\u0644\u062a\u0635\u0648\u064a\u062a \u0639\u0646 \u0637\u0631\u064a\u0642 \u0627\u0644\u0631\u0633\u0627\u0626\u0644 \u0627\u0644\u0642\u0635\u064a\u0631\u0629 \u0627\u0644\u0631\u062c\u0627\u0621 \u0625\u0631\u0633\u0627\u0644  \u0627\u0644\u062a\u0635\u0648\u064a\u062a   \u0627\u0644\u0639\u0645\u0631   \u0627\u0644\u062c\u0646\u0633", 
+            "code": "initiate_poll_message", 
+            "language": 2
+        }
+    }, 
+    {
+        "pk": 81, 
+        "model": "internationalization.translation", 
+        "fields": {
+            "translation": "\u0646\u0638\u0631\u0627 \u0644\u0644\u0623\u062e\u0637\u0627\u0621 \u062a\u0645 \u0625\u064a\u0642\u0627\u0641 \u0627\u0644\u062a\u0635\u0648\u064a\u062a. \u0627\u0644\u0631\u062c\u0627\u0621 \u0625\u0639\u0627\u062f\u0629 \u0627\u0644\u0625\u0631\u0633\u0627\u0644 \u0643\u0645\u0627 \u064a\u0644\u064a  \u0627\u0644\u062a\u0635\u0648\u064a\u062a   \u0627\u0644\u0639\u0645\u0631   \u0627\u0644\u062c\u0646\u0633", 
+            "code": "session_closed_due_to_max_retries", 
+            "language": 2
+        }
+    }, 
+    {
+        "pk": 82, 
+        "model": "internationalization.translation", 
+        "fields": {
+            "translation": "\u0644\u0642\u062f \u062a\u0643\u0631\u0631 \u0625\u062e\u062a\u064a\u0627\u0631\u0643, \u0627\u0644\u0631\u062c\u0627\u0621 \u0625\u062e\u062a\u064a\u0627\u0631 \u062b\u0644\u0627\u062b\u0629 \u0625\u062c\u0627\u0628\u0627\u062a \u0645\u062e\u062a\u0644\u0641\u0629", 
+            "code": "choices_repeated", 
+            "language": 2
+        }
+    }, 
+    {
+        "pk": 83, 
+        "model": "internationalization.translation", 
+        "fields": {
+            "translation": "\u0644\u0642\u062f \u0627\u062e\u062a\u0631\u062a \u062e\u064a\u0627\u0631\u0627 \u063a\u064a\u0631 \u0645\u0648\u062c\u0648\u062f\u0629 \u060c \u064a\u0631\u062c\u0649 \u0627\u062e\u062a\u064a\u0627\u0631 \u0648\u0627\u062d\u062f \u0645\u0646 \u0628\u064a\u0646 \u0627\u0644\u062e\u064a\u0627\u0631\u0627\u062a \u0627\u0644\u0645\u0630\u0643\u0648\u0631\u0629 \u0633\u0627\u0628\u0642\u0627\u064b", 
+            "code": "error_parsing_response", 
+            "language": 2
+        }
+    }, 
+    {
+        "pk": 84, 
+        "model": "internationalization.translation", 
+        "fields": {
+            "translation": "\u0627\u0644\u0631\u062c\u0627\u0621 \u0627\u062e\u062a\u064a\u0627\u0631 \u062e\u064a\u0627\u0631 \u0648\u0627\u062d\u062f", 
+            "code": "error_choose_one_option", 
+            "language": 2
+        }
+    }, 
+    {
+        "pk": 85, 
+        "model": "internationalization.translation", 
+        "fields": {
+            "translation": "Your responses have been recorded. Thank you for participating in the poll.", 
+            "code": "thanks", 
             "language": 1
         }
-    },
-    {
-        "pk": 63,
-        "model": "internationalization.translation",
-        "fields": {
-            "translation": "i don't know",
-            "code": "d",
-            "language": 1
-        }
-    },
-    {
-        "pk": 64,
-        "model": "internationalization.translation",
-        "fields": {
-            "translation": "i do not know",
-            "code": "e",
-            "language": 1
-        }
-    },
-    {
-				"pk": 65, 
-				"model": "internationalization.translation", 
-				"fields": {
-						"translation": "\u0639\u0644\u0649 \u0627\u0644\u062f\u0648\u0627\u0645", 
-						"code": "a1", 
-						"language": 2
-				}
     }, 
     {
-				"pk": 66, 
-				"model": "internationalization.translation", 
-				"fields": {
-						"translation": "\u0645\u0639\u0638\u0645 \u0627\u0644\u0623\u0648\u0642\u0627\u062a", 
-						"code": "b1", 
-						"language": 2
-				}
-    }, 
-    {
-				"pk": 67, 
-				"model": "internationalization.translation", 
-				"fields": {
-						"translation": "\u0646\u0627\u062f\u0631\u0627\u064b", 
-						"code": "c1", 
-						"language": 2
-				}
-    }, 
-    {
-				"pk": 68, 
-				"model": "internationalization.translation", 
-				"fields": {
-						"translation": "\u0644\u0627 \u0623\u0634\u0639\u0631 \u0628\u0647\u0627 \u0639\u0644\u0649 \u0627\u0644\u0625\u0637\u0644\u0627\u0642", 
-						"code": "d1", 
-						"language": 2
-				}
-    }, 
-    {
-				"pk": 69, 
-				"model": "internationalization.translation", 
-				"fields": {
-						"translation": "\u0623\u0641\u0636\u0644", 
-						"code": "a3", 
-						"language": 2
-				}
-    }, 
-    {
-				"pk": 70, 
-				"model": "internationalization.translation", 
-				"fields": {
-						"translation": "\u0646\u0641\u0633 \u0627\u0644\u0634\u064a\u0621 \u062a\u0642\u0631\u064a\u0628\u0627\u064b", 
-						"code": "b3", 
-						"language": 2
-				}
-    }, 
-    {
-				"pk": 71, 
-				"model": "internationalization.translation", 
-				"fields": {
-						"translation": "\u0623\u0633\u0648\u0623", 
-						"code": "c3", 
-						"language": 2
-				}
-    }, 
-    {
-				"pk": 72, 
-				"model": "internationalization.translation", 
-				"fields": {
-						"translation": "\u0644\u0627 \u0623\u0639\u0631\u0641", 
-						"code": "d3", 
-						"language": 2
-				}
-    }, 
-    {
-				"pk": 73, 
-				"model": "internationalization.translation", 
-				"fields": {
-						"translation": "We don't understand. Correct format is register poll governorate-code district-code", 
-						"code": "incorrect_register_format_error", 
-						"language": 1
-				}
-    }, 
-    {
-				"pk": 74, 
-				"model": "internationalization.translation", 
-				"fields": {
-						"translation": "Thank you, to initiate the poll sms the keyword Poll with your age and gender", 
-						"code": "initiate_poll_message", 
-						"language": 1
-				}
-    }, 
-    {
-				"pk": 75, 
-				"model": "internationalization.translation", 
-				"fields": {
-						"translation": "Due to errors the poll has been stopped. To restart, type the keyword Poll with your age and gender", 
-						"code": "session_closed_due_to_max_retries", 
-						"language": 1
-				}
-    }, 
-    {
-				"pk": 76, 
-				"model": "internationalization.translation", 
-				"fields": {
-						"translation": "You have repeated your choices, please select any three unique choices", 
-						"code": "error_choices_repeated", 
-						"language": 1
-				}
-    },
-    {
-				"pk": 77, 
-				"model": "internationalization.translation", 
-				"fields": {
-						"translation": "You have selected an invalid choice, please choose one among the above listed choice", 
-						"code": "error_parsing_response", 
-						"language": 1
-				}
-    },
-    {
-				"pk": 78, 
-				"model": "internationalization.translation", 
-				"fields": {
-						"translation": "Please choose one option", 
-						"code": "error_choose_one_option", 
-						"language": 1
-				}
-    },
-    {
-				"pk": 79, 
-				"model": "internationalization.translation", 
-				"fields": {
-						"translation": "\u0639\u0630\u0631\u0627\u064b, \u0631\u0633\u0627\u0644\u062a\u0643 \u063a\u064a\u0631 \u0645\u0641\u0647\u0648\u0645\u0629. \u0627\u0644\u0635\u064a\u063a\u0629 \u0627\u0644\u0635\u062d\u064a\u062d\u0629 \u0647\u064a    \u062a\u0633\u062c\u064a\u0644   \u0627\u0644\u062a\u0635\u0648\u064a\u062a    \u0631\u0645\u0632 \u0627\u0644\u0645\u062d\u0627\u0641\u0638\u0629    \u0631\u0645\u0632 \u0627\u0644\u0642\u0636\u0627\u0621", 
-						"code": "incorrect_register_format_error", 
-						"language": 2
-				}
-    }, 
-    {
-				"pk": 80, 
-				"model": "internationalization.translation", 
-				"fields": {
-						"translation": "\u0634\u0643\u0631\u0627\u064b \u0644\u0643\u0645, \u0644\u0644\u0634\u0631\u0648\u0639 \u0641\u064a \u0627\u0644\u062a\u0635\u0648\u064a\u062a \u0639\u0646 \u0637\u0631\u064a\u0642 \u0627\u0644\u0631\u0633\u0627\u0626\u0644 \u0627\u0644\u0642\u0635\u064a\u0631\u0629 \u0627\u0644\u0631\u062c\u0627\u0621 \u0625\u0631\u0633\u0627\u0644  \u0627\u0644\u062a\u0635\u0648\u064a\u062a   \u0627\u0644\u0639\u0645\u0631   \u0627\u0644\u062c\u0646\u0633", 
-						"code": "initiate_poll_message", 
-						"language": 2
-				}
-    }, 
-    {
-				"pk": 81, 
-				"model": "internationalization.translation", 
-				"fields": {
-						"translation": "\u0646\u0638\u0631\u0627 \u0644\u0644\u0623\u062e\u0637\u0627\u0621 \u062a\u0645 \u0625\u064a\u0642\u0627\u0641 \u0627\u0644\u062a\u0635\u0648\u064a\u062a. \u0627\u0644\u0631\u062c\u0627\u0621 \u0625\u0639\u0627\u062f\u0629 \u0627\u0644\u0625\u0631\u0633\u0627\u0644 \u0643\u0645\u0627 \u064a\u0644\u064a  \u0627\u0644\u062a\u0635\u0648\u064a\u062a   \u0627\u0644\u0639\u0645\u0631   \u0627\u0644\u062c\u0646\u0633", 
-						"code": "session_closed_due_to_max_retries", 
-						"language": 2
-				}
-    }, 
-    {
-				"pk": 82, 
-				"model": "internationalization.translation", 
-				"fields": {
-						"translation": "\u0644\u0642\u062f \u062a\u0643\u0631\u0631 \u0625\u062e\u062a\u064a\u0627\u0631\u0643, \u0627\u0644\u0631\u062c\u0627\u0621 \u0625\u062e\u062a\u064a\u0627\u0631 \u062b\u0644\u0627\u062b\u0629 \u0625\u062c\u0627\u0628\u0627\u062a \u0645\u062e\u062a\u0644\u0641\u0629", 
-						"code": "choices_repeated", 
-						"language": 2
-				}
-    }, 
-    {
-				"pk": 83, 
-				"model": "internationalization.translation", 
-				"fields": {
-						"translation": "\u0644\u0642\u062f \u0627\u062e\u062a\u0631\u062a \u062e\u064a\u0627\u0631\u0627 \u063a\u064a\u0631 \u0645\u0648\u062c\u0648\u062f\u0629 \u060c \u064a\u0631\u062c\u0649 \u0627\u062e\u062a\u064a\u0627\u0631 \u0648\u0627\u062d\u062f \u0645\u0646 \u0628\u064a\u0646 \u0627\u0644\u062e\u064a\u0627\u0631\u0627\u062a \u0627\u0644\u0645\u0630\u0643\u0648\u0631\u0629 \u0633\u0627\u0628\u0642\u0627\u064b", 
-						"code": "error_parsing_response", 
-						"language": 2
-				}
-    }, 
-    {
-				"pk": 84, 
-				"model": "internationalization.translation", 
-				"fields": {
-						"translation": "\u0627\u0644\u0631\u062c\u0627\u0621 \u0627\u062e\u062a\u064a\u0627\u0631 \u062e\u064a\u0627\u0631 \u0648\u0627\u062d\u062f", 
-						"code": "error_choose_one_option", 
-						"language": 2
-				}
-    },
-		{
-				"pk": 85, 
-				"model": "internationalization.translation", 
-				"fields": {
-						"translation": "Your responses have been recorded. Thank you for participating in the poll.", 
-						"code": "thanks", 
-						"language": 1
-				}
-		},
-		{
         "pk": 86, 
         "model": "internationalization.translation", 
         "fields": {
@@ -761,26 +680,25 @@
             "code": "thanks", 
             "language": 2
         }
-    }
-    ,
+    }, 
     {
-        "pk": 87,
-        "model": "internationalization.translation",
+        "pk": 87, 
+        "model": "internationalization.translation", 
         "fields": {
-            "translation": "\u062a\u0635\u0648\u064a\u062a",
-            "code": "poll",
+            "translation": "\u062a\u0635\u0648\u064a\u062a", 
+            "code": "poll", 
             "language": 2
         }
-    },
+    }, 
     {
-        "pk": 88,
-        "model": "internationalization.translation",
+        "pk": 88, 
+        "model": "internationalization.translation", 
         "fields": {
-            "translation": "ARABICYou ARABICsaid: ARABICpoll",
-            "code": "You said: poll",
+            "translation": "ARABICYou ARABICsaid: ARABICpoll", 
+            "code": "You said: poll", 
             "language": 2
         }
-    },
+    }, 
     {
         "pk": 89, 
         "model": "internationalization.translation", 
@@ -789,7 +707,7 @@
             "code": "trigger_error", 
             "language": 2
         }
-    },
+    }, 
     {
         "pk": 90, 
         "model": "internationalization.translation", 
@@ -798,8 +716,8 @@
             "code": "trigger_error", 
             "language": 1
         }
-    },
-		{
+    }, 
+    {
         "pk": 91, 
         "model": "internationalization.translation", 
         "fields": {
@@ -807,15 +725,14 @@
             "code": "a", 
             "language": 2
         }
-    },
+    }, 
     {
-	"pk": 92, 
-	"model": "internationalization.translation", 
-	"fields": {
-	    "translation": "Please may you enter three choices, in order of preference, to move to the next question", 
-	    "code": "err_less_thank_expected_choices", 
-	    "language": 1
-	}
+        "pk": 92, 
+        "model": "internationalization.translation", 
+        "fields": {
+            "translation": "Please may you enter three choices, in order of preference, to move to the next question", 
+            "code": "err_less_thank_expected_choices", 
+            "language": 1
+        }
     }
-
 ]
