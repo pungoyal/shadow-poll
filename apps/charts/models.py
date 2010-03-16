@@ -1,7 +1,7 @@
 from __future__ import division
 from math import ceil
 from django.contrib.gis.db import models
-
+from rapidsms.webui import settings
 from poll.models import User, UserResponse, Category, Color
 
 class Geography(models.Model):
@@ -126,6 +126,11 @@ class VoiceMessage(models.Model):
     sound_file_name = models.CharField(max_length=150) # full file path on the system
     translated = models.BooleanField(default = False)
     date_recorded = models.DateTimeField()
+
+    @property
+    def sound_file_url(self):
+        media_url = settings.RAPIDSMS_APPS["charts"]["media_base_url"]
+        return media_url + self.sound_file_name
 
     def fill(self, entry, path):
         self.age = entry.age
