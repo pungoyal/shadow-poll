@@ -6,7 +6,8 @@ var mdg_overlay = new OpenLayers.Layer.WMS(
                 { 
                    layers: 'unicef:iraq_mdgs',
                    transparent: true,
-                   format: 'image/png'
+                   format: 'image/png',
+                   styles: mdg_indicator
                 },
                 {
                    isBaseLayer: false,

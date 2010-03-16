@@ -3,57 +3,82 @@
 
 {% block page_stylesheets %}
 <link rel="stylesheet" href="/static/charts/stylesheets/messages.css" type="text/css" media="screen, projection">
-<!--[if lt IE 8]><link rel="stylesheet" href="/static/charts/stylesheets/ie.css" type="text/css" media="screen, projection"><![endif]-->
-{% endblock %}
+  <!--[if lt IE 8]><link rel="stylesheet" href="/static/charts/stylesheets/ie.css" type="text/css" media="screen, projection"><![endif]-->
+  {% endblock %}
 
-{% block javascripts %}
-<script src="/static/charts/javascripts/jquery.jplayer.min.js"></script>
-<script src="/static/charts/javascripts/messages.js"></script>
-<script src="/static/charts/javascripts/language_switcher.js"></script>
-{% endblock %}
+  {% block javascripts %}
+  <script src="/static/charts/javascripts/jquery.jplayer.min.js"></script>
+  <script src="/static/charts/javascripts/messages.js"></script>
+  <script src="/static/charts/javascripts/language_switcher.js"></script>
+  {% endblock %}
 
-{% block title_suffix %}Voice Messages{% endblock %}
+  {% block title_suffix %}Voice Messages{% endblock %}
 
-{% block chart %}{% endblock %}
-{% block charts_container %}{% endblock %}
-{% block map_container %}{% endblock %}
-{% block question %}{% endblock %}
+  {% block chart %}{% endblock %}
+  {% block charts_container %}{% endblock %}
+  {% block map_container %}{% endblock %}
+  {% block question %}{% endblock %}
 
-{% block messages %}
-    <div id="content_area">
+  {% block filter_container %}
+  {% endblock %} 
+
+  {% block messages %}
+  <div id="content_area">
     <div id="message_container">
-    {% if messages %}
-        <ul>
-            {% for message in messages %}
-            <li>
-                <div class="child_details"><img src="/static/charts/img/{{ message.get_child_image }}.gif"
-                                                alt="child"/>
-                    <p><span class="age">{% trans 'Age' %} {{message.age}}</span> / <span class="region">{% trans message.district.name %}</span>
-                    </p>
-                </div>
-                <div class="message_details">
-                    <div class="message">
-                        <p>
-                        	{% ifequal LANGUAGE_CODE "en"  %}
-	                        	{{ message.english_text|default:"" }}
-	                        {% else %}
-	                        	{{ message.arabic_text|default:"" }}
-                        	{% endifequal %}
-                        </p>
-                        <div id = "jquery_jplayer{{message.id}}" class = "audio">                            
-						</div>
-						<div id = "player{{message.id}}" class="jp-single-player">
-  								{% include "jplayer.html" %}
-  								</div>
-  							</div>
-				</div>
-            </li>
-            {% endfor %}
-        </ul>
-	{% else %}
-		<!-- TODO: add better styling here -->
-		<h1>{% trans 'No messages to display' %}.</h1>
- 	{% endif %}
+      {% if messages %}
+      <ul>
+	{% for message in messages %}
+	<li>
+	  <div class="child_details"><img src="/static/charts/img/{{ message.get_child_image }}.gif"
+	  alt="child"/>
+	  <p><span class="age">{% trans 'Age' %} {{message.age}}</span> / <span class="region">{% trans message.district.name %}</span>
+	  </p>
+	  </div>
+	  <div class="message_details">
+	    <div class="message">
+	      <p>
+		{% ifequal LANGUAGE_CODE "en"  %}
+		{{ message.english_text|default:"" }}
+		{% else %}
+		{{ message.arabic_text|default:"" }}
+		{% endifequal %}
+	      </p>
+	      <div id = "jquery_jplayer{{ forloop.counter  }}" class = "audio">                            
+	      </div>
+	      <div id = "player{{ forloop.counter }}" class="jp-single-player">
+		<div class="jp-single-player">
+		  <div class="jp-interface">
+		    <ul class="jp-controls">
+		      <li id="jplayer_play{{ forloop.counter }}" class="jp-play">play</li>
+		      <li id="jplayer_pause{{ forloop.counter }}" class="jp-pause">pause</li>
+
+		      <li id="jplayer_stop{{ forloop.counter }}" class="jp-stop">stop</li>
+		      <li id="jplayer_volume_min{{ forloop.counter }}" class="jp-volume-min">min volume</li>
+		      <li id="jplayer_volume_max{{ forloop.counter }}" class="jp-volume-max">max volume</li>
+		    </ul>
+		    <div class="jp-progress">
+		      <div id="jplayer_load_bar{{ forloop.counter }}" class="jp-load-bar">
+			<div id="jplayer_play_bar{{ forloop.counter }}" class="jp-play-bar"></div>
+
+		      </div>
+		    </div>
+		    <div id="jplayer_volume_bar{{ forloop.counter }}" class="jp-volume-bar">
+		      <div id="jplayer_volume_bar_value{{ forloop.counter }}" class="jp-volume-bar-value"></div>
+		    </div>
+		    <div id="jplayer_play_time{{ forloop.counter }}" class="jp-play-time"></div>
+		    <div id="jplayer_total_time{{ forloop.counter }}" class="jp-total-time"></div>
+		  </div>
+		</div>
+	      </div>
+	    </div>
+	  </div>
+	</li>
+	{% endfor %}
+      </ul>
+      {% else %}
+      <!-- TODO: add better styling here -->
+      <h1>{% trans 'No messages to display' %}.</h1>
+      {% endif %}
     </div>
-    </div>
-{% endblock %}
+  </div>
+  {% endblock %}

@@ -32,7 +32,6 @@ $(document).ready(function(){
         });
  
     map.addLayers([iraq]); 
-    map.addControl(new OpenLayers.Control.Permalink());
 
     /**
      * ZOOM

@@ -1,15 +1,15 @@
 $(document).ready(function(){
 		      $(".audio").
 			  each(function(index){
-				   addPlayer(this.id, index == 0 );
+				   addPlayer(this.id, index == 0, this.id.substring('jquery_jplayer'.length, this.id.length));
 			       });
 });
 
-var addPlayer = function(audible, play){
+var addPlayer = function(audible, play, playerId){
     $("#" +audible)
 	.jPlayer({
 		    ready:function(){
-			this.element.jPlayer("setFile", "http://www.miaowmusic.com/mp3/Miaow-07-Bubble.mp3", "http://www.miaowmusic.com/ogg/Miaow-07-Bubble.ogg").jPlayer(play?"play":"pause");
+			this.element.jPlayer("setFile", "http://www.miaowmusic.com/mp3/Miaow-07-Bubble.mp3").jPlayer(play?"play":"pause");
 
 		    },
 		    nativeSupport: false,
@@ -20,6 +20,16 @@ var addPlayer = function(audible, play){
 		     jpPlayTime.text($.jPlayer.convertTime(playedTime));
 		     jpTotalTime.text($.jPlayer.convertTime(totalTime));
 		     demoStatusInfo(this.element, jpStatus); 
-		 });
+		 })
+	.jPlayer("cssId", "play", "jplayer_play" + playerId)
+	.jPlayer("cssId", "pause", "jplayer_pause" + playerId)
+	.jPlayer("cssId", "stop", "jplayer_stop" + playerId)
+	.jPlayer("cssId", "loadBar", "jplayer_load_bar" + playerId)
+	.jPlayer("cssId", "playBar", "jplayer_play_bar" + playerId)
+	.jPlayer("cssId", "volumeMin", "jplayer_volume_min" + playerId)
+	.jPlayer("cssId", "volumeMax", "jplayer_volume_max" + playerId)
+	.jPlayer("cssId", "volumeBar", "jplayer_volume_bar" + playerId)
+	.jPlayer("cssId", "volumeBarValue", "jplayer_volume_bar_value" + playerId)
+    ;
 };
 
