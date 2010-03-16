@@ -2,6 +2,7 @@ from __future__ import division
 from datetime import datetime
 import re
 from django.db import models
+from django.utils.translation import ugettext_lazy as _
 from apps.reporters.models import Reporter, PersistantConnection
 from apps.register.models import Registration
 from django.db.models import Avg,Count
@@ -61,7 +62,7 @@ class DemographicParser(models.Model):
 
 class ResponseBreakUp():
     #FAAFBE is the default color that shows up when there are no responses for a level
-    def __init__(self, text="No responses yet", percentage=0, color="#FAAFBE"):
+    def __init__(self, text=_("No responses yet"), percentage=0, color="#FAAFBE"):
         self.percentage = percentage
         self.color = color
         self.text = text

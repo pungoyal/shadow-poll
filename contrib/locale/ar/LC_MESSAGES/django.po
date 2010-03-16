@@ -236,3 +236,35 @@ msgstr "ن"
 msgid "Boys And Girls"
 msgstr "الاولاد و البنات معا"
 
+msgid "Take me to voice message page"
+msgstr ""
+
+msgid "Poll Questions"
+msgstr ""
+
+msgid "Sections"
+msgstr ""
+
+msgid "Age"
+msgstr ""
+
+msgid "No messages to display"
+msgstr ""
+
+msgid " %(num_translated_messages)s translated so far "
+msgstr ""
+
+msgid "Map"
+msgstr ""
+
+msgid ""
+"%(total_responses)s responses <br/>\n"
+"    from %(region)s "
+msgstr ""
+
+msgid "Translation saved."
+msgstr ""
+
+msgid "No responses yet"
+msgstr "اجابة"
+
