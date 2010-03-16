@@ -15,6 +15,8 @@ from apps.charts.models import Governorate, District, VoiceMessage
 from apps.charts.forms import VoiceMessageForm
 from apps.poll.models import Question, Choice, Color, UserResponse
 
+DEFAULT_MDG_INDICATOR = 'mdgs_poverty'
+
 def voice_translate(request, message_id, template = "message.html"):
     context = {}
     message = get_object_or_404(VoiceMessage, pk=message_id)
@@ -47,11 +49,19 @@ def voice_admin_page(request):
     context["messages"] = messages
     return render_to_response(request, "messages_admin.html", context)
 
-def show_mdg(request, question_id, template='mdg.html'):
+def show_mdg(request, question_id, mdg, template='mdg.html'):
     context = {}
+    mdg_style_to_url_map ={'poverty': 'mdgs_poverty', 'underweight': 'mdgs_underweight'}
+    try:
+        mdg_indicator = mdg_style_to_url_map[mdg]
+    except:
+        mdg_indicator = DEFAULT_MDG_INDICATOR
+    
+    print mdg_indicator
     total_responses = len(UserResponse.objects.all())
     context.update({"region": "Iraq", 
-                    'total_responses': total_responses})
+                    'total_responses': total_responses,
+                    'mdg_indicator': mdg_indicator})
     return show_by_question(request, question_id, None, template, context)
 
 def play_audio(request, file_name):
