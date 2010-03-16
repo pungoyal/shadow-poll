@@ -192,7 +192,7 @@
 			{% endifequal %}
 		 {% endfor %}
 			 </span>
-       <span class="choice_text" style="color: {{choice.category.color.code}};">{% trans choice.text %}<em> ({{choice.num_votes}} vote{{choice.num_votes|pluralize}})</em></span></li>
+       <span class="choice_text" style="color: {{choice.category.color.code}};">{% trans choice.text %}<em> ({% blocktrans count choice.num_counts as counter %}{{counter}} vote{% plural %}{{counter}} votes{% endblocktrans %})</em></span></li>
  
         {% endfor %}
     </ol>

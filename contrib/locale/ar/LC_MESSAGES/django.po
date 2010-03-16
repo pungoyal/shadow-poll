@@ -268,3 +268,8 @@ msgstr ""
 msgid "No responses yet"
 msgstr "اجابة"
 
+msgid "%(counter)s vote"
+msgid_plural "%(counter)s votes"
+msgstr[0] ""
+msgstr[1] ""
+
