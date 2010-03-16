@@ -51,7 +51,7 @@ def voice_admin_page(request):
 
 def show_mdg(request, question_id, mdg, template='mdg.html'):
     context = {}
-    mdg_style_to_url_map ={'poverty': 'mdgs_poverty', 'underweight': 'mdgs_underweight'}
+    mdg_style_to_url_map ={'poverty': 'mdgs_poverty', 'underweight': 'mdgs_underweight', 'under5mortality':'mdgs_under5mort'}
     try:
         mdg_indicator = mdg_style_to_url_map[mdg]
     except:
