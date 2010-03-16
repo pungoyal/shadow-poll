@@ -6,10 +6,11 @@ $(document).ready(function(){
 });
 
 var addPlayer = function(audible, play, playerId){
+    var soundFile = $("#soundfile_" + playerId).val();
     $("#" +audible)
 	.jPlayer({
 		    ready:function(){
-			this.element.jPlayer("setFile", "http://www.miaowmusic.com/mp3/Miaow-07-Bubble.mp3").jPlayer(play?"play":"pause");
+			this.element.jPlayer("setFile", soundFile).jPlayer(play?"play":"pause");
 
 		    },
 		    nativeSupport: false,
