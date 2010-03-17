@@ -1,5 +1,6 @@
 {% extends 'iraq.html' %}
 {% load i18n %}
+{% load audiotags %}
 
 {% block page_stylesheets %}
 <link rel="stylesheet" href="/static/charts/stylesheets/messages.css" type="text/css" media="screen, projection">
@@ -43,7 +44,7 @@
 		{{ message.arabic_text|default:"" }}
 		{% endifequal %}
 	      </p>
-	      {% include 'partials/jplayer.html' %}
+	      {% jplayer forloop.counter message.sound_file_url %}
 	    </div>
 	  </div>
 	</li>
