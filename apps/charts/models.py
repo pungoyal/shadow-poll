@@ -34,9 +34,6 @@ class Geography(models.Model):
                 style = {'color': most_voted_category.color, 
                          'percentage': scale }
                 return style
-        # default to grey
-        # style = {'color': Color.objects.get(file_name="grey_dot.png"), 
-        #          'percentage': 0.6 }
         return ''
     
     def _percentage_to_display(self, count, total):

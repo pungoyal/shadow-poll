@@ -12,7 +12,7 @@ class TestIntegration(TestScript):
     apps = (reporter_app, register_app, default_app, i18n_app, poll_app)
 
     testHappyPathScenarios = """
-        00919980131127 > register poll 100 1001
+        00919980131127 > register poll 2 1
         00919980131127 < Thank you, to initiate the poll sms the keyword Poll with your age and gender
         00919980131127 > poll 12 f
         00919980131127 < I feel happy: (Choose a,b,c or d.) a. Always b. Most of the time c. Rarely d. Never
@@ -25,7 +25,7 @@ class TestIntegration(TestScript):
     """
     
     testHappyPathScenarios_Arabic = u"""
-        00919980131127 > تسجيل التصويت ١٠٠ ١٠٠١
+        00919980131127 > تسجيل التصويت ٤ ٢
         00919980131127 <  شكراً لكم, للشروع في التصويت عن طريق الرسائل القصيرة الرجاء إرسال  التصويت   العمر   الجنس
         00919980131127 > التصويت ١١ انثى
         00919980131127 < انا أشعر بالسعادة : (الرجاء إختيار أ,ب,ج  أو د)   أ.دائماً    ب.معظم الوقت    ج. نادراً    د.لا أشعر بالسعادة أبداً
@@ -38,19 +38,19 @@ class TestIntegration(TestScript):
     """
     
     testRegistrationFail = """
-        00919980131127 > register 100 1001
+        00919980131127 > register 3 2
         00919980131127 < We don't understand. Correct format is register poll governorate-code district-code
         00919980131127 > register poll
         00919980131127 < We don't understand. Correct format is register poll governorate-code district-code
         00919980131127 > register poll 100 
         00919980131127 < We don't understand. Correct format is register poll governorate-code district-code
         00919980131127 > register poll govt 1001
-        00919980131127 < We don't understand. Correct format is register poll governorate-code district-code
+        00919980131127 < Sorry, the geo location entered is incorrect. Please try again.
         00919980131127 > register 
         00919980131127 < We don't understand. Correct format is register poll governorate-code district-code
     """
     testRegistrationFail_Arabic = u"""
-        00919980131127 > تسجيل ١٠٠ ١٠٠١
+        00919980131127 > تسجيل ١٠٠ 
         00919980131127 < عذراً, رسالتك غير مفهومة. الصيغة الصحيحة هي    تسجيل   التصويت    رمز المحافظة    رمز القضاء
         00919980131127 > تسجيل التصويت
         00919980131127 < عذراً, رسالتك غير مفهومة. الصيغة الصحيحة هي    تسجيل   التصويت    رمز المحافظة    رمز القضاء
@@ -218,7 +218,7 @@ class TestIntegration(TestScript):
     """
     
     testTreeAppFailSessionEnd_2 = """
-        00919980131127 > register poll 100 1001
+        00919980131127 > register poll 5 1
         00919980131127 < Thank you, to initiate the poll sms the keyword Poll with your age and gender
         00919980131127 > poll 16 m
         00919980131127 <  I feel happy: (Choose a,b,c or d.) a. Always b. Most of the time c. Rarely d. Never

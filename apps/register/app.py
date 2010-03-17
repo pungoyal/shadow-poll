@@ -18,11 +18,8 @@ class App (rapidsms.app.App):
             if not hasattr(message, 'language'):
                 # fail gracefully
                 message.language = settings.LANGUAGE_CODE
-            try:
-                registration.parse(message)
-                response = "initiate_poll_message"
-            except Exception, e:
-                response = "incorrect_register_format_error"
+
+            response = registration.respond(message)
             message.respond(response)
             return True
     
