@@ -53,21 +53,6 @@ def voice_translate(request, message_id, template = "translate_message.html"):
     context['message'] = message
     return render_to_response(request, template, context)
 
-def show_mdg(request, question_id, mdg, template='mdg.html'):
-    context = {}
-    mdg_style_to_url_map ={'poverty': 'mdgs_poverty', 'underweight': 'mdgs_underweight', 'under5mortality':'mdgs_under5mort'}
-    try:
-        mdg_indicator = mdg_style_to_url_map[mdg]
-    except:
-        mdg_indicator = DEFAULT_MDG_INDICATOR
-    
-    print mdg_indicator
-    total_responses = len(UserResponse.objects.all())
-    context.update({"region": "Iraq", 
-                    'total_responses': total_responses,
-                    'mdg_indicator': mdg_indicator})
-    return show_by_question(request, question_id, None, template, context)
-
 def play_audio(request, file_name):
     media_dir = settings.RAPIDSMS_APPS["charts"]["media_dir"]
     abspath = os.path.join(media_dir, file_name)

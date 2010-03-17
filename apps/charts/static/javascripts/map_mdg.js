@@ -52,5 +52,5 @@ under5mort_overlay.setOpacity(0.5);
 map.addLayer(under5mort_overlay);
 
 var layer_switcher = new OpenLayers.Control.LayerSwitcher();
-map.addControl(new OpenLayers.Control.LayerSwitcher(layer_switcher));
+map.addControl(layer_switcher);
 });
