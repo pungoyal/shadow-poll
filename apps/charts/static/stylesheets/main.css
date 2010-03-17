@@ -284,6 +284,7 @@ a:hover {
 #sidebar {
 		float: right;
 		width: 200px;
+		position: relative;
 }
 #sidebar .nav_questions {
 		margin: 0 10px;
@@ -296,7 +297,7 @@ a:hover {
 		-webkit-border-radius-bottomleft: 3px;
 		-webkit-border-radius-bottomright: 3px;
 		line-height: 1.1;
-		padding: 2px 2px 0;
+		padding: 2px 2px 110px;
 }
 .nav_questions ul.side_nav {
 		text-align: left;
@@ -325,10 +326,9 @@ a:hover {
 }
 .nav_questions ul.side_nav li ol li {
 		font-size:0.8em;
-		list-style-position:outside;
-		padding-bottom: 2px;
 		margin-bottom: 1px;
 		overflow: hidden;
+		padding-bottom:2px;
 }
 
 .nav_questions ul.side_nav li ol li span{
@@ -346,22 +346,22 @@ a:hover {
 		display: block;
 }
 .nav_questions .note {
-		width: 96%;
-		margin-left: -5px;
+		width: 170px;
+		position: absolute;
+		left: 15px;
+		bottom: 5px;
 		text-align: left;
-		padding: 8px;
 		background: #f3653a;
 		border-radius: 3px;
 		-moz-border-radius: 3px;
 		-webkit-border-radius: 3px;
 }
 .nav_questions .note li {
-		padding-bottom: 10px;
-		margin-bottom: 10px;
+		padding: 9px;
 		border-bottom: 1px dotted #fff;
 }
 .nav_questions .note li.last {
-		padding-bottom: 0;
+
 		margin-bottom: 0;
 		border-bottom: 0;
 }
@@ -385,7 +385,7 @@ a:hover {
 		background: #fff;
 }
 .filter_section {
-		height: 280px;
+		height: 281px;
 		border-bottom: 1px solid #C4C1BC;
 }
 
@@ -426,12 +426,6 @@ a:hover {
 .keys_section .point_key {
 		background: url(../img/point_key.gif) no-repeat 10px 10px;
 }
-
-.keys_section .no_response_key {
-		background: url(../img/grey_dot_small.png) no-repeat 10px 10px;
-		border-bottom: 1px solid #C4C1BC;
-}
-
 /* footer */
 #footer {
 		background: none;
@@ -471,17 +465,24 @@ a:hover {
 }
 .response_category ul li {
 		background: url(../img/bg_sprite.gif) no-repeat 0 -170px;
-		width: 124px;
+		width: 128px;
 		height: 25px;
+		overflow: hidden;
 		margin-right: 5px;
-		padding-left: 18px;
+		padding-left: 15px;
+		border-radius: 3px;
+		-moz-border-radius: 3px;
+		-webkit-border-radius: 3px;
 }
 .response_category ul li span {
 		display: block;
 		font-size: 0.6em;
 		font-weight: bold;
-		padding: 5px 18px 5px 0;
+		padding: 5px 5px 5px 0;
 		background: url(../img/bg_sprite.gif) no-repeat 100% -170px;
+		border-radius: 3px;
+		-moz-border-radius: 3px;
+		-webkit-border-radius: 3px;
 }
 .response_category ul li.educ {
 		background-position:  0 -170px;
