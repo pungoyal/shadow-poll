@@ -1,0 +1,24 @@
+#top_menu {
+	top: -5px;
+}
+#sidebar  {
+	width: 195px;
+}
+#map_container {
+	width: 595px;
+	overflow: hidden;
+}
+#message_container {
+	width:575px;
+}
+#sidebar .nav_questions {
+	margin:0 5px !important;
+	padding: 2px 0 100px !important;
+}
+.nav_questions .note {
+	left: 10px;
+	width:175px;
+}
+.response_category .response_category_header {	
+	display: inline;
+}

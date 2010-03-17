@@ -4,7 +4,7 @@
 
 var map;
 OpenLayers.IMAGE_RELOAD_ATTEMPTS = 3;
-OpenLayers.ImgPath = "http://js.mapbox.com/theme/dark/";
+//OpenLayers.ImgPath = "http://js.mapbox.com/theme/dark/";
 $(document).ready(function(){
     var options = {
         projection: new OpenLayers.Projection("EPSG:900913"),
@@ -28,7 +28,8 @@ $(document).ready(function(){
         ],
         {
             'layername': 'iraq',
-            'type':'jpg'
+            'type':'jpg',
+						'displayInLayerSwitcher': false
         });
  
     map.addLayers([iraq]); 
