@@ -28,7 +28,8 @@ $(document).ready(function(){
         ],
         {
             'layername': 'iraq',
-            'type':'jpg'
+            'type':'jpg',
+						'displayInLayerSwitcher': false
         });
  
     map.addLayers([iraq]); 
