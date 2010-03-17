@@ -7,6 +7,7 @@ from django.shortcuts import get_object_or_404
 from django.template import loader
 from django.utils import translation, simplejson
 from django.utils.translation import ugettext as _
+from django.contrib.auth.decorators import login_required
 
 from rapidsms.webui import settings
 from rapidsms.webui.utils import render_to_response
@@ -17,6 +18,25 @@ from apps.poll.models import Question, Choice, Color, UserResponse
 
 DEFAULT_MDG_INDICATOR = 'mdgs_poverty'
 
+def home_page(request, template = "home_page.html"):
+    questions = Question.objects.all()
+    return render_to_response(request, template, {'questions' : questions})
+
+def voice_home_page(request):
+    messages = VoiceMessage.objects.all()
+    return render_to_response(request, "messages.html", 
+                              {"messages": messages, 
+                               "questions": Question.objects.all().order_by('pk')})
+
+@login_required
+def voice_admin_page(request):
+    messages = VoiceMessage.objects.filter(translated = False).order_by('-date_recorded')[:5]
+    context = {}
+    context['num_translated_messages'] = VoiceMessage.objects.filter(translated=True).count()
+    context["messages"] = messages
+    return render_to_response(request, "translate_messages.html", context)
+
+@login_required
 def voice_translate(request, message_id, template = "translate_message.html"):
     context = {}
     message = get_object_or_404(VoiceMessage, pk=message_id)
@@ -30,24 +50,8 @@ def voice_translate(request, message_id, template = "translate_message.html"):
     else:
         form = VoiceMessageForm(instance=message)
     context['form'] = form
+    context['message'] = message
     return render_to_response(request, template, context)
-
-def home_page(request, template = "home_page.html"):
-    questions = Question.objects.all()
-    return render_to_response(request, template, {'questions' : questions})
-
-def voice_home_page(request):
-    messages = VoiceMessage.objects.all()
-    return render_to_response(request, "messages.html", 
-                              {"messages": messages, 
-                               "questions": Question.objects.all().order_by('pk')})
-
-def voice_admin_page(request):
-    messages = VoiceMessage.objects.filter(translated = False).order_by('-date_recorded')[:5]
-    context = {}
-    context['num_translated_messages'] = VoiceMessage.objects.filter(translated=True).count()
-    context["messages"] = messages
-    return render_to_response(request, "translate_messages.html", context)
 
 def show_mdg(request, question_id, mdg, template='mdg.html'):
     context = {}

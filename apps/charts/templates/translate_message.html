@@ -1,5 +1,6 @@
 {% extends 'iraq.html' %}
 {% load i18n %}
+{% load audiotags %}
 
 {% block page_stylesheets %}
 <link rel="stylesheet" href="/static/charts/stylesheets/messages.css" type="text/css" media="screen, projection">
@@ -26,6 +27,7 @@
 <div id="content_area">
     <div id="message_container">
     	<div id="status">{{status}}</div>
+        {% jplayer 0 message.sound_file_url %}
         <form method="post">
         	{{ form.as_p }}
             <input type="submit" value="Save"/>

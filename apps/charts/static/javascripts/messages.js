@@ -15,7 +15,7 @@ var addPlayer = function(audible, play, playerId){
 		    },
 		    nativeSupport: false,
 		    customCssIds: true,
-		    swfPath: "../static/charts/javascripts/"
+		    swfPath: "/static/charts/javascripts/"
 		})
 	.jPlayer("onProgressChange", function(loadPercent, playedPercentRelative, playedPercentAbsolute, playedTime, totalTime) {
 		     jpPlayTime.text($.jPlayer.convertTime(playedTime));
