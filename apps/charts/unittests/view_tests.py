@@ -46,6 +46,8 @@ class ViewTests(TestCase):
     def test_messaging_pages_is_accesible(self):
         response = self.client.get("/messages/")
         self.assertEquals(response.status_code, 200)
+        login = self.client.login(username='a', password='a')
+        self.failUnless(login, 'Could not log in')
         response = self.client.get("/messages/translate/")
         self.assertEquals(response.status_code, 200)
         response = self.client.get("/message/translate/1")
