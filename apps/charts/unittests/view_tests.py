@@ -15,10 +15,10 @@ class ViewTests(TestCase):
         questions = Question.objects.all()
         governorates = Governorate.objects.all()
         for question in questions:
-            url = '/charts/question%s' % question.id
+            url = '/charts/question%s/' % question.id
             self.assertEquals(self.client.get(url).status_code, 200)
             for governorate in governorates:
-                url = '/charts/question%s/governorate%s' % (question.id, governorate.id)
+                url = '/charts/question%s/governorate%s/' % (question.id, governorate.id)
                 self.assertEquals(self.client.get(url).status_code, 200)
 
     def test_kml(self):
@@ -52,3 +52,9 @@ class ViewTests(TestCase):
         self.assertEquals(response.status_code, 200)
         response = self.client.get("/message/translate/1")
         self.assertEquals(response.status_code, 200)
+
+
+    def test_all_governorates(self):
+        response1 = self.client.get("/charts/question1")
+        response2 = self.client.get("/charts/question1/all")
+        self.assertEquals(response1.content,response2.content)

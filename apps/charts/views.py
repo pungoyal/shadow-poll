@@ -66,16 +66,13 @@ def play_audio(request, file_name):
     response["Content-Length"] = len(contents)
     return response
 
-def show_iraq_by_question(request, question_id,
-                          template='results.html'):
-    context = {}
-    total_responses = len(UserResponse.objects.all())
-    context.update({"region": "Iraq", 
-                    'total_responses': total_responses})
-    return show_by_question(request, question_id, None, template, context)
+def show_filtered_data_by_governorate(request, question_id, governorate_id,
+                                      template='results.html'):
 
-def show_governorate_by_question(request, question_id, governorate_id,
-                                 template='results.html'):
+    if(governorate_id == "all"):
+        return show_iraq_by_question(request,question_id, template)
+
+    governorate_id = governorate_id.replace("governorate","")
     context = {}
     governorate = get_object_or_404(Governorate, pk=governorate_id)
     question = get_object_or_404(Question, pk=question_id)
@@ -89,6 +86,31 @@ def show_governorate_by_question(request, question_id, governorate_id,
                        "choices": choices,
                        "total_responses": total_responses})
     return show_by_question(request, question_id, governorate_id, template, context)
+
+def show_filtered_data_by_governorate_and_gender(request, question_id, governorate_id, gender,template='results.html'):
+    context = {}
+    total_responses = len(UserResponse.objects.all())
+    question = get_object_or_404(Question, pk=question_id)
+    context.update({"region": "Iraq", 
+                    'total_responses': total_responses})
+    return show_by_question(request, question_id, None, template, context)
+
+def show_filtered_data_by_governorate_and_gender_and_age(request, question_id, governorate_id,gender,age_group,template='results.html'):
+    context = {}
+    total_responses = len(UserResponse.objects.all())
+    question = get_object_or_404(Question, pk=question_id)
+    context.update({"region": "Iraq", 
+                    'total_responses': total_responses})
+    return show_by_question(request, question_id, None, template, context)
+
+
+def show_iraq_by_question(request, question_id,
+                          template='results.html'):
+    context = {}
+    total_responses = len(UserResponse.objects.all())
+    context.update({"region": "Iraq", 
+                    'total_responses': total_responses})
+    return show_by_question(request, question_id, None, template, context)
 
 def show_by_question(request, question_id, governorate_id, template, context={}):
     question = get_object_or_404(Question, pk=question_id)
