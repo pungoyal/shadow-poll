@@ -19,7 +19,7 @@ $(document).ready(function(){
     
     kml_url = construct_kml_url(governorate_id, question_id);
     var bubbles = new OpenLayers.Layer.Vector(
-        "Poll Responses", 
+        "poll_responses", 
         {
             projection: map.displayProjection,
             strategies: [new OpenLayers.Strategy.Fixed()],

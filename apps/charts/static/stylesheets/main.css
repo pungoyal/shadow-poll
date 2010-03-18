@@ -582,6 +582,9 @@ a:hover {
 	border-radius-bottomright: 5px;
 	-moz-border-radius-bottomright: 5px;
 	-webkit-border-radius-bottomright: 5px;
+	-box-shadow:3px 3px 6px #000000;
+	-moz-box-shadow:3px 3px 6px #000000;
+	-webkit-box-shadow:3px 3px 6px #000000;
 }
 #map_layer_overlay legend span{
 	display: block;
@@ -592,12 +595,22 @@ a:hover {
 #map_layer_overlay label{
 	color: #fff;
 }
-.map_layer legend a,
-.map_layer legend a:visited {
+.map_layer legend a, .map_layer legend a:visited {
 	color: #fff;
 	font-weight:  bold;
 	background: url('../img/map_layers_arrow.gif') no-repeat 100% 0;
-	padding-right: 120px;
+	padding-right: 90px;
+	letters-spacing: 3px;
+	text-shadow: 1px 1px 1px #ccc;
+	-moz-text-shadow: 1px 1px 1px #ccc;
+	-webkit-text-shadow: 1px 1px 1px #ccc;
+}
+
+.map_layer legend a:hover,.map_layer legend a.collapse {
+	text-decoration: none;
+	text-shadow: 1px 2px 3px #ccc;
+	-moz-text-shadow: 1px 2px 3px #ccc;
+	-webkit-text-shadow: 1px 2px 3px #ccc;
 }
 
 

@@ -8,12 +8,13 @@ $(document).ready(function() {
 															$('#expandable_content').slideUp();
 															$(this).attr("class", "expand");
 													});
-$('.mdg_indicators').bind('click', function(e){
-if(this.checked){
-		
-}else{
-		
-}
-});
 
-									});     
+$.each($('.mdg_indicators'), function(i, val){
+					 var layer = map.getLayersByName(val.value)[0];
+					 layer.setVisibility(val.checked);
+});
+$('.mdg_indicators').bind('click', function(e){
+															var layer = map.getLayersByName(this.value)[0];
+															layer.setVisibility(this.checked);
+});
+});     

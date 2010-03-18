@@ -1,7 +1,7 @@
 $(document).ready(function(){
 var geoserver_url = "http://"+window.location.host+"/geoserver/ows";
 var poverty_overlay = new OpenLayers.Layer.WMS(
-                "Poverty Indicator",
+                "poverty_overlay",
                 geoserver_url,
                 { 
                    layers: 'unicef:iraq_mdgs',
@@ -18,7 +18,7 @@ poverty_overlay.setOpacity(0.5);
 map.addLayer(poverty_overlay);
 
 var underweigh_overlay = new OpenLayers.Layer.WMS(
-                "Under Weight Indicator",
+                "underweigh_overlay",
                 geoserver_url,
                 { 
                    layers: 'unicef:iraq_mdgs',
@@ -35,7 +35,7 @@ underweigh_overlay.setOpacity(0.5);
 map.addLayer(underweigh_overlay);
 
 var under5mort_overlay = new OpenLayers.Layer.WMS(
-                "Under Five Mortality Indicator",
+                "under5mort_overlay",
                 geoserver_url,
                 { 
                    layers: 'unicef:iraq_mdgs',
