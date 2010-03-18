@@ -132,7 +132,7 @@
 					{% if categories %}
                     <ul>
 						{% for cat in categories %}
-                        	<li class="category{{ forloop.counter0 }}"><span>{% trans cat.category__name %}</span></li>
+                        	<li class="category{{ forloop.counter0 }}"><span>{% trans cat.name %}</span></li>
 						{% endfor %}
                     </ul>
 					{% endif %}
@@ -194,7 +194,7 @@
 			{% endifequal %}
 		 {% endfor %}
 			 </span>
-       <span class="choice_text" style="color: {{choice.category.color.code}};">{% trans choice.text %}<em> ({% blocktrans count choice.num_counts as counter %}{{counter}} vote{% plural %}{{counter}} votes{% endblocktrans %})</em></span></li>
+       <span class="choice_text" style="color: {{choice.color.code}};">{% trans choice.text %}<em> ({% blocktrans count choice.votes as counter %}{{counter}} vote{% plural %}{{counter}} votes{% endblocktrans %})</em></span></li>
  
         {% endfor %}
     </ol>

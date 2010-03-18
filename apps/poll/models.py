@@ -59,15 +59,6 @@ class DemographicParser(models.Model):
 
 ##########################################################################
 
-class ResponseBreakUp():
-    #FAAFBE is the default color that shows up when there are no responses for a level
-    def __init__(self, text=_("No responses yet"), percentage=0, color="#FAAFBE"):
-        self.percentage = percentage
-        self.color = color
-        self.text = text
-
-##########################################################################
-
 class Question(models.Model):
     text = models.TextField()
     max_choices = models.IntegerField(default=1)
@@ -81,33 +72,22 @@ class Question(models.Model):
         return "%s: %s %s" % (self.text,self.helper_text, options)
 
     def response_break_up(self, governorate_id=None):
-        """ 
-        returns the percentage of votes going to each category as a list
-        if no responses are received yet, then return empty list
-        """
+
         relevant_responses = UserResponse.objects.filter(question=self)
         if governorate_id is not None:
             relevant_responses = relevant_responses.filter(user__governorate=governorate_id)
-        grouped_responses = relevant_responses.values('choice__category').annotate(Count('choice')).order_by('choice__category')
 
-        break_up = []
+        responses_by_choice = relevant_responses.values("choice").\
+            annotate(votes = Count("choice"))
 
-        if len(grouped_responses) == 0:
-            break_up.append(ResponseBreakUp())
-            return break_up
+        responses_by_category = relevant_responses.values("choice__category").\
+            annotate(votes = Count("choice__category")).order_by("-votes")
 
-        total_responses = relevant_responses.aggregate(Count('choice'))
-
-        for group in grouped_responses:
-            category = Category.objects.get(id=group['choice__category'])
-            percentage = round(group['choice__count']*100/total_responses['choice__count'], 1)
-
-            break_up.append(ResponseBreakUp(percentage = percentage, color= category.color.code, text=category.name))
-
-        return break_up
+        return { "by_choice": responses_by_choice, "by_category" :responses_by_category }
 
     def get_categories(self):
-        return Choice.objects.filter(question=self).values('category__name').annotate(Count('category__name')).order_by('category').values('category__name')
+        category_set = set( choice.category for choice in Choice.objects.filter(question=self) )
+        return list(category_set)
 
     def humanize_options(self):
         choices = Choice.objects.filter(question=self)
@@ -176,12 +156,6 @@ class Choice(models.Model):
 
     def __unicode__(self):
         return "%s:%s" % (self.text, self.code)
-    
-    def num_votes(self, governorate=None):
-        if governorate is not None:
-            return UserResponse.objects.filter(choice=self, 
-                                               user__governorate=governorate.code).count()
-        return UserResponse.objects.filter(choice=self).count()
         
     def parse(self, response):
         return self.code == response

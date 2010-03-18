@@ -92,8 +92,8 @@ class QuestionTest(TestCase):
 
         categories = self.question.get_categories()
         self.assertEquals(len(categories), 2)
-        self.assertEquals(categories[0]['category__name'], self.fruits.name)
-        self.assertEquals(categories[1]['category__name'], self.vegetables.name)
+        self.assertEquals(categories[0].name, self.fruits.name)
+        self.assertEquals(categories[1].name, self.vegetables.name)
 
 
     def setup_question_choices_and_categories(self):
@@ -134,24 +134,9 @@ class QuestionTest(TestCase):
         UserResponse(user = self.user, question = self.question, choice = self.ginger).save()
 
         response_break_up = self.question.response_break_up()
-
-        self.assertEquals(len(response_break_up), 2)
-
-        self.assertEquals(response_break_up[0].percentage, 50.0)
-        self.assertEquals(response_break_up[1].percentage, 50.0)
-
-        self.assertEquals(response_break_up[0].color, self.fruits.color.code)
-        self.assertEquals(response_break_up[1].color, self.vegetables.color.code)
-
-        self.assertEquals(response_break_up[0].text, self.fruits.name)
-        self.assertEquals(response_break_up[1].text, self.vegetables.name)
-
-    def test_get_response_break_up_for_no_responses(self):
-        self.setup_question_choices_and_categories()
-
-        response_break_up = self.question.response_break_up()
-
-        self.assertEquals(len(response_break_up), 1)
-        self.assertEquals(response_break_up[0].text, "No responses yet")
-        self.assertEquals(response_break_up[0].percentage, 0.0)
-        self.assertEquals(response_break_up[0].color, "#FAAFBE")
+        
+        self.assertEquals(response_break_up["by_choice"].count(), 4)
+        
+        #apple
+        apple = filter( lambda r : r["choice"] == self.apple.id,  response_break_up["by_choice"])[0]
+        self.assertEquals(apple["votes"], 3)
