@@ -126,9 +126,9 @@ class ChoiceBreakUp():
     @classmethod
     def create_from(klass, responses, choices):
         breakups = []
-        for response in responses:
-            choice = filter(lambda ch: ch.id == response["choice"], choices)[0]
-            breakup  = ChoiceBreakUp(votes = response["votes"], color = choice.category.color.code, text = choice.text )
+        for choice in choices :
+            response = filter(lambda r : r["choice"] == choice.id, responses)
+            breakup = ChoiceBreakUp(votes = response[0]["votes"] if len(response) > 0 else 0, color = choice.category.color, text = choice.text )
             breakups.append(breakup)
         return breakups
 
