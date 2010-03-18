@@ -3,12 +3,14 @@
 
 {% block javascripts %}
 <script src="/static/charts/javascripts/OpenLayers-2.8/OpenLayers.js"></script>
+<script src="/static/charts/javascripts/jquery-ui-1.7.2.custom.min.js"></script
 <script src="/static/charts/javascripts/raphael-min.js"></script>
 <script src="/static/charts/javascripts/graphs.js"></script>
 <script src="/static/charts/javascripts/map.js" ></script>
 <script src="/static/charts/javascripts/map_results.js" ></script>
 <script src="/static/charts/javascripts/map_mdg.js" ></script>
 <script src="/static/charts/javascripts/language_switcher.js"></script>
+<script src="/static/charts/javascripts/layer_switcher.js"></script
 {% endblock %}
 
 {% block title_suffix %}{% trans 'Map' %}{% endblock %}
@@ -30,8 +32,33 @@
 {% endblock %}
         
 {% block map_container %}
-<div id="map_container" class="clearfix">
+<div id="map_container">
 <div id="map" style="widh:500px; height:465px;"></div>
+ <div id="map_layer_overlay" class="map_layer">
+            <form>
+              <fieldset>
+                <legend><span><a class="expand" href="javascript: void(0);"> Map Layers</a></span></legend>
+                <div id="expandable_content" style="display: none;">
+                  <div class="field_container">
+                    <input class="mdg_indicators" name="map_layer" type="checkbox" value="poll_responses" id="poll" checked />
+                    <label for="poll">Poll Responses</label>
+                  </div>
+                  <div class="field_container">
+                    <input class="mdg_indicators" name="map_layer" type="checkbox" value="poverty_overlay" id="poverty"  />
+                    <label for="poverty">Poverty Indicator</label>
+                  </div>
+                  <div class="field_container">
+                    <input  class="mdg_indicators" name="map_layer" type="checkbox" value="underweigh_overlay" id="under_weight"  />
+                    <label for="under_weight">Under weight indicator</label>
+                  </div>
+                  <div class="field_container">
+                    <input class="mdg_indicators" name="map_layer" type="checkbox" value="under5mort_overlay" id="Under_five" />
+                    <label for="Under_five">Under five mortality indicator</label>
+                  </div>
+                </div>
+              </fieldset>
+            </form>
+</div>
 </div>
 {% endblock %}
         

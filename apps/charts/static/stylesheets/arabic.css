@@ -211,3 +211,43 @@ body {
 #message_container .child_details {
 	float:right;
 }
+
+/* Map layers */
+#map_layer_overlay {
+	left: auto;
+	right: 0;
+	border-radius-bottomright: 0;
+	-moz-border-radius-bottomright: 0;
+	-webkit-border-radius-bottomright: 0;
+	border-radius-bottomleft: 5px;
+	-moz-border-radius-bottomleft: 5px;
+	-webkit-border-radius-bottomleft: 5px;
+	-box-shadow:-3px 3px 6px #000000;
+	-moz-box-shadow:-3px 3px 6px #000000;
+	-webkit-box-shadow:-3px 3px 6px #000000;
+}
+#map_layer_overlay legend span{
+	display: block;
+	padding-left: 0;
+	margin-left: 0;
+	padding-right: 35px;
+	margin-right: 5px;
+	background-position: 100% 50%;
+}
+
+.map_layer legend a,.map_layer legend a:visited {
+	background-position: 0 0;
+	padding-right: 0;
+	padding-left: 90px;
+	text-shadow: -1px 1px 1px #ccc;
+	-moz-text-shadow: -1px 1px 1px #ccc;
+	-webkit-text-shadow:- 1px 1px 1px #ccc;
+}
+.map_layer legend a:hover,.map_layer legend a.collapse {
+	text-shadow: -1px 2px 3px #ccc;
+	-moz-text-shadow: -1px 2px 3px #ccc;
+	-webkit-text-shadow: -1px 2px 3px #ccc;
+}
+.map_layer legend a.collapse{
+	background-position: 0 100%;
+}
