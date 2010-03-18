@@ -54,7 +54,11 @@ class ViewTests(TestCase):
         self.assertEquals(response.status_code, 200)
 
 
-    def test_all_governorates(self):
+    def test_all_governorates_gender_age(self):
         response1 = self.client.get("/charts/question1")
         response2 = self.client.get("/charts/question1/all")
+        self.assertEquals(response1.content,response2.content)
+
+        response1 = self.client.get("/charts/question1/governorate5")
+        response2 = self.client.get("/charts/question1/governorate5/all")
         self.assertEquals(response1.content,response2.content)

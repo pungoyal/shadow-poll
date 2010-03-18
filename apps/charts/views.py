@@ -15,6 +15,7 @@ from rapidsms.webui.utils import render_to_response
 from apps.charts.models import Governorate, District, VoiceMessage
 from apps.charts.forms import VoiceMessageForm
 from apps.poll.models import Question, Choice, Color, UserResponse
+from apps.charts.breakups import ResponseBreakUp, ChoiceBreakUp
 
 character_english =  ['a', 'b', 'c', 'd', 'e', 'f', 'g',
                           'h', 'i', 'j', 'k', 'l', 'm', 'n']
@@ -73,70 +74,69 @@ def show_iraq_by_question(request, question_id,
                           template='results.html'):
     context = {}
     context.update({"region": "Iraq"})
-    return show_by_question(request, question_id, None, template, context)
+    return _update_context_with_data(request, question_id, None, template, context)
     
 def show_filtered_data_by_governorate(request, question_id, governorate_id,
                                       template='results.html'):
 
     context = {}
-    if(governorate_id != "all"):
-        governorate_id = governorate_id.replace("governorate","")
-        _update_context_for_governorate(context, governorate_id)
+    governorate_id = _sanitize_governorate_id(governorate_id)
+    _update_context_for_governorate(context, governorate_id)
+    return _update_context_with_data(request, question_id, governorate_id, template, context)
 
-    return show_by_question(request, question_id, governorate_id, template, context)
+
+def show_filtered_data_by_governorate_and_gender(request, question_id, governorate_id, gender,template='results.html'):
+    context = {}
+    gender = _sanitize_gender_identifier(gender)
+    governorate_id = _sanitize_governorate_id(governorate_id)
+    _update_context_for_governorate(context, governorate_id)
+
+    return _update_context_with_data(request, question_id, governorate_id, template, context, gender )
+
+
+def show_filtered_data_by_governorate_and_gender_and_age(request, question_id, governorate_id, gender,age_group, template='results.html'):
+    context = {}
+    gender = _sanitize_gender_identifier(gender)
+    governorate_id = _sanitize_governorate_id(governorate_id)
+    age_group = _sanitize_age_group(age_group)
+
+    _update_context_for_governorate(context, governorate_id)    
+    return _update_context_with_data(request, question_id, governorate_id, template, context, gender, age_group )
+
+def _sanitize_governorate_id(governorate_id):
+    if governorate_id == "all" : 
+        return None
+    else:
+        return governorate_id.replace("governorate","")
+
+def _sanitize_gender_identifier(gender):
+    if gender == "boys":
+        return "m"
+    if gender == "girls":
+        return "f"
+    return None
+
+def _sanitize_age_group(age_group):
+    ages = age_group.split("to")
+    return ages
 
 def _update_context_for_governorate(context,governorate_id):
-    governorate = get_object_or_404(Governorate, pk=governorate_id)
+    if(governorate_id != None):
+        governorate_id = governorate_id.replace("governorate","")
+    
+        governorate = get_object_or_404(Governorate, pk=governorate_id)
+        
+        context.update(   {"region": governorate.name,
+                           "governorate": governorate,
+                           "bbox": governorate.bounding_box,
+                           })
+    else:
+        context.update({"region": "iraq"})
 
-    context.update(   {"region": governorate.name,
-                       "governorate": governorate,
-                       "bbox": governorate.bounding_box,
-                       })
-
-class ResponseBreakUp():
-    #FAAFBE is the default color that shows up when there are no responses for a level
-    def __init__(self, text=_("No responses yet"), percentage=0, color="#FAAFBE"):
-        self.percentage = percentage
-        self.color = color
-        self.text = text
-
-    @classmethod
-    def create_from(klass, responses, categories):
-        breakups = []
-        total_responses = sum([response_for_category["votes"] for response_for_category in responses])
-
-        if len(responses) == 0:
-            return [ResponseBreakUp(text = "No responses yet")]
-
-
-        for response in responses:
-            category = filter(lambda cat: cat.id == response["choice__category"], categories)[0]
-            breakup  = ResponseBreakUp(percentage = round(response["votes"]*100/total_responses,1), color = category.color.code, text = category.name )
-            breakups.append(breakup)
-        return breakups
-
-
-class ChoiceBreakUp():
-    #FAAFBE is the default color that shows up when there are no responses for a level
-    def __init__(self, text=_("No responses yet"), votes=0, color="#FAAFBE"):
-        self.votes = votes
-        self.color = color
-        self.text = text
-
-    @classmethod
-    def create_from(klass, responses, choices):
-        breakups = []
-        for choice in choices :
-            response = filter(lambda r : r["choice"] == choice.id, responses)
-            breakup = ChoiceBreakUp(votes = response[0]["votes"] if len(response) > 0 else 0, color = choice.category.color, text = choice.text )
-            breakups.append(breakup)
-        return breakups
-
-
-def show_by_question(request, question_id, governorate_id, template, context={}):
+def _update_context_with_data(request, question_id, governorate_id,template, context={}, gender=None, age_group=None):
     question = get_object_or_404(Question, pk=question_id)
     national_response_break_up = question.response_break_up()
-    response_break_up = question.response_break_up(governorate_id)
+    response_break_up = question.response_break_up(governorate_id, gender,age_group)
     choices_of_question = Choice.objects.filter(question = question)
     categories = question.get_categories()
 
@@ -145,6 +145,8 @@ def show_by_question(request, question_id, governorate_id, template, context={})
 
 
     response_by_category = ResponseBreakUp.create_from(response_break_up["by_category"], categories)
+
+    national_response_by_category = ResponseBreakUp.create_from(national_response_break_up["by_category"], categories)
 
     response_by_choice = ChoiceBreakUp.create_from(response_break_up["by_choice"], choices_of_question)
 
@@ -156,7 +158,7 @@ def show_by_question(request, question_id, governorate_id, template, context={})
                      "top_response": top_response,
                      "total_responses" : total_responses,
                      "chart_data": simplejson.dumps([r.__dict__ for r in response_by_category]),
-                     "national_data": simplejson.dumps([r.__dict__ for r in response_by_category]),
+                     "national_data": simplejson.dumps([r.__dict__ for r in national_response_by_category]),
                      "character_english": character_english,
                      "questions" : Question.objects.all()
     }) 
@@ -164,22 +166,6 @@ def show_by_question(request, question_id, governorate_id, template, context={})
     return render_to_response(request, template, context)
 
 
-
-def show_filtered_data_by_governorate_and_gender(request, question_id, governorate_id, gender,template='results.html'):
-    context = {}
-    total_responses = len(UserResponse.objects.all())
-    question = get_object_or_404(Question, pk=question_id)
-    context.update({"region": "Iraq", 
-                    'total_responses': total_responses})
-    return show_by_question(request, question_id, None, template, context)
-
-def show_filtered_data_by_governorate_and_gender_and_age(request, question_id, governorate_id,gender,age_group,template='results.html'):
-    context = {}
-    total_responses = len(UserResponse.objects.all())
-    question = get_object_or_404(Question, pk=question_id)
-    context.update({"region": "Iraq", 
-                    'total_responses': total_responses})
-    return show_by_question(request, question_id, None, template, context)
 
 
 

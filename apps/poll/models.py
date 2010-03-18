@@ -5,6 +5,7 @@ from django.db import models
 from django.utils.translation import ugettext as _
 from apps.reporters.models import Reporter, PersistantConnection
 from django.db.models import Avg,Count
+from django.db.models import Q
 from apps.poll.messages import *
 import math
 from apps.poll.string import clean, has_word
@@ -71,12 +72,18 @@ class Question(models.Model):
         options = self.humanize_options()
         return "%s: %s %s" % (self.text,self.helper_text, options)
 
-    def response_break_up(self, governorate_id=None):
-
+    def response_break_up(self, governorate_id=None, gender=None, age_group=None):
         relevant_responses = UserResponse.objects.filter(question=self)
-        if governorate_id is not None:
+
+        if governorate_id != None:
             relevant_responses = relevant_responses.filter(user__governorate=governorate_id)
 
+        if gender != None:
+            relevant_responses = relevant_responses.filter(user__gender=gender)
+        
+        if age_group != None and len(age_group) == 2 :
+            relevant_responses = relevant_responses.filter(Q(user__age__gt = age_group[0]) | Q(user__age = age_group[0])  , Q(user__age = age_group[0]) | Q( user__age__lt = age_group[1]))
+             
         responses_by_choice = relevant_responses.values("choice").\
             annotate(votes = Count("choice"))
 
