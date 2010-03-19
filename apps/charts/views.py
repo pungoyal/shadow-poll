@@ -87,6 +87,9 @@ def show_filtered_data_by_governorate(request, question_id, governorate_id,
 
 def show_filtered_data_by_governorate_and_gender(request, question_id, governorate_id, gender,template='results.html'):
     context = {}
+    context.update({ 
+            "gender_filter" : gender 
+            })
     gender = _sanitize_gender_identifier(gender)
     governorate_id = _sanitize_governorate_id(governorate_id)
     _update_context_for_governorate(context, governorate_id)
@@ -96,6 +99,10 @@ def show_filtered_data_by_governorate_and_gender(request, question_id, governora
 
 def show_filtered_data_by_governorate_and_gender_and_age(request, question_id, governorate_id, gender,age_group, template='results.html'):
     context = {}
+    context.update({ 
+            "gender_filter" : gender,
+            "age_filter": age_group
+            })
     gender = _sanitize_gender_identifier(gender)
     governorate_id = _sanitize_governorate_id(governorate_id)
     age_group = _sanitize_age_group(age_group)
