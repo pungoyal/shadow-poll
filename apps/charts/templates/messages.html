@@ -18,12 +18,25 @@
   {% block chart %}{% endblock %}
   {% block charts_container %}{% endblock %}
   {% block map_container %}{% endblock %}
+  {% block breadcrumb %}{% endblock %}
   {% block question %}{% endblock %}
+  {% block filter_container %}{% endblock %}
 
-  {% block filter_container %}
-  {% endblock %} 
+{% block sidebar %}
+<div id="sidebar">
+    <div class="nav_questions"><img src="/static/charts/img/poll_q_img_1.gif" alt=""/>
+        <div class="note">
+            <ul>
+                <li><a href="/charts/question1/"> {% trans 'Take me to poll page' %}</a></li>
+                <li class="last"><a href="/about">{% trans 'Read about how UNICEF used SMS to conduct the survey' %}</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}
 
-  {% block messages %}
+{% block messages %}
   <div id="content_area">
     <div id="message_container">
       {% if messages %}

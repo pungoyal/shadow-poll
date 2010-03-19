@@ -1,8 +1,8 @@
 from django.utils.translation import ugettext as _
+from poll.models import Color
 
 class ResponseBreakUp():
-    #FAAFBE is the default color that shows up when there are no responses for a level
-    def __init__(self, text=_("No responses yet"), percentage=0, color="#FAAFBE"):
+    def __init__(self, text=_("No responses yet"), percentage=0, color = '#FAAFBE'):
         self.percentage = percentage
         self.color = color
         self.text = text
@@ -15,7 +15,6 @@ class ResponseBreakUp():
         if len(responses) == 0:
             return [ResponseBreakUp(text = "No responses yet")]
 
-
         for response in responses:
             category = filter(lambda cat: cat.id == response["choice__category"], categories)[0]
             breakup  = ResponseBreakUp(percentage = round(response["votes"]*100/total_responses,1), color = category.color.code, text = category.name )
@@ -24,8 +23,7 @@ class ResponseBreakUp():
 
 
 class ChoiceBreakUp():
-    #FAAFBE is the default color that shows up when there are no responses for a level
-    def __init__(self, text=_("No responses yet"), votes=0, color="#FAAFBE"):
+    def __init__(self, text=_("No responses yet"), votes=0, color = Color('#FAAFBE', 'grey_dot.gif')):
         self.votes = votes
         self.color = color
         self.text = text

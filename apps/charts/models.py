@@ -20,65 +20,18 @@ class Geography(models.Model):
     def __unicode__(self):
         return "%s" % (self.name)
 
-    def total_responses(self):
-        return len(UserResponse.objects.all())
-
     def description(self):
         return "Iraqi Governorate"
 
-    def style(self, question, selected_options=None):
-        most_voted_category = self.most_popular_category(question)
-        if most_voted_category:
-            scale = self._bubble_size(question)
-            if scale:
-                style = {'color': most_voted_category.color, 
-                         'percentage': scale }
-                return style
-        return ''
-    
-    def _percentage_to_display(self, count, total):
-        """ This formula returns the size of the bubble we want to display 
-        responses - count of userresponses
-        all_responses - count of all userresponses
-        """
-        if total == 0:
-            return 0
-        
-        percentage = float(count) / float(total)
-        return percentage
-    
     def exposed(self):
         return {'name': self.id}
-AGE_RANGE = {'a1': '6,7,8,9,10,11', 'a2': '12,13,14', 'a3': '15,16,17'}
+
 class Governorate(Geography):
     code = models.CharField(max_length=16, unique=True)
 
     # this is used by openlayers so that we can manually specify
     # a zoom level which will properly 'fill the image' with the district
     zoom_level = models.IntegerField(null=True, blank=True)
-    
-    def _bubble_size(self, question):
-        """ number of responses in the most popular category for this question
-        divided by total responses to this question 
-        """
-        category = self.most_popular_category(question)
-        if category is None:
-            return 0
-        responses = UserResponse.objects.filter(choice__category=category, 
-                                                question=question, 
-                                                user__governorate=self.code)
-        all_responses = UserResponse.objects.filter(question=question, 
-                                                    user__governorate=self.code)
-        return self._percentage_to_display(responses.count(), 
-                                           all_responses.count())
-
-    def most_popular_category(self, question,selected_options=None):
-        relevant_responses = UserResponse.objects.filter(user__governorate = self.code, 
-                                                         question=question)
-        return Category.most_popular(relevant_responses)
-
-    def num_responses(self):
-        return len(UserResponse.objects.filter(user__governorate = self.code))
 
 class District(Geography):
     code = models.CharField(max_length=16)
@@ -86,32 +39,6 @@ class District(Geography):
     
     class Meta:
         unique_together = ("governorate", "code")
-
-    def _bubble_size(self, question):
-        """ number of responses in the most popular category for this question
-        divided by total responses to this question 
-        """
-        category = self.most_popular_category(question)
-        if category is None:
-            return 0
-        responses = UserResponse.objects.filter(choice__category=category, 
-                                                question=question, 
-                                                user__district=self.code, 
-                                                user__governorate=self.governorate.code)
-        all_responses = UserResponse.objects.filter(question=question, 
-                                                    user__district=self.code, 
-                                                    user__governorate=self.governorate.code)
-        
-        return self._percentage_to_display(responses.count(), all_responses.count())
-
-    def most_popular_category(self, question,selected_options=None):
-        relevant_responses = UserResponse.objects.filter(user__district = self.code, 
-                                                         user__governorate=self.governorate.code, 
-                                                         question=question)
-        return Category.most_popular(relevant_responses)
-
-    def num_responses(self):
-        return len(UserResponse.objects.filter(user__district = self.code, user__governorate=self.governorate.code))
     
 class VoiceMessage(models.Model):
     name = models.CharField(max_length=100, null=True)

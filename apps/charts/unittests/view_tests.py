@@ -3,7 +3,6 @@ from apps.poll.models import Question, User
 from apps.charts.models import Governorate
 from math import ceil
 
-query="?gender=m,f&age=a1,a2,a3"
 class ViewTests(TestCase):
     fixtures = ['functional_test_data', 'messages']
     def setUp(self):
@@ -34,14 +33,10 @@ class ViewTests(TestCase):
                                   msg = "%s did not return 200" % url)
     
     def test_kml_data(self):        
-        response = self.client.get('/get_kml/question1' + query)
-        self.assertContains(response, "<scale>0.758620689655</scale>")
-        response = self.client.get('/get_kml/question1/governorate7' + query)
-        self.assertContains(response, "<scale>0.758620689655</scale>")
-        response = self.client.get('/get_kml/question2/governorate5' + query)
-        self.assertContains(response, "<scale>0.666666666667</scale>")
-        response = self.client.get('/get_kml/question2/governorate7' + query)
-        self.assertContains(response, "<scale>0.5</scale>")
+        response = self.client.get('/get_kml/question1')
+        self.assertContains(response, "<scale>0.75</scale>")
+        response = self.client.get('/get_kml/question1/governorate5')
+        self.assertContains(response, "<scale>0.33</scale>")
 
     def test_messaging_pages_is_accesible(self):
         response = self.client.get("/messages/")
