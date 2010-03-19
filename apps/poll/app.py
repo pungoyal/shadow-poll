@@ -12,7 +12,7 @@ class App (rapidsms.app.App):
 
     def handle (self, message):
         session = UserSession.open(message.persistant_connection)
-        response = session.respond(message.text)
+        response = session.respond(message)
         message.respond(response)
         return True
 

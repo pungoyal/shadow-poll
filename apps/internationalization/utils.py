@@ -40,7 +40,7 @@ def get_translation(string, language_code):
         pass
     else:
         try:
-            return Translation.objects.get(language=language, code=string).translation
+            return Translation.objects.get(language=language, code=unicode(string)).translation
         except Translation.DoesNotExist, ex:
             # hopefully the default passed in string will work
             pass

@@ -1,15 +1,15 @@
 from __future__ import division
-from datetime import datetime
 import re
+import math
+from datetime import datetime
 from django.db import models
-from django.utils.translation import ugettext as _
-from apps.reporters.models import Reporter, PersistantConnection
 from django.db.models import Avg,Count
 from django.db.models import Q
+from apps.internationalization.utils import get_translation as _
 from apps.poll.messages import *
-import math
 from apps.poll.string import clean, has_word
 from apps.poll.list import remove_duplicates
+from apps.reporters.models import Reporter, PersistantConnection
 ##########################################################################
 
 SEPARATOR = ' '
@@ -62,7 +62,7 @@ class DemographicParser(models.Model):
 
 class Question(models.Model):
     text = models.TextField()
-    max_choices = models.IntegerField(default=1)
+    num_answers_expected = models.IntegerField(default=1)
     helper_text = models.CharField(max_length=100, default='')
     error_response = models.TextField(null=True, blank=True)
     next_question = models.ForeignKey('self', null = True,default = None)
@@ -207,6 +207,10 @@ class UserSession(models.Model):
         return "session for : %s" % (self.user)
 
     def respond(self, message):
+        # respond() takes the message object, so that
+        # when we start supporting intelligent feedback,
+        # we can pass the error_code, text, and parameters
+        # back through the message object
         self._set_default_questionnaire()
 
         ''' respond to a trigger message'''
@@ -248,14 +252,14 @@ class UserSession(models.Model):
             self.questionnaire = Questionnaire.objects.all().order_by('pk')[0]
 
     def _respond_to_trigger(self, message):
-        if not self._is_trigger(message): return 
+        if not self._is_trigger(message.text): return 
         ''' create new user '''
         self.user = User(connection = self.user.connection, governorate = self.user.governorate, district = self.user.district, active = True)
-        message = message.strip().lstrip(self.questionnaire.trigger.lower()).strip()
+        text = message.text.strip().lstrip(self.questionnaire.trigger.lower()).strip()
         parsers = list(DemographicParser.objects.filter(questionnaire=self.questionnaire).order_by('order') )
         
         for parser in parsers:
-            demographic_information = parser.parse(message)
+            demographic_information = parser.parse(text)
             if demographic_information == None:
                 return TRIGGER_INCORRECT_MESSAGE
             self.user.set_value(parser.name, demographic_information)
@@ -264,15 +268,16 @@ class UserSession(models.Model):
         self.num_attempt = 0
         return str(self.question)
 
-    def _respond_to_answer(self,message):
+    def _respond_to_answer(self, message):
         if not self.question : 
             return TRIGGER_INCORRECT_MESSAGE
 
-        matching_choices = self.question.matching_choices(message)
+        matching_choices = self.question.matching_choices(message.text)
         if len(matching_choices) > 0:
-            if(len(matching_choices) < self.question.max_choices):
-                return "err_less_thank_expected_choices"
-
+            if(len(matching_choices) < self.question.num_answers_expected):
+                return "err_less_than_expected_choices"
+            if(len(matching_choices) > self.question.num_answers_expected):
+                return "err_more_than_expected_choices"
             self._save_response(self.question, matching_choices)
             self.question = self.question.next_question
             self.num_attempt = 0
@@ -311,9 +316,9 @@ class UserSession(models.Model):
     def _first_access(self):
         return self.question == None
 
-    def _is_trigger(self, message):
+    def _is_trigger(self, text):
         for questionnaire in Questionnaire.objects.all():
-            if  has_word((message, questionnaire.trigger)):
+            if  has_word((text, questionnaire.trigger)):
                 self.questionnaire = questionnaire
                 return True
         return False

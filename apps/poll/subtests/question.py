@@ -23,8 +23,8 @@ class QuestionTest(TestCase):
 
     def test_save(self):
         initial_no_of_questions = len(Question.objects.all())
-        question1 = Question(text = 'question 1', max_choices = 3)
-        question2 = Question(text = 'question 2', max_choices = 3)
+        question1 = Question(text = 'question 1', num_answers_expected = 3)
+        question2 = Question(text = 'question 2', num_answers_expected = 3)
 
         question1.next_question = question2
         question1.save()
@@ -52,7 +52,7 @@ class QuestionTest(TestCase):
         self.assertEquals(first_question, question2)
 
     def setup_question_and_choices(self):
-        question = Question(text = 'question 1',max_choices = 1)
+        question = Question(text = 'question 1',num_answers_expected = 1)
         question.save()
         choice1 = Choice(code= 'a',question=question, text="apple")
         choice2 = Choice(code= 'b',question=question, text="bannana")
@@ -77,7 +77,7 @@ class QuestionTest(TestCase):
         self.assertEquals(str(question), "question 1:  a. apple b. bannana c. carrot")
 
     def test_questions_with_helper_text(self):
-        question = Question(text = 'question 1',max_choices = 1, helper_text="(Prioritize)")
+        question = Question(text = 'question 1',num_answers_expected = 1, helper_text="(Prioritize)")
         question.save()
         choice1 = Choice(code= 'a',question=question, text="apple")
         choice2 = Choice(code= 'b',question=question, text="bannana")
@@ -97,7 +97,7 @@ class QuestionTest(TestCase):
 
 
     def setup_question_choices_and_categories(self):
-        self.question = Question(text = 'question 1',max_choices = 1, helper_text="(Prioritize)")
+        self.question = Question(text = 'question 1',num_answers_expected = 1, helper_text="(Prioritize)")
         self.question.save()
 
         self.blue = Color(file_name="blue.png", code="#blue")

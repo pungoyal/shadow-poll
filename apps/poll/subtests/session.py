@@ -7,6 +7,14 @@ from reporters.models import Reporter, PersistantConnection, PersistantBackend
 from register.models import Registration
 import unittest
 from apps.poll.models import TRIGGER_INCORRECT_MESSAGE
+from rapidsms.message import Message
+from rapidsms.person import Person
+
+class TestMessage(Message):
+    def __init__(self, text):
+        p = Person()
+        super(TestMessage, self).__init__(self, person=p, text=text)
+
 class UserSessionTest(TestCase):
     apps = (poll_App,)
 
@@ -78,25 +86,25 @@ class UserSessionTest(TestCase):
         session = UserSession.open(self.pconnection)
         user = session.user
         user.save()
-        self.assertEquals(session.respond("trigger m 16"), str(self.question1))
+        self.assertEquals(session.respond(TestMessage(text="trigger m 16")), str(self.question1))
 
     def test_correct_response_to_question_sends_next_question(self):
         session = UserSession.open(self.pconnection)
         user = session.user
         user.save()
         self.assertEquals(session.question, None)
-        response1 = session.respond("trigger m 16")
+        response1 = session.respond(TestMessage(text="trigger m 16"))
         self.assertEquals(session.question, self.question1)
-        response2 = session.respond("a")
+        response2 = session.respond(TestMessage(text="a"))
         self.assertEquals(response2, str(self.question2))
         self.assertEquals(session.question, self.question2)
 
     def test_wrong_response_to_question_sends_error(self):
         session = UserSession.open(self.pconnection)
         self.assertEquals(session.question, None)
-        response1 = session.respond("trigger f 16")
+        response1 = session.respond(TestMessage(text="trigger f 16"))
         self.assertEquals(session.question, self.question1)
-        response2 = session.respond("django")
+        response2 = session.respond(TestMessage(text="django"))
         self.assertEquals(response2, "error_parsing_response")
         self.assertEquals(session.question, self.question1)
 
@@ -110,7 +118,7 @@ class UserSessionTest(TestCase):
 
         session = UserSession.open(self.pconnection)
 
-        self.assertEquals(session.respond("b"), str(self.question3))
+        self.assertEquals(session.respond(TestMessage(text="b")), str(self.question3))
         self.assertEquals(session.question, self.question3)
         
     def test_close_ongoing_session_at_trigger(self):
@@ -119,10 +127,10 @@ class UserSessionTest(TestCase):
         user.save()
         session.user = user
         session.question = self.question2
-        self.assertEquals(session.respond("c"), str(self.question3))
+        self.assertEquals(session.respond(TestMessage(text="c")), str(self.question3))
         self.assertEquals(session.question, self.question3)
         
-        self.assertEquals(session.respond("trigger 13 m"), str(self.question1))
+        self.assertEquals(session.respond(TestMessage(text="trigger 13 m")), str(self.question1))
         self.assertEquals(session.question, self.question1)
 
 
@@ -132,7 +140,7 @@ class UserSessionTest(TestCase):
         user.save()
         session.user = user
         session.question = self.question3
-        self.assertEquals(session.respond("c"), "thanks")
+        self.assertEquals(session.respond(TestMessage(text="c")), "thanks")
         self.assertEquals(session.user.active, False)
 
     def test_user_interaction_is_saved_when_successful(self):
@@ -140,9 +148,9 @@ class UserSessionTest(TestCase):
         initial_number_of_users = len(User.objects.all())
         
         session = UserSession.open(self.pconnection1)
-        session.respond('trigger 14 f')
+        session.respond(TestMessage(text='trigger 14 f'))
         self.assertEquals(len(User.objects.all()), initial_number_of_users + 1)
-        session.respond('a')
+        session.respond(TestMessage(text='a'))
         self.assertEquals(len(UserResponse.objects.all()), initial_number_of_responses + 1)
 
     def test_end_session_on_reaching_max_num_allowed_retries(self):
@@ -151,15 +159,15 @@ class UserSessionTest(TestCase):
         user.save()
         session.user = user
         session.question = self.question1
-        session.respond('t')
-        session.respond('t')
-        session.respond('t')
+        session.respond(TestMessage(text='t'))
+        session.respond(TestMessage(text='t'))
+        session.respond(TestMessage(text='t'))
         self.assertEquals(session.user.active, False)
 
 
     def test_user_demographics_saved_when_present(self):
         session = UserSession.open(self.pconnection1)
-        session.respond('trigger 13 f')
+        session.respond(TestMessage(text='trigger 13 f'))
         latest_user = User.objects.all().order_by('-id')[0]
         self.assertEquals(latest_user.age, 13)
         self.assertEquals(latest_user.gender, 'f')
@@ -167,7 +175,7 @@ class UserSessionTest(TestCase):
         
     def test_user_location_from_registration(self):
         session = UserSession.open(self.pconnection)
-        session.respond('trigger 14 f')
+        session.respond(TestMessage(text='trigger 14 f'))
         latest_user = User.objects.all().order_by('-id')[0]
         self.assertEquals(latest_user.governorate, 2)
         self.assertEquals(latest_user.district, 4)
@@ -183,38 +191,44 @@ class UserSessionTest(TestCase):
         pconnection.save()
         session = UserSession.open(pconnection)
 
-        self.assertEquals(session.respond('trigger junk'), TRIGGER_INCORRECT_MESSAGE )
+        self.assertEquals(session.respond(TestMessage(text='trigger junk')), TRIGGER_INCORRECT_MESSAGE )
 
     def test_junk_message(self):
         session = UserSession.open(self.pconnection)
-        self.assertEquals(session.respond('junk'), TRIGGER_INCORRECT_MESSAGE )
+        self.assertEquals(session.respond(TestMessage(text='junk')), TRIGGER_INCORRECT_MESSAGE )
 
     def test_recreate_user_if_demographic_data_changes(self):
         session = UserSession.open(self.pconnection)
-        session.respond("trigger m 16")
-        session.respond("trigger m 12")
+        session.respond(TestMessage(text="trigger m 16"))
+        session.respond(TestMessage(text="trigger m 12"))
         self.assertEquals(len(User.objects.all()), 2)
 
     def test_reset_session_on_sending_trigger(self):
         session = UserSession.open(self.pconnection)
-        session.respond("trigger m 16")
+        session.respond(TestMessage(text="trigger m 16"))
 
         self.assertEquals(session.question, self.question1)
-        session.respond("trigger f 12")
+        session.respond(TestMessage(text="trigger f 12"))
 
         self.assertEquals(session.question, self.question1)
-        session.respond("a")
+        session.respond(TestMessage(text="a"))
 
         self.assertEquals(session.question, self.question2)
         
     def test_less_than_required_choices_reminds_user(self):
-        self.question1.max_choices = 2
+        self.question1.num_answers_expected = 2
         self.question1.save()
         session = UserSession.open(self.pconnection)
-        session.respond("trigger m 16")
-        self.assertEquals(session.question.max_choices, 2)
-        error = session.respond("a")
-        self.assertEquals(error, "err_less_thank_expected_choices")
-        error = session.respond("a a")
-        self.assertEquals(error, "err_less_thank_expected_choices")
+        session.respond(TestMessage(text="trigger m 16"))
+        self.assertEquals(session.question.num_answers_expected, 2)
+        error = session.respond(TestMessage(text="a"))
+        self.assertEquals(error, "err_less_than_expected_choices")
+        error = session.respond(TestMessage(text="a a"))
+        self.assertEquals(error, "err_less_than_expected_choices")
         
+    def test_more_than_required_choices_reminds_user(self):
+        session = UserSession.open(self.pconnection)
+        session.respond(TestMessage(text="trigger m 16"))
+        self.assertEquals(session.question.num_answers_expected, 1)
+        error = session.respond(TestMessage(text="a b"))
+        self.assertEquals(error, "err_more_than_expected_choices")
