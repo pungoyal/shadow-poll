@@ -140,9 +140,7 @@ def _update_context_with_data(request, question_id, governorate_id,template, con
     choices_of_question = Choice.objects.filter(question = question)
     categories = question.get_categories()
 
-
     total_responses = sum([response_for_category["votes"] for response_for_category in response_break_up["by_category"]])
-
 
     response_by_category = ResponseBreakUp.create_from(response_break_up["by_category"], categories)
 
@@ -165,10 +163,6 @@ def _update_context_with_data(request, question_id, governorate_id,template, con
 
     return render_to_response(request, template, context)
 
-
-
-
-
 def view_404(request):
     response = HttpResponseNotFound()
     response.write("The path is not found")
@@ -179,32 +173,39 @@ def view_500(request):
     response.write("Something went wrong")
     return response
 
-def get_kml_for_governorate(request, question_id, governorate_id):
+def kml_filtered_by_governorate(request, question_id, governorate_id):
     gov = Governorate.objects.get(pk=governorate_id)
     district_kml = District.objects.filter(governorate=gov).kml()
-    return get_kml(request, question_id, district_kml)
+    return get_kml(request, question_id, district_kml, gov)
 
-def get_kml_for_iraq(request, question_id):
+def kml_filtered_by_country(request, question_id):
     governorate_kml = Governorate.objects.kml()
-    return get_kml(request, question_id, governorate_kml)
+    return get_kml(request, question_id, governorate_kml, None)
 
-def get_kml(request, question_id, kml):
+def get_kml(request, question_id, kml, governorate):
     """ the kml tells us where to center our bubbles on the map """
     question = Question.objects.get(id=question_id)
     placemarks_info_list = []
     style_dict_list = []
     for (counter, geography) in enumerate(kml):
-        style_dict = geography.style(question)
-        if style_dict:
-            style_str = "s%s-%d" % (style_dict['color'].id, len(style_dict_list))
+        if governorate is not None:
+            response_break_up = question.response_break_up(governorate.code, geography.code)
+        else:
+            response_break_up = question.response_break_up(geography.code)
+        categories = question.get_categories()
+        total_responses = sum([response_for_category["votes"] for response_for_category in response_break_up["by_category"]])
+        if total_responses > 0:
+            response_by_category = ResponseBreakUp.create_from(response_break_up["by_category"], categories)
+            top_response = response_by_category[0]
+            color = Color.objects.get(code = top_response.color)
+            style_str = "s%s-%d" % (top_response.color, len(placemarks_info_list))
             placemarks_info_list.append({'id': geography.id,
                                          'name': geography.name,
                                          'description': geography.description,
                                          'kml': geography.kml,
                                          'style': style_str})
-            style_dict_list.append({'id': style_dict['color'].id, 'percentage': style_dict['percentage'],
-                                    'file_name': style_dict['color'].file_name})
-    colors = Color.objects.all()
+            style_dict_list.append({'id': top_response.color, 'percentage': top_response.percentage/100,
+                                    'file_name': color.file_name})
     style = 'kml/population_points.kml'
     r = _render_to_kml('kml/placemarks.kml', {'places' : placemarks_info_list,
                                               'style_dict_list' : style_dict_list,
