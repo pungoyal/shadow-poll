@@ -48,8 +48,6 @@ def voice_translate(request, message_id, template = "translate_message.html"):
         if form.is_valid():
             form.save()
             context['status'] = _("Translation saved.")
-        else:
-            context['status'] = _(form.errors)
     else:
         form = VoiceMessageForm(instance=message)
     context['form'] = form
