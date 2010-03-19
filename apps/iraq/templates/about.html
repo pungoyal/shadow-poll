@@ -1,0 +1,27 @@
+{% extends 'iraq.html' %}
+{% load i18n %}
+
+{% block page_stylesheets %}
+<link rel="stylesheet" href="/static/charts/stylesheets/messages.css" type="text/css" media="screen, projection">
+<!--[if lt IE 8]><link rel="stylesheet" href="/static/charts/stylesheets/ie.css" type="text/css" media="screen, projection"><![endif]-->
+{% endblock %}
+
+{% block javascripts %}
+<script src="/static/charts/javascripts/language_switcher.js"></script>
+{% endblock %}
+
+{% block title_suffix %}About{% endblock %}
+
+{% block chart %}{% endblock %}
+{% block charts_container %}{% endblock %}
+{% block map_container %}{% endblock %}
+{% block question %}{% endblock %}
+{% block filter_container %}{% endblock %} 
+
+{% block messages %}
+<div id="content_area">
+    <div id="message_container">
+      <h1>{% trans 'About' %}</h1>
+    </div>
+</div>
+{% endblock %}
