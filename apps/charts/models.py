@@ -1,6 +1,7 @@
 from __future__ import division
 from math import ceil
 from django.contrib.gis.db import models
+from django.utils.translation import ugettext_lazy as _
 from rapidsms.webui import settings
 from poll.models import User, UserResponse, Category, Color
 
@@ -45,8 +46,8 @@ class VoiceMessage(models.Model):
     age = models.IntegerField(null=True)
     female = models.NullBooleanField(null = True, blank=True)
     district = models.ForeignKey(District, null=True)
-    arabic_text = models.TextField(null=True, blank=True, verbose_name="Arabic Translation")
-    english_text = models.TextField(null=True, blank=True, verbose_name="English Translation")
+    arabic_text = models.TextField(null=True, blank=True, verbose_name=_("Arabic Translation"))
+    english_text = models.TextField(null=True, blank=True, verbose_name=_("English Translation"))
     sound_file_name = models.CharField(max_length=150) # full file path on the system
     translated = models.BooleanField(default = False)
     date_recorded = models.DateTimeField()

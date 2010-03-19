@@ -385,3 +385,21 @@ msgid "%(counter)s vote"
 msgid_plural "%(counter)s votes"
 msgstr[0] "%(counter)s صوت"
 msgstr[1] "%(counter)s صوت"
+
+msgid "Arabic Translation"
+msgstr "تم حفظ الترجمة."
+
+#: .\apps\charts\models.py:50
+msgid "English Translation"
+msgstr "ArabicEnglish Translation"
+
+msgid "Go Back"
+msgstr "ArabicGo Back"
+
+msgid "List of messages to be translated"
+msgstr "لا يوجد رسائل للعرض"
+
+msgid "Click to hear and append translation(s)"
+msgstr "ArabicClickToHear"
+
+

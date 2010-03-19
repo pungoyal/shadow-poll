@@ -13,7 +13,7 @@
 <script src="/static/charts/javascripts/language_switcher.js"></script>
 {% endblock %}
 
-{% block title_suffix %}Voice Messages{% endblock %}
+{% block title_suffix %}{% trans 'Voice Messages' %}{% endblock %}
 {% block chart %}{% endblock %}
 {% block charts_container %}{% endblock %}
 {% block map_container %}{% endblock %}
@@ -30,9 +30,9 @@
         {% jplayer 0 message.sound_file_url %}
         <form method="post">
         	{{ form.as_p }}
-            <input type="submit" value="Save"/>
+            <input type="submit" value="{% trans 'Save' %}"/>
         </form>
-        <a href="{% url messages_admin %}">Go Back</a>
+        <a href="{% url messages_admin %}">{% trans 'Go Back' %}</a>
     </div>
 </div>
 {% endblock %}

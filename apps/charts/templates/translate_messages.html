@@ -12,7 +12,7 @@
 <script src="/static/charts/javascripts/language_switcher.js"></script>
 {% endblock %}
 
-{% block title_suffix %}Voice Messages{% endblock %}
+{% block title_suffix %}{% trans 'Voice Messages' %}{% endblock %}
 {% block chart %}{% endblock %}
 {% block charts_container %}{% endblock %}
 {% block map_container %}{% endblock %}
@@ -26,8 +26,8 @@
 {% if messages %}
 <div id="content_area">
     <div id="message_container">
-        <h2>List of messages to be translated</h2>
-        Click to hear and append translation(s). <br/><br/>
+        <h2>{% trans 'List of messages to be translated' %}</h2>
+        {% trans 'Click to hear and append translation(s)' %}.<br/><br/>
         
         {% for message in messages %}
         <a href="/message/translate/{{message.id}}">{{message.date_recorded}}</a>
@@ -37,6 +37,6 @@
     </div>
 </div>
 {% else %}
-<h1>No messages to display.</h1>
+<h1>{% trans 'No messages to display' %}.</h1>
 {% endif %}
 {% endblock %}
