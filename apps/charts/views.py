@@ -90,7 +90,7 @@ def show_filtered_data_by_governorate_and_gender(request, question_id, governora
     gender = _sanitize_gender_identifier(gender)
     governorate_id = _sanitize_governorate_id(governorate_id)
     _update_context_for_governorate(context, governorate_id)
-
+    
     return _update_context_with_data(request, question_id, governorate_id, template, context, gender )
 
 
@@ -123,9 +123,7 @@ def _sanitize_age_group(age_group):
 def _update_context_for_governorate(context,governorate_id):
     if(governorate_id != None):
         governorate_id = governorate_id.replace("governorate","")
-    
         governorate = get_object_or_404(Governorate, pk=governorate_id)
-        
         context.update(   {"region": governorate.name,
                            "governorate": governorate,
                            "bbox": governorate.bounding_box,
@@ -136,7 +134,8 @@ def _update_context_for_governorate(context,governorate_id):
 def _update_context_with_data(request, question_id, governorate_id,template, context={}, gender=None, age_group=None):
     question = get_object_or_404(Question, pk=question_id)
     national_response_break_up = question.response_break_up()
-    response_break_up = question.response_break_up(governorate_id, gender,age_group)
+    response_break_up = question.response_break_up(governorate_code = governorate_id, gender = gender, age_group = age_group)
+
     choices_of_question = Choice.objects.filter(question = question)
     categories = question.get_categories()
 
@@ -189,9 +188,9 @@ def get_kml(request, question_id, kml, governorate):
     style_dict_list = []
     for (counter, geography) in enumerate(kml):
         if governorate is not None:
-            response_break_up = question.response_break_up(governorate.code, geography.code)
+            response_break_up = question.response_break_up(governorate_code = governorate.code, district_code = geography.code)
         else:
-            response_break_up = question.response_break_up(geography.code)
+            response_break_up = question.response_break_up(governorate_code = geography.code)
         categories = question.get_categories()
         total_responses = sum([response_for_category["votes"] for response_for_category in response_break_up["by_category"]])
         if total_responses > 0:
