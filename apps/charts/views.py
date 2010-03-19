@@ -26,17 +26,17 @@ def home_page(request, template = "home_page.html"):
     return render_to_response(request, template, {'questions' : questions})
 
 def voice_home_page(request):
-    messages = VoiceMessage.objects.all()
+    messages = VoiceMessage.objects.filter(translated=True).order_by('-date_recorded')
     return render_to_response(request, "messages.html", 
                               {"messages": messages, 
                                "questions": Question.objects.all().order_by('pk')})
 
 @login_required
 def voice_admin_page(request):
-    messages = VoiceMessage.objects.filter(translated = False).order_by('-date_recorded')[:5]
     context = {}
-    context['num_translated_messages'] = VoiceMessage.objects.filter(translated=True).count()
-    context["messages"] = messages
+    messages = VoiceMessage.objects.filter(translated=True)
+    context['num_translated_messages'] = messages.count()
+    context["messages"] = messages.order_by('-date_recorded')[:5]
     return render_to_response(request, "translate_messages.html", context)
 
 @login_required
