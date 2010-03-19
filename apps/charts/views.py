@@ -177,20 +177,22 @@ def kml_filtered_by_governorate(request, question_id, governorate_id):
     district_kml = District.objects.filter(governorate=gov).kml()
     return get_kml(request, question_id, district_kml, gov)
 
-def kml_filtered_by_country(request, question_id):
+def kml_filtered_by_country(request, question_id, gender='all', age_group="all"):
+    gender = _sanitize_gender_identifier(gender)
+    age_group = _sanitize_age_group(age_group)
     governorate_kml = Governorate.objects.kml()
-    return get_kml(request, question_id, governorate_kml, None)
+    return get_kml(request, question_id, governorate_kml, governorate = None, gender = gender, age_group = age_group)
 
-def get_kml(request, question_id, kml, governorate):
+def get_kml(request, question_id, kml, governorate, gender=None, age_group = None):
     """ the kml tells us where to center our bubbles on the map """
     question = Question.objects.get(id=question_id)
     placemarks_info_list = []
     style_dict_list = []
     for (counter, geography) in enumerate(kml):
         if governorate is not None:
-            response_break_up = question.response_break_up(governorate_code = governorate.code, district_code = geography.code)
+            response_break_up = question.response_break_up(governorate_code = governorate.code, district_code = geography.code, gender = gender, age_group = age_group)
         else:
-            response_break_up = question.response_break_up(governorate_code = geography.code)
+            response_break_up = question.response_break_up(governorate_code = geography.code, gender = gender, age_group = age_group)
         categories = question.get_categories()
         total_responses = sum([response_for_category["votes"] for response_for_category in response_break_up["by_category"]])
         if total_responses > 0:

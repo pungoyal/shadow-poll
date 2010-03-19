@@ -12,7 +12,9 @@ urlpatterns = patterns('charts',
                        (r'^charts/[qQ]uestion?([\d+])/$', 'views.show_iraq_by_question'),
                        (r'^charts/$', 'views.home_page'),
                        (r'^get_kml/[qQ]uestion(\d+)/[gG]overnorate(\d{1,2})', 'views.kml_filtered_by_governorate'),
-                       (r'^get_kml/[qQ]uestion(\d+)$', 'views.kml_filtered_by_country')
+                       (r'^get_kml/[qQ]uestion(\d+)$', 'views.kml_filtered_by_country'),
+                       (r'^get_kml/[qQ]uestion(\d+)/(\w+)/$', 'views.kml_filtered_by_country'),
+                       (r'^get_kml/[qQ]uestion(\d+)/(\w+)/(\w+)/$', 'views.kml_filtered_by_country')
                        )
 
 handler404 = 'charts.views.view_404'
