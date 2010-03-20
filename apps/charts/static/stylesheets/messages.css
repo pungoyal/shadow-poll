@@ -47,10 +47,12 @@
 }
 
 .jp-single-player, .jp-playlist-player {
-	 font-size:1.25em;
-	 font-family:Verdana, Arial, sans-serif;
-	 line-height:1.6;
-	 color: #666;
+     direction: ltr;
+     float: right;
+     font-size:1.25em;
+     font-family:Verdana, Arial, sans-serif;
+     line-height:1.6;
+     color: #666;
  }
 .jp-interface {
      position: relative;
