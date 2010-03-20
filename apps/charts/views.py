@@ -85,15 +85,22 @@ def show_filtered_data_by_governorate(request, question_id, governorate_id,
 
 def show_filtered_data_by_governorate_and_gender(request, question_id, governorate_id, gender,template='results.html'):
     context = {}
+    context.update({ 
+            "gender_filter" : gender 
+            })
     gender = _sanitize_gender_identifier(gender)
     governorate_id = _sanitize_governorate_id(governorate_id)
     _update_context_for_governorate(context, governorate_id)
-
+    
     return _update_context_with_data(request, question_id, governorate_id, template, context, gender )
 
 
 def show_filtered_data_by_governorate_and_gender_and_age(request, question_id, governorate_id, gender,age_group, template='results.html'):
     context = {}
+    context.update({ 
+            "gender_filter" : gender,
+            "age_filter": age_group
+            })
     gender = _sanitize_gender_identifier(gender)
     governorate_id = _sanitize_governorate_id(governorate_id)
     age_group = _sanitize_age_group(age_group)
@@ -121,9 +128,7 @@ def _sanitize_age_group(age_group):
 def _update_context_for_governorate(context,governorate_id):
     if(governorate_id != None):
         governorate_id = governorate_id.replace("governorate","")
-    
         governorate = get_object_or_404(Governorate, pk=governorate_id)
-        
         context.update(   {"region": governorate.name,
                            "governorate": governorate,
                            "bbox": governorate.bounding_box,
@@ -134,7 +139,8 @@ def _update_context_for_governorate(context,governorate_id):
 def _update_context_with_data(request, question_id, governorate_id,template, context={}, gender=None, age_group=None):
     question = get_object_or_404(Question, pk=question_id)
     national_response_break_up = question.response_break_up()
-    response_break_up = question.response_break_up(governorate_id, gender,age_group)
+    response_break_up = question.response_break_up(governorate_code = governorate_id, gender = gender, age_group = age_group)
+
     choices_of_question = Choice.objects.filter(question = question)
     categories = question.get_categories()
 
@@ -176,20 +182,22 @@ def kml_filtered_by_governorate(request, question_id, governorate_id):
     district_kml = District.objects.filter(governorate=gov).kml()
     return get_kml(request, question_id, district_kml, gov)
 
-def kml_filtered_by_country(request, question_id):
+def kml_filtered_by_country(request, question_id, gender='all', age_group="all"):
+    gender = _sanitize_gender_identifier(gender)
+    age_group = _sanitize_age_group(age_group)
     governorate_kml = Governorate.objects.kml()
-    return get_kml(request, question_id, governorate_kml, None)
+    return get_kml(request, question_id, governorate_kml, governorate = None, gender = gender, age_group = age_group)
 
-def get_kml(request, question_id, kml, governorate):
+def get_kml(request, question_id, kml, governorate, gender=None, age_group = None):
     """ the kml tells us where to center our bubbles on the map """
     question = Question.objects.get(id=question_id)
     placemarks_info_list = []
     style_dict_list = []
     for (counter, geography) in enumerate(kml):
         if governorate is not None:
-            response_break_up = question.response_break_up(governorate.code, geography.code)
+            response_break_up = question.response_break_up(governorate_code = governorate.code, district_code = geography.code, gender = gender, age_group = age_group)
         else:
-            response_break_up = question.response_break_up(geography.code)
+            response_break_up = question.response_break_up(governorate_code = geography.code, gender = gender, age_group = age_group)
         categories = question.get_categories()
         total_responses = sum([response_for_category["votes"] for response_for_category in response_break_up["by_category"]])
         if total_responses > 0:

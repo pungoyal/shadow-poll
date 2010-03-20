@@ -21,14 +21,16 @@ $(document).ready(function(){
     var iraq = new OpenLayers.Layer.TMS(
         "Iraq Terrain",
         [
-            "http://a.tile.mapbox.com/",
-            "http://b.tile.mapbox.com/",
-            "http://c.tile.mapbox.com/",
-            "http://d.tile.mapbox.com/"
+            "http://a.unicef.mapbox.com/",
+            "http://b.unicef.mapbox.com/",
+            "http://c.unicef.mapbox.com/",
+            "http://d.unicef.mapbox.com/"
         ],
         {
-            'layername': 'iraq',
-            'type':'jpg',
+            'layername': 'unicef-iraq',
+            'type':'png',
+						'buffer':0,
+						'transitionEffect': 'resize',
 						'displayInLayerSwitcher': false
         });
  
