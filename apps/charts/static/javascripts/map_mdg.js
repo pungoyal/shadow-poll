@@ -1,5 +1,5 @@
 $(document).ready(function(){
-var geoserver_url = "http://"+window.location.host+"/geoserver/ows";
+var geoserver_url = "http://iraqyouth.mepemepe.com/geoserver/ows";
 var poverty_overlay = new OpenLayers.Layer.WMS(
                 "poverty_overlay",
                 geoserver_url,
