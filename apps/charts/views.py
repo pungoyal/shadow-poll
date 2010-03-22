@@ -34,7 +34,7 @@ def voice_home_page(request):
 @login_required
 def voice_admin_page(request):
     context = {}
-    messages = VoiceMessage.objects.filter(translated=True)
+    messages = VoiceMessage.objects.filter(translated=False)
     context['num_translated_messages'] = messages.count()
     context["messages"] = messages.order_by('-date_recorded')[:5]
     return render_to_response(request, "translate_messages.html", context)
