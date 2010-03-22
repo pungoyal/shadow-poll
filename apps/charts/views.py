@@ -177,15 +177,15 @@ def kml_filtered_by_governorate(request, question_id, governorate_id):
     return get_kml(request, question_id, district_kml, gov)
 
 def kml_filtered_by_country(request, question_id):
-    filter_dict = {'gender': None, 'age1': None, 'age2': None}
+    filter_dict = {'gender': None, 'age': None}
     for key in request.GET:
         filter_dict[key] = request.GET[key]
     gender = _sanitize_gender_identifier(filter_dict['gender'])
     agegroup = []
-    if filter_dict['age1'] is not None:
-        agegroup.append(filter_dict['age1'])
-    if filter_dict['age2'] is not None:
-        agegroup.append(filter_dict['age2'])
+    if filter_dict['age'] is not None:
+        ranges = filter_dict['age'].split(',')
+        for age_ranges in ranges:
+            agegroup.append(age_ranges)
     age_group_list = _sanitize_age_group(agegroup)
     governorate_kml = Governorate.objects.kml()
     return get_kml(request, question_id, governorate_kml, governorate = None, gender = gender, age_group_list = age_group_list)

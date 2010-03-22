@@ -17,7 +17,7 @@ class ViewTests(TestCase):
             url = '/charts/question%s/' % question.id
             self.assertEquals(self.client.get(url).status_code, 200)
             for governorate in governorates:
-                url = '/charts/question%s/governorate%s/' % (question.id, governorate.id)
+                url = '/charts/question%s/governorate%s' % (question.id, governorate.id)
                 self.assertEquals(self.client.get(url).status_code, 200)
 
     def test_kml(self):
@@ -49,11 +49,4 @@ class ViewTests(TestCase):
         self.assertEquals(response.status_code, 200)
 
 
-    def test_all_governorates_gender_age(self):
-        response1 = self.client.get("/charts/question1")
-        response2 = self.client.get("/charts/question1/all")
-        self.assertEquals(response1.content,response2.content)
-
-        response1 = self.client.get("/charts/question1/governorate5")
-        response2 = self.client.get("/charts/question1/governorate5/all")
-        self.assertEquals(response1.content,response2.content)
+    

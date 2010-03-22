@@ -27,7 +27,7 @@ $(document).ready(function(){
         return kml_url;
     }
 
-    kml_url = construct_kml_url(governorate_id, question_id, gender, age_group);
+    kml_url = construct_kml_url(governorate_id, question_id, gender, age);
     var bubbles = new OpenLayers.Layer.Vector(
         "poll_responses", 
         {
