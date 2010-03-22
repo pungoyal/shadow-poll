@@ -20,9 +20,12 @@ function MDG_overlay_factory(name, style)
 	return overlay;
 }
 
-map.addLayer(MDG_overlay_factory("primary_enrollment_overlay", 'mdgs_primary_enrollment'));
 map.addLayer(MDG_overlay_factory("poverty_overlay", 'mdgs_poverty'));
 map.addLayer(MDG_overlay_factory("underweigh_overlay", 'mdgs_underweight'));
 map.addLayer(MDG_overlay_factory("under5mort_overlay", 'mdgs_under5mort'));
+map.addLayer(MDG_overlay_factory("primary_enrollment_overlay", 'mdgs_primary_enrollment'));
+map.addLayer(MDG_overlay_factory("intermediate_enrollment_overlay", 'mdgs_intermediate_enrollment'));
+map.addLayer(MDG_overlay_factory("secondary_enrollment_overlay", 'mdgs_secondary_enrollment'));
+map.addLayer(MDG_overlay_factory("femaletomale_enrollment_overlay", 'mdgs_femaletomale_enrollment'));
 
 });
