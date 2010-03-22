@@ -30,7 +30,7 @@ if (result.name == 'choice'):
     data.write("Age: %s\n" % result.value)
 
 result = record( "http://hosting.tropo.com/44537/www/audio/sound_5.wav",
-                 { 'beep':True, 'timeout':10, 'silenceTimeout':4, 'maxTime':30, 'choiceMode':'speech', 'format':'audio/mp3', 'bargein':False})
+                 { 'beep':True, 'timeout':3, 'silenceTimeout':30, 'maxTime':30, 'choiceMode':'speech', 'format':'audio/mp3', 'bargein':False,'repeat':5})
 if (result.name == 'record'):
     log( "result.recordURI = " + result.recordURI )
     filename = "q1-%s-%s.wav" % (currentCall.callerID, str(datetime.datetime.now()))
@@ -42,7 +42,7 @@ ftp.storbinary('STOR %s' % filename, f)
 ftp.close()
 
 result = record( "http://hosting.tropo.com/44537/www/audio/sound_6.wav",
-                 { 'beep':True, 'timeout':10, 'silenceTimeout':4, 'maxTime':30, 'choiceMode':'speech', 'format':'audio/mp3', 'bargein':False})
+                 { 'beep':True, 'timeout':3, 'silenceTimeout':30, 'maxTime':30, 'choiceMode':'speech', 'format':'audio/mp3', 'bargein':False, 'repeat':5})
 if (result.name == 'record'):
     log( "result.recordURI = " + result.recordURI )
     filename = "q2-%s-%s.wav" % (currentCall.callerID, str(datetime.datetime.now()))
