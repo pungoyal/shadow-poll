@@ -72,7 +72,7 @@ class Question(models.Model):
         options = self.humanize_options()
         return "%s: %s %s" % (self.text,self.helper_text, options)
 
-    def response_break_up(self, governorate_code=None, district_code = None, gender=None, age_group=None):
+    def response_break_up(self, governorate_code=None, district_code = None, gender=None, age_group_list = None):
         relevant_responses = UserResponse.objects.filter(question=self)
         if governorate_code != None:
             relevant_responses = relevant_responses.filter(user__governorate=governorate_code)
@@ -80,8 +80,16 @@ class Question(models.Model):
             relevant_responses = relevant_responses.filter(user__district = district_code)
         if gender != None:
             relevant_responses = relevant_responses.filter(user__gender=gender)
-        if age_group != None and len(age_group) == 2 :
-            relevant_responses = relevant_responses.filter(Q(user__age__gt = age_group[0]) | Q(user__age = age_group[0])  , Q(user__age = age_group[0]) | Q( user__age__lt = age_group[1]))
+        qset_lower_age_value = Q()
+        qset_higer_age_value = Q()
+        if age_group_list is not None and (len(age_group_list) > 0):
+            for age in age_group_list:
+                qset_lower_age_value = qset_lower_age_value | Q(user__age__gt = age[0])
+                qset_lower_age_value = qset_lower_age_value | Q(user__age = age[0])
+                qset_higer_age_value = qset_higer_age_value | Q(user__age = age[1])
+                qset_higer_age_value = qset_higer_age_value | Q( user__age__lt = age[1])
+                relevant_responses = relevant_responses.filter( qset_lower_age_value  , qset_higer_age_value )
+
         responses_by_choice = relevant_responses.values("choice").\
             annotate(votes = Count("choice"))
         responses_by_category = relevant_responses.values("choice__category").\
