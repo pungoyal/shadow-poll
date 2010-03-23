@@ -391,15 +391,16 @@ msgstr "تم حفظ الترجمة."
 
 #: .\apps\charts\models.py:50
 msgid "English Translation"
-msgstr "ArabicEnglish Translation"
+msgstr "الترجمة الإنجليزية"
 
 msgid "Go Back"
-msgstr "ArabicGo Back"
+msgstr "رجوع"
 
 msgid "List of messages to be translated"
 msgstr "لا يوجد رسائل للعرض"
 
 msgid "Click to hear and append translation(s)"
-msgstr "ArabicClickToHear"
+msgstr "أنقر هنا للإستماع و إضافة الترجمة"
+
 
 
