@@ -1,17 +1,32 @@
 @charset "utf-8";
 /* Arabic Style sheet */
-body {
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, font, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td {
 		direction: rtl;
+		text-align: right;
+}
+#site_header h1 {
+	float: right;
 }
 #top_menu {
 		float:left;
-		left:0;
+		left: 0 !important;
 		right: auto;
 }
 
 #top_menu ul li a {
 		background-image:  url(../img/arabic/bg_sprite_ar.gif);
 		background-position: 100% 0;
+}
+#top_menu ul li a span{
+		text-align: right;
 }
 #top_menu ul li a:hover {
 		background-position: 100% -55px;
@@ -31,6 +46,9 @@ body {
 #top_menu ul li a:hover, #language_menu ul li a:hover {
 		text-decoration: none;
 }
+#top_menu ul li a span {
+		padding: 15px 55px 0 0;
+}
 #language_menu {
 		background:transparent url(../img/arabic/bg_language_right.gif) no-repeat scroll 100% 0;
 }
@@ -47,12 +65,21 @@ body {
 #language_menu ul li.arabic a.current_language {
 		background-position: -280px -140px;
 }
+#site_header h1 {
+	padding-left:0;
+	padding-right:1em;
+}
+#breadcrumb_container ul {
+	margin:0 10px 0 0 ;
+}
+
 #breadcrumb_container ul li {
 		float:right;
 }
 .breadcrumbs {
 		float:right;
 }
+
 .breadcrumbs li {
 		background:transparent url(../img/arabic/breadcrumb_arrow_left.gif) no-repeat scroll 0 50%;
 		margin-right:0;
@@ -78,8 +105,7 @@ body {
 		margin-left:0;
 		margin-right:10px;
 }
-.choice
-{
+.choice {
 		margin-left: 10px;
 		margin-right: 10px;	
 }
@@ -121,7 +147,6 @@ body {
 }
 #sidebar {
 		float:left;
-		width:200px;
 }
 #filter_container {
 		border-left:1px solid #C4C1BC;
@@ -154,9 +179,10 @@ body {
 }
 
 .nav_questions .note {
-		margin-right:-5px;
-		margin-left: 0;
 		text-align:right;
+	left: auto !important;
+	right: 5px !important;
+
 }
 
 #filter_container .keys_section ul li {
@@ -194,8 +220,13 @@ body {
 		margin-left: 5px;
 		margin-right: 0;
 }
+.response_category ul li  {
+		padding-left: 0;
+		
+}
 .response_category ul li span {
 		background-position: 0 -170px;
+		padding-right: 15px;
 }
 
 .filter_section {
@@ -235,8 +266,8 @@ body {
 	background-position: 100% 50%;
 }
 
-.map_layer legend a,.map_layer legend a:visited {
-	background-position: 0 0;
+.map_layer legend a {
+	background-position: 0 3px;
 	padding-right: 0;
 	padding-left: 90px;
 	text-shadow: -1px 1px 1px #ccc;
@@ -249,5 +280,5 @@ body {
 	-webkit-text-shadow: -1px 2px 3px #ccc;
 }
 .map_layer legend a.collapse{
-	background-position: 0 100%;
+	background-position: 0 -13px;
 }

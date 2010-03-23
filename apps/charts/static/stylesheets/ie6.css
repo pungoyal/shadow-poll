@@ -2,7 +2,8 @@
 	top: -5px;
 }
 #sidebar  {
-	width: 195px;
+	display: inline;
+	margin: 0 8px;
 }
 #map_container {
 	width: 595px;
@@ -12,13 +13,23 @@
 	width:575px;
 }
 #sidebar .nav_questions {
-	margin:0 5px !important;
-	padding: 2px 0 100px !important;
+	padding: 2px 2px 6.5em;
 }
 .nav_questions .note {
-	left: 10px;
-	width:175px;
+	bottom: 3px;
+	left: 5px;
 }
-.response_category .response_category_header {	
+.response_category .response_category_header,
+#breadcrumb_container ul  {	
 	display: inline;
+}
+.nav_questions ul.side_nav li.active a {
+	width: 139px;
+}
+#map_layer_overlay {
+	width: 260px;
+}
+#map_layer_overlay legend{
+	
+	margin: 0;
 }
