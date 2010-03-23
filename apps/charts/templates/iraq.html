@@ -15,7 +15,12 @@
 <!--[if lte IE 8]><link rel="stylesheet" href="/static/charts/stylesheets/ie-arabic.css" type="text/css" media="screen, projection"><![endif]-->
 <!-- End: If ARABIC -->
 {% endifequal %}
+<<<<<<< HEAD
 <link rel="stylesheet" href="/static/charts/stylesheets/print.css" type="text/css" media="print">
+=======
+<!--[if IE 6]><link rel="stylesheet" href="/static/charts/stylesheets/ie6.css" type="text/css" media="screen, projection"><![endif]-->
+<!--[if lt IE 8]><link rel="stylesheet" href="/static/charts/stylesheets/ie.css" type="text/css" media="screen, projection"><![endif]-->
+>>>>>>> 7a272aa88b87572ead59875cc7622beaab4e1b8b
 {% block page_stylesheets %}{% endblock %}
 {% endblock %}
 
@@ -35,7 +40,7 @@
         <div id="top_menu">
             <ul>
                 <li class="home first"><a href="/charts"><span>{% trans 'Home' %}</span></a></li>
-                <li class="about"><a href="/about"><span>{% trans 'About' %}</span></a></li>
+                <li class="about"><a href="/about/unicef"><span>{% trans 'About' %}</span></a></li>
                 <li class="poll last"><a href="/charts/question1"><span>{% trans 'Poll' %}</span></a></li>
             </ul>
         </div>
@@ -237,7 +242,7 @@
             <h3>{% trans 'Sections' %}</h3>
             <ul>
                 <li><a href="/charts">{% trans 'Home' %}</a></li>
-                <li><a href="/about">{% trans 'About' %}</a></li>
+                <li><a href="/about/unicef">{% trans 'About' %}</a></li>
                 <li><a href="/charts/question1">{% trans 'Poll' %}</a></li>
             </ul>
         </div>

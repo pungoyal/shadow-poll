@@ -20,7 +20,8 @@
 <span id="question-id" style="display:none;">{{question.id}}</span>
 <span id="governorate-id" style="display:none;">{{ governorate.id }}</span>
 <span id="gender-filter" style="display:none;">{{ gender_filter }}</span>
-<span id="age-filter" style="display:none;">{{ age_filter }}</span>
+<span id="age1" style="display:none;">{{ age1 }}</span>
+<span id="age2" style="display:none;">{{ age2 }}</span>
 <span id="governorate-zoom" style="display:none;">{{ governorate.zoom_level }}</span>
 <span id="bbox" style="display:none;">{{bbox}}</span>
 <div class="question">
@@ -56,6 +57,22 @@
                   <div class="field_container">
                     <input class="mdg_indicators" name="map_layer" type="checkbox" value="under5mort_overlay" id="Under_five" />
                     <label for="Under_five">Under five mortality indicator</label>
+                  </div>
+                  <div class="field_container">
+                    <input class="mdg_indicators" name="map_layer" type="checkbox" value="primary_enrollment_overlay" id="primary_enrollment" />
+                    <label for="primary_enrollment">Primary Enrollment</label>
+                  </div>
+                  <div class="field_container">
+                    <input class="mdg_indicators" name="map_layer" type="checkbox" value="intermediate_enrollment_overlay" id="intermediate_enrollment" />
+                    <label for="intermediate_enrollment">Intermediate Enrollment</label>
+                  </div>
+                  <div class="field_container">
+                    <input class="mdg_indicators" name="map_layer" type="checkbox" value="secondary_enrollment_overlay" id="secondary_enrollment" />
+                    <label for="secondary_enrollment">Secondary Enrollment</label>
+                  </div>
+                  <div class="field_container">
+                    <input class="mdg_indicators" name="map_layer" type="checkbox" value="femaletomale_enrollment_overlay" id="femaletomale_enrollment" />
+                    <label for="femaletomale_enrollment">Female to Male Enrollment</label>
                   </div>
                 </div>
               </fieldset>
