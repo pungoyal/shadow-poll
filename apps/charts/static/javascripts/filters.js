@@ -27,4 +27,11 @@ if(current_governorate == ''){
 																												 window.location =  current_governorate + "?gender="+gender;
 																										 }
 																								 });
+
+											$("#age_slider").slider({
+																									range: true,
+																									min: 2,
+																									max: 18,
+																									values :[5, 15]
+																							});
 									});
