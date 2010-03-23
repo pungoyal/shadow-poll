@@ -86,9 +86,14 @@ def _update_data_with_filters_applied(request, question_id, governorate_id, temp
     filter_dict = {'gender': None, 'age': None}
     for key in request.GET:
         filter_dict[key] = request.GET[key]
+    age_context, gender_filter_context = '', 'all'
+    if filter_dict['age'] is not None:
+        age_context = filter_dict['age']
+    if filter_dict['gender'] is not None:
+        gender_filter_context = filter_dict['gender']
     context.update({
-            "gender_filter": filter_dict['gender'],
-            "age": filter_dict['age']
+            "gender_filter": gender_filter_context,
+            "age": age_context
             })
     gender = _sanitize_gender_identifier(filter_dict['gender'])
     agegroup = []

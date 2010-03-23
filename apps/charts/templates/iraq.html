@@ -15,12 +15,10 @@
 <!--[if lte IE 8]><link rel="stylesheet" href="/static/charts/stylesheets/ie-arabic.css" type="text/css" media="screen, projection"><![endif]-->
 <!-- End: If ARABIC -->
 {% endifequal %}
-<<<<<<< HEAD
 <link rel="stylesheet" href="/static/charts/stylesheets/print.css" type="text/css" media="print">
-=======
 <!--[if IE 6]><link rel="stylesheet" href="/static/charts/stylesheets/ie6.css" type="text/css" media="screen, projection"><![endif]-->
 <!--[if lt IE 8]><link rel="stylesheet" href="/static/charts/stylesheets/ie.css" type="text/css" media="screen, projection"><![endif]-->
->>>>>>> 7a272aa88b87572ead59875cc7622beaab4e1b8b
+<link rel="stylesheet" href="/static/charts/stylesheets/ui-lightness/jquery-ui-1.8.custom.css" type="text/css" media="screen, projection">
 {% block page_stylesheets %}{% endblock %}
 {% endblock %}
 
@@ -96,23 +94,25 @@
                         <fieldset>
                             <legend><span>{% trans 'Filter map by' %}</span></legend>
                             <div class="field_container">
-                                <input name="filter" type="checkbox" value="m" id="Boys" checked="checked" />
-                                <label for="Boys">{% trans 'Boys' %}</label>
-                            </div>
-                            <div class="field_container">
-                                <input name="filter" type="checkbox" value="f" id="Girls" checked="checked"/>
-                                <label for="Girls">{% trans 'Girls' %}</label>
+                              <p class="gender">
+																<label class="lbl_boys">Boys</label>
+																<label class="lbl_all">All</label>
+																<label class="lbl_girls">Girls</label>
+															</p>
+															
+															<div id="gender_slider">
+																</div>
                             </div>                          
                             <div class="field_container">
-                                <input name="filter" type="checkbox" value="a1" id="Ages_6_11" checked="checked"/>
+                                <input class="filter" type="checkbox" value="a1" id="Ages_6_11"/>
                                 <label for="Ages_6_11">{% trans 'Ages 6-11' %}</label>
                             </div>
                             <div class="field_container">
-                                <input name="filter" type="checkbox" value="a2" id="Ages_12_14" checked="checked"/>
+                                <input class="filter" type="checkbox" value="a2" id="Ages_12_14"/>
                                 <label for="Ages_12_14">{% trans 'Ages 12-14' %}</label>
                             </div>
                             <div class="field_container">
-                                <input name="filter" type="checkbox" value="a3" id="Ages_15_17" checked="checked"/>
+                                <input class="filter" type="checkbox" value="a3" id="Ages_15_17"/>
                                 <label for="Ages_15_17">{% trans 'Ages 15-17' %}</label>
                             </div>
 
