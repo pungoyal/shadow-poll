@@ -410,6 +410,35 @@ a:hover {
 		margin-left:10px;
 }
 
+.filter_section #gender_slider {
+		width: 170px;
+		margin-left: 10px;
+		margin-right: 10px;
+}
+
+.filter_section .gender {
+		overflow: hidden;
+		margin: 5px 10px;
+}
+
+.filter_section .gender label {
+		width: 58px;
+		float: left;
+		text-align: left;
+}
+
+.filter_section .gender label.lbl_all  {
+		text-align: center;
+}
+
+.filter_section .gender label.lbl_girls  {
+		text-align: right;
+}
+
+.filter_section .gender label.lbl_boys  {
+		text-align: left;
+}
+
 .keys_section ul{
 		list-style: none;
 }
