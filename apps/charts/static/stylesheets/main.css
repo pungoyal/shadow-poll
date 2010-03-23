@@ -71,22 +71,31 @@ a:hover {
 /* Top Menu */
 #top_menu {
 		width: 400px;
-		float: right;
 		position: absolute;
 		top: 0;
 		right: 0;
 }
-#top_menu ul li {
-		text-indent: -999em;
-}
+
 #top_menu ul li a {
 		display: block;
 		width: 128px;
 		height: 52px;
 		background: url(../img/bg_sprite.gif) no-repeat 0 0;
 }
+
+#top_menu ul li a span {
+		display: block;
+		font-weight: bold;
+		padding: 15px 0 0 55px;
+}
+#top_menu ul li a:hover span {
+		color: #fff;
+		text-decoration: none;
+}
+
 #top_menu ul li a:hover {
 		background-position: 0 -55px;
+		text-decoration: none;
 }
 #top_menu ul li.about a {
 		background-position: -125px 0;
@@ -136,7 +145,7 @@ a:hover {
 }
 #breadcrumb_container ul {
 		list-style: none;
-		margin: 0 10px;
+		margin: 0 0 0 10px;
 }
 #breadcrumb_container ul li {
 		float: left
@@ -282,22 +291,23 @@ a:hover {
 }
 /* Side bar */
 #sidebar {
+		width: 180px;
+		margin: 0 10px;
 		float: right;
-		width: 200px;
 		position: relative;
 }
 #sidebar .nav_questions {
-		margin: 0 10px;
+		margin: 0;
 		border: 8px solid #87C8A2;
 		text-align: center;
+		line-height: 1.1;
+		padding: 2px 2px 7em;
 		border-radius-bottomleft: 3px;
 		border-radius-bottomright: 3px;
 		-moz-border-radius-bottomleft: 3px;
 		-moz-border-radius-bottomright: 3px;
 		-webkit-border-radius-bottomleft: 3px;
 		-webkit-border-radius-bottomright: 3px;
-		line-height: 1.1;
-		padding: 2px 2px 110px;
 }
 .nav_questions ul.side_nav {
 		text-align: left;
@@ -314,7 +324,7 @@ a:hover {
 		padding: 10px;
 		border-bottom: 1px solid #303030;
 }
-.nav_questions ul.side_nav li a:hover, .nav_questions ul.side_nav li.active a, .nav_questions ul.side_nav li.active a:visited {
+.nav_questions ul.side_nav li a:hover, .nav_questions ul.side_nav li.active a, .nav_questions ul.side_nav li.active a:visited, .nav_questions ul.side_nav li.active p {
 		background:  #404040;
 		color:  #fff;
 		text-decoration: none;
@@ -348,8 +358,8 @@ a:hover {
 .nav_questions .note {
 		width: 170px;
 		position: absolute;
-		left: 15px;
 		bottom: 5px;
+		left: 5px;
 		text-align: left;
 		background: #f3653a;
 		border-radius: 3px;
@@ -361,7 +371,6 @@ a:hover {
 		border-bottom: 1px dotted #fff;
 }
 .nav_questions .note li.last {
-
 		margin-bottom: 0;
 		border-bottom: 0;
 }
@@ -624,15 +633,19 @@ a:hover {
 #map_layer_overlay label{
 	color: #fff;
 }
-.map_layer legend a, .map_layer legend a:visited {
+.map_layer legend a {
 	color: #fff;
+	display: block;
 	font-weight:  bold;
-	background: url('../img/map_layers_arrow.gif') no-repeat 100% 0;
+	background: url('../img/map_layers_arrow.gif') no-repeat 100% 3px;
 	padding-right: 90px;
 	letter-spacing: 3px;
 	text-shadow: 1px 1px 1px #ccc;
 	-moz-text-shadow: 1px 1px 1px #ccc;
 	-webkit-text-shadow: 1px 1px 1px #ccc;
+}
+map_layer legend a:visited {
+	color: #fff;
 }
 
 .map_layer legend a:hover,.map_layer legend a.collapse {

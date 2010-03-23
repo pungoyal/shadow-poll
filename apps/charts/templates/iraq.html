@@ -7,9 +7,15 @@
 {% block stylesheets %}
 <link rel="stylesheet" href="/static/charts/stylesheets/reset.css" type="text/css" media="screen, projection">
 <link rel="stylesheet" href="/static/charts/stylesheets/main.css" type="text/css" media="screen, projection">
+<!--[if IE 6]><link rel="stylesheet" href="/static/charts/stylesheets/ie6.css" type="text/css" media="screen, projection"><![endif]-->
+<!--[if lte IE 8]><link rel="stylesheet" href="/static/charts/stylesheets/ie.css" type="text/css" media="screen, projection"><![endif]-->
 {% ifequal LANGUAGE_CODE "ar"%}
 <link rel="stylesheet" href="/static/charts/stylesheets/arabic.css" type="text/css" media="screen, projection">
+<!--[if IE 6]><link rel="stylesheet" href="/static/charts/stylesheets/ie6-arabic.css" type="text/css" media="screen, projection"><![endif]-->
+<!--[if lte IE 8]><link rel="stylesheet" href="/static/charts/stylesheets/ie-arabic.css" type="text/css" media="screen, projection"><![endif]-->
+<!-- End: If ARABIC -->
 {% endifequal %}
+<link rel="stylesheet" href="/static/charts/stylesheets/print.css" type="text/css" media="print">
 <!--[if IE 6]><link rel="stylesheet" href="/static/charts/stylesheets/ie6.css" type="text/css" media="screen, projection"><![endif]-->
 <!--[if lt IE 8]><link rel="stylesheet" href="/static/charts/stylesheets/ie.css" type="text/css" media="screen, projection"><![endif]-->
 <link rel="stylesheet" href="/static/charts/stylesheets/ui-lightness/jquery-ui-1.8.custom.css" type="text/css" media="screen, projection">
