@@ -3,24 +3,24 @@
                        xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                        xsi:schemaLocation="http://www.opengis.net/sld http://schemas.opengis.net/sld/1.0.0/StyledLayerDescriptor.xsd">
     <NamedLayer>
-        <Name>Intermediate Enrollment</Name>
+        <Name>improved_s</Name>
         <UserStyle>
-            <Name>intermediate enrollment</Name>
-            <Title>Intermediate Enrollement</Title>
-            <Abstract>A style emphasizing enrollment in Intermediate School</Abstract>
+            <Name>improved_s</Name>
+            <Title>Improved Sanitation Facilities</Title>
+            <Abstract>A style emphasizing population having access to improved sanitation facilities statistics</Abstract>
             <FeatureTypeStyle>
                 <Rule>
-                    <Name>Less than 20</Name>
+                    <Name>Less than 45</Name>
                     <ogc:Filter>
                         <ogc:PropertyIsLessThan>
-                            <ogc:PropertyName>enrollmen2</ogc:PropertyName>
-                            <ogc:Literal>20</ogc:Literal>
+                            <ogc:PropertyName>improved_s</ogc:PropertyName>
+                            <ogc:Literal>45</ogc:Literal>
                         </ogc:PropertyIsLessThan>
                     </ogc:Filter>
                     <PolygonSymbolizer>
                         <Fill>
-                            <CssParameter name="fill">#fbec04</CssParameter>
-                            <CssParameter name="fill-opacity">0.40</CssParameter>
+                            <CssParameter name="fill">#00aad4</CssParameter>
+                            <CssParameter name="fill-opacity">0.12</CssParameter>
                         </Fill>
                         <Stroke>
                             <CssParameter name="stroke">#777777</CssParameter>
@@ -29,23 +29,23 @@
                     </PolygonSymbolizer>
                 </Rule>
                 <Rule>
-                    <Name>20 to 30</Name>
+                    <Name>45 to 60</Name>
                     <ogc:Filter>
                         <ogc:And>
                             <ogc:PropertyIsGreaterThanOrEqualTo>
-                                <ogc:PropertyName>enrollmen2</ogc:PropertyName>
-                                <ogc:Literal>20</ogc:Literal>
+                                <ogc:PropertyName>improved_s</ogc:PropertyName>
+                                <ogc:Literal>45</ogc:Literal>
                             </ogc:PropertyIsGreaterThanOrEqualTo>
                             <ogc:PropertyIsLessThan>
-                                <ogc:PropertyName>enrollmen2</ogc:PropertyName>
-                                <ogc:Literal>30</ogc:Literal>
+                                <ogc:PropertyName>improved_s</ogc:PropertyName>
+                                <ogc:Literal>60</ogc:Literal>
                             </ogc:PropertyIsLessThan>
                         </ogc:And>
                     </ogc:Filter>
                     <PolygonSymbolizer>
                         <Fill>
-                            <CssParameter name="fill">#c3eb18</CssParameter>
-                            <CssParameter name="fill-opacity">0.45</CssParameter>
+                            <CssParameter name="fill">#00aad4</CssParameter>
+                            <CssParameter name="fill-opacity">0.24</CssParameter>
                         </Fill>
                         <Stroke>
                             <CssParameter name="stroke">#777777</CssParameter>
@@ -54,23 +54,23 @@
                     </PolygonSymbolizer>
                 </Rule>
                 <Rule>
-                    <Name>30 to 40</Name>
+                    <Name>60 to 75</Name>
                     <ogc:Filter>
                         <ogc:And>
                             <ogc:PropertyIsGreaterThanOrEqualTo>
-                                <ogc:PropertyName>enrollmen2</ogc:PropertyName>
-                                <ogc:Literal>30</ogc:Literal>
+                                <ogc:PropertyName>improved_s</ogc:PropertyName>
+                                <ogc:Literal>60</ogc:Literal>
                             </ogc:PropertyIsGreaterThanOrEqualTo>
                             <ogc:PropertyIsLessThan>
-                                <ogc:PropertyName>enrollmen2</ogc:PropertyName>
-                                <ogc:Literal>40</ogc:Literal>
+                                <ogc:PropertyName>improved_s</ogc:PropertyName>
+                                <ogc:Literal>75</ogc:Literal>
                             </ogc:PropertyIsLessThan>
                         </ogc:And>
                     </ogc:Filter>
                     <PolygonSymbolizer>
                         <Fill>
-                            <CssParameter name="fill">#7de931</CssParameter>
-                            <CssParameter name="fill-opacity">0.50</CssParameter>
+                            <CssParameter name="fill">#00aad4</CssParameter>
+                            <CssParameter name="fill-opacity">0.36</CssParameter>
                         </Fill>
                         <Stroke>
                             <CssParameter name="stroke">#777777</CssParameter>
@@ -79,23 +79,23 @@
                     </PolygonSymbolizer>
                 </Rule>
                 <Rule>
-                    <Name>40 to 50</Name>
+                    <Name>75 to 90</Name>
                     <ogc:Filter>
                         <ogc:And>
                             <ogc:PropertyIsGreaterThanOrEqualTo>
-                                <ogc:PropertyName>enrollmen2</ogc:PropertyName>
-                                <ogc:Literal>40</ogc:Literal>
+                                <ogc:PropertyName>improved_s</ogc:PropertyName>
+                                <ogc:Literal>75</ogc:Literal>
                             </ogc:PropertyIsGreaterThanOrEqualTo>
                             <ogc:PropertyIsLessThan>
-                                <ogc:PropertyName>enrollmen2</ogc:PropertyName>
-                                <ogc:Literal>50</ogc:Literal>
+                                <ogc:PropertyName>improved_s</ogc:PropertyName>
+                                <ogc:Literal>90</ogc:Literal>
                             </ogc:PropertyIsLessThan>
                         </ogc:And>
                     </ogc:Filter>
                     <PolygonSymbolizer>
                         <Fill>
-                            <CssParameter name="fill">#33e74b</CssParameter>
-                            <CssParameter name="fill-opacity">0.55</CssParameter>
+                            <CssParameter name="fill">#00aad4</CssParameter>
+                            <CssParameter name="fill-opacity">0.48</CssParameter>
                         </Fill>
                         <Stroke>
                             <CssParameter name="stroke">#777777</CssParameter>
@@ -104,16 +104,16 @@
                     </PolygonSymbolizer>
                 </Rule>
                 <Rule>
-                    <Name>Greater than 50</Name>
+                    <Name>Greater than 90</Name>
                     <ogc:Filter>
                         <ogc:PropertyIsGreaterThanOrEqualTo>
-                            <ogc:PropertyName>enrollmen2</ogc:PropertyName>
-                            <ogc:Literal>50</ogc:Literal>
+                            <ogc:PropertyName>improved_s</ogc:PropertyName>
+                            <ogc:Literal>90</ogc:Literal>
                         </ogc:PropertyIsGreaterThanOrEqualTo>
                     </ogc:Filter>
                     <PolygonSymbolizer>
                         <Fill>
-                            <CssParameter name="fill">#00e65d</CssParameter>
+                            <CssParameter name="fill">#00aad4</CssParameter>
                             <CssParameter name="fill-opacity">0.60</CssParameter>
                         </Fill>
                         <Stroke>
