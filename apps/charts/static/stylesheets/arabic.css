@@ -237,15 +237,26 @@ table, caption, tbody, tfoot, thead, tr, th, td {
 }
 
 /* Messages */
-#content_area #message_container {
-	border-left:1px solid #C4C1BC;
-	border-right: 0;
-	float:right;
-}
+#content_area #message_container,
 #message_container .child_details {
-	float:right;
+	float: right;
 }
+#message_container .child_details{
+	margin-left: 10px;
+	margin-right: 0;
+}
+#message_container .child_details,
+#message_container .child_details p {
+	text-align: left;
+}
+#message_container .message_details {
 
+	background:transparent url(../img/arabic/msg_arrow_right.gif) no-repeat scroll 100% 50%;
+	float: right;
+	padding-right:15px;
+	padding-left: 0;
+
+}
 /* Map layers */
 #map_layer_overlay {
 	left: auto;
@@ -285,6 +296,7 @@ table, caption, tbody, tfoot, thead, tr, th, td {
 .map_layer legend a.collapse{
 	background-position: 0 -13px;
 }
+/* messages */
 
 #translation_container,
 #translation_container p,
