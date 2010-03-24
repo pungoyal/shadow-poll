@@ -1,0 +1,40 @@
+{% extends "iraq.html" %}
+{% load i18n %}
+
+{% block javascripts %}
+<script src="/static/charts/javascripts/language_switcher.js"></script>
+{% endblock %}
+
+{% block title %}{% trans 'Login' %}{% endblock %}
+{% block content %}
+
+{% if form.errors %}
+<p>{% trans "Oops. Your username and password didn't match. Please try again." %}</p>
+{% endif %}
+
+{% if user.is_authenticated %}
+<p>{% trans 'Oops. You do not have permission to view this section.' %}</p>
+{% else %}
+
+<h1>{% trans 'Please log in to RapidSMS' %}</h1>
+
+<form method="post" action="{% url webapp.views.login %}">
+<table>
+<tr>
+    <td>{{ form.username.label_tag }}</td>
+    <td>{{ form.username }}</td>
+</tr>
+<tr>
+    <td>{{ form.password.label_tag }}</td>
+    <td>{{ form.password }}</td>
+</tr>
+</table>
+
+<input type="submit" value="{% trans 'login' %}" />
+<input type="hidden" name="next" value="{{ next }}" />
+</form>
+
+{% endif %}
+{% endblock %}
+
+{% block footer %}{% endblock %}

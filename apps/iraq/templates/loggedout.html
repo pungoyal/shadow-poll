@@ -1,0 +1,19 @@
+{% extends "iraq.html" %}
+{% load i18n %}
+
+{% block javascripts %}
+<script src="/static/charts/javascripts/language_switcher.js"></script>
+{% endblock %}
+
+{% block title %}{% trans 'Goodbye' %}{% endblock %}
+{% block content %}
+
+<h1>{% trans 'Thanks for visiting RapidSMS!' %}</h1>
+
+<p>{% trans 'Please come again.' %}</p>
+
+<a href="/accounts/login">{% trans 'Log in again' %}</a>
+
+{% endblock %}
+
+{% block footer %}{% endblock %}
