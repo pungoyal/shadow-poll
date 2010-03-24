@@ -4,3 +4,4 @@ import unittest
 # file for them to be included in the tests
 from integration_tests import *
 from integration_tests_2 import *
+#from functional_tests import *
