@@ -24,15 +24,15 @@
 {% block footer %}{% endblock %}
 
 {% block messages %}
-<div id="content_area">
-    <div id="message_container">
+    <div id="message_translation_container">
     	<div id="status">{{status}}</div>
         {% jplayer 0 message.sound_file_url %}
+        <div id="translation_container">
         <form method="post">
         	{{ form.as_p }}
-            <input type="submit" value="{% trans 'Save' %}"/>
+            <p><input type="submit" value="{% trans 'Save' %}"/></p>
         </form>
-        <a href="{% url messages_admin %}">{% trans 'Go Back' %}</a>
+        <p><a href="{% url messages_admin %}">{% trans 'Go Back' %}</a></p>
+        </div>
     </div>
-</div>
 {% endblock %}

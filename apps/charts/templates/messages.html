@@ -37,7 +37,6 @@
 {% endblock %}
 
 {% block messages %}
-  <div id="content_area">
     <div id="message_container">
       {% if messages %}
       <ul>
@@ -49,7 +48,7 @@
 	  </p>
 	  </div>
 	  <div class="message_details">
-	    <div class="message">
+	    <div class="message clearfix">
 	      <p>
 		{% ifequal LANGUAGE_CODE "en"  %}
 		{{ message.english_text|default:"" }}
@@ -68,5 +67,4 @@
       <h1>{% trans 'No messages to display' %}.</h1>
       {% endif %}
     </div>
-  </div>
   {% endblock %}

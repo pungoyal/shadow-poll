@@ -1,0 +1,32 @@
+{% extends "iraq.html" %}
+{% load i18n %}
+
+{% block javascripts %}
+<script src="/static/charts/javascripts/language_switcher.js"></script>
+{% endblock %}
+
+{% block title %}{% trans 'Goodbye' %}{% endblock %}
+
+{% block chart %}{% endblock %}
+{% block breadcrumb %}{% endblock %}
+{% block sidebar %}{% endblock %}
+{% block charts_container %}{% endblock %}
+{% block map_container %}{% endblock %}
+{% block question %}{% endblock %}
+{% block filter_container %}{% endblock %} 
+
+{% block messages %}
+<div id="content_area">
+    <div id="message_container">
+
+		<h1>{% trans 'Thanks for visiting RapidSMS!' %}</h1>
+		
+		<p>{% trans 'Please come again.' %}</p>
+		
+		<a href="/accounts/login">{% trans 'Log in again' %}</a>
+
+	</div>
+</div>
+{% endblock %}
+
+{% block footer %}{% endblock %}
