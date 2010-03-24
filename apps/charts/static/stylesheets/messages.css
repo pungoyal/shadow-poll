@@ -3,29 +3,34 @@
 }
 #message_container {
 	float: left;
-	width: 580px;
-	padding: 10px;
+	width: 780px;
+	padding: 1%;
 }
 #message_container ul li {
-	float:left;
+	overflow: hidden;
 	margin-bottom:10px;
 }
 .child_details {
 	float: left;
-	width: 28%;
+	width: 250px;
 	margin-right: 10px;
 	text-align: right;
 }
 .message_details {
 	background:transparent url(../img/msg_arrow.gif) no-repeat scroll 0 50%;
 	float:left;
-	padding-left:15px;
-	width:65%;
+	padding-left: 15px;
+	width: 500px;
 }
 .message_details .message {
 	padding: 10px;
 	background: #faf9f8;
+	overflow: hidden;
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;	
 }
+
 .message_details .audio {
 	padding: 10px;
 	text-align: right;
@@ -56,7 +61,7 @@
 .jp-interface {
      position: relative;
      background-color:#eee;
-     width:355px;
+     width: 475px;
      height:75px;
 }
 .jp-single-player .jp-interface {
@@ -149,7 +154,7 @@ li.jp-next:hover {
                overflow:hidden;
                top:32px;
                background-color: #ddd;
-               width:122px;
+               width: 250px;
                height:15px;
                }
 .jp-single-player .jp-progress {
@@ -178,10 +183,10 @@ li.jp-volume-min {
                    cursor: pointer;
                    }
 .jp-single-player li.jp-volume-min {
-                                     left:245px;
+                                     left:385px;
                                      }
 .jp-playlist-player li.jp-volume-min {
-                                       left:275px;
+                                       left:415px;
                                        }
 li.jp-volume-min:hover {
                          background: url("jplayer.blue.monday.jpg") -19px -170px no-repeat;
@@ -195,10 +200,10 @@ li.jp-volume-max {
                    cursor: pointer;
                    }
 .jp-single-player li.jp-volume-max {
-                                     left:325px;
+                                     left:450px;
                                      }
 .jp-playlist-player li.jp-volume-max {
-                                       left:350px;
+                                       left:480px;
                                        }
 li.jp-volume-max:hover {
                          background: url("jplayer.blue.monday.jpg") -19px -186px no-repeat;
@@ -214,10 +219,10 @@ li.jp-volume-max:hover {
                  cursor: pointer;
                  }
 .jp-single-player .jp-volume-bar {
-                                   left:270px;
+                                   left: 400px;
                                    }
 .jp-playlist-player .jp-volume-bar {
-                                     left:295px;
+                                     left: 430px;
                                      }
 .jp-volume-bar-value {
                        background: url("jplayer.blue.monday.jpg") 0 -256px repeat-x;
