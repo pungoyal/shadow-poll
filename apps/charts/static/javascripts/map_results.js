@@ -8,7 +8,7 @@ $(document).ready(function(){
     var question_id = $("#question-id").html();
     var governorate_id = $("#governorate-id").html();
     var gender = $("#gender-filter").html();
-    var age = $("#age").html();
+    var age = $("#age_range_filter").html();
     function construct_kml_url(governorate_id, question_id, gender, age_group)
     {
         var kml_url = "/get_kml/question" + question_id ;

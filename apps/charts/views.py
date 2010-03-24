@@ -71,7 +71,15 @@ def play_audio(request, file_name):
 def show_iraq_by_question(request, question_id,
                           template='results.html'):
     context = {}
-    context.update({"region": "Iraq"})
+    if 'gender_filter' not in request.session:
+        request.session['gender_filter'] = "all"
+    if 'age_range_filter' not in request.session:
+        request.session['age_range_filter'] = "5,18"
+    context.update({
+            "region": "Iraq",
+            "gender_filter": request.session['gender_filter'],
+            "age_range_filter": request.session['age_range_filter']
+            })
     return _update_context_with_data(request, question_id, None, template, context)
     
 def show_filtered_data_by_governorate(request, question_id, governorate_id,
@@ -79,6 +87,10 @@ def show_filtered_data_by_governorate(request, question_id, governorate_id,
     
     context = {}
     governorate_id = _sanitize_governorate_id(governorate_id)
+    if 'gender_filter' not in request.session:
+        request.session['gender_filter'] = "all"
+    if 'age_range_filter' not in request.session:
+        request.session['age_range_filter'] = "5,18"
     _update_context_for_governorate(context, governorate_id)
     return _update_data_with_filters_applied(request, question_id, governorate_id, template, context)
 
@@ -86,24 +98,20 @@ def _update_data_with_filters_applied(request, question_id, governorate_id, temp
     filter_dict = {'gender': None, 'age': None}
     for key in request.GET:
         filter_dict[key] = request.GET[key]
-    age_context, gender_filter_context = '', 'all'
     if filter_dict['age'] is not None:
-        age_context = filter_dict['age']
+        request.session['age_range_filter'] = filter_dict['age']
     if filter_dict['gender'] is not None:
-        gender_filter_context = filter_dict['gender']
+        request.session['gender_filter'] = filter_dict['gender']
+
     context.update({
-            "gender_filter": gender_filter_context,
-            "age": age_context
+            "gender_filter": request.session['gender_filter'],
+            "age_range_filter": request.session['age_range_filter']
             })
     gender = _sanitize_gender_identifier(filter_dict['gender'])
     agegroup = []
     if filter_dict['age'] is not None:
-        ranges = filter_dict['age'].split(',')
-        for age_ranges in ranges:
-            agegroup.append(age_ranges)
-
-    age_group_list = _sanitize_age_group(agegroup)
-    return _update_context_with_data(request, question_id, governorate_id, template, context, gender, age_group_list)
+        agegroup = _sanitize_age_group(filter_dict['age'])
+    return _update_context_with_data(request, question_id, governorate_id, template, context, gender, agegroup)
 
 def _sanitize_governorate_id(governorate_id):
     if governorate_id == "all" : 
@@ -119,10 +127,7 @@ def _sanitize_gender_identifier(gender):
     return None
 
 def _sanitize_age_group(age_group):
-    ages = []
-    for age in age_group:
-        ages.append(age.split("to"))
-    return ages
+    return age_group.split(",")
 
 def _update_context_for_governorate(context,governorate_id):
     if(governorate_id != None):
@@ -188,12 +193,10 @@ def kml_filtered_by_country(request, question_id):
     gender = _sanitize_gender_identifier(filter_dict['gender'])
     agegroup = []
     if filter_dict['age'] is not None:
-        ranges = filter_dict['age'].split(',')
-        for age_ranges in ranges:
-            agegroup.append(age_ranges)
-    age_group_list = _sanitize_age_group(agegroup)
+        agegroup = _sanitize_age_group(filter_dict['age'])
+
     governorate_kml = Governorate.objects.kml()
-    return get_kml(request, question_id, governorate_kml, governorate = None, gender = gender, age_group_list = age_group_list)
+    return get_kml(request, question_id, governorate_kml, governorate = None, gender = gender, age_group_list = agegroup)
 
 def get_kml(request, question_id, kml, governorate, gender=None, age_group_list = None):
     """ the kml tells us where to center our bubbles on the map """
