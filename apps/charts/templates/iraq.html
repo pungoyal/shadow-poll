@@ -65,7 +65,7 @@
         </div>
         {% endblock %}
 
-        <div id="content_area">
+        <div id="content_area" class="clearfix">
         	{% block messages %}{% endblock %}
             
                 {% block question %}
@@ -185,10 +185,7 @@
 	    <div class="nav_questions"><img src="/static/charts/img/poll_q_img_1.gif" alt=""/>
 	        <ul class="side_nav">
 	      {% for q in questions %}
-	      <li 
-		  {% ifequal q.id question.id %}
-		  class = "active"
-		  {% endifequal %}
+	      <li {% ifequal q.id question.id %}class = "active"{% endifequal %}>
 		  <a href="/charts/question{{q.id}}{% if governorate %}/governorate{{governorate.id}}{% endif %}">
 		  	{% trans q.text %}
 		  </a>
