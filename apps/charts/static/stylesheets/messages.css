@@ -47,8 +47,7 @@
 }
 
 .jp-single-player, .jp-playlist-player {
-     direction: ltr;
-     float: right;
+     float: left;
      font-size:1.25em;
      font-family:Verdana, Arial, sans-serif;
      line-height:1.6;
@@ -281,6 +280,19 @@ li.jp-volume-max:hover {
 .jp-playlist-player .jp-playlist li:hover {
                                             color:#0d88c1;
                                             }
+
+#message_translation_container {
+		padding: 10px;
+}
+
+#translation_container,
+#translation_container p,
+#translation_container p label,
+#translation_container p textarea {
+	float: left;
+	clear: both;
+}
+
 
 
 
