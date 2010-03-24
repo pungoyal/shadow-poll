@@ -25,9 +25,7 @@ table, caption, tbody, tfoot, thead, tr, th, td {
 		background-image:  url(../img/arabic/bg_sprite_ar.gif);
 		background-position: 100% 0;
 }
-#top_menu ul li a span{
-		text-align: right;
-}
+
 #top_menu ul li a:hover {
 		background-position: 100% -55px;
 }
@@ -46,8 +44,13 @@ table, caption, tbody, tfoot, thead, tr, th, td {
 #top_menu ul li a:hover, #language_menu ul li a:hover {
 		text-decoration: none;
 }
-#top_menu ul li a span {
+#top_menu ul li a span{
+		text-align: right;
 		padding: 15px 55px 0 0;
+}
+#top_menu ul li.home a span {
+		padding-top: 12px;
+		line-height: 1;
 }
 #language_menu {
 		background:transparent url(../img/arabic/bg_language_right.gif) no-repeat scroll 100% 0;
@@ -281,4 +284,17 @@ table, caption, tbody, tfoot, thead, tr, th, td {
 }
 .map_layer legend a.collapse{
 	background-position: 0 -13px;
+}
+
+#translation_container,
+#translation_container p,
+#translation_container p label,
+#translation_container p textarea {
+	float: right !important;
+}
+
+.jp-single-player, .jp-playlist-player,
+.jp-volume-bar, .jp-load-bar{
+ 	direction: ltr !important;
+ 	float: right !important;
 }
