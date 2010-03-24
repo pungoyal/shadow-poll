@@ -3,24 +3,49 @@
                        xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                        xsi:schemaLocation="http://www.opengis.net/sld http://schemas.opengis.net/sld/1.0.0/StyledLayerDescriptor.xsd">
     <NamedLayer>
-        <Name>Intermediate Enrollment</Name>
+        <Name>infant_mor</Name>
         <UserStyle>
-            <Name>intermediate enrollment</Name>
-            <Title>Intermediate Enrollement</Title>
-            <Abstract>A style emphasizing enrollment in Intermediate School</Abstract>
+            <Name>infant_mor</Name>
+            <Title>Poverty</Title>
+            <Abstract>A style emphasizing under 5 mortality statistics</Abstract>
             <FeatureTypeStyle>
                 <Rule>
-                    <Name>Less than 20</Name>
+                    <Name>Less than 10</Name>
                     <ogc:Filter>
                         <ogc:PropertyIsLessThan>
-                            <ogc:PropertyName>enrollmen2</ogc:PropertyName>
-                            <ogc:Literal>20</ogc:Literal>
+                            <ogc:PropertyName>infant_mor</ogc:PropertyName>
+                            <ogc:Literal>10</ogc:Literal>
                         </ogc:PropertyIsLessThan>
                     </ogc:Filter>
                     <PolygonSymbolizer>
                         <Fill>
-                            <CssParameter name="fill">#fbec04</CssParameter>
-                            <CssParameter name="fill-opacity">0.40</CssParameter>
+                            <CssParameter name="fill">#aa87de</CssParameter>
+                            <CssParameter name="fill-opacity">0.20</CssParameter>
+                        </Fill>
+                        <Stroke>
+                            <CssParameter name="stroke">#777777</CssParameter>
+                            <CssParameter name="stroke-width">0.5</CssParameter>
+                        </Stroke>
+                    </PolygonSymbolizer>
+                </Rule>
+                <Rule>
+                    <Name>10 to 20</Name>
+                    <ogc:Filter>
+                        <ogc:And>
+                            <ogc:PropertyIsGreaterThanOrEqualTo>
+                                <ogc:PropertyName>infant_mor</ogc:PropertyName>
+                                <ogc:Literal>10</ogc:Literal>
+                            </ogc:PropertyIsGreaterThanOrEqualTo>
+                            <ogc:PropertyIsLessThan>
+                                <ogc:PropertyName>infant_mor</ogc:PropertyName>
+                                <ogc:Literal>20</ogc:Literal>
+                            </ogc:PropertyIsLessThan>
+                        </ogc:And>
+                    </ogc:Filter>
+                    <PolygonSymbolizer>
+                        <Fill>
+                            <CssParameter name="fill">#9075bc</CssParameter>
+                            <CssParameter name="fill-opacity">0.30</CssParameter>
                         </Fill>
                         <Stroke>
                             <CssParameter name="stroke">#777777</CssParameter>
@@ -33,19 +58,19 @@
                     <ogc:Filter>
                         <ogc:And>
                             <ogc:PropertyIsGreaterThanOrEqualTo>
-                                <ogc:PropertyName>enrollmen2</ogc:PropertyName>
+                                <ogc:PropertyName>infant_mor</ogc:PropertyName>
                                 <ogc:Literal>20</ogc:Literal>
                             </ogc:PropertyIsGreaterThanOrEqualTo>
                             <ogc:PropertyIsLessThan>
-                                <ogc:PropertyName>enrollmen2</ogc:PropertyName>
+                                <ogc:PropertyName>infant_mor</ogc:PropertyName>
                                 <ogc:Literal>30</ogc:Literal>
                             </ogc:PropertyIsLessThan>
                         </ogc:And>
                     </ogc:Filter>
                     <PolygonSymbolizer>
                         <Fill>
-                            <CssParameter name="fill">#c3eb18</CssParameter>
-                            <CssParameter name="fill-opacity">0.45</CssParameter>
+                            <CssParameter name="fill">#6f5e91</CssParameter>
+                            <CssParameter name="fill-opacity">0.40</CssParameter>
                         </Fill>
                         <Stroke>
                             <CssParameter name="stroke">#777777</CssParameter>
@@ -58,18 +83,18 @@
                     <ogc:Filter>
                         <ogc:And>
                             <ogc:PropertyIsGreaterThanOrEqualTo>
-                                <ogc:PropertyName>enrollmen2</ogc:PropertyName>
+                                <ogc:PropertyName>infant_mor</ogc:PropertyName>
                                 <ogc:Literal>30</ogc:Literal>
                             </ogc:PropertyIsGreaterThanOrEqualTo>
                             <ogc:PropertyIsLessThan>
-                                <ogc:PropertyName>enrollmen2</ogc:PropertyName>
+                                <ogc:PropertyName>infant_mor</ogc:PropertyName>
                                 <ogc:Literal>40</ogc:Literal>
                             </ogc:PropertyIsLessThan>
                         </ogc:And>
                     </ogc:Filter>
                     <PolygonSymbolizer>
                         <Fill>
-                            <CssParameter name="fill">#7de931</CssParameter>
+                            <CssParameter name="fill">#4e4766</CssParameter>
                             <CssParameter name="fill-opacity">0.50</CssParameter>
                         </Fill>
                         <Stroke>
@@ -79,41 +104,16 @@
                     </PolygonSymbolizer>
                 </Rule>
                 <Rule>
-                    <Name>40 to 50</Name>
-                    <ogc:Filter>
-                        <ogc:And>
-                            <ogc:PropertyIsGreaterThanOrEqualTo>
-                                <ogc:PropertyName>enrollmen2</ogc:PropertyName>
-                                <ogc:Literal>40</ogc:Literal>
-                            </ogc:PropertyIsGreaterThanOrEqualTo>
-                            <ogc:PropertyIsLessThan>
-                                <ogc:PropertyName>enrollmen2</ogc:PropertyName>
-                                <ogc:Literal>50</ogc:Literal>
-                            </ogc:PropertyIsLessThan>
-                        </ogc:And>
-                    </ogc:Filter>
-                    <PolygonSymbolizer>
-                        <Fill>
-                            <CssParameter name="fill">#33e74b</CssParameter>
-                            <CssParameter name="fill-opacity">0.55</CssParameter>
-                        </Fill>
-                        <Stroke>
-                            <CssParameter name="stroke">#777777</CssParameter>
-                            <CssParameter name="stroke-width">0.5</CssParameter>
-                        </Stroke>
-                    </PolygonSymbolizer>
-                </Rule>
-                <Rule>
-                    <Name>Greater than 50</Name>
+                    <Name>Greater than 40</Name>
                     <ogc:Filter>
                         <ogc:PropertyIsGreaterThanOrEqualTo>
-                            <ogc:PropertyName>enrollmen2</ogc:PropertyName>
-                            <ogc:Literal>50</ogc:Literal>
+                            <ogc:PropertyName>infant_mor</ogc:PropertyName>
+                            <ogc:Literal>40</ogc:Literal>
                         </ogc:PropertyIsGreaterThanOrEqualTo>
                     </ogc:Filter>
                     <PolygonSymbolizer>
                         <Fill>
-                            <CssParameter name="fill">#00e65d</CssParameter>
+                            <CssParameter name="fill">#373748</CssParameter>
                             <CssParameter name="fill-opacity">0.60</CssParameter>
                         </Fill>
                         <Stroke>
