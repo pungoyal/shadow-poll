@@ -10,12 +10,10 @@ $(document).ready(function() {
             });
 
     $('.mdg_indicators').bind('click', function(e) {
-        for (var i=0; i<map.layers.length; i++) {
-            var layer = map.layers[i]; 
+        for (var i=0; i<mdg_overlay_array.length; i++) {
+            var layer = mdg_overlay_array[i]; 
             layer.setVisibility(0);
         }
-        map.baseLayer.setVisibility(1);
-        map.getLayersByName('poll_responses')[0].setVisibility(1);
 
         var layer = map.getLayersByName(this.value)[0];
         layer.setVisibility(1);

@@ -83,12 +83,11 @@ class Question(models.Model):
         qset_lower_age_value = Q()
         qset_higer_age_value = Q()
         if age_group_list is not None and (len(age_group_list) > 0):
-            for age in age_group_list:
-                qset_lower_age_value = qset_lower_age_value | Q(user__age__gt = age[0])
-                qset_lower_age_value = qset_lower_age_value | Q(user__age = age[0])
-                qset_higer_age_value = qset_higer_age_value | Q(user__age = age[1])
-                qset_higer_age_value = qset_higer_age_value | Q( user__age__lt = age[1])
-                relevant_responses = relevant_responses.filter( qset_lower_age_value  , qset_higer_age_value )
+            qset_lower_age_value = qset_lower_age_value | Q(user__age__gt = age_group_list[0])
+            qset_lower_age_value = qset_lower_age_value | Q(user__age = age_group_list[0])
+            qset_higer_age_value = qset_higer_age_value | Q(user__age = age_group_list[1])
+            qset_higer_age_value = qset_higer_age_value | Q( user__age__lt = age_group_list[1])
+            relevant_responses = relevant_responses.filter( qset_lower_age_value  , qset_higer_age_value )
 
         responses_by_choice = relevant_responses.values("choice").\
             annotate(votes = Count("choice"))
