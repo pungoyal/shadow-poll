@@ -1,6 +1,7 @@
+var mdg_overlay_array;
 $(document).ready(function() {
     var geoserver_url = "http://iraqyouth.mepemepe.com/geoserver/ows";
-
+    mdg_overlay_array = new Array();
     function MDG_overlay_factory(name, style)
     {
         var overlay = new OpenLayers.Layer.WMS(
@@ -18,6 +19,7 @@ $(document).ready(function() {
         }
                 );
         overlay.setOpacity(0.5);
+				mdg_overlay_array.push(overlay);
         return overlay;
     }
 
@@ -31,5 +33,4 @@ $(document).ready(function() {
     map.addLayer(MDG_overlay_factory("femaletomale_enrollment_overlay", 'mdgs_femaletomale_enrollment'));
     map.addLayer(MDG_overlay_factory("improved_drinking_water_overlay", 'mdgs_improved_drinking_water'));
     map.addLayer(MDG_overlay_factory("improved_sanitation_overlay", 'mdgs_improved_sanitation'));
-
 });
