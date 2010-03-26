@@ -19,12 +19,14 @@ if(current_governorate == ''){
 $('#lower_age_range').html(age_range[0]);
 $('#higher_age_range').html(age_range[1]);
 $("#gender_slider").slider({
+															 animate: true,
 															 value: slider_value,
 															 min: -1,
 															 max: 1,
 															 step:1
 													 });
 $("#age_slider").slider({
+														animate: true,
 														range: true,
 														min: 2,
 														max: 18,
