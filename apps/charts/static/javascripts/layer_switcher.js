@@ -18,4 +18,4 @@ $(document).ready(function() {
         var layer = map.getLayersByName(this.value)[0];
         layer.setVisibility(1);
     });
-});     
+});
