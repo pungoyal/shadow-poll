@@ -16,20 +16,25 @@ if(current_governorate == ''){
 }else{
 		current_governorate = "governorate" + current_governorate;
 }
-											$("#gender_slider").slider({
-																										 value: slider_value,
-																										 min: -1,
-																										 max: 1,
-																										 step:1
-																								 });
-
-											$("#age_slider").slider({
-																									range: true,
-																									min: 2,
-																									max: 18,
-																									values : age_range
-																							});
-
+$('#lower_age_range').html(age_range[0]);
+$('#higher_age_range').html(age_range[1]);
+$("#gender_slider").slider({
+															 value: slider_value,
+															 min: -1,
+															 max: 1,
+															 step:1
+													 });
+$("#age_slider").slider({
+														range: true,
+														min: 2,
+														max: 18,
+														values : age_range,
+														slide: function(event, ui){
+																$('#lower_age_range').html(ui.values[0]);
+																$('#higher_age_range').html(ui.values[1]);
+														}
+												});
+											
 $("#filter_button").bind('click', function(e){
 														 var age_slider_value  = $("#age_slider").slider("values").toString();
 														 var gender_slider_value = $("#gender_slider").slider("value");
