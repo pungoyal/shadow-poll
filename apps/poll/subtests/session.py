@@ -1,7 +1,7 @@
 from django.test import TestCase
-from poll.models import Question, Questionnaire, DemographicParser, User, UserSession, Choice, UserResponse
-from reporters.models import Reporter, PersistantConnection, PersistantBackend
-from register.models import Registration
+from apps.poll.models import Question, Questionnaire, DemographicParser, User, UserSession, Choice, UserResponse
+from apps.reporters.models import Reporter, PersistantConnection, PersistantBackend
+from apps.register.models import Registration
 from apps.poll.models import TRIGGER_INCORRECT_MESSAGE
 from rapidsms.message import Message
 from rapidsms.person import Person
@@ -10,6 +10,29 @@ class TestMessage(Message):
     def __init__(self, text):
         p = Person()
         super(TestMessage, self).__init__(self, person=p, text=text)
+
+class BulkSessionTest(TestCase):
+    def setUp(self):
+        backend = PersistantBackend(slug="MockBackend")
+        backend.save()
+        reporter = Reporter(alias="ReporterName")
+        reporter.save()
+        self.connection = PersistantConnection(backend=backend, reporter=reporter, identity="1000", governorate = 2,
+                                          district = 4)
+        self.connection.save()
+
+        reporter.connections.add(self.connection)
+
+    def test_handle_bulk_response(self):
+        bulk_questionaire = Questionnaire.objects.filter(trigger = 'bulk')[0]
+        self.assertEquals(bulk_questionaire.max_retries, 3)
+
+        session = UserSession.open(self.connection)
+        self.assertEquals(session.questionnaire, None)
+
+        response = session.respond(TestMessage(text="bulk m 16"))
+#        self.assertEquals(response, "bulk")
+
 
 class UserSessionTest(TestCase):
     def setUp(self):

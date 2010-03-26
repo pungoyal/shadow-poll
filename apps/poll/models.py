@@ -214,7 +214,6 @@ class UserSession(models.Model):
         # when we start supporting intelligent feedback,
         # we can pass the error_code, text, and parameters
         # back through the message object
-        self._set_default_questionnaire()
 
         ''' respond to a trigger message'''
         response = self._respond_to_trigger(message)
@@ -256,6 +255,7 @@ class UserSession(models.Model):
 
     def _respond_to_trigger(self, message):
         if not self._is_trigger(message.text): return 
+
         ''' create new user '''
         self.user = User(connection = self.user.connection, governorate = self.user.governorate, district = self.user.district, active = True)
         text = message.text.strip().lstrip(self.questionnaire.trigger.lower()).strip()
