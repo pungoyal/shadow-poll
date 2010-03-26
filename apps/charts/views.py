@@ -71,19 +71,21 @@ def _add_gender_and_age_filter_values_in_session(request):
     if 'gender_filter' not in request.session:
         request.session['gender_filter'] = "all"
     if 'age_range_filter' not in request.session:
-        request.session['age_range_filter'] = "5,18"
-
+        request.session['age_range_filter'] = "2,18"
 
 def show_iraq_by_question(request, question_id,
                           template='results.html'):
     context = {}
     _add_gender_and_age_filter_values_in_session(request)
+    governorate_id="all"
+    governorate_id = _sanitize_governorate_id(governorate_id)
+    _update_context_for_governorate(context, governorate_id)
     context.update({
             "region": "Iraq",
             "gender_filter": request.session['gender_filter'],
             "age_range_filter": request.session['age_range_filter']
             })
-    return _update_context_with_data(request, question_id, None, template, context)
+    return _update_data_with_filters_applied(request, question_id, governorate_id, template, context)
     
 def show_filtered_data_by_governorate(request, question_id, governorate_id,
                                       template='results.html'):
@@ -94,7 +96,7 @@ def show_filtered_data_by_governorate(request, question_id, governorate_id,
     return _update_data_with_filters_applied(request, question_id, governorate_id, template, context)
 
 def _update_data_with_filters_applied(request, question_id, governorate_id, template, context):
-    filter_dict = {'gender': None, 'age': None}
+    filter_dict = {'gender': request.session['gender_filter'], 'age':  request.session['age_range_filter']}
     for key in request.GET:
         filter_dict[key] = request.GET[key]
     if filter_dict['age'] is not None:
