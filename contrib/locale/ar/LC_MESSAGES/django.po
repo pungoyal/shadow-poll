@@ -402,5 +402,19 @@ msgstr "لا يوجد رسائل للعرض"
 msgid "Click to hear and append translation(s)"
 msgstr "أنقر هنا للإستماع و إضافة الترجمة"
 
+msgid "About the poll"
+msgstr "عن التصويت"
+
+msgid "Click on a question to see the poll results"
+msgstr "أنقر على السؤال لمشاهدة نتائج التصويت"
+
+msgid "MDG Indicators Data"
+msgstr " MDG مؤشرات بيانات"
+
+msgid "Take me to the poll page"
+msgstr "أنقلني الى صفحة التصويت"
+
+msgid "All"
+msgstr "الكل"
 
 
