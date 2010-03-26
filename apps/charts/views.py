@@ -67,14 +67,17 @@ def play_audio(request, file_name):
     response["Content-Length"] = len(contents)
     return response
 
-
-def show_iraq_by_question(request, question_id,
-                          template='results.html'):
-    context = {}
+def _add_gender_and_age_filter_values_in_session(request):
     if 'gender_filter' not in request.session:
         request.session['gender_filter'] = "all"
     if 'age_range_filter' not in request.session:
         request.session['age_range_filter'] = "5,18"
+
+
+def show_iraq_by_question(request, question_id,
+                          template='results.html'):
+    context = {}
+    _add_gender_and_age_filter_values_in_session(request)
     context.update({
             "region": "Iraq",
             "gender_filter": request.session['gender_filter'],
@@ -87,10 +90,7 @@ def show_filtered_data_by_governorate(request, question_id, governorate_id,
     
     context = {}
     governorate_id = _sanitize_governorate_id(governorate_id)
-    if 'gender_filter' not in request.session:
-        request.session['gender_filter'] = "all"
-    if 'age_range_filter' not in request.session:
-        request.session['age_range_filter'] = "5,18"
+    _add_gender_and_age_filter_values_in_session(request)
     _update_context_for_governorate(context, governorate_id)
     return _update_data_with_filters_applied(request, question_id, governorate_id, template, context)
 
