@@ -1,11 +1,7 @@
 from django.test import TestCase
-from poll.app import App as poll_App
-import reporters.app as reporters_app
-import internationalization.app as i18n_app
 from poll.models import Question, Questionnaire, DemographicParser, User, UserSession, Choice, UserResponse
 from reporters.models import Reporter, PersistantConnection, PersistantBackend
 from register.models import Registration
-import unittest
 from apps.poll.models import TRIGGER_INCORRECT_MESSAGE
 from rapidsms.message import Message
 from rapidsms.person import Person
@@ -16,26 +12,24 @@ class TestMessage(Message):
         super(TestMessage, self).__init__(self, person=p, text=text)
 
 class UserSessionTest(TestCase):
-    apps = (poll_App,)
-
     def setUp(self):
         Question.objects.all().delete()
         self.backend = PersistantBackend(slug="MockBackend")
         self.backend.save()
         self.reporter = Reporter(alias="ReporterName")
         self.reporter.save()
-        self.pconnection = PersistantConnection(backend=self.backend, 
-                                                reporter=self.reporter, 
+        self.pconnection = PersistantConnection(backend=self.backend,
+                                                reporter=self.reporter,
                                                 identity="1000", governorate = 2, district = 4)
         self.pconnection.save()
 
-        self.pconnection1 = PersistantConnection(backend=self.backend, 
-                                                reporter=self.reporter, 
-                                                identity="10001", governorate = 7, district = 8)
+        self.pconnection1 = PersistantConnection(backend=self.backend,
+                                                 reporter=self.reporter,
+                                                 identity="10001", governorate = 7, district = 8)
         self.pconnection1.save()
 
         self.reporter.connections.add(self.pconnection)
-        
+
         self.question1 = Question(text = "question1")
         self.question1.is_first = True
         self.question1.save()
@@ -43,7 +37,7 @@ class UserSessionTest(TestCase):
         self.question2.save()
         self.question3 = Question(text = "question3")
         self.question3.save()
-        
+
         self.question1.next_question = self.question2
         self.question2.next_question = self.question3
 
@@ -57,14 +51,14 @@ class UserSessionTest(TestCase):
 
         q = Questionnaire(trigger = "trigger", max_retries=3)
         q.save()
-        DemographicParser(questionnaire=q, name='age', regex='[0-9]+', 
-                        order=1, type='i').save()
-        DemographicParser(questionnaire=q, name='gender', 
-                        regex='m|f|male|female', order=2, type='c').save()
+        DemographicParser(questionnaire=q, name='age', regex='[0-9]+',
+                          order=1, type='i').save()
+        DemographicParser(questionnaire=q, name='gender',
+                          regex='m|f|male|female', order=2, type='c').save()
 
         r = Registration(phone = self.pconnection)
         r.save()
-        
+
         r1 = Registration(phone = self.pconnection)
         r1.save()
 
@@ -81,7 +75,7 @@ class UserSessionTest(TestCase):
         user = session.user
         user.save()
         self.assertEquals(session.question, None)
-        
+
     def test_respond_with_first_question_on_new_session_for_any_message(self):
         session = UserSession.open(self.pconnection)
         user = session.user
@@ -120,7 +114,7 @@ class UserSessionTest(TestCase):
 
         self.assertEquals(session.respond(TestMessage(text="b")), str(self.question3))
         self.assertEquals(session.question, self.question3)
-        
+
     def test_close_ongoing_session_at_trigger(self):
         session = UserSession.open(self.pconnection)
         user = session.user
@@ -129,7 +123,7 @@ class UserSessionTest(TestCase):
         session.question = self.question2
         self.assertEquals(session.respond(TestMessage(text="c")), str(self.question3))
         self.assertEquals(session.question, self.question3)
-        
+
         self.assertEquals(session.respond(TestMessage(text="trigger 13 m")), str(self.question1))
         self.assertEquals(session.question, self.question1)
 
@@ -146,7 +140,7 @@ class UserSessionTest(TestCase):
     def test_user_interaction_is_saved_when_successful(self):
         initial_number_of_responses = len(UserResponse.objects.all())
         initial_number_of_users = len(User.objects.all())
-        
+
         session = UserSession.open(self.pconnection1)
         session.respond(TestMessage(text='trigger 14 f'))
         self.assertEquals(len(User.objects.all()), initial_number_of_users + 1)
@@ -171,23 +165,23 @@ class UserSessionTest(TestCase):
         latest_user = User.objects.all().order_by('-id')[0]
         self.assertEquals(latest_user.age, 13)
         self.assertEquals(latest_user.gender, 'f')
-        
-        
+
+
     def test_user_location_from_registration(self):
         session = UserSession.open(self.pconnection)
         session.respond(TestMessage(text='trigger 14 f'))
         latest_user = User.objects.all().order_by('-id')[0]
         self.assertEquals(latest_user.governorate, 2)
         self.assertEquals(latest_user.district, 4)
-        
+
     def test_junk_trigger_message(self):
         backend = PersistantBackend(slug="MockBackend1")
         backend.save()
         reporter = Reporter(alias="ReporterName1")
         reporter.save()
-        pconnection = PersistantConnection(backend=backend, 
-                                                reporter=reporter, 
-                                                identity="1001")
+        pconnection = PersistantConnection(backend=backend,
+                                           reporter=reporter,
+                                           identity="1001")
         pconnection.save()
         session = UserSession.open(pconnection)
 
@@ -214,7 +208,7 @@ class UserSessionTest(TestCase):
         session.respond(TestMessage(text="a"))
 
         self.assertEquals(session.question, self.question2)
-        
+
     def test_less_than_required_choices_reminds_user(self):
         self.question1.num_answers_expected = 2
         self.question1.save()
@@ -225,7 +219,7 @@ class UserSessionTest(TestCase):
         self.assertEquals(error, "err_less_than_expected_choices")
         error = session.respond(TestMessage(text="a a"))
         self.assertEquals(error, "err_less_than_expected_choices")
-        
+
     def test_more_than_required_choices_reminds_user(self):
         session = UserSession.open(self.pconnection)
         session.respond(TestMessage(text="trigger m 16"))
