@@ -87,7 +87,6 @@ def show_iraq_by_question(request, question_id,
     
 def show_filtered_data_by_governorate(request, question_id, governorate_id,
                                       template='results.html'):
-    
     context = {}
     governorate_id = _sanitize_governorate_id(governorate_id)
     _add_gender_and_age_filter_values_in_session(request)
