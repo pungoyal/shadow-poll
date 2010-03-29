@@ -7,17 +7,17 @@ $(document).ready(function() {
         var overlay = new OpenLayers.Layer.WMS(
                 name,
                 geoserver_url,
-        {
-            layers: 'unicef:iraq_mdgs',
-            transparent: true,
-            format: 'image/png',
-            styles: style
-        },
-        {
-            isBaseLayer: false,
-            visibility: false
-        }
-                );
+						{
+								layers: 'unicef:iraq_mdgs',
+								transparent: true,
+								format: 'image/png',
+								styles: style
+						},
+						{
+								isBaseLayer: false,
+								visibility: false
+						}
+				);
         overlay.setOpacity(0.5);
 				mdg_overlay_array.push(overlay);
         return overlay;
@@ -33,4 +33,9 @@ $(document).ready(function() {
     map.addLayer(MDG_overlay_factory("femaletomale_enrollment_overlay", 'mdgs_femaletomale_enrollment'));
     map.addLayer(MDG_overlay_factory("improved_drinking_water_overlay", 'mdgs_improved_drinking_water'));
     map.addLayer(MDG_overlay_factory("improved_sanitation_overlay", 'mdgs_improved_sanitation'));
+    $.each($('.mdg_indicators'), function(index, value){
+							 if (this.checked){
+									 map.getLayersByName(this.value)[0].setVisibility(true);
+							 }
+    });
 });

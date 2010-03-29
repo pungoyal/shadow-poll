@@ -715,6 +715,7 @@ map_layer legend a:visited {
 	-m0z-opacity: 0.75;
 	z-index:2000;
 }
+
 #map_legend_trigger {
 	width: 50px;
 	height: 30px;
