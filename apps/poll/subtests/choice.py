@@ -5,8 +5,11 @@ from poll.models import Color
 class ChoiceTest(TestCase):
     
     def setUp(self):
+        self.questionnaire = Questionnaire(trigger="trig")
+        self.questionnaire.save()
+        
         Question.objects.all().delete()
-        self.question = Question(text = 'question 1', num_answers_expected = 3)
+        self.question = Question(text = 'question 1', num_answers_expected = 3, questionnaire=self.questionnaire)
         self.question.save()
 
         self.color = Color(code = "pink", file_name = "pink.jpg")

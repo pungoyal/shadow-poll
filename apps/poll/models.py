@@ -29,6 +29,11 @@ class Questionnaire(models.Model):
     def __unicode__(self):
         return "%s" % (self.trigger)
 
+    def first_question(self):
+        firsts= Question.objects.filter(is_first=True, questionnaire=self)
+        return firsts[0] if len(firsts)>0 else None
+    
+
 ##########################################################################
 
 class DemographicParser(models.Model):
@@ -67,6 +72,7 @@ class Question(models.Model):
     error_response = models.TextField(null=True, blank=True)
     next_question = models.ForeignKey('self', null = True,default = None)
     is_first = models.BooleanField(default=False)
+    questionnaire = models.ForeignKey(Questionnaire)
 
     def __unicode__(self):
         options = self.humanize_options()
@@ -217,7 +223,7 @@ class UserSession(models.Model):
 
         ''' respond to a trigger message'''
         response = self._respond_to_trigger(message)
-        if response != None: 
+        if response != None:
             self._save_session()
             return response
         
@@ -259,15 +265,15 @@ class UserSession(models.Model):
         ''' create new user '''
         self.user = User(connection = self.user.connection, governorate = self.user.governorate, district = self.user.district, active = True)
         text = message.text.strip().lstrip(self.questionnaire.trigger.lower()).strip()
-        parsers = list(DemographicParser.objects.filter(questionnaire=self.questionnaire).order_by('order') )
-        
+        parsers = list(DemographicParser.objects.filter(questionnaire=self.questionnaire).order_by('order'))
+
         for parser in parsers:
             demographic_information = parser.parse(text)
             if demographic_information == None:
                 return TRIGGER_INCORRECT_MESSAGE
             self.user.set_value(parser.name, demographic_information)
-     
-        self.question = Question.first()
+
+        self.question = self.questionnaire.first_question()
         self.num_attempt = 0
         return str(self.question)
 
@@ -286,7 +292,6 @@ class UserSession(models.Model):
             self.num_attempt = 0
         else:
             return "error_parsing_response"
-        
 
     def _respond_to_exceeding_attempts(self):
         if self._has_user_exceeded_max_attempts():

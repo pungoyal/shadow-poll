@@ -31,11 +31,19 @@ class BulkSessionTest(TestCase):
         self.assertEquals(session.questionnaire, None)
 
         response = session.respond(TestMessage(text="bulk m 16"))
-#        self.assertEquals(response, "bulk")
+        self.assertEquals(response, str(bulk_questionaire.first_question()))
+
+        latest_user = User.objects.all().order_by('-id')[0]
+
+        self.assertEquals(latest_user.age, 16)
+        self.assertEquals(latest_user.gender, 'm')
 
 
 class UserSessionTest(TestCase):
     def setUp(self):
+        self.questionnaire = Questionnaire(trigger = "trigger", max_retries=3)
+        self.questionnaire.save()
+                
         Question.objects.all().delete()
         self.backend = PersistantBackend(slug="MockBackend")
         self.backend.save()
@@ -53,12 +61,12 @@ class UserSessionTest(TestCase):
 
         self.reporter.connections.add(self.pconnection)
 
-        self.question1 = Question(text = "question1")
+        self.question1 = Question(text = "question1", questionnaire=self.questionnaire)
         self.question1.is_first = True
         self.question1.save()
-        self.question2 = Question(text = "question2")
+        self.question2 = Question(text = "question2", questionnaire=self.questionnaire)
         self.question2.save()
-        self.question3 = Question(text = "question3")
+        self.question3 = Question(text = "question3", questionnaire=self.questionnaire)
         self.question3.save()
 
         self.question1.next_question = self.question2
@@ -72,11 +80,9 @@ class UserSessionTest(TestCase):
         self.setup_choices(self.question2)
         self.setup_choices(self.question3)
 
-        q = Questionnaire(trigger = "trigger", max_retries=3)
-        q.save()
-        DemographicParser(questionnaire=q, name='age', regex='[0-9]+',
+        DemographicParser(questionnaire=self.questionnaire, name='age', regex='[0-9]+',
                           order=1, type='i').save()
-        DemographicParser(questionnaire=q, name='gender',
+        DemographicParser(questionnaire=self.questionnaire, name='gender',
                           regex='m|f|male|female', order=2, type='c').save()
 
         r = Registration(phone = self.pconnection)
@@ -104,6 +110,12 @@ class UserSessionTest(TestCase):
         user = session.user
         user.save()
         self.assertEquals(session.respond(TestMessage(text="trigger m 16")), str(self.question1))
+
+    def test_demographic_information_is_mandatory_to_start_the_poll(self):
+        session = UserSession.open(self.pconnection)
+        user = session.user
+        user.save()
+        self.assertEquals(session.respond(TestMessage(text="trigger")), TRIGGER_INCORRECT_MESSAGE)
 
     def test_correct_response_to_question_sends_next_question(self):
         session = UserSession.open(self.pconnection)
@@ -150,7 +162,6 @@ class UserSessionTest(TestCase):
         self.assertEquals(session.respond(TestMessage(text="trigger 13 m")), str(self.question1))
         self.assertEquals(session.question, self.question1)
 
-
     def test_close_session_on_last_answer(self):
         session = UserSession.open(self.pconnection)
         user = session.user
@@ -181,14 +192,13 @@ class UserSessionTest(TestCase):
         session.respond(TestMessage(text='t'))
         self.assertEquals(session.user.active, False)
 
-
     def test_user_demographics_saved_when_present(self):
         session = UserSession.open(self.pconnection1)
         session.respond(TestMessage(text='trigger 13 f'))
         latest_user = User.objects.all().order_by('-id')[0]
+        
         self.assertEquals(latest_user.age, 13)
         self.assertEquals(latest_user.gender, 'f')
-
 
     def test_user_location_from_registration(self):
         session = UserSession.open(self.pconnection)
