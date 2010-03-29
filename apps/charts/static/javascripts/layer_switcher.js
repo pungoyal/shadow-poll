@@ -1,4 +1,16 @@
 $(document).ready(function() {
+    $("#map_legend_trigger").click(
+	  	 function() {
+		      $(this).hide("slide", { direction: "left" }, 1000);
+		      $('#mdg_legends').show("slide", { direction: "left" }, 1000);
+	  });   
+	
+	 $("#map_legend_close").click(
+	  	 function() {
+		     $('#map_legend_trigger').show("slide", { direction: "left" }, 1500);
+		     $('#mdg_legends').hide("slide", { direction: "left" }, 1000);
+	  });  
+
     $("#map_layer_overlay a.expand").toggle(
             function() {
                 $('#expandable_content').slideDown();

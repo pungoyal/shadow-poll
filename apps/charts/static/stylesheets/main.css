@@ -695,3 +695,94 @@ map_layer legend a:visited {
 	-moz-text-shadow:  0 -1px 1px rgba(0,0,0,0.25);
 	-webkit-text-shadow:  0 -1px 1px rgba(0,0,0,0.25);
 }
+
+/* MDG legends */
+#map_legend_trigger, #mdg_legends {
+	position: absolute;
+	top: 200px;
+	left: -10px;
+	width: 250px;
+	padding: 10px;
+	background: #555;
+	color: #fff;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	border-radius: 10px;
+	-moz-box-shadow: 3px 3px 6px #000000;
+	-webkit-box-shadow: 3px 3px 6px #000000;
+	box-shadow: 3px 3px 6px #000000;
+	opacity: 0.75;
+	-m0z-opacity: 0.75;
+	z-index:2000;
+}
+#map_legend_trigger {
+	width: 50px;
+	height: 30px;
+	left: -20px;
+	padding: 0;
+	cursor: pointer;
+}
+#map_legend_trigger a {
+	font-weight: bold;
+	font-size: 25px;
+	padding-left: 25px;
+	line-height: 1;
+	text-decoration: none;
+	color: #ccc;
+	text-shadow:1px 1px 1px rgba(0, 0, 0, 0.8)
+}
+#map_legend_trigger a:hover {
+	text-decoration: none;
+	color: #fff;
+	text-shadow:2px 2px 1px rgba(0, 0, 0, 1)
+}
+#map_legend_close {
+	position: absolute;
+	top: -3px;
+	right: 5px;
+	cursor: pointer;
+}
+#map_legend_close a {
+	font-weight: bold;
+	font-size: 20px;
+	color: #f00;
+	text-decoration: none;
+	text-shadow:1px 1px 1px rgba(0, 0, 0, 0.8)
+}
+#map_legend_close a:hover {
+	color: #FF5C00;
+	text-decoration: none;
+	text-shadow:2px 2px 1px rgba(0, 0, 0, 1)
+}
+#mdg_legends {
+	padding: 20px 30px 0;
+}
+#mdg_legends p {
+	font-size: 1.1em;
+	line-height: 1.1;
+	font-weight: bold;
+	margin-bottom: 10px;
+}
+#mdg_legends ul {
+	overflow: hidden;
+}
+#mdg_legends li {
+	overflow: hidden;
+	margin-bottom: 10px;
+}
+#mdg_legends .legend_color {
+	float: left;
+	width: 15px;
+	height: 15px;
+	background: red;
+	overflow: hidden;
+	margin: 0 10px 5px 0;
+	-moz-box-shadow: 3px 3px 3px #000000;
+	-webkit-box-shadow: 3px 3px 3px #000000;
+	box-shadow: 3px 3px 3px #000000;
+}
+#mdg_legends .legend_text {
+	float: left;
+	width: 200px;
+	line-height: 1;
+}

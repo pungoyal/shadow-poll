@@ -74,3 +74,11 @@ form.inline input.button, form.inline button {
   margin:0.5em 0;
 }
 button, input.button { position:relative;top:0.25em; }
+
+
+#map_layer_overlay, #mdg_legends {
+	filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=3px, OffY=3px, Color='#000'); /* IE6,IE7 */
+	filter: alpha(opacity=75);/* IE6,IE7 */
+	-ms-filter: "progid:DXImageTransform.Microsoft.dropshadow(OffX=3px, OffY=3px, Color='#000')"; /* IE8 */
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=75)"
+}

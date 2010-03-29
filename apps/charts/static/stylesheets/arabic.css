@@ -310,3 +310,29 @@ table, caption, tbody, tfoot, thead, tr, th, td {
  	direction: ltr !important;
  	float: right !important;
 }
+
+/* MDG legends */
+
+#map_legend_trigger, #mdg_legends {
+	right: -10px;
+	left: auto;
+}
+#map_legend_trigger {
+	right: -20px;
+	left: auto;
+}
+#map_legend_trigger a {
+	padding-left:0;
+	padding-right:25px;
+}
+#map_legend_close {
+	left: 5px;
+	right: auto;
+}
+#mdg_legends {
+	padding-left: 10px;
+	padding-right: 20px;
+}
+#mdg_legends .legend_color, #mdg_legends .legend_text {
+	float: right;
+}
