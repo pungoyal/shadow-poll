@@ -314,25 +314,35 @@ table, caption, tbody, tfoot, thead, tr, th, td {
 /* MDG legends */
 
 #map_legend_trigger, #mdg_legends {
-	right: -10px;
+	right: -2px;
 	left: auto;
+	-moz-border-radius-topright: 0;
+	-webkit-border-radius-topright: 0;
+	border-radius-topright: 0;
+	-moz-border-radius-topleft: 5px;
+	-webkit-border-radius-topleft: 5px;
+	border-radius-topleft: 5px;
+	-moz-box-shadow: -1px -1px 2px rgba(255, 200, 0, 0.7);
+	-webkit-box-shadow: -1px -1px 2px rgba(255, 200, 0, 0.7);
+	box-shadow: -1px -1px 2px rgba(255, 200, 0, 0.7);
+	z-index:2000;
+}
+#mdg_legends li {
+	float:right;
 }
 #map_legend_trigger {
-	right: -20px;
+	right: -3px;
 	left: auto;
 }
 #map_legend_trigger a {
-	padding-left:0;
-	padding-right:25px;
+	padding-left: 0;
+	padding-right: 5px;
 }
 #map_legend_close {
-	left: 5px;
+	left: 3px;
 	right: auto;
 }
-#mdg_legends {
-	padding-left: 10px;
-	padding-right: 20px;
-}
+
 #mdg_legends .legend_color, #mdg_legends .legend_text {
 	float: right;
 }

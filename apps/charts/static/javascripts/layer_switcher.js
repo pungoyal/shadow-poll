@@ -7,7 +7,7 @@ $(document).ready(function() {
 	
 	 $("#map_legend_close").click(
 	  	 function() {
-		     $('#map_legend_trigger').show("slide", { direction: "left" }, 1500);
+		     $('#map_legend_trigger').show("slide", { direction: "left" }, 2000);
 		     $('#mdg_legends').hide("slide", { direction: "left" }, 1000);
 	  });  
 
