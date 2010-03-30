@@ -29,5 +29,12 @@ $(document).ready(function() {
 
         var layer = map.getLayersByName(this.value)[0];
         layer.setVisibility(1);
+        var p = layer.pallete;
+        $.each($('.legend_color'), function(index, value){
+            $(this).css('background-color', p.color_code[index]);
+        });
+        $.each($('.legend_text'), function(index, value){
+            $(this).html(p.range[index]);
+        });
     });
 });
