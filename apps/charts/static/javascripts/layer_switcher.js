@@ -36,5 +36,12 @@ $(document).ready(function() {
         $.each($('.legend_text'), function(index, value){
             $(this).html(p.range[index]);
         });
+																	
+        $('#mdg_indicator_text').html($(this).next().html());
+        if(!$('#mdg_legends').is(':visible')){
+						        $('#map_legend_trigger').hide("slide", { direction: "left" }, 1000);
+						$('#mdg_legends').show("slide", { direction: "left" }, 1000);
+				}
+
     });
 });

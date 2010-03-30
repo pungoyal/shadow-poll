@@ -65,6 +65,7 @@ $(document).ready(function() {
 									 $.each($('.legend_text'), function(index, value){
 															$(this).html(p.range[index]);
 													});
+									 $('#mdg_indicator_text').html($(this).next().html());
 							 }
     });
 });
