@@ -267,35 +267,31 @@ table, caption, tbody, tfoot, thead, tr, th, td {
 	border-radius-bottomleft: 5px;
 	-moz-border-radius-bottomleft: 5px;
 	-webkit-border-radius-bottomleft: 5px;
-	-box-shadow:-3px 3px 6px #000000;
-	-moz-box-shadow:-3px 3px 6px #000000;
-	-webkit-box-shadow:-3px 3px 6px #000000;
+	-box-shadow:-3px 3px 6px rgba(0, 0, 0, 0.8);
+	-moz-box-shadow:-3px 3px 6pxrgba(0, 0, 0, 0.8);
+	-webkit-box-shadow:-3px 3px 6px rgba(0, 0, 0, 0.8);
 }
-#map_layer_overlay legend span{
+#map_layer_overlay legend span {
 	display: block;
 	padding-left: 0;
 	margin-left: 0;
-	padding-right: 35px;
+	padding-right: 5px;
 	margin-right: 5px;
 	background-position: 100% 50%;
 }
-
 .map_layer legend a {
-	background-position: 0 3px;
+	background-position: 0 1px;
 	padding-right: 0;
-	padding-left: 90px;
-	text-shadow: -1px 1px 1px #ccc;
-	-moz-text-shadow: -1px 1px 1px #ccc;
-	-webkit-text-shadow:- 1px 1px 1px #ccc;
+	padding-left: 45px;
+	text-shadow: -1px 1px 1px #000;
+	-moz-text-shadow: -1px 1px 1px #000;
+	-webkit-text-shadow: -1px 1px 1px #000;
 }
-.map_layer legend a:hover,.map_layer legend a.collapse {
-	text-shadow: -1px 2px 3px #ccc;
-	-moz-text-shadow: -1px 2px 3px #ccc;
-	-webkit-text-shadow: -1px 2px 3px #ccc;
+
+.map_layer legend a.collapse {
+	background-position: 0 -22px;
 }
-.map_layer legend a.collapse{
-	background-position: 0 -13px;
-}
+
 /* messages */
 
 #translation_container,
@@ -314,25 +310,35 @@ table, caption, tbody, tfoot, thead, tr, th, td {
 /* MDG legends */
 
 #map_legend_trigger, #mdg_legends {
-	right: -10px;
+	right: -2px;
 	left: auto;
+	-moz-border-radius-topright: 0;
+	-webkit-border-radius-topright: 0;
+	border-radius-topright: 0;
+	-moz-border-radius-topleft: 5px;
+	-webkit-border-radius-topleft: 5px;
+	border-radius-topleft: 5px;
+	-moz-box-shadow: -1px -1px 2px rgba(255, 200, 0, 0.7);
+	-webkit-box-shadow: -1px -1px 2px rgba(255, 200, 0, 0.7);
+	box-shadow: -1px -1px 2px rgba(255, 200, 0, 0.7);
+	z-index:2000;
+}
+#mdg_legends li {
+	float:right;
 }
 #map_legend_trigger {
-	right: -20px;
+	right: -3px;
 	left: auto;
 }
 #map_legend_trigger a {
-	padding-left:0;
-	padding-right:25px;
+	padding-left: 0;
+	padding-right: 5px;
 }
 #map_legend_close {
-	left: 5px;
+	left: 3px;
 	right: auto;
 }
-#mdg_legends {
-	padding-left: 10px;
-	padding-right: 20px;
-}
+
 #mdg_legends .legend_color, #mdg_legends .legend_text {
 	float: right;
 }
