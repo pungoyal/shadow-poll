@@ -699,7 +699,7 @@ map_layer legend a:visited {
 	position: absolute;
 	top: 420px;
 	left: -2px;
-	width: 590px;
+	width: 360px;
 	background: #555;
 	color: #fff;
 	-moz-border-radius: 5px;
@@ -792,7 +792,7 @@ map_layer legend a:visited {
 
 #mdg_legends .legend_text {
 	float: left;
-	width: 90px;
+	width: 50px;
 	line-height: 1;
 	font-size: 12px;
 	margin-top:2px;

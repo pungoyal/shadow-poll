@@ -52,18 +52,18 @@ $(document).ready(function() {
     map.addLayer(MDG_overlay_factory("intermediate_enrollment_overlay", 'mdgs_intermediate_enrollment', palette3));
     map.addLayer(MDG_overlay_factory("secondary_enrollment_overlay", 'mdgs_secondary_enrollment', palette3));
     map.addLayer(MDG_overlay_factory("femaletomale_enrollment_overlay", 'mdgs_femaletomale_enrollment', palette4));
-    map.addLayer(MDG_overlay_factory("improved_drinking_water_overlay", 'mdgs_improved_drinking_water'));
-    map.addLayer(MDG_overlay_factory("improved_sanitation_overlay", 'mdgs_improved_sanitation'));
+    map.addLayer(MDG_overlay_factory("improved_drinking_water_overlay", 'mdgs_improved_drinking_water', palette6));
+    map.addLayer(MDG_overlay_factory("improved_sanitation_overlay", 'mdgs_improved_sanitation', palette6));
     $.each($('.mdg_indicators'), function(index, value){
 							 if (this.checked){
 									 var selected_layer = map.getLayersByName(this.value)[0];
 									 selected_layer.setVisibility(true);
-									 var p = selected_layer.pallete;
+									 var mdgPalette = selected_layer.pallete;
 									 $.each($('.legend_color'), function(index, value){
-															$(this).css('background-color', p.color_code[index]);
+															$(this).css('background-color', mdgPalette.color_code[index]);
 													});
 									 $.each($('.legend_text'), function(index, value){
-															$(this).html(p.range[index]);
+															$(this).html(mdgPalette.range[index]);
 													});
 									 $('#mdg_indicator_text').html($(this).next().html());
 							 }
