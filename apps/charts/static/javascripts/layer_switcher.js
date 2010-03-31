@@ -40,7 +40,6 @@ $(document).ready(function() {
         $.each($('.legend_text'), function(index, value){
             $(this).html(p.range[index]);
         });
-																	alert(slide_direction);
         $('#mdg_indicator_text').html($(this).next().html());
         if(!$('#mdg_legends').is(':visible')){
 						        $('#map_legend_trigger').hide("slide", { direction: slide_direction }, 1000);
