@@ -1,14 +1,18 @@
 $(document).ready(function() {
+    var slide_direction = "left";
+    if($('#ar').hasClass('current_language')){
+				slide_direction = "right";
+		}
     $("#map_legend_trigger").click(
 	  	 function() {
-		      $(this).hide("slide", { direction: "left" }, 1000);
-		      $('#mdg_legends').show("slide", { direction: "left" }, 1000);
+		      $(this).hide("slide", { direction: slide_direction }, 1000);
+		      $('#mdg_legends').show("slide", { direction: slide_direction }, 1000);
 	  });   
 	
 	 $("#map_legend_close").click(
 	  	 function() {
-		     $('#map_legend_trigger').show("slide", { direction: "left" }, 2000);
-		     $('#mdg_legends').hide("slide", { direction: "left" }, 1000);
+		     $('#map_legend_trigger').show("slide", { direction: slide_direction }, 2000);
+		     $('#mdg_legends').hide("slide", { direction: slide_direction }, 1000);
 	  });  
 
     $("#map_layer_overlay a.expand").toggle(
@@ -36,11 +40,11 @@ $(document).ready(function() {
         $.each($('.legend_text'), function(index, value){
             $(this).html(p.range[index]);
         });
-																	
+																	alert(slide_direction);
         $('#mdg_indicator_text').html($(this).next().html());
         if(!$('#mdg_legends').is(':visible')){
-						        $('#map_legend_trigger').hide("slide", { direction: "left" }, 1000);
-						$('#mdg_legends').show("slide", { direction: "left" }, 1000);
+						        $('#map_legend_trigger').hide("slide", { direction: slide_direction }, 1000);
+						$('#mdg_legends').show("slide", { direction: slide_direction }, 1000);
 				}
 
     });
