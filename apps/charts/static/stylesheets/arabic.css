@@ -312,12 +312,9 @@ table, caption, tbody, tfoot, thead, tr, th, td {
 #map_legend_trigger, #mdg_legends {
 	right: -2px;
 	left: auto;
-	-moz-border-radius-topright: 0;
-	-webkit-border-radius-topright: 0;
-	border-radius-topright: 0;
-	-moz-border-radius-topleft: 5px;
-	-webkit-border-radius-topleft: 5px;
-	border-radius-topleft: 5px;
+	-moz-border-radius:5px 0 0 0;
+	-webkit-border-radius: 5px 0 0 0;
+	border-radius:5px 0 0 0;
 	-moz-box-shadow: -1px -1px 2px rgba(255, 200, 0, 0.7);
 	-webkit-box-shadow: -1px -1px 2px rgba(255, 200, 0, 0.7);
 	box-shadow: -1px -1px 2px rgba(255, 200, 0, 0.7);
@@ -325,10 +322,15 @@ table, caption, tbody, tfoot, thead, tr, th, td {
 }
 #mdg_legends li {
 	float:right;
+	margin-left:0;
+	margin-right:5px;
 }
 #map_legend_trigger {
 	right: -3px;
 	left: auto;
+	-moz-border-radius:5px 0 0 5px;
+	-webkit-border-radius: 5px 0 0 5px;
+	border-radius:5px 0 0 5px;
 }
 #map_legend_trigger a {
 	padding-left: 0;
@@ -338,7 +340,9 @@ table, caption, tbody, tfoot, thead, tr, th, td {
 	left: 3px;
 	right: auto;
 }
-
+#mdg_legends p {
+		margin:2px 8px 5px 0;
+}
 #mdg_legends .legend_color, #mdg_legends .legend_text {
 	float: right;
 }

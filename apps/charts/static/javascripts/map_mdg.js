@@ -1,5 +1,4 @@
 var mdg_overlay_array;
-
 function MdgPallete(color_code, range){
 		this.color_code = color_code;
 		this.range = range;

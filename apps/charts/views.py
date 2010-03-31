@@ -27,9 +27,11 @@ def home_page(request, template = "home_page.html"):
 
 def voice_home_page(request):
     messages = VoiceMessage.objects.filter(translated=True).order_by('-date_recorded')
+    server_name = request.META['SERVER_NAME']
     return render_to_response(request, "messages.html", 
                               {"messages": messages, 
-                               "questions": Question.objects.all().order_by('pk')})
+                               "questions": Question.objects.all().order_by('pk'),
+                               "server_name": server_name})
 
 @login_required
 def voice_admin_page(request):
