@@ -82,3 +82,8 @@ button, input.button { position:relative;top:0.25em; }
 	filter:progid:DXImageTransform.Microsoft.DropShadow(OffX=3, OffY=-3, Color='ff0', Positive='true'); /* IE6,IE7 */
 	filter:progid:DXImageTransform.Microsoft.Alpha(Opacity=75);/* IE6,IE7 */
 }
+
+.nav_questions ul.side_nav li,
+.nav_questions ul.side_nav li a {
+	zoom: 1;
+}

@@ -247,8 +247,13 @@
         </div>
     </div>
     <div class="unicef_logo">
+{% ifequal LANGUAGE_CODE "ar"%}
         <a href="http://www.unicef.org/" target="_blank" title="UNICEF - United for children"><img
+                src="/static/charts/img/unicef_footer_logo_ar.gif" alt="UNICEF"/></a>
+{% else %}
+				 <a href="http://www.unicef.org/" target="_blank" title="UNICEF - United for children"><img
                 src="/static/charts/img/unicef_footer_logo.gif" alt="UNICEF"/></a>
+{% endifequal %}
     </div>
 </div>
 {% endblock %}
