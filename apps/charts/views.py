@@ -44,6 +44,7 @@ def voice_admin_page(request):
 @login_required
 def voice_translate(request, message_id, template = "translate_message.html"):
     context = {}
+    server_name = request.META['SERVER_NAME']
     message = get_object_or_404(VoiceMessage, pk=message_id)
     if request.method == "POST":
         form = VoiceMessageForm(request.POST, instance=message)
@@ -54,6 +55,7 @@ def voice_translate(request, message_id, template = "translate_message.html"):
         form = VoiceMessageForm(instance=message)
     context['form'] = form
     context['message'] = message
+    context['server_name'] = server_name
     return render_to_response(request, template, context)
 
 def play_audio(request, file_name):
