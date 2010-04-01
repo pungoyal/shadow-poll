@@ -1,13 +1,25 @@
 from rapidsms.tests.scripted import TestScript
+from django.test import TestCase
+from apps.reporters.models import Reporter, PersistantConnection, PersistantBackend
 from app import App
 
-from message_parser import MessageParser
+from message_parser import BulkMessageProcessor
 
-class TestApp (TestScript):
+class TestApp (TestCase):
     apps = (App,)
+    
+    def setUp(self):
+        backend = PersistantBackend(slug="MockBackend")
+        backend.save()
+        reporter = Reporter(alias="ReporterName")
+        reporter.save()
+        self.connection = PersistantConnection(backend=backend, reporter=reporter, identity="1000", governorate = 2,
+                                          district = 4)
+        self.connection.save()
 
     def test_message_parser_age_sex(self):
-        msgParser = MessageParser("bulk m 7 a a b c d")
-        parsed_msg = msgParser.parse()
-        self.assertEquals(parsed_msg[1], 'm')
-        self.assertEquals(parsed_msg[2], '7')
+        msgProcessor = BulkMessageProcessor("bulk m 7 a a b c d")
+        parsed_msg = msgProcessor.parse_and_create_user(self.connection, "bulk m 7 a a b c d")
+        self.assertEquals(parsed_msg[-1], 'a')
+        self.assertEquals(parsed_msg[-2], 'a b c')
+    
