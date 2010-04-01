@@ -45,7 +45,7 @@ class ViewTests(TestCase):
         self.failUnless(login, 'Could not log in')
         response = self.client.get("/messages/translate/")
         self.assertEquals(response.status_code, 200)
-        response = self.client.get("/message/translate/1")
+        response = self.client.get("/message/translate/4")
         self.assertEquals(response.status_code, 200)
 
 
