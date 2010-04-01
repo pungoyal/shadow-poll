@@ -7,6 +7,7 @@ from message_parser import BulkMessageProcessor
 
 class TestApp (TestCase):
     apps = (App,)
+    fixtures = ['poll_interactive']
     
     def setUp(self):
         backend = PersistantBackend(slug="MockBackend")
@@ -23,3 +24,10 @@ class TestApp (TestCase):
         self.assertEquals(parsed_msg[-1], 'a')
         self.assertEquals(parsed_msg[-2], 'a b c')
     
+    def test_save_user_response(self):
+        msgProcessor = BulkMessageProcessor("bulk m 7 a a b c d")
+        parsed_msg = msgProcessor.parse_and_create_user(self.connection, "bulk m 7 a a b c d")
+        
+        response = msgProcessor.save_user_and_responses(parsed_msg)
+        print response
+

@@ -10,8 +10,11 @@ class App (rapidsms.app.App):
         pass
 
     def handle (self, message):
-        """Add your main application logic in the handle phase."""
-        pass
+        if message.text.lower().find("bulk") > -1:
+            message_processor = BulkMessageProcessor(message.text)
+            answers = message_processor.parse_and_create_user(message.connection, message.text)
+            message_processor.save_user_and_responses(answers)
+            return True
 
     def cleanup (self, message):
         """Perform any clean up after all handlers have run in the
