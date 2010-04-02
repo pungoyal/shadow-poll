@@ -30,6 +30,7 @@ class BulkMessageProcessor(object):
             choices = question.matching_choices(self.answer_list[counter])
             for ch in choices:
                 UserResponse(user = self.user, question = question, choice = ch).save()
+        return "Thanks"
     
     def _set_default_questionnaire(self):
         if not self.questionnaire:

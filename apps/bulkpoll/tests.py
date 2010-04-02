@@ -29,5 +29,5 @@ class TestApp (TestCase):
         parsed_msg = msgProcessor.parse_and_create_user(self.connection, "bulk m 7 a a b c d")
         
         response = msgProcessor.save_user_and_responses(parsed_msg)
-        print response
+        self.assertEquals(response, "Thanks")
 
