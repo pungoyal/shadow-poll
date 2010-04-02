@@ -6,7 +6,7 @@ from apps.charts.models import *
 from apps.reporters.models import *
 
 class Command(NoArgsCommand):
-    USERS_TO_BE_CREATED = 10000
+    USERS_TO_BE_CREATED = 50000
     RESPONSES_PER_QUESTION = 220000
 
     def handle_noargs(self, **options):
