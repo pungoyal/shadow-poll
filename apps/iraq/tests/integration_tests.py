@@ -23,7 +23,14 @@ class TestIntegration(TestScript):
         00919980131127 > c
         00919980131127 < Your responses have been recorded. Thank you for participating in the poll.
     """
-    
+
+    testBulkPoll = """
+        00919980131127 > register poll 2 1
+        00919980131127 < Thank you, to initiate the poll sms the keyword Poll with your age and gender
+        00919980131127 > bulk 12 f a a b c d
+        00919980131127 < Thanksdds
+    """
+
     testHappyPathScenarios_Arabic = u"""
         00919980131127 > تسجيل التصويت ٤ ٢
         00919980131127 <  شكراً لكم, للشروع في التصويت عن طريق الرسائل القصيرة الرجاء إرسال  التصويت   العمر   الجنس
