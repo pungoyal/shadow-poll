@@ -225,7 +225,7 @@ def get_kml(request, question_id, kml, governorate, gender=None, age_group_list 
                                          'description': geography.description,
                                          'kml': geography.kml,
                                          'style': style_str})
-            style_dict_list.append({'id': top_response.color, 'percentage': 1 + (top_response.percentage/100),
+            style_dict_list.append({'id': top_response.color, 'percentage': 0.25 + (top_response.percentage/100),
                                     'file_name': color.file_name})
     style = 'kml/population_points.kml'
     r = _render_to_kml('kml/placemarks.kml', {'places' : placemarks_info_list,
