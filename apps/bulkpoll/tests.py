@@ -21,7 +21,7 @@ class TestApp (TestCase):
     def test_message_parser_age_sex(self):
         msgProcessor = BulkMessageProcessor("bulk m 7 a a b c d")
         parsed_msg = msgProcessor.parse_and_create_user(self.connection, "bulk m 7 a a b c d")
-        self.assertEquals(parsed_msg[-1], 'a')
+        self.assertEquals(parsed_msg[-1], 'd')
         self.assertEquals(parsed_msg[-2], 'a b c')
     
     def test_save_user_response(self):
@@ -29,5 +29,5 @@ class TestApp (TestCase):
         parsed_msg = msgProcessor.parse_and_create_user(self.connection, "bulk m 7 a a b c d")
         
         response = msgProcessor.save_user_and_responses(parsed_msg)
-        self.assertEquals(response, "Thanks")
+        self.assertEquals(response, "thanks")
 
