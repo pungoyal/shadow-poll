@@ -1,4 +1,5 @@
 import rapidsms
+from message_parser import BulkMessageProcessor
 
 class App (rapidsms.app.App):
     def start (self):
@@ -12,7 +13,7 @@ class App (rapidsms.app.App):
     def handle (self, message):
         if message.text.lower().find("bulk") > -1:
             message_processor = BulkMessageProcessor(message.text)
-            answers = message_processor.parse_and_create_user(message.connection, message.text)
+            answers = message_processor.parse_and_create_user(message.persistant_connection, message.text)
             response = message_processor.save_user_and_responses(answers)
             message.respond(response)
             return True

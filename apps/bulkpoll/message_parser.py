@@ -1,4 +1,5 @@
 from poll.models import User
+from poll.models import Question
 from poll.models import UserResponse
 from poll.models import Questionnaire
 
@@ -20,17 +21,14 @@ class BulkMessageProcessor(object):
     def save_user_and_responses(self, message_arr):
         self.user.save()
         self._set_default_questionnaire()
-        question_list = []
-        question = self.questionnaire.first_question()
-        while question is not None:
-            question_list.append(question)
-            question = question.next_question
+
+        question_list = Question.objects.filter(questionnaire = self.questionnaire).order_by('id')
         
         for (counter, question) in enumerate(question_list):
             choices = question.matching_choices(self.answer_list[counter])
             for ch in choices:
                 UserResponse(user = self.user, question = question, choice = ch).save()
-        return "Thanks"
+        return "thanks"
     
     def _set_default_questionnaire(self):
         if not self.questionnaire:
