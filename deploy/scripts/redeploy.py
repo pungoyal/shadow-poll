@@ -56,28 +56,28 @@ if __name__ == '__main__':
     #os.chdir(DEPLOY_DIR)
     #issue_cmd(['chmod', '+w', '/static/project-photos'])
 
-#    print "Dumping existing db"
-#    try:
-#        child = pexpect.spawn ('dropdb -U %s %s' % (DB_USER, DB_NAME))
-#        # child.logfile = sys.stdout
-#        #child.expect_exact ('Password:')
-#        #child.sendline (DB_PWD)
-#        child.wait()
-#    except:
-#        print "Failed to drop db"
-#        sys.exit(1)
-#
-#    print "Creating blank db"
-#    try:
-#        child = pexpect.spawn ('createdb -T template_postgis -O %(user)s -U %(user)s %(db)s' % \
-#				       { 'user': DB_USER, 'db': DB_NAME} )
-#        # child.logfile = sys.stdout
-#        #child.expect_exact ('Password:')
-#        #child.sendline (DB_PWD)
-#        child.wait()
-#    except:
-#        print "Failed to create db"
-#        sys.exit(1)
+    print "Dumping existing db"
+    try:
+        child = pexpect.spawn ('dropdb -U %s %s' % (DB_USER, DB_NAME))
+        # child.logfile = sys.stdout
+        #child.expect_exact ('Password:')
+        #child.sendline (DB_PWD)
+        child.wait()
+    except:
+        print "Failed to drop db"
+        sys.exit(1)
+
+    print "Creating blank db"
+    try:
+        child = pexpect.spawn ('createdb -T template_postgis -O %(user)s -U %(user)s %(db)s' % \
+				       { 'user': DB_USER, 'db': DB_NAME} )
+        # child.logfile = sys.stdout
+        #child.expect_exact ('Password:')
+        #child.sendline (DB_PWD)
+        child.wait()
+    except:
+        print "Failed to create db"
+        sys.exit(1)
 
     print "Syncing db and loading initial data"
     os.chdir(APP_DIR)
