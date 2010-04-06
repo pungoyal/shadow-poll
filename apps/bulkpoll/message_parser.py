@@ -1,18 +1,21 @@
-from poll.models import User
-from poll.models import Question
-from poll.models import UserResponse
-from poll.models import Questionnaire
+from poll.models import User, Question, UserResponse, Questionnaire
 
 class BulkMessageProcessor(object):
-    def __init__(self, message):
-        self.message = message
+    def __init__(self):
         self.questionnaire = None
         
-    def parse_and_create_user(self, connection, message):
+    def parse_and_create_user(self, message, connection):
         answers = []
+        message_parts = message.split(" ")
 
-        message_parts = self.message.split(" ")
         self.user = User(connection = connection, governorate = connection.governorate, district = connection.district, active = True)
+
+        try:
+            self.user.age = int(message_parts[1])
+            self.user.gender = message_parts[2]
+        except ValueError:
+            return "bulk_response_error"
+
         answers.append(message_parts[3])
         answers.append(" ".join(message_parts[4:7]))
         answers.append(message_parts[7])
