@@ -29,7 +29,7 @@
     <div id="language_menu">
         <ul>
             <li class="en"><a href="javascript:switch_to_language('en')" {% ifequal LANGUAGE_CODE "en"  %} class="current_language" {% endifequal %}>English</a></li>
-            <li class="arabic"><a href="javascript:switch_to_language('ar')" {% ifequal LANGUAGE_CODE "ar"  %} class="current_language" {% endifequal %} >Arabic</a></li>
+            <li class="arabic"><a id="ar" href="javascript:switch_to_language('ar')" {% ifequal LANGUAGE_CODE "ar"  %} class="current_language" {% endifequal %} >Arabic</a></li>
         </ul>
     </div>
     <div id="site_header">
@@ -247,8 +247,13 @@
         </div>
     </div>
     <div class="unicef_logo">
+{% ifequal LANGUAGE_CODE "ar"%}
         <a href="http://www.unicef.org/" target="_blank" title="UNICEF - United for children"><img
+                src="/static/charts/img/unicef_footer_logo_ar.gif" alt="UNICEF"/></a>
+{% else %}
+				 <a href="http://www.unicef.org/" target="_blank" title="UNICEF - United for children"><img
                 src="/static/charts/img/unicef_footer_logo.gif" alt="UNICEF"/></a>
+{% endifequal %}
     </div>
 </div>
 {% endblock %}

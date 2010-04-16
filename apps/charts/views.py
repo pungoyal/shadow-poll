@@ -27,9 +27,11 @@ def home_page(request, template = "home_page.html"):
 
 def voice_home_page(request):
     messages = VoiceMessage.objects.filter(translated=True).order_by('-date_recorded')
+    server_name = request.META['SERVER_NAME']
     return render_to_response(request, "messages.html", 
                               {"messages": messages, 
-                               "questions": Question.objects.all().order_by('pk')})
+                               "questions": Question.objects.all().order_by('pk'),
+                               "server_name": server_name})
 
 @login_required
 def voice_admin_page(request):
@@ -42,6 +44,7 @@ def voice_admin_page(request):
 @login_required
 def voice_translate(request, message_id, template = "translate_message.html"):
     context = {}
+    server_name = request.META['SERVER_NAME']
     message = get_object_or_404(VoiceMessage, pk=message_id)
     if request.method == "POST":
         form = VoiceMessageForm(request.POST, instance=message)
@@ -52,6 +55,7 @@ def voice_translate(request, message_id, template = "translate_message.html"):
         form = VoiceMessageForm(instance=message)
     context['form'] = form
     context['message'] = message
+    context['server_name'] = server_name
     return render_to_response(request, template, context)
 
 def play_audio(request, file_name):
@@ -221,7 +225,7 @@ def get_kml(request, question_id, kml, governorate, gender=None, age_group_list 
                                          'description': geography.description,
                                          'kml': geography.kml,
                                          'style': style_str})
-            style_dict_list.append({'id': top_response.color, 'percentage': top_response.percentage/100,
+            style_dict_list.append({'id': top_response.color, 'percentage': 0.25 + (top_response.percentage/100),
                                     'file_name': color.file_name})
     style = 'kml/population_points.kml'
     r = _render_to_kml('kml/placemarks.kml', {'places' : placemarks_info_list,

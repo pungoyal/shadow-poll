@@ -26,7 +26,7 @@
 {% block messages %}
     <div id="message_translation_container">
     	<div id="status">{{status}}</div>
-        {% jplayer 0 message.sound_file_url %}
+        {% jplayer 0 message.sound_file_url server_name %}
         <div id="translation_container">
         <form method="post">
         	{{ form.as_p }}

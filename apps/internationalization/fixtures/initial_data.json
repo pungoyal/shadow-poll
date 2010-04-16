@@ -779,5 +779,23 @@
             "code": "err_more_than_expected_choices", 
             "language": 2
         }
+    },
+    {
+        "pk": 99,
+        "model": "internationalization.translation",
+        "fields": {
+            "translation": "Invalid answers entered. Please try again.",
+            "code": "bulk_response_error",
+            "language": 1
+        }
+    },
+    {
+        "pk": 100,
+        "model": "internationalization.translation",
+        "fields": {
+            "translation": "ARABICInvalid answers entered. Please try again.",
+            "code": "bulk_response_error",
+            "language": 2
+        }
     }
 ]

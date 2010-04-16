@@ -32,12 +32,6 @@ class ViewTests(TestCase):
                 self.assertEquals(self.client.get(url).status_code, 200, 
                                   msg = "%s did not return 200" % url)
     
-    def test_kml_data(self):        
-        response = self.client.get('/get_kml/question1')
-        self.assertContains(response, "<scale>0.75</scale>")
-        response = self.client.get('/get_kml/question1/governorate5')
-        self.assertContains(response, "<scale>0.33</scale>")
-
     def test_messaging_pages_is_accesible(self):
         response = self.client.get("/messages/")
         self.assertEquals(response.status_code, 200)
@@ -45,7 +39,7 @@ class ViewTests(TestCase):
         self.failUnless(login, 'Could not log in')
         response = self.client.get("/messages/translate/")
         self.assertEquals(response.status_code, 200)
-        response = self.client.get("/message/translate/1")
+        response = self.client.get("/message/translate/4")
         self.assertEquals(response.status_code, 200)
 
 

@@ -6,10 +6,11 @@ from apps.register.app import App as register_app
 from apps.internationalization.app import App as i18n_app
 from rapidsms.tests.scripted import TestScript
 from apps.poll.app import App as poll_app
+from apps.bulkpoll.app import App as bulk_app
 
 class TestIntegration(TestScript):
     """ Test our various SMS apps all together now """
-    apps = (reporter_app, register_app, default_app, i18n_app, poll_app)
+    apps = (reporter_app, register_app, default_app, i18n_app, bulk_app, poll_app)
 
     testHappyPathScenarios = """
         00919980131127 > register poll 2 1
@@ -23,7 +24,14 @@ class TestIntegration(TestScript):
         00919980131127 > c
         00919980131127 < Your responses have been recorded. Thank you for participating in the poll.
     """
-    
+
+    testBulkPoll = """
+        00919980131127 > register poll 2 1
+        00919980131127 < Thank you, to initiate the poll sms the keyword Poll with your age and gender
+        00919980131127 > bulk 12 f a a b c d
+        00919980131127 < Your responses have been recorded. Thank you for participating in the poll.
+    """
+
     testHappyPathScenarios_Arabic = u"""
         00919980131127 > تسجيل التصويت ٤ ٢
         00919980131127 <  شكراً لكم, للشروع في التصويت عن طريق الرسائل القصيرة الرجاء إرسال  التصويت   العمر   الجنس

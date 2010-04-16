@@ -54,30 +54,10 @@
         }
     },
     {
-        "pk": 4,
-        "model": "poll.question",
-        "fields": {
-            "num_answers_expected": 1,
-            "text": "Enter your bulk response",
-            "helper_text": "(Choose a a,b,c c)",
-            "error_response": "Placeholder error for bulk response. Please re-send.",
-            "is_first": true,
-            "questionnaire":2
-        }
-    },
-    {
         "pk": 1,
         "model": "poll.questionnaire",
         "fields": {
             "trigger": "poll",
-            "max_retries":3
-        }
-    },
-    {
-        "pk": 2,
-        "model": "poll.questionnaire",
-        "fields": {
-            "trigger": "bulk",
             "max_retries":3
         }
     },
@@ -239,28 +219,6 @@
         "fields": {
             "regex": "[0-9]+",
             "questionnaire": 1,
-            "type": "i",
-            "name": "age",
-            "order": 1
-        }
-    },
-    {
-        "pk": 3,
-        "model": "poll.demographicparser",
-        "fields": {
-            "regex": "m|f|male|female",
-            "questionnaire": 2,
-            "type": "c",
-            "name": "gender",
-            "order": 2
-        }
-    },
-    {
-        "pk": 4,
-        "model": "poll.demographicparser",
-        "fields": {
-            "regex": "[0-9]+",
-            "questionnaire": 2,
             "type": "i",
             "name": "age",
             "order": 1
