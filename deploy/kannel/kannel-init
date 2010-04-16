@@ -1,10 +1,11 @@
 #!/bin/sh
 # This script is meant to go in /etc/init.d to be run on startup/shutdown
 # using standard linux startup/shutdown utilities
-# Start/stop the Kannel boxes: One bearer box and one WAP box.
+# Start/stop the Kannel boxes: One bearer box and one SMS box.
 
-# This is the default init.d script for Kannel.  Its configuration is
-# appropriate for a small site running Kannel on one machine.
+# we found kannel worked out of the box for ubuntu 8.10 and kannel 1.4.1
+# for ubuntu 9.10 and kannel 1.4.3, we needed this slightly modified
+# init script, in order to start smsbox properly (instead of wapbox)
 
 # Make sure that the Kannel binaries can be found in $BOXPATH or somewhere
 # else along $PATH.  run_kannel_box has to be in $BOXPATH.
