@@ -17,7 +17,7 @@ admin-port = 13000
 # required for SMS gateway
 smsbox-port = 13001
 # password for http administration commands
-admin-password = thotwrk9
+admin-password = XXX
 # disable http admin interface
 admin-deny-ip = "*.*.*.*"
 admin-allow-ip = ""
